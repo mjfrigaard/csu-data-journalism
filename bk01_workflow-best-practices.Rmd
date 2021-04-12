@@ -7,7 +7,7 @@ output:
     toc_float: yes
     toc_depth: 5
     number_sections: yes
-    theme: flatly
+    theme: united
     df_print: paged
     
 always_allow_html: true

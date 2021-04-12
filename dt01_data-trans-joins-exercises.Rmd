@@ -8,7 +8,7 @@ output:
     toc_depth: 5
     number_sections: yes
     code_folding: show
-    theme: flatly
+    theme: united
     df_print: paged
     
 always_allow_html: true

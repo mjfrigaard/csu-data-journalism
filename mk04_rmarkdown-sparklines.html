@@ -16,7 +16,7 @@
 <script src="site_libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -379,8 +379,8 @@ str(chickwts)</code></pre>
   mutate(boxplot = NA, sparkline = NA)
 
 listviewer::jsonedit(listdata = chickwts_grouped, mode = &quot;view&quot;)</code></pre>
-<div id="htmlwidget-ef8bd4ea163caff621d9" style="width:672px;height:480px;" class="jsonedit html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ef8bd4ea163caff621d9">{"x":{"data":{"feed":["casein","horsebean","linseed","meatmeal","soybean","sunflower"],"weight":[[368,390,379,260,404,318,352,359,216,222,283,332],[179,160,136,227,217,168,108,124,143,140],[309,229,181,141,260,203,148,169,213,257,244,271],[325,257,303,315,380,153,263,242,206,344,258],[243,230,248,327,329,250,193,271,316,267,199,171,158,248],[423,340,392,339,341,226,320,295,334,322,297,318]],"boxplot":[null,null,null,null,null,null],"sparkline":[null,null,null,null,null,null]},"options":{"mode":"view","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-20ebcaacf209ffacfdfd" style="width:672px;height:480px;" class="jsonedit html-widget"></div>
+<script type="application/json" data-for="htmlwidget-20ebcaacf209ffacfdfd">{"x":{"data":{"feed":["casein","horsebean","linseed","meatmeal","soybean","sunflower"],"weight":[[368,390,379,260,404,318,352,359,216,222,283,332],[179,160,136,227,217,168,108,124,143,140],[309,229,181,141,260,203,148,169,213,257,244,271],[325,257,303,315,380,153,263,242,206,344,258],[243,230,248,327,329,250,193,271,316,267,199,171,158,248],[423,340,392,339,341,226,320,295,334,322,297,318]],"boxplot":[null,null,null,null,null,null],"sparkline":[null,null,null,null,null,null]},"options":{"mode":"view","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>reactable(chickwts_grouped,
   columns = list(
     weight = colDef(cell = function(values) {

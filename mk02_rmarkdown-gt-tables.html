@@ -16,7 +16,7 @@
 <script src="site_libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -432,7 +432,7 @@ str(biotech_prices)</code></pre>
 ##   xts Attributes:  
 ## List of 2
 ##  $ src    : chr &quot;yahoo&quot;
-##  $ updated: POSIXct[1:1], format: &quot;2021-04-12 07:26:54&quot;</code></pre>
+##  $ updated: POSIXct[1:1], format: &quot;2021-04-12 07:42:30&quot;</code></pre>
 <p>We can see this creates an <code>xts</code> or, extensible time-series object. A noteworthy difference between an <code>xts</code> and <code>tibble</code> dataset is that all <code>xts</code> objects have a date <code>index</code>.</p>
 <p>The code below shows the attributes and structure of the first six items in <code>biotech_prices</code>:</p>
 <pre class="r"><code>unclass(head(biotech_prices))</code></pre>
@@ -446,7 +446,7 @@ str(biotech_prices)</code></pre>
 ## attr(,&quot;src&quot;)
 ## [1] &quot;yahoo&quot;
 ## attr(,&quot;updated&quot;)
-## [1] &quot;2021-04-12 07:26:54 MST&quot;
+## [1] &quot;2021-04-12 07:42:30 MST&quot;
 ## attr(,&quot;index&quot;)
 ## [1] 1577750400 1577923200 1578009600 1578268800 1578355200 1578441600
 ## attr(,&quot;index&quot;)attr(,&quot;tzone&quot;)
@@ -795,7 +795,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#tfpixxuhik .gt_table {
+#clkktferfd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -820,7 +820,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#tfpixxuhik .gt_heading {
+#clkktferfd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -832,7 +832,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tfpixxuhik .gt_title {
+#clkktferfd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -842,7 +842,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-width: 0;
 }
 
-#tfpixxuhik .gt_subtitle {
+#clkktferfd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -852,13 +852,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-width: 0;
 }
 
-#tfpixxuhik .gt_bottom_border {
+#clkktferfd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tfpixxuhik .gt_col_headings {
+#clkktferfd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -873,7 +873,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tfpixxuhik .gt_col_heading {
+#clkktferfd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -893,7 +893,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#tfpixxuhik .gt_column_spanner_outer {
+#clkktferfd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -905,15 +905,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 4px;
 }
 
-#tfpixxuhik .gt_column_spanner_outer:first-child {
+#clkktferfd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tfpixxuhik .gt_column_spanner_outer:last-child {
+#clkktferfd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tfpixxuhik .gt_column_spanner {
+#clkktferfd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -925,7 +925,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   width: 100%;
 }
 
-#tfpixxuhik .gt_group_heading {
+#clkktferfd .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -947,7 +947,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#tfpixxuhik .gt_empty_group_heading {
+#clkktferfd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -962,15 +962,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#tfpixxuhik .gt_from_md > :first-child {
+#clkktferfd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tfpixxuhik .gt_from_md > :last-child {
+#clkktferfd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tfpixxuhik .gt_row {
+#clkktferfd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -989,7 +989,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#tfpixxuhik .gt_stub {
+#clkktferfd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1001,7 +1001,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-left: 12px;
 }
 
-#tfpixxuhik .gt_summary_row {
+#clkktferfd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1011,7 +1011,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#tfpixxuhik .gt_first_summary_row {
+#clkktferfd .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1021,7 +1021,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#tfpixxuhik .gt_grand_summary_row {
+#clkktferfd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1031,7 +1031,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#tfpixxuhik .gt_first_grand_summary_row {
+#clkktferfd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1041,11 +1041,11 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#tfpixxuhik .gt_striped {
+#clkktferfd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tfpixxuhik .gt_table_body {
+#clkktferfd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1054,7 +1054,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#tfpixxuhik .gt_footnotes {
+#clkktferfd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1068,13 +1068,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tfpixxuhik .gt_footnote {
+#clkktferfd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#tfpixxuhik .gt_sourcenotes {
+#clkktferfd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1088,46 +1088,46 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tfpixxuhik .gt_sourcenote {
+#clkktferfd .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#tfpixxuhik .gt_left {
+#clkktferfd .gt_left {
   text-align: left;
 }
 
-#tfpixxuhik .gt_center {
+#clkktferfd .gt_center {
   text-align: center;
 }
 
-#tfpixxuhik .gt_right {
+#clkktferfd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tfpixxuhik .gt_font_normal {
+#clkktferfd .gt_font_normal {
   font-weight: normal;
 }
 
-#tfpixxuhik .gt_font_bold {
+#clkktferfd .gt_font_bold {
   font-weight: bold;
 }
 
-#tfpixxuhik .gt_font_italic {
+#clkktferfd .gt_font_italic {
   font-style: italic;
 }
 
-#tfpixxuhik .gt_super {
+#clkktferfd .gt_super {
   font-size: 65%;
 }
 
-#tfpixxuhik .gt_footnote_marks {
+#clkktferfd .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="tfpixxuhik" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="clkktferfd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="6" class="gt_heading gt_title gt_font_normal" style>Adjusted Prices for BioTech Stocks</th>
@@ -1272,7 +1272,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#gzjvymxmrj .gt_table {
+#hjzfxpqiwh .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1297,7 +1297,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#gzjvymxmrj .gt_heading {
+#hjzfxpqiwh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1309,7 +1309,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gzjvymxmrj .gt_title {
+#hjzfxpqiwh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1319,7 +1319,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-width: 0;
 }
 
-#gzjvymxmrj .gt_subtitle {
+#hjzfxpqiwh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1329,13 +1329,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-width: 0;
 }
 
-#gzjvymxmrj .gt_bottom_border {
+#hjzfxpqiwh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gzjvymxmrj .gt_col_headings {
+#hjzfxpqiwh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1350,7 +1350,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gzjvymxmrj .gt_col_heading {
+#hjzfxpqiwh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1370,7 +1370,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#gzjvymxmrj .gt_column_spanner_outer {
+#hjzfxpqiwh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1382,15 +1382,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 4px;
 }
 
-#gzjvymxmrj .gt_column_spanner_outer:first-child {
+#hjzfxpqiwh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gzjvymxmrj .gt_column_spanner_outer:last-child {
+#hjzfxpqiwh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gzjvymxmrj .gt_column_spanner {
+#hjzfxpqiwh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1402,7 +1402,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   width: 100%;
 }
 
-#gzjvymxmrj .gt_group_heading {
+#hjzfxpqiwh .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1424,7 +1424,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#gzjvymxmrj .gt_empty_group_heading {
+#hjzfxpqiwh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1439,15 +1439,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#gzjvymxmrj .gt_from_md > :first-child {
+#hjzfxpqiwh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gzjvymxmrj .gt_from_md > :last-child {
+#hjzfxpqiwh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gzjvymxmrj .gt_row {
+#hjzfxpqiwh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1466,7 +1466,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#gzjvymxmrj .gt_stub {
+#hjzfxpqiwh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1478,7 +1478,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-left: 12px;
 }
 
-#gzjvymxmrj .gt_summary_row {
+#hjzfxpqiwh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1488,7 +1488,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#gzjvymxmrj .gt_first_summary_row {
+#hjzfxpqiwh .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1498,7 +1498,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#gzjvymxmrj .gt_grand_summary_row {
+#hjzfxpqiwh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1508,7 +1508,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#gzjvymxmrj .gt_first_grand_summary_row {
+#hjzfxpqiwh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1518,11 +1518,11 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#gzjvymxmrj .gt_striped {
+#hjzfxpqiwh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gzjvymxmrj .gt_table_body {
+#hjzfxpqiwh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1531,7 +1531,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#gzjvymxmrj .gt_footnotes {
+#hjzfxpqiwh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1545,13 +1545,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gzjvymxmrj .gt_footnote {
+#hjzfxpqiwh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#gzjvymxmrj .gt_sourcenotes {
+#hjzfxpqiwh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1565,46 +1565,46 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gzjvymxmrj .gt_sourcenote {
+#hjzfxpqiwh .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#gzjvymxmrj .gt_left {
+#hjzfxpqiwh .gt_left {
   text-align: left;
 }
 
-#gzjvymxmrj .gt_center {
+#hjzfxpqiwh .gt_center {
   text-align: center;
 }
 
-#gzjvymxmrj .gt_right {
+#hjzfxpqiwh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gzjvymxmrj .gt_font_normal {
+#hjzfxpqiwh .gt_font_normal {
   font-weight: normal;
 }
 
-#gzjvymxmrj .gt_font_bold {
+#hjzfxpqiwh .gt_font_bold {
   font-weight: bold;
 }
 
-#gzjvymxmrj .gt_font_italic {
+#hjzfxpqiwh .gt_font_italic {
   font-style: italic;
 }
 
-#gzjvymxmrj .gt_super {
+#hjzfxpqiwh .gt_super {
   font-size: 65%;
 }
 
-#gzjvymxmrj .gt_footnote_marks {
+#hjzfxpqiwh .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="gzjvymxmrj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="hjzfxpqiwh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="6" class="gt_heading gt_title gt_font_normal" style>Adjusted Prices for BioTech Stocks</th>
@@ -1748,7 +1748,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#epjxhpelsl .gt_table {
+#qrbyuitycm .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1773,7 +1773,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#epjxhpelsl .gt_heading {
+#qrbyuitycm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1785,7 +1785,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#epjxhpelsl .gt_title {
+#qrbyuitycm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1795,7 +1795,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-width: 0;
 }
 
-#epjxhpelsl .gt_subtitle {
+#qrbyuitycm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1805,13 +1805,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-width: 0;
 }
 
-#epjxhpelsl .gt_bottom_border {
+#qrbyuitycm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#epjxhpelsl .gt_col_headings {
+#qrbyuitycm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1826,7 +1826,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#epjxhpelsl .gt_col_heading {
+#qrbyuitycm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1846,7 +1846,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#epjxhpelsl .gt_column_spanner_outer {
+#qrbyuitycm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1858,15 +1858,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 4px;
 }
 
-#epjxhpelsl .gt_column_spanner_outer:first-child {
+#qrbyuitycm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#epjxhpelsl .gt_column_spanner_outer:last-child {
+#qrbyuitycm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#epjxhpelsl .gt_column_spanner {
+#qrbyuitycm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1878,7 +1878,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   width: 100%;
 }
 
-#epjxhpelsl .gt_group_heading {
+#qrbyuitycm .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1900,7 +1900,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#epjxhpelsl .gt_empty_group_heading {
+#qrbyuitycm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1915,15 +1915,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#epjxhpelsl .gt_from_md > :first-child {
+#qrbyuitycm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#epjxhpelsl .gt_from_md > :last-child {
+#qrbyuitycm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#epjxhpelsl .gt_row {
+#qrbyuitycm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1942,7 +1942,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#epjxhpelsl .gt_stub {
+#qrbyuitycm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1954,7 +1954,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-left: 12px;
 }
 
-#epjxhpelsl .gt_summary_row {
+#qrbyuitycm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1964,7 +1964,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#epjxhpelsl .gt_first_summary_row {
+#qrbyuitycm .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1974,7 +1974,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#epjxhpelsl .gt_grand_summary_row {
+#qrbyuitycm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1984,7 +1984,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#epjxhpelsl .gt_first_grand_summary_row {
+#qrbyuitycm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1994,11 +1994,11 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#epjxhpelsl .gt_striped {
+#qrbyuitycm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#epjxhpelsl .gt_table_body {
+#qrbyuitycm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2007,7 +2007,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#epjxhpelsl .gt_footnotes {
+#qrbyuitycm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2021,13 +2021,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#epjxhpelsl .gt_footnote {
+#qrbyuitycm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#epjxhpelsl .gt_sourcenotes {
+#qrbyuitycm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2041,46 +2041,46 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#epjxhpelsl .gt_sourcenote {
+#qrbyuitycm .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#epjxhpelsl .gt_left {
+#qrbyuitycm .gt_left {
   text-align: left;
 }
 
-#epjxhpelsl .gt_center {
+#qrbyuitycm .gt_center {
   text-align: center;
 }
 
-#epjxhpelsl .gt_right {
+#qrbyuitycm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#epjxhpelsl .gt_font_normal {
+#qrbyuitycm .gt_font_normal {
   font-weight: normal;
 }
 
-#epjxhpelsl .gt_font_bold {
+#qrbyuitycm .gt_font_bold {
   font-weight: bold;
 }
 
-#epjxhpelsl .gt_font_italic {
+#qrbyuitycm .gt_font_italic {
   font-style: italic;
 }
 
-#epjxhpelsl .gt_super {
+#qrbyuitycm .gt_super {
   font-size: 65%;
 }
 
-#epjxhpelsl .gt_footnote_marks {
+#qrbyuitycm .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="epjxhpelsl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="qrbyuitycm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="6" class="gt_heading gt_title gt_font_normal" style>Adjusted Prices for BioTech Stocks</th>
@@ -2228,7 +2228,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#xsdtybkedd .gt_table {
+#rprzhshfqm .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2253,7 +2253,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#xsdtybkedd .gt_heading {
+#rprzhshfqm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2265,7 +2265,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xsdtybkedd .gt_title {
+#rprzhshfqm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2275,7 +2275,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-width: 0;
 }
 
-#xsdtybkedd .gt_subtitle {
+#rprzhshfqm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2285,13 +2285,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-width: 0;
 }
 
-#xsdtybkedd .gt_bottom_border {
+#rprzhshfqm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xsdtybkedd .gt_col_headings {
+#rprzhshfqm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2306,7 +2306,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xsdtybkedd .gt_col_heading {
+#rprzhshfqm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2326,7 +2326,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#xsdtybkedd .gt_column_spanner_outer {
+#rprzhshfqm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2338,15 +2338,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 4px;
 }
 
-#xsdtybkedd .gt_column_spanner_outer:first-child {
+#rprzhshfqm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xsdtybkedd .gt_column_spanner_outer:last-child {
+#rprzhshfqm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xsdtybkedd .gt_column_spanner {
+#rprzhshfqm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2358,7 +2358,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   width: 100%;
 }
 
-#xsdtybkedd .gt_group_heading {
+#rprzhshfqm .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2380,7 +2380,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#xsdtybkedd .gt_empty_group_heading {
+#rprzhshfqm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2395,15 +2395,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#xsdtybkedd .gt_from_md > :first-child {
+#rprzhshfqm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xsdtybkedd .gt_from_md > :last-child {
+#rprzhshfqm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xsdtybkedd .gt_row {
+#rprzhshfqm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2422,7 +2422,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#xsdtybkedd .gt_stub {
+#rprzhshfqm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2434,7 +2434,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-left: 12px;
 }
 
-#xsdtybkedd .gt_summary_row {
+#rprzhshfqm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2444,7 +2444,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#xsdtybkedd .gt_first_summary_row {
+#rprzhshfqm .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2454,7 +2454,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#xsdtybkedd .gt_grand_summary_row {
+#rprzhshfqm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2464,7 +2464,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#xsdtybkedd .gt_first_grand_summary_row {
+#rprzhshfqm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2474,11 +2474,11 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#xsdtybkedd .gt_striped {
+#rprzhshfqm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xsdtybkedd .gt_table_body {
+#rprzhshfqm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2487,7 +2487,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xsdtybkedd .gt_footnotes {
+#rprzhshfqm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2501,13 +2501,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xsdtybkedd .gt_footnote {
+#rprzhshfqm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#xsdtybkedd .gt_sourcenotes {
+#rprzhshfqm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2521,46 +2521,46 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xsdtybkedd .gt_sourcenote {
+#rprzhshfqm .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#xsdtybkedd .gt_left {
+#rprzhshfqm .gt_left {
   text-align: left;
 }
 
-#xsdtybkedd .gt_center {
+#rprzhshfqm .gt_center {
   text-align: center;
 }
 
-#xsdtybkedd .gt_right {
+#rprzhshfqm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xsdtybkedd .gt_font_normal {
+#rprzhshfqm .gt_font_normal {
   font-weight: normal;
 }
 
-#xsdtybkedd .gt_font_bold {
+#rprzhshfqm .gt_font_bold {
   font-weight: bold;
 }
 
-#xsdtybkedd .gt_font_italic {
+#rprzhshfqm .gt_font_italic {
   font-style: italic;
 }
 
-#xsdtybkedd .gt_super {
+#rprzhshfqm .gt_super {
   font-size: 65%;
 }
 
-#xsdtybkedd .gt_footnote_marks {
+#rprzhshfqm .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="xsdtybkedd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="rprzhshfqm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="6" class="gt_heading gt_title gt_font_normal" style>Adjusted Prices for BioTech Stocks</th>
@@ -2733,7 +2733,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#fzidsbthdo .gt_table {
+#bfxzunvbxn .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2758,7 +2758,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#fzidsbthdo .gt_heading {
+#bfxzunvbxn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2770,7 +2770,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#fzidsbthdo .gt_title {
+#bfxzunvbxn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2780,7 +2780,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-width: 0;
 }
 
-#fzidsbthdo .gt_subtitle {
+#bfxzunvbxn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2790,13 +2790,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-width: 0;
 }
 
-#fzidsbthdo .gt_bottom_border {
+#bfxzunvbxn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fzidsbthdo .gt_col_headings {
+#bfxzunvbxn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2811,7 +2811,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#fzidsbthdo .gt_col_heading {
+#bfxzunvbxn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2831,7 +2831,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#fzidsbthdo .gt_column_spanner_outer {
+#bfxzunvbxn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2843,15 +2843,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 4px;
 }
 
-#fzidsbthdo .gt_column_spanner_outer:first-child {
+#bfxzunvbxn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fzidsbthdo .gt_column_spanner_outer:last-child {
+#bfxzunvbxn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fzidsbthdo .gt_column_spanner {
+#bfxzunvbxn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2863,7 +2863,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   width: 100%;
 }
 
-#fzidsbthdo .gt_group_heading {
+#bfxzunvbxn .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2885,7 +2885,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#fzidsbthdo .gt_empty_group_heading {
+#bfxzunvbxn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2900,15 +2900,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#fzidsbthdo .gt_from_md > :first-child {
+#bfxzunvbxn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fzidsbthdo .gt_from_md > :last-child {
+#bfxzunvbxn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fzidsbthdo .gt_row {
+#bfxzunvbxn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2927,7 +2927,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#fzidsbthdo .gt_stub {
+#bfxzunvbxn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2939,7 +2939,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-left: 12px;
 }
 
-#fzidsbthdo .gt_summary_row {
+#bfxzunvbxn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2949,7 +2949,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#fzidsbthdo .gt_first_summary_row {
+#bfxzunvbxn .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2959,7 +2959,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#fzidsbthdo .gt_grand_summary_row {
+#bfxzunvbxn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2969,7 +2969,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#fzidsbthdo .gt_first_grand_summary_row {
+#bfxzunvbxn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2979,11 +2979,11 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#fzidsbthdo .gt_striped {
+#bfxzunvbxn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fzidsbthdo .gt_table_body {
+#bfxzunvbxn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2992,7 +2992,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#fzidsbthdo .gt_footnotes {
+#bfxzunvbxn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3006,13 +3006,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#fzidsbthdo .gt_footnote {
+#bfxzunvbxn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#fzidsbthdo .gt_sourcenotes {
+#bfxzunvbxn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3026,46 +3026,46 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#fzidsbthdo .gt_sourcenote {
+#bfxzunvbxn .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#fzidsbthdo .gt_left {
+#bfxzunvbxn .gt_left {
   text-align: left;
 }
 
-#fzidsbthdo .gt_center {
+#bfxzunvbxn .gt_center {
   text-align: center;
 }
 
-#fzidsbthdo .gt_right {
+#bfxzunvbxn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fzidsbthdo .gt_font_normal {
+#bfxzunvbxn .gt_font_normal {
   font-weight: normal;
 }
 
-#fzidsbthdo .gt_font_bold {
+#bfxzunvbxn .gt_font_bold {
   font-weight: bold;
 }
 
-#fzidsbthdo .gt_font_italic {
+#bfxzunvbxn .gt_font_italic {
   font-style: italic;
 }
 
-#fzidsbthdo .gt_super {
+#bfxzunvbxn .gt_super {
   font-size: 65%;
 }
 
-#fzidsbthdo .gt_footnote_marks {
+#bfxzunvbxn .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="fzidsbthdo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="bfxzunvbxn" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="6" class="gt_heading gt_title gt_font_normal" style>Adjusted Prices for BioTech Stocks</th>
@@ -3231,7 +3231,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ixshcybjeq .gt_table {
+#umtxybdxkh .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3256,7 +3256,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#ixshcybjeq .gt_heading {
+#umtxybdxkh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3268,7 +3268,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ixshcybjeq .gt_title {
+#umtxybdxkh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3278,7 +3278,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-width: 0;
 }
 
-#ixshcybjeq .gt_subtitle {
+#umtxybdxkh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3288,13 +3288,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-width: 0;
 }
 
-#ixshcybjeq .gt_bottom_border {
+#umtxybdxkh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ixshcybjeq .gt_col_headings {
+#umtxybdxkh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3309,7 +3309,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ixshcybjeq .gt_col_heading {
+#umtxybdxkh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3329,7 +3329,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#ixshcybjeq .gt_column_spanner_outer {
+#umtxybdxkh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3341,15 +3341,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 4px;
 }
 
-#ixshcybjeq .gt_column_spanner_outer:first-child {
+#umtxybdxkh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ixshcybjeq .gt_column_spanner_outer:last-child {
+#umtxybdxkh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ixshcybjeq .gt_column_spanner {
+#umtxybdxkh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3361,7 +3361,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   width: 100%;
 }
 
-#ixshcybjeq .gt_group_heading {
+#umtxybdxkh .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3383,7 +3383,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#ixshcybjeq .gt_empty_group_heading {
+#umtxybdxkh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3398,15 +3398,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#ixshcybjeq .gt_from_md > :first-child {
+#umtxybdxkh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ixshcybjeq .gt_from_md > :last-child {
+#umtxybdxkh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ixshcybjeq .gt_row {
+#umtxybdxkh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3425,7 +3425,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#ixshcybjeq .gt_stub {
+#umtxybdxkh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3437,7 +3437,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-left: 12px;
 }
 
-#ixshcybjeq .gt_summary_row {
+#umtxybdxkh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3447,7 +3447,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#ixshcybjeq .gt_first_summary_row {
+#umtxybdxkh .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3457,7 +3457,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#ixshcybjeq .gt_grand_summary_row {
+#umtxybdxkh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3467,7 +3467,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#ixshcybjeq .gt_first_grand_summary_row {
+#umtxybdxkh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3477,11 +3477,11 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#ixshcybjeq .gt_striped {
+#umtxybdxkh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ixshcybjeq .gt_table_body {
+#umtxybdxkh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3490,7 +3490,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ixshcybjeq .gt_footnotes {
+#umtxybdxkh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3504,13 +3504,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ixshcybjeq .gt_footnote {
+#umtxybdxkh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ixshcybjeq .gt_sourcenotes {
+#umtxybdxkh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3524,46 +3524,46 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ixshcybjeq .gt_sourcenote {
+#umtxybdxkh .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ixshcybjeq .gt_left {
+#umtxybdxkh .gt_left {
   text-align: left;
 }
 
-#ixshcybjeq .gt_center {
+#umtxybdxkh .gt_center {
   text-align: center;
 }
 
-#ixshcybjeq .gt_right {
+#umtxybdxkh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ixshcybjeq .gt_font_normal {
+#umtxybdxkh .gt_font_normal {
   font-weight: normal;
 }
 
-#ixshcybjeq .gt_font_bold {
+#umtxybdxkh .gt_font_bold {
   font-weight: bold;
 }
 
-#ixshcybjeq .gt_font_italic {
+#umtxybdxkh .gt_font_italic {
   font-style: italic;
 }
 
-#ixshcybjeq .gt_super {
+#umtxybdxkh .gt_super {
   font-size: 65%;
 }
 
-#ixshcybjeq .gt_footnote_marks {
+#umtxybdxkh .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="ixshcybjeq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="umtxybdxkh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="6" class="gt_heading gt_title gt_font_normal" style>Adjusted Prices for BioTech Stocks</th>
@@ -3750,7 +3750,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#gerfxsngwi .gt_table {
+#iffkcobfbw .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3775,7 +3775,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#gerfxsngwi .gt_heading {
+#iffkcobfbw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3787,7 +3787,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gerfxsngwi .gt_title {
+#iffkcobfbw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3797,7 +3797,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-width: 0;
 }
 
-#gerfxsngwi .gt_subtitle {
+#iffkcobfbw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3807,13 +3807,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-width: 0;
 }
 
-#gerfxsngwi .gt_bottom_border {
+#iffkcobfbw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gerfxsngwi .gt_col_headings {
+#iffkcobfbw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3828,7 +3828,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gerfxsngwi .gt_col_heading {
+#iffkcobfbw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3848,7 +3848,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#gerfxsngwi .gt_column_spanner_outer {
+#iffkcobfbw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3860,15 +3860,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 4px;
 }
 
-#gerfxsngwi .gt_column_spanner_outer:first-child {
+#iffkcobfbw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gerfxsngwi .gt_column_spanner_outer:last-child {
+#iffkcobfbw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gerfxsngwi .gt_column_spanner {
+#iffkcobfbw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3880,7 +3880,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   width: 100%;
 }
 
-#gerfxsngwi .gt_group_heading {
+#iffkcobfbw .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3902,7 +3902,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#gerfxsngwi .gt_empty_group_heading {
+#iffkcobfbw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3917,15 +3917,15 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   vertical-align: middle;
 }
 
-#gerfxsngwi .gt_from_md > :first-child {
+#iffkcobfbw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gerfxsngwi .gt_from_md > :last-child {
+#iffkcobfbw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gerfxsngwi .gt_row {
+#iffkcobfbw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3944,7 +3944,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   overflow-x: hidden;
 }
 
-#gerfxsngwi .gt_stub {
+#iffkcobfbw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3956,7 +3956,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-left: 12px;
 }
 
-#gerfxsngwi .gt_summary_row {
+#iffkcobfbw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3966,7 +3966,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#gerfxsngwi .gt_first_summary_row {
+#iffkcobfbw .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3976,7 +3976,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#gerfxsngwi .gt_grand_summary_row {
+#iffkcobfbw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3986,7 +3986,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   padding-right: 5px;
 }
 
-#gerfxsngwi .gt_first_grand_summary_row {
+#iffkcobfbw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3996,11 +3996,11 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#gerfxsngwi .gt_striped {
+#iffkcobfbw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gerfxsngwi .gt_table_body {
+#iffkcobfbw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4009,7 +4009,7 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#gerfxsngwi .gt_footnotes {
+#iffkcobfbw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4023,13 +4023,13 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gerfxsngwi .gt_footnote {
+#iffkcobfbw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#gerfxsngwi .gt_sourcenotes {
+#iffkcobfbw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4043,46 +4043,46 @@ glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gerfxsngwi .gt_sourcenote {
+#iffkcobfbw .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#gerfxsngwi .gt_left {
+#iffkcobfbw .gt_left {
   text-align: left;
 }
 
-#gerfxsngwi .gt_center {
+#iffkcobfbw .gt_center {
   text-align: center;
 }
 
-#gerfxsngwi .gt_right {
+#iffkcobfbw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gerfxsngwi .gt_font_normal {
+#iffkcobfbw .gt_font_normal {
   font-weight: normal;
 }
 
-#gerfxsngwi .gt_font_bold {
+#iffkcobfbw .gt_font_bold {
   font-weight: bold;
 }
 
-#gerfxsngwi .gt_font_italic {
+#iffkcobfbw .gt_font_italic {
   font-style: italic;
 }
 
-#gerfxsngwi .gt_super {
+#iffkcobfbw .gt_super {
   font-size: 65%;
 }
 
-#gerfxsngwi .gt_footnote_marks {
+#iffkcobfbw .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="gerfxsngwi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="iffkcobfbw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="4" class="gt_heading gt_title gt_font_normal" style>BioTech Stock Prices and Returns</th>
