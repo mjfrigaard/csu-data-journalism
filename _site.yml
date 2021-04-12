@@ -3,8 +3,10 @@ output_dir: "."
 navbar:
   title: "CSU Data Journalism"
   left:
-    - text: "Lessons and exercises"
+    - text: "Course outline"
       href: index.html
+    - text: "Lessons and exercises"
+      href: lessons-exercises.html
     - text: "Slides"
       href: slides.html
     - text: "More resources"

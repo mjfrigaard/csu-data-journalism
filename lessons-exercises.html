@@ -11,7 +11,7 @@
 
 
 
-<title>Creating Data in R</title>
+<title>Lessons and Exercises</title>
 
 <script src="site_libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -29,15 +29,11 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -221,73 +217,7 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
-
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
 
 
 
@@ -297,16 +227,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -347,71 +267,56 @@ div.tocify {
 
 <div id="header">
 
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+
+
+<h1 class="title toc-ignore">Lessons and Exercises</h1>
+
+</div>
+
+
+<div id="introduction-to-r-rstudio" class="section level3">
+<h3>Introduction to R &amp; RStudio</h3>
+<ul>
+<li><a href="bk00_functions-and-objects.html">Introduction to R Programming</a> <em>an introduction to functions and objects</em></li>
+<li><a href="bk01_workflow-best-practices.html">R Workflow Best Practices</a> <em>tips for managing your code, data, and files</em></li>
+<li><a href="bk02_subsetting-flow-control.html">Subsetting and Flow Control Statements</a> <em>change the flow of your code</em></li>
 </ul>
 </div>
-
-
-
-<h1 class="title toc-ignore">Creating Data in R</h1>
-
+<div id="reproducible-analysis-with-r-markdown" class="section level3">
+<h3>Reproducible Analysis With R Markdown</h3>
+<ul>
+<li><a href="mk00_rmarkdown-exercises.html">Getting Started With R Markdown</a> <em>building reproducible reports</em></li>
+<li><a href="mk01_rmarkdown-reactable-tables.html">Displaying Tables With reactable</a> <em>interactive tables in reproducible reports</em></li>
+<li><a href="mk02_rmarkdown-gt-tables.html">Displaying Tables With gt</a> <em>create a wide variety of tables using a cohesive set of table parts</em></li>
+<li><a href="mk03_rmarkdown-DT-tables.html">Displaying Tables With DT (under construction)</a> <em>tables for R Markdown and shiny applications</em></li>
+<li><a href="mk04_rmarkdown-sparklines.html">Displaying graphs in tables (under construction)</a> <em>add graphs to your tables!</em></li>
+</ul>
 </div>
-
-
-<div id="objectives" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
-<p>This lesson outlines some examples for creating data in R. Being able to generate your own datasets in R makes it easier to test code and create reproducible examples. We’re going to cover the following packages for creating data in R:</p>
-<ol style="list-style-type: decimal">
-<li><a href="https://cran.r-project.org/web/packages/fakeR/fakeR.pdf">fakeR</a><br />
-</li>
-<li><a href="https://declaredesign.org/r/fabricatr/articles/getting_started.html">fabricatr</a><br />
-</li>
-<li><a href="https://docs.ropensci.org/charlatan/">charlatan</a></li>
-<li><a href="https://thinkr-open.github.io/fakir/">fakir</a></li>
-</ol>
-<p>Read more about data simulation <a href="https://rviews.rstudio.com/2019/07/01/imagine-your-data-before-you-collect-it/">here</a> and <a href="https://rviews.rstudio.com/2020/09/09/fake-data-with-r/">here</a> on the RStudio blog.</p>
+<div id="data-manipulation-and-transformation" class="section level3">
+<h3>Data Manipulation and Transformation</h3>
+<ul>
+<li><a href="dt00_data-manipulations.html">Introduction to Data Manipulation</a> <em>introduction to wrangling data</em></li>
+<li><a href="dt01_data-trans-joins-exercises.html">Reshaping and Joining Data in R</a> <em>transpose, pivot, split, and combine data</em></li>
+<li><a href="dt02_adv-data-manip-joins.html">Advanced Data Transformation and Manipulation</a> <em>dealing with complex data structures</em></li>
+<li><a href="dt03_scrape-wikipedia-data.html">Scraping Wikipedia Tables</a> <em>advanced wrangling example</em></li>
+<li><a href="dt04_manip-with-datatable.html">Data manipulation with data.table</a> <em>faster data wrangling with data.table!</em></li>
+</ul>
+<!-- ### Simulate Data  -->
 </div>
-<div id="load-packages" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Load packages</h1>
-<p>Install and load packages below:</p>
-<pre class="r"><code>install.packages(c(&quot;fakeR&quot;, &quot;fabricatr&quot;,
-                   &quot;charlatan&quot;, &quot;fakir&quot;,
-                   &quot;tidyverse&quot;))
-#&gt; Error in contrib.url(repos, &quot;source&quot;): trying to use CRAN without setting a mirror
-library(fakeR)
-library(fabricatr)
-library(charlatan)
-library(fakir)
-library(tidyverse)</code></pre>
-</div>
-<div id="materials-coming-soon" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Materials (coming soon!)</h1>
-<p>The slides for this presentation are <a href="">here</a>.</p>
-<p>The RStudio.Cloud project <a href="">here</a>.</p>
-</div>
-<div id="faker" class="section level1" number="4">
-<h1 number="4"><span class="header-section-number">4</span> <code>fakeR</code></h1>
-<p>The <code>fakeR</code> package has been.</p>
-</div>
-<div id="fabricatr" class="section level1" number="5">
-<h1 number="5"><span class="header-section-number">5</span> <code>fabricatr</code></h1>
-</div>
-<div id="charlatan" class="section level1" number="6">
-<h1 number="6"><span class="header-section-number">6</span> <code>charlatan</code></h1>
-</div>
-<div id="fakir" class="section level1" number="7">
-<h1 number="7"><span class="header-section-number">7</span> <code>fakir</code></h1>
+<div id="data-visualization" class="section level3">
+<h3>Data Visualization</h3>
+<ul>
+<li><a href="gg00_intro-to-data-viz.html">Introduction to Data Visualization with ggplot2</a> <em>an introduction to the grammar of graphics</em></li>
+<li><a href="gg01_data-viz-as-comm.html">Data Visualization as Communication</a> <em>using graphs to effectively share ideas</em></li>
+<li><a href="gg02_adv-data-viz.html">Advanced Data Visualization</a> <em>extending ggplot2</em></li>
+</ul>
+<!-- ### Dashboards and Shiny -->
+<p>This work is licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
 </div>
 
 <i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
 
 
-</div>
-</div>
 
 </div>
 
@@ -443,38 +348,7 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3,h4,h5",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
