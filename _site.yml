@@ -1,0 +1,20 @@
+name: "r-meetup-tutorials"
+output_dir: "."
+navbar:
+  title: "bmRn R Training"
+  left:
+    - text: "Lessons and exercises"
+      href: index.html
+    - text: "Slides"
+      href: slides.html
+    - text: "More resources"
+      href: more-resources.html
+  right:
+    - text: "About"
+      href: about.html
+output:
+  html_document:
+    theme: flatly
+    includes:
+      after_body: footer.html
+new_session: true

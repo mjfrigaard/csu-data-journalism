@@ -1,0 +1,72 @@
+---
+title: "Displaying graphs in tables (under construction)"
+comment: "*add graphs to your tables!*"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 5
+    number_sections: yes
+    code_folding: hide
+    theme: flatly
+    df_print: paged
+
+always_allow_html: true
+---
+
+```{r , include=FALSE}
+library(tidyverse)
+library(skimr)
+# create data folder
+# folders
+folders <- c("code", "data", "img", "docs", "pdfs")
+purrr::map(.x = folders, .f = fs::dir_create)
+knitr::opts_chunk$set(warning = FALSE,
+                      message = FALSE,
+                      tidy = FALSE,
+                      size = "Huge")
+```
+
+
+## Sparklines with `reactable` {.tabset}
+
+```{r sparkline-data}
+library(reactable)
+library(dplyr)
+library(sparkline)
+# inspect the chickwts data
+str(chickwts)
+```
+
+```{r create-data}
+chickwts_grouped <- chickwts %>%
+  group_by(feed) %>%
+  summarise(weight = list(weight)) %>%
+  mutate(boxplot = NA, sparkline = NA)
+
+listviewer::jsonedit(listdata = chickwts_grouped, mode = "view")
+```
+
+
+```{r sparkline-reactable, eval=FALSE}
+reactable(chickwts_grouped,
+  columns = list(
+    weight = colDef(cell = function(values) {
+      sparkline(
+        values = values, type = "bar",
+        chartRangeMin = 0,
+        chartRangeMax = max(chickwts$weight)
+      )
+    }),
+    boxplot = colDef(cell = function(value, index) {
+      sparkline(
+        values = data$weight[[index]],
+        type = "box"
+      )
+    }),
+    sparkline = colDef(cell = function(value, index) {
+      sparkline(data$weight[[index]])
+    })
+  )
+)
+```

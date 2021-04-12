@@ -1,0 +1,55 @@
+---
+title: "More resources"
+---
+
+## General R Resources
+
++ [R for Data Science](https://r4ds.had.co.nz/) 
+
++ [Advanced R](https://adv-r.hadley.nz/)  
+
++ [Hands on Programming with R](https://rstudio-education.github.io/hopr/r-objects.html)
+
++ [R Language Definition](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects)
+
++ [Tidyverse](https://www.tidyverse.org/)  
+
++ [RViews Community Blog](https://rviews.rstudio.com/)
+
+## R Markdown Resources 
+
+- **YAML**: check out the [`ymlthis` package](https://r-lib.github.io/ymlthis/) for tools and documentation for working with YAML
+
+- **Markdown**: [Commonmark](https://commonmark.org/help/tutorial) has a quick ten-twenty minute tutorial on markdown.
+
+- [R Markdown](https://bookdown.org/yihui/rmarkdown/): A comprehensive but friendly introduction to R Markdown and friends. Free online!
+
+- [R for Data Science](http://r4ds.had.co.nz/): A comprehensive but friendly introduction to the tidyverse. Free online.
+
+- [R Markdown for Scientists](https://rmd4sci.njtierney.com/): R Markdown for Scientists workshop material
+
+## Resources for Data Manipluation 
+
++ [R for Data Science](https://r4ds.had.co.nz/transform.html) 
+
++ [Data Wrangling with R](https://cengel.github.io/R-data-wrangling/) 
+
++ [Stack Overflow questions tagged with `dplyr`](https://stackoverflow.com/questions/tagged/dplyr)
+
++ [RStudio Community posts tagged `dplyr`](https://community.rstudio.com/tag/dplyr)
+
+## Resources for Data Tidying 
+
++ [R for Data Science](https://r4ds.had.co.nz/tidy-data.html) 
+
++ [Stack Overflow questions tagged with `tidyr`](https://stackoverflow.com/questions/tagged/tidyr)
+
++ [RStudio Community posts tagged `tidyr`](https://community.rstudio.com/tag/tidyr)
+
+## Data Visualization Resources 
+
++ The [`ggplot2` book](https://ggplot2-book.org/) 
+
++ [`ggplot2`](https://ggplot2.tidyverse.org/) on the tidyverse website 
+
++ [Flowing Data](https://flowingdata.com/) 

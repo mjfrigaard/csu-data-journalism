@@ -1,0 +1,4608 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Displaying Tables With gt</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">bmRn R Training</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Lessons and exercises</a>
+</li>
+<li>
+  <a href="slides.html">Slides</a>
+</li>
+<li>
+  <a href="more-resources.html">More resources</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Displaying Tables With gt</h1>
+
+</div>
+
+
+<div id="objectives" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
+<p>This section covers the <a href="https://gt.rstudio.com/"><code>gt</code></a> package for displaying data in tables in your R Markdown reports.</p>
+</div>
+<div id="resources" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Resources</h1>
+<p>Slides: this is an extra lesson, so there aren’t currently slides available (yet!)</p>
+<p>RStudio.Cloud: this is an extra lesson, so there isn’t an RStudio.Cloud project (yet!)</p>
+</div>
+<div id="packages" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Packages</h1>
+<p>We’ll be covering the <a href="https://gt.rstudio.com/"><code>gt</code></a> and <a href="https://www.tidyverse.org/"><code>tidyverse</code></a> packages for displaying tables in R Markdown.</p>
+<p>We will also import some actual stock data using <code>quantmod</code> and <code>xts</code> packages. This code was built using the example in <a href="http://www.reproduciblefinance.com/code/get-returns/">Reproducible Finance with R</a> by Jonathan K. Regenstein, Jr.</p>
+<pre class="r"><code>library(gt)
+library(tidyverse)
+library(glue)
+library(readxl)
+library(highcharter)
+library(tidyquant)
+library(timetk)
+library(tibbletime)
+library(quantmod)
+library(PerformanceAnalytics)
+library(scales)</code></pre>
+</div>
+<div id="stock-data-from-quantmod" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Stock data from <code>quantmod</code></h1>
+<p>The code below collects stock data for five biotech companies:</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://finance.yahoo.com/quote/BMRN/history?p=BMRN">BioMarin</a><br />
+</li>
+<li><a href="https://finance.yahoo.com/quote/NVS?p=NVS">Novartis AG</a><br />
+</li>
+<li><a href="https://finance.yahoo.com/quote/GSK?p=GSK">GlaxoSmithKline plc</a><br />
+</li>
+<li><a href="https://finance.yahoo.com/quote/AZN?p=AZN">AstraZeneca PLC</a><br />
+</li>
+<li><a href="https://finance.yahoo.com/quote/LLY?p=LLY">Eli Lilly and Company</a></li>
+</ol>
+<p>Each of these companies are exchange-traded funds, or <a href="https://en.wikipedia.org/wiki/Exchange-traded_fund">ETFs</a>, and we can download their data using their unique ‘ticker’ symbols.</p>
+<blockquote>
+<p>“ETFs are bought and sold throughout the day on stock exchanges.”</p>
+</blockquote>
+<pre class="r"><code># put stock symbols in a vector
+biotech_symbols &lt;- c(&quot;BMRN&quot;, &quot;NVS&quot;, &quot;GSK&quot;, &quot;AZN&quot;, &quot;LLY&quot;)
+# collect yahoo sales data 
+biotech_prices &lt;- quantmod::getSymbols(biotech_symbols, 
+                  # returns an object with the opening price, closing price, 
+                  # adjusted price, daily high, daily low and daily volume
+                  # for each ticker.
+                     src = &#39;yahoo&#39;, 
+                     from = &quot;2019-12-31&quot;, to = &quot;2020-12-31&quot;, 
+                     auto.assign = TRUE, 
+                     warnings = FALSE) %&gt;% 
+          # Ad() and get() is used to isolate the adjusted price
+          purrr::map(~Ad(get(.))) %&gt;% 
+          # merge() looks for the date index shared by our objects and 
+          # uses that index to align the data.
+          purrr::reduce(merge) %&gt;% 
+          # use colnames&lt;- to rename the columns according to the 
+          # symbols object.
+          `colnames&lt;-`(biotech_symbols)
+# check structure of biotech_prices
+str(biotech_prices)</code></pre>
+<pre><code>## An &#39;xts&#39; object on 2019-12-31/2020-12-29 containing:
+##   Data: num [1:252, 1:5] 84.6 84 84 84.6 84.2 ...
+##  - attr(*, &quot;dimnames&quot;)=List of 2
+##   ..$ : NULL
+##   ..$ : chr [1:5] &quot;BMRN&quot; &quot;NVS&quot; &quot;GSK&quot; &quot;AZN&quot; ...
+##   Indexed by objects of class: [Date] TZ: UTC
+##   xts Attributes:  
+## List of 2
+##  $ src    : chr &quot;yahoo&quot;
+##  $ updated: POSIXct[1:1], format: &quot;2020-12-30 00:51:27&quot;</code></pre>
+<p>We can see this creates an <code>xts</code> or, extensible time-series object. A noteworthy difference between an <code>xts</code> and <code>tibble</code> dataset is that all <code>xts</code> objects have a date <code>index</code>.</p>
+<p>The code below shows the attributes and structure of the first six items in <code>biotech_prices</code>:</p>
+<pre class="r"><code>unclass(head(biotech_prices))</code></pre>
+<pre><code>##       BMRN      NVS      GSK      AZN      LLY
+## [1,] 84.55 91.37416 44.72367 48.47673 128.8463
+## [2,] 84.04 91.62505 44.65704 48.99202 129.6110
+## [3,] 84.00 91.47066 44.23826 48.70035 129.1796
+## [4,] 84.59 92.08825 44.25729 48.49617 129.6600
+## [5,] 84.21 91.17152 43.98128 48.68090 129.9051
+## [6,] 84.71 91.17152 44.17164 48.56423 131.0815
+## attr(,&quot;src&quot;)
+## [1] &quot;yahoo&quot;
+## attr(,&quot;updated&quot;)
+## [1] &quot;2020-12-30 00:51:27 MST&quot;
+## attr(,&quot;index&quot;)
+## [1] 1577750400 1577923200 1578009600 1578268800 1578355200 1578441600
+## attr(,&quot;index&quot;)attr(,&quot;tzone&quot;)
+## [1] &quot;UTC&quot;
+## attr(,&quot;index&quot;)attr(,&quot;tclass&quot;)
+## [1] &quot;Date&quot;</code></pre>
+<p>Read more about these objects <a href="https://cran.r-project.org/web/packages/xts/vignettes/xts.pdf">here</a>.</p>
+</div>
+<div id="convert-xts-prices-data-to-wide" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Convert <code>xts</code> prices data to wide</h1>
+<p>We want to take our <code>xts</code> data (<code>biotech_prices</code>) and convert it to a wide dataset of stock prices.</p>
+<div id="xts-to-data.frame" class="section level3 tabset" number="5.0.1">
+<h3 class="tabset" number="5.0.1"><span class="header-section-number">5.0.1</span> <code>xts</code> to <code>data.frame</code></h3>
+<p>We can do this by combining the <code>xts::to.monthly()</code> function with <code>base::data.frame()</code>. We’ll use <code>index(.)</code> to shift the dates to a <code>date</code> column.</p>
+<pre class="r"><code>biotech_prices %&gt;%
+  xts::to.monthly(indexAt = &quot;lastof&quot;, 
+             OHLC = FALSE) %&gt;%
+  # convert the index to a date
+  base::data.frame(date = index(.))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["BMRN"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["NVS"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["GSK"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["AZN"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["LLY"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["date"],"name":[6],"type":["date"],"align":["right"]}],"data":[{"1":"84.55","2":"91.37416","3":"44.72367","4":"48.47673","5":"128.8463","6":"2019-12-31","_rn_":"2019-12-31"},{"1":"83.50","2":"91.20046","3":"44.54283","4":"47.34891","5":"136.8949","6":"2020-01-31","_rn_":"2020-01-31"},{"1":"90.37","2":"81.01990","3":"39.11396","4":"43.45262","5":"124.2914","6":"2020-02-29","_rn_":"2020-02-29"},{"1":"84.50","2":"82.45000","3":"36.56619","4":"44.30580","5":"136.6979","6":"2020-03-31","_rn_":"2020-03-31"},{"1":"92.02","2":"84.73000","3":"40.60016","4":"51.86537","5":"152.3858","6":"2020-04-30","_rn_":"2020-04-30"},{"1":"106.55","2":"87.43000","3":"40.90715","4":"54.16697","5":"151.4300","6":"2020-05-31","_rn_":"2020-05-31"},{"1":"123.34","2":"87.34000","3":"39.80446","4":"52.47053","5":"162.5484","6":"2020-06-30","_rn_":"2020-06-30"},{"1":"119.81","2":"82.14000","3":"39.34581","4":"55.33761","5":"148.7964","6":"2020-07-31","_rn_":"2020-07-31"},{"1":"78.03","2":"86.06000","3":"39.09855","4":"56.00000","5":"147.6314","6":"2020-08-31","_rn_":"2020-08-31"},{"1":"76.08","2":"86.96000","3":"37.16337","4":"54.80000","5":"147.2633","6":"2020-09-30","_rn_":"2020-09-30"},{"1":"74.43","2":"78.08000","3":"32.99681","4":"50.16000","5":"129.7931","6":"2020-10-31","_rn_":"2020-10-31"},{"1":"78.70","2":"90.83000","3":"36.79000","4":"52.94000","5":"145.6500","6":"2020-11-30","_rn_":"2020-11-30"},{"1":"86.18","2":"93.35000","3":"36.98000","4":"49.90000","5":"166.5800","6":"2020-12-31","_rn_":"2020-12-31"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="remove_rownames" class="section level3" number="5.0.2">
+<h3 number="5.0.2"><span class="header-section-number">5.0.2</span> <code>remove_rownames</code></h3>
+<p>Now that we have the dates stored in <code>date</code>, we want to drop the rownames with <code>remove_rownames()</code> and rearrange the data with <code>select()</code>.</p>
+<pre class="r"><code>biotech_prices %&gt;%
+  xts::to.monthly(indexAt = &quot;lastof&quot;, 
+             OHLC = FALSE) %&gt;%
+  # convert the index to a date
+  base::data.frame(date = index(.)) %&gt;%
+  # now remove the index because it got converted to row names 
+  tibble::remove_rownames() %&gt;% 
+  dplyr::select(date, 
+                dplyr::everything()) </code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["BMRN"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["NVS"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["GSK"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["AZN"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["LLY"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019-12-31","2":"84.55","3":"91.37416","4":"44.72367","5":"48.47673","6":"128.8463"},{"1":"2020-01-31","2":"83.50","3":"91.20046","4":"44.54283","5":"47.34891","6":"136.8949"},{"1":"2020-02-29","2":"90.37","3":"81.01990","4":"39.11396","5":"43.45262","6":"124.2914"},{"1":"2020-03-31","2":"84.50","3":"82.45000","4":"36.56619","5":"44.30580","6":"136.6979"},{"1":"2020-04-30","2":"92.02","3":"84.73000","4":"40.60016","5":"51.86537","6":"152.3858"},{"1":"2020-05-31","2":"106.55","3":"87.43000","4":"40.90715","5":"54.16697","6":"151.4300"},{"1":"2020-06-30","2":"123.34","3":"87.34000","4":"39.80446","5":"52.47053","6":"162.5484"},{"1":"2020-07-31","2":"119.81","3":"82.14000","4":"39.34581","5":"55.33761","6":"148.7964"},{"1":"2020-08-31","2":"78.03","3":"86.06000","4":"39.09855","5":"56.00000","6":"147.6314"},{"1":"2020-09-30","2":"76.08","3":"86.96000","4":"37.16337","5":"54.80000","6":"147.2633"},{"1":"2020-10-31","2":"74.43","3":"78.08000","4":"32.99681","5":"50.16000","6":"129.7931"},{"1":"2020-11-30","2":"78.70","3":"90.83000","4":"36.79000","5":"52.94000","6":"145.6500"},{"1":"2020-12-31","2":"86.18","3":"93.35000","4":"36.98000","5":"49.90000","6":"166.5800"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="create-priceswide" class="section level3" number="5.0.3">
+<h3 number="5.0.3"><span class="header-section-number">5.0.3</span> create <code>PricesWide</code></h3>
+<p>Assign this to <code>PricesWide</code></p>
+<pre class="r"><code>biotech_prices %&gt;%
+  xts::to.monthly(indexAt = &quot;lastof&quot;, 
+             OHLC = FALSE) %&gt;%
+  # convert the index to a date
+  base::data.frame(date = index(.)) %&gt;%
+  # now remove the index because it got converted to row names 
+  tibble::remove_rownames() %&gt;% 
+  dplyr::select(date, 
+                dplyr::everything()) -&gt; PricesWide
+PricesWide</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["BMRN"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["NVS"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["GSK"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["AZN"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["LLY"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019-12-31","2":"84.55","3":"91.37416","4":"44.72367","5":"48.47673","6":"128.8463"},{"1":"2020-01-31","2":"83.50","3":"91.20046","4":"44.54283","5":"47.34891","6":"136.8949"},{"1":"2020-02-29","2":"90.37","3":"81.01990","4":"39.11396","5":"43.45262","6":"124.2914"},{"1":"2020-03-31","2":"84.50","3":"82.45000","4":"36.56619","5":"44.30580","6":"136.6979"},{"1":"2020-04-30","2":"92.02","3":"84.73000","4":"40.60016","5":"51.86537","6":"152.3858"},{"1":"2020-05-31","2":"106.55","3":"87.43000","4":"40.90715","5":"54.16697","6":"151.4300"},{"1":"2020-06-30","2":"123.34","3":"87.34000","4":"39.80446","5":"52.47053","6":"162.5484"},{"1":"2020-07-31","2":"119.81","3":"82.14000","4":"39.34581","5":"55.33761","6":"148.7964"},{"1":"2020-08-31","2":"78.03","3":"86.06000","4":"39.09855","5":"56.00000","6":"147.6314"},{"1":"2020-09-30","2":"76.08","3":"86.96000","4":"37.16337","5":"54.80000","6":"147.2633"},{"1":"2020-10-31","2":"74.43","3":"78.08000","4":"32.99681","5":"50.16000","6":"129.7931"},{"1":"2020-11-30","2":"78.70","3":"90.83000","4":"36.79000","5":"52.94000","6":"145.6500"},{"1":"2020-12-31","2":"86.18","3":"93.35000","4":"36.98000","5":"49.90000","6":"166.5800"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="calculate-log-returns" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> Calculate log returns</h1>
+<p>With the <code>PricesWide</code> dataset, we can create a wide dataset of log returns. This involves <code>log()</code> transforming the prices, and calculating the month-to-month difference.</p>
+<div id="convert-wide-to-long" class="section level2 tabset" number="6.1">
+<h2 class="tabset" number="6.1"><span class="header-section-number">6.1</span> Convert wide to long</h2>
+<p>We’ll want <code>PricesWide</code> in a long format to calculate the <code>return</code> variable.</p>
+<div id="pivot_longer" class="section level3" number="6.1.1">
+<h3 number="6.1.1"><span class="header-section-number">6.1.1</span> <code>pivot_longer</code></h3>
+<p>First we need to pivot the data from wide to long with <code>tidyr::pivot_longer()</code>.</p>
+<pre class="r"><code>PricesWide %&gt;%
+  # shift to long 
+  tidyr::pivot_longer(names_to = &quot;asset&quot;, 
+                      values_to = &quot;prices&quot;, 
+                      cols = -date)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["asset"],"name":[2],"type":["chr"],"align":["left"]},{"label":["prices"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019-12-31","2":"BMRN","3":"84.55000"},{"1":"2019-12-31","2":"NVS","3":"91.37416"},{"1":"2019-12-31","2":"GSK","3":"44.72367"},{"1":"2019-12-31","2":"AZN","3":"48.47673"},{"1":"2019-12-31","2":"LLY","3":"128.84630"},{"1":"2020-01-31","2":"BMRN","3":"83.50000"},{"1":"2020-01-31","2":"NVS","3":"91.20046"},{"1":"2020-01-31","2":"GSK","3":"44.54283"},{"1":"2020-01-31","2":"AZN","3":"47.34891"},{"1":"2020-01-31","2":"LLY","3":"136.89491"},{"1":"2020-02-29","2":"BMRN","3":"90.37000"},{"1":"2020-02-29","2":"NVS","3":"81.01990"},{"1":"2020-02-29","2":"GSK","3":"39.11396"},{"1":"2020-02-29","2":"AZN","3":"43.45262"},{"1":"2020-02-29","2":"LLY","3":"124.29139"},{"1":"2020-03-31","2":"BMRN","3":"84.50000"},{"1":"2020-03-31","2":"NVS","3":"82.45000"},{"1":"2020-03-31","2":"GSK","3":"36.56619"},{"1":"2020-03-31","2":"AZN","3":"44.30580"},{"1":"2020-03-31","2":"LLY","3":"136.69786"},{"1":"2020-04-30","2":"BMRN","3":"92.02000"},{"1":"2020-04-30","2":"NVS","3":"84.73000"},{"1":"2020-04-30","2":"GSK","3":"40.60016"},{"1":"2020-04-30","2":"AZN","3":"51.86537"},{"1":"2020-04-30","2":"LLY","3":"152.38579"},{"1":"2020-05-31","2":"BMRN","3":"106.55000"},{"1":"2020-05-31","2":"NVS","3":"87.43000"},{"1":"2020-05-31","2":"GSK","3":"40.90715"},{"1":"2020-05-31","2":"AZN","3":"54.16697"},{"1":"2020-05-31","2":"LLY","3":"151.42998"},{"1":"2020-06-30","2":"BMRN","3":"123.34000"},{"1":"2020-06-30","2":"NVS","3":"87.34000"},{"1":"2020-06-30","2":"GSK","3":"39.80446"},{"1":"2020-06-30","2":"AZN","3":"52.47053"},{"1":"2020-06-30","2":"LLY","3":"162.54837"},{"1":"2020-07-31","2":"BMRN","3":"119.81000"},{"1":"2020-07-31","2":"NVS","3":"82.14000"},{"1":"2020-07-31","2":"GSK","3":"39.34581"},{"1":"2020-07-31","2":"AZN","3":"55.33761"},{"1":"2020-07-31","2":"LLY","3":"148.79642"},{"1":"2020-08-31","2":"BMRN","3":"78.03000"},{"1":"2020-08-31","2":"NVS","3":"86.06000"},{"1":"2020-08-31","2":"GSK","3":"39.09855"},{"1":"2020-08-31","2":"AZN","3":"56.00000"},{"1":"2020-08-31","2":"LLY","3":"147.63144"},{"1":"2020-09-30","2":"BMRN","3":"76.08000"},{"1":"2020-09-30","2":"NVS","3":"86.96000"},{"1":"2020-09-30","2":"GSK","3":"37.16337"},{"1":"2020-09-30","2":"AZN","3":"54.80000"},{"1":"2020-09-30","2":"LLY","3":"147.26334"},{"1":"2020-10-31","2":"BMRN","3":"74.43000"},{"1":"2020-10-31","2":"NVS","3":"78.08000"},{"1":"2020-10-31","2":"GSK","3":"32.99681"},{"1":"2020-10-31","2":"AZN","3":"50.16000"},{"1":"2020-10-31","2":"LLY","3":"129.79311"},{"1":"2020-11-30","2":"BMRN","3":"78.70000"},{"1":"2020-11-30","2":"NVS","3":"90.83000"},{"1":"2020-11-30","2":"GSK","3":"36.79000"},{"1":"2020-11-30","2":"AZN","3":"52.94000"},{"1":"2020-11-30","2":"LLY","3":"145.64999"},{"1":"2020-12-31","2":"BMRN","3":"86.18000"},{"1":"2020-12-31","2":"NVS","3":"93.35000"},{"1":"2020-12-31","2":"GSK","3":"36.98000"},{"1":"2020-12-31","2":"AZN","3":"49.90000"},{"1":"2020-12-31","2":"LLY","3":"166.58000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Now we can see the stock symbols have been moved into <code>asset</code> and all the prices have been stacked in <code>prices</code>.</p>
+</div>
+<div id="group-by-asset-symbols" class="section level3" number="6.1.2">
+<h3 number="6.1.2"><span class="header-section-number">6.1.2</span> group by <code>asset</code> (Symbols)</h3>
+<p>To calculate the <code>return</code>s, we group by the stock symbols in <code>asset</code>, then use <code>mutate()</code> to calculate the difference between <code>log(prices)</code> and <code>log(lag(prices))</code></p>
+<p>We can use <code>log()</code> and <code>lag()</code> inside <code>mutate()</code> to calculate <code>returns</code>.</p>
+<pre class="r"><code>PricesWide %&gt;%
+  # shift to long 
+  tidyr::pivot_longer(names_to = &quot;asset&quot;, 
+                      values_to = &quot;prices&quot;, 
+                      cols = -date) %&gt;% 
+  # group by asset
+  dplyr::group_by(asset) %&gt;% 
+  # calculate log returns and add those returns to the data frame
+  dplyr::mutate(returns = (log(prices) - log(lag(prices))))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["asset"],"name":[2],"type":["chr"],"align":["left"]},{"label":["prices"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["returns"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019-12-31","2":"BMRN","3":"84.55000","4":"NA"},{"1":"2019-12-31","2":"NVS","3":"91.37416","4":"NA"},{"1":"2019-12-31","2":"GSK","3":"44.72367","4":"NA"},{"1":"2019-12-31","2":"AZN","3":"48.47673","4":"NA"},{"1":"2019-12-31","2":"LLY","3":"128.84630","4":"NA"},{"1":"2020-01-31","2":"BMRN","3":"83.50000","4":"-0.012496479"},{"1":"2020-01-31","2":"NVS","3":"91.20046","4":"-0.001902773"},{"1":"2020-01-31","2":"GSK","3":"44.54283","4":"-0.004051604"},{"1":"2020-01-31","2":"AZN","3":"47.34891","4":"-0.023540091"},{"1":"2020-01-31","2":"LLY","3":"136.89491","4":"0.060593367"},{"1":"2020-02-29","2":"BMRN","3":"90.37000","4":"0.079065755"},{"1":"2020-02-29","2":"NVS","3":"81.01990","4":"-0.118365196"},{"1":"2020-02-29","2":"GSK","3":"39.11396","4":"-0.129971886"},{"1":"2020-02-29","2":"AZN","3":"43.45262","4":"-0.085872472"},{"1":"2020-02-29","2":"LLY","3":"124.29139","4":"-0.096584853"},{"1":"2020-03-31","2":"BMRN","3":"84.50000","4":"-0.067160853"},{"1":"2020-03-31","2":"NVS","3":"82.45000","4":"0.017497246"},{"1":"2020-03-31","2":"GSK","3":"36.56619","4":"-0.067355209"},{"1":"2020-03-31","2":"AZN","3":"44.30580","4":"0.019444443"},{"1":"2020-03-31","2":"LLY","3":"136.69786","4":"0.095144376"},{"1":"2020-04-30","2":"BMRN","3":"92.02000","4":"0.085254378"},{"1":"2020-04-30","2":"NVS","3":"84.73000","4":"0.027277753"},{"1":"2020-04-30","2":"GSK","3":"40.60016","4":"0.104647759"},{"1":"2020-04-30","2":"AZN","3":"51.86537","4":"0.157535577"},{"1":"2020-04-30","2":"LLY","3":"152.38579","4":"0.108642288"},{"1":"2020-05-31","2":"BMRN","3":"106.55000","4":"0.146608475"},{"1":"2020-05-31","2":"NVS","3":"87.43000","4":"0.031368708"},{"1":"2020-05-31","2":"GSK","3":"40.90715","4":"0.007532980"},{"1":"2020-05-31","2":"AZN","3":"54.16697","4":"0.043420010"},{"1":"2020-05-31","2":"LLY","3":"151.42998","4":"-0.006292064"},{"1":"2020-06-30","2":"BMRN","3":"123.34000","4":"0.146330350"},{"1":"2020-06-30","2":"NVS","3":"87.34000","4":"-0.001029971"},{"1":"2020-06-30","2":"GSK","3":"39.80446","4":"-0.027325923"},{"1":"2020-06-30","2":"AZN","3":"52.47053","4":"-0.031819597"},{"1":"2020-06-30","2":"LLY","3":"162.54837","4":"0.070852299"},{"1":"2020-07-31","2":"BMRN","3":"119.81000","4":"-0.029037599"},{"1":"2020-07-31","2":"NVS","3":"82.14000","4":"-0.061383406"},{"1":"2020-07-31","2":"GSK","3":"39.34581","4":"-0.011589351"},{"1":"2020-07-31","2":"AZN","3":"55.33761","4":"0.053201124"},{"1":"2020-07-31","2":"LLY","3":"148.79642","4":"-0.088396576"},{"1":"2020-08-31","2":"BMRN","3":"78.03000","4":"-0.428813783"},{"1":"2020-08-31","2":"NVS","3":"86.06000","4":"0.046619608"},{"1":"2020-08-31","2":"GSK","3":"39.09855","4":"-0.006304132"},{"1":"2020-08-31","2":"AZN","3":"56.00000","4":"0.011898869"},{"1":"2020-08-31","2":"LLY","3":"147.63144","4":"-0.007860152"},{"1":"2020-09-30","2":"BMRN","3":"76.08000","4":"-0.025307911"},{"1":"2020-09-30","2":"NVS","3":"86.96000","4":"0.010403527"},{"1":"2020-09-30","2":"GSK","3":"37.16337","4":"-0.050761806"},{"1":"2020-09-30","2":"AZN","3":"54.80000","4":"-0.021661515"},{"1":"2020-09-30","2":"LLY","3":"147.26334","4":"-0.002496505"},{"1":"2020-10-31","2":"BMRN","3":"74.43000","4":"-0.021926358"},{"1":"2020-10-31","2":"NVS","3":"78.08000","4":"-0.107714264"},{"1":"2020-10-31","2":"GSK","3":"32.99681","4":"-0.118912853"},{"1":"2020-10-31","2":"AZN","3":"50.16000","4":"-0.088472279"},{"1":"2020-10-31","2":"LLY","3":"129.79311","4":"-0.126280695"},{"1":"2020-11-30","2":"BMRN","3":"78.70000","4":"0.055784031"},{"1":"2020-11-30","2":"NVS","3":"90.83000","4":"0.151255682"},{"1":"2020-11-30","2":"GSK","3":"36.79000","4":"0.108815297"},{"1":"2020-11-30","2":"AZN","3":"52.94000","4":"0.053941282"},{"1":"2020-11-30","2":"LLY","3":"145.64999","4":"0.115264752"},{"1":"2020-12-31","2":"BMRN","3":"86.18000","4":"0.090795015"},{"1":"2020-12-31","2":"NVS","3":"93.35000","4":"0.027366199"},{"1":"2020-12-31","2":"GSK","3":"36.98000","4":"0.005151130"},{"1":"2020-12-31","2":"AZN","3":"49.90000","4":"-0.059138135"},{"1":"2020-12-31","2":"LLY","3":"166.58000","4":"0.134269244"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Notice all the data are missing from <code>2019-12-31</code>? Well, this makes sense if you know how <code>dplyr::lag()</code> works. The next section walks through an example.</p>
+</div>
+</div>
+<div id="differences-with-dplyrlag" class="section level2 tabset" number="6.2">
+<h2 class="tabset" number="6.2"><span class="header-section-number">6.2</span> Differences with <code>dplyr::lag()</code></h2>
+<p>The <code>dplyr::lag()</code> function is great for calculating changes across time-series. We want to use it to calculate <code>return</code>s, which is the difference in price from month-to-month.</p>
+<div id="create-bmrn_prices" class="section level3" number="6.2.1">
+<h3 number="6.2.1"><span class="header-section-number">6.2.1</span> Create <code>bmrn_prices</code></h3>
+<p>To demonstrate how <code>dplyr::lag()</code> works, we’ll look at a small subset of <code>BMRN</code> prices (in <code>bmrn_prices</code>).</p>
+<pre class="r"><code>bmrn_prices &lt;- c(83.50000, 90.37000, 84.50000, 
+                 92.02000, 106.55000, 123.34000)
+bmrn_prices</code></pre>
+<pre><code>## [1]  83.50  90.37  84.50  92.02 106.55 123.34</code></pre>
+<p>First we will use <code>dplyr::lag()</code> on the <code>bmrn_prices</code></p>
+<pre class="r"><code>bmrn_prices - dplyr::lag(bmrn_prices)</code></pre>
+<pre><code>## [1]    NA  6.87 -5.87  7.52 14.53 16.79</code></pre>
+<p>Once again, we see only five values are returned (even though we started out with 6 elements in <code>bmrn_prices</code>).</p>
+</div>
+<div id="lag-internals" class="section level3" number="6.2.2">
+<h3 number="6.2.2"><span class="header-section-number">6.2.2</span> <code>lag()</code> internals</h3>
+<p>We see missing data because <code>dplyr::lag()</code> works using the following combination of elements in the <code>bmrn_prices</code> vector:</p>
+<pre class="r"><code># difference between 2 and 1
+bmrn_prices[2] - bmrn_prices[1]</code></pre>
+<pre><code>## [1] 6.87</code></pre>
+<pre class="r"><code># difference between 3 and 2
+bmrn_prices[3] - bmrn_prices[2]</code></pre>
+<pre><code>## [1] -5.87</code></pre>
+<pre class="r"><code># difference between 4 and 3
+bmrn_prices[4] - bmrn_prices[3]</code></pre>
+<pre><code>## [1] 7.52</code></pre>
+<pre class="r"><code># difference between 5 and 4
+bmrn_prices[5] - bmrn_prices[4]</code></pre>
+<pre><code>## [1] 14.53</code></pre>
+<pre class="r"><code># difference between 6 and 5
+bmrn_prices[6] - bmrn_prices[5]</code></pre>
+<pre><code>## [1] 16.79</code></pre>
+</div>
+<div id="log-and-lag" class="section level3" number="6.2.3">
+<h3 number="6.2.3"><span class="header-section-number">6.2.3</span> <code>log()</code> and <code>lag()</code></h3>
+<p>And when we combine <code>log()</code> with <code>mutate()</code> function, the <code>lag()</code> function produces the following:</p>
+<pre class="r"><code>log(bmrn_prices) - log(dplyr::lag(bmrn_prices))</code></pre>
+<pre><code>## [1]          NA  0.07906572 -0.06716082  0.08525441  0.14660841  0.14633041</code></pre>
+<p>Notice the order of the <code>log()</code> vs. <code>dplyr::lag()</code></p>
+<pre class="r"><code># difference between log 2 and log 1
+log(bmrn_prices[2]) - log(bmrn_prices[1])</code></pre>
+<pre><code>## [1] 0.07906572</code></pre>
+<pre class="r"><code># log difference between log 3 and log 2
+log(bmrn_prices[3]) - log(bmrn_prices[2])</code></pre>
+<pre><code>## [1] -0.06716082</code></pre>
+<pre class="r"><code># difference between log 4 and log 3
+log(bmrn_prices[4]) - log(bmrn_prices[3])</code></pre>
+<pre><code>## [1] 0.08525441</code></pre>
+<pre class="r"><code># difference between log 5 and log 4
+log(bmrn_prices[5]) - log(bmrn_prices[4])</code></pre>
+<pre><code>## [1] 0.1466084</code></pre>
+<pre class="r"><code># difference between log 6 and log 5
+log(bmrn_prices[6]) - log(bmrn_prices[5])</code></pre>
+<pre><code>## [1] 0.1463304</code></pre>
+</div>
+<div id="mutate-with-lag" class="section level3" number="6.2.4">
+<h3 number="6.2.4"><span class="header-section-number">6.2.4</span> <code>mutate()</code> with <code>lag()</code></h3>
+<p>Now we know why we see the following missing values in <code>returns</code> on <code>2019-12-31</code>. These represent the fact we can’t calculate a difference without two values in prices.</p>
+<pre class="r"><code>PricesWide %&gt;%
+  # shift to long 
+  tidyr::pivot_longer(names_to = &quot;asset&quot;, 
+                      values_to = &quot;prices&quot;, 
+                      cols = -date) %&gt;% 
+  # group by asset
+  dplyr::group_by(asset) %&gt;% 
+  # calculate log returns and add those returns to the data frame
+  dplyr::mutate(returns = (log(prices) - log(lag(prices))))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["asset"],"name":[2],"type":["chr"],"align":["left"]},{"label":["prices"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["returns"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019-12-31","2":"BMRN","3":"84.55000","4":"NA"},{"1":"2019-12-31","2":"NVS","3":"91.37416","4":"NA"},{"1":"2019-12-31","2":"GSK","3":"44.72367","4":"NA"},{"1":"2019-12-31","2":"AZN","3":"48.47673","4":"NA"},{"1":"2019-12-31","2":"LLY","3":"128.84630","4":"NA"},{"1":"2020-01-31","2":"BMRN","3":"83.50000","4":"-0.012496479"},{"1":"2020-01-31","2":"NVS","3":"91.20046","4":"-0.001902773"},{"1":"2020-01-31","2":"GSK","3":"44.54283","4":"-0.004051604"},{"1":"2020-01-31","2":"AZN","3":"47.34891","4":"-0.023540091"},{"1":"2020-01-31","2":"LLY","3":"136.89491","4":"0.060593367"},{"1":"2020-02-29","2":"BMRN","3":"90.37000","4":"0.079065755"},{"1":"2020-02-29","2":"NVS","3":"81.01990","4":"-0.118365196"},{"1":"2020-02-29","2":"GSK","3":"39.11396","4":"-0.129971886"},{"1":"2020-02-29","2":"AZN","3":"43.45262","4":"-0.085872472"},{"1":"2020-02-29","2":"LLY","3":"124.29139","4":"-0.096584853"},{"1":"2020-03-31","2":"BMRN","3":"84.50000","4":"-0.067160853"},{"1":"2020-03-31","2":"NVS","3":"82.45000","4":"0.017497246"},{"1":"2020-03-31","2":"GSK","3":"36.56619","4":"-0.067355209"},{"1":"2020-03-31","2":"AZN","3":"44.30580","4":"0.019444443"},{"1":"2020-03-31","2":"LLY","3":"136.69786","4":"0.095144376"},{"1":"2020-04-30","2":"BMRN","3":"92.02000","4":"0.085254378"},{"1":"2020-04-30","2":"NVS","3":"84.73000","4":"0.027277753"},{"1":"2020-04-30","2":"GSK","3":"40.60016","4":"0.104647759"},{"1":"2020-04-30","2":"AZN","3":"51.86537","4":"0.157535577"},{"1":"2020-04-30","2":"LLY","3":"152.38579","4":"0.108642288"},{"1":"2020-05-31","2":"BMRN","3":"106.55000","4":"0.146608475"},{"1":"2020-05-31","2":"NVS","3":"87.43000","4":"0.031368708"},{"1":"2020-05-31","2":"GSK","3":"40.90715","4":"0.007532980"},{"1":"2020-05-31","2":"AZN","3":"54.16697","4":"0.043420010"},{"1":"2020-05-31","2":"LLY","3":"151.42998","4":"-0.006292064"},{"1":"2020-06-30","2":"BMRN","3":"123.34000","4":"0.146330350"},{"1":"2020-06-30","2":"NVS","3":"87.34000","4":"-0.001029971"},{"1":"2020-06-30","2":"GSK","3":"39.80446","4":"-0.027325923"},{"1":"2020-06-30","2":"AZN","3":"52.47053","4":"-0.031819597"},{"1":"2020-06-30","2":"LLY","3":"162.54837","4":"0.070852299"},{"1":"2020-07-31","2":"BMRN","3":"119.81000","4":"-0.029037599"},{"1":"2020-07-31","2":"NVS","3":"82.14000","4":"-0.061383406"},{"1":"2020-07-31","2":"GSK","3":"39.34581","4":"-0.011589351"},{"1":"2020-07-31","2":"AZN","3":"55.33761","4":"0.053201124"},{"1":"2020-07-31","2":"LLY","3":"148.79642","4":"-0.088396576"},{"1":"2020-08-31","2":"BMRN","3":"78.03000","4":"-0.428813783"},{"1":"2020-08-31","2":"NVS","3":"86.06000","4":"0.046619608"},{"1":"2020-08-31","2":"GSK","3":"39.09855","4":"-0.006304132"},{"1":"2020-08-31","2":"AZN","3":"56.00000","4":"0.011898869"},{"1":"2020-08-31","2":"LLY","3":"147.63144","4":"-0.007860152"},{"1":"2020-09-30","2":"BMRN","3":"76.08000","4":"-0.025307911"},{"1":"2020-09-30","2":"NVS","3":"86.96000","4":"0.010403527"},{"1":"2020-09-30","2":"GSK","3":"37.16337","4":"-0.050761806"},{"1":"2020-09-30","2":"AZN","3":"54.80000","4":"-0.021661515"},{"1":"2020-09-30","2":"LLY","3":"147.26334","4":"-0.002496505"},{"1":"2020-10-31","2":"BMRN","3":"74.43000","4":"-0.021926358"},{"1":"2020-10-31","2":"NVS","3":"78.08000","4":"-0.107714264"},{"1":"2020-10-31","2":"GSK","3":"32.99681","4":"-0.118912853"},{"1":"2020-10-31","2":"AZN","3":"50.16000","4":"-0.088472279"},{"1":"2020-10-31","2":"LLY","3":"129.79311","4":"-0.126280695"},{"1":"2020-11-30","2":"BMRN","3":"78.70000","4":"0.055784031"},{"1":"2020-11-30","2":"NVS","3":"90.83000","4":"0.151255682"},{"1":"2020-11-30","2":"GSK","3":"36.79000","4":"0.108815297"},{"1":"2020-11-30","2":"AZN","3":"52.94000","4":"0.053941282"},{"1":"2020-11-30","2":"LLY","3":"145.64999","4":"0.115264752"},{"1":"2020-12-31","2":"BMRN","3":"86.18000","4":"0.090795015"},{"1":"2020-12-31","2":"NVS","3":"93.35000","4":"0.027366199"},{"1":"2020-12-31","2":"GSK","3":"36.98000","4":"0.005151130"},{"1":"2020-12-31","2":"AZN","3":"49.90000","4":"-0.059138135"},{"1":"2020-12-31","2":"LLY","3":"166.58000","4":"0.134269244"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="convert-returns-to-wide" class="section level2 tabset" number="6.3">
+<h2 class="tabset" number="6.3"><span class="header-section-number">6.3</span> Convert returns to wide</h2>
+<p>Now that we have converted the original <code>xts</code> data to a long (tidy) dataset with the <code>returns</code> and <code>prices</code> indexed by date and stock symbol (stored in <code>asset</code>). However, we want this converted back to a wide dataset.</p>
+<div id="remove-prices" class="section level3" number="6.3.1">
+<h3 number="6.3.1"><span class="header-section-number">6.3.1</span> remove <code>prices</code></h3>
+<p>Before we convert the long data back to a wide dataset, we need to remove the <code>prices</code> column because this will be a dataset of returns (we can join these together later).</p>
+<pre class="r"><code>PricesWide %&gt;%
+  # shift to long 
+  tidyr::pivot_longer(names_to = &quot;asset&quot;, 
+                      values_to = &quot;prices&quot;, 
+                      cols = -date) %&gt;% 
+  # group by asset
+  dplyr::group_by(asset) %&gt;% 
+  # calculate log returns and add those returns to the data frame
+  dplyr::mutate(returns = (log(prices) - log(lag(prices)))) %&gt;% 
+  # remove prices 
+  dplyr::select(-prices) </code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["asset"],"name":[2],"type":["chr"],"align":["left"]},{"label":["returns"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019-12-31","2":"BMRN","3":"NA"},{"1":"2019-12-31","2":"NVS","3":"NA"},{"1":"2019-12-31","2":"GSK","3":"NA"},{"1":"2019-12-31","2":"AZN","3":"NA"},{"1":"2019-12-31","2":"LLY","3":"NA"},{"1":"2020-01-31","2":"BMRN","3":"-0.012496479"},{"1":"2020-01-31","2":"NVS","3":"-0.001902773"},{"1":"2020-01-31","2":"GSK","3":"-0.004051604"},{"1":"2020-01-31","2":"AZN","3":"-0.023540091"},{"1":"2020-01-31","2":"LLY","3":"0.060593367"},{"1":"2020-02-29","2":"BMRN","3":"0.079065755"},{"1":"2020-02-29","2":"NVS","3":"-0.118365196"},{"1":"2020-02-29","2":"GSK","3":"-0.129971886"},{"1":"2020-02-29","2":"AZN","3":"-0.085872472"},{"1":"2020-02-29","2":"LLY","3":"-0.096584853"},{"1":"2020-03-31","2":"BMRN","3":"-0.067160853"},{"1":"2020-03-31","2":"NVS","3":"0.017497246"},{"1":"2020-03-31","2":"GSK","3":"-0.067355209"},{"1":"2020-03-31","2":"AZN","3":"0.019444443"},{"1":"2020-03-31","2":"LLY","3":"0.095144376"},{"1":"2020-04-30","2":"BMRN","3":"0.085254378"},{"1":"2020-04-30","2":"NVS","3":"0.027277753"},{"1":"2020-04-30","2":"GSK","3":"0.104647759"},{"1":"2020-04-30","2":"AZN","3":"0.157535577"},{"1":"2020-04-30","2":"LLY","3":"0.108642288"},{"1":"2020-05-31","2":"BMRN","3":"0.146608475"},{"1":"2020-05-31","2":"NVS","3":"0.031368708"},{"1":"2020-05-31","2":"GSK","3":"0.007532980"},{"1":"2020-05-31","2":"AZN","3":"0.043420010"},{"1":"2020-05-31","2":"LLY","3":"-0.006292064"},{"1":"2020-06-30","2":"BMRN","3":"0.146330350"},{"1":"2020-06-30","2":"NVS","3":"-0.001029971"},{"1":"2020-06-30","2":"GSK","3":"-0.027325923"},{"1":"2020-06-30","2":"AZN","3":"-0.031819597"},{"1":"2020-06-30","2":"LLY","3":"0.070852299"},{"1":"2020-07-31","2":"BMRN","3":"-0.029037599"},{"1":"2020-07-31","2":"NVS","3":"-0.061383406"},{"1":"2020-07-31","2":"GSK","3":"-0.011589351"},{"1":"2020-07-31","2":"AZN","3":"0.053201124"},{"1":"2020-07-31","2":"LLY","3":"-0.088396576"},{"1":"2020-08-31","2":"BMRN","3":"-0.428813783"},{"1":"2020-08-31","2":"NVS","3":"0.046619608"},{"1":"2020-08-31","2":"GSK","3":"-0.006304132"},{"1":"2020-08-31","2":"AZN","3":"0.011898869"},{"1":"2020-08-31","2":"LLY","3":"-0.007860152"},{"1":"2020-09-30","2":"BMRN","3":"-0.025307911"},{"1":"2020-09-30","2":"NVS","3":"0.010403527"},{"1":"2020-09-30","2":"GSK","3":"-0.050761806"},{"1":"2020-09-30","2":"AZN","3":"-0.021661515"},{"1":"2020-09-30","2":"LLY","3":"-0.002496505"},{"1":"2020-10-31","2":"BMRN","3":"-0.021926358"},{"1":"2020-10-31","2":"NVS","3":"-0.107714264"},{"1":"2020-10-31","2":"GSK","3":"-0.118912853"},{"1":"2020-10-31","2":"AZN","3":"-0.088472279"},{"1":"2020-10-31","2":"LLY","3":"-0.126280695"},{"1":"2020-11-30","2":"BMRN","3":"0.055784031"},{"1":"2020-11-30","2":"NVS","3":"0.151255682"},{"1":"2020-11-30","2":"GSK","3":"0.108815297"},{"1":"2020-11-30","2":"AZN","3":"0.053941282"},{"1":"2020-11-30","2":"LLY","3":"0.115264752"},{"1":"2020-12-31","2":"BMRN","3":"0.090795015"},{"1":"2020-12-31","2":"NVS","3":"0.027366199"},{"1":"2020-12-31","2":"GSK","3":"0.005151130"},{"1":"2020-12-31","2":"AZN","3":"-0.059138135"},{"1":"2020-12-31","2":"LLY","3":"0.134269244"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="pivot_wider" class="section level3" number="6.3.2">
+<h3 number="6.3.2"><span class="header-section-number">6.3.2</span> <code>pivot_wider</code></h3>
+<p>Now we can restructure (or <code>pivot_wider()</code>) the data and place the stock symbols in each column.</p>
+<pre class="r"><code>PricesWide %&gt;%
+  # shift to long 
+  tidyr::pivot_longer(names_to = &quot;asset&quot;, 
+                      values_to = &quot;prices&quot;, 
+                      cols = -date) %&gt;% 
+  # group by asset
+  dplyr::group_by(asset) %&gt;% 
+  # calculate log returns and add those returns to the data frame
+  dplyr::mutate(returns = (log(prices) - log(lag(prices)))) %&gt;% 
+  dplyr::select(-prices) %&gt;% 
+  # restructure to wide
+  tidyr::pivot_wider(names_from = asset, 
+                     values_from = returns)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["BMRN"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["NVS"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["GSK"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["AZN"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["LLY"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019-12-31","2":"NA","3":"NA","4":"NA","5":"NA","6":"NA"},{"1":"2020-01-31","2":"-0.01249648","3":"-0.001902773","4":"-0.004051604","5":"-0.02354009","6":"0.060593367"},{"1":"2020-02-29","2":"0.07906576","3":"-0.118365196","4":"-0.129971886","5":"-0.08587247","6":"-0.096584853"},{"1":"2020-03-31","2":"-0.06716085","3":"0.017497246","4":"-0.067355209","5":"0.01944444","6":"0.095144376"},{"1":"2020-04-30","2":"0.08525438","3":"0.027277753","4":"0.104647759","5":"0.15753558","6":"0.108642288"},{"1":"2020-05-31","2":"0.14660847","3":"0.031368708","4":"0.007532980","5":"0.04342001","6":"-0.006292064"},{"1":"2020-06-30","2":"0.14633035","3":"-0.001029971","4":"-0.027325923","5":"-0.03181960","6":"0.070852299"},{"1":"2020-07-31","2":"-0.02903760","3":"-0.061383406","4":"-0.011589351","5":"0.05320112","6":"-0.088396576"},{"1":"2020-08-31","2":"-0.42881378","3":"0.046619608","4":"-0.006304132","5":"0.01189887","6":"-0.007860152"},{"1":"2020-09-30","2":"-0.02530791","3":"0.010403527","4":"-0.050761806","5":"-0.02166152","6":"-0.002496505"},{"1":"2020-10-31","2":"-0.02192636","3":"-0.107714264","4":"-0.118912853","5":"-0.08847228","6":"-0.126280695"},{"1":"2020-11-30","2":"0.05578403","3":"0.151255682","4":"0.108815297","5":"0.05394128","6":"0.115264752"},{"1":"2020-12-31","2":"0.09079501","3":"0.027366199","4":"0.005151130","5":"-0.05913814","6":"0.134269244"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="create-returnswide" class="section level3" number="6.3.3">
+<h3 number="6.3.3"><span class="header-section-number">6.3.3</span> create <code>ReturnsWide</code></h3>
+<p>The output looks correct, so we will assign the data to <code>ReturnsWide</code>.</p>
+<pre class="r"><code>PricesWide %&gt;%
+  tidyr::pivot_longer(names_to = &quot;asset&quot;, 
+                      values_to = &quot;prices&quot;, 
+                      cols = -date) %&gt;% 
+  dplyr::group_by(asset) %&gt;% 
+  dplyr::mutate(returns = (log(prices) - log(lag(prices)))) %&gt;% 
+  dplyr::select(-prices) %&gt;% 
+  tidyr::pivot_wider(names_from = asset, 
+                     values_from = returns) -&gt; ReturnsWide
+ReturnsWide</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["BMRN"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["NVS"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["GSK"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["AZN"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["LLY"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019-12-31","2":"NA","3":"NA","4":"NA","5":"NA","6":"NA"},{"1":"2020-01-31","2":"-0.01249648","3":"-0.001902773","4":"-0.004051604","5":"-0.02354009","6":"0.060593367"},{"1":"2020-02-29","2":"0.07906576","3":"-0.118365196","4":"-0.129971886","5":"-0.08587247","6":"-0.096584853"},{"1":"2020-03-31","2":"-0.06716085","3":"0.017497246","4":"-0.067355209","5":"0.01944444","6":"0.095144376"},{"1":"2020-04-30","2":"0.08525438","3":"0.027277753","4":"0.104647759","5":"0.15753558","6":"0.108642288"},{"1":"2020-05-31","2":"0.14660847","3":"0.031368708","4":"0.007532980","5":"0.04342001","6":"-0.006292064"},{"1":"2020-06-30","2":"0.14633035","3":"-0.001029971","4":"-0.027325923","5":"-0.03181960","6":"0.070852299"},{"1":"2020-07-31","2":"-0.02903760","3":"-0.061383406","4":"-0.011589351","5":"0.05320112","6":"-0.088396576"},{"1":"2020-08-31","2":"-0.42881378","3":"0.046619608","4":"-0.006304132","5":"0.01189887","6":"-0.007860152"},{"1":"2020-09-30","2":"-0.02530791","3":"0.010403527","4":"-0.050761806","5":"-0.02166152","6":"-0.002496505"},{"1":"2020-10-31","2":"-0.02192636","3":"-0.107714264","4":"-0.118912853","5":"-0.08847228","6":"-0.126280695"},{"1":"2020-11-30","2":"0.05578403","3":"0.151255682","4":"0.108815297","5":"0.05394128","6":"0.115264752"},{"1":"2020-12-31","2":"0.09079501","3":"0.027366199","4":"0.005151130","5":"-0.05913814","6":"0.134269244"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</div>
+<div id="combine-prices-and-returns" class="section level1" number="7">
+<h1 number="7"><span class="header-section-number">7</span> Combine prices and returns</h1>
+<p>Now that we have two wide datasets for (<code>PricesWide</code> and <code>ReturnsWide</code>), we will convert them to long and join them into a single dataset with both <code>prices</code> and <code>returns</code>.</p>
+<div id="tidy-adjusted-prices-log-returns" class="section level2 tabset" number="7.1">
+<h2 class="tabset" number="7.1"><span class="header-section-number">7.1</span> Tidy adjusted prices &amp; log returns</h2>
+<p>We’ve already covered the <code>tidyr::pivot_longer()</code> function, but just remember this function requires two columns: one for <code>names_to</code> (<code>asset</code>) and one for <code>values_to</code> (<code>adj_prices</code>)</p>
+<div id="create-pricestidy" class="section level3" number="7.1.1">
+<h3 number="7.1.1"><span class="header-section-number">7.1.1</span> Create <code>PricesTidy</code></h3>
+<p>Below we pivot <code>PricesWide</code> into a long format dataset with <code>date</code>, <code>asset</code>, and <code>adj_prices</code>–we will call this <code>PricesTidy</code>.</p>
+<pre class="r"><code>PricesWide %&gt;%
+  # shift to long 
+  tidyr::pivot_longer(names_to = &quot;asset&quot;, 
+                      values_to = &quot;adj_prices&quot;, 
+                      cols = -date) -&gt; PricesTidy
+PricesTidy</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["asset"],"name":[2],"type":["chr"],"align":["left"]},{"label":["adj_prices"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019-12-31","2":"BMRN","3":"84.55000"},{"1":"2019-12-31","2":"NVS","3":"91.37416"},{"1":"2019-12-31","2":"GSK","3":"44.72367"},{"1":"2019-12-31","2":"AZN","3":"48.47673"},{"1":"2019-12-31","2":"LLY","3":"128.84630"},{"1":"2020-01-31","2":"BMRN","3":"83.50000"},{"1":"2020-01-31","2":"NVS","3":"91.20046"},{"1":"2020-01-31","2":"GSK","3":"44.54283"},{"1":"2020-01-31","2":"AZN","3":"47.34891"},{"1":"2020-01-31","2":"LLY","3":"136.89491"},{"1":"2020-02-29","2":"BMRN","3":"90.37000"},{"1":"2020-02-29","2":"NVS","3":"81.01990"},{"1":"2020-02-29","2":"GSK","3":"39.11396"},{"1":"2020-02-29","2":"AZN","3":"43.45262"},{"1":"2020-02-29","2":"LLY","3":"124.29139"},{"1":"2020-03-31","2":"BMRN","3":"84.50000"},{"1":"2020-03-31","2":"NVS","3":"82.45000"},{"1":"2020-03-31","2":"GSK","3":"36.56619"},{"1":"2020-03-31","2":"AZN","3":"44.30580"},{"1":"2020-03-31","2":"LLY","3":"136.69786"},{"1":"2020-04-30","2":"BMRN","3":"92.02000"},{"1":"2020-04-30","2":"NVS","3":"84.73000"},{"1":"2020-04-30","2":"GSK","3":"40.60016"},{"1":"2020-04-30","2":"AZN","3":"51.86537"},{"1":"2020-04-30","2":"LLY","3":"152.38579"},{"1":"2020-05-31","2":"BMRN","3":"106.55000"},{"1":"2020-05-31","2":"NVS","3":"87.43000"},{"1":"2020-05-31","2":"GSK","3":"40.90715"},{"1":"2020-05-31","2":"AZN","3":"54.16697"},{"1":"2020-05-31","2":"LLY","3":"151.42998"},{"1":"2020-06-30","2":"BMRN","3":"123.34000"},{"1":"2020-06-30","2":"NVS","3":"87.34000"},{"1":"2020-06-30","2":"GSK","3":"39.80446"},{"1":"2020-06-30","2":"AZN","3":"52.47053"},{"1":"2020-06-30","2":"LLY","3":"162.54837"},{"1":"2020-07-31","2":"BMRN","3":"119.81000"},{"1":"2020-07-31","2":"NVS","3":"82.14000"},{"1":"2020-07-31","2":"GSK","3":"39.34581"},{"1":"2020-07-31","2":"AZN","3":"55.33761"},{"1":"2020-07-31","2":"LLY","3":"148.79642"},{"1":"2020-08-31","2":"BMRN","3":"78.03000"},{"1":"2020-08-31","2":"NVS","3":"86.06000"},{"1":"2020-08-31","2":"GSK","3":"39.09855"},{"1":"2020-08-31","2":"AZN","3":"56.00000"},{"1":"2020-08-31","2":"LLY","3":"147.63144"},{"1":"2020-09-30","2":"BMRN","3":"76.08000"},{"1":"2020-09-30","2":"NVS","3":"86.96000"},{"1":"2020-09-30","2":"GSK","3":"37.16337"},{"1":"2020-09-30","2":"AZN","3":"54.80000"},{"1":"2020-09-30","2":"LLY","3":"147.26334"},{"1":"2020-10-31","2":"BMRN","3":"74.43000"},{"1":"2020-10-31","2":"NVS","3":"78.08000"},{"1":"2020-10-31","2":"GSK","3":"32.99681"},{"1":"2020-10-31","2":"AZN","3":"50.16000"},{"1":"2020-10-31","2":"LLY","3":"129.79311"},{"1":"2020-11-30","2":"BMRN","3":"78.70000"},{"1":"2020-11-30","2":"NVS","3":"90.83000"},{"1":"2020-11-30","2":"GSK","3":"36.79000"},{"1":"2020-11-30","2":"AZN","3":"52.94000"},{"1":"2020-11-30","2":"LLY","3":"145.64999"},{"1":"2020-12-31","2":"BMRN","3":"86.18000"},{"1":"2020-12-31","2":"NVS","3":"93.35000"},{"1":"2020-12-31","2":"GSK","3":"36.98000"},{"1":"2020-12-31","2":"AZN","3":"49.90000"},{"1":"2020-12-31","2":"LLY","3":"166.58000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="create-returnstidy" class="section level3" number="7.1.2">
+<h3 number="7.1.2"><span class="header-section-number">7.1.2</span> Create <code>ReturnsTidy</code></h3>
+<p>We repeat the process from above, but this time we assign the <code>names_to</code> as <code>asset</code> and the <code>values_to</code> as <code>log_returns</code>.</p>
+<pre class="r"><code>ReturnsWide %&gt;% 
+  # shift to long 
+  tidyr::pivot_longer(names_to = &quot;asset&quot;, 
+                      values_to = &quot;log_returns&quot;, 
+                      cols = -date) -&gt; ReturnsTidy
+ReturnsTidy</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["asset"],"name":[2],"type":["chr"],"align":["left"]},{"label":["log_returns"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019-12-31","2":"BMRN","3":"NA"},{"1":"2019-12-31","2":"NVS","3":"NA"},{"1":"2019-12-31","2":"GSK","3":"NA"},{"1":"2019-12-31","2":"AZN","3":"NA"},{"1":"2019-12-31","2":"LLY","3":"NA"},{"1":"2020-01-31","2":"BMRN","3":"-0.012496479"},{"1":"2020-01-31","2":"NVS","3":"-0.001902773"},{"1":"2020-01-31","2":"GSK","3":"-0.004051604"},{"1":"2020-01-31","2":"AZN","3":"-0.023540091"},{"1":"2020-01-31","2":"LLY","3":"0.060593367"},{"1":"2020-02-29","2":"BMRN","3":"0.079065755"},{"1":"2020-02-29","2":"NVS","3":"-0.118365196"},{"1":"2020-02-29","2":"GSK","3":"-0.129971886"},{"1":"2020-02-29","2":"AZN","3":"-0.085872472"},{"1":"2020-02-29","2":"LLY","3":"-0.096584853"},{"1":"2020-03-31","2":"BMRN","3":"-0.067160853"},{"1":"2020-03-31","2":"NVS","3":"0.017497246"},{"1":"2020-03-31","2":"GSK","3":"-0.067355209"},{"1":"2020-03-31","2":"AZN","3":"0.019444443"},{"1":"2020-03-31","2":"LLY","3":"0.095144376"},{"1":"2020-04-30","2":"BMRN","3":"0.085254378"},{"1":"2020-04-30","2":"NVS","3":"0.027277753"},{"1":"2020-04-30","2":"GSK","3":"0.104647759"},{"1":"2020-04-30","2":"AZN","3":"0.157535577"},{"1":"2020-04-30","2":"LLY","3":"0.108642288"},{"1":"2020-05-31","2":"BMRN","3":"0.146608475"},{"1":"2020-05-31","2":"NVS","3":"0.031368708"},{"1":"2020-05-31","2":"GSK","3":"0.007532980"},{"1":"2020-05-31","2":"AZN","3":"0.043420010"},{"1":"2020-05-31","2":"LLY","3":"-0.006292064"},{"1":"2020-06-30","2":"BMRN","3":"0.146330350"},{"1":"2020-06-30","2":"NVS","3":"-0.001029971"},{"1":"2020-06-30","2":"GSK","3":"-0.027325923"},{"1":"2020-06-30","2":"AZN","3":"-0.031819597"},{"1":"2020-06-30","2":"LLY","3":"0.070852299"},{"1":"2020-07-31","2":"BMRN","3":"-0.029037599"},{"1":"2020-07-31","2":"NVS","3":"-0.061383406"},{"1":"2020-07-31","2":"GSK","3":"-0.011589351"},{"1":"2020-07-31","2":"AZN","3":"0.053201124"},{"1":"2020-07-31","2":"LLY","3":"-0.088396576"},{"1":"2020-08-31","2":"BMRN","3":"-0.428813783"},{"1":"2020-08-31","2":"NVS","3":"0.046619608"},{"1":"2020-08-31","2":"GSK","3":"-0.006304132"},{"1":"2020-08-31","2":"AZN","3":"0.011898869"},{"1":"2020-08-31","2":"LLY","3":"-0.007860152"},{"1":"2020-09-30","2":"BMRN","3":"-0.025307911"},{"1":"2020-09-30","2":"NVS","3":"0.010403527"},{"1":"2020-09-30","2":"GSK","3":"-0.050761806"},{"1":"2020-09-30","2":"AZN","3":"-0.021661515"},{"1":"2020-09-30","2":"LLY","3":"-0.002496505"},{"1":"2020-10-31","2":"BMRN","3":"-0.021926358"},{"1":"2020-10-31","2":"NVS","3":"-0.107714264"},{"1":"2020-10-31","2":"GSK","3":"-0.118912853"},{"1":"2020-10-31","2":"AZN","3":"-0.088472279"},{"1":"2020-10-31","2":"LLY","3":"-0.126280695"},{"1":"2020-11-30","2":"BMRN","3":"0.055784031"},{"1":"2020-11-30","2":"NVS","3":"0.151255682"},{"1":"2020-11-30","2":"GSK","3":"0.108815297"},{"1":"2020-11-30","2":"AZN","3":"0.053941282"},{"1":"2020-11-30","2":"LLY","3":"0.115264752"},{"1":"2020-12-31","2":"BMRN","3":"0.090795015"},{"1":"2020-12-31","2":"NVS","3":"0.027366199"},{"1":"2020-12-31","2":"GSK","3":"0.005151130"},{"1":"2020-12-31","2":"AZN","3":"-0.059138135"},{"1":"2020-12-31","2":"LLY","3":"0.134269244"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="join-tidy-datasets" class="section level3" number="7.1.3">
+<h3 number="7.1.3"><span class="header-section-number">7.1.3</span> Join tidy datasets</h3>
+<p>Now we can join the two <code>Tidy</code> datasets together on <code>date</code> and <code>asset</code> and name the full dataset <code>BioTechTidy</code>.</p>
+<pre class="r"><code>inner_join(x = PricesTidy, 
+           y = ReturnsTidy, 
+           by = c(&quot;date&quot;, &quot;asset&quot;)) %&gt;% 
+  filter(!is.na(log_returns)) -&gt; BioTechTidy
+BioTechTidy</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["asset"],"name":[2],"type":["chr"],"align":["left"]},{"label":["adj_prices"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["log_returns"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2020-01-31","2":"BMRN","3":"83.50000","4":"-0.012496479"},{"1":"2020-01-31","2":"NVS","3":"91.20046","4":"-0.001902773"},{"1":"2020-01-31","2":"GSK","3":"44.54283","4":"-0.004051604"},{"1":"2020-01-31","2":"AZN","3":"47.34891","4":"-0.023540091"},{"1":"2020-01-31","2":"LLY","3":"136.89491","4":"0.060593367"},{"1":"2020-02-29","2":"BMRN","3":"90.37000","4":"0.079065755"},{"1":"2020-02-29","2":"NVS","3":"81.01990","4":"-0.118365196"},{"1":"2020-02-29","2":"GSK","3":"39.11396","4":"-0.129971886"},{"1":"2020-02-29","2":"AZN","3":"43.45262","4":"-0.085872472"},{"1":"2020-02-29","2":"LLY","3":"124.29139","4":"-0.096584853"},{"1":"2020-03-31","2":"BMRN","3":"84.50000","4":"-0.067160853"},{"1":"2020-03-31","2":"NVS","3":"82.45000","4":"0.017497246"},{"1":"2020-03-31","2":"GSK","3":"36.56619","4":"-0.067355209"},{"1":"2020-03-31","2":"AZN","3":"44.30580","4":"0.019444443"},{"1":"2020-03-31","2":"LLY","3":"136.69786","4":"0.095144376"},{"1":"2020-04-30","2":"BMRN","3":"92.02000","4":"0.085254378"},{"1":"2020-04-30","2":"NVS","3":"84.73000","4":"0.027277753"},{"1":"2020-04-30","2":"GSK","3":"40.60016","4":"0.104647759"},{"1":"2020-04-30","2":"AZN","3":"51.86537","4":"0.157535577"},{"1":"2020-04-30","2":"LLY","3":"152.38579","4":"0.108642288"},{"1":"2020-05-31","2":"BMRN","3":"106.55000","4":"0.146608475"},{"1":"2020-05-31","2":"NVS","3":"87.43000","4":"0.031368708"},{"1":"2020-05-31","2":"GSK","3":"40.90715","4":"0.007532980"},{"1":"2020-05-31","2":"AZN","3":"54.16697","4":"0.043420010"},{"1":"2020-05-31","2":"LLY","3":"151.42998","4":"-0.006292064"},{"1":"2020-06-30","2":"BMRN","3":"123.34000","4":"0.146330350"},{"1":"2020-06-30","2":"NVS","3":"87.34000","4":"-0.001029971"},{"1":"2020-06-30","2":"GSK","3":"39.80446","4":"-0.027325923"},{"1":"2020-06-30","2":"AZN","3":"52.47053","4":"-0.031819597"},{"1":"2020-06-30","2":"LLY","3":"162.54837","4":"0.070852299"},{"1":"2020-07-31","2":"BMRN","3":"119.81000","4":"-0.029037599"},{"1":"2020-07-31","2":"NVS","3":"82.14000","4":"-0.061383406"},{"1":"2020-07-31","2":"GSK","3":"39.34581","4":"-0.011589351"},{"1":"2020-07-31","2":"AZN","3":"55.33761","4":"0.053201124"},{"1":"2020-07-31","2":"LLY","3":"148.79642","4":"-0.088396576"},{"1":"2020-08-31","2":"BMRN","3":"78.03000","4":"-0.428813783"},{"1":"2020-08-31","2":"NVS","3":"86.06000","4":"0.046619608"},{"1":"2020-08-31","2":"GSK","3":"39.09855","4":"-0.006304132"},{"1":"2020-08-31","2":"AZN","3":"56.00000","4":"0.011898869"},{"1":"2020-08-31","2":"LLY","3":"147.63144","4":"-0.007860152"},{"1":"2020-09-30","2":"BMRN","3":"76.08000","4":"-0.025307911"},{"1":"2020-09-30","2":"NVS","3":"86.96000","4":"0.010403527"},{"1":"2020-09-30","2":"GSK","3":"37.16337","4":"-0.050761806"},{"1":"2020-09-30","2":"AZN","3":"54.80000","4":"-0.021661515"},{"1":"2020-09-30","2":"LLY","3":"147.26334","4":"-0.002496505"},{"1":"2020-10-31","2":"BMRN","3":"74.43000","4":"-0.021926358"},{"1":"2020-10-31","2":"NVS","3":"78.08000","4":"-0.107714264"},{"1":"2020-10-31","2":"GSK","3":"32.99681","4":"-0.118912853"},{"1":"2020-10-31","2":"AZN","3":"50.16000","4":"-0.088472279"},{"1":"2020-10-31","2":"LLY","3":"129.79311","4":"-0.126280695"},{"1":"2020-11-30","2":"BMRN","3":"78.70000","4":"0.055784031"},{"1":"2020-11-30","2":"NVS","3":"90.83000","4":"0.151255682"},{"1":"2020-11-30","2":"GSK","3":"36.79000","4":"0.108815297"},{"1":"2020-11-30","2":"AZN","3":"52.94000","4":"0.053941282"},{"1":"2020-11-30","2":"LLY","3":"145.64999","4":"0.115264752"},{"1":"2020-12-31","2":"BMRN","3":"86.18000","4":"0.090795015"},{"1":"2020-12-31","2":"NVS","3":"93.35000","4":"0.027366199"},{"1":"2020-12-31","2":"GSK","3":"36.98000","4":"0.005151130"},{"1":"2020-12-31","2":"AZN","3":"49.90000","4":"-0.059138135"},{"1":"2020-12-31","2":"LLY","3":"166.58000","4":"0.134269244"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</div>
+<div id="gt-package" class="section level1" number="8">
+<h1 number="8"><span class="header-section-number">8</span> <code>gt</code> package</h1>
+<p>The <a href="https://gt.rstudio.com/"><code>gt</code> package</a> comes from RStudio and it’s philosophy is straightforward: tables can be assembled from their various parts,</p>
+<blockquote>
+<p><em>the table header, the stub, the column labels and spanner column labels, the table body, and the table footer.</em></p>
+</blockquote>
+<div id="the-basics" class="section level2 tabset" number="8.1">
+<h2 class="tabset" number="8.1"><span class="header-section-number">8.1</span> The basics</h2>
+<p>We will start by using the <a href="https://gt.rstudio.com/"><code>gt</code> package</a> with our biotech stock data.</p>
+<div id="remove-missing-returns" class="section level3" number="8.1.1">
+<h3 number="8.1.1"><span class="header-section-number">8.1.1</span> Remove missing returns</h3>
+<p>We’ll only be displaying data for <code>2020</code>, so we will filter out the row for <code>2019-12-31</code>.</p>
+<pre class="r"><code># remove missing
+PricesWide &lt;- PricesWide %&gt;% filter(date != &quot;2019-12-31&quot;)
+PricesWide</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["BMRN"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["NVS"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["GSK"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["AZN"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["LLY"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"2020-01-31","2":"83.50","3":"91.20046","4":"44.54283","5":"47.34891","6":"136.8949"},{"1":"2020-02-29","2":"90.37","3":"81.01990","4":"39.11396","5":"43.45262","6":"124.2914"},{"1":"2020-03-31","2":"84.50","3":"82.45000","4":"36.56619","5":"44.30580","6":"136.6979"},{"1":"2020-04-30","2":"92.02","3":"84.73000","4":"40.60016","5":"51.86537","6":"152.3858"},{"1":"2020-05-31","2":"106.55","3":"87.43000","4":"40.90715","5":"54.16697","6":"151.4300"},{"1":"2020-06-30","2":"123.34","3":"87.34000","4":"39.80446","5":"52.47053","6":"162.5484"},{"1":"2020-07-31","2":"119.81","3":"82.14000","4":"39.34581","5":"55.33761","6":"148.7964"},{"1":"2020-08-31","2":"78.03","3":"86.06000","4":"39.09855","5":"56.00000","6":"147.6314"},{"1":"2020-09-30","2":"76.08","3":"86.96000","4":"37.16337","5":"54.80000","6":"147.2633"},{"1":"2020-10-31","2":"74.43","3":"78.08000","4":"32.99681","5":"50.16000","6":"129.7931"},{"1":"2020-11-30","2":"78.70","3":"90.83000","4":"36.79000","5":"52.94000","6":"145.6500"},{"1":"2020-12-31","2":"86.18","3":"93.35000","4":"36.98000","5":"49.90000","6":"166.5800"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="create-begin-and-end-dates" class="section level3" number="8.1.2">
+<h3 number="8.1.2"><span class="header-section-number">8.1.2</span> Create begin and end dates</h3>
+<p>We will also create two date vectors (<code>begin_date</code> and <code>end_date</code>) to use in the table title.</p>
+<pre class="r"><code>begin_date &lt;- min(PricesWide$date)
+begin_date</code></pre>
+<pre><code>## [1] &quot;2020-01-31&quot;</code></pre>
+<pre class="r"><code>end_date &lt;- max(PricesWide$date)
+end_date</code></pre>
+<pre><code>## [1] &quot;2020-12-31&quot;</code></pre>
+</div>
+<div id="the-gt-table-header" class="section level3" number="8.1.3">
+<h3 number="8.1.3"><span class="header-section-number">8.1.3</span> The <code>gt</code> table header</h3>
+<p>We will pass the <code>PricesWide</code> data to <code>gt()</code> and <code>tag_header()</code> functions to create a basic <code>gt</code> table. We use the <code>glue::glue()</code> function to create the <code>subtitle</code>.</p>
+<p>See the code below to understand how <code>glue::glue()</code> works.</p>
+<pre class="r"><code># recall we&#39;ve created begin_date and end_date
+glue::glue(&quot;From {begin_date} to {end_date}&quot;)</code></pre>
+<pre><code>## From 2020-01-31 to 2020-12-31</code></pre>
+<p>Now we create a <code>gt</code> table with a header defined by <code>tab_header()</code></p>
+<pre class="r"><code>PricesWide %&gt;% 
+  # create gt table
+  gt() %&gt;%
+  # create header
+  tab_header(
+    title = &quot;Adjusted Prices for BioTech Stocks&quot;,
+    subtitle = glue::glue(&quot;From {begin_date} to {end_date}&quot;)) </code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#wbldpqeweb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wbldpqeweb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wbldpqeweb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wbldpqeweb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wbldpqeweb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wbldpqeweb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wbldpqeweb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wbldpqeweb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wbldpqeweb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wbldpqeweb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wbldpqeweb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wbldpqeweb .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wbldpqeweb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wbldpqeweb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wbldpqeweb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wbldpqeweb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wbldpqeweb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#wbldpqeweb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wbldpqeweb .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#wbldpqeweb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wbldpqeweb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wbldpqeweb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wbldpqeweb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wbldpqeweb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wbldpqeweb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#wbldpqeweb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wbldpqeweb .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#wbldpqeweb .gt_left {
+  text-align: left;
+}
+
+#wbldpqeweb .gt_center {
+  text-align: center;
+}
+
+#wbldpqeweb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wbldpqeweb .gt_font_normal {
+  font-weight: normal;
+}
+
+#wbldpqeweb .gt_font_bold {
+  font-weight: bold;
+}
+
+#wbldpqeweb .gt_font_italic {
+  font-style: italic;
+}
+
+#wbldpqeweb .gt_super {
+  font-size: 65%;
+}
+
+#wbldpqeweb .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="wbldpqeweb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="6" class="gt_heading gt_title gt_font_normal" style>Adjusted Prices for BioTech Stocks</th>
+    </tr>
+    <tr>
+      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>From 2020-01-31 to 2020-12-31</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">BMRN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">NVS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">GSK</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">AZN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">LLY</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">2020-01-31</td>
+      <td class="gt_row gt_right">83.50</td>
+      <td class="gt_row gt_right">91.20046</td>
+      <td class="gt_row gt_right">44.54283</td>
+      <td class="gt_row gt_right">47.34891</td>
+      <td class="gt_row gt_right">136.8949</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-02-29</td>
+      <td class="gt_row gt_right">90.37</td>
+      <td class="gt_row gt_right">81.01990</td>
+      <td class="gt_row gt_right">39.11396</td>
+      <td class="gt_row gt_right">43.45262</td>
+      <td class="gt_row gt_right">124.2914</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-03-31</td>
+      <td class="gt_row gt_right">84.50</td>
+      <td class="gt_row gt_right">82.45000</td>
+      <td class="gt_row gt_right">36.56619</td>
+      <td class="gt_row gt_right">44.30580</td>
+      <td class="gt_row gt_right">136.6979</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-04-30</td>
+      <td class="gt_row gt_right">92.02</td>
+      <td class="gt_row gt_right">84.73000</td>
+      <td class="gt_row gt_right">40.60016</td>
+      <td class="gt_row gt_right">51.86537</td>
+      <td class="gt_row gt_right">152.3858</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-05-31</td>
+      <td class="gt_row gt_right">106.55</td>
+      <td class="gt_row gt_right">87.43000</td>
+      <td class="gt_row gt_right">40.90715</td>
+      <td class="gt_row gt_right">54.16697</td>
+      <td class="gt_row gt_right">151.4300</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-06-30</td>
+      <td class="gt_row gt_right">123.34</td>
+      <td class="gt_row gt_right">87.34000</td>
+      <td class="gt_row gt_right">39.80446</td>
+      <td class="gt_row gt_right">52.47053</td>
+      <td class="gt_row gt_right">162.5484</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-07-31</td>
+      <td class="gt_row gt_right">119.81</td>
+      <td class="gt_row gt_right">82.14000</td>
+      <td class="gt_row gt_right">39.34581</td>
+      <td class="gt_row gt_right">55.33761</td>
+      <td class="gt_row gt_right">148.7964</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-08-31</td>
+      <td class="gt_row gt_right">78.03</td>
+      <td class="gt_row gt_right">86.06000</td>
+      <td class="gt_row gt_right">39.09855</td>
+      <td class="gt_row gt_right">56.00000</td>
+      <td class="gt_row gt_right">147.6314</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-09-30</td>
+      <td class="gt_row gt_right">76.08</td>
+      <td class="gt_row gt_right">86.96000</td>
+      <td class="gt_row gt_right">37.16337</td>
+      <td class="gt_row gt_right">54.80000</td>
+      <td class="gt_row gt_right">147.2633</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-10-31</td>
+      <td class="gt_row gt_right">74.43</td>
+      <td class="gt_row gt_right">78.08000</td>
+      <td class="gt_row gt_right">32.99681</td>
+      <td class="gt_row gt_right">50.16000</td>
+      <td class="gt_row gt_right">129.7931</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-11-30</td>
+      <td class="gt_row gt_right">78.70</td>
+      <td class="gt_row gt_right">90.83000</td>
+      <td class="gt_row gt_right">36.79000</td>
+      <td class="gt_row gt_right">52.94000</td>
+      <td class="gt_row gt_right">145.6500</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-12-31</td>
+      <td class="gt_row gt_right">86.18</td>
+      <td class="gt_row gt_right">93.35000</td>
+      <td class="gt_row gt_right">36.98000</td>
+      <td class="gt_row gt_right">49.90000</td>
+      <td class="gt_row gt_right">166.5800</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+<p><code>gt::tab_header()</code> controls the <em>table header</em> (which was one of the table parts we introduced into the philosophy).</p>
+</div>
+</div>
+<div id="formatting-with-gt" class="section level2 tabset" number="8.2">
+<h2 class="tabset" number="8.2"><span class="header-section-number">8.2</span> Formatting with <code>gt</code></h2>
+<p>The formatting functions in <code>gt</code> start with a <code>fmt_</code> prefix. Some of the options include <code>fmt_number</code>, <code>fmt_date</code>, and <code>fmt_currency</code>.</p>
+<div id="format-numbers" class="section level3" number="8.2.1">
+<h3 number="8.2.1"><span class="header-section-number">8.2.1</span> Format numbers</h3>
+<p>We will use <code>gt::fmt_number()</code> to reduce the <code>decimal</code> places down to <code>2</code> in the stock symbol columns. We give the columns we want formatted to the <code>columns = vars()</code> argument.</p>
+<pre class="r"><code>PricesWide %&gt;% 
+  # create gt table
+  gt() %&gt;%
+  # create header
+  tab_header(
+    title = &quot;Adjusted Prices for BioTech Stocks&quot;,
+    subtitle = glue::glue(&quot;From {begin_date} to {end_date}&quot;)) %&gt;% 
+  # format number
+  fmt_number(
+    columns = vars(BMRN, NVS, GSK, AZN, LLY),
+    decimals = 2
+  )</code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#ytqhwhpmdd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ytqhwhpmdd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ytqhwhpmdd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ytqhwhpmdd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ytqhwhpmdd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ytqhwhpmdd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ytqhwhpmdd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ytqhwhpmdd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ytqhwhpmdd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ytqhwhpmdd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ytqhwhpmdd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ytqhwhpmdd .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ytqhwhpmdd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ytqhwhpmdd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ytqhwhpmdd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ytqhwhpmdd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ytqhwhpmdd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#ytqhwhpmdd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ytqhwhpmdd .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#ytqhwhpmdd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ytqhwhpmdd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ytqhwhpmdd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ytqhwhpmdd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ytqhwhpmdd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ytqhwhpmdd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ytqhwhpmdd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ytqhwhpmdd .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ytqhwhpmdd .gt_left {
+  text-align: left;
+}
+
+#ytqhwhpmdd .gt_center {
+  text-align: center;
+}
+
+#ytqhwhpmdd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ytqhwhpmdd .gt_font_normal {
+  font-weight: normal;
+}
+
+#ytqhwhpmdd .gt_font_bold {
+  font-weight: bold;
+}
+
+#ytqhwhpmdd .gt_font_italic {
+  font-style: italic;
+}
+
+#ytqhwhpmdd .gt_super {
+  font-size: 65%;
+}
+
+#ytqhwhpmdd .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="ytqhwhpmdd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="6" class="gt_heading gt_title gt_font_normal" style>Adjusted Prices for BioTech Stocks</th>
+    </tr>
+    <tr>
+      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>From 2020-01-31 to 2020-12-31</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">BMRN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">NVS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">GSK</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">AZN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">LLY</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">2020-01-31</td>
+      <td class="gt_row gt_right">83.50</td>
+      <td class="gt_row gt_right">91.20</td>
+      <td class="gt_row gt_right">44.54</td>
+      <td class="gt_row gt_right">47.35</td>
+      <td class="gt_row gt_right">136.89</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-02-29</td>
+      <td class="gt_row gt_right">90.37</td>
+      <td class="gt_row gt_right">81.02</td>
+      <td class="gt_row gt_right">39.11</td>
+      <td class="gt_row gt_right">43.45</td>
+      <td class="gt_row gt_right">124.29</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-03-31</td>
+      <td class="gt_row gt_right">84.50</td>
+      <td class="gt_row gt_right">82.45</td>
+      <td class="gt_row gt_right">36.57</td>
+      <td class="gt_row gt_right">44.31</td>
+      <td class="gt_row gt_right">136.70</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-04-30</td>
+      <td class="gt_row gt_right">92.02</td>
+      <td class="gt_row gt_right">84.73</td>
+      <td class="gt_row gt_right">40.60</td>
+      <td class="gt_row gt_right">51.87</td>
+      <td class="gt_row gt_right">152.39</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-05-31</td>
+      <td class="gt_row gt_right">106.55</td>
+      <td class="gt_row gt_right">87.43</td>
+      <td class="gt_row gt_right">40.91</td>
+      <td class="gt_row gt_right">54.17</td>
+      <td class="gt_row gt_right">151.43</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-06-30</td>
+      <td class="gt_row gt_right">123.34</td>
+      <td class="gt_row gt_right">87.34</td>
+      <td class="gt_row gt_right">39.80</td>
+      <td class="gt_row gt_right">52.47</td>
+      <td class="gt_row gt_right">162.55</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-07-31</td>
+      <td class="gt_row gt_right">119.81</td>
+      <td class="gt_row gt_right">82.14</td>
+      <td class="gt_row gt_right">39.35</td>
+      <td class="gt_row gt_right">55.34</td>
+      <td class="gt_row gt_right">148.80</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-08-31</td>
+      <td class="gt_row gt_right">78.03</td>
+      <td class="gt_row gt_right">86.06</td>
+      <td class="gt_row gt_right">39.10</td>
+      <td class="gt_row gt_right">56.00</td>
+      <td class="gt_row gt_right">147.63</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-09-30</td>
+      <td class="gt_row gt_right">76.08</td>
+      <td class="gt_row gt_right">86.96</td>
+      <td class="gt_row gt_right">37.16</td>
+      <td class="gt_row gt_right">54.80</td>
+      <td class="gt_row gt_right">147.26</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-10-31</td>
+      <td class="gt_row gt_right">74.43</td>
+      <td class="gt_row gt_right">78.08</td>
+      <td class="gt_row gt_right">33.00</td>
+      <td class="gt_row gt_right">50.16</td>
+      <td class="gt_row gt_right">129.79</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-11-30</td>
+      <td class="gt_row gt_right">78.70</td>
+      <td class="gt_row gt_right">90.83</td>
+      <td class="gt_row gt_right">36.79</td>
+      <td class="gt_row gt_right">52.94</td>
+      <td class="gt_row gt_right">145.65</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2020-12-31</td>
+      <td class="gt_row gt_right">86.18</td>
+      <td class="gt_row gt_right">93.35</td>
+      <td class="gt_row gt_right">36.98</td>
+      <td class="gt_row gt_right">49.90</td>
+      <td class="gt_row gt_right">166.58</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+</div>
+<div id="format-dates" class="section level3" number="8.2.2">
+<h3 number="8.2.2"><span class="header-section-number">8.2.2</span> Format dates</h3>
+<p>We can change the dates in <code>date</code> using the <code>gt::fmt_date()</code>. The <code>columns</code> argument needs <code>vars(date)</code>, and</p>
+<pre class="r"><code>PricesWide %&gt;% 
+  # create gt table
+  gt() %&gt;%
+  tab_header(
+    title = &quot;Adjusted Prices for BioTech Stocks&quot;,
+    subtitle = glue::glue(&quot;From {begin_date} to {end_date}&quot;)) %&gt;% 
+  # format numbers
+  fmt_number(
+    columns = vars(BMRN, NVS, GSK, AZN, LLY),
+    decimals = 2
+  ) %&gt;% 
+  # format date
+  fmt_date(
+    columns = vars(date),
+    date_style = 5
+  ) </code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#ksxaoynacw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ksxaoynacw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ksxaoynacw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ksxaoynacw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ksxaoynacw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ksxaoynacw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ksxaoynacw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ksxaoynacw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ksxaoynacw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ksxaoynacw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ksxaoynacw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ksxaoynacw .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ksxaoynacw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ksxaoynacw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ksxaoynacw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ksxaoynacw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ksxaoynacw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#ksxaoynacw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ksxaoynacw .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#ksxaoynacw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ksxaoynacw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ksxaoynacw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ksxaoynacw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ksxaoynacw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ksxaoynacw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ksxaoynacw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ksxaoynacw .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ksxaoynacw .gt_left {
+  text-align: left;
+}
+
+#ksxaoynacw .gt_center {
+  text-align: center;
+}
+
+#ksxaoynacw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ksxaoynacw .gt_font_normal {
+  font-weight: normal;
+}
+
+#ksxaoynacw .gt_font_bold {
+  font-weight: bold;
+}
+
+#ksxaoynacw .gt_font_italic {
+  font-style: italic;
+}
+
+#ksxaoynacw .gt_super {
+  font-size: 65%;
+}
+
+#ksxaoynacw .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="ksxaoynacw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="6" class="gt_heading gt_title gt_font_normal" style>Adjusted Prices for BioTech Stocks</th>
+    </tr>
+    <tr>
+      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>From 2020-01-31 to 2020-12-31</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">BMRN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">NVS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">GSK</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">AZN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">LLY</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">January 31, 2020</td>
+      <td class="gt_row gt_right">83.50</td>
+      <td class="gt_row gt_right">91.20</td>
+      <td class="gt_row gt_right">44.54</td>
+      <td class="gt_row gt_right">47.35</td>
+      <td class="gt_row gt_right">136.89</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">February 29, 2020</td>
+      <td class="gt_row gt_right">90.37</td>
+      <td class="gt_row gt_right">81.02</td>
+      <td class="gt_row gt_right">39.11</td>
+      <td class="gt_row gt_right">43.45</td>
+      <td class="gt_row gt_right">124.29</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">March 31, 2020</td>
+      <td class="gt_row gt_right">84.50</td>
+      <td class="gt_row gt_right">82.45</td>
+      <td class="gt_row gt_right">36.57</td>
+      <td class="gt_row gt_right">44.31</td>
+      <td class="gt_row gt_right">136.70</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">April 30, 2020</td>
+      <td class="gt_row gt_right">92.02</td>
+      <td class="gt_row gt_right">84.73</td>
+      <td class="gt_row gt_right">40.60</td>
+      <td class="gt_row gt_right">51.87</td>
+      <td class="gt_row gt_right">152.39</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">May 31, 2020</td>
+      <td class="gt_row gt_right">106.55</td>
+      <td class="gt_row gt_right">87.43</td>
+      <td class="gt_row gt_right">40.91</td>
+      <td class="gt_row gt_right">54.17</td>
+      <td class="gt_row gt_right">151.43</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">June 30, 2020</td>
+      <td class="gt_row gt_right">123.34</td>
+      <td class="gt_row gt_right">87.34</td>
+      <td class="gt_row gt_right">39.80</td>
+      <td class="gt_row gt_right">52.47</td>
+      <td class="gt_row gt_right">162.55</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">July 31, 2020</td>
+      <td class="gt_row gt_right">119.81</td>
+      <td class="gt_row gt_right">82.14</td>
+      <td class="gt_row gt_right">39.35</td>
+      <td class="gt_row gt_right">55.34</td>
+      <td class="gt_row gt_right">148.80</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">August 31, 2020</td>
+      <td class="gt_row gt_right">78.03</td>
+      <td class="gt_row gt_right">86.06</td>
+      <td class="gt_row gt_right">39.10</td>
+      <td class="gt_row gt_right">56.00</td>
+      <td class="gt_row gt_right">147.63</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">September 30, 2020</td>
+      <td class="gt_row gt_right">76.08</td>
+      <td class="gt_row gt_right">86.96</td>
+      <td class="gt_row gt_right">37.16</td>
+      <td class="gt_row gt_right">54.80</td>
+      <td class="gt_row gt_right">147.26</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">October 31, 2020</td>
+      <td class="gt_row gt_right">74.43</td>
+      <td class="gt_row gt_right">78.08</td>
+      <td class="gt_row gt_right">33.00</td>
+      <td class="gt_row gt_right">50.16</td>
+      <td class="gt_row gt_right">129.79</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">November 30, 2020</td>
+      <td class="gt_row gt_right">78.70</td>
+      <td class="gt_row gt_right">90.83</td>
+      <td class="gt_row gt_right">36.79</td>
+      <td class="gt_row gt_right">52.94</td>
+      <td class="gt_row gt_right">145.65</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">December 31, 2020</td>
+      <td class="gt_row gt_right">86.18</td>
+      <td class="gt_row gt_right">93.35</td>
+      <td class="gt_row gt_right">36.98</td>
+      <td class="gt_row gt_right">49.90</td>
+      <td class="gt_row gt_right">166.58</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+</div>
+<div id="format-currency" class="section level3" number="8.2.3">
+<h3 number="8.2.3"><span class="header-section-number">8.2.3</span> Format currency</h3>
+<p>We also want to makes sure the numbers are formatted as <code>USD</code> with <code>gt::fmt_currency()</code></p>
+<pre class="r"><code>PricesWide %&gt;% 
+  # create gt table
+  gt() %&gt;%
+  tab_header(
+    title = &quot;Adjusted Prices for BioTech Stocks&quot;,
+    subtitle = glue::glue(&quot;From {begin_date} to {end_date}&quot;)) %&gt;% 
+  # format numbers
+  fmt_number(
+    columns = vars(BMRN, NVS, GSK, AZN, LLY),
+    decimals = 2
+  ) %&gt;% 
+  # format date
+  fmt_date(
+    columns = vars(date),
+    date_style = 5
+  ) %&gt;% 
+  # format currency
+  fmt_currency(
+    columns = vars(BMRN, NVS, GSK, AZN, LLY),
+    currency = &quot;USD&quot;)</code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#oadqzjqoyv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#oadqzjqoyv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oadqzjqoyv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#oadqzjqoyv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#oadqzjqoyv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oadqzjqoyv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oadqzjqoyv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#oadqzjqoyv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#oadqzjqoyv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#oadqzjqoyv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#oadqzjqoyv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#oadqzjqoyv .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#oadqzjqoyv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#oadqzjqoyv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#oadqzjqoyv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#oadqzjqoyv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#oadqzjqoyv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#oadqzjqoyv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oadqzjqoyv .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#oadqzjqoyv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oadqzjqoyv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#oadqzjqoyv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#oadqzjqoyv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oadqzjqoyv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#oadqzjqoyv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#oadqzjqoyv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#oadqzjqoyv .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#oadqzjqoyv .gt_left {
+  text-align: left;
+}
+
+#oadqzjqoyv .gt_center {
+  text-align: center;
+}
+
+#oadqzjqoyv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#oadqzjqoyv .gt_font_normal {
+  font-weight: normal;
+}
+
+#oadqzjqoyv .gt_font_bold {
+  font-weight: bold;
+}
+
+#oadqzjqoyv .gt_font_italic {
+  font-style: italic;
+}
+
+#oadqzjqoyv .gt_super {
+  font-size: 65%;
+}
+
+#oadqzjqoyv .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="oadqzjqoyv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="6" class="gt_heading gt_title gt_font_normal" style>Adjusted Prices for BioTech Stocks</th>
+    </tr>
+    <tr>
+      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>From 2020-01-31 to 2020-12-31</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">BMRN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">NVS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">GSK</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">AZN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">LLY</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">January 31, 2020</td>
+      <td class="gt_row gt_right">$83.50</td>
+      <td class="gt_row gt_right">$91.20</td>
+      <td class="gt_row gt_right">$44.54</td>
+      <td class="gt_row gt_right">$47.35</td>
+      <td class="gt_row gt_right">$136.89</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">February 29, 2020</td>
+      <td class="gt_row gt_right">$90.37</td>
+      <td class="gt_row gt_right">$81.02</td>
+      <td class="gt_row gt_right">$39.11</td>
+      <td class="gt_row gt_right">$43.45</td>
+      <td class="gt_row gt_right">$124.29</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">March 31, 2020</td>
+      <td class="gt_row gt_right">$84.50</td>
+      <td class="gt_row gt_right">$82.45</td>
+      <td class="gt_row gt_right">$36.57</td>
+      <td class="gt_row gt_right">$44.31</td>
+      <td class="gt_row gt_right">$136.70</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">April 30, 2020</td>
+      <td class="gt_row gt_right">$92.02</td>
+      <td class="gt_row gt_right">$84.73</td>
+      <td class="gt_row gt_right">$40.60</td>
+      <td class="gt_row gt_right">$51.87</td>
+      <td class="gt_row gt_right">$152.39</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">May 31, 2020</td>
+      <td class="gt_row gt_right">$106.55</td>
+      <td class="gt_row gt_right">$87.43</td>
+      <td class="gt_row gt_right">$40.91</td>
+      <td class="gt_row gt_right">$54.17</td>
+      <td class="gt_row gt_right">$151.43</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">June 30, 2020</td>
+      <td class="gt_row gt_right">$123.34</td>
+      <td class="gt_row gt_right">$87.34</td>
+      <td class="gt_row gt_right">$39.80</td>
+      <td class="gt_row gt_right">$52.47</td>
+      <td class="gt_row gt_right">$162.55</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">July 31, 2020</td>
+      <td class="gt_row gt_right">$119.81</td>
+      <td class="gt_row gt_right">$82.14</td>
+      <td class="gt_row gt_right">$39.35</td>
+      <td class="gt_row gt_right">$55.34</td>
+      <td class="gt_row gt_right">$148.80</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">August 31, 2020</td>
+      <td class="gt_row gt_right">$78.03</td>
+      <td class="gt_row gt_right">$86.06</td>
+      <td class="gt_row gt_right">$39.10</td>
+      <td class="gt_row gt_right">$56.00</td>
+      <td class="gt_row gt_right">$147.63</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">September 30, 2020</td>
+      <td class="gt_row gt_right">$76.08</td>
+      <td class="gt_row gt_right">$86.96</td>
+      <td class="gt_row gt_right">$37.16</td>
+      <td class="gt_row gt_right">$54.80</td>
+      <td class="gt_row gt_right">$147.26</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">October 31, 2020</td>
+      <td class="gt_row gt_right">$74.43</td>
+      <td class="gt_row gt_right">$78.08</td>
+      <td class="gt_row gt_right">$33.00</td>
+      <td class="gt_row gt_right">$50.16</td>
+      <td class="gt_row gt_right">$129.79</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">November 30, 2020</td>
+      <td class="gt_row gt_right">$78.70</td>
+      <td class="gt_row gt_right">$90.83</td>
+      <td class="gt_row gt_right">$36.79</td>
+      <td class="gt_row gt_right">$52.94</td>
+      <td class="gt_row gt_right">$145.65</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">December 31, 2020</td>
+      <td class="gt_row gt_right">$86.18</td>
+      <td class="gt_row gt_right">$93.35</td>
+      <td class="gt_row gt_right">$36.98</td>
+      <td class="gt_row gt_right">$49.90</td>
+      <td class="gt_row gt_right">$166.58</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+</div>
+</div>
+<div id="column-labels" class="section level2 tabset" number="8.3">
+<h2 class="tabset" number="8.3"><span class="header-section-number">8.3</span> Column labels</h2>
+<p>We have two different categories of variables in the <code>PricesWide</code> dataset, dates (i.e. months) and stock symbols. Adding a label above each group of columns would make the table easier to read. In the <code>gt</code> package philosophy, these are called <em>spanner columns</em>.</p>
+<div id="column-labels-excel-1" class="section level3" number="8.3.1">
+<h3 number="8.3.1"><span class="header-section-number">8.3.1</span> Column labels (Excel #1)</h3>
+<p>In Excel, adding a label for a group of columns usually involves inserting a row above the <code>date</code> and stock symbol columns,</p>
+<p><img src="img/gt-excel-01.png" width="448" style="display: block; margin: auto;" /></p>
+</div>
+<div id="column-labels-excel-2" class="section level3" number="8.3.2">
+<h3 number="8.3.2"><span class="header-section-number">8.3.2</span> Column labels (Excel #2)</h3>
+<p>The next step is merging the columns above each respective column type…</p>
+<p><img src="img/gt-excel-02.png" width="432" style="display: block; margin: auto;" /></p>
+</div>
+<div id="column-labels-excel-3" class="section level3" number="8.3.3">
+<h3 number="8.3.3"><span class="header-section-number">8.3.3</span> Column labels (Excel #3)</h3>
+<p>Finally, we add a new title in the merged rows (above our respective columns).</p>
+<p><img src="img/gt-excel-03.png" width="418" style="display: block; margin: auto;" /></p>
+</div>
+<div id="column-labels-gt" class="section level3" number="8.3.4">
+<h3 number="8.3.4"><span class="header-section-number">8.3.4</span> Column labels (<code>gt</code>)</h3>
+<p>In <code>gt</code>, we can add a <em>spanner column</em> with <code>tab_spanner()</code>. We give this function a <code>label</code> (like the example above) and the <code>columns</code> we want to include under the label.</p>
+<pre class="r"><code>PricesWide %&gt;% 
+  # create gt table
+  gt() %&gt;% 
+  # create header
+  tab_header(
+    title = &quot;Adjusted Prices for BioTech Stocks&quot;,
+    subtitle = glue::glue(&quot;From {begin_date} to {end_date}&quot;)) %&gt;% 
+  # format numbers
+  fmt_number(
+    columns = vars(BMRN, NVS, GSK, AZN, LLY),
+    decimals = 2
+  ) %&gt;% 
+  # format date
+  fmt_date(
+    columns = vars(date),
+    date_style = 5
+  ) %&gt;% 
+  # format currency
+  fmt_currency(
+    columns = vars(BMRN, NVS, GSK, AZN, LLY),
+    currency = &quot;USD&quot;) %&gt;% 
+  # add spanner column label
+  tab_spanner(
+    label = &quot;BioTech Stocks&quot;,
+    columns = vars(BMRN, NVS, GSK, AZN, LLY)
+  )</code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#krfmlnqxjo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#krfmlnqxjo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#krfmlnqxjo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#krfmlnqxjo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#krfmlnqxjo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#krfmlnqxjo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#krfmlnqxjo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#krfmlnqxjo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#krfmlnqxjo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#krfmlnqxjo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#krfmlnqxjo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#krfmlnqxjo .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#krfmlnqxjo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#krfmlnqxjo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#krfmlnqxjo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#krfmlnqxjo .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#krfmlnqxjo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#krfmlnqxjo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#krfmlnqxjo .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#krfmlnqxjo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#krfmlnqxjo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#krfmlnqxjo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#krfmlnqxjo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#krfmlnqxjo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#krfmlnqxjo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#krfmlnqxjo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#krfmlnqxjo .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#krfmlnqxjo .gt_left {
+  text-align: left;
+}
+
+#krfmlnqxjo .gt_center {
+  text-align: center;
+}
+
+#krfmlnqxjo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#krfmlnqxjo .gt_font_normal {
+  font-weight: normal;
+}
+
+#krfmlnqxjo .gt_font_bold {
+  font-weight: bold;
+}
+
+#krfmlnqxjo .gt_font_italic {
+  font-style: italic;
+}
+
+#krfmlnqxjo .gt_super {
+  font-size: 65%;
+}
+
+#krfmlnqxjo .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="krfmlnqxjo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="6" class="gt_heading gt_title gt_font_normal" style>Adjusted Prices for BioTech Stocks</th>
+    </tr>
+    <tr>
+      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>From 2020-01-31 to 2020-12-31</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1">date</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="5">
+        <span class="gt_column_spanner">BioTech Stocks</span>
+      </th>
+    </tr>
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">BMRN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">NVS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">GSK</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">AZN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">LLY</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">January 31, 2020</td>
+      <td class="gt_row gt_right">$83.50</td>
+      <td class="gt_row gt_right">$91.20</td>
+      <td class="gt_row gt_right">$44.54</td>
+      <td class="gt_row gt_right">$47.35</td>
+      <td class="gt_row gt_right">$136.89</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">February 29, 2020</td>
+      <td class="gt_row gt_right">$90.37</td>
+      <td class="gt_row gt_right">$81.02</td>
+      <td class="gt_row gt_right">$39.11</td>
+      <td class="gt_row gt_right">$43.45</td>
+      <td class="gt_row gt_right">$124.29</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">March 31, 2020</td>
+      <td class="gt_row gt_right">$84.50</td>
+      <td class="gt_row gt_right">$82.45</td>
+      <td class="gt_row gt_right">$36.57</td>
+      <td class="gt_row gt_right">$44.31</td>
+      <td class="gt_row gt_right">$136.70</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">April 30, 2020</td>
+      <td class="gt_row gt_right">$92.02</td>
+      <td class="gt_row gt_right">$84.73</td>
+      <td class="gt_row gt_right">$40.60</td>
+      <td class="gt_row gt_right">$51.87</td>
+      <td class="gt_row gt_right">$152.39</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">May 31, 2020</td>
+      <td class="gt_row gt_right">$106.55</td>
+      <td class="gt_row gt_right">$87.43</td>
+      <td class="gt_row gt_right">$40.91</td>
+      <td class="gt_row gt_right">$54.17</td>
+      <td class="gt_row gt_right">$151.43</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">June 30, 2020</td>
+      <td class="gt_row gt_right">$123.34</td>
+      <td class="gt_row gt_right">$87.34</td>
+      <td class="gt_row gt_right">$39.80</td>
+      <td class="gt_row gt_right">$52.47</td>
+      <td class="gt_row gt_right">$162.55</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">July 31, 2020</td>
+      <td class="gt_row gt_right">$119.81</td>
+      <td class="gt_row gt_right">$82.14</td>
+      <td class="gt_row gt_right">$39.35</td>
+      <td class="gt_row gt_right">$55.34</td>
+      <td class="gt_row gt_right">$148.80</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">August 31, 2020</td>
+      <td class="gt_row gt_right">$78.03</td>
+      <td class="gt_row gt_right">$86.06</td>
+      <td class="gt_row gt_right">$39.10</td>
+      <td class="gt_row gt_right">$56.00</td>
+      <td class="gt_row gt_right">$147.63</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">September 30, 2020</td>
+      <td class="gt_row gt_right">$76.08</td>
+      <td class="gt_row gt_right">$86.96</td>
+      <td class="gt_row gt_right">$37.16</td>
+      <td class="gt_row gt_right">$54.80</td>
+      <td class="gt_row gt_right">$147.26</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">October 31, 2020</td>
+      <td class="gt_row gt_right">$74.43</td>
+      <td class="gt_row gt_right">$78.08</td>
+      <td class="gt_row gt_right">$33.00</td>
+      <td class="gt_row gt_right">$50.16</td>
+      <td class="gt_row gt_right">$129.79</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">November 30, 2020</td>
+      <td class="gt_row gt_right">$78.70</td>
+      <td class="gt_row gt_right">$90.83</td>
+      <td class="gt_row gt_right">$36.79</td>
+      <td class="gt_row gt_right">$52.94</td>
+      <td class="gt_row gt_right">$145.65</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">December 31, 2020</td>
+      <td class="gt_row gt_right">$86.18</td>
+      <td class="gt_row gt_right">$93.35</td>
+      <td class="gt_row gt_right">$36.98</td>
+      <td class="gt_row gt_right">$49.90</td>
+      <td class="gt_row gt_right">$166.58</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+</div>
+</div>
+<div id="source-notes-and-row-groups" class="section level2 tabset" number="8.4">
+<h2 class="tabset" number="8.4"><span class="header-section-number">8.4</span> Source notes and row groups</h2>
+<p>Inserting meta-data (more labels, footnotes, etc.) in Excel involves using the GUI to add rows or columns (following the steps outlined above). We’re going to cover how to include meta-data and row group labels in <code>gt</code>.</p>
+<div id="source-notes-gt" class="section level3" number="8.4.1">
+<h3 number="8.4.1"><span class="header-section-number">8.4.1</span> Source notes (<code>gt</code>)</h3>
+<p>It’s good practice to include the source of the data in a table display. In <code>gt</code> we can simply add a <code>tab_source_note()</code> function and include a text string for the <code>source_note =</code>.</p>
+<pre class="r"><code>PricesWide %&gt;% 
+  # create gt table
+  gt() %&gt;% 
+  # create header
+  tab_header(
+    title = &quot;Adjusted Prices for BioTech Stocks&quot;,
+    subtitle = glue::glue(&quot;From {begin_date} to {end_date}&quot;)) %&gt;% 
+  # format numbers
+  fmt_number(
+    columns = vars(BMRN, NVS, GSK, AZN, LLY),
+    decimals = 2
+  ) %&gt;% 
+  # format date
+  fmt_date(
+    columns = vars(date),
+    date_style = 5
+  ) %&gt;% 
+  # format currency
+  fmt_currency(
+    columns = vars(BMRN, NVS, GSK, AZN, LLY),
+    currency = &quot;USD&quot;) %&gt;% 
+  # add spanner column label
+  tab_spanner(
+    label = &quot;BioTech Stocks&quot;,
+    columns = vars(BMRN, NVS, GSK, AZN, LLY)
+  ) %&gt;% 
+  # add data source
+  tab_source_note(
+    source_note = &quot;Source: Yahoo finance data and xts package.&quot;)</code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#ugyvsciray .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ugyvsciray .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ugyvsciray .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ugyvsciray .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ugyvsciray .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ugyvsciray .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ugyvsciray .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ugyvsciray .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ugyvsciray .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ugyvsciray .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ugyvsciray .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ugyvsciray .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ugyvsciray .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ugyvsciray .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ugyvsciray .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ugyvsciray .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ugyvsciray .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#ugyvsciray .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ugyvsciray .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#ugyvsciray .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ugyvsciray .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ugyvsciray .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ugyvsciray .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ugyvsciray .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ugyvsciray .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ugyvsciray .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ugyvsciray .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ugyvsciray .gt_left {
+  text-align: left;
+}
+
+#ugyvsciray .gt_center {
+  text-align: center;
+}
+
+#ugyvsciray .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ugyvsciray .gt_font_normal {
+  font-weight: normal;
+}
+
+#ugyvsciray .gt_font_bold {
+  font-weight: bold;
+}
+
+#ugyvsciray .gt_font_italic {
+  font-style: italic;
+}
+
+#ugyvsciray .gt_super {
+  font-size: 65%;
+}
+
+#ugyvsciray .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="ugyvsciray" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="6" class="gt_heading gt_title gt_font_normal" style>Adjusted Prices for BioTech Stocks</th>
+    </tr>
+    <tr>
+      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>From 2020-01-31 to 2020-12-31</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1">date</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="5">
+        <span class="gt_column_spanner">BioTech Stocks</span>
+      </th>
+    </tr>
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">BMRN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">NVS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">GSK</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">AZN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">LLY</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">January 31, 2020</td>
+      <td class="gt_row gt_right">$83.50</td>
+      <td class="gt_row gt_right">$91.20</td>
+      <td class="gt_row gt_right">$44.54</td>
+      <td class="gt_row gt_right">$47.35</td>
+      <td class="gt_row gt_right">$136.89</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">February 29, 2020</td>
+      <td class="gt_row gt_right">$90.37</td>
+      <td class="gt_row gt_right">$81.02</td>
+      <td class="gt_row gt_right">$39.11</td>
+      <td class="gt_row gt_right">$43.45</td>
+      <td class="gt_row gt_right">$124.29</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">March 31, 2020</td>
+      <td class="gt_row gt_right">$84.50</td>
+      <td class="gt_row gt_right">$82.45</td>
+      <td class="gt_row gt_right">$36.57</td>
+      <td class="gt_row gt_right">$44.31</td>
+      <td class="gt_row gt_right">$136.70</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">April 30, 2020</td>
+      <td class="gt_row gt_right">$92.02</td>
+      <td class="gt_row gt_right">$84.73</td>
+      <td class="gt_row gt_right">$40.60</td>
+      <td class="gt_row gt_right">$51.87</td>
+      <td class="gt_row gt_right">$152.39</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">May 31, 2020</td>
+      <td class="gt_row gt_right">$106.55</td>
+      <td class="gt_row gt_right">$87.43</td>
+      <td class="gt_row gt_right">$40.91</td>
+      <td class="gt_row gt_right">$54.17</td>
+      <td class="gt_row gt_right">$151.43</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">June 30, 2020</td>
+      <td class="gt_row gt_right">$123.34</td>
+      <td class="gt_row gt_right">$87.34</td>
+      <td class="gt_row gt_right">$39.80</td>
+      <td class="gt_row gt_right">$52.47</td>
+      <td class="gt_row gt_right">$162.55</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">July 31, 2020</td>
+      <td class="gt_row gt_right">$119.81</td>
+      <td class="gt_row gt_right">$82.14</td>
+      <td class="gt_row gt_right">$39.35</td>
+      <td class="gt_row gt_right">$55.34</td>
+      <td class="gt_row gt_right">$148.80</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">August 31, 2020</td>
+      <td class="gt_row gt_right">$78.03</td>
+      <td class="gt_row gt_right">$86.06</td>
+      <td class="gt_row gt_right">$39.10</td>
+      <td class="gt_row gt_right">$56.00</td>
+      <td class="gt_row gt_right">$147.63</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">September 30, 2020</td>
+      <td class="gt_row gt_right">$76.08</td>
+      <td class="gt_row gt_right">$86.96</td>
+      <td class="gt_row gt_right">$37.16</td>
+      <td class="gt_row gt_right">$54.80</td>
+      <td class="gt_row gt_right">$147.26</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">October 31, 2020</td>
+      <td class="gt_row gt_right">$74.43</td>
+      <td class="gt_row gt_right">$78.08</td>
+      <td class="gt_row gt_right">$33.00</td>
+      <td class="gt_row gt_right">$50.16</td>
+      <td class="gt_row gt_right">$129.79</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">November 30, 2020</td>
+      <td class="gt_row gt_right">$78.70</td>
+      <td class="gt_row gt_right">$90.83</td>
+      <td class="gt_row gt_right">$36.79</td>
+      <td class="gt_row gt_right">$52.94</td>
+      <td class="gt_row gt_right">$145.65</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">December 31, 2020</td>
+      <td class="gt_row gt_right">$86.18</td>
+      <td class="gt_row gt_right">$93.35</td>
+      <td class="gt_row gt_right">$36.98</td>
+      <td class="gt_row gt_right">$49.90</td>
+      <td class="gt_row gt_right">$166.58</td>
+    </tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="6">Source: Yahoo finance data and xts package.</td>
+    </tr>
+  </tfoot>
+  
+</table></div>
+</div>
+<div id="stub-heads-and-row-groups-gt" class="section level3" number="8.4.2">
+<h3 number="8.4.2"><span class="header-section-number">8.4.2</span> Stub heads and row groups (<code>gt</code>)</h3>
+<p>Another way to add a label for particular columns is to use the <a href="https://gt.rstudio.com/reference/tab_stubhead.html"><code>tab_stubhead()</code></a> or <a href="https://gt.rstudio.com/reference/tab_row_group.html"><code>tab_row_group()</code></a> functions.</p>
+<p><code>tab_stubhead()</code> takes a <code>label</code> argument and gets the name of the column we want to insert the label above. <code>tab_row_group()</code> takes a <code>group</code> argument, which is the name of the label for the groups of rows, and the <code>rows</code> argument which can be either 1) a vector of rows inside <code>c()</code>, 2) a <a href="https://tidyselect.r-lib.org/reference/language.html"><code>tidyselect</code> helper function</a>, or 3) a set of row indexes (we use this one).</p>
+<p>We’re going to demonstrate the <code>tab_stubhead()</code> and <code>tab_row_group()</code> functions, we’re going to use the <code>BioTechTidy</code> dataset we created earlier.</p>
+<pre class="r"><code>BioTechTidy %&gt;% 
+  # cleaner column names
+  select(
+    Date = date, 
+    `Stock Symbol` = asset,
+    `Adjusted Prices` = adj_prices,
+    `log(Returns)` = log_returns) %&gt;% 
+  # create gt table
+  gt() %&gt;% 
+  # create table header
+  tab_header(
+    title = &quot;BioTech Stock Prices and Returns&quot;,
+    subtitle = &quot;Ajusted monthly prices and log-adjusted returns&quot;) %&gt;%
+  # add stubhead for Date
+  tab_stubhead(label = &quot;Date&quot;) %&gt;% 
+      # format numbers
+  fmt_number(
+    columns = vars(`Adjusted Prices`, `log(Returns)`),
+    decimals = 2
+  ) %&gt;% 
+  # format date
+  fmt_date(
+    columns = vars(Date),
+    date_style = 5
+  ) %&gt;% 
+  # format currency
+  fmt_currency(
+    columns = vars(`Adjusted Prices`, `log(Returns)`),
+    currency = &quot;USD&quot;) %&gt;% 
+  # row group for quarter 4
+  tab_row_group(
+    group = &quot;Quarter 4 (OCT - DEC)&quot;,
+    rows = 46:60) %&gt;% 
+  # row group for quarter 3
+  tab_row_group(
+    group = &quot;Quarter 3 (JUL - SEP)&quot;,
+    rows = 31:45) %&gt;% 
+  # row group for quarter 2
+  tab_row_group(
+    group = &quot;Quarter 2 (APR - JUN)&quot;,
+    rows = 16:30) %&gt;% 
+  # row group for quarter 1
+  tab_row_group(
+    group = &quot;Quarter 1 (JAN - MAR)&quot;,
+    rows = 1:15) %&gt;% 
+  # add source of data
+  tab_source_note(
+    source_note = &quot;Source: Yahoo finance data and xts package.&quot;) </code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#bphdqlgbrj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bphdqlgbrj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bphdqlgbrj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bphdqlgbrj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bphdqlgbrj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bphdqlgbrj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bphdqlgbrj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bphdqlgbrj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bphdqlgbrj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bphdqlgbrj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bphdqlgbrj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bphdqlgbrj .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bphdqlgbrj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bphdqlgbrj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bphdqlgbrj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bphdqlgbrj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bphdqlgbrj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#bphdqlgbrj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bphdqlgbrj .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#bphdqlgbrj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bphdqlgbrj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bphdqlgbrj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bphdqlgbrj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bphdqlgbrj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bphdqlgbrj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#bphdqlgbrj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bphdqlgbrj .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#bphdqlgbrj .gt_left {
+  text-align: left;
+}
+
+#bphdqlgbrj .gt_center {
+  text-align: center;
+}
+
+#bphdqlgbrj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bphdqlgbrj .gt_font_normal {
+  font-weight: normal;
+}
+
+#bphdqlgbrj .gt_font_bold {
+  font-weight: bold;
+}
+
+#bphdqlgbrj .gt_font_italic {
+  font-style: italic;
+}
+
+#bphdqlgbrj .gt_super {
+  font-size: 65%;
+}
+
+#bphdqlgbrj .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="bphdqlgbrj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="4" class="gt_heading gt_title gt_font_normal" style>BioTech Stock Prices and Returns</th>
+    </tr>
+    <tr>
+      <th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Ajusted monthly prices and log-adjusted returns</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Stock Symbol</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Adjusted Prices</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">log(Returns)</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr class="gt_group_heading_row">
+      <td colspan="4" class="gt_group_heading">Quarter 1 (JAN - MAR)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">January 31, 2020</td>
+      <td class="gt_row gt_left">BMRN</td>
+      <td class="gt_row gt_right">$83.50</td>
+      <td class="gt_row gt_right">&minus;$0.01</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">January 31, 2020</td>
+      <td class="gt_row gt_left">NVS</td>
+      <td class="gt_row gt_right">$91.20</td>
+      <td class="gt_row gt_right">&minus;$0.00</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">January 31, 2020</td>
+      <td class="gt_row gt_left">GSK</td>
+      <td class="gt_row gt_right">$44.54</td>
+      <td class="gt_row gt_right">&minus;$0.00</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">January 31, 2020</td>
+      <td class="gt_row gt_left">AZN</td>
+      <td class="gt_row gt_right">$47.35</td>
+      <td class="gt_row gt_right">&minus;$0.02</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">January 31, 2020</td>
+      <td class="gt_row gt_left">LLY</td>
+      <td class="gt_row gt_right">$136.89</td>
+      <td class="gt_row gt_right">$0.06</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">February 29, 2020</td>
+      <td class="gt_row gt_left">BMRN</td>
+      <td class="gt_row gt_right">$90.37</td>
+      <td class="gt_row gt_right">$0.08</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">February 29, 2020</td>
+      <td class="gt_row gt_left">NVS</td>
+      <td class="gt_row gt_right">$81.02</td>
+      <td class="gt_row gt_right">&minus;$0.12</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">February 29, 2020</td>
+      <td class="gt_row gt_left">GSK</td>
+      <td class="gt_row gt_right">$39.11</td>
+      <td class="gt_row gt_right">&minus;$0.13</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">February 29, 2020</td>
+      <td class="gt_row gt_left">AZN</td>
+      <td class="gt_row gt_right">$43.45</td>
+      <td class="gt_row gt_right">&minus;$0.09</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">February 29, 2020</td>
+      <td class="gt_row gt_left">LLY</td>
+      <td class="gt_row gt_right">$124.29</td>
+      <td class="gt_row gt_right">&minus;$0.10</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">March 31, 2020</td>
+      <td class="gt_row gt_left">BMRN</td>
+      <td class="gt_row gt_right">$84.50</td>
+      <td class="gt_row gt_right">&minus;$0.07</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">March 31, 2020</td>
+      <td class="gt_row gt_left">NVS</td>
+      <td class="gt_row gt_right">$82.45</td>
+      <td class="gt_row gt_right">$0.02</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">March 31, 2020</td>
+      <td class="gt_row gt_left">GSK</td>
+      <td class="gt_row gt_right">$36.57</td>
+      <td class="gt_row gt_right">&minus;$0.07</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">March 31, 2020</td>
+      <td class="gt_row gt_left">AZN</td>
+      <td class="gt_row gt_right">$44.31</td>
+      <td class="gt_row gt_right">$0.02</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">March 31, 2020</td>
+      <td class="gt_row gt_left">LLY</td>
+      <td class="gt_row gt_right">$136.70</td>
+      <td class="gt_row gt_right">$0.10</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="4" class="gt_group_heading">Quarter 2 (APR - JUN)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">April 30, 2020</td>
+      <td class="gt_row gt_left">BMRN</td>
+      <td class="gt_row gt_right">$92.02</td>
+      <td class="gt_row gt_right">$0.09</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">April 30, 2020</td>
+      <td class="gt_row gt_left">NVS</td>
+      <td class="gt_row gt_right">$84.73</td>
+      <td class="gt_row gt_right">$0.03</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">April 30, 2020</td>
+      <td class="gt_row gt_left">GSK</td>
+      <td class="gt_row gt_right">$40.60</td>
+      <td class="gt_row gt_right">$0.10</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">April 30, 2020</td>
+      <td class="gt_row gt_left">AZN</td>
+      <td class="gt_row gt_right">$51.87</td>
+      <td class="gt_row gt_right">$0.16</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">April 30, 2020</td>
+      <td class="gt_row gt_left">LLY</td>
+      <td class="gt_row gt_right">$152.39</td>
+      <td class="gt_row gt_right">$0.11</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">May 31, 2020</td>
+      <td class="gt_row gt_left">BMRN</td>
+      <td class="gt_row gt_right">$106.55</td>
+      <td class="gt_row gt_right">$0.15</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">May 31, 2020</td>
+      <td class="gt_row gt_left">NVS</td>
+      <td class="gt_row gt_right">$87.43</td>
+      <td class="gt_row gt_right">$0.03</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">May 31, 2020</td>
+      <td class="gt_row gt_left">GSK</td>
+      <td class="gt_row gt_right">$40.91</td>
+      <td class="gt_row gt_right">$0.01</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">May 31, 2020</td>
+      <td class="gt_row gt_left">AZN</td>
+      <td class="gt_row gt_right">$54.17</td>
+      <td class="gt_row gt_right">$0.04</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">May 31, 2020</td>
+      <td class="gt_row gt_left">LLY</td>
+      <td class="gt_row gt_right">$151.43</td>
+      <td class="gt_row gt_right">&minus;$0.01</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">June 30, 2020</td>
+      <td class="gt_row gt_left">BMRN</td>
+      <td class="gt_row gt_right">$123.34</td>
+      <td class="gt_row gt_right">$0.15</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">June 30, 2020</td>
+      <td class="gt_row gt_left">NVS</td>
+      <td class="gt_row gt_right">$87.34</td>
+      <td class="gt_row gt_right">&minus;$0.00</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">June 30, 2020</td>
+      <td class="gt_row gt_left">GSK</td>
+      <td class="gt_row gt_right">$39.80</td>
+      <td class="gt_row gt_right">&minus;$0.03</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">June 30, 2020</td>
+      <td class="gt_row gt_left">AZN</td>
+      <td class="gt_row gt_right">$52.47</td>
+      <td class="gt_row gt_right">&minus;$0.03</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">June 30, 2020</td>
+      <td class="gt_row gt_left">LLY</td>
+      <td class="gt_row gt_right">$162.55</td>
+      <td class="gt_row gt_right">$0.07</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="4" class="gt_group_heading">Quarter 3 (JUL - SEP)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">July 31, 2020</td>
+      <td class="gt_row gt_left">BMRN</td>
+      <td class="gt_row gt_right">$119.81</td>
+      <td class="gt_row gt_right">&minus;$0.03</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">July 31, 2020</td>
+      <td class="gt_row gt_left">NVS</td>
+      <td class="gt_row gt_right">$82.14</td>
+      <td class="gt_row gt_right">&minus;$0.06</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">July 31, 2020</td>
+      <td class="gt_row gt_left">GSK</td>
+      <td class="gt_row gt_right">$39.35</td>
+      <td class="gt_row gt_right">&minus;$0.01</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">July 31, 2020</td>
+      <td class="gt_row gt_left">AZN</td>
+      <td class="gt_row gt_right">$55.34</td>
+      <td class="gt_row gt_right">$0.05</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">July 31, 2020</td>
+      <td class="gt_row gt_left">LLY</td>
+      <td class="gt_row gt_right">$148.80</td>
+      <td class="gt_row gt_right">&minus;$0.09</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">August 31, 2020</td>
+      <td class="gt_row gt_left">BMRN</td>
+      <td class="gt_row gt_right">$78.03</td>
+      <td class="gt_row gt_right">&minus;$0.43</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">August 31, 2020</td>
+      <td class="gt_row gt_left">NVS</td>
+      <td class="gt_row gt_right">$86.06</td>
+      <td class="gt_row gt_right">$0.05</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">August 31, 2020</td>
+      <td class="gt_row gt_left">GSK</td>
+      <td class="gt_row gt_right">$39.10</td>
+      <td class="gt_row gt_right">&minus;$0.01</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">August 31, 2020</td>
+      <td class="gt_row gt_left">AZN</td>
+      <td class="gt_row gt_right">$56.00</td>
+      <td class="gt_row gt_right">$0.01</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">August 31, 2020</td>
+      <td class="gt_row gt_left">LLY</td>
+      <td class="gt_row gt_right">$147.63</td>
+      <td class="gt_row gt_right">&minus;$0.01</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">September 30, 2020</td>
+      <td class="gt_row gt_left">BMRN</td>
+      <td class="gt_row gt_right">$76.08</td>
+      <td class="gt_row gt_right">&minus;$0.03</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">September 30, 2020</td>
+      <td class="gt_row gt_left">NVS</td>
+      <td class="gt_row gt_right">$86.96</td>
+      <td class="gt_row gt_right">$0.01</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">September 30, 2020</td>
+      <td class="gt_row gt_left">GSK</td>
+      <td class="gt_row gt_right">$37.16</td>
+      <td class="gt_row gt_right">&minus;$0.05</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">September 30, 2020</td>
+      <td class="gt_row gt_left">AZN</td>
+      <td class="gt_row gt_right">$54.80</td>
+      <td class="gt_row gt_right">&minus;$0.02</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">September 30, 2020</td>
+      <td class="gt_row gt_left">LLY</td>
+      <td class="gt_row gt_right">$147.26</td>
+      <td class="gt_row gt_right">&minus;$0.00</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="4" class="gt_group_heading">Quarter 4 (OCT - DEC)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">October 31, 2020</td>
+      <td class="gt_row gt_left">BMRN</td>
+      <td class="gt_row gt_right">$74.43</td>
+      <td class="gt_row gt_right">&minus;$0.02</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">October 31, 2020</td>
+      <td class="gt_row gt_left">NVS</td>
+      <td class="gt_row gt_right">$78.08</td>
+      <td class="gt_row gt_right">&minus;$0.11</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">October 31, 2020</td>
+      <td class="gt_row gt_left">GSK</td>
+      <td class="gt_row gt_right">$33.00</td>
+      <td class="gt_row gt_right">&minus;$0.12</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">October 31, 2020</td>
+      <td class="gt_row gt_left">AZN</td>
+      <td class="gt_row gt_right">$50.16</td>
+      <td class="gt_row gt_right">&minus;$0.09</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">October 31, 2020</td>
+      <td class="gt_row gt_left">LLY</td>
+      <td class="gt_row gt_right">$129.79</td>
+      <td class="gt_row gt_right">&minus;$0.13</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">November 30, 2020</td>
+      <td class="gt_row gt_left">BMRN</td>
+      <td class="gt_row gt_right">$78.70</td>
+      <td class="gt_row gt_right">$0.06</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">November 30, 2020</td>
+      <td class="gt_row gt_left">NVS</td>
+      <td class="gt_row gt_right">$90.83</td>
+      <td class="gt_row gt_right">$0.15</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">November 30, 2020</td>
+      <td class="gt_row gt_left">GSK</td>
+      <td class="gt_row gt_right">$36.79</td>
+      <td class="gt_row gt_right">$0.11</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">November 30, 2020</td>
+      <td class="gt_row gt_left">AZN</td>
+      <td class="gt_row gt_right">$52.94</td>
+      <td class="gt_row gt_right">$0.05</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">November 30, 2020</td>
+      <td class="gt_row gt_left">LLY</td>
+      <td class="gt_row gt_right">$145.65</td>
+      <td class="gt_row gt_right">$0.12</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">December 31, 2020</td>
+      <td class="gt_row gt_left">BMRN</td>
+      <td class="gt_row gt_right">$86.18</td>
+      <td class="gt_row gt_right">$0.09</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">December 31, 2020</td>
+      <td class="gt_row gt_left">NVS</td>
+      <td class="gt_row gt_right">$93.35</td>
+      <td class="gt_row gt_right">$0.03</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">December 31, 2020</td>
+      <td class="gt_row gt_left">GSK</td>
+      <td class="gt_row gt_right">$36.98</td>
+      <td class="gt_row gt_right">$0.01</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">December 31, 2020</td>
+      <td class="gt_row gt_left">AZN</td>
+      <td class="gt_row gt_right">$49.90</td>
+      <td class="gt_row gt_right">&minus;$0.06</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">December 31, 2020</td>
+      <td class="gt_row gt_left">LLY</td>
+      <td class="gt_row gt_right">$166.58</td>
+      <td class="gt_row gt_right">$0.13</td>
+    </tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="4">Source: Yahoo finance data and xts package.</td>
+    </tr>
+  </tfoot>
+  
+</table></div>
+</div>
+</div>
+</div>
+
+<i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

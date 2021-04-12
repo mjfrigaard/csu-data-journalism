@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Advanced Data Visualization</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="site_libs/viz-1.8.2/viz.js"></script>
+<link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="site_libs/grViz-binding-1.0.6.1/grViz.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">bmRn R Training</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Lessons and exercises</a>
+</li>
+<li>
+  <a href="slides.html">Slides</a>
+</li>
+<li>
+  <a href="more-resources.html">More resources</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Advanced Data Visualization</h1>
+
+</div>
+
+
+<div id="objectives" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
+<p>Give your graphs a custom look using <code>ggplot</code> extension packages.</p>
+</div>
+<div id="materials" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Materials</h1>
+<ul>
+<li><p>Slides: <em>this lesson does not slides.</em></p></li>
+<li><p>RStudio Project: <em>this lesson does not have an RStudio.Cloud project.</em></p></li>
+</ul>
+</div>
+<div id="previous-lessons" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Previous lessons</h1>
+<p>All of the exercises and lessons are available <a href="https://mjfrigaard.github.io/r-meetup-tutorials/">here</a>, but you can also read more about <a href="https://ggplot2.tidyverse.org/index.html"><code>ggplot2</code></a> on the tidyverse website, and in the <a href="https://r4ds.had.co.nz/data-visualisation.html">Data Visualisation</a> chapter of R for Data Science.</p>
+</div>
+<div id="load-the-tidyverse" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Load the <code>tidyverse</code></h1>
+<p>The main packages we’re going to use are <code>dplyr</code>, <code>tidyr</code>, and <code>ggplot2</code>. These are all part of the <code>tidyverse</code>, so we’ll import this package below:</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)
+library(tidyverse)</code></pre>
+</div>
+<div id="ggplot2-extension-packages" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> <code>ggplot2</code> extension packages</h1>
+<p><code>ggplot2</code> has an extensive list of user-written packages for just about any data visualization you can think of, and we’re only going to cover a few in this lesson. Check out more <a href="https://exts.ggplot2.tidyverse.org/gallery/">here</a>.</p>
+<pre class="r"><code>library(ggtext)
+library(ggfittext)
+library(ggdist)
+library(ggbeeswarm)
+library(plotly)
+library(ggthemes)
+library(wesanderson)
+library(gganimate)</code></pre>
+</div>
+<div id="data-sources" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> Data Sources</h1>
+<p>We’re going to be using data from the following packages:</p>
+<pre class="r"><code>library(tidytuesdayR)
+library(Lahman)
+library(starwarsdb)
+library(dplyr)</code></pre>
+</div>
+<div id="labeling-values" class="section level1" number="7">
+<h1 number="7"><span class="header-section-number">7</span> Labeling values</h1>
+<p>In the <a href="https://mjfrigaard.github.io/r-meetup-tutorials/gg01_data-viz-as-comm.html#8_Adding_Text_to_Graphs">previous lesson</a>, we covered how to annotate your graphs with <code>ggplot2::annotate()</code>, and how to label data points with <code>ggrepel</code>. In this section, we’re going to cover additional text options with <a href="https://wilkelab.org/ggtext/"><code>ggtext</code></a>.</p>
+<pre class="r"><code>library(ggtext)</code></pre>
+<p>We’re going to be visualizing the relationship between height and weight for baseball players in the <code>People</code> dataset from the <code>Lahman</code> package.</p>
+<div id="when-to-label-values" class="section level2" number="7.1">
+<h2 number="7.1"><span class="header-section-number">7.1</span> When to label values</h2>
+<p>Adding labels to values on a graph can highlight important values and focus the audiences’ attention on what information we’re trying to display. Good text annotation,</p>
+<blockquote>
+<p>“<em>places descriptions directly in the context of the data so that a reader doesn’t have to look outside a graph for additional information to fully understand what you show.</em>” - Nathan Yau, <a href="https://www.wiley.com/en-us/Data+Points%3A+Visualization+That+Means+Something-p-9781118462195">Data Points</a></p>
+</blockquote>
+</div>
+<div id="data" class="section level2 tabset" number="7.2">
+<h2 class="tabset" number="7.2"><span class="header-section-number">7.2</span> Data</h2>
+<p>The descriptive information on this dataset is presented below:</p>
+<p><strong>Description</strong> <em><code>People</code> table - Player names, DOB, and biographical info. This file is to be used to get details about players listed in the Batting, Pitching, and other files where players are identified only by <code>playerID</code>.</em><br />
+<em><code>nameFirst</code> - Player’s first name</em><br />
+<em><code>nameLast</code> - Player’s last name</em><br />
+<em><code>weight</code> - Player’s weight in pounds</em><br />
+<em><code>height</code> - Player’s height in inches</em></p>
+<div id="exercise" class="section level3" number="7.2.1">
+<h3 number="7.2.1"><span class="header-section-number">7.2.1</span> exercise</h3>
+<p>Create a <code>BPlayerData</code> dataset with the variables listed above:</p>
+<pre class="r"><code>BPlayerData &lt;- Lahman::People %&gt;% 
+  dplyr::select(__________, __________, __________, __________)
+BPlayerData</code></pre>
+</div>
+<div id="solution" class="section level3" number="7.2.2">
+<h3 number="7.2.2"><span class="header-section-number">7.2.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>BPlayerData &lt;- Lahman::People %&gt;% 
+  dplyr::select(nameFirst, nameLast, height, weight)
+BPlayerData</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["nameFirst"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nameLast"],"name":[2],"type":["chr"],"align":["left"]},{"label":["height"],"name":[3],"type":["int"],"align":["right"]},{"label":["weight"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"David","2":"Aardsma","3":"75","4":"215"},{"1":"Hank","2":"Aaron","3":"72","4":"180"},{"1":"Tommie","2":"Aaron","3":"75","4":"190"},{"1":"Don","2":"Aase","3":"75","4":"190"},{"1":"Andy","2":"Abad","3":"73","4":"184"},{"1":"Fernando","2":"Abad","3":"73","4":"220"},{"1":"John","2":"Abadie","3":"72","4":"192"},{"1":"Ed","2":"Abbaticchio","3":"71","4":"170"},{"1":"Bert","2":"Abbey","3":"71","4":"175"},{"1":"Charlie","2":"Abbey","3":"68","4":"169"},{"1":"Dan","2":"Abbott","3":"71","4":"190"},{"1":"Fred","2":"Abbott","3":"70","4":"180"},{"1":"Glenn","2":"Abbott","3":"78","4":"200"},{"1":"Jeff","2":"Abbott","3":"74","4":"190"},{"1":"Jim","2":"Abbott","3":"75","4":"200"},{"1":"Kurt","2":"Abbott","3":"71","4":"180"},{"1":"Kyle","2":"Abbott","3":"76","4":"200"},{"1":"Ody","2":"Abbott","3":"69","4":"165"},{"1":"Paul","2":"Abbott","3":"75","4":"185"},{"1":"Al","2":"Aber","3":"74","4":"195"},{"1":"Frank","2":"Abercrombie","3":"NA","4":"NA"},{"1":"Reggie","2":"Abercrombie","3":"75","4":"215"},{"1":"Bill","2":"Abernathie","3":"70","4":"190"},{"1":"Brent","2":"Abernathy","3":"73","4":"185"},{"1":"Ted","2":"Abernathy","3":"74","4":"210"},{"1":"Ted","2":"Abernathy","3":"76","4":"215"},{"1":"Woody","2":"Abernathy","3":"72","4":"170"},{"1":"Cliff","2":"Aberson","3":"72","4":"200"},{"1":"Harry","2":"Ables","3":"74","4":"200"},{"1":"Shawn","2":"Abner","3":"73","4":"190"},{"1":"Cal","2":"Abrams","3":"72","4":"185"},{"1":"George","2":"Abrams","3":"69","4":"170"},{"1":"Johnny","2":"Abrego","3":"72","4":"185"},{"1":"Bobby","2":"Abreu","3":"72","4":"220"},{"1":"Bryan","2":"Abreu","3":"73","4":"204"},{"1":"Joe","2":"Abreu","3":"68","4":"160"},{"1":"Jose","2":"Abreu","3":"75","4":"255"},{"1":"Juan","2":"Abreu","3":"72","4":"185"},{"1":"Tony","2":"Abreu","3":"70","4":"200"},{"1":"Winston","2":"Abreu","3":"74","4":"170"},{"1":"Bill","2":"Abstein","3":"72","4":"185"},{"1":"Jeremy","2":"Accardo","3":"72","4":"195"},{"1":"Alfredo","2":"Aceves","3":"74","4":"205"},{"1":"Jose","2":"Acevedo","3":"72","4":"185"},{"1":"Juan","2":"Acevedo","3":"74","4":"245"},{"1":"A. J.","2":"Achter","3":"77","4":"215"},{"1":"Jim","2":"Acker","3":"74","4":"210"},{"1":"Tom","2":"Acker","3":"76","4":"215"},{"1":"Dustin","2":"Ackley","3":"73","4":"205"},{"1":"Fritz","2":"Ackley","3":"73","4":"202"},{"1":"Cy","2":"Acosta","3":"70","4":"165"},{"1":"Ed","2":"Acosta","3":"77","4":"215"},{"1":"Jose","2":"Acosta","3":"66","4":"134"},{"1":"Manny","2":"Acosta","3":"76","4":"215"},{"1":"Merito","2":"Acosta","3":"67","4":"140"},{"1":"Mark","2":"Acre","3":"80","4":"235"},{"1":"Manny","2":"Acta","3":"74","4":"172"},{"1":"Ronald","2":"Acuna","3":"72","4":"180"},{"1":"Bill","2":"Adair","3":"72","4":"168"},{"1":"Jerry","2":"Adair","3":"72","4":"175"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="labels" class="section level2 tabset" number="7.3">
+<h2 class="tabset" number="7.3"><span class="header-section-number">7.3</span> Labels</h2>
+<p>Define the graph labels.</p>
+<div id="exercise-1" class="section level3" number="7.3.1">
+<h3 number="7.3.1"><span class="header-section-number">7.3.1</span> exercise</h3>
+<pre class="r"><code>lab_bbp_ht_wt &lt;- labs(title = &quot;Relationship between _______ and ________&quot;, 
+                      subtitle = &quot;Baseball Players from ______ Data Package&quot;, 
+                      x = &quot;_______ in pounds&quot;, 
+                      y = &quot;______ in inches&quot;)</code></pre>
+</div>
+<div id="solution-1" class="section level3" number="7.3.2">
+<h3 number="7.3.2"><span class="header-section-number">7.3.2</span> solution</h3>
+<pre class="r"><code>lab_bbp_ht_wt &lt;- labs(title = &quot;Relationship between height and weight&quot;, 
+                      subtitle = &quot;Baseball Players from Lahman Data Package&quot;, 
+                      x = &quot;Weight in pounds&quot;, 
+                      y = &quot;Height in inches&quot;)</code></pre>
+</div>
+</div>
+<div id="scatter-plot" class="section level2 tabset" number="7.4">
+<h2 class="tabset" number="7.4"><span class="header-section-number">7.4</span> Scatter plot</h2>
+<p>Now we can create a scatter-plot</p>
+<div id="exercise-2" class="section level3" number="7.4.1">
+<h3 number="7.4.1"><span class="header-section-number">7.4.1</span> exercise</h3>
+<p>Use <code>geom_point()</code>. Set the <code>alpha</code> to <code>1/3</code>.</p>
+<pre class="r"><code>BPlayerData %&gt;% 
+  ggplot(aes(x = ______, y = ______)) +
+  geom_point(alpha = _/_) + 
+  lab_bbp_ht_wt</code></pre>
+</div>
+<div id="solution-2" class="section level3" number="7.4.2">
+<h3 number="7.4.2"><span class="header-section-number">7.4.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>BPlayerData %&gt;% 
+  ggplot(aes(x = weight, y = height)) +
+  geom_point(alpha = 1/3) + 
+  lab_bbp_ht_wt</code></pre>
+<p><img src="img/point-bbp_ht_wt-sol-1.png" width="864" /></p>
+<p>We can see there are some outliers in this graph, let’s label them!</p>
+</div>
+</div>
+<div id="identify-outliers" class="section level2 tabset" number="7.5">
+<h2 class="tabset" number="7.5"><span class="header-section-number">7.5</span> Identify outliers</h2>
+<p>First we identify the outliers and determine the names of these players.</p>
+<div id="exercise-3" class="section level3" number="7.5.1">
+<h3 number="7.5.1"><span class="header-section-number">7.5.1</span> exercise</h3>
+<ul>
+<li>identify the weight greater than <code>315</code> as <code>BPHeavy</code></li>
+<li>identify the height greater than <code>82</code> as <code>BPTall</code><br />
+</li>
+<li>identify the height less than <code>60</code> and height greater than <code>50</code> as <code>BPShort</code><br />
+</li>
+<li>identify the weight less than <code>100</code> and height greater than <code>70</code> as <code>BPLight</code><br />
+</li>
+<li>identify the height less than <code>50</code> and weight less than <code>100</code> as <code>BPTiny</code><br />
+</li>
+<li>bind these rows together as <code>BPlayerLabels</code></li>
+</ul>
+<pre class="r"><code>BPlayerData %&gt;% filter(weight &gt; ___) -&gt; BPHeavy
+BPlayerData %&gt;% filter(height &gt; 82) -&gt; BPTall
+BPlayerData %&gt;% filter(height &lt; __ &amp; height &gt; __) -&gt; BPShort
+BPlayerData %&gt;% filter(weight &lt; 100 &amp; height &gt; 70) -&gt; BPLight
+BPlayerData %&gt;% filter(height &lt; __ &amp; weight &lt; ___) -&gt; BPTiny
+bind_rows(BPHeavy, BPTall, BPShort, BPLight, BPTiny) -&gt; _____________</code></pre>
+</div>
+<div id="solution-3" class="section level3" number="7.5.2">
+<h3 number="7.5.2"><span class="header-section-number">7.5.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>BPlayerData %&gt;% filter(weight &gt; 315) -&gt; BPHeavy
+BPlayerData %&gt;% filter(height &gt; 82) -&gt; BPTall
+BPlayerData %&gt;% filter(height &lt; 60 &amp; height &gt; 50) -&gt; BPShort
+BPlayerData %&gt;% filter(weight &lt; 100 &amp; height &gt; 70) -&gt; BPLight
+BPlayerData %&gt;% filter(height &lt; 50 &amp; weight &lt; 100) -&gt; BPTiny
+bind_rows(BPHeavy, BPTall, BPShort, BPLight, BPTiny) -&gt; BPlayerLabels
+BPlayerLabels</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["nameFirst"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nameLast"],"name":[2],"type":["chr"],"align":["left"]},{"label":["height"],"name":[3],"type":["int"],"align":["right"]},{"label":["weight"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"Walter","2":"Young","3":"77","4":"320"},{"1":"Jon","2":"Rauch","3":"83","4":"290"},{"1":"Tom","2":"Healey","3":"55","4":"155"},{"1":"Jacob","2":"Stallings","3":"77","4":"76"},{"1":"Eddie","2":"Gaedel","3":"43","4":"65"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-4" class="section level3" number="7.5.3">
+<h3 number="7.5.3"><span class="header-section-number">7.5.3</span> exercise</h3>
+<p>Now we’re going to build some labels for these four players:</p>
+<ul>
+<li>use <code>paste0()</code> to combine the markdown formatting with the <code>nameFirst</code> and <code>nameLast</code> variables.</li>
+</ul>
+<p>Assign the text to the appropriate player:</p>
+<ul>
+<li><p><code>"Heaviest"</code> = <a href="https://www.baseball-reference.com/players/y/youngwa01.shtml" class="uri">https://www.baseball-reference.com/players/y/youngwa01.shtml</a></p></li>
+<li><p><code>"Tallest"</code> = <a href="https://www.baseball-reference.com/players/r/rauchjo01.shtml" class="uri">https://www.baseball-reference.com/players/r/rauchjo01.shtml</a></p></li>
+<li><p><code>"Shortest"</code> = <a href="https://www.baseball-reference.com/players/h/healeto01.shtml" class="uri">https://www.baseball-reference.com/players/h/healeto01.shtml</a></p></li>
+<li><p><code>"Lightest"</code> = <a href="https://www.baseball-reference.com/players/s/stallja01.shtml" class="uri">https://www.baseball-reference.com/players/s/stallja01.shtml</a></p></li>
+<li><p><code>"Tiniest"</code> = <a href="https://www.baseball-reference.com/players/g/gaedeed01.shtml" class="uri">https://www.baseball-reference.com/players/g/gaedeed01.shtml</a></p></li>
+</ul>
+<p>Create separate datasets for each group: <code>BPBigSmall</code>, <code>BPShortTall</code>, and <code>BPMaybeLightest</code></p>
+<ul>
+<li><p>put <code>"Young"</code> and <code>"Gaedel"</code> in <code>BPBigSmall</code></p></li>
+<li><p>put <code>"Rauch"</code> and <code>"Healey"</code> in <code>BPShortTall</code></p></li>
+<li><p>put <code>"Stallings"</code> in <code>BPMaybeLightest</code></p></li>
+</ul>
+<pre class="r"><code>BPlayerLabels &lt;- BPlayerLabels %&gt;% 
+  mutate(outlier_label = case_when(
+  nameFirst == &quot;Walter&quot; ~ paste0(&quot;**&quot;, __________, &quot; &quot;, __________, &quot;:** &quot;,
+                                 &quot;*__________...*&quot;),
+  nameFirst == &quot;Jon&quot; ~ paste0(&quot;**&quot;, __________, &quot; &quot;, __________, &quot;:** &quot;,
+                                 &quot;*__________...*&quot;),
+  nameFirst == &quot;Tom&quot; ~ paste0(&quot;**&quot;, nameFirst, &quot; &quot;, nameLast, &quot;:** &quot;,
+                              &quot;*__________...*&quot;),
+  nameFirst == &quot;Jacob&quot; ~ paste0(&quot;**&quot;, nameFirst, &quot; &quot;, nameLast, &quot;:** &quot;,
+                              &quot;*__________..?*&quot;),
+  nameFirst == &quot;Eddie&quot; ~ paste0(&quot;**&quot;, nameFirst, &quot; &quot;, nameLast, &quot;:** &quot;,
+                                &quot;*__________...*&quot;)))
+
+BPlayerLabels %&gt;% 
+  filter(nameLast %in% c(&quot;______&quot;, &quot;_______&quot;)) -&gt; BPBigSmall
+BPlayerLabels %&gt;% 
+  filter(nameLast %in% c(&quot;______&quot;, &quot;_______&quot;)) -&gt; BPShortTall
+BPlayerLabels %&gt;% 
+  filter(nameLast == &quot;__________&quot;) -&gt; BPMaybeLightest</code></pre>
+</div>
+<div id="solution-4" class="section level3" number="7.5.4">
+<h3 number="7.5.4"><span class="header-section-number">7.5.4</span> solution</h3>
+<p>See below.</p>
+<pre class="r"><code>BPlayerLabels &lt;- BPlayerLabels %&gt;% 
+  mutate(outlier_label = case_when(
+  nameFirst == &quot;Walter&quot; ~ paste0(&quot;**&quot;, nameFirst, &quot; &quot;, nameLast, &quot;:** &quot;,
+                                 &quot;*Heaviest...*&quot;),
+  nameFirst == &quot;Jon&quot; ~ paste0(&quot;**&quot;, nameFirst, &quot; &quot;, nameLast, &quot;:** &quot;,
+                                 &quot;*Tallest...*&quot;),
+  nameFirst == &quot;Tom&quot; ~ paste0(&quot;**&quot;, nameFirst, &quot; &quot;, nameLast, &quot;:** &quot;,
+                              &quot;*Shortest...*&quot;),
+  nameFirst == &quot;Jacob&quot; ~ paste0(&quot;**&quot;, nameFirst, &quot; &quot;, nameLast, &quot;:** &quot;,
+                              &quot;*Lightest..?*&quot;),
+  nameFirst == &quot;Eddie&quot; ~ paste0(&quot;**&quot;, nameFirst, &quot; &quot;, nameLast, &quot;:** &quot;,
+                                &quot;*Tiniest...*&quot;)))
+BPlayerLabels %&gt;% 
+  filter(nameLast %in% c(&quot;Young&quot;, &quot;Gaedel&quot;)) -&gt; BPBigSmall
+BPlayerLabels %&gt;% 
+  filter(nameLast %in% c(&quot;Rauch&quot;, &quot;Healey&quot;)) -&gt; BPShortTall
+BPlayerLabels %&gt;% 
+  filter(nameLast == &quot;Stallings&quot;) -&gt; BPMaybeLightest</code></pre>
+</div>
+</div>
+<div id="placing-data-labels" class="section level2 tabset" number="7.6">
+<h2 class="tabset" number="7.6"><span class="header-section-number">7.6</span> Placing data labels</h2>
+<div id="big-and-small-players" class="section level3" number="7.6.1">
+<h3 number="7.6.1"><span class="header-section-number">7.6.1</span> Big and small players</h3>
+<pre class="r"><code>BPBigSmall</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["nameFirst"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nameLast"],"name":[2],"type":["chr"],"align":["left"]},{"label":["height"],"name":[3],"type":["int"],"align":["right"]},{"label":["weight"],"name":[4],"type":["int"],"align":["right"]},{"label":["outlier_label"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Walter","2":"Young","3":"77","4":"320","5":"**Walter Young:** *Heaviest...*"},{"1":"Eddie","2":"Gaedel","3":"43","4":"65","5":"**Eddie Gaedel:** *Tiniest...*"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-5" class="section level3" number="7.6.2">
+<h3 number="7.6.2"><span class="header-section-number">7.6.2</span> exercise</h3>
+<p>Now we create the <code>geom_textbox()</code> layer. To accomplish this, we’re going to define the following aesthetics in the <code>ggtext::geom_textbox(aes())</code>: - <code>data</code> = <code>BPBigSmall</code> - <code>label</code> = <code>outlier_label</code><br />
+- <code>orientation</code> = <code>"upright"</code><br />
+- <code>hjust</code> = <code>-0.01</code><br />
+- <code>vjust</code> = <code>-0.01</code><br />
+- <code>fill</code> = <code>"black"</code><br />
+- <code>color</code> = <code>"white"</code></p>
+<p>These aesthetics are defined <em>outside</em> the <code>geom_textbox(aes())</code> function, but <em>inside</em> the <code>geom_textbox()</code> geom:</p>
+<ul>
+<li><code>size</code> = <code>3</code><br />
+</li>
+<li><code>width</code> = <code>unit(0.16, "npc")</code></li>
+</ul>
+<p>Add another <code>geom_point()</code> layer</p>
+<ul>
+<li>map <code>data</code> as <code>BPBigSmall</code></li>
+<li>map <code>x = weight</code> and <code>y = height</code> <em>inside</em> <code>aes()</code></li>
+<li>map <code>size</code> to <code>3</code><br />
+</li>
+<li>map <code>color</code> to <code>"green4"</code><br />
+</li>
+<li>map <code>alpha</code> to <code>2/3</code></li>
+</ul>
+<p>In order to get the <code>geom_textbox()</code> to fit on the graph, we need to extend the <code>x</code> and <code>y</code> axes. We can do this with <code>scale_x_continuous()</code>:</p>
+<ul>
+<li>set <code>limits</code> to <code>0</code> and <code>370</code></li>
+</ul>
+<pre class="r"><code>lab_bbp_big_small &lt;- labs(title = &quot;Biggest and smallest MLB players&quot;, 
+                      subtitle = &quot;Baseball Players from Lahman Data Package&quot;, 
+                      x = &quot;Weight in pounds&quot;, 
+                      y = &quot;Height in inches&quot;)
+BPlayerData %&gt;% 
+  ggplot(aes(x = weight, 
+             y = height)) + 
+  geom_point(alpha = 1/3) + 
+  ggtext::geom_textbox(data = ____________, 
+                       aes(label = ___________, 
+                           orientation = &quot;________&quot;, 
+                           hjust = -____,
+                           vjust = -____, 
+                           fill = &quot;_____&quot;, 
+                           color = &quot;_____&quot;), 
+                           size = _, 
+                           width = unit(____, &quot;___&quot;)) +
+  geom_point(data = ____________, 
+             aes(x = _______, y = _______), 
+             size = _, 
+             color = &quot;_______&quot;,
+             alpha = ___) +
+  scale_discrete_identity(aesthetics = c(&quot;color&quot;, 
+                                         &quot;fill&quot;, 
+                                         &quot;orientation&quot;)) +
+  scale_x_continuous(limits = c(_, ___)) +
+  lab_bbp_big_small</code></pre>
+</div>
+<div id="solution-5" class="section level3" number="7.6.3">
+<h3 number="7.6.3"><span class="header-section-number">7.6.3</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>lab_bbp_big_small &lt;- labs(title = &quot;Biggest and smallest MLB players&quot;, 
+                      subtitle = &quot;Baseball Players from Lahman Data Package&quot;, 
+                      x = &quot;Weight in pounds&quot;, 
+                      y = &quot;Height in inches&quot;)
+BPlayerData %&gt;% 
+  ggplot(aes(x = weight, 
+             y = height)) + 
+  geom_point(alpha = 1/3) + 
+  ggtext::geom_textbox(data = BPBigSmall, 
+                       aes(label = outlier_label, 
+                           orientation = &quot;upright&quot;, 
+                           hjust = -0.01,
+                           vjust = -0.01, 
+                           fill = &quot;black&quot;, 
+                           color = &quot;white&quot;), 
+                           size = 3, 
+                           width = unit(0.16, &quot;npc&quot;)) +
+  geom_point(data = BPBigSmall, 
+             aes(x = weight, y = height), 
+             size = 3, 
+             color = &quot;green4&quot;,
+             alpha = 2/3) +
+  scale_discrete_identity(aesthetics = c(&quot;color&quot;, 
+                                         &quot;fill&quot;, 
+                                         &quot;orientation&quot;)) +
+  scale_x_continuous(limits = c(0, 370)) +
+  lab_bbp_big_small</code></pre>
+<p><img src="img/lab_bbp_big_small-sol-1.png" width="864" /></p>
+</div>
+<div id="short-and-tall-players" class="section level3" number="7.6.4">
+<h3 number="7.6.4"><span class="header-section-number">7.6.4</span> Short and tall players</h3>
+<pre class="r"><code>BPShortTall</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["nameFirst"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nameLast"],"name":[2],"type":["chr"],"align":["left"]},{"label":["height"],"name":[3],"type":["int"],"align":["right"]},{"label":["weight"],"name":[4],"type":["int"],"align":["right"]},{"label":["outlier_label"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Jon","2":"Rauch","3":"83","4":"290","5":"**Jon Rauch:** *Tallest...*"},{"1":"Tom","2":"Healey","3":"55","4":"155","5":"**Tom Healey:** *Shortest...*"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-6" class="section level3" number="7.6.5">
+<h3 number="7.6.5"><span class="header-section-number">7.6.5</span> exercise</h3>
+<p>Change the <code>geom_textbox()</code> layer by defining the following aesthetics in the <code>ggtext::geom_textbox(aes())</code>:</p>
+<ul>
+<li><code>data</code> = <code>BPShortTall</code><br />
+</li>
+<li><code>hjust</code> = <code>-0.04</code><br />
+</li>
+<li><code>vjust</code> = <code>0.08</code></li>
+</ul>
+<p>Add another <code>geom_point()</code> layer</p>
+<ul>
+<li>map <code>color</code> to <code>"dodgerblue"</code></li>
+</ul>
+<p>We want to ‘zoom in’ on the tallest and shortest players in the dataset, so we’ll adjust the <code>x</code> and <code>y</code> axes with <code>scale_x_continuous()</code> and <code>scale_y_continuous()</code>:</p>
+<ul>
+<li><p>set the <code>scale_x_continuous()</code> limits to <code>50</code> and <code>350</code></p></li>
+<li><p>set the <code>scale_y_continuous()</code> limits to <code>30</code> and <code>90</code></p></li>
+</ul>
+<pre class="r"><code>lab_bbp_tall_short &lt;- labs(title = &quot;Tallest and shortest MLB players&quot;, 
+                      subtitle = &quot;Baseball Players from Lahman Data Package&quot;, 
+                      x = &quot;Weight in pounds&quot;, 
+                      y = &quot;Height in inches&quot;)
+BPlayerData %&gt;% 
+  ggplot(aes(x = weight, 
+             y = height)) + 
+  geom_point(alpha = 1/3) + 
+  ggtext::geom_textbox(data = ____________, 
+                       aes(label = outlier_label, 
+                           orientation = &quot;upright&quot;, 
+                           hjust = ______,
+                           vjust = ______, 
+                           fill = &quot;black&quot;, 
+                           color = &quot;white&quot;), 
+                           size = 3, 
+                           width = unit(0.16, &quot;npc&quot;)) +
+  geom_point(data = ____________, 
+             aes(x = weight, 
+                 y = height), 
+                 size = 3, 
+                 color = &quot;__________&quot;,
+                 alpha = 2/3) +
+  scale_discrete_identity(aesthetics = c(&quot;color&quot;, 
+                                         &quot;fill&quot;, 
+                                         &quot;orientation&quot;)) +
+  scale_x_continuous(limits = c(__, ___)) +
+  scale_y_continuous(limits = c(__, __)) +
+  lab_bbp_tall_short</code></pre>
+</div>
+<div id="solution-6" class="section level3" number="7.6.6">
+<h3 number="7.6.6"><span class="header-section-number">7.6.6</span> solution</h3>
+<pre class="r"><code>lab_bbp_tall_short &lt;- labs(title = &quot;Tallest and shortest MLB players&quot;, 
+                      subtitle = &quot;Baseball Players from Lahman Data Package&quot;, 
+                      x = &quot;Weight in pounds&quot;, 
+                      y = &quot;Height in inches&quot;)
+BPlayerData %&gt;% 
+  ggplot(aes(x = weight, 
+             y = height)) + 
+  geom_point(alpha = 1/3) + 
+  ggtext::geom_textbox(data = BPShortTall, 
+                       aes(label = outlier_label, 
+                           orientation = &quot;upright&quot;, 
+                           hjust = -0.04,
+                           vjust = 0.08, 
+                           fill = &quot;black&quot;, 
+                           color = &quot;white&quot;), 
+                           size = 3, 
+                           width = unit(0.14, &quot;npc&quot;)) +
+  geom_point(data = BPShortTall, 
+             aes(x = weight, 
+                 y = height), 
+                 size = 3, 
+                 color = &quot;dodgerblue&quot;,
+                 alpha = 2/3) +
+  scale_discrete_identity(aesthetics = c(&quot;color&quot;, 
+                                         &quot;fill&quot;, 
+                                         &quot;orientation&quot;)) +
+  scale_x_continuous(limits = c(50, 350)) +
+  scale_y_continuous(limits = c(30, 90)) +
+  lab_bbp_tall_short</code></pre>
+<p><img src="img/lab_bbp_tall_short-sol-1.png" width="864" /></p>
+</div>
+<div id="lightest-player" class="section level3" number="7.6.7">
+<h3 number="7.6.7"><span class="header-section-number">7.6.7</span> Lightest player?</h3>
+<p>The <code>Lahman</code> dataset lists <code>Jacob Stallings</code> as weighing <code>76</code> lbs, but <a href="https://www.baseball-reference.com">baseball-reference</a> lists his weight as 220lbs. We will include this label with different colors.</p>
+<pre class="r"><code>BPMaybeLightest</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["nameFirst"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nameLast"],"name":[2],"type":["chr"],"align":["left"]},{"label":["height"],"name":[3],"type":["int"],"align":["right"]},{"label":["weight"],"name":[4],"type":["int"],"align":["right"]},{"label":["outlier_label"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Jacob","2":"Stallings","3":"77","4":"76","5":"**Jacob Stallings:** *Lightest..?*"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-7" class="section level3" number="7.6.8">
+<h3 number="7.6.8"><span class="header-section-number">7.6.8</span> exercise</h3>
+<p>Change the <code>geom_textbox()</code> layer by defining the following aesthetics in the <code>ggtext::geom_textbox(aes())</code>:</p>
+<ul>
+<li><code>data</code> = <code>BPMaybeLightest</code><br />
+</li>
+<li><code>hjust</code> = <code>-0.05</code><br />
+</li>
+<li><code>vjust</code> = <code>-0.01</code><br />
+</li>
+<li><code>fill</code> = <code>"darkred"</code><br />
+</li>
+<li><code>color</code> = <code>"white"</code></li>
+</ul>
+<p>Add another <code>geom_point()</code> layer</p>
+<ul>
+<li>map <code>color</code> to <code>"firebrick"</code></li>
+</ul>
+<p>We don’t need to adjust the axes on this graph.</p>
+<pre class="r"><code>lab_bbp_maybe_light &lt;- labs(title = &quot;Is Jacob Stallings the lightest player?&quot;, 
+                      subtitle = &quot;Listed as 6-5, 220lb on baseball-reference.com&quot;, 
+                      x = &quot;Weight in pounds&quot;, 
+                      y = &quot;Height in inches&quot;,
+                      caption = &quot;https://www.baseball-reference.com/players/s/stallja01.shtml&quot;)
+BPlayerData %&gt;% 
+  ggplot(aes(x = weight, 
+             y = height)) + 
+  geom_point(alpha = 1/3) + 
+  ggtext::geom_textbox(data = ________________, 
+                       aes(label = outlier_label, 
+                           orientation = &quot;upright&quot;, 
+                           hjust = _____,
+                           vjust = _____, 
+                           fill = &quot;________&quot;, 
+                           color = &quot;white&quot;), 
+                           size = 3, 
+                           width = unit(0.16, &quot;npc&quot;)) +
+  geom_point(data = ________________, 
+             aes(x = weight, y = height), 
+             size = 3, 
+             color = &quot;__________&quot;,
+             alpha = 2/3) +
+  scale_discrete_identity(aesthetics = c(&quot;color&quot;, &quot;fill&quot;, &quot;orientation&quot;)) +
+  lab_bbp_maybe_light</code></pre>
+</div>
+<div id="solution-7" class="section level3" number="7.6.9">
+<h3 number="7.6.9"><span class="header-section-number">7.6.9</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>lab_bbp_maybe_light &lt;- labs(title = &quot;Is Jacob Stallings the lightest player?&quot;, 
+                      subtitle = &quot;Listed as 6-5, 220lb on baseball-reference.com&quot;, 
+                      x = &quot;Weight in pounds&quot;, 
+                      y = &quot;Height in inches&quot;,
+                      caption = &quot;https://www.baseball-reference.com/players/s/stallja01.shtml&quot;)
+BPlayerData %&gt;% 
+  ggplot(aes(x = weight, 
+             y = height)) + 
+  geom_point(alpha = 1/3) + 
+  ggtext::geom_textbox(data = BPMaybeLightest, 
+                       aes(label = outlier_label, 
+                           orientation = &quot;upright&quot;, 
+                           hjust = -0.05,
+                           vjust = -0.01, 
+                           fill = &quot;darkred&quot;, 
+                           color = &quot;white&quot;), 
+                           size = 3, 
+                           width = unit(0.16, &quot;npc&quot;)) +
+  geom_point(data = BPMaybeLightest, 
+             aes(x = weight, y = height), 
+             size = 3, 
+             color = &quot;firebrick&quot;,
+             alpha = 2/3) +
+  scale_discrete_identity(aesthetics = c(&quot;color&quot;, &quot;fill&quot;, &quot;orientation&quot;)) +
+  lab_bbp_maybe_light</code></pre>
+<p><img src="img/lab_bbp_maybe_light-sol-1.png" width="864" /></p>
+<p>The colored points and textboxes highlight the outliers on the scatter plot.</p>
+</div>
+</div>
+</div>
+<div id="text-placement" class="section level1" number="8">
+<h1 number="8"><span class="header-section-number">8</span> Text placement</h1>
+<p>We’re going to be using the <code>ggfittext</code> package to add labels onto a bar (or column) graph. This comes in handy if space is limited, or we have</p>
+<pre class="r"><code>library(ggfittext)</code></pre>
+<div id="data-1" class="section level2 tabset" number="8.1">
+<h2 class="tabset" number="8.1"><span class="header-section-number">8.1</span> Data</h2>
+<div id="exercise-8" class="section level3" number="8.1.1">
+<h3 number="8.1.1"><span class="header-section-number">8.1.1</span> exercise</h3>
+<p>Calculate the slugging percentage <code>slug_perc</code> from the <code>Lahman::Batting</code> table using the following code:</p>
+<p><code>H - X2B - X3B - HR + 2 * X2B + 3 * X3B + 4 * HR) / AB</code></p>
+<p>Also create the <code>batting_era</code> variable that <code>cut()</code>s the <code>yearID</code> into 7 different levels:</p>
+<ol style="list-style-type: decimal">
+<li>“19th Century” (1871 to 1900) -&gt; set to 1870 to include 1871<br />
+</li>
+<li>“Dead Ball” (1901 to 1919)<br />
+</li>
+<li>“Lively Ball” (1920 to 1941)<br />
+</li>
+<li>“Integration” (1942 to 1960)<br />
+</li>
+<li>“Expansion” (1961 to 1976)<br />
+</li>
+<li>“Free Agency” (1977 to 1993)<br />
+</li>
+<li>“Long Ball” (1993 to 2019) -&gt; set to 2020 to include 2019</li>
+</ol>
+<p>Note that <code>cut()</code> has a <code>breaks</code> argument that will actually take <em>8</em> levels.</p>
+<pre class="r"><code>BattingStats &lt;- Lahman::Batting %&gt;% 
+  mutate(slug_perc = (_ - ___ - ___ - __ +
+                      _ * ___ + _ * ___ + _ * __) / __, 
+         batting_era = cut(yearID,
+                   breaks = c(____, 1900, 1919, 1941,
+                              1960, 1976, 1993, ____),
+                   labels = c(&quot;____________ (1871 - 1900)&quot;, 
+                              &quot;________ (1901 - 1919)&quot;,
+                              &quot;____________ (1920 - 1941)&quot;, 
+                              &quot;__________ (1942 - 1976)&quot;,
+                              &quot;________ (1961 - 1976)&quot;, 
+                              &quot;____________ (1977 - 1993)&quot;,
+                              &quot;__________ (1994 - 2019)&quot;))) 
+BattingStats %&gt;% 
+  group_by(batting_era) %&gt;% 
+  summarize(from = min(yearID), 
+            to = max(yearID))</code></pre>
+</div>
+<div id="solution-8" class="section level3" number="8.1.2">
+<h3 number="8.1.2"><span class="header-section-number">8.1.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>BattingStats &lt;- Lahman::Batting %&gt;% 
+  mutate(slug_perc = (H - X2B - X3B - HR +
+                      2 * X2B + 3 * X3B + 4 * HR) / AB, 
+         batting_era = cut(yearID,
+                   breaks = c(1870, 1900, 1919, 1941,
+                              1960, 1976, 1993, 2020),
+                   labels = c(&quot;19th Century (1871 - 1900)&quot;, 
+                              &quot;Dead Ball (1901 - 1919)&quot;,
+                              &quot;Lively Ball (1920 - 1941)&quot;, 
+                              &quot;Integration (1942 - 1976)&quot;,
+                              &quot;Expansion (1961 - 1976)&quot;, 
+                              &quot;Free Agency (1977 - 1993)&quot;,
+                              &quot;Long Ball (1994 - 2019)&quot;))) 
+BattingStats %&gt;% 
+  group_by(batting_era) %&gt;% 
+  summarize(from = min(yearID), 
+            to = max(yearID))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["batting_era"],"name":[1],"type":["fct"],"align":["left"]},{"label":["from"],"name":[2],"type":["int"],"align":["right"]},{"label":["to"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"19th Century (1871 - 1900)","2":"1871","3":"1900"},{"1":"Dead Ball (1901 - 1919)","2":"1901","3":"1919"},{"1":"Lively Ball (1920 - 1941)","2":"1920","3":"1941"},{"1":"Integration (1942 - 1976)","2":"1942","3":"1960"},{"1":"Expansion (1961 - 1976)","2":"1961","3":"1976"},{"1":"Free Agency (1977 - 1993)","2":"1977","3":"1993"},{"1":"Long Ball (1994 - 2019)","2":"1994","3":"2019"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-9" class="section level3" number="8.1.3">
+<h3 number="8.1.3"><span class="header-section-number">8.1.3</span> exercise</h3>
+<p>Group by <code>batting_era</code> and <code>summarize</code> the <code>mean</code> of <code>slug_perc</code>, calling it <code>avg_slug_perc</code>. Remove the missing values with <code>na.rm = TRUE</code>.</p>
+<pre class="r"><code>SumBattingStats &lt;- BattingStats %&gt;% 
+  group_by(_________) %&gt;% 
+  summarize(_________ = mean(_____, na.rm = ____))
+SumBattingStats %&gt;% str()</code></pre>
+</div>
+<div id="solution-9" class="section level3" number="8.1.4">
+<h3 number="8.1.4"><span class="header-section-number">8.1.4</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>SumBattingStats &lt;- BattingStats %&gt;% 
+  group_by(batting_era) %&gt;% 
+  summarize(avg_slug_perc = mean(slug_perc, na.rm = TRUE))
+SumBattingStats %&gt;% str()</code></pre>
+<pre><code>## tibble [7 × 2] (S3: tbl_df/tbl/data.frame)
+##  $ batting_era  : Factor w/ 7 levels &quot;19th Century (1871 - 1900)&quot;,..: 1 2 3 4 5 6 7
+##  $ avg_slug_perc: num [1:7] 0.291 0.264 0.304 0.281 0.272 ...</code></pre>
+</div>
+</div>
+<div id="labels-1" class="section level2 tabset" number="8.2">
+<h2 class="tabset" number="8.2"><span class="header-section-number">8.2</span> Labels</h2>
+<p>Define the graph labels.</p>
+<div id="exercise-10" class="section level3" number="8.2.1">
+<h3 number="8.2.1"><span class="header-section-number">8.2.1</span> exercise</h3>
+<p>Define the graph labels below:</p>
+<pre class="r"><code>lab_bat_era &lt;- labs(title = &quot;Average slugging percentage by era&quot;, 
+                      subtitle = &quot;Batting Statistics from ______ Data Package&quot;, 
+                      x = &quot;___&quot;, 
+                      y = &quot;Average Slugging Percentage&quot;)</code></pre>
+</div>
+<div id="solution-10" class="section level3" number="8.2.2">
+<h3 number="8.2.2"><span class="header-section-number">8.2.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>lab_bat_era &lt;- labs(title = &quot;Average slugging percentage by era&quot;, 
+                      subtitle = &quot;Batting Statistics from Lahman Data Package&quot;, 
+                      x = &quot;Era&quot;, 
+                      y = &quot;Average Slugging Percentage&quot;)</code></pre>
+</div>
+</div>
+<div id="bar-text" class="section level2 tabset" number="8.3">
+<h2 class="tabset" number="8.3"><span class="header-section-number">8.3</span> Bar text</h2>
+<p>Now we’re ready for adding the text to the bars. In this case, the levels of <code>batting_era</code> aren’t equal, so we want to include the timeframe inside the bars to show the actual range of years.</p>
+<div id="exercise-11" class="section level3" number="8.3.1">
+<h3 number="8.3.1"><span class="header-section-number">8.3.1</span> exercise</h3>
+<p>Initiate a graph below by mapping <code>batting_era</code> to the <code>x</code> and the <code>label</code>, and <code>avg_slug_perc</code> to the <code>y</code>. Create a column (or bar) with <code>geom_col()</code>, flip the coordinate using <code>coord_flip()</code>.</p>
+<pre class="r"><code>SumBattingStats %&gt;% 
+  ggplot(aes(x = __________, 
+             y = __________, 
+             label = __________)) + 
+  geom____() + 
+  ___________() + 
+  lab_bat_era</code></pre>
+</div>
+<div id="solition" class="section level3" number="8.3.2">
+<h3 number="8.3.2"><span class="header-section-number">8.3.2</span> solition</h3>
+<p>See below:</p>
+<pre class="r"><code>SumBattingStats %&gt;% 
+  ggplot(aes(x = batting_era, 
+             y = avg_slug_perc, 
+             label = batting_era)) + 
+  geom_col() + 
+  coord_flip() + 
+  lab_bat_era</code></pre>
+<p><img src="img/geom_col-sol-1.png" width="864" /></p>
+<p>The text on the <code>y</code> axis is taking up a lot of space–we’re going to move this to <em>inside</em> the columns.</p>
+</div>
+<div id="exercise-12" class="section level3" number="8.3.3">
+<h3 number="8.3.3"><span class="header-section-number">8.3.3</span> exercise</h3>
+<p>Add the <code>geom_bar_text()</code> to include labels on the columns. Use <code>theme_bw()</code>, but also remove the <code>y</code> axis <code>text</code> and <code>ticks</code> <em>inside</em> an additional <code>theme()</code> layer, using <code>element_blank()</code>.</p>
+<pre class="r"><code>SumBattingStats %&gt;% 
+  ggplot(aes(x = batting_era, 
+             y = avg_slug_perc, 
+             label = batting_era)) + 
+  geom_col() + 
+  coord_flip() + 
+  geom__________() + 
+  theme_bw() +
+  theme(axis.____.y = element_blank(),
+        axis._____.y = element_blank()) + 
+  coord_flip() + 
+  _____________() +
+  lab_bat_era</code></pre>
+</div>
+<div id="solution-11" class="section level3" number="8.3.4">
+<h3 number="8.3.4"><span class="header-section-number">8.3.4</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>SumBattingStats %&gt;% 
+  ggplot(aes(x = batting_era, 
+             y = avg_slug_perc, 
+             label = batting_era)) + 
+  geom_col() + 
+  coord_flip() + 
+  geom_bar_text() + 
+  theme_minimal() +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank()) + 
+  lab_bat_era</code></pre>
+<p><img src="img/geom_bar_text-sol-1.png" width="864" /></p>
+<p>Now we have more ink (data) on the graph. The labels inside the columns also makes sense because these aren’t equal year intervals.</p>
+</div>
+</div>
+</div>
+<div id="distributions" class="section level1" number="9">
+<h1 number="9"><span class="header-section-number">9</span> Distributions</h1>
+<p>We previously explored variable distributions using histograms, density and violin plots, and ridgeline plots from the <code>ggridges</code> package.</p>
+<p>In this section, we’re going to cover some advanced variable distribution graphs using the <a href="https://mjskay.github.io/ggdist/"><code>ggdist</code> package</a>. We’ll also need some help from the <code>broom</code> and <code>distributional</code> packages. The <code>ggdist</code> package requires a little more underlying knowledge about modeling in R, and I invite you to read the entire <a href="https://mjskay.github.io/ggdist/articles/freq-uncertainty-vis.html">vignette for more information</a>.</p>
+<pre class="r"><code>library(ggdist)
+library(broom)
+library(distributional)</code></pre>
+<div id="data-2" class="section level2 tabset" number="9.1">
+<h2 class="tabset" number="9.1"><span class="header-section-number">9.1</span> Data</h2>
+<p>We’re going to be using <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-07-28/readme.md">TidyTuesday’s dataset on penguins</a>. We can load these data below:</p>
+<pre class="r"><code>penguin_data &lt;- tidytuesdayR::tt_load(&#39;2020-07-28&#39;)</code></pre>
+<pre><code>## 
+##  Downloading file 1 of 2: `penguins.csv`
+##  Downloading file 2 of 2: `penguins_raw.csv`</code></pre>
+<pre class="r"><code>Penguins &lt;- penguin_data$penguins</code></pre>
+<div id="penguins-data" class="section level3" number="9.1.1">
+<h3 number="9.1.1"><span class="header-section-number">9.1.1</span> Penguins data</h3>
+<p>We can view the data with <code>skimr::skim()</code></p>
+<pre class="r"><code>Penguins %&gt;% skimr::skim()</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">344</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">8</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">species</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">6</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">island</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">5</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">sex</td>
+<td align="right">11</td>
+<td align="right">0.97</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">bill_length_mm</td>
+<td align="right">2</td>
+<td align="right">0.99</td>
+<td align="right">43.92</td>
+<td align="right">5.46</td>
+<td align="right">32.1</td>
+<td align="right">39.23</td>
+<td align="right">44.45</td>
+<td align="right">48.5</td>
+<td align="right">59.6</td>
+<td align="left">▃▇▇▆▁</td>
+</tr>
+<tr class="even">
+<td align="left">bill_depth_mm</td>
+<td align="right">2</td>
+<td align="right">0.99</td>
+<td align="right">17.15</td>
+<td align="right">1.97</td>
+<td align="right">13.1</td>
+<td align="right">15.60</td>
+<td align="right">17.30</td>
+<td align="right">18.7</td>
+<td align="right">21.5</td>
+<td align="left">▅▅▇▇▂</td>
+</tr>
+<tr class="odd">
+<td align="left">flipper_length_mm</td>
+<td align="right">2</td>
+<td align="right">0.99</td>
+<td align="right">200.92</td>
+<td align="right">14.06</td>
+<td align="right">172.0</td>
+<td align="right">190.00</td>
+<td align="right">197.00</td>
+<td align="right">213.0</td>
+<td align="right">231.0</td>
+<td align="left">▂▇▃▅▂</td>
+</tr>
+<tr class="even">
+<td align="left">body_mass_g</td>
+<td align="right">2</td>
+<td align="right">0.99</td>
+<td align="right">4201.75</td>
+<td align="right">801.95</td>
+<td align="right">2700.0</td>
+<td align="right">3550.00</td>
+<td align="right">4050.00</td>
+<td align="right">4750.0</td>
+<td align="right">6300.0</td>
+<td align="left">▃▇▆▃▂</td>
+</tr>
+<tr class="odd">
+<td align="left">year</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">2008.03</td>
+<td align="right">0.82</td>
+<td align="right">2007.0</td>
+<td align="right">2007.00</td>
+<td align="right">2008.00</td>
+<td align="right">2009.0</td>
+<td align="right">2009.0</td>
+<td align="left">▇▁▇▁▇</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data-dictionary" class="section level3" number="9.1.2">
+<h3 number="9.1.2"><span class="header-section-number">9.1.2</span> Data dictionary</h3>
+<p>The description of each variable in <code>Penguins</code> is below.</p>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="9%" />
+<col width="67%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="left">class</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>species</code></td>
+<td align="left">integer</td>
+<td align="left">Penguin species (Adelie, Gentoo, Chinstrap)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>island</code></td>
+<td align="left">integer</td>
+<td align="left">Island where recorded (Biscoe, Dream, Torgersen)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>bill_length_mm</code></td>
+<td align="left">double</td>
+<td align="left">Bill length in millimeters (also known as culmen length)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>bill_depth_mm</code></td>
+<td align="left">double</td>
+<td align="left">Bill depth in millimeters (also known as culmen depth)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>flipper_length_mm</code></td>
+<td align="left">integer</td>
+<td align="left">Flipper length in mm</td>
+</tr>
+<tr class="even">
+<td align="left"><code>body_mass_g</code></td>
+<td align="left">integer</td>
+<td align="left">Body mass in grams</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>sex</code></td>
+<td align="left">integer</td>
+<td align="left">sex of the animal</td>
+</tr>
+<tr class="even">
+<td align="left"><code>year</code></td>
+<td align="left">integer</td>
+<td align="left">year recorded</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="scatter-plot-1" class="section level2 tabset" number="9.2">
+<h2 class="tabset" number="9.2"><span class="header-section-number">9.2</span> Scatter plot</h2>
+<p>We will start by looking at body mass of the three species in the <code>Penguins</code> dataset.</p>
+<div id="exercise-13" class="section level3" number="9.2.1">
+<h3 number="9.2.1"><span class="header-section-number">9.2.1</span> exercise</h3>
+<p>Build the labels for a scatter plot of <code>body_mass_g</code> on the <code>x</code> axis, and <code>species</code> on the <code>y</code></p>
+<pre class="r"><code>lab_peng_scatter &lt;- labs(title = &quot;Relationship between body mass and species&quot;, 
+                     subtitle = &quot;Data from the palmerpenguins package&quot;, 
+                     x = &quot;___________&quot;, 
+                     y = &quot;_______&quot;, 
+                     caption = &quot;https://allisonhorst.github.io/palmerpenguins/&quot;)</code></pre>
+</div>
+<div id="solution-12" class="section level3" number="9.2.2">
+<h3 number="9.2.2"><span class="header-section-number">9.2.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>lab_peng_scatter &lt;- labs(title = &quot;Relationship between body mass and species&quot;, 
+                     subtitle = &quot;Data from the palmerpenguins package&quot;, 
+                     x = &quot;Body mass (g)&quot;, 
+                     y = &quot;Species&quot;, 
+                     caption = &quot;https://allisonhorst.github.io/palmerpenguins/&quot;)</code></pre>
+</div>
+<div id="exercise-14" class="section level3" number="9.2.3">
+<h3 number="9.2.3"><span class="header-section-number">9.2.3</span> exercise</h3>
+<p>Create a scatter plot using the labels we built above. Set the <code>alpha</code> to <code>1/2</code>.</p>
+<pre class="r"><code>Penguins %&gt;%
+  ggplot(aes(x = __________, y = ________)) +
+  geom_point(alpha = 1/2) + 
+  lab_peng_scatter</code></pre>
+</div>
+<div id="solution-13" class="section level3" number="9.2.4">
+<h3 number="9.2.4"><span class="header-section-number">9.2.4</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>Penguins %&gt;%
+  ggplot(aes(x = body_mass_g, y = species)) +
+  geom_point(alpha = 1/2) + 
+  lab_peng_scatter</code></pre>
+<p><img src="img/geom_point-sol-1.png" width="864" /></p>
+</div>
+</div>
+<div id="create-linear-model" class="section level2 tabset" number="9.3">
+<h2 class="tabset" number="9.3"><span class="header-section-number">9.3</span> Create linear model</h2>
+<p>The graph above doesn’t show much in terms of the probability distributions for body mass across the different levels of species, so we will build a linear model to include additional terms (<code>estimate</code> and <code>std.error</code>) for each level of the distribution on the graph.</p>
+<div id="exercise-15" class="section level3" number="9.3.1">
+<h3 number="9.3.1"><span class="header-section-number">9.3.1</span> exercise</h3>
+<p>We will use the <code>lm()</code> function to create a linear model predicting <code>body_mass_g</code> with <code>species</code>.</p>
+<pre class="r"><code>lmmod_penguins &lt;- lm(___________ ~ _______, data = Penguins) </code></pre>
+</div>
+<div id="solution-14" class="section level3" number="9.3.2">
+<h3 number="9.3.2"><span class="header-section-number">9.3.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>lmmod_penguins &lt;- lm(body_mass_g ~ species, data = Penguins) 
+summary(lmmod_penguins)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = body_mass_g ~ species, data = Penguins)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1126.02  -333.09   -33.09   316.91  1223.98 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       3700.66      37.62   98.37   &lt;2e-16 ***
+## speciesChinstrap    32.43      67.51    0.48    0.631    
+## speciesGentoo     1375.35      56.15   24.50   &lt;2e-16 ***
+## ---
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 462.3 on 339 degrees of freedom
+##   (2 observations deleted due to missingness)
+## Multiple R-squared:  0.6697, Adjusted R-squared:  0.6677 
+## F-statistic: 343.6 on 2 and 339 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div id="tidy-model-output" class="section level2 tabset" number="9.4">
+<h2 class="tabset" number="9.4"><span class="header-section-number">9.4</span> Tidy model output</h2>
+<p>The typical output from the <code>summary(lmmod_penguins)</code> is not very helpful from a graphing standpoint, so we will use the <code>broom</code> package to make it easier to manipulate.</p>
+<div id="exercise-16" class="section level3" number="9.4.1">
+<h3 number="9.4.1"><span class="header-section-number">9.4.1</span> exercise</h3>
+<p>Pass the output of <code>lm()</code> to <code>broom::tidy()</code> to convert the model statistics into a <code>tibble</code>.</p>
+<pre class="r"><code>______________ %&gt;% broom::tidy()</code></pre>
+</div>
+<div id="solution-15" class="section level3" number="9.4.2">
+<h3 number="9.4.2"><span class="header-section-number">9.4.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>lmmod_penguins %&gt;% broom::tidy()</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"3700.66225","3":"37.61935","4":"98.3712321","5":"2.488024e-251"},{"1":"speciesChinstrap","2":"32.42598","3":"67.51168","4":"0.4803018","5":"6.313226e-01"},{"1":"speciesGentoo","2":"1375.35401","3":"56.14797","4":"24.4951686","5":"5.420612e-77"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="plot-probability-distribution" class="section level2 tabset" number="9.5">
+<h2 class="tabset" number="9.5"><span class="header-section-number">9.5</span> Plot probability distribution</h2>
+<p>We can now use the columns from <code>broom::tidy()</code> to build a graph of the probability distributions.</p>
+<div id="exercise-17" class="section level3" number="9.5.1">
+<h3 number="9.5.1"><span class="header-section-number">9.5.1</span> exercise</h3>
+<p>Fill in the following labels:</p>
+<p><code>title = "Probability distribution of body mass by species"</code></p>
+<p><code>x = "Student T distribution"</code></p>
+<p><code>y = "Model Term"</code></p>
+<pre class="r"><code>lab_prob_dist &lt;- labs(title = &quot;_______________________________________________&quot;, 
+                     subtitle = &quot;Data from the palmerpenguins package&quot;, 
+                     x = &quot;________________________&quot;, 
+                     y = &quot;__________________&quot;, 
+                     caption = &quot;https://allisonhorst.github.io/palmerpenguins/&quot;)</code></pre>
+</div>
+<div id="solution-16" class="section level3" number="9.5.2">
+<h3 number="9.5.2"><span class="header-section-number">9.5.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>lab_prob_dist &lt;- labs(title = &quot;Probability distribution of body mass by species&quot;, 
+                     subtitle = &quot;Data from the palmerpenguins package&quot;, 
+                     x = &quot;Student T distribution&quot;, 
+                     y = &quot;Model Term&quot;, 
+                     caption = &quot;https://allisonhorst.github.io/palmerpenguins/&quot;)</code></pre>
+</div>
+<div id="exercise-18" class="section level3" number="9.5.3">
+<h3 number="9.5.3"><span class="header-section-number">9.5.3</span> exercise</h3>
+<p>Use the <code>ggdist::stat_dist_halfeye()</code> to map the <code>dist</code> aesthetic with some help from the <code>distributional::dist_student_t()</code> function.</p>
+<ul>
+<li>map <code>df.residual(lmmod_penguins)</code> to <code>df</code> <em>inside</em> the <code>dist_student_t()</code> function<br />
+</li>
+<li>map <code>estimate</code> to <code>mu</code> <em>inside</em> the <code>dist_student_t()</code> function<br />
+</li>
+<li>map <code>std.error</code> to <code>sigma</code> <em>inside</em> the <code>dist_student_t()</code> function</li>
+</ul>
+<p>We’ve extended the <code>x</code> axis with <code>scale_x_continuous()</code> for clarity.</p>
+<pre class="r"><code>Penguins %&gt;% 
+  lm(body_mass_g ~ species, data = .) %&gt;% 
+  broom::tidy() %&gt;% 
+  ggplot(aes(y = term)) +
+  ggdist::_______________(
+    aes(dist = distributional::______________(df = df.residual(___________), 
+                                              mu = _________, 
+                                              sigma = ___________))) + 
+  scale_x_continuous(limits = c(-400, 4400)) +
+  lab_prob_dist</code></pre>
+</div>
+<div id="solution-17" class="section level3" number="9.5.4">
+<h3 number="9.5.4"><span class="header-section-number">9.5.4</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>Penguins %&gt;% 
+  lm(body_mass_g ~ species, data = .) %&gt;% 
+  broom::tidy() %&gt;% 
+  ggplot(aes(y = term)) +
+  ggdist::stat_dist_halfeye(
+    aes(dist = distributional::dist_student_t(df = df.residual(lmmod_penguins), 
+                                              mu = estimate, 
+                                              sigma = std.error))) + 
+  scale_x_continuous(limits = c(-400, 4400)) +
+  lab_prob_dist</code></pre>
+<p><img src="img/stat_dist_halfeye-sol-1.png" width="864" /></p>
+</div>
+</div>
+</div>
+<div id="using-color" class="section level1" number="10">
+<h1 number="10"><span class="header-section-number">10</span> Using color</h1>
+<p><code>ggplot2</code> has many options for picking the colors on your graph. We’re going to cover the <a href="https://khroma.archaeo.science/index.html"><code>khroma</code></a> and <a href="https://github.com/karthik/wesanderson"><code>wesanderson</code> color packages</a> in this section.</p>
+<pre class="r"><code>library(wesanderson)
+library(khroma)</code></pre>
+<div id="data-3" class="section level2 tabset" number="10.1">
+<h2 class="tabset" number="10.1"><span class="header-section-number">10.1</span> Data</h2>
+<p>We’re going to be graphing the <a href="https://github.com/gadenbuie/starwarsdb"><code>starwarsdb</code> package</a>. Below is a relational model for the tables in the package.</p>
+<pre class="r"><code>library(dm, warn.conflicts = FALSE)
+sw_dm &lt;- starwars_dm()
+dm_draw(sw_dm)</code></pre>
+<div id="htmlwidget-5badbe44dc510409d72d" style="width:864px;height:576px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5badbe44dc510409d72d">{"x":{"diagram":"#data_model\ndigraph {\ngraph [rankdir=LR tooltip=\"Data Model\" ]\n\nnode [margin=0 fontcolor = \"#444444\" ]\n\nedge [color = \"#555555\", arrowsize = 1, ]\n\npack=true\npackmode= \"node\"\n\n  \"films\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\"><U>title<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_people\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_people<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"character\">character<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_planets\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_planets<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"planet\">planet<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_vehicles\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_vehicles<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"vehicle\">vehicle<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"people\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#496567AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#6E989BFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">people<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"homeworld\">homeworld<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"species\">species<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"pilots\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#496567AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#6E989BFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">pilots<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"pilot\">pilot<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"vehicle\">vehicle<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"planets\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#7D2E0AAA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#BC4610FF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">planets<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F1DACFFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"species\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#7D563AAA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#BC8258FF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">species<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F1E6DDFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"vehicles\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#4B3529AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#71503EFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">vehicles<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2DCD8FF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n\"films_people\":\"title\"->\"films\":\"title\"\n\"films_planets\":\"title\"->\"films\":\"title\"\n\"films_vehicles\":\"title\"->\"films\":\"title\"\n\"films_people\":\"character\"->\"people\":\"name\"\n\"pilots\":\"pilot\"->\"people\":\"name\"\n\"films_planets\":\"planet\"->\"planets\":\"name\"\n\"people\":\"homeworld\"->\"planets\":\"name\"\n\"people\":\"species\"->\"species\":\"name\"\n\"films_vehicles\":\"vehicle\"->\"vehicles\":\"name\"\n\"pilots\":\"vehicle\"->\"vehicles\":\"name\"\n}","config":{"engine":null,"options":null}},"evals":[],"jsHooks":[]}</script>
+<p>We covered joins in a previous <a href="https://mjfrigaard.github.io/r-meetup-tutorials/dt01_data-trans-joins-exercises.html#3_Joins">lesson</a>. Below we will create a dataset with variables from the <code>people</code>, <code>planets</code>, <code>species</code>, and <code>pilots</code> tables.</p>
+<div id="exercise-19" class="section level3" number="10.1.1">
+<h3 number="10.1.1"><span class="header-section-number">10.1.1</span> exercise</h3>
+<p>Use an <code>inner_join()</code> to connect <code>people</code> to <code>planets</code> by <code>"homeworld"</code> and <code>"name"</code></p>
+<pre class="r"><code>SWPeopPlan &lt;- starwarsdb::people %&gt;% 
+  ____________(x = ., y = starwarsdb::planets, by = c(&quot;_________&quot; = &quot;____&quot;))
+SWPeopPlan</code></pre>
+</div>
+<div id="solution-18" class="section level3" number="10.1.2">
+<h3 number="10.1.2"><span class="header-section-number">10.1.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>SWPeopPlan &lt;- starwarsdb::people %&gt;% 
+  inner_join(x = ., y = starwarsdb::planets, by = c(&quot;homeworld&quot; = &quot;name&quot;))
+SWPeopPlan</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hair_color"],"name":[4],"type":["chr"],"align":["left"]},{"label":["skin_color"],"name":[5],"type":["chr"],"align":["left"]},{"label":["eye_color"],"name":[6],"type":["chr"],"align":["left"]},{"label":["birth_year"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["gender"],"name":[8],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[9],"type":["chr"],"align":["left"]},{"label":["species"],"name":[10],"type":["chr"],"align":["left"]},{"label":["sex"],"name":[11],"type":["chr"],"align":["left"]},{"label":["rotation_period"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["orbital_period"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["diameter"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["climate"],"name":[15],"type":["chr"],"align":["left"]},{"label":["gravity"],"name":[16],"type":["chr"],"align":["left"]},{"label":["terrain"],"name":[17],"type":["chr"],"align":["left"]},{"label":["surface_water"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["population"],"name":[19],"type":["dbl"],"align":["right"]}],"data":[{"1":"Luke Skywalker","2":"172","3":"77.0","4":"blond","5":"fair","6":"blue","7":"19.0","8":"masculine","9":"Tatooine","10":"Human","11":"male","12":"23","13":"304","14":"10465","15":"arid","16":"1 standard","17":"desert","18":"1","19":"2.000e+05"},{"1":"C-3PO","2":"167","3":"75.0","4":"NA","5":"gold","6":"yellow","7":"112.0","8":"masculine","9":"Tatooine","10":"Droid","11":"none","12":"23","13":"304","14":"10465","15":"arid","16":"1 standard","17":"desert","18":"1","19":"2.000e+05"},{"1":"R2-D2","2":"96","3":"32.0","4":"NA","5":"white, blue","6":"red","7":"33.0","8":"masculine","9":"Naboo","10":"Droid","11":"none","12":"26","13":"312","14":"12120","15":"temperate","16":"1 standard","17":"grassy hills, swamps, forests, mountains","18":"12","19":"4.500e+09"},{"1":"Darth Vader","2":"202","3":"136.0","4":"none","5":"white","6":"yellow","7":"41.9","8":"masculine","9":"Tatooine","10":"Human","11":"male","12":"23","13":"304","14":"10465","15":"arid","16":"1 standard","17":"desert","18":"1","19":"2.000e+05"},{"1":"Leia Organa","2":"150","3":"49.0","4":"brown","5":"light","6":"brown","7":"19.0","8":"feminine","9":"Alderaan","10":"Human","11":"female","12":"24","13":"364","14":"12500","15":"temperate","16":"1 standard","17":"grasslands, mountains","18":"40","19":"2.000e+09"},{"1":"Owen Lars","2":"178","3":"120.0","4":"brown, grey","5":"light","6":"blue","7":"52.0","8":"masculine","9":"Tatooine","10":"Human","11":"male","12":"23","13":"304","14":"10465","15":"arid","16":"1 standard","17":"desert","18":"1","19":"2.000e+05"},{"1":"Beru Whitesun lars","2":"165","3":"75.0","4":"brown","5":"light","6":"blue","7":"47.0","8":"feminine","9":"Tatooine","10":"Human","11":"female","12":"23","13":"304","14":"10465","15":"arid","16":"1 standard","17":"desert","18":"1","19":"2.000e+05"},{"1":"R5-D4","2":"97","3":"32.0","4":"NA","5":"white, red","6":"red","7":"NA","8":"masculine","9":"Tatooine","10":"Droid","11":"none","12":"23","13":"304","14":"10465","15":"arid","16":"1 standard","17":"desert","18":"1","19":"2.000e+05"},{"1":"Biggs Darklighter","2":"183","3":"84.0","4":"black","5":"light","6":"brown","7":"24.0","8":"masculine","9":"Tatooine","10":"Human","11":"male","12":"23","13":"304","14":"10465","15":"arid","16":"1 standard","17":"desert","18":"1","19":"2.000e+05"},{"1":"Obi-Wan Kenobi","2":"182","3":"77.0","4":"auburn, white","5":"fair","6":"blue-gray","7":"57.0","8":"masculine","9":"Stewjon","10":"Human","11":"male","12":"NA","13":"NA","14":"0","15":"temperate","16":"1 standard","17":"grass","18":"NA","19":"NA"},{"1":"Anakin Skywalker","2":"188","3":"84.0","4":"blond","5":"fair","6":"blue","7":"41.9","8":"masculine","9":"Tatooine","10":"Human","11":"male","12":"23","13":"304","14":"10465","15":"arid","16":"1 standard","17":"desert","18":"1","19":"2.000e+05"},{"1":"Wilhuff Tarkin","2":"180","3":"NA","4":"auburn, grey","5":"fair","6":"blue","7":"64.0","8":"masculine","9":"Eriadu","10":"Human","11":"male","12":"24","13":"360","14":"13490","15":"polluted","16":"1 standard","17":"cityscape","18":"NA","19":"2.200e+10"},{"1":"Chewbacca","2":"228","3":"112.0","4":"brown","5":"NA","6":"blue","7":"200.0","8":"masculine","9":"Kashyyyk","10":"Wookie","11":"male","12":"26","13":"381","14":"12765","15":"tropical","16":"1 standard","17":"jungle, forests, lakes, rivers","18":"60","19":"4.500e+07"},{"1":"Han Solo","2":"180","3":"80.0","4":"brown","5":"fair","6":"brown","7":"29.0","8":"masculine","9":"Corellia","10":"Human","11":"male","12":"25","13":"329","14":"11000","15":"temperate","16":"1 standard","17":"plains, urban, hills, forests","18":"70","19":"3.000e+09"},{"1":"Greedo","2":"173","3":"74.0","4":"NA","5":"green","6":"black","7":"44.0","8":"masculine","9":"Rodia","10":"Rodian","11":"male","12":"29","13":"305","14":"7549","15":"hot","16":"1 standard","17":"jungles, oceans, urban, swamps","18":"60","19":"1.300e+09"},{"1":"Jabba Desilijic Tiure","2":"175","3":"1358.0","4":"NA","5":"green-tan, brown","6":"orange","7":"600.0","8":"masculine","9":"Nal Hutta","10":"Hutt","11":"hermaphroditic","12":"87","13":"413","14":"12150","15":"temperate","16":"1 standard","17":"urban, oceans, swamps, bogs","18":"NA","19":"7.000e+09"},{"1":"Wedge Antilles","2":"170","3":"77.0","4":"brown","5":"fair","6":"hazel","7":"21.0","8":"masculine","9":"Corellia","10":"Human","11":"male","12":"25","13":"329","14":"11000","15":"temperate","16":"1 standard","17":"plains, urban, hills, forests","18":"70","19":"3.000e+09"},{"1":"Jek Tono Porkins","2":"180","3":"110.0","4":"brown","5":"fair","6":"blue","7":"NA","8":"masculine","9":"Bestine IV","10":"Human","11":"male","12":"26","13":"680","14":"6400","15":"temperate","16":"NA","17":"rocky islands, oceans","18":"98","19":"6.200e+07"},{"1":"Palpatine","2":"170","3":"75.0","4":"grey","5":"pale","6":"yellow","7":"82.0","8":"masculine","9":"Naboo","10":"Human","11":"male","12":"26","13":"312","14":"12120","15":"temperate","16":"1 standard","17":"grassy hills, swamps, forests, mountains","18":"12","19":"4.500e+09"},{"1":"Boba Fett","2":"183","3":"78.2","4":"black","5":"fair","6":"brown","7":"31.5","8":"masculine","9":"Kamino","10":"Human","11":"male","12":"27","13":"463","14":"19720","15":"temperate","16":"1 standard","17":"ocean","18":"100","19":"1.000e+09"},{"1":"Bossk","2":"190","3":"113.0","4":"none","5":"green","6":"red","7":"53.0","8":"masculine","9":"Trandosha","10":"Trandoshan","11":"male","12":"25","13":"371","14":"0","15":"arid","16":"0.62 standard","17":"mountains, seas, grasslands, deserts","18":"NA","19":"4.200e+07"},{"1":"Lando Calrissian","2":"177","3":"79.0","4":"black","5":"dark","6":"brown","7":"31.0","8":"masculine","9":"Socorro","10":"Human","11":"male","12":"20","13":"326","14":"0","15":"arid","16":"1 standard","17":"deserts, mountains","18":"NA","19":"3.000e+08"},{"1":"Lobot","2":"175","3":"79.0","4":"none","5":"light","6":"blue","7":"37.0","8":"masculine","9":"Bespin","10":"Human","11":"male","12":"12","13":"5110","14":"118000","15":"temperate","16":"1.5 (surface), 1 standard (Cloud City)","17":"gas giant","18":"0","19":"6.000e+06"},{"1":"Ackbar","2":"180","3":"83.0","4":"none","5":"brown mottle","6":"orange","7":"41.0","8":"masculine","9":"Mon Cala","10":"Mon Calamari","11":"male","12":"21","13":"398","14":"11030","15":"temperate","16":"1","17":"oceans, reefs, islands","18":"100","19":"2.700e+10"},{"1":"Mon Mothma","2":"150","3":"NA","4":"auburn","5":"fair","6":"blue","7":"48.0","8":"feminine","9":"Chandrila","10":"Human","11":"female","12":"20","13":"368","14":"13500","15":"temperate","16":"1","17":"plains, forests","18":"40","19":"1.200e+09"},{"1":"Wicket Systri Warrick","2":"88","3":"20.0","4":"brown","5":"brown","6":"brown","7":"8.0","8":"masculine","9":"Endor","10":"Ewok","11":"male","12":"18","13":"402","14":"4900","15":"temperate","16":"0.85 standard","17":"forests, mountains, lakes","18":"8","19":"3.000e+07"},{"1":"Nien Nunb","2":"160","3":"68.0","4":"none","5":"grey","6":"black","7":"NA","8":"masculine","9":"Sullust","10":"Sullustan","11":"male","12":"20","13":"263","14":"12780","15":"superheated","16":"1","17":"mountains, volcanoes, rocky deserts","18":"5","19":"1.850e+10"},{"1":"Nute Gunray","2":"191","3":"90.0","4":"none","5":"mottled green","6":"red","7":"NA","8":"masculine","9":"Cato Neimoidia","10":"Neimodian","11":"male","12":"25","13":"278","14":"0","15":"temperate, moist","16":"1 standard","17":"mountains, fields, forests, rock arches","18":"NA","19":"1.000e+07"},{"1":"Finis Valorum","2":"170","3":"NA","4":"blond","5":"fair","6":"blue","7":"91.0","8":"masculine","9":"Coruscant","10":"Human","11":"male","12":"24","13":"368","14":"12240","15":"temperate","16":"1 standard","17":"cityscape, mountains","18":"NA","19":"1.000e+12"},{"1":"Padmé Amidala","2":"185","3":"45.0","4":"brown","5":"light","6":"brown","7":"46.0","8":"feminine","9":"Naboo","10":"Human","11":"female","12":"26","13":"312","14":"12120","15":"temperate","16":"1 standard","17":"grassy hills, swamps, forests, mountains","18":"12","19":"4.500e+09"},{"1":"Jar Jar Binks","2":"196","3":"66.0","4":"none","5":"orange","6":"orange","7":"52.0","8":"masculine","9":"Naboo","10":"Gungan","11":"male","12":"26","13":"312","14":"12120","15":"temperate","16":"1 standard","17":"grassy hills, swamps, forests, mountains","18":"12","19":"4.500e+09"},{"1":"Roos Tarpals","2":"224","3":"82.0","4":"none","5":"grey","6":"orange","7":"NA","8":"masculine","9":"Naboo","10":"Gungan","11":"male","12":"26","13":"312","14":"12120","15":"temperate","16":"1 standard","17":"grassy hills, swamps, forests, mountains","18":"12","19":"4.500e+09"},{"1":"Rugor Nass","2":"206","3":"NA","4":"none","5":"green","6":"orange","7":"NA","8":"masculine","9":"Naboo","10":"Gungan","11":"male","12":"26","13":"312","14":"12120","15":"temperate","16":"1 standard","17":"grassy hills, swamps, forests, mountains","18":"12","19":"4.500e+09"},{"1":"Ric Olié","2":"183","3":"NA","4":"brown","5":"fair","6":"blue","7":"NA","8":"masculine","9":"Naboo","10":"Human","11":"male","12":"26","13":"312","14":"12120","15":"temperate","16":"1 standard","17":"grassy hills, swamps, forests, mountains","18":"12","19":"4.500e+09"},{"1":"Watto","2":"137","3":"NA","4":"black","5":"blue, grey","6":"yellow","7":"NA","8":"masculine","9":"Toydaria","10":"Toydarian","11":"male","12":"21","13":"184","14":"7900","15":"temperate","16":"1","17":"swamps, lakes","18":"NA","19":"1.100e+07"},{"1":"Sebulba","2":"112","3":"40.0","4":"none","5":"grey, red","6":"orange","7":"NA","8":"masculine","9":"Malastare","10":"Dug","11":"male","12":"26","13":"201","14":"18880","15":"arid, temperate, tropical","16":"1.56","17":"swamps, deserts, jungles, mountains","18":"NA","19":"2.000e+09"},{"1":"Quarsh Panaka","2":"183","3":"NA","4":"black","5":"dark","6":"brown","7":"62.0","8":"masculine","9":"Naboo","10":"Human","11":"male","12":"26","13":"312","14":"12120","15":"temperate","16":"1 standard","17":"grassy hills, swamps, forests, mountains","18":"12","19":"4.500e+09"},{"1":"Shmi Skywalker","2":"163","3":"NA","4":"black","5":"fair","6":"brown","7":"72.0","8":"feminine","9":"Tatooine","10":"Human","11":"female","12":"23","13":"304","14":"10465","15":"arid","16":"1 standard","17":"desert","18":"1","19":"2.000e+05"},{"1":"Darth Maul","2":"175","3":"80.0","4":"none","5":"red","6":"yellow","7":"54.0","8":"masculine","9":"Dathomir","10":"Zabrak","11":"male","12":"24","13":"491","14":"10480","15":"temperate","16":"0.9","17":"forests, deserts, savannas","18":"NA","19":"5.200e+03"},{"1":"Bib Fortuna","2":"180","3":"NA","4":"none","5":"pale","6":"pink","7":"NA","8":"masculine","9":"Ryloth","10":"Twi'lek","11":"male","12":"30","13":"305","14":"10600","15":"temperate, arid, subartic","16":"1","17":"mountains, valleys, deserts, tundra","18":"5","19":"1.500e+09"},{"1":"Ayla Secura","2":"178","3":"55.0","4":"none","5":"blue","6":"hazel","7":"48.0","8":"feminine","9":"Ryloth","10":"Twi'lek","11":"female","12":"30","13":"305","14":"10600","15":"temperate, arid, subartic","16":"1","17":"mountains, valleys, deserts, tundra","18":"5","19":"1.500e+09"},{"1":"Ratts Tyerel","2":"79","3":"15.0","4":"none","5":"grey, blue","6":"NA","7":"NA","8":"masculine","9":"Aleen Minor","10":"Aleena","11":"male","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA"},{"1":"Dud Bolt","2":"94","3":"45.0","4":"none","5":"blue, grey","6":"yellow","7":"NA","8":"masculine","9":"Vulpter","10":"Vulptereen","11":"male","12":"22","13":"391","14":"14900","15":"temperate, artic","16":"1","17":"urban, barren","18":"NA","19":"4.210e+08"},{"1":"Gasgano","2":"122","3":"NA","4":"none","5":"white, blue","6":"black","7":"NA","8":"masculine","9":"Troiken","10":"Xexto","11":"male","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"desert, tundra, rainforests, mountains","18":"NA","19":"NA"},{"1":"Ben Quadinaros","2":"163","3":"65.0","4":"none","5":"grey, green, yellow","6":"orange","7":"NA","8":"masculine","9":"Tund","10":"Toong","11":"male","12":"48","13":"1770","14":"12190","15":"NA","16":"NA","17":"barren, ash","18":"NA","19":"0.000e+00"},{"1":"Mace Windu","2":"188","3":"84.0","4":"none","5":"dark","6":"brown","7":"72.0","8":"masculine","9":"Haruun Kal","10":"Human","11":"male","12":"25","13":"383","14":"10120","15":"temperate","16":"0.98","17":"toxic cloudsea, plateaus, volcanoes","18":"NA","19":"7.053e+05"},{"1":"Ki-Adi-Mundi","2":"198","3":"82.0","4":"white","5":"pale","6":"yellow","7":"92.0","8":"masculine","9":"Cerea","10":"Cerean","11":"male","12":"27","13":"386","14":"NA","15":"temperate","16":"1","17":"verdant","18":"20","19":"4.500e+08"},{"1":"Kit Fisto","2":"196","3":"87.0","4":"none","5":"green","6":"black","7":"NA","8":"masculine","9":"Glee Anselm","10":"Nautolan","11":"male","12":"33","13":"206","14":"15600","15":"tropical, temperate","16":"1","17":"lakes, islands, swamps, seas","18":"80","19":"5.000e+08"},{"1":"Eeth Koth","2":"171","3":"NA","4":"black","5":"brown","6":"brown","7":"NA","8":"masculine","9":"Iridonia","10":"Zabrak","11":"male","12":"29","13":"413","14":"NA","15":"NA","16":"NA","17":"rocky canyons, acid pools","18":"NA","19":"NA"},{"1":"Adi Gallia","2":"184","3":"50.0","4":"none","5":"dark","6":"blue","7":"NA","8":"feminine","9":"Coruscant","10":"Tholothian","11":"female","12":"24","13":"368","14":"12240","15":"temperate","16":"1 standard","17":"cityscape, mountains","18":"NA","19":"1.000e+12"},{"1":"Saesee Tiin","2":"188","3":"NA","4":"none","5":"pale","6":"orange","7":"NA","8":"masculine","9":"Iktotch","10":"Iktotchi","11":"male","12":"22","13":"481","14":"NA","15":"arid, rocky, windy","16":"1","17":"rocky","18":"NA","19":"NA"},{"1":"Yarael Poof","2":"264","3":"NA","4":"none","5":"white","6":"yellow","7":"NA","8":"masculine","9":"Quermia","10":"Quermian","11":"male","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA"},{"1":"Plo Koon","2":"188","3":"80.0","4":"none","5":"orange","6":"black","7":"22.0","8":"masculine","9":"Dorin","10":"Kel Dor","11":"male","12":"22","13":"409","14":"13400","15":"temperate","16":"1","17":"NA","18":"NA","19":"NA"},{"1":"Mas Amedda","2":"196","3":"NA","4":"none","5":"blue","6":"blue","7":"NA","8":"masculine","9":"Champala","10":"Chagrian","11":"male","12":"27","13":"318","14":"NA","15":"temperate","16":"1","17":"oceans, rainforests, plateaus","18":"NA","19":"3.500e+09"},{"1":"Gregar Typho","2":"185","3":"85.0","4":"black","5":"dark","6":"brown","7":"NA","8":"masculine","9":"Naboo","10":"Human","11":"male","12":"26","13":"312","14":"12120","15":"temperate","16":"1 standard","17":"grassy hills, swamps, forests, mountains","18":"12","19":"4.500e+09"},{"1":"Cordé","2":"157","3":"NA","4":"brown","5":"light","6":"brown","7":"NA","8":"feminine","9":"Naboo","10":"Human","11":"female","12":"26","13":"312","14":"12120","15":"temperate","16":"1 standard","17":"grassy hills, swamps, forests, mountains","18":"12","19":"4.500e+09"},{"1":"Cliegg Lars","2":"183","3":"NA","4":"brown","5":"fair","6":"blue","7":"82.0","8":"masculine","9":"Tatooine","10":"Human","11":"male","12":"23","13":"304","14":"10465","15":"arid","16":"1 standard","17":"desert","18":"1","19":"2.000e+05"},{"1":"Poggle the Lesser","2":"183","3":"80.0","4":"none","5":"green","6":"yellow","7":"NA","8":"masculine","9":"Geonosis","10":"Geonosian","11":"male","12":"30","13":"256","14":"11370","15":"temperate, arid","16":"0.9 standard","17":"rock, desert, mountain, barren","18":"5","19":"1.000e+11"},{"1":"Luminara Unduli","2":"170","3":"56.2","4":"black","5":"yellow","6":"blue","7":"58.0","8":"feminine","9":"Mirial","10":"Mirialan","11":"female","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"deserts","18":"NA","19":"NA"},{"1":"Barriss Offee","2":"166","3":"50.0","4":"black","5":"yellow","6":"blue","7":"40.0","8":"feminine","9":"Mirial","10":"Mirialan","11":"female","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"deserts","18":"NA","19":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-20" class="section level3" number="10.1.3">
+<h3 number="10.1.3"><span class="header-section-number">10.1.3</span> exercise</h3>
+<ol style="list-style-type: decimal">
+<li><p>Use <code>select()</code> to remove <code>homeworld</code> from <code>species</code></p></li>
+<li><p><code>inner_join()</code> to connect <code>species</code> to <code>SWPeopPlan</code> by <code>"name"</code> and <code>"species"</code>.</p></li>
+<li><p>Use the <code>suffix</code> argument to keep track of the variables original location by supplying <code>c("_species", "_people")</code>.</p></li>
+<li><p><code>rename()</code> the <code>name</code> variable as <code>species_name</code>.</p></li>
+<li><p>Use another <code>inner_join()</code> to add the <code>vehicle</code> column from <code>pilots</code>, joining <code>by</code> the <code>"name_people" = "pilot"</code>.</p></li>
+<li><p><code>select()</code> only the <code>name_people</code>, <code>height</code>, <code>mass</code>, <code>sex</code>, <code>homeworld</code>, <code>gravity</code>, <code>terrain</code>, <code>population</code>, <code>species_name</code>, <code>average_height</code>, <code>classification</code>, <code>average_lifespan</code>, and <code>vehicle</code> columns</p></li>
+<li><p>Finally, change <code>population</code> to an <code>integer</code> value with <code>mutate()</code></p></li>
+</ol>
+<pre class="r"><code>starwarsdb::species %&gt;% 
+  select(-_________) %&gt;% 
+  _________(x = ., y = SWPeopPlan,
+             by = c(&quot;name&quot; = &quot;species&quot;),
+             suffix = c(&quot;_________&quot;, &quot;_________&quot;)) %&gt;% 
+  rename(_________ = name) %&gt;% 
+  inner_join(x = ., y = starwarsdb::pilots, 
+             by = c(&quot;name_people&quot; = &quot;_________&quot;)) %&gt;% 
+  select(_________, 
+         _________, 
+         _________, 
+         _________, 
+         _________,
+         _________, 
+         _________,
+         _________,
+         _________, 
+         _________,
+         _________,
+         _________,
+         _________) %&gt;% 
+  _________(population = as.integer(population)) -&gt; SWDBData</code></pre>
+</div>
+<div id="solution-19" class="section level3" number="10.1.4">
+<h3 number="10.1.4"><span class="header-section-number">10.1.4</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>starwarsdb::species %&gt;% 
+  select(-homeworld) %&gt;% 
+  inner_join(x = ., y = SWPeopPlan,
+             by = c(&quot;name&quot; = &quot;species&quot;),
+             suffix = c(&quot;_species&quot;, &quot;_people&quot;)) %&gt;% 
+  rename(species_name = name) %&gt;% 
+  inner_join(x = ., y = starwarsdb::pilots, 
+             by = c(&quot;name_people&quot; = &quot;pilot&quot;)) %&gt;% 
+  select(name_people, 
+         height, 
+         mass, 
+         sex,
+         homeworld, 
+         gravity,
+         terrain,
+         population, 
+         species_name,
+         average_height,
+         classification,
+         average_lifespan,
+         vehicle) %&gt;% 
+  mutate(population = as.integer(population),
+         average_lifespan = as.integer(average_lifespan)) -&gt; SWDBData
+SWDBData</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name_people"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sex"],"name":[4],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[5],"type":["chr"],"align":["left"]},{"label":["gravity"],"name":[6],"type":["chr"],"align":["left"]},{"label":["terrain"],"name":[7],"type":["chr"],"align":["left"]},{"label":["population"],"name":[8],"type":["int"],"align":["right"]},{"label":["species_name"],"name":[9],"type":["chr"],"align":["left"]},{"label":["average_height"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["classification"],"name":[11],"type":["chr"],"align":["left"]},{"label":["average_lifespan"],"name":[12],"type":["int"],"align":["right"]},{"label":["vehicle"],"name":[13],"type":["chr"],"align":["left"]}],"data":[{"1":"Luke Skywalker","2":"172","3":"77.0","4":"male","5":"Tatooine","6":"1 standard","7":"desert","8":"200000","9":"Human","10":"180","11":"mammal","12":"120","13":"X-wing"},{"1":"Luke Skywalker","2":"172","3":"77.0","4":"male","5":"Tatooine","6":"1 standard","7":"desert","8":"200000","9":"Human","10":"180","11":"mammal","12":"120","13":"Imperial shuttle"},{"1":"Luke Skywalker","2":"172","3":"77.0","4":"male","5":"Tatooine","6":"1 standard","7":"desert","8":"200000","9":"Human","10":"180","11":"mammal","12":"120","13":"Snowspeeder"},{"1":"Luke Skywalker","2":"172","3":"77.0","4":"male","5":"Tatooine","6":"1 standard","7":"desert","8":"200000","9":"Human","10":"180","11":"mammal","12":"120","13":"Imperial Speeder Bike"},{"1":"Darth Vader","2":"202","3":"136.0","4":"male","5":"Tatooine","6":"1 standard","7":"desert","8":"200000","9":"Human","10":"180","11":"mammal","12":"120","13":"TIE Advanced x1"},{"1":"Leia Organa","2":"150","3":"49.0","4":"female","5":"Alderaan","6":"1 standard","7":"grasslands, mountains","8":"2000000000","9":"Human","10":"180","11":"mammal","12":"120","13":"Imperial Speeder Bike"},{"1":"Biggs Darklighter","2":"183","3":"84.0","4":"male","5":"Tatooine","6":"1 standard","7":"desert","8":"200000","9":"Human","10":"180","11":"mammal","12":"120","13":"X-wing"},{"1":"Obi-Wan Kenobi","2":"182","3":"77.0","4":"male","5":"Stewjon","6":"1 standard","7":"grass","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Jedi starfighter"},{"1":"Obi-Wan Kenobi","2":"182","3":"77.0","4":"male","5":"Stewjon","6":"1 standard","7":"grass","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Trade Federation cruiser"},{"1":"Obi-Wan Kenobi","2":"182","3":"77.0","4":"male","5":"Stewjon","6":"1 standard","7":"grass","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Naboo star skiff"},{"1":"Obi-Wan Kenobi","2":"182","3":"77.0","4":"male","5":"Stewjon","6":"1 standard","7":"grass","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Jedi Interceptor"},{"1":"Obi-Wan Kenobi","2":"182","3":"77.0","4":"male","5":"Stewjon","6":"1 standard","7":"grass","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Belbullab-22 starfighter"},{"1":"Obi-Wan Kenobi","2":"182","3":"77.0","4":"male","5":"Stewjon","6":"1 standard","7":"grass","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Tribubble bongo"},{"1":"Anakin Skywalker","2":"188","3":"84.0","4":"male","5":"Tatooine","6":"1 standard","7":"desert","8":"200000","9":"Human","10":"180","11":"mammal","12":"120","13":"Naboo fighter"},{"1":"Anakin Skywalker","2":"188","3":"84.0","4":"male","5":"Tatooine","6":"1 standard","7":"desert","8":"200000","9":"Human","10":"180","11":"mammal","12":"120","13":"Trade Federation cruiser"},{"1":"Anakin Skywalker","2":"188","3":"84.0","4":"male","5":"Tatooine","6":"1 standard","7":"desert","8":"200000","9":"Human","10":"180","11":"mammal","12":"120","13":"Jedi Interceptor"},{"1":"Anakin Skywalker","2":"188","3":"84.0","4":"male","5":"Tatooine","6":"1 standard","7":"desert","8":"200000","9":"Human","10":"180","11":"mammal","12":"120","13":"Zephyr-G swoop bike"},{"1":"Anakin Skywalker","2":"188","3":"84.0","4":"male","5":"Tatooine","6":"1 standard","7":"desert","8":"200000","9":"Human","10":"180","11":"mammal","12":"120","13":"XJ-6 airspeeder"},{"1":"Han Solo","2":"180","3":"80.0","4":"male","5":"Corellia","6":"1 standard","7":"plains, urban, hills, forests","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Millennium Falcon"},{"1":"Han Solo","2":"180","3":"80.0","4":"male","5":"Corellia","6":"1 standard","7":"plains, urban, hills, forests","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Imperial shuttle"},{"1":"Wedge Antilles","2":"170","3":"77.0","4":"male","5":"Corellia","6":"1 standard","7":"plains, urban, hills, forests","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"X-wing"},{"1":"Wedge Antilles","2":"170","3":"77.0","4":"male","5":"Corellia","6":"1 standard","7":"plains, urban, hills, forests","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Snowspeeder"},{"1":"Jek Tono Porkins","2":"180","3":"110.0","4":"male","5":"Bestine IV","6":"NA","7":"rocky islands, oceans","8":"62000000","9":"Human","10":"180","11":"mammal","12":"120","13":"X-wing"},{"1":"Boba Fett","2":"183","3":"78.2","4":"male","5":"Kamino","6":"1 standard","7":"ocean","8":"1000000000","9":"Human","10":"180","11":"mammal","12":"120","13":"Slave 1"},{"1":"Lando Calrissian","2":"177","3":"79.0","4":"male","5":"Socorro","6":"1 standard","7":"deserts, mountains","8":"300000000","9":"Human","10":"180","11":"mammal","12":"120","13":"Millennium Falcon"},{"1":"Padmé Amidala","2":"185","3":"45.0","4":"female","5":"Naboo","6":"1 standard","7":"grassy hills, swamps, forests, mountains","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Naboo fighter"},{"1":"Padmé Amidala","2":"185","3":"45.0","4":"female","5":"Naboo","6":"1 standard","7":"grassy hills, swamps, forests, mountains","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"H-type Nubian yacht"},{"1":"Padmé Amidala","2":"185","3":"45.0","4":"female","5":"Naboo","6":"1 standard","7":"grassy hills, swamps, forests, mountains","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Naboo star skiff"},{"1":"Ric Olié","2":"183","3":"NA","4":"male","5":"Naboo","6":"1 standard","7":"grassy hills, swamps, forests, mountains","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Naboo Royal Starship"},{"1":"Gregar Typho","2":"185","3":"85.0","4":"male","5":"Naboo","6":"1 standard","7":"grassy hills, swamps, forests, mountains","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Naboo fighter"},{"1":"Dooku","2":"193","3":"80.0","4":"male","5":"Serenno","6":"NA","7":"rainforests, rivers, mountains","8":"NA","9":"Human","10":"180","11":"mammal","12":"120","13":"Flitknot speeder"},{"1":"Chewbacca","2":"228","3":"112.0","4":"male","5":"Kashyyyk","6":"1 standard","7":"jungle, forests, lakes, rivers","8":"45000000","9":"Wookie","10":"210","11":"mammal","12":"400","13":"Millennium Falcon"},{"1":"Chewbacca","2":"228","3":"112.0","4":"male","5":"Kashyyyk","6":"1 standard","7":"jungle, forests, lakes, rivers","8":"45000000","9":"Wookie","10":"210","11":"mammal","12":"400","13":"Imperial shuttle"},{"1":"Chewbacca","2":"228","3":"112.0","4":"male","5":"Kashyyyk","6":"1 standard","7":"jungle, forests, lakes, rivers","8":"45000000","9":"Wookie","10":"210","11":"mammal","12":"400","13":"AT-ST"},{"1":"Nien Nunb","2":"160","3":"68.0","4":"male","5":"Sullust","6":"1","7":"mountains, volcanoes, rocky deserts","8":"NA","9":"Sullustan","10":"180","11":"mammal","12":"NA","13":"Millennium Falcon"},{"1":"Darth Maul","2":"175","3":"80.0","4":"male","5":"Dathomir","6":"0.9","7":"forests, deserts, savannas","8":"5200","9":"Zabrak","10":"180","11":"mammal","12":"NA","13":"Scimitar"},{"1":"Darth Maul","2":"175","3":"80.0","4":"male","5":"Dathomir","6":"0.9","7":"forests, deserts, savannas","8":"5200","9":"Zabrak","10":"180","11":"mammal","12":"NA","13":"Sith speeder"},{"1":"Plo Koon","2":"188","3":"80.0","4":"male","5":"Dorin","6":"1","7":"NA","8":"NA","9":"Kel Dor","10":"180","11":"NA","12":"70","13":"Jedi starfighter"},{"1":"Zam Wesell","2":"168","3":"55.0","4":"female","5":"Zolan","6":"NA","7":"NA","8":"NA","9":"Clawdite","10":"180","11":"reptilian","12":"70","13":"Koro-2 Exodrive airspeeder"},{"1":"Grievous","2":"216","3":"159.0","4":"male","5":"Kalee","6":"1","7":"rainforests, cliffs, canyons, seas","8":"NA","9":"Kaleesh","10":"170","11":"reptile","12":"80","13":"Belbullab-22 starfighter"},{"1":"Grievous","2":"216","3":"159.0","4":"male","5":"Kalee","6":"1","7":"rainforests, cliffs, canyons, seas","8":"NA","9":"Kaleesh","10":"170","11":"reptile","12":"80","13":"Tsmeu-6 personal wheel bike"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="viewing-color-scales" class="section level2 tabset" number="10.2">
+<h2 class="tabset" number="10.2"><span class="header-section-number">10.2</span> Viewing color scales</h2>
+<p>Before we start building a graph, we should take a look at the available colors each package and palette.</p>
+<div id="wesanderson" class="section level3" number="10.2.1">
+<h3 number="10.2.1"><span class="header-section-number">10.2.1</span> <code>wesanderson</code></h3>
+<p>Check the names of the palettes in the <code>wesanderson</code> package using <code>names(wes_palettes)</code>.</p>
+<pre class="r"><code>names(wes_palettes)</code></pre>
+<pre><code>##  [1] &quot;BottleRocket1&quot;  &quot;BottleRocket2&quot;  &quot;Rushmore1&quot;     
+##  [4] &quot;Rushmore&quot;       &quot;Royal1&quot;         &quot;Royal2&quot;        
+##  [7] &quot;Zissou1&quot;        &quot;Darjeeling1&quot;    &quot;Darjeeling2&quot;   
+## [10] &quot;Chevalier1&quot;     &quot;FantasticFox1&quot;  &quot;Moonrise1&quot;     
+## [13] &quot;Moonrise2&quot;      &quot;Moonrise3&quot;      &quot;Cavalcanti1&quot;   
+## [16] &quot;GrandBudapest1&quot; &quot;GrandBudapest2&quot; &quot;IsleofDogs1&quot;   
+## [19] &quot;IsleofDogs2&quot;</code></pre>
+</div>
+<div id="exercise-21" class="section level3" number="10.2.2">
+<h3 number="10.2.2"><span class="header-section-number">10.2.2</span> exercise</h3>
+<p>We can view the colors using <code>wes_palette("name of palette")</code>.</p>
+<p>View the <code>"IsleofDogs1"</code> palette below:</p>
+<pre class="r"><code>wes_palette(&quot;____________&quot;)</code></pre>
+</div>
+<div id="solution-20" class="section level3" number="10.2.3">
+<h3 number="10.2.3"><span class="header-section-number">10.2.3</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>wes_palette(&quot;IsleofDogs1&quot;)</code></pre>
+<p><img src="img/IsleofDogs1-sol-1.png" width="864" /></p>
+</div>
+<div id="exercise-22" class="section level3" number="10.2.4">
+<h3 number="10.2.4"><span class="header-section-number">10.2.4</span> exercise</h3>
+<p>View the <code>"FantasticFox1"</code> palette below:</p>
+<pre class="r"><code>wes_palette(&quot;_____________&quot;)</code></pre>
+</div>
+<div id="solution-21" class="section level3" number="10.2.5">
+<h3 number="10.2.5"><span class="header-section-number">10.2.5</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>wes_palette(&quot;FantasticFox1&quot;)</code></pre>
+<p><img src="img/FantasticFox1-sol-1.png" width="864" /></p>
+</div>
+<div id="khroma" class="section level3" number="10.2.6">
+<h3 number="10.2.6"><span class="header-section-number">10.2.6</span> <code>khroma</code></h3>
+<p>View the available <code>khroma</code> package using the following syntax:</p>
+<ol style="list-style-type: decimal">
+<li><p>First we define the <code>colour()</code> or <code>color()</code> with a text string (i.e. <code>"vibrant"</code>) and store in an output (i.e. <code>vibrant</code>).</p></li>
+<li><p>Then we use the <code>plot_scheme()</code> function, which takes the output from <code>colour()</code> (in this case, <code>vibrant</code>) along with the number of colors we want displayed from that particular scheme in parentheses (each scheme has an upper limit of colors). It looks like <code>vibrant(7)</code>.</p></li>
+<li><p>Additional arguments include <code>colours</code> and <code>names</code> (which we set to <code>TRUE</code>) and <code>size</code> (which we set to <code>0.9</code>).</p></li>
+</ol>
+<p>See the example below for reference.</p>
+<pre class="r"><code># set palette
+vibrant &lt;- colour(&quot;vibrant&quot;)
+# plot the color scheme
+plot_scheme(vibrant(7), colours = TRUE, names = TRUE, size = 0.9)</code></pre>
+<p><img src="img/vibrant-1.png" width="864" /></p>
+</div>
+<div id="exercise-23" class="section level3" number="10.2.7">
+<h3 number="10.2.7"><span class="header-section-number">10.2.7</span> exercise</h3>
+<p>View the colors in the <code>"bright"</code> scheme, setting the number of different colors to <code>6</code>.</p>
+<pre class="r"><code>bright &lt;- colour(&quot;______&quot;)
+plot_scheme(bright(_), colours = TRUE, names = TRUE, size = 0.9)</code></pre>
+</div>
+<div id="solution-22" class="section level3" number="10.2.8">
+<h3 number="10.2.8"><span class="header-section-number">10.2.8</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>bright &lt;- colour(&quot;bright&quot;)
+plot_scheme(bright(6), colours = TRUE, names = TRUE, size = 0.9)</code></pre>
+<p><img src="img/bright-sol-1.png" width="864" /></p>
+</div>
+</div>
+<div id="coloring-bars-and-columns" class="section level2 tabset" number="10.3">
+<h2 class="tabset" number="10.3"><span class="header-section-number">10.3</span> Coloring bars and columns</h2>
+<p>Now we’re going to build a few bar and column graphs using the color palettes we’ve outlined above. Bar and column graphs are great for showing amounts (or counts) of data. An important distinction between the <code>geom_bar()</code> and <code>geom_col()</code> is the that the <code>geom_bar()</code> only maps a single <code>x</code> variable, while the <code>geom_col()</code> can map <em>both</em> <code>x</code> and <code>y</code> variables.</p>
+<div id="exercise-24" class="section level3" number="10.3.1">
+<h3 number="10.3.1"><span class="header-section-number">10.3.1</span> exercise</h3>
+<p>I’ve defined the labels for the graph below. Use them to guide you in building a column graph for the number of species present in the <code>SWDBData</code> pilots data.</p>
+<ul>
+<li><p>Fill the columns by <code>species_name</code></p></li>
+<li><p>Add the <code>khroma::scale_fill_light()</code> layer after the <code>geom_bar()</code> (but before the labels)</p></li>
+</ul>
+<pre class="r"><code>lab_species_swdb &lt;- labs(title = &quot;Species of the Pilots in Star Wars&quot;,
+                         subtitle = &quot;Species for pilot characters&quot;,
+                         x = &quot;Species&quot;,
+                         y = &quot;Count&quot;,
+                         caption = &quot;Data from starwarsdb package&quot;,
+                         fill = &quot;Species&quot;)
+SWDBData %&gt;% 
+  ggplot(aes(x = ___________, 
+             fill = ___________)) +  
+    geom_bar(show.legend = FALSE) + 
+    khroma::____________________() + 
+    lab_species_swdb</code></pre>
+</div>
+<div id="solution-23" class="section level3" number="10.3.2">
+<h3 number="10.3.2"><span class="header-section-number">10.3.2</span> solution</h3>
+<p>See below. Note that the <code>fill</code> aesthetic is matched with a <code>scale_fill_light()</code> function.</p>
+<pre class="r"><code>lab_species_swdb &lt;- labs(title = &quot;Species of the Pilots in Star Wars&quot;,
+                         subtitle = &quot;Species for pilot characters&quot;,
+                         x = &quot;Species&quot;,
+                         y = &quot;Count&quot;,
+                         caption = &quot;Data from starwarsdb package&quot;,
+                         fill = &quot;Species&quot;)
+SWDBData %&gt;% 
+  ggplot(aes(x = species_name, 
+             fill = species_name)) +  
+    geom_bar(show.legend = FALSE) + 
+    khroma::scale_fill_light() + 
+    lab_species_swdb</code></pre>
+<p><img src="img/scale_fill_light-1-sol-1.png" width="864" /></p>
+</div>
+<div id="exercise-25" class="section level3" number="10.3.3">
+<h3 number="10.3.3"><span class="header-section-number">10.3.3</span> exercise</h3>
+<p>We are going to reorganize the bars in the previous graph according to the values on the <code>y</code> axis. In order to reorganize our graph, we need a column of <code>counts</code>. Do this with <code>dplyr::count()</code>, sorting the output and naming the new column <code>"counts"</code>.</p>
+<ul>
+<li><p>Reordering the <code>x</code> axis is accomplished with the <code>forcats::fct_reorder()</code> function, which takes <code>.f</code> (the factor or character variable we’re reordering: <code>species_name</code>) and <code>.x</code> (the numerical variable we want to use to reorder the factor or character variable: <code>counts</code>).</p></li>
+<li><p>We need to switch from using a <code>geom_bar()</code> to a <code>geom_col()</code>, because we need to map an <code>x</code> and <code>y</code> variable.</p></li>
+<li><p>Swap the <code>khroma::scale_fill_light()</code> function for <code>khroma::scale_fill_bright()</code></p></li>
+</ul>
+<pre class="r"><code>lab_species_swdb &lt;- labs(title = &quot;Species of the Pilots in Star Wars&quot;,
+                         subtitle = &quot;Species for pilot characters&quot;,
+                         x = &quot;Species&quot;,
+                         y = &quot;Count&quot;,
+                         caption = &quot;Data from starwarsdb package&quot;,
+                         fill = &quot;Species&quot;)
+SWDBData %&gt;% 
+  # here we count species_name and give the new variable name
+  dplyr::count(name = &quot;_______&quot;, species_name, sort = ____) %&gt;% 
+  ggplot(aes(x = forcats::fct_reorder(.f = ___________, .x = ______), 
+             y = counts, 
+             fill = species_name)) +  
+    geom____(show.legend = FALSE) + 
+    khroma::___________________() + 
+    lab_species_swdb</code></pre>
+</div>
+<div id="solution-24" class="section level3" number="10.3.4">
+<h3 number="10.3.4"><span class="header-section-number">10.3.4</span> solution</h3>
+<p>See below. Note that we’ve organized the <code>x</code> axis according to the values on the <code>y</code>. Which color scheme do you prefer?</p>
+<pre class="r"><code>lab_species_swdb &lt;- labs(title = &quot;Species of the Pilots in Star Wars&quot;,
+                         subtitle = &quot;Species for pilot characters&quot;,
+                         x = &quot;Species&quot;,
+                         y = &quot;Count&quot;,
+                         caption = &quot;Data from starwarsdb package&quot;,
+                         fill = &quot;Species&quot;)
+SWDBData %&gt;% 
+  # here we count species_name and give the new variable name
+  count(name = &quot;counts&quot;, species_name, sort = TRUE) %&gt;% 
+  ggplot(aes(x = forcats::fct_reorder(.f = species_name, .x = counts), 
+             y = counts, 
+             fill = species_name)) +  
+    geom_col(show.legend = FALSE) + 
+    khroma::scale_fill_bright() + 
+    lab_species_swdb</code></pre>
+<p><img src="img/scale_fill_light-2-sol-1.png" width="864" /></p>
+</div>
+<div id="exercise-26" class="section level3" number="10.3.5">
+<h3 number="10.3.5"><span class="header-section-number">10.3.5</span> exercise</h3>
+<p>Now we’re going to use a palette from the <code>wesanderson</code> package.</p>
+<ul>
+<li>Complete the labels with the following arguments:
+<ul>
+<li><code>x = "Species"</code><br />
+</li>
+<li><code>y = "Average lifespan"</code></li>
+</ul></li>
+</ul>
+<p>Wrangle the data:<br />
++ <code>select()</code> the <code>species_name</code> and <code>average_lifespan</code><br />
++ Remove missing values with <code>tidyr::drop_na()</code><br />
++ Get only the distinct combinations of <code>species_name</code> and <code>average_lifespan</code> using <code>dplyr::distinct()</code></p>
+<p>Initiate a graph and map the global positions: + reorder <code>species_name</code> on the <code>x</code> axis according to the descending values of <code>average_lifespan</code><br />
++ <code>y</code> as <code>average_lifespan</code>, and<br />
++ <code>fill</code> as <code>species_name</code></p>
+<p>Add a <code>geom_col()</code> layer and set <code>show.legend</code> to <code>FALSE</code></p>
+<p>Add the <code>scale_fill_manual()</code> layer, and specify the <code>values</code> argument to <code>wes_palette("IsleofDogs2")</code></p>
+<pre class="r"><code>lab_spec_lfspn_class &lt;- labs(title = &quot;Average lifespan by species&quot;, 
+                             x = &quot;_______&quot;, 
+                             y = &quot;_________ _________&quot;, 
+                             caption = &quot;Data from starwarsdb package&quot;)
+SWDBData %&gt;% 
+  dplyr::select(____________, ________________) %&gt;% 
+  tidyr::______() %&gt;% 
+  dplyr::________() %&gt;%
+  ggplot(aes(x = forcats::fct_reorder(.f = ____________,
+                                      .x = desc(________________)), 
+             y = ________________, 
+             fill = ____________)) +
+  geom_col(___________ = ____) +
+  scale_fill_manual(values = wes_palette(&quot;_____________&quot;)) + 
+  lab_spec_lfspn_class</code></pre>
+</div>
+<div id="solution-25" class="section level3" number="10.3.6">
+<h3 number="10.3.6"><span class="header-section-number">10.3.6</span> solution</h3>
+<p>See below. Note the different position of the columns compared to the previous graph.</p>
+<pre class="r"><code>lab_spec_lfspn_class &lt;- labs(title = &quot;Average lifespan by species&quot;, 
+                             x = &quot;Species&quot;, 
+                             y = &quot;Average lifespan&quot;, 
+                             caption = &quot;Data from starwarsdb package&quot;)
+SWDBData %&gt;% 
+  dplyr::select(species_name, average_lifespan) %&gt;% 
+  tidyr::drop_na() %&gt;% 
+  dplyr::distinct() %&gt;%
+  ggplot(aes(x = forcats::fct_reorder(.f = species_name,
+                                      .x = desc(average_lifespan)), 
+             y = average_lifespan, 
+             fill = species_name)) +
+  geom_col(show.legend = FALSE) +
+  scale_fill_manual(values = wes_palette(&quot;IsleofDogs2&quot;)) + 
+  lab_spec_lfspn_class</code></pre>
+<p><img src="img/sol-1.png" width="864" /></p>
+</div>
+</div>
+<div id="position-and-color" class="section level2 tabset" number="10.4">
+<h2 class="tabset" number="10.4"><span class="header-section-number">10.4</span> Position and color</h2>
+<p>The previous graphs introduced two packages for choosing alternative colors. In this section, we’re going to extend the color selection to other geoms, and include considerations for people with color-vision deficiencies.</p>
+<div id="may-the-force-be-with-you" class="section level3" number="10.4.1">
+<h3 number="10.4.1"><span class="header-section-number">10.4.1</span> May the force be with you…</h3>
+<p>The code below filters the <code>SWDBData</code> data to only the <code>height</code> and <code>weight</code> for those characters who were <a href="https://starwars.fandom.com/wiki/Force-sensitive">“force sensitive”</a> (either Jedi or Sith).</p>
+<pre class="r"><code>SWDBData %&gt;% 
+  filter(name_people %in% c(&quot;Anakin Skywalker&quot;, &quot;Dooku&quot;, 
+                            &quot;Obi-Wan Kenobi&quot;, &quot;Plo Koon&quot;, 
+                            &quot;Luke Skywalker&quot;, &quot;Leia Organa&quot;,
+                            &quot;Darth Vader&quot;, &quot;Darth Maul&quot;)) %&gt;% 
+  select(name_people, height, mass) %&gt;% 
+  distinct() -&gt; SWDBForcePilots
+SWDBForcePilots</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name_people"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Luke Skywalker","2":"172","3":"77"},{"1":"Darth Vader","2":"202","3":"136"},{"1":"Leia Organa","2":"150","3":"49"},{"1":"Obi-Wan Kenobi","2":"182","3":"77"},{"1":"Anakin Skywalker","2":"188","3":"84"},{"1":"Dooku","2":"193","3":"80"},{"1":"Darth Maul","2":"175","3":"80"},{"1":"Plo Koon","2":"188","3":"80"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-27" class="section level3" number="10.4.2">
+<h3 number="10.4.2"><span class="header-section-number">10.4.2</span> exercise</h3>
+<p>We’re going to build another column graph, and reorder the <code>x</code> axis by the <code>mass</code> variable.</p>
+<ul>
+<li>map <code>name_people</code> (reordered by <code>mass</code>)<br />
+</li>
+<li>map <code>mass</code> to the <code>y</code> variable<br />
+</li>
+<li>map <code>fill</code> to <code>name_people</code></li>
+<li>add a <code>scale_fill_muted()</code> layer to set the colors</li>
+</ul>
+<pre class="r"><code>lab_ht_wt_cols &lt;- labs(title = &quot;Force and mass in Star Wars&quot;, 
+                       subtitle = &quot;Mass of force sensitive characters&quot;, 
+                       caption = &quot;source: https://starwars.fandom.com/wiki/&quot;, 
+                       x = &quot;Character&quot;, 
+                       y = &quot;Mass&quot;)
+SWDBForcePilots %&gt;% 
+  ggplot(aes(x = fct_reorder(.f = ___________, 
+                             .x = ____),
+             y = ____, 
+             fill = ___________)) + 
+  geom_col(show.legend = FALSE) + 
+  ____________________() + 
+  lab_ht_wt_cols</code></pre>
+</div>
+<div id="solution-26" class="section level3" number="10.4.3">
+<h3 number="10.4.3"><span class="header-section-number">10.4.3</span> solution</h3>
+<p>See the solution below. Notice how the text along the <code>x</code> axis is difficult to read.</p>
+<pre class="r"><code>lab_ht_wt_cols &lt;- labs(title = &quot;Force and mass in Star Wars&quot;, 
+                       subtitle = &quot;Mass of force sensitive characters&quot;, 
+                       caption = &quot;source: https://starwars.fandom.com/wiki/&quot;, 
+                       x = &quot;Character&quot;, 
+                       y = &quot;Mass&quot;)
+
+SWDBForcePilots %&gt;% 
+  ggplot(aes(x = fct_reorder(.f = name_people, 
+                             .x = mass),
+             y = mass, 
+             fill = name_people)) + 
+  geom_col(show.legend = FALSE) + 
+  scale_fill_muted() + 
+  lab_ht_wt_cols</code></pre>
+<p><img src="img/lab_ht_wt_cols-1-sol-1.png" width="864" /></p>
+</div>
+<div id="exercise-28" class="section level3" number="10.4.4">
+<h3 number="10.4.4"><span class="header-section-number">10.4.4</span> exercise</h3>
+<p>Use the Okabe Ito scale if you’re presenting graphs to a broad audience, because it’s specifically designed for color-blindness.</p>
+<ul>
+<li><p>add a <code>coord_flip()</code> layer to deal with the <code>x</code> axis</p></li>
+<li><p>add the <code>scale_fill_okabeito()</code> layer</p></li>
+</ul>
+<pre class="r"><code>SWDBForcePilots %&gt;%  
+  ggplot(aes(x = fct_reorder(.f = name_people, 
+                             .x = mass),
+             y = mass, 
+             fill = name_people)) + 
+  geom_col(show.legend = FALSE) + 
+  __________() + 
+  ___________________() + 
+  lab_ht_wt_cols</code></pre>
+</div>
+<div id="solution-27" class="section level3" number="10.4.5">
+<h3 number="10.4.5"><span class="header-section-number">10.4.5</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>SWDBForcePilots %&gt;%  
+  ggplot(aes(x = fct_reorder(.f = name_people, 
+                             .x = mass),
+             y = mass, 
+             fill = name_people)) + 
+  geom_col(show.legend = FALSE) + 
+  coord_flip() + 
+  scale_fill_okabeito() + 
+  lab_ht_wt_cols</code></pre>
+<p><img src="img/lab_ht_wt_cols-2-sol-1.png" width="864" /></p>
+</div>
+<div id="columns-vs.-points" class="section level3" number="10.4.6">
+<h3 number="10.4.6"><span class="header-section-number">10.4.6</span> columns vs. points</h3>
+<p>Sometimes it’s better to pick a different aesthetic when presenting a continuous variable across a categorical variable. Below we replace the columns with shapes, and use color as an additional aesthetic to distinguish the different species of mammals.</p>
+<p>We have to manually set the color scales here using the hex codes for the Okabe-Ito scale, but we can make things more exciting by randomly assigning the color values to the shapes in the plot.</p>
+<pre class="r"><code>okabe_scale &lt;- c(&quot;#E69F00&quot;, &quot;#56B4E9&quot;, &quot;#009E73&quot;, &quot;#F0E442&quot;, 
+                 &quot;#0072B2&quot;, &quot;#D55E00&quot;, &quot;#CC79A7&quot;)
+sample(x = okabe_scale, size = 4, replace = FALSE)</code></pre>
+<pre><code>## [1] &quot;#F0E442&quot; &quot;#D55E00&quot; &quot;#0072B2&quot; &quot;#E69F00&quot;</code></pre>
+<p>We also add the <code>theme_bw()</code> layer to reduce some of the excess chart elements.</p>
+<pre class="r"><code>lab_mammal_ht &lt;- labs(title = &quot;Human aren&#39;t flightless mammals in Star Wars&quot;, 
+                       subtitle = &quot;Heights of all mammal Star Wars pilots&quot;, 
+                       caption = &quot;source: https://starwars.fandom.com/wiki/&quot;, 
+                       x = &quot;Pilot&quot;, 
+                       y = &quot;Height&quot;)
+
+SWDBData %&gt;%
+  filter(classification == &quot;mammal&quot;) %&gt;% 
+  ggplot(aes(x = fct_reorder(.f = name_people, 
+                             .x = height),
+             y = height,
+             color = species_name,
+             fill = species_name,
+             shape = species_name)) + 
+  geom_point(size = 3) + 
+  coord_flip() + 
+  scale_shape_manual(name = &quot;Species&quot;, 
+                     values = 21:24) +
+  scale_color_manual(name = &quot;Species&quot;, 
+                     values = sample(x = okabe_scale, 
+                                     size = 4, 
+                                     replace = FALSE)) +
+  scale_fill_manual(name = &quot;Species&quot;, 
+                    values = sample(x = okabe_scale, 
+                                    size = 4, 
+                                    replace = FALSE)) +
+  theme_bw() +
+  lab_mammal_ht</code></pre>
+<p><img src="img/lab_mammal_ht-sol-1.png" width="864" /></p>
+</div>
+</div>
+</div>
+<div id="advanced-interactivity" class="section level1" number="11">
+<h1 number="11"><span class="header-section-number">11</span> Advanced Interactivity</h1>
+<p><code>plotly</code> <em>coming soon!!</em></p>
+<div id="exercise-29" class="section level3" number="11.0.1">
+<h3 number="11.0.1"><span class="header-section-number">11.0.1</span> exercise</h3>
+<p><code>plotly</code> <em>coming soon!!</em></p>
+</div>
+<div id="solution-28" class="section level3" number="11.0.2">
+<h3 number="11.0.2"><span class="header-section-number">11.0.2</span> solution</h3>
+<p>See below:</p>
+</div>
+<div id="exercise-30" class="section level3" number="11.0.3">
+<h3 number="11.0.3"><span class="header-section-number">11.0.3</span> exercise</h3>
+<p><code>plotly</code> <em>coming soon!!</em></p>
+</div>
+<div id="solution-29" class="section level3" number="11.0.4">
+<h3 number="11.0.4"><span class="header-section-number">11.0.4</span> solution</h3>
+<p>See below:</p>
+</div>
+<div id="exercise-31" class="section level3" number="11.0.5">
+<h3 number="11.0.5"><span class="header-section-number">11.0.5</span> exercise</h3>
+<p><code>plotly</code> <em>coming soon!!</em></p>
+</div>
+<div id="solution-30" class="section level3" number="11.0.6">
+<h3 number="11.0.6"><span class="header-section-number">11.0.6</span> solution</h3>
+<p>See below:</p>
+</div>
+</div>
+<div id="advanced-animations" class="section level1" number="12">
+<h1 number="12"><span class="header-section-number">12</span> Advanced Animations</h1>
+<p><code>gganimate</code> <em>coming soon!!</em></p>
+<div id="exercise-32" class="section level3" number="12.0.1">
+<h3 number="12.0.1"><span class="header-section-number">12.0.1</span> exercise</h3>
+<p><code>gganimate</code> <em>coming soon!!</em></p>
+</div>
+<div id="solution-31" class="section level3" number="12.0.2">
+<h3 number="12.0.2"><span class="header-section-number">12.0.2</span> solution</h3>
+<p>See below:</p>
+</div>
+<div id="exercise-33" class="section level3" number="12.0.3">
+<h3 number="12.0.3"><span class="header-section-number">12.0.3</span> exercise</h3>
+<p><code>gganimate</code> <em>coming soon!!</em></p>
+</div>
+<div id="solution-32" class="section level3" number="12.0.4">
+<h3 number="12.0.4"><span class="header-section-number">12.0.4</span> solution</h3>
+<p>See below:</p>
+</div>
+<div id="exercise-34" class="section level3" number="12.0.5">
+<h3 number="12.0.5"><span class="header-section-number">12.0.5</span> exercise</h3>
+<p><code>gganimate</code> <em>coming soon!!</em></p>
+</div>
+<div id="solution-33" class="section level3" number="12.0.6">
+<h3 number="12.0.6"><span class="header-section-number">12.0.6</span> solution</h3>
+<p>See below:</p>
+</div>
+</div>
+
+<i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

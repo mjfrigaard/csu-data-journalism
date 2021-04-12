@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Introduction to Data Manipulation</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">bmRn R Training</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Lessons and exercises</a>
+</li>
+<li>
+  <a href="slides.html">Slides</a>
+</li>
+<li>
+  <a href="more-resources.html">More resources</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Introduction to Data Manipulation</h1>
+
+</div>
+
+
+<div id="objectives" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
+<p>This lesson outlines some common data manipulation tasks with <code>dplyr</code>.</p>
+</div>
+<div id="materials" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Materials</h1>
+<p>The slides for this presentation are <a href="https://mjfrigaard.github.io/data-manip-intro/Index.html#1">here</a>.</p>
+<p>There is also an accompanying RStudio.Cloud project <a href="https://rstudio.cloud/project/1918833">here.</a></p>
+<p>Read more about <code>dplyr</code> <a href="https://dplyr.tidyverse.org/index.html">here</a> on the tidyverse website, or in the <a href="https://r4ds.had.co.nz/transform.html">Data Transformation</a> chapter of R for Data Science.</p>
+</div>
+<div id="load-packages" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Load packages</h1>
+<p><code>dplyr</code> is part of the core <code>tidyverse</code> packages, so we install and load this meta-package below.</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)
+library(tidyverse)</code></pre>
+</div>
+<div id="import-data" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Import data</h1>
+<p>We’ll cover two methods for importing data into RStudio.</p>
+<div id="import-data-1" class="section level2 tabset" number="4.1">
+<h2 class="tabset" number="4.1"><span class="header-section-number">4.1</span> Import data</h2>
+<p>We have the path to the <code>original_starwars</code> data stored in our <code>params</code>, but we will also go over how to build this dataset from <code>dplyr::starwars</code>.</p>
+<div id="import-using-url" class="section level3" number="4.1.1">
+<h3 number="4.1.1"><span class="header-section-number">4.1.1</span> Import using url</h3>
+<p>Below we import the <code>original_starwars</code> dataset from the slides using the url. This is similar to providing a local file path (<code>data/original-starwars.csv</code>).</p>
+<pre class="r"><code>read_csv(&quot;https://bit.ly/3qgjqSC&quot;)
+#&gt; 
+#&gt; ── Column specification ────────────────────────────────────────────────────────
+#&gt; cols(
+#&gt;   name = col_character(),
+#&gt;   height = col_double(),
+#&gt;   mass = col_double(),
+#&gt;   hair_color = col_character(),
+#&gt;   species = col_character(),
+#&gt;   homeworld = col_character()
+#&gt; )</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hair_color"],"name":[4],"type":["chr"],"align":["left"]},{"label":["species"],"name":[5],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"Luke Skywalker","2":"172","3":"77","4":"blond","5":"Human","6":"Tatooine"},{"1":"C-3PO","2":"167","3":"75","4":"NA","5":"Droid","6":"Tatooine"},{"1":"R2-D2","2":"96","3":"32","4":"NA","5":"Droid","6":"Naboo"},{"1":"Leia Organa","2":"150","3":"49","4":"brown","5":"Human","6":"Alderaan"},{"1":"Chewbacca","2":"228","3":"112","4":"brown","5":"Wookiee","6":"Kashyyyk"},{"1":"Han Solo","2":"180","3":"80","4":"brown","5":"Human","6":"Corellia"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="import-using-params" class="section level3" number="4.1.2">
+<h3 number="4.1.2"><span class="header-section-number">4.1.2</span> Import using <code>params</code></h3>
+<p>We have the <code>params</code> list from our YAML header, which we can also use to import the data.</p>
+<pre class="yaml"><code>params: 
+  data_file: !r file.path(&quot;https://bit.ly/3qgjqSC&quot;)</code></pre>
+<pre class="r"><code>readr::read_csv(params$data_file)
+#&gt; 
+#&gt; ── Column specification ────────────────────────────────────────────────────────
+#&gt; cols(
+#&gt;   name = col_character(),
+#&gt;   height = col_double(),
+#&gt;   mass = col_double(),
+#&gt;   hair_color = col_character(),
+#&gt;   species = col_character(),
+#&gt;   homeworld = col_character()
+#&gt; )</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hair_color"],"name":[4],"type":["chr"],"align":["left"]},{"label":["species"],"name":[5],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"Luke Skywalker","2":"172","3":"77","4":"blond","5":"Human","6":"Tatooine"},{"1":"C-3PO","2":"167","3":"75","4":"NA","5":"Droid","6":"Tatooine"},{"1":"R2-D2","2":"96","3":"32","4":"NA","5":"Droid","6":"Naboo"},{"1":"Leia Organa","2":"150","3":"49","4":"brown","5":"Human","6":"Alderaan"},{"1":"Chewbacca","2":"228","3":"112","4":"brown","5":"Wookiee","6":"Kashyyyk"},{"1":"Han Solo","2":"180","3":"80","4":"brown","5":"Human","6":"Corellia"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</div>
+<div id="dplyr-verbs" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> <code>dplyr</code> verbs</h1>
+<p>This section covers four common <code>dplyr</code> verbs for data manipulation:</p>
+<ul>
+<li><code>select</code><br />
+</li>
+<li><code>filter</code><br />
+</li>
+<li><code>arrange</code><br />
+</li>
+<li><code>mutate</code></li>
+</ul>
+<div id="selecting-columns" class="section level2 tabset" number="5.1">
+<h2 class="tabset" number="5.1"><span class="header-section-number">5.1</span> Selecting columns</h2>
+<p>These are exercises to try on your own using the <code>select()</code> function.</p>
+<div id="exercise" class="section level3" number="5.1.1">
+<h3 number="5.1.1"><span class="header-section-number">5.1.1</span> exercise</h3>
+<p>Alter the code below to select just the <code>name</code> and <code>homeoworld</code> column:</p>
+<pre class="r"><code>select(original_starwars, name, species, homeworld)</code></pre>
+</div>
+<div id="solution" class="section level3" number="5.1.2">
+<h3 number="5.1.2"><span class="header-section-number">5.1.2</span> solution</h3>
+<pre class="r"><code>select(original_starwars, name, homeworld)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Luke Skywalker","2":"Tatooine"},{"1":"C-3PO","2":"Tatooine"},{"1":"R2-D2","2":"Naboo"},{"1":"Leia Organa","2":"Alderaan"},{"1":"Chewbacca","2":"Kashyyyk"},{"1":"Han Solo","2":"Corellia"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-1" class="section level3" number="5.1.3">
+<h3 number="5.1.3"><span class="header-section-number">5.1.3</span> exercise</h3>
+<p>Select only the columns starting with the letter <code>h</code>.</p>
+<pre class="r"><code>select(original_starwars, starts_with(&quot;_&quot;))</code></pre>
+</div>
+<div id="solution-1" class="section level3" number="5.1.4">
+<h3 number="5.1.4"><span class="header-section-number">5.1.4</span> solution</h3>
+<pre class="r"><code>select(original_starwars, starts_with(&quot;h&quot;))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["height"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["hair_color"],"name":[2],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"172","2":"blond","3":"Tatooine"},{"1":"167","2":"NA","3":"Tatooine"},{"1":"96","2":"NA","3":"Naboo"},{"1":"150","2":"brown","3":"Alderaan"},{"1":"228","2":"brown","3":"Kashyyyk"},{"1":"180","2":"brown","3":"Corellia"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="filtering-rows" class="section level2 tabset" number="5.2">
+<h2 class="tabset" number="5.2"><span class="header-section-number">5.2</span> Filtering rows</h2>
+<p>These are some additional exercises for <code>filter()</code>ing data.</p>
+<div id="exercise-2" class="section level3" number="5.2.1">
+<h3 number="5.2.1"><span class="header-section-number">5.2.1</span> exercise</h3>
+<p>Change the code below so <code>original_starwars</code> only includes the droids.</p>
+<pre class="r"><code>filter(original_starwars, species == &quot;____&quot;)</code></pre>
+</div>
+<div id="solution-2" class="section level3" number="5.2.2">
+<h3 number="5.2.2"><span class="header-section-number">5.2.2</span> solution</h3>
+<pre class="r"><code>filter(original_starwars, species == &quot;Droid&quot;)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hair_color"],"name":[4],"type":["chr"],"align":["left"]},{"label":["species"],"name":[5],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"C-3PO","2":"167","3":"75","4":"NA","5":"Droid","6":"Tatooine"},{"1":"R2-D2","2":"96","3":"32","4":"NA","5":"Droid","6":"Naboo"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-3" class="section level3" number="5.2.3">
+<h3 number="5.2.3"><span class="header-section-number">5.2.3</span> exercise</h3>
+<p>Change the code below so <code>original_starwars</code> only includes data from the <code>homeworld</code>s of <code>Tatooine</code> and <code>Alderaan</code></p>
+<pre class="r"><code>filter(original_starwars, 
+       homeworld %in% c(&quot;________&quot;, &quot;________&quot;))</code></pre>
+</div>
+<div id="solution-3" class="section level3" number="5.2.4">
+<h3 number="5.2.4"><span class="header-section-number">5.2.4</span> solution</h3>
+<pre class="r"><code>filter(original_starwars, 
+       homeworld %in% c(&quot;Tatooine&quot;, &quot;Alderaan&quot;))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hair_color"],"name":[4],"type":["chr"],"align":["left"]},{"label":["species"],"name":[5],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"Luke Skywalker","2":"172","3":"77","4":"blond","5":"Human","6":"Tatooine"},{"1":"C-3PO","2":"167","3":"75","4":"NA","5":"Droid","6":"Tatooine"},{"1":"Leia Organa","2":"150","3":"49","4":"brown","5":"Human","6":"Alderaan"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="arranging-data" class="section level2 tabset" number="5.3">
+<h2 class="tabset" number="5.3"><span class="header-section-number">5.3</span> Arranging data</h2>
+<p><code>arrange()</code> sorts variables on their content, numeric or character.</p>
+<div id="exercise-4" class="section level3" number="5.3.1">
+<h3 number="5.3.1"><span class="header-section-number">5.3.1</span> exercise</h3>
+<p>Sort <code>original_starwars</code> according to the <code>hair_color</code>.</p>
+<pre class="r"><code>arrange(original_starwars, &quot;____ _____&quot;)</code></pre>
+</div>
+<div id="solution-4" class="section level3" number="5.3.2">
+<h3 number="5.3.2"><span class="header-section-number">5.3.2</span> solution</h3>
+<p>Note that the missing values are sorted to the bottom.</p>
+<pre class="r"><code>arrange(original_starwars, hair_color)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hair_color"],"name":[4],"type":["chr"],"align":["left"]},{"label":["species"],"name":[5],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"Luke Skywalker","2":"172","3":"77","4":"blond","5":"Human","6":"Tatooine"},{"1":"Leia Organa","2":"150","3":"49","4":"brown","5":"Human","6":"Alderaan"},{"1":"Chewbacca","2":"228","3":"112","4":"brown","5":"Wookiee","6":"Kashyyyk"},{"1":"Han Solo","2":"180","3":"80","4":"brown","5":"Human","6":"Corellia"},{"1":"C-3PO","2":"167","3":"75","4":"NA","5":"Droid","6":"Tatooine"},{"1":"R2-D2","2":"96","3":"32","4":"NA","5":"Droid","6":"Naboo"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-5" class="section level3" number="5.3.3">
+<h3 number="5.3.3"><span class="header-section-number">5.3.3</span> exercise</h3>
+<p>Sort <code>original_starwars</code> by <code>height</code> and <code>mass</code>, descending.</p>
+<pre class="r"><code>arrange(original_starwars, desc(______, ____))</code></pre>
+</div>
+<div id="solution-5" class="section level3" number="5.3.4">
+<h3 number="5.3.4"><span class="header-section-number">5.3.4</span> solution</h3>
+<pre class="r"><code>arrange(original_starwars, desc(height, mass))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hair_color"],"name":[4],"type":["chr"],"align":["left"]},{"label":["species"],"name":[5],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"Chewbacca","2":"228","3":"112","4":"brown","5":"Wookiee","6":"Kashyyyk"},{"1":"Han Solo","2":"180","3":"80","4":"brown","5":"Human","6":"Corellia"},{"1":"Luke Skywalker","2":"172","3":"77","4":"blond","5":"Human","6":"Tatooine"},{"1":"C-3PO","2":"167","3":"75","4":"NA","5":"Droid","6":"Tatooine"},{"1":"Leia Organa","2":"150","3":"49","4":"brown","5":"Human","6":"Alderaan"},{"1":"R2-D2","2":"96","3":"32","4":"NA","5":"Droid","6":"Naboo"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Including two variables is helpful if some of the values ‘tie’.</p>
+</div>
+</div>
+<div id="mutate-columns" class="section level2 tabset" number="5.4">
+<h2 class="tabset" number="5.4"><span class="header-section-number">5.4</span> Mutate columns</h2>
+<p><code>mutate()</code> can create new columns, or change existing columns.</p>
+<div id="exercise-6" class="section level3" number="5.4.1">
+<h3 number="5.4.1"><span class="header-section-number">5.4.1</span> exercise</h3>
+<p>Alter the code below to create a <code>bmi</code> column for <code>starwars</code> characters in <code>original_starwars</code>.</p>
+<pre class="r"><code>mutate(original_starwars, 
+       bmi = ____ / ((______ / 100) ^ 2))</code></pre>
+</div>
+<div id="solution-6" class="section level3" number="5.4.2">
+<h3 number="5.4.2"><span class="header-section-number">5.4.2</span> solution</h3>
+<p>Note the use of parentheses here.</p>
+<pre class="r"><code>mutate(original_starwars, 
+       bmi = mass / ((height / 100) ^ 2))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hair_color"],"name":[4],"type":["chr"],"align":["left"]},{"label":["species"],"name":[5],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[6],"type":["chr"],"align":["left"]},{"label":["bmi"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"Luke Skywalker","2":"172","3":"77","4":"blond","5":"Human","6":"Tatooine","7":"26.02758"},{"1":"C-3PO","2":"167","3":"75","4":"NA","5":"Droid","6":"Tatooine","7":"26.89232"},{"1":"R2-D2","2":"96","3":"32","4":"NA","5":"Droid","6":"Naboo","7":"34.72222"},{"1":"Leia Organa","2":"150","3":"49","4":"brown","5":"Human","6":"Alderaan","7":"21.77778"},{"1":"Chewbacca","2":"228","3":"112","4":"brown","5":"Wookiee","6":"Kashyyyk","7":"21.54509"},{"1":"Han Solo","2":"180","3":"80","4":"brown","5":"Human","6":"Corellia","7":"24.69136"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-7" class="section level3" number="5.4.3">
+<h3 number="5.4.3"><span class="header-section-number">5.4.3</span> exercise</h3>
+<p>Round the new <code>bmi</code> variable to 1 digit.</p>
+<pre class="r"><code>mutate(original_starwars, 
+       bmi = mass / ((height / 100) ^ 2),
+       bmi = _____(___, digits = _))</code></pre>
+</div>
+<div id="solution-7" class="section level3" number="5.4.4">
+<h3 number="5.4.4"><span class="header-section-number">5.4.4</span> solution</h3>
+<pre class="r"><code>mutate(original_starwars, 
+       bmi = mass / ((height / 100) ^ 2),
+       bmi = round(bmi, digits = 1))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hair_color"],"name":[4],"type":["chr"],"align":["left"]},{"label":["species"],"name":[5],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[6],"type":["chr"],"align":["left"]},{"label":["bmi"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"Luke Skywalker","2":"172","3":"77","4":"blond","5":"Human","6":"Tatooine","7":"26.0"},{"1":"C-3PO","2":"167","3":"75","4":"NA","5":"Droid","6":"Tatooine","7":"26.9"},{"1":"R2-D2","2":"96","3":"32","4":"NA","5":"Droid","6":"Naboo","7":"34.7"},{"1":"Leia Organa","2":"150","3":"49","4":"brown","5":"Human","6":"Alderaan","7":"21.8"},{"1":"Chewbacca","2":"228","3":"112","4":"brown","5":"Wookiee","6":"Kashyyyk","7":"21.5"},{"1":"Han Solo","2":"180","3":"80","4":"brown","5":"Human","6":"Corellia","7":"24.7"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</div>
+<div id="the-pipe" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> The pipe</h1>
+<p>Clearly written code makes it easier for machines <em>and</em> humans to read. The pipe (<code>%&gt;%</code>) from <code>magrittr</code> package allows us to chain together multiple operations into functional ‘pipelines’.</p>
+<div id="function-pipelines" class="section level2 tabset" number="6.1">
+<h2 class="tabset" number="6.1"><span class="header-section-number">6.1</span> Function pipelines</h2>
+<p>The pipe (<code>%&gt;%</code>) takes an object that comes before it, and it drops the object into the function that comes after it.</p>
+<div id="exercise-8" class="section level3" number="6.1.1">
+<h3 number="6.1.1"><span class="header-section-number">6.1.1</span> exercise</h3>
+<p>Rewrite the code below to use the pipe</p>
+<pre class="r"><code>select(filter(
+          original_starwars, mass &lt; ___), 
+              ____, hair_color, _______, homeworld)</code></pre>
+</div>
+<div id="solution-8" class="section level3" number="6.1.2">
+<h3 number="6.1.2"><span class="header-section-number">6.1.2</span> solution</h3>
+<p>This actually wouldn’t matter what order it was in–both would return the same result.</p>
+<pre class="r"><code>original_starwars %&gt;% 
+  filter(mass &lt; 100) %&gt;% 
+  select(name, hair_color, species, homeworld)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["hair_color"],"name":[2],"type":["chr"],"align":["left"]},{"label":["species"],"name":[3],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Luke Skywalker","2":"blond","3":"Human","4":"Tatooine"},{"1":"C-3PO","2":"NA","3":"Droid","4":"Tatooine"},{"1":"R2-D2","2":"NA","3":"Droid","4":"Naboo"},{"1":"Leia Organa","2":"brown","3":"Human","4":"Alderaan"},{"1":"Han Solo","2":"brown","3":"Human","4":"Corellia"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-9" class="section level3" number="6.1.3">
+<h3 number="6.1.3"><span class="header-section-number">6.1.3</span> exercise</h3>
+<p>Perform the following operations <em>without</em> using the pipe.</p>
+<ol style="list-style-type: decimal">
+<li>create object <code>x</code> with three values, (<code>3</code>, <code>7</code>, <code>12</code>)<br />
+</li>
+<li>get the <code>mean()</code> of <code>x</code>, and store it in <code>mean_x</code><br />
+</li>
+<li>take the squared root of <code>mean_x</code></li>
+</ol>
+<pre class="r"><code># 1) 
+_ &lt;- c(_, _, __)
+# 2) 
+mean_x &lt;- ____(x)
+# 3 
+sqrt(______)</code></pre>
+</div>
+<div id="soluton" class="section level3" number="6.1.4">
+<h3 number="6.1.4"><span class="header-section-number">6.1.4</span> soluton</h3>
+<p>This returns a vector, not a <code>tibble</code>.</p>
+<pre class="r"><code># 1) 
+x &lt;- c(3, 7, 12)
+# 2) 
+mean_x &lt;- mean(x)
+# 3 
+sqrt(mean_x)
+#&gt; [1] 2.708013</code></pre>
+</div>
+<div id="exercise-10" class="section level3" number="6.1.5">
+<h3 number="6.1.5"><span class="header-section-number">6.1.5</span> exercise</h3>
+<p>Perform the following operations <em>with</em> the pipe.</p>
+<ol style="list-style-type: decimal">
+<li>create object <code>x</code> with three values, (<code>3</code>, <code>7</code>, <code>12</code>)<br />
+</li>
+<li>get the <code>mean()</code> of <code>x</code>, and store it in <code>mean_x</code><br />
+</li>
+<li>take the squared root of <code>mean_x</code></li>
+</ol>
+<pre class="r"><code>c(_, _, __) %&gt;% 
+  ____() %&gt;% 
+  ____()</code></pre>
+</div>
+<div id="solution-9" class="section level3" number="6.1.6">
+<h3 number="6.1.6"><span class="header-section-number">6.1.6</span> solution</h3>
+<p>Note that we can create a pipeline without even creating an object.</p>
+<pre class="r"><code>c(3, 7, 12) %&gt;% 
+  mean() %&gt;% 
+  sqrt()
+#&gt; [1] 2.708013</code></pre>
+</div>
+</div>
+</div>
+
+<i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
