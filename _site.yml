@@ -1,7 +1,7 @@
-name: "r-meetup-tutorials"
+name: "csu-data-journalism"
 output_dir: "."
 navbar:
-  title: "bmRn R Training"
+  title: "CSU Data Journalism"
   left:
     - text: "Lessons and exercises"
       href: index.html
@@ -14,7 +14,7 @@ navbar:
       href: about.html
 output:
   html_document:
-    theme: flatly
+    theme: united
     includes:
       after_body: footer.html
 new_session: true

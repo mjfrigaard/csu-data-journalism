@@ -66,9 +66,7 @@ cat_bullet(x, "^mk")
 cat_bullet(x, "^dt")
 ```
 
-### Simulate Data 
-
-*Coming soon!*
+<!-- ### Simulate Data  -->
 
 ```{r dg-files, eval=FALSE, results = 'asis', echo = FALSE}
 # here we see the 'dg' for data generation lessons
@@ -82,9 +80,7 @@ cat_bullet(x, "^dg")
 cat_bullet(x, "^gg")
 ```
 
-### Dashboards and Shiny
-
-*coming soon!*
+<!-- ### Dashboards and Shiny -->
 
 ```{r sh-files, results = 'asis', echo = FALSE, eval=FALSE}
 # and the `sh` for shiny

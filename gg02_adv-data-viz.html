@@ -13,13 +13,22 @@
 
 <title>Advanced Data Visualization</title>
 
-<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -44,11 +53,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -61,32 +65,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -97,10 +75,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -117,40 +91,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -178,7 +125,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -190,7 +137,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -201,10 +148,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -216,7 +176,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -345,13 +304,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -364,7 +323,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">bmRn R Training</a>
+      <a class="navbar-brand" href="index.html">CSU Data Journalism</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -387,11 +346,11 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
 </ul>
@@ -480,7 +439,7 @@ BPlayerData</code></pre>
 BPlayerData</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["nameFirst"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nameLast"],"name":[2],"type":["chr"],"align":["left"]},{"label":["height"],"name":[3],"type":["int"],"align":["right"]},{"label":["weight"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"David","2":"Aardsma","3":"75","4":"215"},{"1":"Hank","2":"Aaron","3":"72","4":"180"},{"1":"Tommie","2":"Aaron","3":"75","4":"190"},{"1":"Don","2":"Aase","3":"75","4":"190"},{"1":"Andy","2":"Abad","3":"73","4":"184"},{"1":"Fernando","2":"Abad","3":"73","4":"220"},{"1":"John","2":"Abadie","3":"72","4":"192"},{"1":"Ed","2":"Abbaticchio","3":"71","4":"170"},{"1":"Bert","2":"Abbey","3":"71","4":"175"},{"1":"Charlie","2":"Abbey","3":"68","4":"169"},{"1":"Dan","2":"Abbott","3":"71","4":"190"},{"1":"Fred","2":"Abbott","3":"70","4":"180"},{"1":"Glenn","2":"Abbott","3":"78","4":"200"},{"1":"Jeff","2":"Abbott","3":"74","4":"190"},{"1":"Jim","2":"Abbott","3":"75","4":"200"},{"1":"Kurt","2":"Abbott","3":"71","4":"180"},{"1":"Kyle","2":"Abbott","3":"76","4":"200"},{"1":"Ody","2":"Abbott","3":"69","4":"165"},{"1":"Paul","2":"Abbott","3":"75","4":"185"},{"1":"Al","2":"Aber","3":"74","4":"195"},{"1":"Frank","2":"Abercrombie","3":"NA","4":"NA"},{"1":"Reggie","2":"Abercrombie","3":"75","4":"215"},{"1":"Bill","2":"Abernathie","3":"70","4":"190"},{"1":"Brent","2":"Abernathy","3":"73","4":"185"},{"1":"Ted","2":"Abernathy","3":"74","4":"210"},{"1":"Ted","2":"Abernathy","3":"76","4":"215"},{"1":"Woody","2":"Abernathy","3":"72","4":"170"},{"1":"Cliff","2":"Aberson","3":"72","4":"200"},{"1":"Harry","2":"Ables","3":"74","4":"200"},{"1":"Shawn","2":"Abner","3":"73","4":"190"},{"1":"Cal","2":"Abrams","3":"72","4":"185"},{"1":"George","2":"Abrams","3":"69","4":"170"},{"1":"Johnny","2":"Abrego","3":"72","4":"185"},{"1":"Bobby","2":"Abreu","3":"72","4":"220"},{"1":"Bryan","2":"Abreu","3":"73","4":"204"},{"1":"Joe","2":"Abreu","3":"68","4":"160"},{"1":"Jose","2":"Abreu","3":"75","4":"255"},{"1":"Juan","2":"Abreu","3":"72","4":"185"},{"1":"Tony","2":"Abreu","3":"70","4":"200"},{"1":"Winston","2":"Abreu","3":"74","4":"170"},{"1":"Bill","2":"Abstein","3":"72","4":"185"},{"1":"Jeremy","2":"Accardo","3":"72","4":"195"},{"1":"Alfredo","2":"Aceves","3":"74","4":"205"},{"1":"Jose","2":"Acevedo","3":"72","4":"185"},{"1":"Juan","2":"Acevedo","3":"74","4":"245"},{"1":"A. J.","2":"Achter","3":"77","4":"215"},{"1":"Jim","2":"Acker","3":"74","4":"210"},{"1":"Tom","2":"Acker","3":"76","4":"215"},{"1":"Dustin","2":"Ackley","3":"73","4":"205"},{"1":"Fritz","2":"Ackley","3":"73","4":"202"},{"1":"Cy","2":"Acosta","3":"70","4":"165"},{"1":"Ed","2":"Acosta","3":"77","4":"215"},{"1":"Jose","2":"Acosta","3":"66","4":"134"},{"1":"Manny","2":"Acosta","3":"76","4":"215"},{"1":"Merito","2":"Acosta","3":"67","4":"140"},{"1":"Mark","2":"Acre","3":"80","4":"235"},{"1":"Manny","2":"Acta","3":"74","4":"172"},{"1":"Ronald","2":"Acuna","3":"72","4":"180"},{"1":"Bill","2":"Adair","3":"72","4":"168"},{"1":"Jerry","2":"Adair","3":"72","4":"175"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["nameFirst"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nameLast"],"name":[2],"type":["chr"],"align":["left"]},{"label":["height"],"name":[3],"type":["int"],"align":["right"]},{"label":["weight"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"David","2":"Aardsma","3":"75","4":"215"},{"1":"Hank","2":"Aaron","3":"72","4":"180"},{"1":"Tommie","2":"Aaron","3":"75","4":"190"},{"1":"Don","2":"Aase","3":"75","4":"190"},{"1":"Andy","2":"Abad","3":"73","4":"184"},{"1":"Fernando","2":"Abad","3":"74","4":"235"},{"1":"John","2":"Abadie","3":"72","4":"192"},{"1":"Ed","2":"Abbaticchio","3":"71","4":"170"},{"1":"Bert","2":"Abbey","3":"71","4":"175"},{"1":"Charlie","2":"Abbey","3":"68","4":"169"},{"1":"Dan","2":"Abbott","3":"71","4":"190"},{"1":"Fred","2":"Abbott","3":"70","4":"180"},{"1":"Glenn","2":"Abbott","3":"78","4":"200"},{"1":"Jeff","2":"Abbott","3":"74","4":"190"},{"1":"Jim","2":"Abbott","3":"75","4":"200"},{"1":"Kurt","2":"Abbott","3":"71","4":"180"},{"1":"Kyle","2":"Abbott","3":"76","4":"200"},{"1":"Ody","2":"Abbott","3":"69","4":"165"},{"1":"Paul","2":"Abbott","3":"75","4":"185"},{"1":"Al","2":"Aber","3":"74","4":"195"},{"1":"Frank","2":"Abercrombie","3":"NA","4":"NA"},{"1":"Reggie","2":"Abercrombie","3":"75","4":"215"},{"1":"Bill","2":"Abernathie","3":"70","4":"190"},{"1":"Brent","2":"Abernathy","3":"73","4":"185"},{"1":"Ted","2":"Abernathy","3":"74","4":"210"},{"1":"Ted","2":"Abernathy","3":"76","4":"215"},{"1":"Woody","2":"Abernathy","3":"72","4":"170"},{"1":"Cliff","2":"Aberson","3":"72","4":"200"},{"1":"Harry","2":"Ables","3":"74","4":"200"},{"1":"Shawn","2":"Abner","3":"73","4":"190"},{"1":"Cal","2":"Abrams","3":"72","4":"185"},{"1":"George","2":"Abrams","3":"69","4":"170"},{"1":"Johnny","2":"Abrego","3":"72","4":"185"},{"1":"Albert","2":"Abreu","3":"74","4":"190"},{"1":"Bobby","2":"Abreu","3":"72","4":"220"},{"1":"Bryan","2":"Abreu","3":"73","4":"225"},{"1":"Joe","2":"Abreu","3":"68","4":"160"},{"1":"Jose","2":"Abreu","3":"75","4":"250"},{"1":"Juan","2":"Abreu","3":"72","4":"185"},{"1":"Tony","2":"Abreu","3":"70","4":"200"},{"1":"Winston","2":"Abreu","3":"74","4":"170"},{"1":"Bill","2":"Abstein","3":"72","4":"185"},{"1":"Jeremy","2":"Accardo","3":"72","4":"195"},{"1":"Alfredo","2":"Aceves","3":"74","4":"205"},{"1":"Jose","2":"Acevedo","3":"72","4":"185"},{"1":"Juan","2":"Acevedo","3":"74","4":"245"},{"1":"A. J.","2":"Achter","3":"77","4":"215"},{"1":"Jim","2":"Acker","3":"74","4":"210"},{"1":"Tom","2":"Acker","3":"76","4":"215"},{"1":"Dustin","2":"Ackley","3":"73","4":"205"},{"1":"Fritz","2":"Ackley","3":"73","4":"202"},{"1":"Cy","2":"Acosta","3":"70","4":"165"},{"1":"Ed","2":"Acosta","3":"77","4":"215"},{"1":"Jose","2":"Acosta","3":"66","4":"134"},{"1":"Manny","2":"Acosta","3":"76","4":"215"},{"1":"Merito","2":"Acosta","3":"67","4":"140"},{"1":"Mark","2":"Acre","3":"80","4":"235"},{"1":"Manny","2":"Acta","3":"74","4":"172"},{"1":"Ronald","2":"Acuna","3":"72","4":"205"},{"1":"Bill","2":"Adair","3":"72","4":"168"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -561,7 +520,7 @@ bind_rows(BPHeavy, BPTall, BPShort, BPLight, BPTiny) -&gt; BPlayerLabels
 BPlayerLabels</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["nameFirst"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nameLast"],"name":[2],"type":["chr"],"align":["left"]},{"label":["height"],"name":[3],"type":["int"],"align":["right"]},{"label":["weight"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"Walter","2":"Young","3":"77","4":"320"},{"1":"Jon","2":"Rauch","3":"83","4":"290"},{"1":"Tom","2":"Healey","3":"55","4":"155"},{"1":"Jacob","2":"Stallings","3":"77","4":"76"},{"1":"Eddie","2":"Gaedel","3":"43","4":"65"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["nameFirst"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nameLast"],"name":[2],"type":["chr"],"align":["left"]},{"label":["height"],"name":[3],"type":["int"],"align":["right"]},{"label":["weight"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"Walter","2":"Young","3":"77","4":"320"},{"1":"Jon","2":"Rauch","3":"83","4":"290"},{"1":"Tom","2":"Healey","3":"55","4":"155"},{"1":"Eddie","2":"Gaedel","3":"43","4":"65"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -818,13 +777,15 @@ BPlayerData %&gt;%
   lab_bbp_tall_short</code></pre>
 <p><img src="img/lab_bbp_tall_short-sol-1.png" width="864" /></p>
 </div>
-<div id="lightest-player" class="section level3" number="7.6.7">
-<h3 number="7.6.7"><span class="header-section-number">7.6.7</span> Lightest player?</h3>
-<p>The <code>Lahman</code> dataset lists <code>Jacob Stallings</code> as weighing <code>76</code> lbs, but <a href="https://www.baseball-reference.com">baseball-reference</a> lists his weight as 220lbs. We will include this label with different colors.</p>
-<pre class="r"><code>BPMaybeLightest</code></pre>
+<div id="label-the-lightest-player" class="section level3" number="7.6.7">
+<h3 number="7.6.7"><span class="header-section-number">7.6.7</span> Label the lightest player</h3>
+<p>The <code>Lahman</code> dataset lists <code>Eddie Gaedel</code> as weighing <code>65</code> lbs. We will include this label with different colors.</p>
+<pre class="r"><code>BPMaybeLightest &lt;- BPBigSmall %&gt;%  
+  slice_min(weight)
+BPMaybeLightest</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["nameFirst"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nameLast"],"name":[2],"type":["chr"],"align":["left"]},{"label":["height"],"name":[3],"type":["int"],"align":["right"]},{"label":["weight"],"name":[4],"type":["int"],"align":["right"]},{"label":["outlier_label"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Jacob","2":"Stallings","3":"77","4":"76","5":"**Jacob Stallings:** *Lightest..?*"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["nameFirst"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nameLast"],"name":[2],"type":["chr"],"align":["left"]},{"label":["height"],"name":[3],"type":["int"],"align":["right"]},{"label":["weight"],"name":[4],"type":["int"],"align":["right"]},{"label":["outlier_label"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Eddie","2":"Gaedel","3":"43","4":"65","5":"**Eddie Gaedel:** *Tiniest...*"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -847,8 +808,8 @@ BPlayerData %&gt;%
 <li>map <code>color</code> to <code>"firebrick"</code></li>
 </ul>
 <p>We don’t need to adjust the axes on this graph.</p>
-<pre class="r"><code>lab_bbp_maybe_light &lt;- labs(title = &quot;Is Jacob Stallings the lightest player?&quot;, 
-                      subtitle = &quot;Listed as 6-5, 220lb on baseball-reference.com&quot;, 
+<pre class="r"><code>lab_bbp_maybe_light &lt;- labs(title = &quot;Who is the lightest player?&quot;, 
+                      subtitle = &quot;The lighted player in Lahman database&quot;, 
                       x = &quot;Weight in pounds&quot;, 
                       y = &quot;Height in inches&quot;,
                       caption = &quot;https://www.baseball-reference.com/players/s/stallja01.shtml&quot;)
@@ -876,8 +837,8 @@ BPlayerData %&gt;%
 <div id="solution-7" class="section level3" number="7.6.9">
 <h3 number="7.6.9"><span class="header-section-number">7.6.9</span> solution</h3>
 <p>See below:</p>
-<pre class="r"><code>lab_bbp_maybe_light &lt;- labs(title = &quot;Is Jacob Stallings the lightest player?&quot;, 
-                      subtitle = &quot;Listed as 6-5, 220lb on baseball-reference.com&quot;, 
+<pre class="r"><code>lab_bbp_maybe_light &lt;- labs(title = &quot;Who is the lightest player?&quot;, 
+                      subtitle = &quot;The lighted player in Lahman database&quot;, 
                       x = &quot;Weight in pounds&quot;, 
                       y = &quot;Height in inches&quot;,
                       caption = &quot;https://www.baseball-reference.com/players/s/stallja01.shtml&quot;)
@@ -973,7 +934,7 @@ BattingStats %&gt;%
             to = max(yearID))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["batting_era"],"name":[1],"type":["fct"],"align":["left"]},{"label":["from"],"name":[2],"type":["int"],"align":["right"]},{"label":["to"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"19th Century (1871 - 1900)","2":"1871","3":"1900"},{"1":"Dead Ball (1901 - 1919)","2":"1901","3":"1919"},{"1":"Lively Ball (1920 - 1941)","2":"1920","3":"1941"},{"1":"Integration (1942 - 1976)","2":"1942","3":"1960"},{"1":"Expansion (1961 - 1976)","2":"1961","3":"1976"},{"1":"Free Agency (1977 - 1993)","2":"1977","3":"1993"},{"1":"Long Ball (1994 - 2019)","2":"1994","3":"2019"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["batting_era"],"name":[1],"type":["fct"],"align":["left"]},{"label":["from"],"name":[2],"type":["int"],"align":["right"]},{"label":["to"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"19th Century (1871 - 1900)","2":"1871","3":"1900"},{"1":"Dead Ball (1901 - 1919)","2":"1901","3":"1919"},{"1":"Lively Ball (1920 - 1941)","2":"1920","3":"1941"},{"1":"Integration (1942 - 1976)","2":"1942","3":"1960"},{"1":"Expansion (1961 - 1976)","2":"1961","3":"1976"},{"1":"Free Agency (1977 - 1993)","2":"1977","3":"1993"},{"1":"Long Ball (1994 - 2019)","2":"1994","3":"2020"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -992,7 +953,7 @@ SumBattingStats %&gt;% str()</code></pre>
   group_by(batting_era) %&gt;% 
   summarize(avg_slug_perc = mean(slug_perc, na.rm = TRUE))
 SumBattingStats %&gt;% str()</code></pre>
-<pre><code>## tibble [7 × 2] (S3: tbl_df/tbl/data.frame)
+<pre><code>## tibble[,2] [7 × 2] (S3: tbl_df/tbl/data.frame)
 ##  $ batting_era  : Factor w/ 7 levels &quot;19th Century (1871 - 1900)&quot;,..: 1 2 3 4 5 6 7
 ##  $ avg_slug_perc: num [1:7] 0.291 0.264 0.304 0.281 0.272 ...</code></pre>
 </div>
@@ -1502,8 +1463,8 @@ library(khroma)</code></pre>
 <pre class="r"><code>library(dm, warn.conflicts = FALSE)
 sw_dm &lt;- starwars_dm()
 dm_draw(sw_dm)</code></pre>
-<div id="htmlwidget-5badbe44dc510409d72d" style="width:864px;height:576px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5badbe44dc510409d72d">{"x":{"diagram":"#data_model\ndigraph {\ngraph [rankdir=LR tooltip=\"Data Model\" ]\n\nnode [margin=0 fontcolor = \"#444444\" ]\n\nedge [color = \"#555555\", arrowsize = 1, ]\n\npack=true\npackmode= \"node\"\n\n  \"films\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\"><U>title<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_people\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_people<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"character\">character<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_planets\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_planets<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"planet\">planet<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_vehicles\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_vehicles<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"vehicle\">vehicle<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"people\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#496567AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#6E989BFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">people<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"homeworld\">homeworld<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"species\">species<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"pilots\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#496567AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#6E989BFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">pilots<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"pilot\">pilot<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"vehicle\">vehicle<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"planets\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#7D2E0AAA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#BC4610FF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">planets<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F1DACFFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"species\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#7D563AAA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#BC8258FF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">species<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F1E6DDFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"vehicles\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#4B3529AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#71503EFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">vehicles<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2DCD8FF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n\"films_people\":\"title\"->\"films\":\"title\"\n\"films_planets\":\"title\"->\"films\":\"title\"\n\"films_vehicles\":\"title\"->\"films\":\"title\"\n\"films_people\":\"character\"->\"people\":\"name\"\n\"pilots\":\"pilot\"->\"people\":\"name\"\n\"films_planets\":\"planet\"->\"planets\":\"name\"\n\"people\":\"homeworld\"->\"planets\":\"name\"\n\"people\":\"species\"->\"species\":\"name\"\n\"films_vehicles\":\"vehicle\"->\"vehicles\":\"name\"\n\"pilots\":\"vehicle\"->\"vehicles\":\"name\"\n}","config":{"engine":null,"options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-660d8c060b884199271e" style="width:864px;height:576px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-660d8c060b884199271e">{"x":{"diagram":"#data_model\ndigraph {\ngraph [rankdir=LR tooltip=\"Data Model\" ]\n\nnode [margin=0 fontcolor = \"#444444\" ]\n\nedge [color = \"#555555\", arrowsize = 1, ]\n\npack=true\npackmode= \"node\"\n\n  \"films\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\"><U>title<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_people\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_people<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"character\">character<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_planets\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_planets<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"planet\">planet<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_vehicles\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_vehicles<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"vehicle\">vehicle<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"people\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#496567AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#6E989BFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">people<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"homeworld\">homeworld<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"species\">species<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"pilots\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#496567AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#6E989BFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">pilots<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"pilot\">pilot<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"vehicle\">vehicle<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"planets\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#7D2E0AAA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#BC4610FF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">planets<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F1DACFFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"species\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#7D563AAA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#BC8258FF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">species<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F1E6DDFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"vehicles\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#4B3529AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#71503EFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">vehicles<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2DCD8FF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n\"films_people\":\"title\"->\"films\":\"title\"\n\"films_planets\":\"title\"->\"films\":\"title\"\n\"films_vehicles\":\"title\"->\"films\":\"title\"\n\"films_people\":\"character\"->\"people\":\"name\"\n\"pilots\":\"pilot\"->\"people\":\"name\"\n\"films_planets\":\"planet\"->\"planets\":\"name\"\n\"people\":\"homeworld\"->\"planets\":\"name\"\n\"people\":\"species\"->\"species\":\"name\"\n\"films_vehicles\":\"vehicle\"->\"vehicles\":\"name\"\n\"pilots\":\"vehicle\"->\"vehicles\":\"name\"\n}","config":{"engine":null,"options":null}},"evals":[],"jsHooks":[]}</script>
 <p>We covered joins in a previous <a href="https://mjfrigaard.github.io/r-meetup-tutorials/dt01_data-trans-joins-exercises.html#3_Joins">lesson</a>. Below we will create a dataset with variables from the <code>people</code>, <code>planets</code>, <code>species</code>, and <code>pilots</code> tables.</p>
 <div id="exercise-19" class="section level3" number="10.1.1">
 <h3 number="10.1.1"><span class="header-section-number">10.1.1</span> exercise</h3>
@@ -1902,7 +1863,7 @@ SWDBForcePilots %&gt;%
 <pre class="r"><code>okabe_scale &lt;- c(&quot;#E69F00&quot;, &quot;#56B4E9&quot;, &quot;#009E73&quot;, &quot;#F0E442&quot;, 
                  &quot;#0072B2&quot;, &quot;#D55E00&quot;, &quot;#CC79A7&quot;)
 sample(x = okabe_scale, size = 4, replace = FALSE)</code></pre>
-<pre><code>## [1] &quot;#F0E442&quot; &quot;#D55E00&quot; &quot;#0072B2&quot; &quot;#E69F00&quot;</code></pre>
+<pre><code>## [1] &quot;#CC79A7&quot; &quot;#D55E00&quot; &quot;#0072B2&quot; &quot;#009E73&quot;</code></pre>
 <p>We also add the <code>theme_bw()</code> layer to reduce some of the excess chart elements.</p>
 <pre class="r"><code>lab_mammal_ht &lt;- labs(title = &quot;Human aren&#39;t flightless mammals in Star Wars&quot;, 
                        subtitle = &quot;Heights of all mammal Star Wars pilots&quot;, 
@@ -2023,7 +1984,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

@@ -492,11 +492,13 @@ BPlayerData %>%
 ```
 
 
-### Lightest player?
+### Label the lightest player
 
-The `Lahman` dataset lists `Jacob Stallings` as weighing `76` lbs, but [baseball-reference](https://www.baseball-reference.com) lists his weight as 220lbs. We will include this label with different colors. 
+The `Lahman` dataset lists `Eddie Gaedel` as weighing `65` lbs. We will include this label with different colors. 
 
 ```{r BPMaybeLightest}
+BPMaybeLightest <- BPBigSmall %>%  
+  slice_min(weight)
 BPMaybeLightest
 ```
 
@@ -517,8 +519,8 @@ Add another `geom_point()` layer
 We don't need to adjust the axes on this graph.
 
 ```{r lab_bbp_maybe_light-ex, eval=FALSE}
-lab_bbp_maybe_light <- labs(title = "Is Jacob Stallings the lightest player?", 
-                      subtitle = "Listed as 6-5, 220lb on baseball-reference.com", 
+lab_bbp_maybe_light <- labs(title = "Who is the lightest player?", 
+                      subtitle = "The lighted player in Lahman database", 
                       x = "Weight in pounds", 
                       y = "Height in inches",
                       caption = "https://www.baseball-reference.com/players/s/stallja01.shtml")
@@ -549,8 +551,8 @@ BPlayerData %>%
 See below:
 
 ```{r lab_bbp_maybe_light-sol, message=FALSE, warning=FALSE}
-lab_bbp_maybe_light <- labs(title = "Is Jacob Stallings the lightest player?", 
-                      subtitle = "Listed as 6-5, 220lb on baseball-reference.com", 
+lab_bbp_maybe_light <- labs(title = "Who is the lightest player?", 
+                      subtitle = "The lighted player in Lahman database", 
                       x = "Weight in pounds", 
                       y = "Height in inches",
                       caption = "https://www.baseball-reference.com/players/s/stallja01.shtml")
