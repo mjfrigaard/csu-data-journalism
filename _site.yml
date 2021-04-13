@@ -1,7 +1,7 @@
-name: "csu-data-journalism"
+name: "csuc-data-journalism"
 output_dir: "."
 navbar:
-  title: "CSU Data Journalism"
+  title: "CSUC Data Journalism"
   left:
     - text: "Course outline"
       href: index.html
