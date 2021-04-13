@@ -49,9 +49,9 @@ options(width = 60, max.print = 60)
 
 We're going to import the data from the previous exercises.  
 
-```{r import-tidy-apple}
+```{r import-TidyApple-TopUSCities, message=FALSE, warning=FALSE}
 TidyApple <- readr::read_csv("https://bit.ly/3deFcBy")
-TopUSCities <- readr::read_csv("")
+TopUSCities <- readr::read_csv("https://bit.ly/3dYbVub")
 ```
 
 
@@ -78,9 +78,18 @@ TopUSCities %>%
   lab_top_cities
 ```
 
+
+
 ### solution
 
 See below:
+
+```{r lab_top_cities-sol}
+lab_top_cities <- labs(x = "Date", y  = "Direction Requests",
+     title = "Trends of Relative Activity in Selected US Cities",
+     subtitle = "NY, LA, CH, HOU, PHA, PHL, SATX, SD",
+     color = "Type")
+```
 
 ```{r facet_wrap-sol, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 TopUSCities %>%

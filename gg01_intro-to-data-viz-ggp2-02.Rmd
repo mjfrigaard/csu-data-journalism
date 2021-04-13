@@ -431,8 +431,8 @@ lab_violin <- labs(x = _________________________,
 ### solution
 
 ```{r lab_violin-sol}
-lab_violin <- labs(x = "Apple directions requests",
-                   y = "Transit Type",
+lab_violin <- labs(x = "Transit Type",
+                   y = "Apple directions requests",
                    fill = "Transit Type",
      title = "Distribution of Direction Requests vs. Transportation Type",
      subtitle = "source: https://covid19.apple.com/mobility")
@@ -490,7 +490,9 @@ TidyApple %>%
 
 ## Export the data {.tabset}
 
-You'll want to export the `TidyApple` and `USCities` datasets for the next set of exercise. The code chunk below exports the dataset as a .csv with a date-stamp. 
+You'll want to export the `TidyApple` dataset for the next set of exercise. 
+
+The code chunk below exports the dataset as a .csv with a date-stamp. 
 
 ```{r export-TidyApple-USCities}
 readr::write_csv(x = TidyApple, 
