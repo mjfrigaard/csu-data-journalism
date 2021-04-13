@@ -1,0 +1,24 @@
+---
+title: "Your first RStudio session"
+comment: "*a crash course in R*"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 5
+    number_sections: yes
+    theme: united
+    df_print: paged
+
+always_allow_html: true
+---
+
+```{r, echo = FALSE}
+# don't name this setup!
+knitr::opts_chunk$set(collapse = TRUE,
+                      comment = "#>",
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+

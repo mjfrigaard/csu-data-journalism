@@ -1,0 +1,680 @@
+---
+title: "Introduction to Data Visualization with ggplot2"
+comment: "*an introduction to the grammar of graphics*"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+    toc_depth: 5
+    number_sections: yes
+    code_folding: show
+    theme: united
+    df_print: paged
+    
+always_allow_html: true
+---
+
+
+```{r , include=FALSE}
+library(tidyverse)
+library(skimr)
+# create data folder
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE,
+                      tidy = FALSE, 
+                      fig.height = 5,
+                      fig.width = 7,
+                      fig.path = "img/")
+# set width
+options(width = 60)
+```
+
+# Objectives 
+
+This document outlines and introduction to data visualization with `ggplot2`. 
+
+# Materials
+
+The slides for this presentation are [here](https://mjfrigaard.github.io/data-viz-intro/Index.html)
+
+There is also an accompanying [RStudio.Cloud project](https://rstudio.cloud/project/1973650)
+
+# Previous lessons
+
+All of the exercises and lessons are available [here](https://mjfrigaard.github.io/r-meetup-tutorials/), but you can also read more about [`dplyr`](https://dplyr.tidyverse.org/index.html) and [`tidyr`](https://tidyr.tidyverse.org/) on the tidyverse website, and in the [Data Transformation](https://r4ds.had.co.nz/transform.html) and [Tidy Data](https://r4ds.had.co.nz/tidy-data.html) chapters of R for Data Science. 
+
+# Load the packages 
+
+The main packages we're going to use are `dplyr`, `tidyr`, and `ggplot2`. These are all part of the `tidyverse`, so we'll import this package below: 
+
+```{r packages, eval=FALSE}
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+# Import data 
+
+We will begin by importing the data from the wrangling section. These data come from a wikipedia table on [largest biotechnology and pharmaceutical companies](https://en.wikipedia.org/wiki/List_of_largest_biotechnology_and_pharmaceutical_companies).
+
+```{r TopPharmComp, message=FALSE, warning=FALSE}
+TopPharmComp <- readr::read_csv(file = "https://bit.ly/3gC67HT")
+TopPharmComp %>% glimpse(78)
+```
+
+## Format variables 
+
+We can see a few of the variables need to be formatted before we can start visualizing. 
+
+```{r format-variables}
+TopPharmComp %>% 
+  mutate(
+    # create factor
+    ranking = factor(ranking, ordered = TRUE),
+    # remove whitespace
+    stock_id = str_trim(string = stock_id, side = "both")) -> TopPharmComp
+# get skim
+TopPharmComp %>% skimr::skim()
+```
+
+
+# Visualize 
+
+We will start by looking at the trends of `market_cap_us_bil` over time (using `year`). 
+
+## Build the labels first!
+
+I suggest building labels **first** when making a figure or graph, because it forces us to think about what we should expect to see. For example, if we want to see `market_cap_us_bil` on the `y` and `market_cap_year` on the `x`, we can create these with a title using the `ggplot2::labs()` function below. 
+
+```{r lab_year_x_mrktcap}
+lab_year_x_mrktcap <- ggplot2::labs(title = "Market Cap Trends Over Time", 
+                              subtitle = "Largest Pharmaceutical Companies",
+                              x = "Year", y = "Market cap (USD in billions)")
+```
+
+# Map Variables to Positions
+
+We map variables to positions (`x` and `y`) inside the `aes()` function, either globally inside `ggplot()` or locally inside a `geom()`. 
+
+## Positions {.tabset}
+
+The exercises below are a refresher on mapping variables to aesthetics and picking geoms. 
+
+### exercise
+
+Map the `year` to the `x` and `market_cap_us_bil` to the `y` globally and add a `geom_point()`
+
+```{r aes-ex-01, eval=FALSE}
+TopPharmComp %>% 
+  ggplot(aes(x = __________, y = __________)) + 
+  geom______() + 
+  lab_year_x_mrktcap
+```
+
+### solution
+
+Check the solution below--what is wrong with this plot?
+
+```{r aes-sol-01, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+TopPharmComp %>% 
+  ggplot(aes(x = year, y = market_cap_us_bil)) + 
+  geom_point() + 
+  lab_year_x_mrktcap
+```
+
+### exercise
+
+Change the geom to a `geom_line()`. Does it help?
+
+```{r aes-ex-02, eval=FALSE}
+TopPharmComp %>% 
+  ggplot(aes(x = __________, y = __________)) + 
+  geom_____() + 
+  lab_year_x_mrktcap
+```
+
+### solution
+
+Check the updated graph below. It's closer to what we want, but not quite. What do you think the issue is?
+
+```{r aes-sol-02, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+TopPharmComp %>% 
+  ggplot(aes(x = year, y = market_cap_us_bil)) + 
+  geom_line() + 
+  lab_year_x_mrktcap
+```
+
+### exercise
+
+This time add another `aes()` *inside* the `geom_line()` function, and apply `group` to `company_name`.
+
+```{r aes-ex-03, eval=FALSE}
+TopPharmComp %>% 
+  ggplot(aes(x = year, y = market_cap_us_bil)) + 
+  geom_line(aes(_____ = __________)) + 
+  lab_year_x_mrktcap
+```
+
+### solution
+
+Now the graph is looking how we want! We can see the trend lines are separated according to each company name, but we can't tell which line is which. 
+
+Let's add some color to see more.
+
+```{r aes-sol-03, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+TopPharmComp %>% 
+  ggplot(aes(x = year, y = market_cap_us_bil)) + 
+  geom_line(aes(group = company_name)) + 
+  lab_year_x_mrktcap
+```
+
+# Map Variables to Aesthetics
+
+Aesthetics include visual elements like `size`, `color`, and `fill`.
+
+## Aesthetics {.tabset} 
+
+In the previous graph, we were able to get a different line per company. However, we want to identify more about these companies with color. 
+
+We know there are 33 levels in `company_name`, and this is too many to map with color (check this below with `distinct()`) 
+
+```{r distinct-company_name}
+TopPharmComp %>% distinct(company_name)
+```
+
+### exercise
+
+Use the `stock_exch` to color the lines, assign this graph to `gg_trend_line`
+
+```{r aes-ex-04-gg_trend_line, eval=FALSE}
+gg_trend_line <- TopPharmComp %>% 
+  ggplot(aes(x = year, y = market_cap_us_bil)) + 
+  geom_line(aes(group = company_name, color = __________)) + 
+  lab_year_x_mrktcap
+gg_trend_line
+```
+
+### solution
+
+This graph is showing us more information that the previous plot. For example, we can see the companies with the best performance are on the `NYSE`, and those with relatively low performance are on the `TSX`. 
+
+This graph is better then the previous versions, but it still has too much information to be very helpful. For example, we have no idea which line belongs to which company?
+
+```{r aes-sol-04-gg_trend_line, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+gg_trend_line <- TopPharmComp %>% 
+  ggplot(aes(x = year, y = market_cap_us_bil)) + 
+  geom_line(aes(group = company_name, color = stock_exch)) + 
+  lab_year_x_mrktcap
+gg_trend_line
+```
+
+In the next section, we'll summarize the data a bit more to create different visualizations.
+
+# Graphing Data Summaries 
+
+We're going to summarize the data in `TopPharmComp`. Summarizations are helpful when we're interested in comparing variables across groups.
+
+## Grouped calculations {.tabset}
+
+Whenever we're grouping by a particular variable (or variables), we need to decide what summary calculation to use. In the section below we will use the `mean()` function to get the average market cap (in USD in billions).
+
+### Graph Labels
+
+We want the `TopPharmComp` dataset to have one variable per `company_name` name and `stock_exch`. 
+
+A good measure of central tendency for this is the `mean()` (or average). First we define the new labels.
+
+```{r lab_avgmrktcap_compname}
+lab_avgmrktcap_compname <- ggplot2::labs(title = "Average Market Cap (2013-2019)", 
+                              subtitle = "Largest Pharmaceutical Companies",
+                              x = "Average Market cap (USD in billions)",
+                              y = "Company")
+```
+
+The code below groups the `TopPharmComp` data by `company_name` and `stock_exch` and summarizes the mean `market_cap_us_bil`.
+
+```{r group_by-summarize, message=FALSE, warning=FALSE}
+TopPharmComp %>% 
+  group_by(company_name, stock_exch) %>% 
+  summarize(
+    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %>% 
+  ungroup()
+```
+
+This dataset will allow us to show more information per company.
+
+### exercise 
+
+Complete the code below with the following:
+
+1. map `avg_market_cap` to the `x` axis  
+2. map `company_name` to the `y` axis
+3. map `stock_exch` to `fill`
+
+```{r aes-ex-05, eval=FALSE}
+TopPharmComp %>% 
+  group_by(company_name, stock_exch) %>% 
+  summarize(
+    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_col(aes(x = _________, 
+             
+             y = __________,
+             
+             fill = _________)) + 
+  lab_avgmrktcap_compname
+```
+
+### solution
+
+See below: 
+
+```{r aes-sol-05-gg_col_graph, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+TopPharmComp %>% 
+  group_by(company_name, stock_exch) %>% 
+  summarize(
+    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_col(aes(x = avg_market_cap, 
+               
+               y = company_name,
+             
+               fill = stock_exch)) + 
+  lab_avgmrktcap_compname
+```
+
+This graph is better because we can see the average performance of the market cap per company. The lines are very unorganized, though. We can use a combination of `factor()` and `forcats::fct_reorder()` to fix this.
+
+### exercise 
+
+Use `fct_reorder` and `factor` to reorder `avg_market_cap` according to `company_name`  
+
+```{r aes-ex-6, eval=FALSE}
+TopPharmComp %>% 
+  group_by(company_name, stock_exch) %>% 
+  summarize(
+    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_col(aes(x = avg_market_cap, 
+             y = fct_reorder(factor(_________), __________),
+             fill = stock_exch)) + 
+  lab_avgmrktcap_compname
+```
+
+### solution
+
+See below:
+
+```{r aes-sol-6, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+TopPharmComp %>% 
+  group_by(company_name, stock_exch) %>% 
+  summarize(
+    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_col(aes(x = avg_market_cap, 
+             y = fct_reorder(factor(company_name), avg_market_cap),
+             fill = stock_exch)) + 
+  lab_avgmrktcap_compname
+```
+
+
+### exercise 
+
+Change the labels below so that the legend is named, `"Stock Exchange"`. Re-build the plot with the new labels and assign this to `gg_col_graph`.
+
+```{r label-ex-07-gg_col_graph, eval=FALSE}
+lab_avgmrktcap_comp_fill <- ggplot2::labs(x = "Company", 
+                              y = "Average Market cap (USD in billions)", 
+                              title = "Average Market Cap (2013-2019)", 
+                              subtitle = "Largest Pharmaceutical Companies", 
+                              fill = ___________)
+
+TopPharmComp %>% 
+  group_by(company_name, stock_exch) %>% 
+  summarize(
+    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  
+  ggplot() + 
+  geom_col(aes(x = avg_market_cap, 
+             y = fct_reorder(factor(company_name), avg_market_cap),
+             fill = stock_exch)) +
+  
+  lab_avgmrktcap_comp_fill -> gg_col_graph
+
+gg_col_graph
+```
+
+### solution
+
+See below:
+
+```{r label-sol-07, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+lab_avgmrktcap_comp_fill <- ggplot2::labs(x = "Company", 
+                              y = "Average Market cap (USD in billions)", 
+                              title = "Average Market Cap (2013-2019)", 
+                              subtitle = "Largest Pharmaceutical Companies", 
+                              fill = "Stock Exchange")
+
+TopPharmComp %>% 
+  group_by(company_name, stock_exch) %>% 
+  summarize(
+    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  
+  ggplot() + 
+  geom_col(aes(x = avg_market_cap, 
+             y = fct_reorder(factor(company_name), avg_market_cap),
+             fill = stock_exch)) +
+  
+  lab_avgmrktcap_comp_fill -> gg_col_graph
+
+gg_col_graph
+```
+
+# Labelling Values
+
+We're going to focus on the Largest Market Cap (`largest_market_cap_us_bil`) and Largest Market Cap Date (`largest_market_cap_date`) variables.
+
+## Scatter plot {.tabset}
+
+First we are going to build a scatter plot (`geom_point()`) of Largest Market Cap over time. 
+
+### Graph lables
+
+We will define a new set of labels below. 
+
+```{r lab_lrg_mrkt_cap_trend, message=FALSE, warning=FALSE}
+lab_lrg_mrkt_cap_trend <- labs(title = "Largest Market Cap (USD in billions)", 
+                              subtitle = "Largest Pharmaceutical Companies",
+                              x = "Largest Market Cap Date", 
+                              y = "Largest Market Cap (USD in billions)", 
+                              color = "Company Type")
+```
+
+### exercise 
+
+`select()` the `stock_exch`, `stock_id`, `company_type`, `largest_market_cap_date`, and `largest_market_cap_us_bil` variables and get the `distinct()` values. Assign this to `TopPharmComCaps`. 
+
+```{r dplyr-ex-08, eval=FALSE}
+TopPharmComCaps <- TopPharmComp %>% 
+  select(_________, _________, _________,
+         _________, _________) %>% 
+  dplyr::distinct()
+```
+
+
+### solution
+
+See below:
+
+```{r dplyr-sol-08-TopPharmComCaps, message=FALSE, warning=FALSE}
+TopPharmComCaps <- TopPharmComp %>% 
+  select(stock_exch, stock_id, company_type,
+         largest_market_cap_date, largest_market_cap_us_bil) %>%  
+  dplyr::distinct()
+TopPharmComCaps
+```
+
+### exercise 
+
+Use `TopPharmComCaps` to create a scatter plot with `largest_market_cap_date` to the `x` axis, and `largest_market_cap_us_bil` to the `y`. Color the points by `company_type`. 
+
+```{r aes-ex-09, eval=FALSE}
+TopPharmComCaps %>% 
+  ggplot() + 
+  geom_point(aes(x = _____________, 
+             y = _____________, 
+             color = _____________)) + 
+  lab_lrg_mrkt_cap_trend
+```
+
+### solution
+
+We can see this plot is showing us the date they reached their Largest Market Cap, and the date they reached it. But we still can't see which company is which.
+
+```{r aes-sol-09, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+TopPharmComCaps %>% 
+  ggplot() + 
+  geom_point(aes(x = largest_market_cap_date, 
+                 y = largest_market_cap_us_bil, 
+                 color = company_type)) + 
+  lab_lrg_mrkt_cap_trend
+```
+
+## Adding text labels {.tabset}
+
+We're going to add text labels to each data point. This is as simple as adding another layer to our previous plot! We just need to identify the proper geom, then map the variables to their aesthetics. 
+
+### exercise 
+
+Add another layer to the plot above using `geom_text()` 
+
+- map `largest_market_cap_date` to the `x`  
+- map `largest_market_cap_us_bil` to the `y`  
+- map `stock_id` to `label` 
+- set `size` to `3` (outside `aes()`)
+
+```{r aes-ex-10, eval=FALSE}
+TopPharmComCaps %>% 
+  
+  ggplot() + 
+  
+  geom_point(aes(x = largest_market_cap_date, 
+                 y = largest_market_cap_us_bil, 
+                 color = company_type)) + 
+  
+  geom_text(aes(x = _____________, 
+                y = _____________, 
+                label = _____________), size = _) + 
+  
+  lab_lrg_mrkt_cap_trend
+```
+
+
+### solution
+
+We can see this plot has labeled each company on their data-point, so we can clearly see the date they reached their Largest Market Cap in comparison to other companies. The labels are hard to see, though. We can try to adjust this with `size`, but fortunately there is a package specifically designed to help with text labels.
+
+```{r ael-sol-10, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+TopPharmComCaps %>% 
+  
+  ggplot() + 
+  
+  geom_point(aes(x = largest_market_cap_date, 
+                 y = largest_market_cap_us_bil, 
+                 color = company_type)) + 
+  
+  geom_text(aes(x = largest_market_cap_date, 
+                y = largest_market_cap_us_bil, 
+                label = stock_id), size = 3) + 
+  
+  lab_lrg_mrkt_cap_trend
+```
+
+### exercise 
+
+Use the [`ggrepel` package](https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html) to adjust the labels.
+
+- Map `stock_id` to `geom_text_repel()`
+
+```{r aes-ex-11, eval=FALSE}
+library(ggrepel)
+TopPharmComCaps %>% 
+  ggplot(aes(x = largest_market_cap_date, 
+             y = largest_market_cap_us_bil)) + 
+  geom_point(aes(color = company_type)) + 
+  geom_text_repel(aes(label = __________), size = 3) + 
+  lab_lrg_mrkt_cap_trend 
+```
+
+### solution
+
+Now the labels for each company are easier to see! However, this is still a very busy graph. We probably don't want label **all** the points on the scatter plot. We will cover more advanced uses of text annotations in the next section.
+
+```{r aes-sol-11, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+library(ggrepel)
+TopPharmComCaps %>% 
+  ggplot(aes(x = largest_market_cap_date, 
+             y = largest_market_cap_us_bil)) + 
+  geom_point(aes(color = company_type)) + 
+  geom_text_repel(aes(label = stock_id), size = 3) + 
+  lab_lrg_mrkt_cap_trend 
+```
+
+# Facetting
+
+In the next few exercises we're going to see how to use facets to explore values across different levels and scales. Facets show subplots for different levels of a grouping variable.
+
+## Scales {.tabset}
+
+We're going to build a few graphs using `facet_wrap()`. Each exercise uses a different setting for the `scales` argument.
+
+### exercise 
+
+Use `facet_wrap()` to split the graphs by `company_type` 
+
+- set the `scales` argument to `"free"` and `nrow` to `2`.
+
+```{r aes-ex-12, eval=FALSE}
+TopPharmComCaps %>% 
+  ggplot(aes(x = largest_market_cap_date, 
+             y = largest_market_cap_us_bil)) + 
+  geom_point(aes(color = company_type), show.legend = FALSE) + 
+  geom_text_repel(aes(label = stock_id), size = 3) + 
+  
+  facet_wrap(. ~ company_type, scales = ______, nrow = _) + 
+  
+  lab_lrg_mrkt_cap_trend 
+```
+
+### solution
+
+This creates two graphs--one for each level of `company_type`. Why would setting the `scales` to `"free"` be an issue? 
+
+It makes it difficult to compare points (i.e. companies) when they don't share common axes.
+
+```{r aes-sol-12, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+TopPharmComCaps %>% 
+  ggplot(aes(x = largest_market_cap_date, 
+             y = largest_market_cap_us_bil)) + 
+  geom_point(aes(color = company_type), show.legend = FALSE) + 
+  geom_text_repel(aes(label = stock_id), size = 3) + 
+  
+  facet_wrap(. ~ company_type, scales = "free", nrow = 2) + 
+  
+  lab_lrg_mrkt_cap_trend 
+```
+
+### exercise 
+
+Change the `scales` argument to `"free_x"` and rebuild the graph above.
+
+```{r aes-ex-13, eval=FALSE}
+TopPharmComCaps %>% 
+  filter(stock_exch %in% c("NASDAQ", "NYSE"), 
+         company_type == "Pharma") %>% 
+  
+  ggplot(aes(x = largest_market_cap_date, 
+             y = largest_market_cap_us_bil)) + 
+  geom_point(aes(color = stock_exch), show.legend = FALSE) + 
+  geom_text_repel(aes(label = stock_id), size = 3) + 
+  facet_wrap(. ~ stock_exch, scales = ______, nrow = 2) + 
+  
+  lab_lrg_mrkt_cap_trend 
+```
+
+
+### solution
+
+This fixes the `y` axis, but allows the `x` to adjust according to the data. Now the data are comparable in terms of the `y` axis, but over different time-frames (along the `x` axis).
+
+```{r aes-sol-13, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+TopPharmComCaps %>% 
+  filter(stock_exch %in% c("NASDAQ", "NYSE"), 
+         company_type == "Pharma") %>% 
+  
+  ggplot(aes(x = largest_market_cap_date, 
+             y = largest_market_cap_us_bil)) + 
+  geom_point(aes(color = stock_exch), show.legend = FALSE) + 
+  geom_text_repel(aes(label = stock_id), size = 3) + 
+  
+  facet_wrap(. ~ stock_exch, scales = "free_x", nrow = 2) + 
+  
+  lab_lrg_mrkt_cap_trend 
+```
+
+### exercise 
+
+Change the `scales` argument to `"free_y"` and rebuild the graph.
+
+```{r aes-ex-14, eval=FALSE}
+TopPharmComCaps %>% 
+  filter(stock_exch %in% c("NASDAQ", "NYSE"), 
+         company_type == "Pharma") %>% 
+  
+  ggplot(aes(x = largest_market_cap_date, 
+             y = largest_market_cap_us_bil)) + 
+  geom_point(aes(color = stock_exch), show.legend = FALSE) + 
+  geom_text_repel(aes(label = stock_id), size = 3) + 
+  
+  facet_wrap(. ~ stock_exch, scales = ________, nrow = 2) + 
+  
+  lab_lrg_mrkt_cap_trend
+```
+
+
+### solution
+
+Now we have a fixed `x` axis, and the `y` axis can adjust according to the data. This presents a similar dilemma--we can compare the time-frames, but the `y` axes are misleading. 
+
+```{r aes-sol-14, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+TopPharmComCaps %>% 
+  filter(stock_exch %in% c("NASDAQ", "NYSE"), 
+         company_type == "Pharma") %>% 
+  
+  ggplot(aes(x = largest_market_cap_date, 
+             y = largest_market_cap_us_bil)) + 
+  geom_point(aes(color = stock_exch), show.legend = FALSE) + 
+  geom_text_repel(aes(label = stock_id), size = 3) + 
+  facet_wrap(. ~ stock_exch, scales = "free_y", nrow = 2) + 
+  
+  lab_lrg_mrkt_cap_trend 
+```
+
+### Common axes
+
+This is why it's preferable to keep *both* the `x` and `y` axes identical whenever we use facets. See below:
+
+```{r aes-sol-15, message=FALSE, warning=FALSE, fig.height=5, fig.width=7, out.height='100%', out.width='100%'}
+TopPharmComCaps %>% 
+  filter(stock_exch %in% c("NASDAQ", "NYSE"), 
+         company_type == "Pharma") %>% 
+  
+  ggplot(aes(x = largest_market_cap_date, 
+             y = largest_market_cap_us_bil)) + 
+  geom_point(aes(color = stock_exch), show.legend = FALSE) + 
+  geom_text_repel(aes(label = stock_id), size = 3) + 
+  facet_wrap(. ~ stock_exch, nrow = 2) + 
+  
+  lab_lrg_mrkt_cap_trend 
+```
+
+
+# Recap 
+
+These exercises have covered: 
+ 
+1. Build the labels first!  
+2. Mapping variables to position     
+  - `aes()` is used to map variables to `x` and `y` positions  
+3. Mapping variables to aesthetics  
+  - `aes()` is used to map variables to `color`, `fill`, etc. 
+4. Graphing data summaries  
+  - Use data wrangling pipelines to pass `data.frame`s to `ggplot2` functions  
+5. Labeling data points (with layers)  
+  - add labels with `geom_text()` and `ggrepel` layers  
+4. Using `facet`s to explore graphs across different scales for the `x` and `y` axes   
