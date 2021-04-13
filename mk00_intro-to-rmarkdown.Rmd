@@ -31,7 +31,7 @@ This section provides some exercises to improve your understanding of R Markdown
 
 ## Create a new R Markdown file {.tabset}
 
-We will start by creating a new R Markdown file, and set it to create an HTML document. **When you save your new .Rmd file, be sure to delete all the text beneath the YAML header in your new .Rmd document**
+We will start by creating a new R Markdown file, and set it to create an HTML document.
 
 ### New File icon
 
@@ -51,12 +51,11 @@ knitr::include_graphics("img/new-rmarkdown-02.png")
 
 ### Save your .Rmd file
 
-We will need to save our `.Rmd` file before we can knit it, so we'll save it in the same directory as this `rmarkdown-solutions.html` file.
+We will need to save our `.Rmd` file before we can knit it, so we'll save it as this `rmarkdown-solutions.Rmd`.
 
 ```{r save-rmd-file-02, echo = FALSE, out.height="65%", out.width="65%", fig.align='center'}
 knitr::include_graphics("img/save-rmd-file-02.png")
 ```
-
 
 ## RMarkdown: YAML {.tabset}
 
@@ -68,7 +67,7 @@ Our new `.Rmd` file should have the following information. *Note that indentatio
 
 ``` {.yaml}
 ---
-title: "Untitled"
+title: "My Report"
 author: "Martin Frigaard"
 date: "10/24/2020"
 output: html_document
@@ -77,13 +76,22 @@ output: html_document
 
 ### Table of Contents (TOC)
 
-Having an interactive table of contents makes it easier for readers to navigate your report. We can add a floating table of contents to our new report to the following YAML settings:
+Having an interactive table of contents makes it easier for readers to navigate your report.
+
+We can add a table of contents (`toc: yes`) and make sure it 'floats' (i.e., remains static when we scroll through the document) with `toc_float: true`. 
+
+These settings should be placed on an indented line below our `html_document:` output in the YAML settings:
 
 ``` {.yaml}
+---
+title: "My Report"
+author: "Martin Frigaard"
+date: "10/24/2020"
 output:
   html_document:
     toc: yes
     toc_float: true
+---
 ```
 
 *Knit* the document again and extend the view to see the floating table of contents.
@@ -93,12 +101,17 @@ output:
 Highlighting and themes give us some control over the aesthetics in our reports. We can add a new theme and text highlighting to the report with the following YAML options.
 
 ``` {.yaml}
+---
+title: "My Report"
+author: "Martin Frigaard"
+date: "10/24/2020"
 output:
   html_document:
     toc: yes
     toc_float: yes
     highlight: spacelab
     theme: espresso
+---
 ```
 
 *Knit* the document again and extend the view to see the new theme of text highlighting.

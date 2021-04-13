@@ -66,13 +66,6 @@ cat_bullet(x, "^mk")
 cat_bullet(x, "^dt")
 ```
 
-<!-- ### Simulate Data  -->
-
-```{r dg-files, eval=FALSE, results = 'asis', echo = FALSE}
-# here we see the 'dg' for data generation lessons
-cat_bullet(x, "^dg")
-```
-
 ### Data Visualization
 
 ```{r gg-files, results = 'asis', echo = FALSE, eval=TRUE}
@@ -80,11 +73,20 @@ cat_bullet(x, "^dg")
 cat_bullet(x, "^gg")
 ```
 
-<!-- ### Dashboards and Shiny -->
+### Building storyboards with flexdashboard
 
-```{r sh-files, results = 'asis', echo = FALSE, eval=FALSE}
+*(under construction)*
+
+```{r sh-files, results = 'asis', echo = FALSE, eval=TRUE}
 # and the `sh` for shiny
 cat_bullet(x, "^sh")
+```
+
+### Programming
+
+```{r pr-files, results = 'asis', echo = FALSE, eval=TRUE}
+# and the `pr` for programming
+cat_bullet(x, "^pr")
 ```
 
 This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
