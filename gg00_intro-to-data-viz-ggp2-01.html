@@ -38,6 +38,9 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="site_libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="site_libs/str_view-binding-1.4.0/str_view.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -368,12 +371,12 @@ div.tocify {
 </div>
 <div id="materials" class="section level1" number="2">
 <h1 number="2"><span class="header-section-number">2</span> Materials</h1>
-<p>The slides for this presentation are <a href="https://mjfrigaard.github.io/data-viz-intro/Index.html">here</a></p>
-<p>There is also an accompanying <a href="https://rstudio.cloud/project/1973650">RStudio.Cloud project</a></p>
+<p>The slides for this presentation are <a href="">here</a></p>
+<p>There is also an accompanying <a href="">RStudio.Cloud project</a></p>
 </div>
-<div id="previous-lessons" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Previous lessons</h1>
-<p>All of the exercises and lessons are available <a href="https://mjfrigaard.github.io/r-meetup-tutorials/">here</a>, but you can also read more about <a href="https://dplyr.tidyverse.org/index.html"><code>dplyr</code></a> and <a href="https://tidyr.tidyverse.org/"><code>tidyr</code></a> on the tidyverse website, and in the <a href="https://r4ds.had.co.nz/transform.html">Data Transformation</a> and <a href="https://r4ds.had.co.nz/tidy-data.html">Tidy Data</a> chapters of R for Data Science.</p>
+<div id="previous-lesson-contents" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Previous lesson contents</h1>
+<p>You can read more about <a href="https://dplyr.tidyverse.org/index.html"><code>dplyr</code></a> and <a href="https://tidyr.tidyverse.org/"><code>tidyr</code></a> on the tidyverse website, and in the <a href="https://r4ds.had.co.nz/transform.html">Data Transformation</a> and <a href="https://r4ds.had.co.nz/tidy-data.html">Tidy Data</a> chapters of R for Data Science.</p>
 </div>
 <div id="load-the-packages" class="section level1" number="4">
 <h1 number="4"><span class="header-section-number">4</span> Load the packages</h1>
@@ -383,802 +386,74 @@ library(tidyverse)</code></pre>
 </div>
 <div id="import-data" class="section level1" number="5">
 <h1 number="5"><span class="header-section-number">5</span> Import data</h1>
-<p>We will begin by importing the data from the wrangling section. These data come from a wikipedia table on <a href="https://en.wikipedia.org/wiki/List_of_largest_biotechnology_and_pharmaceutical_companies">largest biotechnology and pharmaceutical companies</a>.</p>
-<pre class="r"><code>TopPharmComp &lt;- readr::read_csv(file = &quot;https://bit.ly/3gC67HT&quot;)
-TopPharmComp %&gt;% glimpse(78)</code></pre>
-<pre><code>## Rows: 231
-## Columns: 10
-## $ ranking                   &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, …
-## $ company_name              &lt;chr&gt; &quot;Johnson &amp; Johnson&quot;, &quot;Johnson &amp; Johnson&quot;, …
-## $ company_type              &lt;chr&gt; &quot;Pharma&quot;, &quot;Pharma&quot;, &quot;Pharma&quot;, &quot;Pharma&quot;, &quot;P…
-## $ stock_exch                &lt;chr&gt; &quot;NYSE&quot;, &quot;NYSE&quot;, &quot;NYSE&quot;, &quot;NYSE&quot;, &quot;NYSE&quot;, &quot;N…
-## $ stock_id                  &lt;chr&gt; &quot; JNJ&quot;, &quot; JNJ&quot;, &quot; JNJ&quot;, &quot; JNJ&quot;, &quot; JNJ&quot;, &quot; …
-## $ cap_date_original         &lt;chr&gt; &quot;Jan 2018&quot;, &quot;Jan 2018&quot;, &quot;Jan 2018&quot;, &quot;Jan 2…
-## $ largest_market_cap_date   &lt;date&gt; 2018-01-01, 2018-01-01, 2018-01-01, 2018-…
-## $ year                      &lt;dbl&gt; 2019, 2018, 2017, 2016, 2015, 2014, 2013, …
-## $ largest_market_cap_us_bil &lt;dbl&gt; 397.4, 397.4, 397.4, 397.4, 397.4, 397.4, …
-## $ market_cap_us_bil         &lt;dbl&gt; 385.0, 346.1, 375.4, 314.1, 284.2, 277.8, …</code></pre>
+<p>We will begin by importing the data from the wrangling section. These data come from a wikipedia table on <a href="https://en.wikipedia.org/wiki/COVID-19_vaccine#Deployment">the deployment of COVID-19 vaccinations</a>. The code below will scrape the html table and store the results in <code>COVID19VaxDistByLoc</code>.</p>
+<p>A few things to note about the code below:</p>
+<ol style="list-style-type: decimal">
+<li>We load the <code>tidyverse</code>, <code>rvest</code>, and <code>xml2</code> packages with <code>library()</code><br />
+</li>
+<li>The url for the wikipedia page is read into R with <code>xml2::read_html()</code> and stored in <code>wiki_html</code> as a list containing <code>xml_document</code> and <code>xml_node</code><br />
+</li>
+<li>The <code>rvest::html_nodes()</code> function looks for a CSS <code>"table"</code> in <code>wiki_html</code> and stores these in <code>wiki_html_tables</code><br />
+</li>
+<li>We use the bracket subsetting (<code>[]</code>) and <code>base::grep()</code> to find tables with the word <code>"distribution"</code> in them and store these in <code>relevant_tables</code></li>
+<li>Now we can use the <code>rvest::html_table()</code> function to ‘harvest’ the tables stored in the first position of <code>relevant_tables</code> and set the <code>fill</code> argument to <code>TRUE</code> (<code>[[1]]</code>), and store the output in <code>COVID19VaxDistByLoc</code>.</li>
+<li>The <code>COVID19VaxDistByLoc</code> is a rectangular <code>data.frame</code> object, but we only want the first three columns (<code>[ , 1:3]</code>), and we want to rename these <code>"location"</code>, <code>"n_vaccinated"</code>, and <code>"perc_of_pop"</code>.</li>
+</ol>
+<pre class="r"><code># packages -----------------------------------------------------------
+library(tidyverse)
+library(rvest)
+library(xml2)
+
+# scrape wikipedia table ---------------------------------------------
+# Read html from url
+wiki_html &lt;- xml2::read_html(&quot;https://en.wikipedia.org/wiki/COVID-19_vaccine&quot;)
+# extract html nodes
+wiki_html_tables &lt;- wiki_html %&gt;% rvest::html_nodes(css = &quot;table&quot;)
+# identify relevant html table with &#39;distribution&#39; in the title
+relevant_tables &lt;- wiki_html_tables[grep(&quot;distribution&quot;, wiki_html_tables)]
+# convert table to data.frame
+COVID19VaxDistByLoc &lt;- rvest::html_table(relevant_tables[[1]],
+                                         fill = TRUE)
+# assign names to first three columns
+COVID19VaxDistByLoc &lt;- COVID19VaxDistByLoc[ , 1:3] %&gt;%
+  magrittr::set_names(x = ., value = c(&quot;location&quot;, &quot;n_vaccinated&quot;,
+                                       &quot;perc_of_pop&quot;))
+glimpse(COVID19VaxDistByLoc)</code></pre>
+<pre><code>## Rows: 180
+## Columns: 3
+## $ location     &lt;chr&gt; &quot;World[d]&quot;, &quot;China[e]&quot;, &quot;United State…
+## $ n_vaccinated &lt;chr&gt; &quot;468,036,108&quot;, &quot;179,216,000&quot;, &quot;123,91…
+## $ perc_of_pop  &lt;chr&gt; &quot;6.0%&quot;, &quot;--&quot;, &quot;37.1%&quot;, &quot;7.3%&quot;, &quot;16.6%…</code></pre>
+<p>This is a good time to export these data into the <code>data/raw</code> folder (in case the numbers change the next time we scrape the table).</p>
+<pre class="r"><code>readr::write_csv(x = COVID19VaxDistByLoc, 
+                 file = paste0(&quot;data/raw/&quot;, 
+                               base::noquote(lubridate::today()),
+                 &quot;-COVID19VaxDistByLoc.csv&quot;))
+# verify
+fs::dir_tree(&quot;data/raw/&quot;, regexp = &quot;COVID19&quot;)</code></pre>
+<pre><code>## data/raw/
+## └── 2021-04-15-COVID19VaxDistByLoc.csv</code></pre>
 <div id="format-variables" class="section level2" number="5.1">
 <h2 number="5.1"><span class="header-section-number">5.1</span> Format variables</h2>
 <p>We can see a few of the variables need to be formatted before we can start visualizing.</p>
-<pre class="r"><code>TopPharmComp %&gt;% 
-  mutate(
-    # create factor
-    ranking = factor(ranking, ordered = TRUE),
-    # remove whitespace
-    stock_id = str_trim(string = stock_id, side = &quot;both&quot;)) -&gt; TopPharmComp
-# get skim
-TopPharmComp %&gt;% skimr::skim()</code></pre>
-<table>
-<caption>Data summary</caption>
-<tbody>
-<tr class="odd">
-<td align="left">Name</td>
-<td align="left">Piped data</td>
-</tr>
-<tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">231</td>
-</tr>
-<tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">10</td>
-</tr>
-<tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">character</td>
-<td align="left">5</td>
-</tr>
-<tr class="odd">
-<td align="left">Date</td>
-<td align="left">1</td>
-</tr>
-<tr class="even">
-<td align="left">factor</td>
-<td align="left">1</td>
-</tr>
-<tr class="odd">
-<td align="left">numeric</td>
-<td align="left">3</td>
-</tr>
-<tr class="even">
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Group variables</td>
-<td align="left">None</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: character</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">min</th>
-<th align="right">max</th>
-<th align="right">empty</th>
-<th align="right">n_unique</th>
-<th align="right">whitespace</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">company_name</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">5</td>
-<td align="right">25</td>
-<td align="right">0</td>
-<td align="right">33</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">company_type</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">6</td>
-<td align="right">7</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">stock_exch</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3</td>
-<td align="right">6</td>
-<td align="right">0</td>
-<td align="right">6</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">stock_id</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3</td>
-<td align="right">5</td>
-<td align="right">0</td>
-<td align="right">33</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">cap_date_original</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">8</td>
-<td align="right">8</td>
-<td align="right">0</td>
-<td align="right">17</td>
-<td align="right">0</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: Date</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="left">min</th>
-<th align="left">max</th>
-<th align="left">median</th>
-<th align="right">n_unique</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">largest_market_cap_date</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="left">2000-07-01</td>
-<td align="left">2020-08-01</td>
-<td align="left">2017-03-01</td>
-<td align="right">17</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: factor</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="left">ordered</th>
-<th align="right">n_unique</th>
-<th align="left">top_counts</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">ranking</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="left">TRUE</td>
-<td align="right">33</td>
-<td align="left">1: 7, 2: 7, 3: 7, 4: 7</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: numeric</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">year</td>
-<td align="right">0</td>
-<td align="right">1.00</td>
-<td align="right">2016.00</td>
-<td align="right">2.00</td>
-<td align="right">2013.0</td>
-<td align="right">2014.0</td>
-<td align="right">2016.0</td>
-<td align="right">2018.0</td>
-<td align="right">2019.0</td>
-<td align="left">▇▃▃▃▇</td>
-</tr>
-<tr class="even">
-<td align="left">largest_market_cap_us_bil</td>
-<td align="right">0</td>
-<td align="right">1.00</td>
-<td align="right">125.23</td>
-<td align="right">91.21</td>
-<td align="right">24.0</td>
-<td align="right">47.0</td>
-<td align="right">111.7</td>
-<td align="right">159.6</td>
-<td align="right">397.4</td>
-<td align="left">▇▅▂▂▁</td>
-</tr>
-<tr class="odd">
-<td align="left">market_cap_us_bil</td>
-<td align="right">2</td>
-<td align="right">0.99</td>
-<td align="right">85.68</td>
-<td align="right">75.07</td>
-<td align="right">2.6</td>
-<td align="right">28.7</td>
-<td align="right">63.2</td>
-<td align="right">117.2</td>
-<td align="right">385.0</td>
-<td align="left">▇▅▁▁▁</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="visualize" class="section level1" number="6">
-<h1 number="6"><span class="header-section-number">6</span> Visualize</h1>
-<p>We will start by looking at the trends of <code>market_cap_us_bil</code> over time (using <code>year</code>).</p>
-<div id="build-the-labels-first" class="section level2" number="6.1">
-<h2 number="6.1"><span class="header-section-number">6.1</span> Build the labels first!</h2>
-<p>I suggest building labels <strong>first</strong> when making a figure or graph, because it forces us to think about what we should expect to see. For example, if we want to see <code>market_cap_us_bil</code> on the <code>y</code> and <code>market_cap_year</code> on the <code>x</code>, we can create these with a title using the <code>ggplot2::labs()</code> function below.</p>
-<pre class="r"><code>lab_year_x_mrktcap &lt;- ggplot2::labs(title = &quot;Market Cap Trends Over Time&quot;, 
-                              subtitle = &quot;Largest Pharmaceutical Companies&quot;,
-                              x = &quot;Year&quot;, y = &quot;Market cap (USD in billions)&quot;)</code></pre>
-</div>
-</div>
-<div id="map-variables-to-positions" class="section level1" number="7">
-<h1 number="7"><span class="header-section-number">7</span> Map Variables to Positions</h1>
-<p>We map variables to positions (<code>x</code> and <code>y</code>) inside the <code>aes()</code> function, either globally inside <code>ggplot()</code> or locally inside a <code>geom()</code>.</p>
-<div id="positions" class="section level2 tabset" number="7.1">
-<h2 class="tabset" number="7.1"><span class="header-section-number">7.1</span> Positions</h2>
-<p>The exercises below are a refresher on mapping variables to aesthetics and picking geoms.</p>
-<div id="exercise" class="section level3" number="7.1.1">
-<h3 number="7.1.1"><span class="header-section-number">7.1.1</span> exercise</h3>
-<p>Map the <code>year</code> to the <code>x</code> and <code>market_cap_us_bil</code> to the <code>y</code> globally and add a <code>geom_point()</code></p>
-<pre class="r"><code>TopPharmComp %&gt;% 
-  ggplot(aes(x = __________, y = __________)) + 
-  geom______() + 
-  lab_year_x_mrktcap</code></pre>
-</div>
-<div id="solution" class="section level3" number="7.1.2">
-<h3 number="7.1.2"><span class="header-section-number">7.1.2</span> solution</h3>
-<p>Check the solution below–what is wrong with this plot?</p>
-<pre class="r"><code>TopPharmComp %&gt;% 
-  ggplot(aes(x = year, y = market_cap_us_bil)) + 
-  geom_point() + 
-  lab_year_x_mrktcap</code></pre>
-<p><img src="img/aes-sol-01-1.png" width="100%" height="100%" /></p>
-</div>
-<div id="exercise-1" class="section level3" number="7.1.3">
-<h3 number="7.1.3"><span class="header-section-number">7.1.3</span> exercise</h3>
-<p>Change the geom to a <code>geom_line()</code>. Does it help?</p>
-<pre class="r"><code>TopPharmComp %&gt;% 
-  ggplot(aes(x = __________, y = __________)) + 
-  geom_____() + 
-  lab_year_x_mrktcap</code></pre>
-</div>
-<div id="solution-1" class="section level3" number="7.1.4">
-<h3 number="7.1.4"><span class="header-section-number">7.1.4</span> solution</h3>
-<p>Check the updated graph below. It’s closer to what we want, but not quite. What do you think the issue is?</p>
-<pre class="r"><code>TopPharmComp %&gt;% 
-  ggplot(aes(x = year, y = market_cap_us_bil)) + 
-  geom_line() + 
-  lab_year_x_mrktcap</code></pre>
-<p><img src="img/aes-sol-02-1.png" width="100%" height="100%" /></p>
-</div>
-<div id="exercise-2" class="section level3" number="7.1.5">
-<h3 number="7.1.5"><span class="header-section-number">7.1.5</span> exercise</h3>
-<p>This time add another <code>aes()</code> <em>inside</em> the <code>geom_line()</code> function, and apply <code>group</code> to <code>company_name</code>.</p>
-<pre class="r"><code>TopPharmComp %&gt;% 
-  ggplot(aes(x = year, y = market_cap_us_bil)) + 
-  geom_line(aes(_____ = __________)) + 
-  lab_year_x_mrktcap</code></pre>
-</div>
-<div id="solution-2" class="section level3" number="7.1.6">
-<h3 number="7.1.6"><span class="header-section-number">7.1.6</span> solution</h3>
-<p>Now the graph is looking how we want! We can see the trend lines are separated according to each company name, but we can’t tell which line is which.</p>
-<p>Let’s add some color to see more.</p>
-<pre class="r"><code>TopPharmComp %&gt;% 
-  ggplot(aes(x = year, y = market_cap_us_bil)) + 
-  geom_line(aes(group = company_name)) + 
-  lab_year_x_mrktcap</code></pre>
-<p><img src="img/aes-sol-03-1.png" width="100%" height="100%" /></p>
-</div>
-</div>
-</div>
-<div id="map-variables-to-aesthetics" class="section level1" number="8">
-<h1 number="8"><span class="header-section-number">8</span> Map Variables to Aesthetics</h1>
-<p>Aesthetics include visual elements like <code>size</code>, <code>color</code>, and <code>fill</code>.</p>
-<div id="aesthetics" class="section level2 tabset" number="8.1">
-<h2 class="tabset" number="8.1"><span class="header-section-number">8.1</span> Aesthetics</h2>
-<p>In the previous graph, we were able to get a different line per company. However, we want to identify more about these companies with color.</p>
-<p>We know there are 33 levels in <code>company_name</code>, and this is too many to map with color (check this below with <code>distinct()</code>)</p>
-<pre class="r"><code>TopPharmComp %&gt;% distinct(company_name)</code></pre>
+<pre class="r"><code>head(COVID19VaxDistByLoc)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["company_name"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Johnson & Johnson"},{"1":"Roche"},{"1":"Novartis"},{"1":"Merck & Co."},{"1":"Pfizer"},{"1":"Abbott Laboratories"},{"1":"Amgen"},{"1":"Novo Nordisk"},{"1":"AbbVie"},{"1":"AstraZeneca"},{"1":"Eli Lilly & Co"},{"1":"GlaxoSmithKline"},{"1":"Bristol-Myers Squibb"},{"1":"Gilead Sciences"},{"1":"Bayer"},{"1":"Stryker Corporation"},{"1":"Sanofi"},{"1":"Zoetis"},{"1":"Teva Pharmaceuticals"},{"1":"Takeda Pharmaceutical"},{"1":"Vertex Pharmaceuticals"},{"1":"Biogen"},{"1":"Illumina"},{"1":"Regeneron Pharmaceuticals"},{"1":"Astellas"},{"1":"Daiichi Sankyo"},{"1":"Alexion Pharmaceuticals"},{"1":"Eisai Pharmaceutical"},{"1":"Incyte"},{"1":"BioMarin"},{"1":"Genmab"},{"1":"Mylan"},{"1":"Bausch Health"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n_vaccinated"],"name":[2],"type":["chr"],"align":["left"]},{"label":["perc_of_pop"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"World[d]","2":"468,036,108","3":"6.0%"},{"1":"China[e]","2":"179,216,000","3":"--"},{"1":"United States","2":"123,917,385","3":"37.1%"},{"1":"India","2":"100,179,199","3":"7.3%"},{"1":"EU","2":"74,044,946","3":"16.6%"},{"1":"United Kingdom","2":"32,326,604","3":"47.6%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div id="exercise-3" class="section level3" number="8.1.1">
-<h3 number="8.1.1"><span class="header-section-number">8.1.1</span> exercise</h3>
-<p>Use the <code>stock_exch</code> to color the lines, assign this graph to <code>gg_trend_line</code></p>
-<pre class="r"><code>gg_trend_line &lt;- TopPharmComp %&gt;% 
-  ggplot(aes(x = year, y = market_cap_us_bil)) + 
-  geom_line(aes(group = company_name, color = __________)) + 
-  lab_year_x_mrktcap
-gg_trend_line</code></pre>
-</div>
-<div id="solution-3" class="section level3" number="8.1.2">
-<h3 number="8.1.2"><span class="header-section-number">8.1.2</span> solution</h3>
-<p>This graph is showing us more information that the previous plot. For example, we can see the companies with the best performance are on the <code>NYSE</code>, and those with relatively low performance are on the <code>TSX</code>.</p>
-<p>This graph is better then the previous versions, but it still has too much information to be very helpful. For example, we have no idea which line belongs to which company?</p>
-<pre class="r"><code>gg_trend_line &lt;- TopPharmComp %&gt;% 
-  ggplot(aes(x = year, y = market_cap_us_bil)) + 
-  geom_line(aes(group = company_name, color = stock_exch)) + 
-  lab_year_x_mrktcap
-gg_trend_line</code></pre>
-<p><img src="img/aes-sol-04-gg_trend_line-1.png" width="100%" height="100%" /></p>
-<p>In the next section, we’ll summarize the data a bit more to create different visualizations.</p>
-</div>
-</div>
-</div>
-<div id="graphing-data-summaries" class="section level1" number="9">
-<h1 number="9"><span class="header-section-number">9</span> Graphing Data Summaries</h1>
-<p>We’re going to summarize the data in <code>TopPharmComp</code>. Summarizations are helpful when we’re interested in comparing variables across groups.</p>
-<div id="grouped-calculations" class="section level2 tabset" number="9.1">
-<h2 class="tabset" number="9.1"><span class="header-section-number">9.1</span> Grouped calculations</h2>
-<p>Whenever we’re grouping by a particular variable (or variables), we need to decide what summary calculation to use. In the section below we will use the <code>mean()</code> function to get the average market cap (in USD in billions).</p>
-<div id="graph-labels" class="section level3" number="9.1.1">
-<h3 number="9.1.1"><span class="header-section-number">9.1.1</span> Graph Labels</h3>
-<p>We want the <code>TopPharmComp</code> dataset to have one variable per <code>company_name</code> name and <code>stock_exch</code>.</p>
-<p>A good measure of central tendency for this is the <code>mean()</code> (or average). First we define the new labels.</p>
-<pre class="r"><code>lab_avgmrktcap_compname &lt;- ggplot2::labs(title = &quot;Average Market Cap (2013-2019)&quot;, 
-                              subtitle = &quot;Largest Pharmaceutical Companies&quot;,
-                              x = &quot;Average Market cap (USD in billions)&quot;,
-                              y = &quot;Company&quot;)</code></pre>
-<p>The code below groups the <code>TopPharmComp</code> data by <code>company_name</code> and <code>stock_exch</code> and summarizes the mean <code>market_cap_us_bil</code>.</p>
-<pre class="r"><code>TopPharmComp %&gt;% 
-  group_by(company_name, stock_exch) %&gt;% 
-  summarize(
-    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %&gt;% 
-  ungroup()</code></pre>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["company_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["stock_exch"],"name":[2],"type":["chr"],"align":["left"]},{"label":["avg_market_cap"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Abbott Laboratories","2":"NYSE","3":"90.028571"},{"1":"AbbVie","2":"NYSE","3":"116.642857"},{"1":"Alexion Pharmaceuticals","2":"NASDAQ","3":"29.414286"},{"1":"Amgen","2":"NASDAQ","3":"114.685714"},{"1":"Astellas","2":"TYO","3":"30.785714"},{"1":"AstraZeneca","2":"NYSE","3":"90.428571"},{"1":"Bausch Health","2":"TSX","3":"15.683333"},{"1":"Bayer","2":"FWB","3":"94.885714"},{"1":"Biogen","2":"NASDAQ","3":"65.900000"},{"1":"BioMarin","2":"NASDAQ","3":"15.214286"},{"1":"Bristol-Myers Squibb","2":"NASDAQ","3":"98.300000"},{"1":"Daiichi Sankyo","2":"NASDAQ","3":"33.071429"},{"1":"Eisai Pharmaceutical","2":"TYO","3":"27.714286"},{"1":"Eli Lilly & Co","2":"NYSE","3":"93.342857"},{"1":"Genmab","2":"NASDAQ","3":"8.842857"},{"1":"Gilead Sciences","2":"NASDAQ","3":"98.185714"},{"1":"GlaxoSmithKline","2":"NYSE","3":"107.042857"},{"1":"Illumina","2":"NASDAQ","3":"37.371429"},{"1":"Incyte","2":"NASDAQ","3":"12.642857"},{"1":"Johnson & Johnson","2":"NYSE","3":"320.128571"},{"1":"Merck & Co.","2":"NYSE","3":"173.900000"},{"1":"Mylan","2":"NASDAQ","3":"27.142857"},{"1":"Novartis","2":"NYSE","3":"205.442857"},{"1":"Novo Nordisk","2":"NYSE","3":"125.350000"},{"1":"Pfizer","2":"NYSE","3":"212.757143"},{"1":"Regeneron Pharmaceuticals","2":"NASDAQ","3":"41.014286"},{"1":"Roche","2":"SIX","3":"233.242857"},{"1":"Sanofi","2":"NYSE","3":"110.542857"},{"1":"Stryker Corporation","2":"NYSE","3":"48.428571"},{"1":"Takeda Pharmaceutical","2":"NASDAQ","3":"45.685714"},{"1":"Teva Pharmaceuticals","2":"NYSE","3":"33.514286"},{"1":"Vertex Pharmaceuticals","2":"NASDAQ","3":"33.114286"},{"1":"Zoetis","2":"NASDAQ","3":"32.542857"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-<p>This dataset will allow us to show more information per company.</p>
-</div>
-<div id="exercise-4" class="section level3" number="9.1.2">
-<h3 number="9.1.2"><span class="header-section-number">9.1.2</span> exercise</h3>
-<p>Complete the code below with the following:</p>
 <ol style="list-style-type: decimal">
-<li>map <code>avg_market_cap</code> to the <code>x</code> axis<br />
+<li>We need to remove the alphabetic identifier for each country <code>location</code> (i.e., <code>World[d]</code> and <code>China[e]</code>).<br />
 </li>
-<li>map <code>company_name</code> to the <code>y</code> axis</li>
-<li>map <code>stock_exch</code> to <code>fill</code></li>
+<li>The number vaccinated variable (<code>n_vaccinated</code>) and percent of population variable (<code>perc_of_pop</code>) have symbols (commas (<code>,</code>) and percent symbols (<code>%</code>)), which is making R treat it as a character, so these will have to be removed and converted to numbers.</li>
 </ol>
-<pre class="r"><code>TopPharmComp %&gt;% 
-  group_by(company_name, stock_exch) %&gt;% 
-  summarize(
-    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %&gt;% 
-  ungroup() %&gt;% 
-  ggplot() + 
-  geom_col(aes(x = _________, 
-             
-             y = __________,
-             
-             fill = _________)) + 
-  lab_avgmrktcap_compname</code></pre>
+<p>First we will identify all the letters in brackets inside the <code>location</code> variable using <a href=""><code>stringr::str_view_all()</code></a></p>
+<p>We can take care of both of these issues with <code>dplyr::mutate()</code></p>
+<pre class="r"><code>str_view_all(string = COVID19VaxDistByLoc$location, pattern = &quot;\\[[^\\[\\]]+\\]&quot;, match = TRUE)</code></pre>
+<div id="htmlwidget-50f50cb5800137f4f1e3" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-50f50cb5800137f4f1e3">{"x":{"html":"<ul>\n  <li>World<span class='match'>[d]<\/span><\/li>\n  <li>China<span class='match'>[e]<\/span><\/li>\n  <li>Mexico<span class='match'>[e]<\/span><\/li>\n  <li>United Arab Emirates<span class='match'>[e]<\/span><\/li>\n  <li>Saudi Arabia<span class='match'>[e]<\/span><\/li>\n  <li>Nepal<span class='match'>[e]<\/span><\/li>\n  <li>Australia<span class='match'>[e]<\/span><\/li>\n  <li>Qatar<span class='match'>[e]<\/span><\/li>\n  <li>Mongolia<span class='match'>[e]<\/span><\/li>\n  <li>Kuwait<span class='match'>[e]<\/span><\/li>\n  <li>El Salvador<span class='match'>[e]<\/span><\/li>\n  <li>Albania<span class='match'>[e]<\/span><\/li>\n  <li>Guinea<span class='match'>[e]<\/span><\/li>\n  <li>Algeria<span class='match'>[e]<\/span><\/li>\n  <li>Saint Lucia<span class='match'>[e]<\/span><\/li>\n  <li>Andorra<span class='match'>[e]<\/span><\/li>\n  <li>Bosnia and Herzegovina<span class='match'>[e]<\/span><\/li>\n  <li>Saint Vincent and the Grenadines<span class='match'>[e]<\/span><\/li>\n  <li>Liechtenstein<span class='match'>[e]<\/span><\/li>\n  <li>F.S. Micronesia<span class='match'>[460]<\/span><\/li>\n  <li>Marshall Islands<span class='match'>[460]<\/span><\/li>\n  <li>Palau<span class='match'>[460]<\/span><\/li>\n  <li>Vatican City<span class='match'>[461]<\/span><span class='match'>[462]<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<p>&lt;!–</p>
 </div>
-<div id="solution-4" class="section level3" number="9.1.3">
-<h3 number="9.1.3"><span class="header-section-number">9.1.3</span> solution</h3>
-<p>See below:</p>
-<pre class="r"><code>TopPharmComp %&gt;% 
-  group_by(company_name, stock_exch) %&gt;% 
-  summarize(
-    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %&gt;% 
-  ungroup() %&gt;% 
-  ggplot() + 
-  geom_col(aes(x = avg_market_cap, 
-               
-               y = company_name,
-             
-               fill = stock_exch)) + 
-  lab_avgmrktcap_compname</code></pre>
-<p><img src="img/aes-sol-05-gg_col_graph-1.png" width="100%" height="100%" /></p>
-<p>This graph is better because we can see the average performance of the market cap per company. The lines are very unorganized, though. We can use a combination of <code>factor()</code> and <code>forcats::fct_reorder()</code> to fix this.</p>
-</div>
-<div id="exercise-5" class="section level3" number="9.1.4">
-<h3 number="9.1.4"><span class="header-section-number">9.1.4</span> exercise</h3>
-<p>Use <code>fct_reorder</code> and <code>factor</code> to reorder <code>avg_market_cap</code> according to <code>company_name</code></p>
-<pre class="r"><code>TopPharmComp %&gt;% 
-  group_by(company_name, stock_exch) %&gt;% 
-  summarize(
-    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %&gt;% 
-  ungroup() %&gt;% 
-  ggplot() + 
-  geom_col(aes(x = avg_market_cap, 
-             y = fct_reorder(factor(_________), __________),
-             fill = stock_exch)) + 
-  lab_avgmrktcap_compname</code></pre>
-</div>
-<div id="solution-5" class="section level3" number="9.1.5">
-<h3 number="9.1.5"><span class="header-section-number">9.1.5</span> solution</h3>
-<p>See below:</p>
-<pre class="r"><code>TopPharmComp %&gt;% 
-  group_by(company_name, stock_exch) %&gt;% 
-  summarize(
-    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %&gt;% 
-  ungroup() %&gt;% 
-  ggplot() + 
-  geom_col(aes(x = avg_market_cap, 
-             y = fct_reorder(factor(company_name), avg_market_cap),
-             fill = stock_exch)) + 
-  lab_avgmrktcap_compname</code></pre>
-<p><img src="img/aes-sol-6-1.png" width="100%" height="100%" /></p>
-</div>
-<div id="exercise-6" class="section level3" number="9.1.6">
-<h3 number="9.1.6"><span class="header-section-number">9.1.6</span> exercise</h3>
-<p>Change the labels below so that the legend is named, <code>"Stock Exchange"</code>. Re-build the plot with the new labels and assign this to <code>gg_col_graph</code>.</p>
-<pre class="r"><code>lab_avgmrktcap_comp_fill &lt;- ggplot2::labs(x = &quot;Company&quot;, 
-                              y = &quot;Average Market cap (USD in billions)&quot;, 
-                              title = &quot;Average Market Cap (2013-2019)&quot;, 
-                              subtitle = &quot;Largest Pharmaceutical Companies&quot;, 
-                              fill = ___________)
-
-TopPharmComp %&gt;% 
-  group_by(company_name, stock_exch) %&gt;% 
-  summarize(
-    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %&gt;% 
-  ungroup() %&gt;% 
-  
-  ggplot() + 
-  geom_col(aes(x = avg_market_cap, 
-             y = fct_reorder(factor(company_name), avg_market_cap),
-             fill = stock_exch)) +
-  
-  lab_avgmrktcap_comp_fill -&gt; gg_col_graph
-
-gg_col_graph</code></pre>
-</div>
-<div id="solution-6" class="section level3" number="9.1.7">
-<h3 number="9.1.7"><span class="header-section-number">9.1.7</span> solution</h3>
-<p>See below:</p>
-<pre class="r"><code>lab_avgmrktcap_comp_fill &lt;- ggplot2::labs(x = &quot;Company&quot;, 
-                              y = &quot;Average Market cap (USD in billions)&quot;, 
-                              title = &quot;Average Market Cap (2013-2019)&quot;, 
-                              subtitle = &quot;Largest Pharmaceutical Companies&quot;, 
-                              fill = &quot;Stock Exchange&quot;)
-
-TopPharmComp %&gt;% 
-  group_by(company_name, stock_exch) %&gt;% 
-  summarize(
-    avg_market_cap = mean(market_cap_us_bil, na.rm = TRUE)) %&gt;% 
-  ungroup() %&gt;% 
-  
-  ggplot() + 
-  geom_col(aes(x = avg_market_cap, 
-             y = fct_reorder(factor(company_name), avg_market_cap),
-             fill = stock_exch)) +
-  
-  lab_avgmrktcap_comp_fill -&gt; gg_col_graph
-
-gg_col_graph</code></pre>
-<p><img src="img/label-sol-07-1.png" width="100%" height="100%" /></p>
-</div>
-</div>
-</div>
-<div id="labelling-values" class="section level1" number="10">
-<h1 number="10"><span class="header-section-number">10</span> Labelling Values</h1>
-<p>We’re going to focus on the Largest Market Cap (<code>largest_market_cap_us_bil</code>) and Largest Market Cap Date (<code>largest_market_cap_date</code>) variables.</p>
-<div id="scatter-plot" class="section level2 tabset" number="10.1">
-<h2 class="tabset" number="10.1"><span class="header-section-number">10.1</span> Scatter plot</h2>
-<p>First we are going to build a scatter plot (<code>geom_point()</code>) of Largest Market Cap over time.</p>
-<div id="graph-lables" class="section level3" number="10.1.1">
-<h3 number="10.1.1"><span class="header-section-number">10.1.1</span> Graph lables</h3>
-<p>We will define a new set of labels below.</p>
-<pre class="r"><code>lab_lrg_mrkt_cap_trend &lt;- labs(title = &quot;Largest Market Cap (USD in billions)&quot;, 
-                              subtitle = &quot;Largest Pharmaceutical Companies&quot;,
-                              x = &quot;Largest Market Cap Date&quot;, 
-                              y = &quot;Largest Market Cap (USD in billions)&quot;, 
-                              color = &quot;Company Type&quot;)</code></pre>
-</div>
-<div id="exercise-7" class="section level3" number="10.1.2">
-<h3 number="10.1.2"><span class="header-section-number">10.1.2</span> exercise</h3>
-<p><code>select()</code> the <code>stock_exch</code>, <code>stock_id</code>, <code>company_type</code>, <code>largest_market_cap_date</code>, and <code>largest_market_cap_us_bil</code> variables and get the <code>distinct()</code> values. Assign this to <code>TopPharmComCaps</code>.</p>
-<pre class="r"><code>TopPharmComCaps &lt;- TopPharmComp %&gt;% 
-  select(_________, _________, _________,
-         _________, _________) %&gt;% 
-  dplyr::distinct()</code></pre>
-</div>
-<div id="solution-7" class="section level3" number="10.1.3">
-<h3 number="10.1.3"><span class="header-section-number">10.1.3</span> solution</h3>
-<p>See below:</p>
-<pre class="r"><code>TopPharmComCaps &lt;- TopPharmComp %&gt;% 
-  select(stock_exch, stock_id, company_type,
-         largest_market_cap_date, largest_market_cap_us_bil) %&gt;%  
-  dplyr::distinct()
-TopPharmComCaps</code></pre>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["stock_exch"],"name":[1],"type":["chr"],"align":["left"]},{"label":["stock_id"],"name":[2],"type":["chr"],"align":["left"]},{"label":["company_type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["largest_market_cap_date"],"name":[4],"type":["date"],"align":["right"]},{"label":["largest_market_cap_us_bil"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"NYSE","2":"JNJ","3":"Pharma","4":"2018-01-01","5":"397.4"},{"1":"SIX","2":"ROG","3":"Pharma","4":"2019-12-01","5":"281.1"},{"1":"NYSE","2":"NVS","3":"Pharma","4":"2015-07-01","5":"275.2"},{"1":"NYSE","2":"MRK","3":"Pharma","4":"2019-12-01","5":"232.9"},{"1":"NYSE","2":"PFE","3":"Pharma","4":"2000-07-01","5":"310.5"},{"1":"NYSE","2":"ABT","3":"Pharma","4":"2019-12-01","5":"153.5"},{"1":"NASDAQ","2":"AMGN","3":"Biotech","4":"2019-12-01","5":"145.8"},{"1":"NYSE","2":"NVO","3":"Pharma","4":"2015-08-01","5":"159.6"},{"1":"NYSE","2":"ABBV","3":"Pharma","4":"2018-01-01","5":"196.2"},{"1":"NYSE","2":"AZN","3":"Pharma","4":"2019-12-01","5":"130.8"},{"1":"NYSE","2":"LLY","3":"Pharma","4":"2019-02-01","5":"131.2"},{"1":"NYSE","2":"GSK","3":"Pharma","4":"2006-05-01","5":"174.9"},{"1":"NASDAQ","2":"BMY","3":"Pharma","4":"2016-07-01","5":"128.3"},{"1":"NASDAQ","2":"GILD","3":"Biotech","4":"2013-06-01","5":"179.6"},{"1":"FWB","2":"BAYN","3":"Pharma","4":"2015-03-01","5":"129.0"},{"1":"NYSE","2":"SYK","3":"Pharma","4":"2019-12-01","5":"78.5"},{"1":"NYSE","2":"SNY","3":"Pharma","4":"2014-09-01","5":"151.3"},{"1":"NASDAQ","2":"ZTS","3":"Pharma","4":"2020-08-01","5":"76.6"},{"1":"NYSE","2":"TEVA","3":"Pharma","4":"2015-07-01","5":"110.5"},{"1":"NASDAQ","2":"TAK","3":"Pharma","4":"2019-12-01","5":"61.5"},{"1":"NASDAQ","2":"VRTX","3":"Pharma","4":"2020-07-01","5":"78.9"},{"1":"NASDAQ","2":"BIIB","3":"Biotech","4":"2015-03-01","5":"111.7"},{"1":"NASDAQ","2":"ILMN","3":"Biotech","4":"2019-07-01","5":"56.0"},{"1":"NASDAQ","2":"REGN","3":"Biotech","4":"2015-08-01","5":"61.4"},{"1":"TYO","2":"4503","3":"Pharma","4":"2015-12-01","5":"40.6"},{"1":"NASDAQ","2":"DSNKY","3":"Pharma","4":"2019-12-01","5":"45.3"},{"1":"NASDAQ","2":"ALXN","3":"Pharma","4":"2015-07-01","5":"47.0"},{"1":"TYO","2":"4523","3":"Pharma","4":"2016-12-01","5":"37.3"},{"1":"NASDAQ","2":"INCY","3":"Pharma","4":"2017-03-01","5":"31.2"},{"1":"NASDAQ","2":"BMRN","3":"Pharma","4":"2015-07-01","5":"24.0"},{"1":"NASDAQ","2":"GMAB","3":"Biotech","4":"2020-08-01","5":"24.7"},{"1":"NASDAQ","2":"MYL","3":"Pharma","4":"2015-12-01","5":"38.8"},{"1":"TSX","2":"BHC","3":"Pharma","4":"2020-08-01","5":"31.2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-<div id="exercise-8" class="section level3" number="10.1.4">
-<h3 number="10.1.4"><span class="header-section-number">10.1.4</span> exercise</h3>
-<p>Use <code>TopPharmComCaps</code> to create a scatter plot with <code>largest_market_cap_date</code> to the <code>x</code> axis, and <code>largest_market_cap_us_bil</code> to the <code>y</code>. Color the points by <code>company_type</code>.</p>
-<pre class="r"><code>TopPharmComCaps %&gt;% 
-  ggplot() + 
-  geom_point(aes(x = _____________, 
-             y = _____________, 
-             color = _____________)) + 
-  lab_lrg_mrkt_cap_trend</code></pre>
-</div>
-<div id="solution-8" class="section level3" number="10.1.5">
-<h3 number="10.1.5"><span class="header-section-number">10.1.5</span> solution</h3>
-<p>We can see this plot is showing us the date they reached their Largest Market Cap, and the date they reached it. But we still can’t see which company is which.</p>
-<pre class="r"><code>TopPharmComCaps %&gt;% 
-  ggplot() + 
-  geom_point(aes(x = largest_market_cap_date, 
-                 y = largest_market_cap_us_bil, 
-                 color = company_type)) + 
-  lab_lrg_mrkt_cap_trend</code></pre>
-<p><img src="img/aes-sol-09-1.png" width="100%" height="100%" /></p>
-</div>
-</div>
-<div id="adding-text-labels" class="section level2 tabset" number="10.2">
-<h2 class="tabset" number="10.2"><span class="header-section-number">10.2</span> Adding text labels</h2>
-<p>We’re going to add text labels to each data point. This is as simple as adding another layer to our previous plot! We just need to identify the proper geom, then map the variables to their aesthetics.</p>
-<div id="exercise-9" class="section level3" number="10.2.1">
-<h3 number="10.2.1"><span class="header-section-number">10.2.1</span> exercise</h3>
-<p>Add another layer to the plot above using <code>geom_text()</code></p>
-<ul>
-<li>map <code>largest_market_cap_date</code> to the <code>x</code><br />
-</li>
-<li>map <code>largest_market_cap_us_bil</code> to the <code>y</code><br />
-</li>
-<li>map <code>stock_id</code> to <code>label</code></li>
-<li>set <code>size</code> to <code>3</code> (outside <code>aes()</code>)</li>
-</ul>
-<pre class="r"><code>TopPharmComCaps %&gt;% 
-  
-  ggplot() + 
-  
-  geom_point(aes(x = largest_market_cap_date, 
-                 y = largest_market_cap_us_bil, 
-                 color = company_type)) + 
-  
-  geom_text(aes(x = _____________, 
-                y = _____________, 
-                label = _____________), size = _) + 
-  
-  lab_lrg_mrkt_cap_trend</code></pre>
-</div>
-<div id="solution-9" class="section level3" number="10.2.2">
-<h3 number="10.2.2"><span class="header-section-number">10.2.2</span> solution</h3>
-<p>We can see this plot has labeled each company on their data-point, so we can clearly see the date they reached their Largest Market Cap in comparison to other companies. The labels are hard to see, though. We can try to adjust this with <code>size</code>, but fortunately there is a package specifically designed to help with text labels.</p>
-<pre class="r"><code>TopPharmComCaps %&gt;% 
-  
-  ggplot() + 
-  
-  geom_point(aes(x = largest_market_cap_date, 
-                 y = largest_market_cap_us_bil, 
-                 color = company_type)) + 
-  
-  geom_text(aes(x = largest_market_cap_date, 
-                y = largest_market_cap_us_bil, 
-                label = stock_id), size = 3) + 
-  
-  lab_lrg_mrkt_cap_trend</code></pre>
-<p><img src="img/ael-sol-10-1.png" width="100%" height="100%" /></p>
-</div>
-<div id="exercise-10" class="section level3" number="10.2.3">
-<h3 number="10.2.3"><span class="header-section-number">10.2.3</span> exercise</h3>
-<p>Use the <a href="https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html"><code>ggrepel</code> package</a> to adjust the labels.</p>
-<ul>
-<li>Map <code>stock_id</code> to <code>geom_text_repel()</code></li>
-</ul>
-<pre class="r"><code>library(ggrepel)
-TopPharmComCaps %&gt;% 
-  ggplot(aes(x = largest_market_cap_date, 
-             y = largest_market_cap_us_bil)) + 
-  geom_point(aes(color = company_type)) + 
-  geom_text_repel(aes(label = __________), size = 3) + 
-  lab_lrg_mrkt_cap_trend </code></pre>
-</div>
-<div id="solution-10" class="section level3" number="10.2.4">
-<h3 number="10.2.4"><span class="header-section-number">10.2.4</span> solution</h3>
-<p>Now the labels for each company are easier to see! However, this is still a very busy graph. We probably don’t want label <strong>all</strong> the points on the scatter plot. We will cover more advanced uses of text annotations in the next section.</p>
-<pre class="r"><code>library(ggrepel)
-TopPharmComCaps %&gt;% 
-  ggplot(aes(x = largest_market_cap_date, 
-             y = largest_market_cap_us_bil)) + 
-  geom_point(aes(color = company_type)) + 
-  geom_text_repel(aes(label = stock_id), size = 3) + 
-  lab_lrg_mrkt_cap_trend </code></pre>
-<p><img src="img/aes-sol-11-1.png" width="100%" height="100%" /></p>
-</div>
-</div>
-</div>
-<div id="facetting" class="section level1" number="11">
-<h1 number="11"><span class="header-section-number">11</span> Facetting</h1>
-<p>In the next few exercises we’re going to see how to use facets to explore values across different levels and scales. Facets show subplots for different levels of a grouping variable.</p>
-<div id="scales" class="section level2 tabset" number="11.1">
-<h2 class="tabset" number="11.1"><span class="header-section-number">11.1</span> Scales</h2>
-<p>We’re going to build a few graphs using <code>facet_wrap()</code>. Each exercise uses a different setting for the <code>scales</code> argument.</p>
-<div id="exercise-11" class="section level3" number="11.1.1">
-<h3 number="11.1.1"><span class="header-section-number">11.1.1</span> exercise</h3>
-<p>Use <code>facet_wrap()</code> to split the graphs by <code>company_type</code></p>
-<ul>
-<li>set the <code>scales</code> argument to <code>"free"</code> and <code>nrow</code> to <code>2</code>.</li>
-</ul>
-<pre class="r"><code>TopPharmComCaps %&gt;% 
-  ggplot(aes(x = largest_market_cap_date, 
-             y = largest_market_cap_us_bil)) + 
-  geom_point(aes(color = company_type), show.legend = FALSE) + 
-  geom_text_repel(aes(label = stock_id), size = 3) + 
-  
-  facet_wrap(. ~ company_type, scales = ______, nrow = _) + 
-  
-  lab_lrg_mrkt_cap_trend </code></pre>
-</div>
-<div id="solution-11" class="section level3" number="11.1.2">
-<h3 number="11.1.2"><span class="header-section-number">11.1.2</span> solution</h3>
-<p>This creates two graphs–one for each level of <code>company_type</code>. Why would setting the <code>scales</code> to <code>"free"</code> be an issue?</p>
-<p>It makes it difficult to compare points (i.e. companies) when they don’t share common axes.</p>
-<pre class="r"><code>TopPharmComCaps %&gt;% 
-  ggplot(aes(x = largest_market_cap_date, 
-             y = largest_market_cap_us_bil)) + 
-  geom_point(aes(color = company_type), show.legend = FALSE) + 
-  geom_text_repel(aes(label = stock_id), size = 3) + 
-  
-  facet_wrap(. ~ company_type, scales = &quot;free&quot;, nrow = 2) + 
-  
-  lab_lrg_mrkt_cap_trend </code></pre>
-<p><img src="img/aes-sol-12-1.png" width="100%" height="100%" /></p>
-</div>
-<div id="exercise-12" class="section level3" number="11.1.3">
-<h3 number="11.1.3"><span class="header-section-number">11.1.3</span> exercise</h3>
-<p>Change the <code>scales</code> argument to <code>"free_x"</code> and rebuild the graph above.</p>
-<pre class="r"><code>TopPharmComCaps %&gt;% 
-  filter(stock_exch %in% c(&quot;NASDAQ&quot;, &quot;NYSE&quot;), 
-         company_type == &quot;Pharma&quot;) %&gt;% 
-  
-  ggplot(aes(x = largest_market_cap_date, 
-             y = largest_market_cap_us_bil)) + 
-  geom_point(aes(color = stock_exch), show.legend = FALSE) + 
-  geom_text_repel(aes(label = stock_id), size = 3) + 
-  facet_wrap(. ~ stock_exch, scales = ______, nrow = 2) + 
-  
-  lab_lrg_mrkt_cap_trend </code></pre>
-</div>
-<div id="solution-12" class="section level3" number="11.1.4">
-<h3 number="11.1.4"><span class="header-section-number">11.1.4</span> solution</h3>
-<p>This fixes the <code>y</code> axis, but allows the <code>x</code> to adjust according to the data. Now the data are comparable in terms of the <code>y</code> axis, but over different time-frames (along the <code>x</code> axis).</p>
-<pre class="r"><code>TopPharmComCaps %&gt;% 
-  filter(stock_exch %in% c(&quot;NASDAQ&quot;, &quot;NYSE&quot;), 
-         company_type == &quot;Pharma&quot;) %&gt;% 
-  
-  ggplot(aes(x = largest_market_cap_date, 
-             y = largest_market_cap_us_bil)) + 
-  geom_point(aes(color = stock_exch), show.legend = FALSE) + 
-  geom_text_repel(aes(label = stock_id), size = 3) + 
-  
-  facet_wrap(. ~ stock_exch, scales = &quot;free_x&quot;, nrow = 2) + 
-  
-  lab_lrg_mrkt_cap_trend </code></pre>
-<p><img src="img/aes-sol-13-1.png" width="100%" height="100%" /></p>
-</div>
-<div id="exercise-13" class="section level3" number="11.1.5">
-<h3 number="11.1.5"><span class="header-section-number">11.1.5</span> exercise</h3>
-<p>Change the <code>scales</code> argument to <code>"free_y"</code> and rebuild the graph.</p>
-<pre class="r"><code>TopPharmComCaps %&gt;% 
-  filter(stock_exch %in% c(&quot;NASDAQ&quot;, &quot;NYSE&quot;), 
-         company_type == &quot;Pharma&quot;) %&gt;% 
-  
-  ggplot(aes(x = largest_market_cap_date, 
-             y = largest_market_cap_us_bil)) + 
-  geom_point(aes(color = stock_exch), show.legend = FALSE) + 
-  geom_text_repel(aes(label = stock_id), size = 3) + 
-  
-  facet_wrap(. ~ stock_exch, scales = ________, nrow = 2) + 
-  
-  lab_lrg_mrkt_cap_trend</code></pre>
-</div>
-<div id="solution-13" class="section level3" number="11.1.6">
-<h3 number="11.1.6"><span class="header-section-number">11.1.6</span> solution</h3>
-<p>Now we have a fixed <code>x</code> axis, and the <code>y</code> axis can adjust according to the data. This presents a similar dilemma–we can compare the time-frames, but the <code>y</code> axes are misleading.</p>
-<pre class="r"><code>TopPharmComCaps %&gt;% 
-  filter(stock_exch %in% c(&quot;NASDAQ&quot;, &quot;NYSE&quot;), 
-         company_type == &quot;Pharma&quot;) %&gt;% 
-  
-  ggplot(aes(x = largest_market_cap_date, 
-             y = largest_market_cap_us_bil)) + 
-  geom_point(aes(color = stock_exch), show.legend = FALSE) + 
-  geom_text_repel(aes(label = stock_id), size = 3) + 
-  facet_wrap(. ~ stock_exch, scales = &quot;free_y&quot;, nrow = 2) + 
-  
-  lab_lrg_mrkt_cap_trend </code></pre>
-<p><img src="img/aes-sol-14-1.png" width="100%" height="100%" /></p>
-</div>
-<div id="common-axes" class="section level3" number="11.1.7">
-<h3 number="11.1.7"><span class="header-section-number">11.1.7</span> Common axes</h3>
-<p>This is why it’s preferable to keep <em>both</em> the <code>x</code> and <code>y</code> axes identical whenever we use facets. See below:</p>
-<pre class="r"><code>TopPharmComCaps %&gt;% 
-  filter(stock_exch %in% c(&quot;NASDAQ&quot;, &quot;NYSE&quot;), 
-         company_type == &quot;Pharma&quot;) %&gt;% 
-  
-  ggplot(aes(x = largest_market_cap_date, 
-             y = largest_market_cap_us_bil)) + 
-  geom_point(aes(color = stock_exch), show.legend = FALSE) + 
-  geom_text_repel(aes(label = stock_id), size = 3) + 
-  facet_wrap(. ~ stock_exch, nrow = 2) + 
-  
-  lab_lrg_mrkt_cap_trend </code></pre>
-<p><img src="img/aes-sol-15-1.png" width="100%" height="100%" /></p>
-</div>
-</div>
-</div>
-<div id="recap" class="section level1" number="12">
-<h1 number="12"><span class="header-section-number">12</span> Recap</h1>
-<p>These exercises have covered:</p>
-<ol style="list-style-type: decimal">
-<li>Build the labels first!<br />
-</li>
-<li>Mapping variables to position<br />
-</li>
-</ol>
-<ul>
-<li><code>aes()</code> is used to map variables to <code>x</code> and <code>y</code> positions<br />
-</li>
-</ul>
-<ol start="3" style="list-style-type: decimal">
-<li>Mapping variables to aesthetics<br />
-</li>
-</ol>
-<ul>
-<li><code>aes()</code> is used to map variables to <code>color</code>, <code>fill</code>, etc.</li>
-</ul>
-<ol start="4" style="list-style-type: decimal">
-<li>Graphing data summaries<br />
-</li>
-</ol>
-<ul>
-<li>Use data wrangling pipelines to pass <code>data.frame</code>s to <code>ggplot2</code> functions<br />
-</li>
-</ul>
-<ol start="5" style="list-style-type: decimal">
-<li>Labeling data points (with layers)<br />
-</li>
-</ol>
-<ul>
-<li>add labels with <code>geom_text()</code> and <code>ggrepel</code> layers<br />
-</li>
-</ul>
-<ol start="4" style="list-style-type: decimal">
-<li>Using <code>facet</code>s to explore graphs across different scales for the <code>x</code> and <code>y</code> axes</li>
-</ol>
 </div>
 
 <i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>

@@ -350,7 +350,130 @@ div.tocify {
 </div>
 
 
-
+<div id="objectives" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
+<ul>
+<li>download, install, and set up R and RStudio on your local machine</li>
+<li>compare differences between the R programming language and the R application</li>
+<li>explain what the differences between the command line, script files, and an <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">Integrated Development Environment</a></li>
+<li>compare <a href="https://en.wikipedia.org/wiki/Open-source_software">open-source software</a> and <a href="https://en.wikipedia.org/wiki/Proprietary_software">proprietary software</a></li>
+</ul>
+</div>
+<div id="materials" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Materials</h1>
+<p>The slides for this section are available <a href="">here</a>.</p>
+</div>
+<div id="installation" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Installation</h1>
+<p>Depending on what kind of computer you have, these instructions will be a little different. The two sections below describe how to install R and RStudio on Mac and Windows machines. An alternative to downloading and installing R and RStudio is using <a href="https://rstudio.cloud/">RStudio.Cloud</a>, which operates entirely in your browser. You’ll need to sign up for a free RStudio.cloud account using your Google account or email address, but we recommend using a <a href="https://github.com/">Github</a> account (also free!).</p>
+<div id="installing-r-on-mac" class="section level2 tabset" number="3.1">
+<h2 class="tabset" number="3.1"><span class="header-section-number">3.1</span> Installing R on Mac</h2>
+<p>These steps cover how to install R and RStudio on a Windows machine. The technical details on the operating system and machine are listed below,</p>
+<pre><code>MacBook Pro (13-inch, 2017, Four Thunderbolt 3 Ports)
+macOS Big Sur
+  Version: 11.2.3 (20D91)
+Model Name: MacBook Pro
+  Model Identifier: MacBookPro14,2
+  Graphics: Intel Iris Plus Graphics 650 1536 MB
+  Processor Name:   Dual-Core Intel Core i5
+  Processor Speed:  3.1 GHz
+  Number of Processors: 1
+  Total Number of Cores:    2
+  L2 Cache (per Core):  256 KB
+  L3 Cache: 4 MB
+  Hyper-Threading Technology:   Enabled
+  Memory:   16 GB
+  System Firmware Version:  429.80.1.0.0
+  SMC Version (system): 2.44f6</code></pre>
+<div id="download-r" class="section level3" number="3.1.1">
+<h3 number="3.1.1"><span class="header-section-number">3.1.1</span> Download R</h3>
+<p>Navigate to <a href="https://cran.r-project.org/">CRAN</a>, the The Comprehensive R Archive Network.</p>
+<p><img src="img/bk00-01-cran.png" width="924" /></p>
+<p>Click on the <a href="https://cran.r-project.org/">Download R for (Mac) OS X</a>.</p>
+<p><img src="img/bk00-02-mac-download.png" width="924" /></p>
+<p>Download the R package:</p>
+<p><img src="img/bk00-03-mac-r-pkg.png" width="1109" /></p>
+<p>Download the R installer package into your Applications folder.</p>
+<p><img src="img/bk00-05-mac-r-app-folder.png" width="614" /></p>
+</div>
+<div id="download-rstudio" class="section level3" number="3.1.2">
+<h3 number="3.1.2"><span class="header-section-number">3.1.2</span> Download RStudio</h3>
+<p>Navigate to <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio downloads</a> for Macs</p>
+<p><img src="img/bk00-04-mac-rstudio-download.png" width="1120" /></p>
+<p>Download the RStudio .dmg into your Applications folder.</p>
+<p><img src="img/bk00-06-mac-rstudio-app-folder.png" width="615" /></p>
+</div>
+<div id="install-xcode" class="section level3" number="3.1.3">
+<h3 number="3.1.3"><span class="header-section-number">3.1.3</span> Install Xcode</h3>
+<p>You’ll need to install Xcode to compile R packages, which you can find in the <a href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">Mac App Store</a>.</p>
+<p><img src="img/bk00-07-mac-xcode-app-store.png" width="1006" /></p>
+<p>Open the App Store on your local machine and click on the ‘Develop’ tab. Click on the ‘Get’ icon (<em>mine says ‘open’ because I already Xcode installed</em>).</p>
+<p>Follow the instructions to install Xcode just like you would any other application on your Mac.</p>
+<p><img src="img/bk00-08-mac-xcode-app-get.png" width="1176" /></p>
+</div>
+<div id="install-r" class="section level3" number="3.1.4">
+<h3 number="3.1.4"><span class="header-section-number">3.1.4</span> Install R</h3>
+<p>Open your Applications folder and click on the R package installer.</p>
+<p><img src="img/bk00-09-r-install-01.png" width="637" /></p>
+<p>This will open the installer package, click on ‘Continue’ until you’re asked to ‘Agree’</p>
+<p><img src="img/bk00-09-r-install-02.png" width="614" /></p>
+<p>Click ‘Agree’</p>
+<p><img src="img/bk00-09-r-install-03.png" width="503" /></p>
+<p>All the package installer to install R on your machine.</p>
+<p><img src="img/bk00-09-r-install-04.png" width="614" /></p>
+<p>Wait for R to finishing installing…</p>
+<p><img src="img/bk00-09-r-install-05.png" width="614" /></p>
+<p>Click ‘Close’ when the application is installed.</p>
+<p><img src="img/bk00-09-r-install-06.png" width="613" /></p>
+</div>
+<div id="install-rstudio" class="section level3" number="3.1.5">
+<h3 number="3.1.5"><span class="header-section-number">3.1.5</span> Install RStudio</h3>
+<p>Open your Applications folder and click on the RStudio .dmg installer.</p>
+<p><img src="img/bk00-09-rstudio-install-01.png" width="632" /></p>
+<p>Drag and drop the ‘RStudio.app’ icon into the ‘Applications’ folder.</p>
+<p><img src="img/bk00-09-rstudio-install-02.png" width="549" /></p>
+<p>Wait for the application to finishing copying…</p>
+<p><img src="img/bk00-09-rstudio-install-03.png" width="915" /></p>
+<p>Double-click on the new ‘RStudio.App’ icon.</p>
+<p><img src="img/bk00-09-rstudio-install-04.png" width="632" /></p>
+<p>We’re sure–click ‘Open’</p>
+<p><img src="img/bk00-09-rstudio-install-05.png" width="257" /></p>
+<p>Take a look at the RStudio IDE!</p>
+<p><img src="img/bk00-09-rstudio-install-06.png" width="1436" /></p>
+</div>
+</div>
+<div id="installing-r-on-windows" class="section level2 tabset" number="3.2">
+<h2 class="tabset" number="3.2"><span class="header-section-number">3.2</span> Installing R on Windows</h2>
+<p>These steps cover how to install R and RStudio on a Windows machine. The technical details on the operating system and machine are listed below,</p>
+<div id="download-r-1" class="section level3" number="3.2.1">
+<h3 number="3.2.1"><span class="header-section-number">3.2.1</span> Download R</h3>
+</div>
+<div id="download-rstudio-1" class="section level3" number="3.2.2">
+<h3 number="3.2.2"><span class="header-section-number">3.2.2</span> Download RStudio</h3>
+</div>
+<div id="download-rtools" class="section level3" number="3.2.3">
+<h3 number="3.2.3"><span class="header-section-number">3.2.3</span> Download Rtools</h3>
+</div>
+<div id="install-r-1" class="section level3" number="3.2.4">
+<h3 number="3.2.4"><span class="header-section-number">3.2.4</span> Install R</h3>
+</div>
+<div id="install-rstudio-1" class="section level3" number="3.2.5">
+<h3 number="3.2.5"><span class="header-section-number">3.2.5</span> Install RStudio</h3>
+</div>
+<div id="install-rtools" class="section level3" number="3.2.6">
+<h3 number="3.2.6"><span class="header-section-number">3.2.6</span> Install Rtools</h3>
+</div>
+</div>
+<div id="rstudio.cloud" class="section level2 tabset" number="3.3">
+<h2 class="tabset" number="3.3"><span class="header-section-number">3.3</span> RStudio.Cloud</h2>
+<div id="create-a-github-account" class="section level3" number="3.3.1">
+<h3 number="3.3.1"><span class="header-section-number">3.3.1</span> Create a Github account</h3>
+</div>
+<div id="create-a-rstudio.cloud-account" class="section level3" number="3.3.2">
+<h3 number="3.3.2"><span class="header-section-number">3.3.2</span> Create a RStudio.Cloud account</h3>
+</div>
+</div>
+</div>
 
 <i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
 
