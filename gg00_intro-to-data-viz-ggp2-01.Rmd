@@ -124,9 +124,6 @@ Now that we've successfully identified the pattern, we can use the
 COVID19VaxDistByLoc %>%
   mutate(
     # remove bracket indicators ([])
-    location = str_remove_all(string = location, pattern = "\\[[^\\[\\]]+\\]"),
-    # 
-    # remove whitespace
-    stock_id = str_trim(string = stock_id, side = "both")) -> TopPharmComp
+    location = str_remove_all(string = location, pattern = "\\[[^\\[\\]]+\\]"))
 ```
 

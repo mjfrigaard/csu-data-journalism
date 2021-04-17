@@ -201,11 +201,11 @@ These steps cover how to install R and RStudio on a Windows machine. The technic
 ### Download R
 
 ```{r bk00-10-cran, echo=FALSE}
-knitr::include_graphics("img/bk00-10-cran.png")
+# knitr::include_graphics("img/bk00-10-cran.png")
 ```
 
 ```{r bk00-10-win-download, echo=FALSE}
-knitr::include_graphics("img/bk00-10-win-download.png")
+# knitr::include_graphics("img/bk00-10-win-download.png")
 ```
 
 
