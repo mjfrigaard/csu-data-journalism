@@ -1,5 +1,5 @@
-# purrr-tutorial
+# Data Journalism 303
 
-Source for an R Markdown website for learning how to use [purrr](http://purrr.tidyverse.org):
+Source for an R Markdown website for [Data Journalism 303, a course at CSU, Chico](https://mjfrigaard.github.io/csuc-data-journalism/):
 
-<https://jennybc.github.io/purrr-tutorial>
+<https://mjfrigaard.github.io/csuc-data-journalism/>
