@@ -2,13 +2,13 @@
 title: "Scraping Wikipedia Tables"
 comment: "*advanced wrangling example*"
 output:
-  html_document:
+  html_document: 
     toc: yes
     toc_float: yes
-    toc_depth: 5
+    toc_depth: 6
     number_sections: yes
     code_folding: show
-    theme: united
+    theme: yeti
     df_print: paged
 
 always_allow_html: true

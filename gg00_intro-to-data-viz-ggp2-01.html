@@ -16,7 +16,7 @@
 <script src="site_libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -365,29 +365,42 @@ div.tocify {
 </div>
 
 
-<div id="objectives" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
-<p>This document outlines and introduction to data visualization with <code>ggplot2</code>.</p>
+<div id="objectives" class="section level2" number="0.1">
+<h2 number="0.1"><span class="header-section-number">0.1</span> Objectives</h2>
+<p>This document outlines and introduction to data visualization with <code>ggplot2</code>. The objectives for this section are:</p>
+<ul class="task-list">
+<li><p><input type="checkbox" disabled="" />
+Explain why there is as Grammar of Graphics is and what problem it solves</p></li>
+<li><p><input type="checkbox" disabled="" />
+Define the terms <code>geom</code> and <code>aesthetic</code></p></li>
+<li><p><input type="checkbox" disabled="" />
+Compare and contrast function calls with and without the pipe operator (<code>%&gt;%</code>)</p></li>
+<li><p><input type="checkbox" disabled="" />
+Create a visualization using <code>ggplot2</code>’s quickplot function (<code>qplot()</code>)</p></li>
+<li><p><input type="checkbox" disabled="" />
+Build a graph one layer at a time using the <code>ggplot2</code> template</p></li>
+</ul>
 </div>
-<div id="materials" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Materials</h1>
+<div id="materials" class="section level2" number="0.2">
+<h2 number="0.2"><span class="header-section-number">0.2</span> Materials</h2>
 <p>The slides for this presentation are <a href="">here</a></p>
 <p>There is also an accompanying <a href="">RStudio.Cloud project</a></p>
 </div>
-<div id="previous-lesson-contents" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Previous lesson contents</h1>
-<p>You can read more about <a href="https://dplyr.tidyverse.org/index.html"><code>dplyr</code></a> and <a href="https://tidyr.tidyverse.org/"><code>tidyr</code></a> on the tidyverse website, and in the <a href="https://r4ds.had.co.nz/transform.html">Data Transformation</a> and <a href="https://r4ds.had.co.nz/tidy-data.html">Tidy Data</a> chapters of R for Data Science.</p>
+<div id="previous-lessons" class="section level2" number="0.3">
+<h2 number="0.3"><span class="header-section-number">0.3</span> Previous lessons</h2>
+<p>You might want to revisit the <a href="https://mjfrigaard.github.io/csuc-data-journalism/dt00_data-manipulations.html"><code>dplyr</code></a> and <a href="https://mjfrigaard.github.io/csuc-data-journalism/dt01_data-trans-joins-exercises.html"><code>tidyr</code></a> lessons, or check out the <a href="https://r4ds.had.co.nz/transform.html">Data Transformation</a> and <a href="https://r4ds.had.co.nz/tidy-data.html">Tidy Data</a> chapters of R for Data Science.</p>
 </div>
-<div id="load-the-packages" class="section level1" number="4">
-<h1 number="4"><span class="header-section-number">4</span> Load the packages</h1>
+<div id="load-the-packages" class="section level2" number="0.4">
+<h2 number="0.4"><span class="header-section-number">0.4</span> Load the packages</h2>
 <p>The main packages we’re going to use are <code>dplyr</code>, <code>tidyr</code>, and <code>ggplot2</code>. These are all part of the <code>tidyverse</code>, so we’ll import this package below:</p>
 <pre class="r"><code>install.packages(&quot;tidyverse&quot;)
 library(tidyverse)</code></pre>
 </div>
-<div id="import-data" class="section level1" number="5">
-<h1 number="5"><span class="header-section-number">5</span> Import data</h1>
-<p>We will begin by importing the data from the wrangling section. These data come from a wikipedia table on <a href="https://en.wikipedia.org/wiki/COVID-19_vaccine#Deployment">the deployment of COVID-19 vaccinations</a>. The code below will scrape the html table and store the results in <code>COVID19VaxDistByLoc</code>.</p>
-<p>A few things to note about the code below:</p>
+<div id="import-data" class="section level2 tabset" number="0.5">
+<h2 class="tabset" number="0.5"><span class="header-section-number">0.5</span> Import data</h2>
+<p>We will begin by importing the data from the wrangling section. These data come from a wikipedia table on <a href="https://en.wikipedia.org/wiki/Deployment_of_COVID-19_vaccines#Distribution">the deployment of COVID-19 vaccinations</a>. The code below will scrape the html table and store the results in <code>COVID19VaxDistByLoc</code>.</p>
+<div id="scrape-wikipedia" class="section level3" number="0.5.1">
+<h3 number="0.5.1"><span class="header-section-number">0.5.1</span> Scrape wikipedia</h3>
 <ol style="list-style-type: decimal">
 <li>We load the <code>tidyverse</code>, <code>rvest</code>, and <code>xml2</code> packages with <code>library()</code><br />
 </li>
@@ -419,11 +432,14 @@ COVID19VaxDistByLoc &lt;- COVID19VaxDistByLoc[ , 1:3] %&gt;%
   magrittr::set_names(x = ., value = c(&quot;location&quot;, &quot;n_vaccinated&quot;,
                                        &quot;perc_of_pop&quot;))
 glimpse(COVID19VaxDistByLoc)</code></pre>
-<pre><code>## Rows: 184
+<pre><code>## Rows: 196
 ## Columns: 3
-## $ location     &lt;chr&gt; &quot;China[e]&quot;, &quot;United States&quot;, &quot;India&quot;,…
-## $ n_vaccinated &lt;chr&gt; &quot;187,360,000&quot;, &quot;127,743,096&quot;, &quot;104,40…
-## $ perc_of_pop  &lt;chr&gt; &quot;--&quot;, &quot;38.2%&quot;, &quot;7.6%&quot;, &quot;17.8%&quot;, &quot;48.0…</code></pre>
+## $ location     &lt;chr&gt; &quot;World[e]&quot;, &quot;United States&quot;, &quot;China[f…
+## $ n_vaccinated &lt;chr&gt; &quot;562,324,298&quot;, &quot;140,969,663&quot;, &quot;229,48…
+## $ perc_of_pop  &lt;chr&gt; &quot;7.2%&quot;, &quot;42.1%&quot;, &quot;--&quot;, &quot;8.7%&quot;, &quot;21.7%…</code></pre>
+</div>
+<div id="date-stamp-and-export" class="section level3" number="0.5.2">
+<h3 number="0.5.2"><span class="header-section-number">0.5.2</span> Date-stamp and export</h3>
 <p>This is a good time to export these data into the <code>data/raw</code> folder (in case the numbers change the next time we scrape the table).</p>
 <pre class="r"><code>readr::write_csv(x = COVID19VaxDistByLoc, 
                  file = paste0(&quot;data/raw/&quot;, 
@@ -433,36 +449,500 @@ glimpse(COVID19VaxDistByLoc)</code></pre>
 fs::dir_tree(&quot;data/raw/&quot;, regexp = &quot;COVID19&quot;)</code></pre>
 <pre><code>## data/raw/
 ## ├── 2021-04-15-COVID19VaxDistByLoc.csv
-## └── 2021-04-17-COVID19VaxDistByLoc.csv</code></pre>
-<div id="format-variables" class="section level2" number="5.1">
-<h2 number="5.1"><span class="header-section-number">5.1</span> Format variables</h2>
-<p>We can see a few of the variables need to be formatted before we can start visualizing.</p>
-<pre class="r"><code>head(COVID19VaxDistByLoc)</code></pre>
+## ├── 2021-04-17-COVID19VaxDistByLoc.csv
+## ├── 2021-04-21-COVID19VaxDistByLoc.csv
+## ├── 2021-04-22-COVID19VaxDistByLoc.csv
+## ├── 2021-04-23-COVID19VaxDistByLoc.csv
+## ├── 2021-04-26-COVID19VaxDistByLoc.csv
+## └── 2021-04-27-COVID19VaxDistByLoc.csv</code></pre>
+<p>We can see these data have been downloaded on multiple days (starting on <code>2021-04-15</code>)</p>
+</div>
+</div>
+<div id="look-at-the-data" class="section level2 tabset" number="0.6">
+<h2 class="tabset" number="0.6"><span class="header-section-number">0.6</span> Look at the data</h2>
+<blockquote>
+<p>“A problem well-defined is a problem half solved.” ― <a href="https://www.goodreads.com/quotes/7702317-a-problem-well-defined-is-a-problem-half-solved#">John Dewey</a></p>
+</blockquote>
+<p>Before we start any data wrangling, we need to look at the data in it’s ‘natural state.’ Viewing the data gives us an opportunity to quantify the catastrophe we’re dealing with, and let’s us plan a path forward.</p>
+<p>There are multiple functions for looking at your data in R. I like to start with the <code>utils::head()</code> and <code>utils::tail()</code> functions see the ‘top’ and ‘bottom’ a dataset.</p>
+<p><code>utils::head()</code> shows us the top six rows of <code>COVID19VaxDistByLoc</code>:</p>
+<pre class="r"><code>utils::head(COVID19VaxDistByLoc)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n_vaccinated"],"name":[2],"type":["chr"],"align":["left"]},{"label":["perc_of_pop"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"China[e]","2":"187,360,000","3":"--"},{"1":"United States","2":"127,743,096","3":"38.2%"},{"1":"India","2":"104,408,484","3":"7.6%"},{"1":"EU","2":"79,343,977","3":"17.8%"},{"1":"United Kingdom","2":"32,574,221","3":"48.0%"},{"1":"Brazil","2":"24,809,790","3":"11.7%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n_vaccinated"],"name":[2],"type":["chr"],"align":["left"]},{"label":["perc_of_pop"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"World[e]","2":"562,324,298","3":"7.2%"},{"1":"United States","2":"140,969,663","3":"42.1%"},{"1":"China[f]","2":"229,489,000","3":"--"},{"1":"India","2":"119,886,252","3":"8.7%"},{"1":"EU","2":"96,709,919","3":"21.7%"},{"1":"United Kingdom","2":"33,752,885","3":"49.7%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
+<p>We can change the number of rows <code>head()</code> or <code>tail()</code> returns by supplying a number to the <code>n</code> argument.</p>
+<pre class="r"><code>utils::head(COVID19VaxDistByLoc, n = 10)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n_vaccinated"],"name":[2],"type":["chr"],"align":["left"]},{"label":["perc_of_pop"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"World[e]","2":"562,324,298","3":"7.2%"},{"1":"United States","2":"140,969,663","3":"42.1%"},{"1":"China[f]","2":"229,489,000","3":"--"},{"1":"India","2":"119,886,252","3":"8.7%"},{"1":"EU","2":"96,709,919","3":"21.7%"},{"1":"United Kingdom","2":"33,752,885","3":"49.7%"},{"1":"Brazil","2":"27,345,796","3":"12.9%"},{"1":"Germany","2":"19,854,550","3":"23.7%"},{"1":"Turkey","2":"13,287,707","3":"15.8%"},{"1":"France","2":"14,102,290","3":"20.7%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div id="exercise" class="section level3" number="0.6.1">
+<h3 number="0.6.1"><span class="header-section-number">0.6.1</span> exercise</h3>
+<p>Use the <code>utils::tail()</code> function below to view the bottom 10 rows of <code>COVID19VaxDistByLoc</code>.</p>
+<pre class="r"><code>utils::tail(COVID19VaxDistByLoc, n = __)</code></pre>
+</div>
+<div id="solution" class="section level3" number="0.6.2">
+<h3 number="0.6.2"><span class="header-section-number">0.6.2</span> solution</h3>
+<pre class="r"><code>utils::tail(COVID19VaxDistByLoc, n = 10)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n_vaccinated"],"name":[2],"type":["chr"],"align":["left"]},{"label":["perc_of_pop"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"Libya","2":"750","3":"0.0%"},{"1":"Armenia","2":"565","3":"0.0%"},{"1":"Tonga","2":"500","3":"0.5%"},{"1":"Cameroon","2":"400","3":"0.0%"},{"1":"Nauru","2":"168","3":"1.6%"},{"1":"F.S. Micronesia[498]","2":"19,983","3":"19.3%"},{"1":"Marshall Islands[498]","2":"14,228","3":"24.4%"},{"1":"Palau[498]","2":"11,685","3":"65.3%"},{"1":"Vatican City[499][500]","2":"22","3":"2.7%"},{"1":"Sources\\nList of sources by country.\\nNotes\\n\\n^ Latest available data as of this date. Individual country reporting frequency varies.\\n\\n^ Number of unique individuals who have received at least one dose of a COVID-19 vaccine (unless noted otherwise).\\n\\n^ Percentage of population that has received at least one dose of a COVID-19 vaccine.\\n\\n^ May include vaccination of non-citizen workers, which can push totals beyond 100% of the local population.\\n\\n^ Some countries are not yet reporting first-dose counts. Total dose counts for these countries are not included in the World total.\\n\\n^ a b c d e f g h i j k l m n This country's data reflects total doses administered, not the first shot only.","2":"Sources\\nList of sources by country.\\nNotes\\n\\n^ Latest available data as of this date. Individual country reporting frequency varies.\\n\\n^ Number of unique individuals who have received at least one dose of a COVID-19 vaccine (unless noted otherwise).\\n\\n^ Percentage of population that has received at least one dose of a COVID-19 vaccine.\\n\\n^ May include vaccination of non-citizen workers, which can push totals beyond 100% of the local population.\\n\\n^ Some countries are not yet reporting first-dose counts. Total dose counts for these countries are not included in the World total.\\n\\n^ a b c d e f g h i j k l m n This country's data reflects total doses administered, not the first shot only.","3":"Sources\\nList of sources by country.\\nNotes\\n\\n^ Latest available data as of this date. Individual country reporting frequency varies.\\n\\n^ Number of unique individuals who have received at least one dose of a COVID-19 vaccine (unless noted otherwise).\\n\\n^ Percentage of population that has received at least one dose of a COVID-19 vaccine.\\n\\n^ May include vaccination of non-citizen workers, which can push totals beyond 100% of the local population.\\n\\n^ Some countries are not yet reporting first-dose counts. Total dose counts for these countries are not included in the World total.\\n\\n^ a b c d e f g h i j k l m n This country's data reflects total doses administered, not the first shot only."}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>We’ve covered other functions for viewing your data (<code>dplyr::glimpse()</code>, <code>utils::str()</code>, and <code>View()</code>), and I recommend using any combination of them to get a good understanding of what you’re dealing with. We can already see a few of the columns need to be addressed before we can start visualizing, so let’s write up a plan for wrangling these variables:</p>
 <ol style="list-style-type: decimal">
+<li>The last row in <code>COVID19VaxDistByLoc</code> has some metadata (data about data) that needs to be extracted before we can visualize.</li>
 <li>We need to remove the alphabetic identifier for each country <code>location</code> (i.e., <code>World[d]</code> and <code>China[e]</code>).<br />
 </li>
-<li>The number vaccinated variable (<code>n_vaccinated</code>) and percent of population variable (<code>perc_of_pop</code>) have symbols (commas (<code>,</code>) and percent symbols (<code>%</code>)), which is making R treat it as a character, so these will have to be removed and converted to numbers.</li>
+<li>The number vaccinated variable (<code>n_vaccinated</code>) has commas (<code>,</code>) and needs to be converted to a number.<br />
+</li>
+<li>The percent of population variable (<code>perc_of_pop</code>) has symbols (decimals, percent symbols (<code>%</code>), and missing values (<code>--</code>)), which is making R treat it as a character, so these will have to be removed.</li>
 </ol>
-<p>First we will identify all the letters in brackets inside the <code>location</code> variable using <a href=""><code>stringr::str_view_all()</code></a></p>
-<pre class="r"><code>str_view_all(string = COVID19VaxDistByLoc$location, pattern = &quot;\\[[^\\[\\]]+\\]&quot;, match = TRUE)</code></pre>
-<div id="htmlwidget-faab9d6191ded68663cb" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-faab9d6191ded68663cb">{"x":{"html":"<ul>\n  <li>China<span class='match'>[e]<\/span><\/li>\n  <li>United Arab Emirates<span class='match'>[e]<\/span><\/li>\n  <li>Saudi Arabia<span class='match'>[e]<\/span><\/li>\n  <li>Nepal<span class='match'>[e]<\/span><\/li>\n  <li>Australia<span class='match'>[e]<\/span><\/li>\n  <li>Qatar<span class='match'>[e]<\/span><\/li>\n  <li>Mongolia<span class='match'>[e]<\/span><\/li>\n  <li>Kuwait<span class='match'>[e]<\/span><\/li>\n  <li>Panama<span class='match'>[e]<\/span><\/li>\n  <li>Ethiopia<span class='match'>[e]<\/span><\/li>\n  <li>Albania<span class='match'>[e]<\/span><\/li>\n  <li>Guinea<span class='match'>[e]<\/span><\/li>\n  <li>Algeria<span class='match'>[e]<\/span><\/li>\n  <li>Nicaragua<span class='match'>[e]<\/span><\/li>\n  <li>Saint Lucia<span class='match'>[e]<\/span><\/li>\n  <li>Andorra<span class='match'>[e]<\/span><\/li>\n  <li>Bosnia and Herzegovina<span class='match'>[e]<\/span><\/li>\n  <li>Saint Vincent and the Grenadines<span class='match'>[e]<\/span><\/li>\n  <li>F.S. Micronesia<span class='match'>[464]<\/span><\/li>\n  <li>Marshall Islands<span class='match'>[464]<\/span><\/li>\n  <li>Palau<span class='match'>[464]<\/span><\/li>\n  <li>Vatican City<span class='match'>[465]<\/span><span class='match'>[466]<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
-<p><code>str_view_all()</code> shows us all the <code>locations</code> with a bracket <code>[]</code> + letter/number indicator. Don’t worry if you don’t know what the regular expression pattern is doing (<code>"\\[[^\\[\\]]+\\]"</code>). We will cover regular expressions in a later section (if you can’t wait, check out the <a href="https://r4ds.had.co.nz/strings.html">Strings chapter of R for Data Science</a>).</p>
-<p>Now that we’ve successfully identified the pattern, we can use the</p>
-<pre class="r"><code>COVID19VaxDistByLoc %&gt;%
+</div>
+</div>
+<div id="step-1-remove-metadata" class="section level2 tabset" number="0.7">
+<h2 class="tabset" number="0.7"><span class="header-section-number">0.7</span> Step 1: Remove metadata</h2>
+<p>We can use the <code>dplyr::filter</code> function to remove the last row with the <code>Sources</code>. We’re going to combine <code>filter()</code> with the <code>stringr::str_detect()</code> function so we can identify the row with the word ‘Sources’. The <a href="https://stringr.tidyverse.org/index.html"><code>stringr</code> package</a> is part of the <code>tidyverse</code> and comes with some excellent functions for manipulating strings (characters).</p>
+<p><code>stringr::str_detect()</code> takes a <code>string</code> argument, which will be our <code>location</code> variable in <code>COVID19VaxDistByLoc</code>, and a <code>pattern</code> argument, which we will specify as <code>"Source"</code>.</p>
+<pre class="r"><code>stringr::str_detect(string = COVID19VaxDistByLoc$location, 
+                    pattern = &quot;Source&quot;)</code></pre>
+<pre><code>##   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [10] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [19] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [28] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [46] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [55] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [64] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [73] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [82] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [91] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [100] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [109] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [118] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [127] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [136] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [145] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [154] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [163] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [172] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [181] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [190] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE</code></pre>
+<p>As we can see, only the last row is identified as having the <code>"Source"</code> pattern. But what if we want the <em>opposite</em> logical values designated? Fortunately, <code>str_detect()</code> has a <code>negate</code> argument we can set to <code>TRUE</code>.</p>
+<pre class="r"><code>stringr::str_detect(string = COVID19VaxDistByLoc$location, 
+                    pattern = &quot;Source&quot;, negate = TRUE)</code></pre>
+<pre><code>##   [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [10]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [19]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [28]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [37]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [46]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [55]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [64]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [73]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [82]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [91]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [100]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [109]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [118]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [127]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [136]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [145]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [154]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [163]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [172]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [181]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [190]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE</code></pre>
+<div id="exercise-1" class="section level3" number="0.7.1">
+<h3 number="0.7.1"><span class="header-section-number">0.7.1</span> exercise</h3>
+<p>Use <code>str_detect()</code> and <code>filter()</code> to remove the metadata row, and assign the output to <code>WikiCovid</code>. Change the <code>negate</code> argument to <code>TRUE</code> for these data.</p>
+<pre class="r"><code>WikiCovid &lt;- COVID19VaxDistByLoc %&gt;% 
+  dplyr::filter(str_detect(string = COVID19VaxDistByLoc$location, 
+                    pattern = &quot;_____&quot;, negate = ____))
+glimpse(WikiCovid)</code></pre>
+</div>
+<div id="solution-1" class="section level3" number="0.7.2">
+<h3 number="0.7.2"><span class="header-section-number">0.7.2</span> solution</h3>
+<p>See solution below.</p>
+<pre class="r"><code>WikiCovid &lt;- COVID19VaxDistByLoc %&gt;% 
+  dplyr::filter(str_detect(string = COVID19VaxDistByLoc$location, 
+                    pattern = &quot;Source&quot;, negate = TRUE))
+glimpse(WikiCovid)</code></pre>
+<pre><code>## Rows: 195
+## Columns: 3
+## $ location     &lt;chr&gt; &quot;World[e]&quot;, &quot;United States&quot;, &quot;China[f…
+## $ n_vaccinated &lt;chr&gt; &quot;562,324,298&quot;, &quot;140,969,663&quot;, &quot;229,48…
+## $ perc_of_pop  &lt;chr&gt; &quot;7.2%&quot;, &quot;42.1%&quot;, &quot;--&quot;, &quot;8.7%&quot;, &quot;21.7%…</code></pre>
+</div>
+<div id="exercise-2" class="section level3" number="0.7.3">
+<h3 number="0.7.3"><span class="header-section-number">0.7.3</span> exercise</h3>
+<p>Now use <code>str_detect()</code> with <code>filter()</code> to extract the metadata row with the <code>"Source"</code> pattern, and assign the output to <code>WikiCovidSource</code>. Don’t change the <code>negate</code> argument this time.</p>
+<pre class="r"><code>WikiCovidSource &lt;- COVID19VaxDistByLoc %&gt;% 
+  dplyr::filter(str_detect(string = __________________________, 
+                    pattern = &quot;_______&quot;))</code></pre>
+</div>
+<div id="solution-2" class="section level3" number="0.7.4">
+<h3 number="0.7.4"><span class="header-section-number">0.7.4</span> solution</h3>
+<p>See solution below.</p>
+<pre class="r"><code>WikiCovidSource &lt;- COVID19VaxDistByLoc %&gt;% 
+  dplyr::filter(str_detect(string = COVID19VaxDistByLoc$location, 
+                    pattern = &quot;Source&quot;))
+glimpse(WikiCovidSource)</code></pre>
+<pre><code>## Rows: 1
+## Columns: 3
+## $ location     &lt;chr&gt; &quot;Sources\nList of sources by country.…
+## $ n_vaccinated &lt;chr&gt; &quot;Sources\nList of sources by country.…
+## $ perc_of_pop  &lt;chr&gt; &quot;Sources\nList of sources by country.…</code></pre>
+<p>We changed the name of the <code>COVID19VaxDistByLoc</code> dataset to <code>WikiCovid</code> so we can differentiate the changed data from the raw data. This is a good practice because you might need to revert back to the original dataset along the way (or view it for comparison).</p>
+</div>
+</div>
+<div id="step-2-remove-string-characters" class="section level2 tabset" number="0.8">
+<h2 class="tabset" number="0.8"><span class="header-section-number">0.8</span> Step 2: Remove string characters</h2>
+<p>For the next step in wrangling the <code>location</code> variable, we will want to identify all the letters in brackets using <a href="https://stringr.tidyverse.org/reference/str_view.html"><code>stringr::str_view_all()</code></a>. Below is an example of how it works:</p>
+<pre class="r"><code>str_view_all(string = WikiCovid$location, pattern = &quot;\\[[^\\[\\]]+\\]&quot;, match = TRUE)</code></pre>
+<div id="htmlwidget-bb23a98da24dab7df284" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bb23a98da24dab7df284">{"x":{"html":"<ul>\n  <li>World<span class='match'>[e]<\/span><\/li>\n  <li>China<span class='match'>[f]<\/span><\/li>\n  <li>United Arab Emirates<span class='match'>[f]<\/span><\/li>\n  <li>Saudi Arabia<span class='match'>[f]<\/span><\/li>\n  <li>Netherlands<span class='match'>[f]<\/span><\/li>\n  <li>Australia<span class='match'>[f]<\/span><\/li>\n  <li>Qatar<span class='match'>[f]<\/span><\/li>\n  <li>Mongolia<span class='match'>[f]<\/span><\/li>\n  <li>Ethiopia<span class='match'>[f]<\/span><\/li>\n  <li>Albania<span class='match'>[f]<\/span><\/li>\n  <li>Algeria<span class='match'>[f]<\/span><\/li>\n  <li>Taiwan<span class='match'>[f]<\/span><\/li>\n  <li>Saint Lucia<span class='match'>[f]<\/span><\/li>\n  <li>Bosnia and Herzegovina<span class='match'>[f]<\/span><\/li>\n  <li>Saint Vincent and the Grenadines<span class='match'>[f]<\/span><\/li>\n  <li>F.S. Micronesia<span class='match'>[498]<\/span><\/li>\n  <li>Marshall Islands<span class='match'>[498]<\/span><\/li>\n  <li>Palau<span class='match'>[498]<\/span><\/li>\n  <li>Vatican City<span class='match'>[499]<\/span><span class='match'>[500]<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<p><code>str_view_all()</code> shows us all the <code>locations</code> with a bracket <code>[]</code> + letter/number indicator. Don’t worry if you don’t know what the regular expression pattern (<code>"\\[[^\\[\\]]+\\]"</code>) is doing. We will cover regular expressions in a later section (if you can’t wait, check out the <a href="https://r4ds.had.co.nz/strings.html">Strings chapter of R for Data Science</a>). The main takeaway here is that we need to provide a <code>string</code> (i.e. the variable name), and a pattern we wish to view.</p>
+<div id="exercise-3" class="section level3" number="0.8.1">
+<h3 number="0.8.1"><span class="header-section-number">0.8.1</span> exercise</h3>
+<p>Now that we’ve successfully identified the regular expression pattern for matching all the strings we want to remove, we can use <code>dplyr::mutate()</code> and <code>stringr::str_remove_all()</code> to remove these numbers and letters from the <code>location</code> column:</p>
+<ul>
+<li>copy and paste the <code>pattern</code> from the <code>stringr::str_view_all()</code> function above into the <code>pattern</code> argument for <code>stringr::str_remove_all()</code> below:</li>
+</ul>
+<pre class="r"><code>WikiCovid %&gt;%
   mutate(
     # remove bracket indicators ([])
-    location = str_remove_all(string = location, pattern = &quot;\\[[^\\[\\]]+\\]&quot;))</code></pre>
+    location = stringr::str_remove_all(string = location, 
+                                       pattern = &quot;_______________&quot;))</code></pre>
+</div>
+<div id="solution-3" class="section level3" number="0.8.2">
+<h3 number="0.8.2"><span class="header-section-number">0.8.2</span> solution</h3>
+<p>Check your solution below:</p>
+<pre class="r"><code>WikiCovid %&gt;%
+  mutate(
+    # remove bracket indicators ([])
+    location = stringr::str_remove_all(string = location, 
+                                       pattern = &quot;\\[[^\\[\\]]+\\]&quot;))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n_vaccinated"],"name":[2],"type":["chr"],"align":["left"]},{"label":["perc_of_pop"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"China","2":"187,360,000","3":"--"},{"1":"United States","2":"127,743,096","3":"38.2%"},{"1":"India","2":"104,408,484","3":"7.6%"},{"1":"EU","2":"79,343,977","3":"17.8%"},{"1":"United Kingdom","2":"32,574,221","3":"48.0%"},{"1":"Brazil","2":"24,809,790","3":"11.7%"},{"1":"Germany","2":"15,906,352","3":"19.0%"},{"1":"Turkey","2":"12,038,403","3":"14.3%"},{"1":"France","2":"11,982,970","3":"17.6%"},{"1":"Indonesia","2":"10,457,337","3":"3.8%"},{"1":"Italy","2":"10,311,621","3":"17.1%"},{"1":"Mexico","2":"10,134,800","3":"7.9%"},{"1":"Russia","2":"9,731,470","3":"6.7%"},{"1":"United Arab Emirates","2":"9,489,684","3":"--"},{"1":"Spain","2":"9,002,054","3":"19.3%"},{"1":"Canada","2":"8,641,720","3":"22.9%"},{"1":"Chile","2":"7,664,226","3":"40.1%"},{"1":"Saudi Arabia","2":"6,800,711","3":"--"},{"1":"Poland","2":"6,236,689","3":"16.5%"},{"1":"Bangladesh","2":"5,686,885","3":"3.5%"},{"1":"Israel","2":"5,341,887","3":"61.7%"},{"1":"Argentina","2":"5,305,604","3":"11.7%"},{"1":"Morocco","2":"4,583,664","3":"12.4%"},{"1":"Hungary","2":"3,090,994","3":"32.0%"},{"1":"Netherlands","2":"2,957,777","3":"17.3%"},{"1":"Romania","2":"2,471,779","3":"12.9%"},{"1":"Colombia","2":"2,340,554","3":"4.6%"},{"1":"Belgium","2":"2,204,943","3":"19.0%"},{"1":"Serbia","2":"1,820,747","3":"26.8%"},{"1":"Portugal","2":"1,772,322","3":"17.4%"},{"1":"Nepal","2":"1,700,000","3":"--"},{"1":"Greece","2":"1,671,324","3":"16.0%"},{"1":"Sweden","2":"1,667,542","3":"16.5%"},{"1":"Austria","2":"1,658,035","3":"18.4%"},{"1":"Czech Republic","2":"1,575,629","3":"14.7%"},{"1":"South Korea","2":"1,482,969","3":"2.9%"},{"1":"Australia","2":"1,420,577","3":"--"},{"1":"Finland","2":"1,267,678","3":"22.9%"},{"1":"Cambodia","2":"1,241,947","3":"7.4%"},{"1":"Switzerland","2":"1,228,368","3":"14.2%"},{"1":"Qatar","2":"1,209,648","3":"--"},{"1":"Japan","2":"1,175,324","3":"0.9%"},{"1":"Singapore","2":"1,131,658","3":"19.3%"},{"1":"Pakistan","2":"1,114,000","3":"0.5%"},{"1":"Philippines","2":"1,093,651","3":"1.0%"},{"1":"Nigeria","2":"1,051,096","3":"0.5%"},{"1":"Uruguay","2":"1,025,979","3":"29.5%"},{"1":"Norway","2":"1,025,429","3":"18.9%"},{"1":"Denmark","2":"1,022,477","3":"17.7%"},{"1":"Myanmar","2":"1,000,000","3":"1.8%"},{"1":"Sri Lanka","2":"925,242","3":"4.3%"},{"1":"Slovakia","2":"925,101","3":"16.9%"},{"1":"Dominican Republic","2":"909,898","3":"8.4%"},{"1":"Azerbaijan","2":"859,338","3":"8.5%"},{"1":"Ireland","2":"814,470","3":"16.6%"},{"1":"Ghana","2":"755,686","3":"2.4%"},{"1":"Peru","2":"676,387","3":"2.1%"},{"1":"Hong Kong","2":"671,715","3":"9.0%"},{"1":"Malaysia","2":"653,531","3":"2.0%"},{"1":"Mongolia","2":"632,812","3":"--"},{"1":"Kuwait","2":"604,861","3":"--"},{"1":"Bahrain","2":"586,279","3":"34.5%"},{"1":"Kenya","2":"569,244","3":"1.1%"},{"1":"Lithuania","2":"561,712","3":"20.6%"},{"1":"Panama","2":"550,860","3":"--"},{"1":"Jordan","2":"543,095","3":"5.3%"},{"1":"Thailand","2":"523,830","3":"0.8%"},{"1":"Bulgaria","2":"507,245","3":"7.3%"},{"1":"Croatia","2":"500,233","3":"12.2%"},{"1":"Bhutan","2":"478,219","3":"62.0%"},{"1":"El Salvador","2":"460,565","3":"7.1%"},{"1":"Ukraine","2":"445,859","3":"1.0%"},{"1":"Ethiopia","2":"430,000","3":"--"},{"1":"Senegal","2":"376,974","3":"2.3%"},{"1":"Slovenia","2":"368,446","3":"17.7%"},{"1":"Iran","2":"361,951","3":"0.4%"},{"1":"Costa Rica","2":"354,291","3":"7.0%"},{"1":"Rwanda","2":"348,926","3":"2.7%"},{"1":"Kazakhstan","2":"338,582","3":"1.8%"},{"1":"Ecuador","2":"338,180","3":"1.9%"},{"1":"Bolivia","2":"333,137","3":"2.9%"},{"1":"Albania","2":"314,622","3":"--"},{"1":"South Africa","2":"292,623","3":"0.5%"},{"1":"Estonia","2":"277,745","3":"20.9%"},{"1":"Maldives","2":"274,782","3":"50.8%"},{"1":"Uzbekistan","2":"256,958","3":"0.8%"},{"1":"Zimbabwe","2":"252,932","3":"1.7%"},{"1":"Venezuela","2":"250,000","3":"0.9%"},{"1":"Angola","2":"245,442","3":"0.8%"},{"1":"Malawi","2":"240,744","3":"1.3%"},{"1":"Uganda","2":"206,708","3":"0.5%"},{"1":"Lebanon","2":"199,999","3":"2.9%"},{"1":"Malta","2":"183,987","3":"41.7%"},{"1":"Tunisia","2":"174,534","3":"1.5%"},{"1":"Latvia","2":"174,005","3":"9.2%"},{"1":"Oman","2":"173,789","3":"3.4%"},{"1":"Palestine","2":"159,754","3":"3.1%"},{"1":"Iraq","2":"152,962","3":"0.4%"},{"1":"Guatemala","2":"152,733","3":"0.9%"},{"1":"Egypt","2":"148,987","3":"0.2%"},{"1":"Cyprus","2":"145,357","3":"16.6%"},{"1":"Jamaica","2":"135,473","3":"4.6%"},{"1":"Afghanistan","2":"120,000","3":"0.3%"},{"1":"Luxembourg","2":"110,434","3":"17.6%"},{"1":"New Zealand","2":"105,391","3":"2.2%"},{"1":"Sudan","2":"100,010","3":"0.2%"},{"1":"Togo","2":"100,000","3":"1.2%"},{"1":"Belarus","2":"92,000","3":"1.0%"},{"1":"Ivory Coast","2":"87,267","3":"0.3%"},{"1":"Moldova","2":"82,267","3":"2.0%"},{"1":"Guinea","2":"79,665","3":"--"},{"1":"Algeria","2":"75,000","3":"--"},{"1":"Iceland","2":"70,058","3":"20.5%"},{"1":"Seychelles","2":"66,250","3":"67.4%"},{"1":"Barbados","2":"66,069","3":"23.0%"},{"1":"Vietnam","2":"63,758","3":"0.1%"},{"1":"Nicaragua","2":"61,625","3":"--"},{"1":"Guyana","2":"60,172","3":"7.7%"},{"1":"Paraguay","2":"57,327","3":"0.8%"},{"1":"Mozambique","2":"57,305","3":"0.2%"},{"1":"Northern Cyprus","2":"56,516","3":"14.8%"},{"1":"Honduras","2":"55,000","3":"0.6%"},{"1":"Macau","2":"50,184","3":"7.7%"},{"1":"Isle of Man","2":"48,625","3":"57.2%"},{"1":"Jersey","2":"45,585","3":"45.1%"},{"1":"Sierra Leone","2":"41,543","3":"0.5%"},{"1":"Laos","2":"40,732","3":"0.6%"},{"1":"North Macedonia","2":"38,626","3":"1.9%"},{"1":"Montenegro","2":"37,519","3":"6.0%"},{"1":"Gibraltar","2":"35,825","3":"106.3%"},{"1":"Suriname","2":"34,630","3":"5.9%"},{"1":"Cayman Islands","2":"33,808","3":"51.4%"},{"1":"Botswana","2":"31,628","3":"1.3%"},{"1":"Taiwan","2":"30,039","3":"0.1%"},{"1":"Belize","2":"29,939","3":"7.5%"},{"1":"Guernsey","2":"29,575","3":"44.1%"},{"1":"Fiji","2":"27,705","3":"3.1%"},{"1":"Eswatini","2":"27,601","3":"2.4%"},{"1":"Equatorial Guinea","2":"27,579","3":"2.0%"},{"1":"Antigua and Barbuda","2":"27,032","3":"27.6%"},{"1":"Mali","2":"26,226","3":"0.1%"},{"1":"Bermuda","2":"25,781","3":"41.4%"},{"1":"Georgia","2":"24,917","3":"0.6%"},{"1":"Saint Lucia","2":"23,575","3":"--"},{"1":"Andorra","2":"19,064","3":"--"},{"1":"Dominica","2":"17,775","3":"24.7%"},{"1":"Gambia","2":"16,735","3":"0.7%"},{"1":"Bahamas","2":"15,000","3":"3.8%"},{"1":"Bosnia and Herzegovina","2":"15,000","3":"--"},{"1":"Turks and Caicos Islands","2":"14,300","3":"36.9%"},{"1":"Saint Vincent and the Grenadines","2":"12,124","3":"--"},{"1":"San Marino","2":"11,989","3":"35.3%"},{"1":"Monaco","2":"11,715","3":"29.9%"},{"1":"Trinidad and Tobago","2":"11,686","3":"0.8%"},{"1":"Kosovo","2":"10,704","3":"0.6%"},{"1":"Saint Kitts and Nevis","2":"10,456","3":"19.7%"},{"1":"Grenada","2":"9,821","3":"8.7%"},{"1":"São Tomé and Príncipe","2":"9,724","3":"4.4%"},{"1":"Faroe Islands","2":"9,528","3":"19.5%"},{"1":"Greenland","2":"6,270","3":"11.0%"},{"1":"Anguilla","2":"5,835","3":"38.9%"},{"1":"Liechtenstein","2":"5,305","3":"13.9%"},{"1":"Gabon","2":"3,925","3":"0.2%"},{"1":"Mauritius","2":"3,843","3":"0.3%"},{"1":"Saint Helena","2":"3,546","3":"58.4%"},{"1":"Mauritania","2":"2,930","3":"0.1%"},{"1":"Falkland Islands","2":"2,605","3":"74.8%"},{"1":"Namibia","2":"2,526","3":"0.1%"},{"1":"Syria","2":"2,500","3":"0.0%"},{"1":"Brunei","2":"2,323","3":"0.5%"},{"1":"Cape Verde","2":"2,184","3":"0.4%"},{"1":"Kyrgyzstan","2":"2,100","3":"0.0%"},{"1":"Solomon Islands","2":"2,000","3":"0.3%"},{"1":"Montserrat","2":"1,266","3":"25.3%"},{"1":"Papua New Guinea","2":"1,081","3":"0.0%"},{"1":"South Sudan","2":"947","3":"0.0%"},{"1":"Armenia","2":"565","3":"0.0%"},{"1":"Cameroon","2":"400","3":"0.0%"},{"1":"Zambia","2":"106","3":"0.0%"},{"1":"F.S. Micronesia","2":"17,821","3":"17.2%"},{"1":"Marshall Islands","2":"13,592","3":"23.3%"},{"1":"Palau","2":"8,927","3":"49.9%"},{"1":"Vatican City","2":"22","3":"2.7%"},{"1":"Sources\\nList of sources by country.\\nNotes\\n\\n^ Latest available data as of this date. Individual country reporting frequency varies.\\n\\n^ Number of unique individuals who have received at least one dose of a COVID-19 vaccine (unless noted otherwise).\\n\\n^ Percentage of population that has received at least one dose of a COVID-19 vaccine.\\n\\n^ May include vaccination of non-citizen workers, which can push totals beyond 100% of the local population.\\n\\n^ a b c d e f g h i j k l m n o p q r This country's data reflects total doses administered, not the first shot only.\\n\\n\\nCite error: A list-defined reference named \"world-total\" is not used in the content (see the help page).","2":"Sources\\nList of sources by country.\\nNotes\\n\\n^ Latest available data as of this date. Individual country reporting frequency varies.\\n\\n^ Number of unique individuals who have received at least one dose of a COVID-19 vaccine (unless noted otherwise).\\n\\n^ Percentage of population that has received at least one dose of a COVID-19 vaccine.\\n\\n^ May include vaccination of non-citizen workers, which can push totals beyond 100% of the local population.\\n\\n^ a b c d e f g h i j k l m n o p q r This country's data reflects total doses administered, not the first shot only.\\n\\n\\nCite error: A list-defined reference named \"world-total\" is not used in the content (see the help page).","3":"Sources\\nList of sources by country.\\nNotes\\n\\n^ Latest available data as of this date. Individual country reporting frequency varies.\\n\\n^ Number of unique individuals who have received at least one dose of a COVID-19 vaccine (unless noted otherwise).\\n\\n^ Percentage of population that has received at least one dose of a COVID-19 vaccine.\\n\\n^ May include vaccination of non-citizen workers, which can push totals beyond 100% of the local population.\\n\\n^ a b c d e f g h i j k l m n o p q r This country's data reflects total doses administered, not the first shot only.\\n\\n\\nCite error: A list-defined reference named \"world-total\" is not used in the content (see the help page)."}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n_vaccinated"],"name":[2],"type":["chr"],"align":["left"]},{"label":["perc_of_pop"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"World","2":"562,324,298","3":"7.2%"},{"1":"United States","2":"140,969,663","3":"42.1%"},{"1":"China","2":"229,489,000","3":"--"},{"1":"India","2":"119,886,252","3":"8.7%"},{"1":"EU","2":"96,709,919","3":"21.7%"},{"1":"United Kingdom","2":"33,752,885","3":"49.7%"},{"1":"Brazil","2":"27,345,796","3":"12.9%"},{"1":"Germany","2":"19,854,550","3":"23.7%"},{"1":"Turkey","2":"13,287,707","3":"15.8%"},{"1":"France","2":"14,102,290","3":"20.7%"},{"1":"Indonesia","2":"11,844,579","3":"4.3%"},{"1":"Russia","2":"11,445,394","3":"7.8%"},{"1":"Italy","2":"12,802,320","3":"21.2%"},{"1":"Mexico","2":"12,054,021","3":"9.3%"},{"1":"Spain","2":"10,796,466","3":"23.1%"},{"1":"Chile","2":"7,953,916","3":"41.6%"},{"1":"Canada","2":"11,518,249","3":"30.3%"},{"1":"Israel","2":"5,388,860","3":"62.3%"},{"1":"Poland","2":"7,765,723","3":"20.5%"},{"1":"United Arab Emirates","2":"10,254,053","3":"--"},{"1":"Morocco","2":"4,731,440","3":"12.8%"},{"1":"Saudi Arabia","2":"8,444,390","3":"--"},{"1":"Bangladesh","2":"5,798,880","3":"3.5%"},{"1":"Argentina","2":"6,341,959","3":"14.0%"},{"1":"Hungary","2":"3,679,730","3":"38.1%"},{"1":"Netherlands","2":"5,207,495","3":"--"},{"1":"Romania","2":"3,037,698","3":"15.8%"},{"1":"Colombia","2":"3,039,713","3":"6.0%"},{"1":"Belgium","2":"2,682,515","3":"23.1%"},{"1":"Serbia","2":"1,954,709","3":"28.7%"},{"1":"Portugal","2":"2,206,549","3":"21.6%"},{"1":"Japan","2":"2,080,125","3":"1.6%"},{"1":"Greece","2":"2,032,090","3":"19.5%"},{"1":"Czech Republic","2":"1,926,440","3":"18.0%"},{"1":"Austria","2":"2,045,677","3":"22.7%"},{"1":"Sweden","2":"2,086,142","3":"20.7%"},{"1":"South Korea","2":"2,409,975","3":"4.7%"},{"1":"Switzerland","2":"1,453,331","3":"16.8%"},{"1":"Singapore","2":"1,364,124","3":"23.3%"},{"1":"Cambodia","2":"1,295,973","3":"7.8%"},{"1":"Nepal","2":"2,006,436","3":"6.9%"},{"1":"Australia","2":"1,937,485","3":"--"},{"1":"Denmark","2":"1,222,528","3":"21.1%"},{"1":"Philippines","2":"1,529,948","3":"1.4%"},{"1":"Dominican Republic","2":"993,804","3":"9.2%"},{"1":"Finland","2":"1,529,600","3":"27.6%"},{"1":"Uruguay","2":"1,132,434","3":"32.6%"},{"1":"Norway","2":"1,217,295","3":"22.4%"},{"1":"Peru","2":"867,961","3":"2.6%"},{"1":"Slovakia","2":"1,024,688","3":"18.8%"},{"1":"Qatar","2":"1,442,708","3":"--"},{"1":"Azerbaijan","2":"939,460","3":"9.3%"},{"1":"Ireland","2":"998,134","3":"20.3%"},{"1":"Malaysia","2":"800,996","3":"2.5%"},{"1":"Hong Kong","2":"872,458","3":"13.3%"},{"1":"Pakistan","2":"1,300,000","3":"0.6%"},{"1":"Jordan","2":"1,200,000","3":"11.8%"},{"1":"Bahrain","2":"667,979","3":"39.3%"},{"1":"Nigeria","2":"1,175,285","3":"0.6%"},{"1":"Thailand","2":"972,204","3":"1.4%"},{"1":"Myanmar","2":"1,000,000","3":"1.8%"},{"1":"Kazakhstan","2":"858,566","3":"4.6%"},{"1":"Sri Lanka","2":"925,242","3":"4.3%"},{"1":"Lithuania","2":"636,765","3":"23.4%"},{"1":"Kuwait","2":"822,000","3":"19.2%"},{"1":"Ghana","2":"842,521","3":"2.7%"},{"1":"Croatia","2":"627,216","3":"15.3%"},{"1":"Kenya","2":"750,471","3":"1.4%"},{"1":"El Salvador","2":"718,089","3":"11.1%"},{"1":"Ecuador","2":"541,420","3":"3.1%"},{"1":"Bulgaria","2":"564,282","3":"8.1%"},{"1":"Mongolia","2":"707,838","3":"--"},{"1":"Costa Rica","2":"450,593","3":"8.8%"},{"1":"Iran","2":"518,904","3":"0.6%"},{"1":"Bolivia","2":"469,586","3":"4.0%"},{"1":"Egypt","2":"660,000","3":"0.6%"},{"1":"Panama","2":"431,459","3":"10.0%"},{"1":"Slovenia","2":"409,939","3":"19.7%"},{"1":"Uzbekistan","2":"544,529","3":"1.6%"},{"1":"Ukraine","2":"539,124","3":"1.2%"},{"1":"Bhutan","2":"479,686","3":"62.2%"},{"1":"Angola","2":"456,349","3":"1.4%"},{"1":"Ethiopia","2":"430,000","3":"--"},{"1":"Lebanon","2":"274,263","3":"4.0%"},{"1":"Zimbabwe","2":"353,834","3":"2.4%"},{"1":"Estonia","2":"311,731","3":"23.5%"},{"1":"Albania","2":"400,064","3":"--"},{"1":"Senegal","2":"399,915","3":"2.4%"},{"1":"Tunisia","2":"320,009","3":"2.7%"},{"1":"Maldives","2":"292,413","3":"54.1%"},{"1":"Rwanda","2":"349,702","3":"2.7%"},{"1":"Belarus","2":"244,000","3":"2.6%"},{"1":"Malta","2":"212,593","3":"48.1%"},{"1":"Iraq","2":"298,377","3":"0.7%"},{"1":"South Africa","2":"292,623","3":"0.5%"},{"1":"Malawi","2":"277,442","3":"1.4%"},{"1":"Uganda","2":"276,306","3":"0.6%"},{"1":"Latvia","2":"222,798","3":"11.8%"},{"1":"Vietnam","2":"259,736","3":"0.3%"},{"1":"Oman","2":"198,563","3":"3.9%"},{"1":"Venezuela","2":"250,000","3":"0.9%"},{"1":"Afghanistan","2":"240,000","3":"0.6%"},{"1":"Cyprus","2":"176,082","3":"20.1%"},{"1":"Palestine","2":"170,109","3":"3.3%"},{"1":"Laos","2":"126,072","3":"1.7%"},{"1":"New Zealand","2":"140,580","3":"2.9%"},{"1":"Luxembourg","2":"130,591","3":"20.9%"},{"1":"Guatemala","2":"163,431","3":"0.9%"},{"1":"Togo","2":"160,000","3":"1.9%"},{"1":"Sudan","2":"140,227","3":"0.3%"},{"1":"Jamaica","2":"135,473","3":"4.6%"},{"1":"Guinea","2":"89,874","3":"0.7%"},{"1":"Moldova","2":"113,135","3":"2.8%"},{"1":"Seychelles","2":"66,497","3":"67.6%"},{"1":"Ivory Coast","2":"119,663","3":"0.5%"},{"1":"Somalia","2":"117,567","3":"0.7%"},{"1":"Mauritius","2":"117,323","3":"9.2%"},{"1":"Guyana","2":"111,825","3":"14.2%"},{"1":"Iceland","2":"80,721","3":"23.6%"},{"1":"Northern Cyprus","2":"60,642","3":"15.9%"},{"1":"Paraguay","2":"86,305","3":"1.2%"},{"1":"Macau","2":"62,155","3":"9.6%"},{"1":"Curaçao","2":"68,723","3":"41.9%"},{"1":"Jersey","2":"49,413","3":"48.9%"},{"1":"Algeria","2":"75,000","3":"--"},{"1":"Barbados","2":"73,590","3":"25.6%"},{"1":"Aruba","2":"53,244","3":"49.9%"},{"1":"Isle of Man","2":"54,555","3":"64.2%"},{"1":"Gibraltar","2":"36,724","3":"106.8%"},{"1":"Cayman Islands","2":"35,307","3":"53.7%"},{"1":"Nicaragua","2":"61,625","3":"0.9%"},{"1":"Montenegro","2":"39,715","3":"6.3%"},{"1":"Honduras","2":"55,000","3":"0.6%"},{"1":"Mozambique","2":"57,305","3":"0.2%"},{"1":"Fiji","2":"56,000","3":"6.2%"},{"1":"Equatorial Guinea","2":"47,410","3":"3.4%"},{"1":"North Macedonia","2":"53,193","3":"2.5%"},{"1":"Bermuda","2":"30,094","3":"48.3%"},{"1":"Mali","2":"49,903","3":"0.2%"},{"1":"Trinidad and Tobago","2":"41,669","3":"3.5%"},{"1":"Guernsey","2":"32,969","3":"49.2%"},{"1":"Taiwan","2":"45,387","3":"--"},{"1":"Sierra Leone","2":"42,566","3":"0.5%"},{"1":"Botswana","2":"41,612","3":"1.8%"},{"1":"Belize","2":"39,330","3":"9.9%"},{"1":"Georgia","2":"38,553","3":"1.0%"},{"1":"Suriname","2":"36,503","3":"6.2%"},{"1":"Eswatini","2":"34,897","3":"3.0%"},{"1":"Antigua and Barbuda","2":"29,754","3":"30.4%"},{"1":"Andorra","2":"21,733","3":"28.1%"},{"1":"San Marino","2":"17,368","3":"51.2%"},{"1":"Turks and Caicos Islands","2":"15,039","3":"38.8%"},{"1":"Monaco","2":"12,758","3":"32.5%"},{"1":"Saint Lucia","2":"23,941","3":"--"},{"1":"Dominica","2":"18,237","3":"25.3%"},{"1":"Kosovo","2":"22,096","3":"1.1%"},{"1":"Bahamas","2":"21,907","3":"5.6%"},{"1":"Gambia","2":"20,922","3":"0.9%"},{"1":"Faroe Islands","2":"12,748","3":"26.1%"},{"1":"Lesotho","2":"16,000","3":"0.8%"},{"1":"Bosnia and Herzegovina","2":"15,000","3":"--"},{"1":"Congo","2":"14,297","3":"0.3%"},{"1":"Zambia","2":"14,012","3":"0.1%"},{"1":"Saint Vincent and the Grenadines","2":"13,852","3":"--"},{"1":"Greenland","2":"8,810","3":"15.5%"},{"1":"Namibia","2":"11,971","3":"0.5%"},{"1":"Grenada","2":"11,779","3":"10.5%"},{"1":"Saint Kitts and Nevis","2":"11,848","3":"22.3%"},{"1":"Liechtenstein","2":"7,229","3":"19.0%"},{"1":"Djibouti","2":"10,246","3":"1.0%"},{"1":"São Tomé and Príncipe","2":"9,724","3":"4.4%"},{"1":"Gabon","2":"6,895","3":"0.3%"},{"1":"Mauritania","2":"7,038","3":"0.1%"},{"1":"Anguilla","2":"6,115","3":"40.8%"},{"1":"Saint Helena","2":"3,563","3":"58.7%"},{"1":"Falkland Islands","2":"2,632","3":"75.6%"},{"1":"East Timor","2":"2,629","3":"0.2%"},{"1":"Syria","2":"2,500","3":"0.0%"},{"1":"Brunei","2":"2,323","3":"0.5%"},{"1":"Cape Verde","2":"2,184","3":"0.4%"},{"1":"Kyrgyzstan","2":"2,100","3":"0.0%"},{"1":"Solomon Islands","2":"2,000","3":"0.3%"},{"1":"Montserrat","2":"1,293","3":"25.9%"},{"1":"Niger","2":"1,366","3":"0.0%"},{"1":"Papua New Guinea","2":"1,081","3":"0.0%"},{"1":"South Sudan","2":"947","3":"0.0%"},{"1":"Libya","2":"750","3":"0.0%"},{"1":"Armenia","2":"565","3":"0.0%"},{"1":"Tonga","2":"500","3":"0.5%"},{"1":"Cameroon","2":"400","3":"0.0%"},{"1":"Nauru","2":"168","3":"1.6%"},{"1":"F.S. Micronesia","2":"19,983","3":"19.3%"},{"1":"Marshall Islands","2":"14,228","3":"24.4%"},{"1":"Palau","2":"11,685","3":"65.3%"},{"1":"Vatican City","2":"22","3":"2.7%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
+</div>
+</div>
+<div id="step-3-removing-commas" class="section level2 tabset" number="0.9">
+<h2 class="tabset" number="0.9"><span class="header-section-number">0.9</span> Step 3: Removing commas</h2>
+<p>The next variable we want to address is the number vaccinated, or <code>n_vaccinated</code>. These numbers were formatted with commas in the Wikipedia table (which is common), so R treated them like a character variable. We will use the <code>readr::parse_number()</code> to convert <code>n_vaccinated</code> to a numerical variable.</p>
+<div id="exercise-4" class="section level3" number="0.9.1">
+<h3 number="0.9.1"><span class="header-section-number">0.9.1</span> exercise</h3>
+<p>Enter the <code>n_vaccinated</code> variable into the <code>readr::parse_number()</code> function below:</p>
+<pre class="r"><code>WikiCovid %&gt;%
+  mutate(
+    # remove bracket indicators ([])
+    location = stringr::str_remove_all(string = location, 
+                                       pattern = &quot;\\[[^\\[\\]]+\\]&quot;), 
+    n_vaccinated = readr::parse_number(x = ____________))</code></pre>
+</div>
+<div id="solution-4" class="section level3" number="0.9.2">
+<h3 number="0.9.2"><span class="header-section-number">0.9.2</span> solution</h3>
+<p>See solution below:</p>
+<pre class="r"><code>WikiCovid %&gt;%
+  mutate(
+    # remove bracket indicators ([])
+    location = stringr::str_remove_all(string = location, 
+                                       pattern = &quot;\\[[^\\[\\]]+\\]&quot;), 
+    n_vaccinated = readr::parse_number(n_vaccinated))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n_vaccinated"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["perc_of_pop"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"World","2":"562324298","3":"7.2%"},{"1":"United States","2":"140969663","3":"42.1%"},{"1":"China","2":"229489000","3":"--"},{"1":"India","2":"119886252","3":"8.7%"},{"1":"EU","2":"96709919","3":"21.7%"},{"1":"United Kingdom","2":"33752885","3":"49.7%"},{"1":"Brazil","2":"27345796","3":"12.9%"},{"1":"Germany","2":"19854550","3":"23.7%"},{"1":"Turkey","2":"13287707","3":"15.8%"},{"1":"France","2":"14102290","3":"20.7%"},{"1":"Indonesia","2":"11844579","3":"4.3%"},{"1":"Russia","2":"11445394","3":"7.8%"},{"1":"Italy","2":"12802320","3":"21.2%"},{"1":"Mexico","2":"12054021","3":"9.3%"},{"1":"Spain","2":"10796466","3":"23.1%"},{"1":"Chile","2":"7953916","3":"41.6%"},{"1":"Canada","2":"11518249","3":"30.3%"},{"1":"Israel","2":"5388860","3":"62.3%"},{"1":"Poland","2":"7765723","3":"20.5%"},{"1":"United Arab Emirates","2":"10254053","3":"--"},{"1":"Morocco","2":"4731440","3":"12.8%"},{"1":"Saudi Arabia","2":"8444390","3":"--"},{"1":"Bangladesh","2":"5798880","3":"3.5%"},{"1":"Argentina","2":"6341959","3":"14.0%"},{"1":"Hungary","2":"3679730","3":"38.1%"},{"1":"Netherlands","2":"5207495","3":"--"},{"1":"Romania","2":"3037698","3":"15.8%"},{"1":"Colombia","2":"3039713","3":"6.0%"},{"1":"Belgium","2":"2682515","3":"23.1%"},{"1":"Serbia","2":"1954709","3":"28.7%"},{"1":"Portugal","2":"2206549","3":"21.6%"},{"1":"Japan","2":"2080125","3":"1.6%"},{"1":"Greece","2":"2032090","3":"19.5%"},{"1":"Czech Republic","2":"1926440","3":"18.0%"},{"1":"Austria","2":"2045677","3":"22.7%"},{"1":"Sweden","2":"2086142","3":"20.7%"},{"1":"South Korea","2":"2409975","3":"4.7%"},{"1":"Switzerland","2":"1453331","3":"16.8%"},{"1":"Singapore","2":"1364124","3":"23.3%"},{"1":"Cambodia","2":"1295973","3":"7.8%"},{"1":"Nepal","2":"2006436","3":"6.9%"},{"1":"Australia","2":"1937485","3":"--"},{"1":"Denmark","2":"1222528","3":"21.1%"},{"1":"Philippines","2":"1529948","3":"1.4%"},{"1":"Dominican Republic","2":"993804","3":"9.2%"},{"1":"Finland","2":"1529600","3":"27.6%"},{"1":"Uruguay","2":"1132434","3":"32.6%"},{"1":"Norway","2":"1217295","3":"22.4%"},{"1":"Peru","2":"867961","3":"2.6%"},{"1":"Slovakia","2":"1024688","3":"18.8%"},{"1":"Qatar","2":"1442708","3":"--"},{"1":"Azerbaijan","2":"939460","3":"9.3%"},{"1":"Ireland","2":"998134","3":"20.3%"},{"1":"Malaysia","2":"800996","3":"2.5%"},{"1":"Hong Kong","2":"872458","3":"13.3%"},{"1":"Pakistan","2":"1300000","3":"0.6%"},{"1":"Jordan","2":"1200000","3":"11.8%"},{"1":"Bahrain","2":"667979","3":"39.3%"},{"1":"Nigeria","2":"1175285","3":"0.6%"},{"1":"Thailand","2":"972204","3":"1.4%"},{"1":"Myanmar","2":"1000000","3":"1.8%"},{"1":"Kazakhstan","2":"858566","3":"4.6%"},{"1":"Sri Lanka","2":"925242","3":"4.3%"},{"1":"Lithuania","2":"636765","3":"23.4%"},{"1":"Kuwait","2":"822000","3":"19.2%"},{"1":"Ghana","2":"842521","3":"2.7%"},{"1":"Croatia","2":"627216","3":"15.3%"},{"1":"Kenya","2":"750471","3":"1.4%"},{"1":"El Salvador","2":"718089","3":"11.1%"},{"1":"Ecuador","2":"541420","3":"3.1%"},{"1":"Bulgaria","2":"564282","3":"8.1%"},{"1":"Mongolia","2":"707838","3":"--"},{"1":"Costa Rica","2":"450593","3":"8.8%"},{"1":"Iran","2":"518904","3":"0.6%"},{"1":"Bolivia","2":"469586","3":"4.0%"},{"1":"Egypt","2":"660000","3":"0.6%"},{"1":"Panama","2":"431459","3":"10.0%"},{"1":"Slovenia","2":"409939","3":"19.7%"},{"1":"Uzbekistan","2":"544529","3":"1.6%"},{"1":"Ukraine","2":"539124","3":"1.2%"},{"1":"Bhutan","2":"479686","3":"62.2%"},{"1":"Angola","2":"456349","3":"1.4%"},{"1":"Ethiopia","2":"430000","3":"--"},{"1":"Lebanon","2":"274263","3":"4.0%"},{"1":"Zimbabwe","2":"353834","3":"2.4%"},{"1":"Estonia","2":"311731","3":"23.5%"},{"1":"Albania","2":"400064","3":"--"},{"1":"Senegal","2":"399915","3":"2.4%"},{"1":"Tunisia","2":"320009","3":"2.7%"},{"1":"Maldives","2":"292413","3":"54.1%"},{"1":"Rwanda","2":"349702","3":"2.7%"},{"1":"Belarus","2":"244000","3":"2.6%"},{"1":"Malta","2":"212593","3":"48.1%"},{"1":"Iraq","2":"298377","3":"0.7%"},{"1":"South Africa","2":"292623","3":"0.5%"},{"1":"Malawi","2":"277442","3":"1.4%"},{"1":"Uganda","2":"276306","3":"0.6%"},{"1":"Latvia","2":"222798","3":"11.8%"},{"1":"Vietnam","2":"259736","3":"0.3%"},{"1":"Oman","2":"198563","3":"3.9%"},{"1":"Venezuela","2":"250000","3":"0.9%"},{"1":"Afghanistan","2":"240000","3":"0.6%"},{"1":"Cyprus","2":"176082","3":"20.1%"},{"1":"Palestine","2":"170109","3":"3.3%"},{"1":"Laos","2":"126072","3":"1.7%"},{"1":"New Zealand","2":"140580","3":"2.9%"},{"1":"Luxembourg","2":"130591","3":"20.9%"},{"1":"Guatemala","2":"163431","3":"0.9%"},{"1":"Togo","2":"160000","3":"1.9%"},{"1":"Sudan","2":"140227","3":"0.3%"},{"1":"Jamaica","2":"135473","3":"4.6%"},{"1":"Guinea","2":"89874","3":"0.7%"},{"1":"Moldova","2":"113135","3":"2.8%"},{"1":"Seychelles","2":"66497","3":"67.6%"},{"1":"Ivory Coast","2":"119663","3":"0.5%"},{"1":"Somalia","2":"117567","3":"0.7%"},{"1":"Mauritius","2":"117323","3":"9.2%"},{"1":"Guyana","2":"111825","3":"14.2%"},{"1":"Iceland","2":"80721","3":"23.6%"},{"1":"Northern Cyprus","2":"60642","3":"15.9%"},{"1":"Paraguay","2":"86305","3":"1.2%"},{"1":"Macau","2":"62155","3":"9.6%"},{"1":"Curaçao","2":"68723","3":"41.9%"},{"1":"Jersey","2":"49413","3":"48.9%"},{"1":"Algeria","2":"75000","3":"--"},{"1":"Barbados","2":"73590","3":"25.6%"},{"1":"Aruba","2":"53244","3":"49.9%"},{"1":"Isle of Man","2":"54555","3":"64.2%"},{"1":"Gibraltar","2":"36724","3":"106.8%"},{"1":"Cayman Islands","2":"35307","3":"53.7%"},{"1":"Nicaragua","2":"61625","3":"0.9%"},{"1":"Montenegro","2":"39715","3":"6.3%"},{"1":"Honduras","2":"55000","3":"0.6%"},{"1":"Mozambique","2":"57305","3":"0.2%"},{"1":"Fiji","2":"56000","3":"6.2%"},{"1":"Equatorial Guinea","2":"47410","3":"3.4%"},{"1":"North Macedonia","2":"53193","3":"2.5%"},{"1":"Bermuda","2":"30094","3":"48.3%"},{"1":"Mali","2":"49903","3":"0.2%"},{"1":"Trinidad and Tobago","2":"41669","3":"3.5%"},{"1":"Guernsey","2":"32969","3":"49.2%"},{"1":"Taiwan","2":"45387","3":"--"},{"1":"Sierra Leone","2":"42566","3":"0.5%"},{"1":"Botswana","2":"41612","3":"1.8%"},{"1":"Belize","2":"39330","3":"9.9%"},{"1":"Georgia","2":"38553","3":"1.0%"},{"1":"Suriname","2":"36503","3":"6.2%"},{"1":"Eswatini","2":"34897","3":"3.0%"},{"1":"Antigua and Barbuda","2":"29754","3":"30.4%"},{"1":"Andorra","2":"21733","3":"28.1%"},{"1":"San Marino","2":"17368","3":"51.2%"},{"1":"Turks and Caicos Islands","2":"15039","3":"38.8%"},{"1":"Monaco","2":"12758","3":"32.5%"},{"1":"Saint Lucia","2":"23941","3":"--"},{"1":"Dominica","2":"18237","3":"25.3%"},{"1":"Kosovo","2":"22096","3":"1.1%"},{"1":"Bahamas","2":"21907","3":"5.6%"},{"1":"Gambia","2":"20922","3":"0.9%"},{"1":"Faroe Islands","2":"12748","3":"26.1%"},{"1":"Lesotho","2":"16000","3":"0.8%"},{"1":"Bosnia and Herzegovina","2":"15000","3":"--"},{"1":"Congo","2":"14297","3":"0.3%"},{"1":"Zambia","2":"14012","3":"0.1%"},{"1":"Saint Vincent and the Grenadines","2":"13852","3":"--"},{"1":"Greenland","2":"8810","3":"15.5%"},{"1":"Namibia","2":"11971","3":"0.5%"},{"1":"Grenada","2":"11779","3":"10.5%"},{"1":"Saint Kitts and Nevis","2":"11848","3":"22.3%"},{"1":"Liechtenstein","2":"7229","3":"19.0%"},{"1":"Djibouti","2":"10246","3":"1.0%"},{"1":"São Tomé and Príncipe","2":"9724","3":"4.4%"},{"1":"Gabon","2":"6895","3":"0.3%"},{"1":"Mauritania","2":"7038","3":"0.1%"},{"1":"Anguilla","2":"6115","3":"40.8%"},{"1":"Saint Helena","2":"3563","3":"58.7%"},{"1":"Falkland Islands","2":"2632","3":"75.6%"},{"1":"East Timor","2":"2629","3":"0.2%"},{"1":"Syria","2":"2500","3":"0.0%"},{"1":"Brunei","2":"2323","3":"0.5%"},{"1":"Cape Verde","2":"2184","3":"0.4%"},{"1":"Kyrgyzstan","2":"2100","3":"0.0%"},{"1":"Solomon Islands","2":"2000","3":"0.3%"},{"1":"Montserrat","2":"1293","3":"25.9%"},{"1":"Niger","2":"1366","3":"0.0%"},{"1":"Papua New Guinea","2":"1081","3":"0.0%"},{"1":"South Sudan","2":"947","3":"0.0%"},{"1":"Libya","2":"750","3":"0.0%"},{"1":"Armenia","2":"565","3":"0.0%"},{"1":"Tonga","2":"500","3":"0.5%"},{"1":"Cameroon","2":"400","3":"0.0%"},{"1":"Nauru","2":"168","3":"1.6%"},{"1":"F.S. Micronesia","2":"19983","3":"19.3%"},{"1":"Marshall Islands","2":"14228","3":"24.4%"},{"1":"Palau","2":"11685","3":"65.3%"},{"1":"Vatican City","2":"22","3":"2.7%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Now the data are beginning to look wrangled! We only have one more variable to go!</p>
+</div>
+</div>
+<div id="step-4-remove-decimals-and-symbols" class="section level2 tabset" number="0.10">
+<h2 class="tabset" number="0.10"><span class="header-section-number">0.10</span> Step 4: Remove decimals and symbols</h2>
+<p>The <code>perc_of_pop</code> variable poses a few challenges, starting with the <code>%</code> symbol. We can remove this with <code>stringr::str_remove_all()</code> <em>or</em> the <code>readr::parse_number()</code> function. But we can also see the missing values are represented with a <code>--</code> symbol. We should see how many missing values there are in this dataset using <code>stringr::str_view_all()</code>.</p>
+<pre class="r"><code>str_view_all(string = WikiCovid$perc_of_pop, pattern = &quot;--&quot;, match = TRUE)</code></pre>
+<div id="htmlwidget-e19dc9372d4920ccd4ee" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e19dc9372d4920ccd4ee">{"x":{"html":"<ul>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n  <li><span class='match'>--<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<p>This is not an insignificant amount! To get an exact count, we can combine <code>sum()</code> and <code>str_detect()</code>:</p>
+<pre class="r"><code>sum(str_detect(WikiCovid$perc_of_pop, pattern = &quot;--&quot;))</code></pre>
+<pre><code>## [1] 14</code></pre>
+<p>Now we need to decide how to deal with these missing values <em>and</em> the percentage symbols. We will test both <code>stringr::str_remove_all()</code> and <code>readr::parse_number()</code> below to see which one is best:</p>
+<pre class="r"><code>stringr::str_remove_all(string = head(WikiCovid$perc_of_pop), pattern = &quot;%&quot;)</code></pre>
+<pre><code>## [1] &quot;7.2&quot;  &quot;42.1&quot; &quot;--&quot;   &quot;8.7&quot;  &quot;21.7&quot; &quot;49.7&quot;</code></pre>
+<p><code>stringr::str_remove_all</code> gives us no problems, and returns the original symbol for the missing <code>China</code> value (<code>--</code>). What about <code>readr::parse_number()</code>?</p>
+<pre class="r"><code>readr::parse_number(x = head(WikiCovid$perc_of_pop))</code></pre>
+<pre><code>## [1]  7.2 42.1   NA  8.7 21.7 49.7
+## attr(,&quot;problems&quot;)
+## # A tibble: 1 x 4
+##     row   col expected actual
+##   &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;chr&gt; 
+## 1     3    NA a number --</code></pre>
+<p><code>readr::parse_number()</code> tells us there was a <code>parsing failure</code>, and this value has been changed to <code>NA</code>. This is preferred because 1) it requires fewer steps, and 2) it will handle other missing values in the future.</p>
+<div id="exercise-5" class="section level3" number="0.10.1">
+<h3 number="0.10.1"><span class="header-section-number">0.10.1</span> exercise</h3>
+<p>Add the code for removing the percentage symbols from <code>perc_of_pop</code> with <code>readr::parse_number()</code> to the <code>mutate()</code> function below:</p>
+<pre class="r"><code>WikiCovid &lt;- WikiCovid %&gt;%
+  mutate(
+    # remove bracket indicators ([])
+    location = stringr::str_remove_all(string = location, 
+                                       pattern = &quot;\\[[^\\[\\]]+\\]&quot;), 
+    n_vaccinated = readr::parse_number(n_vaccinated), 
+    # add perc_of_pop
+    perc_of_pop = readr::parse_number(_____________)
+  )</code></pre>
+</div>
+<div id="solution-5" class="section level3" number="0.10.2">
+<h3 number="0.10.2"><span class="header-section-number">0.10.2</span> solution</h3>
+<p>See solution below:</p>
+<pre class="r"><code>WikiCovid &lt;- WikiCovid %&gt;%
+  mutate(
+    # remove bracket indicators ([])
+    location = stringr::str_remove_all(string = location, 
+                                       pattern = &quot;\\[[^\\[\\]]+\\]&quot;), 
+    n_vaccinated = readr::parse_number(n_vaccinated), 
+    perc_of_pop = readr::parse_number(perc_of_pop)
+  )</code></pre>
+<p>We can see the message about the parsing failures (which we expected). Let’s view our wrangled dataset below:</p>
+<pre class="r"><code>WikiCovid</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n_vaccinated"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["perc_of_pop"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"World","2":"562324298","3":"7.2"},{"1":"United States","2":"140969663","3":"42.1"},{"1":"China","2":"229489000","3":"NA"},{"1":"India","2":"119886252","3":"8.7"},{"1":"EU","2":"96709919","3":"21.7"},{"1":"United Kingdom","2":"33752885","3":"49.7"},{"1":"Brazil","2":"27345796","3":"12.9"},{"1":"Germany","2":"19854550","3":"23.7"},{"1":"Turkey","2":"13287707","3":"15.8"},{"1":"France","2":"14102290","3":"20.7"},{"1":"Indonesia","2":"11844579","3":"4.3"},{"1":"Russia","2":"11445394","3":"7.8"},{"1":"Italy","2":"12802320","3":"21.2"},{"1":"Mexico","2":"12054021","3":"9.3"},{"1":"Spain","2":"10796466","3":"23.1"},{"1":"Chile","2":"7953916","3":"41.6"},{"1":"Canada","2":"11518249","3":"30.3"},{"1":"Israel","2":"5388860","3":"62.3"},{"1":"Poland","2":"7765723","3":"20.5"},{"1":"United Arab Emirates","2":"10254053","3":"NA"},{"1":"Morocco","2":"4731440","3":"12.8"},{"1":"Saudi Arabia","2":"8444390","3":"NA"},{"1":"Bangladesh","2":"5798880","3":"3.5"},{"1":"Argentina","2":"6341959","3":"14.0"},{"1":"Hungary","2":"3679730","3":"38.1"},{"1":"Netherlands","2":"5207495","3":"NA"},{"1":"Romania","2":"3037698","3":"15.8"},{"1":"Colombia","2":"3039713","3":"6.0"},{"1":"Belgium","2":"2682515","3":"23.1"},{"1":"Serbia","2":"1954709","3":"28.7"},{"1":"Portugal","2":"2206549","3":"21.6"},{"1":"Japan","2":"2080125","3":"1.6"},{"1":"Greece","2":"2032090","3":"19.5"},{"1":"Czech Republic","2":"1926440","3":"18.0"},{"1":"Austria","2":"2045677","3":"22.7"},{"1":"Sweden","2":"2086142","3":"20.7"},{"1":"South Korea","2":"2409975","3":"4.7"},{"1":"Switzerland","2":"1453331","3":"16.8"},{"1":"Singapore","2":"1364124","3":"23.3"},{"1":"Cambodia","2":"1295973","3":"7.8"},{"1":"Nepal","2":"2006436","3":"6.9"},{"1":"Australia","2":"1937485","3":"NA"},{"1":"Denmark","2":"1222528","3":"21.1"},{"1":"Philippines","2":"1529948","3":"1.4"},{"1":"Dominican Republic","2":"993804","3":"9.2"},{"1":"Finland","2":"1529600","3":"27.6"},{"1":"Uruguay","2":"1132434","3":"32.6"},{"1":"Norway","2":"1217295","3":"22.4"},{"1":"Peru","2":"867961","3":"2.6"},{"1":"Slovakia","2":"1024688","3":"18.8"},{"1":"Qatar","2":"1442708","3":"NA"},{"1":"Azerbaijan","2":"939460","3":"9.3"},{"1":"Ireland","2":"998134","3":"20.3"},{"1":"Malaysia","2":"800996","3":"2.5"},{"1":"Hong Kong","2":"872458","3":"13.3"},{"1":"Pakistan","2":"1300000","3":"0.6"},{"1":"Jordan","2":"1200000","3":"11.8"},{"1":"Bahrain","2":"667979","3":"39.3"},{"1":"Nigeria","2":"1175285","3":"0.6"},{"1":"Thailand","2":"972204","3":"1.4"},{"1":"Myanmar","2":"1000000","3":"1.8"},{"1":"Kazakhstan","2":"858566","3":"4.6"},{"1":"Sri Lanka","2":"925242","3":"4.3"},{"1":"Lithuania","2":"636765","3":"23.4"},{"1":"Kuwait","2":"822000","3":"19.2"},{"1":"Ghana","2":"842521","3":"2.7"},{"1":"Croatia","2":"627216","3":"15.3"},{"1":"Kenya","2":"750471","3":"1.4"},{"1":"El Salvador","2":"718089","3":"11.1"},{"1":"Ecuador","2":"541420","3":"3.1"},{"1":"Bulgaria","2":"564282","3":"8.1"},{"1":"Mongolia","2":"707838","3":"NA"},{"1":"Costa Rica","2":"450593","3":"8.8"},{"1":"Iran","2":"518904","3":"0.6"},{"1":"Bolivia","2":"469586","3":"4.0"},{"1":"Egypt","2":"660000","3":"0.6"},{"1":"Panama","2":"431459","3":"10.0"},{"1":"Slovenia","2":"409939","3":"19.7"},{"1":"Uzbekistan","2":"544529","3":"1.6"},{"1":"Ukraine","2":"539124","3":"1.2"},{"1":"Bhutan","2":"479686","3":"62.2"},{"1":"Angola","2":"456349","3":"1.4"},{"1":"Ethiopia","2":"430000","3":"NA"},{"1":"Lebanon","2":"274263","3":"4.0"},{"1":"Zimbabwe","2":"353834","3":"2.4"},{"1":"Estonia","2":"311731","3":"23.5"},{"1":"Albania","2":"400064","3":"NA"},{"1":"Senegal","2":"399915","3":"2.4"},{"1":"Tunisia","2":"320009","3":"2.7"},{"1":"Maldives","2":"292413","3":"54.1"},{"1":"Rwanda","2":"349702","3":"2.7"},{"1":"Belarus","2":"244000","3":"2.6"},{"1":"Malta","2":"212593","3":"48.1"},{"1":"Iraq","2":"298377","3":"0.7"},{"1":"South Africa","2":"292623","3":"0.5"},{"1":"Malawi","2":"277442","3":"1.4"},{"1":"Uganda","2":"276306","3":"0.6"},{"1":"Latvia","2":"222798","3":"11.8"},{"1":"Vietnam","2":"259736","3":"0.3"},{"1":"Oman","2":"198563","3":"3.9"},{"1":"Venezuela","2":"250000","3":"0.9"},{"1":"Afghanistan","2":"240000","3":"0.6"},{"1":"Cyprus","2":"176082","3":"20.1"},{"1":"Palestine","2":"170109","3":"3.3"},{"1":"Laos","2":"126072","3":"1.7"},{"1":"New Zealand","2":"140580","3":"2.9"},{"1":"Luxembourg","2":"130591","3":"20.9"},{"1":"Guatemala","2":"163431","3":"0.9"},{"1":"Togo","2":"160000","3":"1.9"},{"1":"Sudan","2":"140227","3":"0.3"},{"1":"Jamaica","2":"135473","3":"4.6"},{"1":"Guinea","2":"89874","3":"0.7"},{"1":"Moldova","2":"113135","3":"2.8"},{"1":"Seychelles","2":"66497","3":"67.6"},{"1":"Ivory Coast","2":"119663","3":"0.5"},{"1":"Somalia","2":"117567","3":"0.7"},{"1":"Mauritius","2":"117323","3":"9.2"},{"1":"Guyana","2":"111825","3":"14.2"},{"1":"Iceland","2":"80721","3":"23.6"},{"1":"Northern Cyprus","2":"60642","3":"15.9"},{"1":"Paraguay","2":"86305","3":"1.2"},{"1":"Macau","2":"62155","3":"9.6"},{"1":"Curaçao","2":"68723","3":"41.9"},{"1":"Jersey","2":"49413","3":"48.9"},{"1":"Algeria","2":"75000","3":"NA"},{"1":"Barbados","2":"73590","3":"25.6"},{"1":"Aruba","2":"53244","3":"49.9"},{"1":"Isle of Man","2":"54555","3":"64.2"},{"1":"Gibraltar","2":"36724","3":"106.8"},{"1":"Cayman Islands","2":"35307","3":"53.7"},{"1":"Nicaragua","2":"61625","3":"0.9"},{"1":"Montenegro","2":"39715","3":"6.3"},{"1":"Honduras","2":"55000","3":"0.6"},{"1":"Mozambique","2":"57305","3":"0.2"},{"1":"Fiji","2":"56000","3":"6.2"},{"1":"Equatorial Guinea","2":"47410","3":"3.4"},{"1":"North Macedonia","2":"53193","3":"2.5"},{"1":"Bermuda","2":"30094","3":"48.3"},{"1":"Mali","2":"49903","3":"0.2"},{"1":"Trinidad and Tobago","2":"41669","3":"3.5"},{"1":"Guernsey","2":"32969","3":"49.2"},{"1":"Taiwan","2":"45387","3":"NA"},{"1":"Sierra Leone","2":"42566","3":"0.5"},{"1":"Botswana","2":"41612","3":"1.8"},{"1":"Belize","2":"39330","3":"9.9"},{"1":"Georgia","2":"38553","3":"1.0"},{"1":"Suriname","2":"36503","3":"6.2"},{"1":"Eswatini","2":"34897","3":"3.0"},{"1":"Antigua and Barbuda","2":"29754","3":"30.4"},{"1":"Andorra","2":"21733","3":"28.1"},{"1":"San Marino","2":"17368","3":"51.2"},{"1":"Turks and Caicos Islands","2":"15039","3":"38.8"},{"1":"Monaco","2":"12758","3":"32.5"},{"1":"Saint Lucia","2":"23941","3":"NA"},{"1":"Dominica","2":"18237","3":"25.3"},{"1":"Kosovo","2":"22096","3":"1.1"},{"1":"Bahamas","2":"21907","3":"5.6"},{"1":"Gambia","2":"20922","3":"0.9"},{"1":"Faroe Islands","2":"12748","3":"26.1"},{"1":"Lesotho","2":"16000","3":"0.8"},{"1":"Bosnia and Herzegovina","2":"15000","3":"NA"},{"1":"Congo","2":"14297","3":"0.3"},{"1":"Zambia","2":"14012","3":"0.1"},{"1":"Saint Vincent and the Grenadines","2":"13852","3":"NA"},{"1":"Greenland","2":"8810","3":"15.5"},{"1":"Namibia","2":"11971","3":"0.5"},{"1":"Grenada","2":"11779","3":"10.5"},{"1":"Saint Kitts and Nevis","2":"11848","3":"22.3"},{"1":"Liechtenstein","2":"7229","3":"19.0"},{"1":"Djibouti","2":"10246","3":"1.0"},{"1":"São Tomé and Príncipe","2":"9724","3":"4.4"},{"1":"Gabon","2":"6895","3":"0.3"},{"1":"Mauritania","2":"7038","3":"0.1"},{"1":"Anguilla","2":"6115","3":"40.8"},{"1":"Saint Helena","2":"3563","3":"58.7"},{"1":"Falkland Islands","2":"2632","3":"75.6"},{"1":"East Timor","2":"2629","3":"0.2"},{"1":"Syria","2":"2500","3":"0.0"},{"1":"Brunei","2":"2323","3":"0.5"},{"1":"Cape Verde","2":"2184","3":"0.4"},{"1":"Kyrgyzstan","2":"2100","3":"0.0"},{"1":"Solomon Islands","2":"2000","3":"0.3"},{"1":"Montserrat","2":"1293","3":"25.9"},{"1":"Niger","2":"1366","3":"0.0"},{"1":"Papua New Guinea","2":"1081","3":"0.0"},{"1":"South Sudan","2":"947","3":"0.0"},{"1":"Libya","2":"750","3":"0.0"},{"1":"Armenia","2":"565","3":"0.0"},{"1":"Tonga","2":"500","3":"0.5"},{"1":"Cameroon","2":"400","3":"0.0"},{"1":"Nauru","2":"168","3":"1.6"},{"1":"F.S. Micronesia","2":"19983","3":"19.3"},{"1":"Marshall Islands","2":"14228","3":"24.4"},{"1":"Palau","2":"11685","3":"65.3"},{"1":"Vatican City","2":"22","3":"2.7"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="explore-your-data" class="section level2 tabset" number="0.11">
+<h2 class="tabset" number="0.11"><span class="header-section-number">0.11</span> Explore your data</h2>
+<p>R has thousands of custom built packages for visualizing data. One of the packages we’ll be using a lot in this course is <a href="https://docs.ropensci.org/skimr/"><code>skimr</code></a>, which provides a “<em>A frictionless, pipeable approach to dealing with summary statistics.</em>”</p>
+<blockquote>
+<p><em>What is ‘pipeable’?</em></p>
+</blockquote>
+<p>The pipe (<code>%&gt;%</code>) from the <a href="https://magrittr.tidyverse.org/"><code>magrittr</code> package</a> is what’s referred to as syntactic sugar (yes, that’s <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">really a term</a>) because it’s,</p>
+<p>“<em>syntax within a programming language that is designed to make things easier to read or to express</em>”</p>
+<div id="how-pipes-work" class="section level3" number="0.11.1">
+<h3 number="0.11.1"><span class="header-section-number">0.11.1</span> How pipes work</h3>
+<p>R is a <a href="https://adv-r.hadley.nz/fp.html">functional programming language</a>. In standard math notation, the common way to write a function is <code>f(x)</code> or <code>y = f(x)</code>, which is read as “<em>f of x</em>” or “<em>y equals f of x</em>”.</p>
+<p>Pipes restructure the function syntax, so this:</p>
+<p><img src="img/pipe-args-01.png" width="686" style="display: block; margin: auto;" /></p>
+<p>Becomes this:</p>
+<p><img src="img/pipe-args-02.png" width="812" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pipelines" class="section level3" number="0.11.2">
+<h3 number="0.11.2"><span class="header-section-number">0.11.2</span> Pipelines</h3>
+<p>As you can imagine, writing code like this can get complicated if we wanted to use multiple functions (as we typically do), Without the pipe, we have to write these as nested functions (i.e. <code>h(f(x))</code>).</p>
+<p><img src="img/pipe-args-03.png" width="893" style="display: block; margin: auto;" /></p>
+<p>With the pipe, we can rewrite this code to the following:</p>
+<p><img src="img/pipe-args-04.png" width="668" style="display: block; margin: auto;" /></p>
+<p>Using the pipe makes code easier to 1) think about, 2) write, and 3) read.</p>
+</div>
+<div id="exercise-6" class="section level3" number="0.11.3">
+<h3 number="0.11.3"><span class="header-section-number">0.11.3</span> exercise</h3>
+<p>Pipe the <code>WikiCovid</code> to the <code>skimr::skim()</code> function:</p>
+<pre class="r"><code>WikiCovid %&gt;% </code></pre>
+</div>
+<div id="solution-6" class="section level3" number="0.11.4">
+<h3 number="0.11.4"><span class="header-section-number">0.11.4</span> solution</h3>
+<p>See the solution below:</p>
+<pre class="r"><code>WikiCovid %&gt;% skimr::skim()</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">195</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">location</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">32</td>
+<td align="right">0</td>
+<td align="right">195</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="9%" />
+<col width="12%" />
+<col width="10%" />
+<col width="11%" />
+<col width="2%" />
+<col width="7%" />
+<col width="8%" />
+<col width="9%" />
+<col width="11%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">n_vaccinated</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">7544246.38</td>
+<td align="right">45715084.23</td>
+<td align="right">22</td>
+<td align="right">33933.0</td>
+<td align="right">244000.0</td>
+<td align="right">1187642.5</td>
+<td align="right">562324298.0</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">perc_of_pop</td>
+<td align="right">14</td>
+<td align="right">0.93</td>
+<td align="right">14.92</td>
+<td align="right">18.51</td>
+<td align="right">0</td>
+<td align="right">1.4</td>
+<td align="right">7.2</td>
+<td align="right">22.3</td>
+<td align="right">106.8</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<p>As we can see, <code>the skim()</code> output gives us a lot of descriptive information about the variables (columns) in <code>WikiCovid</code>. A brief summary of these statistics is provided below:</p>
+<p><strong>Character variables</strong> We can see none of the data in <code>location</code> are missing (<code>n_missing</code> and <code>complete_rate</code>). <code>Skimr::skim()</code> also shows us the <code>min</code>, <code>max</code>, <code>empty</code>, <code>n_unique</code>, and <code>whitespace</code>.</p>
+<p><strong>Numeric variables: Location statistics</strong><br />
+- the <code>mean</code> (or average) gives us the expected value for each variable<br />
+- the median (as <code>p50</code>) or the ‘center’ value for each variable. Half of the values are above, and half are below.</p>
+<p><strong>Numeric variables: Spread statistics</strong><br />
+- the lowest value for each variable, or minimum (as <code>p0</code>)<br />
+- the highest value for each variable, or maximum (as <code>p100</code>)<br />
+<em>Together, these two values can give us the range, which is the difference between the maximum and minimum values</em></p>
+<p><strong><em>Do you notice anything strange?</em></strong></p>
+<p>Now we are ready to start visualizing!</p>
+<hr />
+</div>
+</div>
+<div id="intro-to-ggplot2" class="section level2" number="0.12">
+<h2 number="0.12"><span class="header-section-number">0.12</span> Intro to <code>ggplot2</code></h2>
+<p><code>ggplot2</code> is part of the <code>tidyverse</code>, which is a collection of opinionated packages from RStudio that <a href="https://www.tidyverse.org/packages/">‘<em>you’re likely to use in everyday data analyses.</em>’</a>. The <code>ggplot2</code> package is an implementation of the <a href="https://amzn.to/2MRRCAB">“Grammar of Graphics”</a> by Leland Wilkinson. This text outlines a foundation for understanding the components of just about every graph or figure we’ve encountered (and some we haven’t). <code>ggplot2</code> extends these concepts into a powerful grammar for developing data visualizations in R.</p>
+<div id="a-grammar-for-data-visualization" class="section level3" number="0.12.1">
+<h3 number="0.12.1"><span class="header-section-number">0.12.1</span> A ‘grammar’ for data visualization?</h3>
+<p><a href="https://en.wikipedia.org/wiki/Wilhelm_von_Humboldt">Wilhelm von Humboldt</a> has described a language as a system for “<em>making infinite use of finite means.</em>” Grammar is the way we convert the thoughts in our heads into discrete concepts (i.e. words), and then we apply a set of rules (or syntax) to create and display comprehensible statements (for humans or computers). In this sense, <code>ggplot2</code> gives us an ability to communicate the complexities of any data visualization in the same way that any specialized vocabulary allows us to precisely and unambiguously define ideas.</p>
+<p>Within the R language, <code>ggplot2</code> provides the grammar (or set of rules) we can learn to develop a rich vocabulary for data visualizations. Knowing how to use <code>ggplot2</code>’s grammar also gives us an excellent mental model for thinking about individual graphical elements.</p>
+</div>
+</div>
+<div id="terms-and-definitions-geoms-and-aesthetics" class="section level2 tabset" number="0.13">
+<h2 class="tabset" number="0.13"><span class="header-section-number">0.13</span> Terms and definitions: geoms and aesthetics</h2>
+<p>A <em>geom</em> (or geometric object) is the shape or ‘thing’ we see on a graph or plot (this includes dots or points, lines, bars, etc.). <em>geoms</em> are created using <em>aesthetic</em> mappings, which are visual properties of the shape on the plot or graph (i.e. the color of the point, the size of the lines, the position or shape of the bars, etc.).</p>
+<p>So every graph or plot has a geom, and that geom will also have some visual properties called aesthetics.</p>
+<div id="exercise-7" class="section level3" number="0.13.1">
+<h3 number="0.13.1"><span class="header-section-number">0.13.1</span> exercise</h3>
+<p>Use the pipe syntax below to apply the <code>ggplot2::ggplot()</code> and <code>ggplot2::aes()</code> functions to the <code>WikiCovid</code> data.</p>
+<pre class="r"><code>WikiCovid %&gt;% 
+  ggplot2::_______(ggplot2::___())</code></pre>
+</div>
+<div id="solution-7" class="section level3" number="0.13.2">
+<h3 number="0.13.2"><span class="header-section-number">0.13.2</span> solution</h3>
+<p>See the solution below:</p>
+<pre class="r"><code>WikiCovid %&gt;% 
+  ggplot2::ggplot(ggplot2::aes())</code></pre>
+<p><img src="img/ggplot-aes-sol-1.png" width="672" /></p>
+<p>When we combine a dataset with the <code>ggplot2::ggplot()</code> and <code>ggplot2::aes()</code> functions, we get a blank canvas. This is the base layer for <code>ggplot2</code> graphs. Next we will see what happens when we ‘map’ variables to their respective positions (<code>x</code> and <code>y</code>).</p>
+</div>
+</div>
+<div id="build-the-labels-first" class="section level2 tabset" number="0.14">
+<h2 class="tabset" number="0.14"><span class="header-section-number">0.14</span> Build the labels first!</h2>
+<p>I suggest building labels <strong>first</strong> when making a figure or graph, because it forces us to think about what we should expect to see. For example, if we want to see <code>location</code> on the <code>y</code> and <code>perc_of_pop</code> on the <code>x</code>, we can create these with a title using the <code>ggplot2::labs()</code> function below.</p>
+<p><em>Note the use of the <code>paste0()</code> function to ensure the date matches the same day we scraped the data.</em></p>
+<pre class="r"><code>labs_location_vaccinated &lt;- ggplot2::labs(
+                              title = &quot;COVID-19 vaccine distribution by location&quot;, 
+                              subtitle = paste0(&quot;Data as of &quot;, as.character(Sys.Date())),
+                              caption = &quot;https://en.wikipedia.org/wiki/Deployment_of_COVID-19_vaccines#Distribution&quot;,
+                              x = &quot;Percent of population vaccinated&quot;, 
+                              y = &quot;Location&quot;)</code></pre>
+<div id="exercise-8" class="section level3" number="0.14.1">
+<h3 number="0.14.1"><span class="header-section-number">0.14.1</span> exercise</h3>
+<p>Use the labels to guide you in filling in the <code>aes()</code> function below:</p>
+<pre class="r"><code>WikiCovid %&gt;% 
+  ggplot2::ggplot(ggplot2::aes(x = _____________, y = _____________)) + 
+  labs_location_vaccinated</code></pre>
+</div>
+<div id="solution-8" class="section level3" number="0.14.2">
+<h3 number="0.14.2"><span class="header-section-number">0.14.2</span> solution</h3>
+<p>See the solution below:</p>
+<pre class="r"><code>WikiCovid %&gt;% 
+  ggplot2::ggplot(ggplot2::aes(x = perc_of_pop, y = location)) + 
+  labs_location_vaccinated</code></pre>
+<p><img src="img/labs_location_vaccinated-sol-1.png" width="672" /></p>
 </div>
 </div>
 
@@ -518,7 +998,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4,h5",
+      selectors: "h1,h2,h3,h4,h5,h6",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

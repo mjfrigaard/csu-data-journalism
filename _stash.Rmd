@@ -4,15 +4,23 @@ output:
   html_document: 
     toc: yes
     toc_float: yes
-    toc_depth: 5
+    toc_depth: 6
     number_sections: yes
     code_folding: show
-    theme: united
-    df_print: paged
+    theme: yeti
     
 always_allow_html: true
 ---
 
+
+```{r setup, echo = FALSE}
+# don't name this setup!
+knitr::opts_chunk$set(collapse = TRUE,
+                      comment = "#>",
+                      eval = FALSE,
+                      message = FALSE,
+                      warning = FALSE)
+```
 
 ```{r}
 # COVID19VaxDistByLoc %>% 

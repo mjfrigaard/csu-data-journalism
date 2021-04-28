@@ -5,9 +5,10 @@ output:
   html_document: 
     toc: yes
     toc_float: yes
-    toc_depth: 5
+    toc_depth: 6
     number_sections: yes
-    theme: united
+    code_folding: show
+    theme: yeti
     df_print: paged
     
 always_allow_html: true

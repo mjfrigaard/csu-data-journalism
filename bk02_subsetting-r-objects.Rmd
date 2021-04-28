@@ -2,13 +2,13 @@
 title: "Subsetting R Objects"
 comment: "*pull out the pieces from any object in R*"
 output:
-  html_document:
+  html_document: 
     toc: yes
     toc_float: yes
-    toc_depth: 5
+    toc_depth: 6
     number_sections: yes
     code_folding: show
-    theme: united
+    theme: yeti
     df_print: paged
 
 always_allow_html: true
@@ -26,9 +26,12 @@ knitr::opts_chunk$set(
 
 # Objectives
 
-This section contains a basic overview of R's subsetting syntax (`[[`, `[`, and `$`).
+Subsetting is an important operation on data objects in R. This section will cover how to: 
 
-# Packages 
+1. Build vectors and extracting their elements using single bracket notation (`[`), a range of elements (`:`), the dollar sign (`$`), and supplying a vector to subset vectors using `c()`  
+2. Create multidimensional objects (matrices and arrays) extracting their elements using `[ , ]`, `[`, and `c()`.  
+3. Assemble vectors of different classes into `data.frame`s and `tibble`s, and how to subset them using a variety of methods.  
+4. Combine any and all objects into lists, identify different methods for extracting elements (`[[`, `[`, and `$`), and recognize the class of each element that's returned.  
 
 Load the `tidyverse` package.
 
@@ -36,10 +39,16 @@ Load the `tidyverse` package.
 library(tidyverse)
 ```
 
-
-# Subsetting 
+# Subsetting Overview 
 
 Subsetting is an important topic because it's how we can get access to the information stored in R objects. Inevitably we'll end up with some kind of data stored in some kind of object, and in order to do anything to that data, we need to access it. 
+
+There are three primary methods for subetting objects in are: 
+
+1. single brackets: `[`  
+2. double brackets: `[[`  
+3. dollar sign: `$`  
+
 
 ## Vectors {.tabset}
 

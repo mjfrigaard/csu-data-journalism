@@ -2,13 +2,13 @@
 title: "Advanced Data Transformation and Manipulation"
 comment: "*dealing with complex data structures*"
 output:
-  html_document:
+  html_document: 
     toc: yes
     toc_float: yes
-    toc_depth: 5
+    toc_depth: 6
     number_sections: yes
     code_folding: show
-    theme: flatly
+    theme: yeti
     df_print: paged
 
 always_allow_html: true

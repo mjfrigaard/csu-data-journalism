@@ -16,7 +16,7 @@
 <script src="site_libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -33,6 +33,7 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
@@ -220,6 +221,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -342,6 +346,14 @@ div.tocify {
 </div><!--/.navbar -->
 
 <div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
 
 
 
@@ -542,21 +554,21 @@ unclass(vec_factor)
 <p>Dates are stored as <code>double</code> vectors with a class attribute set to <code>Date</code>.</p>
 <pre class="r"><code>vec_date &lt;- c(Sys.Date(), Sys.Date() + 1, Sys.Date() + 2)
 vec_date
-#&gt; [1] &quot;2021-04-17&quot; &quot;2021-04-18&quot; &quot;2021-04-19&quot;
+#&gt; [1] &quot;2021-04-27&quot; &quot;2021-04-28&quot; &quot;2021-04-29&quot;
 attributes(vec_date)
 #&gt; $class
 #&gt; [1] &quot;Date&quot;</code></pre>
 <p><code>unclass()</code> tells us what the actual number is.</p>
 <pre class="r"><code>unclass(vec_date)
-#&gt; [1] 18734 18735 18736</code></pre>
+#&gt; [1] 18744 18745 18746</code></pre>
 </div>
 <div id="date-times" class="section level3" number="4.4.3">
 <h3 number="4.4.3"><span class="header-section-number">4.4.3</span> Date-times</h3>
 <p>Date-times contain a bit more information than dates.</p>
 <pre class="r"><code>vec_datetime_ct &lt;- as.POSIXct(x = vec_date)
 vec_datetime_ct
-#&gt; [1] &quot;2021-04-16 17:00:00 MST&quot; &quot;2021-04-17 17:00:00 MST&quot;
-#&gt; [3] &quot;2021-04-18 17:00:00 MST&quot;</code></pre>
+#&gt; [1] &quot;2021-04-26 17:00:00 MST&quot; &quot;2021-04-27 17:00:00 MST&quot;
+#&gt; [3] &quot;2021-04-28 17:00:00 MST&quot;</code></pre>
 <p><code>vec_datetime_ct</code> is a <code>double</code> vector</p>
 <pre class="r"><code>typeof(vec_datetime_ct)
 #&gt; [1] &quot;double&quot;</code></pre>
@@ -805,6 +817,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {
@@ -816,7 +833,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4,h5",
+      selectors: "h1,h2,h3,h4,h5,h6",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

@@ -1,13 +1,14 @@
 ---
-title: "Your first RStudio session"
-comment: "*getting R and RStudio set up on your computer*"
+title: "Installing R & RStudio"
+comment: "*download R, RStudio, and other tools for the course*"
 output:
-  html_document:
+  html_document: 
     toc: yes
     toc_float: yes
-    toc_depth: 5
+    toc_depth: 6
     number_sections: yes
-    theme: united
+    code_folding: show
+    theme: yeti
     df_print: paged
 
 always_allow_html: true
@@ -23,14 +24,24 @@ knitr::opts_chunk$set(collapse = TRUE,
 
 # Objectives
 
+- compare open-source and proprietary software    
+- explain the differences between using the R console, .R script files, and RStudio   
 - download, install, and set up R and RStudio on your local machine
-- compare differences between the R programming language and the R application
-- explain what the differences between the command line, script files, and an [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment)
-- compare [open-source software](https://en.wikipedia.org/wiki/Open-source_software) and [proprietary software](https://en.wikipedia.org/wiki/Proprietary_software)
 
 # Materials
 
 The slides for this section are available [here]().
+
+# R (a quick background)
+
+When people decide to begin using R, it can be confusing to know where to start. Googling "how can I learn R?" will return a lot of results, but it can quickly feel like you're drinking water from a fire-hose. Like most things, knowing the correct terminology can help you sift through the resources to find what you're looking for. 
+
+We're going to clear up some of the terms and definitions so the R programming landscape is a little less overwhelming:
+
+1. R - an [open-source software](https://en.wikipedia.org/wiki/Open-source_software) programming language for statistical analysis and graphics (compared to [proprietary software](https://en.wikipedia.org/wiki/Proprietary_software) like [SPSS](https://en.wikipedia.org/wiki/SPSS) or [SAS](https://en.wikipedia.org/wiki/SAS_(software)))
+2. the R console - a command line interface for entering and executing R code.  
+3. .R script files - plain text files containing R code that computers can run.   
+4. RStudio - an [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment), or IDE for writing R code, connecting to databases, building graphics, websites, software packages, and applications.  
 
 # Installation
 
@@ -221,6 +232,8 @@ These steps cover how to install R and RStudio on a Windows machine. The technic
 ### Install Rtools
 
 ## RStudio.Cloud {.tabset}
+
+A third option for using RStudio is setting up an [RStudio.Cloud](https://rstudio.cloud/) account. This requires a [Github account](https://github.com/) (**which you should set up first**). RStudio cloud is a service provided by RStudio that exists entirely in your browser. 
 
 ### Create a Github account
 

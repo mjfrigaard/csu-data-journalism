@@ -16,7 +16,7 @@ navbar:
       href: about.html
 output:
   html_document:
-    theme: united
+    theme: yeti
     includes:
       after_body: footer.html
 new_session: true

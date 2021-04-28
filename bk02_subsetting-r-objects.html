@@ -16,7 +16,7 @@
 <script src="site_libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -364,33 +364,47 @@ div.tocify {
 
 <div id="objectives" class="section level1" number="1">
 <h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
-<p>This section contains a basic overview of R’s subsetting syntax (<code>[[</code>, <code>[</code>, and <code>$</code>).</p>
-</div>
-<div id="packages" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Packages</h1>
+<p>Subsetting is an important operation on data objects in R. This section will cover how to:</p>
+<ol style="list-style-type: decimal">
+<li>Build vectors and extracting their elements using single bracket notation (<code>[</code>), a range of elements (<code>:</code>), the dollar sign (<code>$</code>), and supplying a vector to subset vectors using <code>c()</code><br />
+</li>
+<li>Create multidimensional objects (matrices and arrays) extracting their elements using <code>[ , ]</code>, <code>[</code>, and <code>c()</code>.<br />
+</li>
+<li>Assemble vectors of different classes into <code>data.frame</code>s and <code>tibble</code>s, and how to subset them using a variety of methods.<br />
+</li>
+<li>Combine any and all objects into lists, identify different methods for extracting elements (<code>[[</code>, <code>[</code>, and <code>$</code>), and recognize the class of each element that’s returned.</li>
+</ol>
 <p>Load the <code>tidyverse</code> package.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
 </div>
-<div id="subsetting" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Subsetting</h1>
+<div id="subsetting-overview" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Subsetting Overview</h1>
 <p>Subsetting is an important topic because it’s how we can get access to the information stored in R objects. Inevitably we’ll end up with some kind of data stored in some kind of object, and in order to do anything to that data, we need to access it.</p>
-<div id="vectors" class="section level2 tabset" number="3.1">
-<h2 class="tabset" number="3.1"><span class="header-section-number">3.1</span> Vectors</h2>
+<p>There are three primary methods for subetting objects in are:</p>
+<ol style="list-style-type: decimal">
+<li>single brackets: <code>[</code><br />
+</li>
+<li>double brackets: <code>[[</code><br />
+</li>
+<li>dollar sign: <code>$</code></li>
+</ol>
+<div id="vectors" class="section level2 tabset" number="2.1">
+<h2 class="tabset" number="2.1"><span class="header-section-number">2.1</span> Vectors</h2>
 <p>Vectors are the fundamental data type in R. Below we assign five numbers to the vector <code>vec</code>.</p>
 <pre class="r"><code>num_vec &lt;- c(2, 9, 4, 3, 7)
 num_vec
 #&gt; [1] 2 9 4 3 7</code></pre>
 <p>These five numbers exist in five different <em>positions</em> within the vector, and we can subset them using a bracket with the numerical index.</p>
-<div id="using" class="section level3" number="3.1.1">
-<h3 number="3.1.1"><span class="header-section-number">3.1.1</span> using <code>[]</code></h3>
+<div id="using" class="section level3" number="2.1.1">
+<h3 number="2.1.1"><span class="header-section-number">2.1.1</span> using <code>[]</code></h3>
 <p>Here are the numbers located at positions <code>[1]</code> and position <code>[5]</code></p>
 <pre class="r"><code>num_vec[1]
 #&gt; [1] 2
 num_vec[5]
 #&gt; [1] 7</code></pre>
 </div>
-<div id="using-1" class="section level3" number="3.1.2">
-<h3 number="3.1.2"><span class="header-section-number">3.1.2</span> using <code>:</code></h3>
+<div id="using-1" class="section level3" number="2.1.2">
+<h3 number="2.1.2"><span class="header-section-number">2.1.2</span> using <code>:</code></h3>
 <p>If we want a range of values from <code>num_vec</code>, we can use the colon in the index:</p>
 <pre class="r"><code>num_vec[1:3]
 #&gt; [1] 2 9 4</code></pre>
@@ -400,8 +414,8 @@ num_vec[5]
 is.vector(num_vec[1:3])
 #&gt; [1] TRUE</code></pre>
 </div>
-<div id="using-with-c" class="section level3" number="3.1.3">
-<h3 number="3.1.3"><span class="header-section-number">3.1.3</span> using <code>[]</code> with <code>c()</code></h3>
+<div id="using-with-c" class="section level3" number="2.1.3">
+<h3 number="2.1.3"><span class="header-section-number">2.1.3</span> using <code>[]</code> with <code>c()</code></h3>
 <p>We can also use vectors to subset other vectors. The code below returns the same result as <code>num_vec[1:3]</code>:</p>
 <pre class="r"><code>num_vec[c(1, 2, 3)]
 #&gt; [1] 2 9 4</code></pre>
@@ -410,19 +424,19 @@ is.vector(num_vec[1:3])
 num_vec[x]
 #&gt; [1] 2 9 4</code></pre>
 </div>
-<div id="vs.--" class="section level3" number="3.1.4">
-<h3 number="3.1.4"><span class="header-section-number">3.1.4</span> <code>[]</code> vs. <code>&lt;-</code></h3>
+<div id="vs.--" class="section level3" number="2.1.4">
+<h3 number="2.1.4"><span class="header-section-number">2.1.4</span> <code>[]</code> vs. <code>&lt;-</code></h3>
 <p>So far, we’ve been subsetting <code>num_vec</code> in a way that <em>only</em> returns the requested elements. If we wanted to subset <code>num_vec</code> and store the output in a new vector, we would need the assignment operator (<code>&lt;-</code>):</p>
 <pre class="r"><code>small_num_vec &lt;- num_vec[1:3]
 small_num_vec
 #&gt; [1] 2 9 4</code></pre>
 </div>
 </div>
-<div id="matrices" class="section level2 tabset" number="3.2">
-<h2 class="tabset" number="3.2"><span class="header-section-number">3.2</span> Matrices</h2>
+<div id="matrices" class="section level2 tabset" number="2.2">
+<h2 class="tabset" number="2.2"><span class="header-section-number">2.2</span> Matrices</h2>
 <p>We’ll now move into subsetting higher-dimensional objects. We went over these objects in a <a href="https://mjfrigaard.github.io/r-meetup-tutorials/bk00_functions-and-objects.html#5_Multidimensional_objects">previous lesson</a>.</p>
-<div id="create-a-matrix" class="section level3" number="3.2.1">
-<h3 number="3.2.1"><span class="header-section-number">3.2.1</span> create a matrix</h3>
+<div id="create-a-matrix" class="section level3" number="2.2.1">
+<h3 number="2.2.1"><span class="header-section-number">2.2.1</span> create a matrix</h3>
 <p>Here we create <code>mat_data</code>, a matrix with 3 rows and two columns. We also supply a set of <code>dimnames</code>.</p>
 <pre class="r"><code>mat_data &lt;- matrix(
   data = c(0.2, 0.4, 0.8, 5, 15, 150),
@@ -441,8 +455,8 @@ mat_data
 #&gt; row_3   0.8   150</code></pre>
 <p>We can see this is a two-dimensional object with rows and columns.</p>
 </div>
-<div id="using-2" class="section level3" number="3.2.2">
-<h3 number="3.2.2"><span class="header-section-number">3.2.2</span> using <code>[, ]</code></h3>
+<div id="using-2" class="section level3" number="2.2.2">
+<h3 number="2.2.2"><span class="header-section-number">2.2.2</span> using <code>[, ]</code></h3>
 <p>To subset a matrix, the syntax is <code>object[row, column]</code>. So if we wanted the number at the intersection of the third row and second column (<code>150</code>), we can pass these positions inside brackets <code>[3, 2]</code>.</p>
 <pre class="r"><code>mat_data[3, 2]
 #&gt; [1] 150</code></pre>
@@ -454,8 +468,8 @@ mat_data[, 2]
 #&gt; row_1 row_2 row_3 
 #&gt;     5    15   150</code></pre>
 </div>
-<div id="using-with-c-1" class="section level3" number="3.2.3">
-<h3 number="3.2.3"><span class="header-section-number">3.2.3</span> using <code>[]</code> with <code>c()</code></h3>
+<div id="using-with-c-1" class="section level3" number="2.2.3">
+<h3 number="2.2.3"><span class="header-section-number">2.2.3</span> using <code>[]</code> with <code>c()</code></h3>
 <p>We can also control how the matrix elements are returned. If we want to access the second and first rows of <code>mat_data</code> (in that order), we can pass <code>c(2, 1)</code> inside <code>[]</code> and R will return both columns.</p>
 <pre class="r"><code>mat_data[c(2, 1), ]
 #&gt;       col_1 col_2
@@ -466,12 +480,12 @@ mat_data[, 2]
 #&gt; [1] 0.4</code></pre>
 </div>
 </div>
-<div id="arrays" class="section level2 tabset" number="3.3">
-<h2 class="tabset" number="3.3"><span class="header-section-number">3.3</span> Arrays</h2>
+<div id="arrays" class="section level2 tabset" number="2.3">
+<h2 class="tabset" number="2.3"><span class="header-section-number">2.3</span> Arrays</h2>
 <p>Arrays contain a collection of equal-dimension matrices. Just like matrices, they have fixed number of rows and columns, but they also have a third dimension called a <em>layer</em>. See the image below for conceptual illustration a three-row, three-column, two-layer array (3 × 3 × 2).</p>
 <p><img src="img/array.png" width="45%" height="45%" style="display: block; margin: auto;" /></p>
-<div id="create-an-array" class="section level3" number="3.3.1">
-<h3 number="3.3.1"><span class="header-section-number">3.3.1</span> create an array</h3>
+<div id="create-an-array" class="section level3" number="2.3.1">
+<h3 number="2.3.1"><span class="header-section-number">2.3.1</span> create an array</h3>
 <p>Now we’ll create an array (<code>array_dat</code>) with 3 columns, 3 rows, and 3 <em>layers</em>.</p>
 <pre class="r"><code>array_dat &lt;- array(
   data = c(
@@ -503,21 +517,21 @@ array_dat
 #&gt; [2,]    6   15   24
 #&gt; [3,]    9   18   27</code></pre>
 </div>
-<div id="using-3" class="section level3" number="3.3.2">
-<h3 number="3.3.2"><span class="header-section-number">3.3.2</span> using <code>[]</code></h3>
+<div id="using-3" class="section level3" number="2.3.2">
+<h3 number="2.3.2"><span class="header-section-number">2.3.2</span> using <code>[]</code></h3>
 <p>As the number of dimensions increase, so do the number of commas required for subsetting. If we want the third row of the second layer of <code>array_dat</code>, we would use the following:</p>
 <pre class="r"><code>array_dat[3, , 2]
 #&gt; [1] 1.5 3.0 4.5</code></pre>
 <p>Note that this returns a vector.</p>
 </div>
-<div id="using-with-c-2" class="section level3" number="3.3.3">
-<h3 number="3.3.3"><span class="header-section-number">3.3.3</span> using <code>[]</code> with <code>c()</code></h3>
+<div id="using-with-c-2" class="section level3" number="2.3.3">
+<h3 number="2.3.3"><span class="header-section-number">2.3.3</span> using <code>[]</code> with <code>c()</code></h3>
 <p>We can also use a vector to subset the <code>array_dat</code> by index (or position). Below we get the first row and third and second columns (in that order) of layer two.</p>
 <pre class="r"><code>array_dat[1, c(3, 2), 2]
 #&gt; [1] 3.5 2.0</code></pre>
 </div>
-<div id="return-behavior" class="section level3" number="3.3.4">
-<h3 number="3.3.4"><span class="header-section-number">3.3.4</span> Return behavior</h3>
+<div id="return-behavior" class="section level3" number="2.3.4">
+<h3 number="2.3.4"><span class="header-section-number">2.3.4</span> Return behavior</h3>
 <p>If we only supply a single row <code>array_dat[1, , ]</code>, we will see R returns the rows as a column in a single matrix. They are also arranged by columns, not rows.</p>
 <pre class="r"><code>array_dat[1, , ]
 #&gt;      [,1] [,2] [,3]
@@ -530,11 +544,11 @@ array_dat
 <p><img src="img/array-return-cols.png" width="35%" height="35%" style="display: block; margin: auto 0 auto auto;" /></p>
 </div>
 </div>
-<div id="data-framestibbes" class="section level2 tabset" number="3.4">
-<h2 class="tabset" number="3.4"><span class="header-section-number">3.4</span> Data frames/tibbes</h2>
+<div id="data-framestibbes" class="section level2 tabset" number="2.4">
+<h2 class="tabset" number="2.4"><span class="header-section-number">2.4</span> Data frames/tibbes</h2>
 <p>Data frames and tibbles are rectangular representations of data (like spreadsheets). Data frames and tibbles contain vectors of equal length.</p>
-<div id="create-a-data.frametibble" class="section level3" number="3.4.1">
-<h3 number="3.4.1"><span class="header-section-number">3.4.1</span> create a <code>data.frame</code>/<code>tibble</code></h3>
+<div id="create-a-data.frametibble" class="section level3" number="2.4.1">
+<h3 number="2.4.1"><span class="header-section-number">2.4.1</span> create a <code>data.frame</code>/<code>tibble</code></h3>
 <p>To create the <code>Simpsons</code> <code>data.frame</code> we can use the following function:</p>
 <pre class="r"><code>Simpsons &lt;- data.frame(
   character = c(&quot;Homer&quot;, &quot;Marge&quot;, &quot;Bart&quot;, &quot;Lisa&quot;),
@@ -562,8 +576,8 @@ str(AmericanDad)
 #&gt;  $ age      : num [1:4] 42 40 15 19
 #&gt;  $ sex      : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 1 2 1</code></pre>
 </div>
-<div id="using-4" class="section level3" number="3.4.2">
-<h3 number="3.4.2"><span class="header-section-number">3.4.2</span> using <code>$</code></h3>
+<div id="using-4" class="section level3" number="2.4.2">
+<h3 number="2.4.2"><span class="header-section-number">2.4.2</span> using <code>$</code></h3>
 <p>The dollar sign (<code>$</code>) can be used to subset named vectors.</p>
 <pre class="r"><code>Simpsons$character
 #&gt; [1] &quot;Homer&quot; &quot;Marge&quot; &quot;Bart&quot;  &quot;Lisa&quot;</code></pre>
@@ -571,8 +585,8 @@ str(AmericanDad)
 <pre class="r"><code>AmericanDad$character
 #&gt; [1] &quot;Stan&quot;     &quot;Francine&quot; &quot;Steven&quot;   &quot;Hayley&quot;</code></pre>
 </div>
-<div id="using-5" class="section level3" number="3.4.3">
-<h3 number="3.4.3"><span class="header-section-number">3.4.3</span> using <code>[]</code></h3>
+<div id="using-5" class="section level3" number="2.4.3">
+<h3 number="2.4.3"><span class="header-section-number">2.4.3</span> using <code>[]</code></h3>
 <p>We can use the row and column index to subset data frames and tibbles just like matrices and arrays.</p>
 <pre class="r"><code># homer&#39;s age
 Simpsons[1, 2]
@@ -618,8 +632,8 @@ AmericanDad[1, 2] # Stan&#39;s age</code></pre>
   </script>
 </div>
 </div>
-<div id="using-c" class="section level3" number="3.4.4">
-<h3 number="3.4.4"><span class="header-section-number">3.4.4</span> using <code>[]</code> &amp; <code>c()</code></h3>
+<div id="using-c" class="section level3" number="2.4.4">
+<h3 number="2.4.4"><span class="header-section-number">2.4.4</span> using <code>[]</code> &amp; <code>c()</code></h3>
 <p>We can use a numeric index for rows along with the names of the vectors (or columns) to subset data frames and tibbles:</p>
 <pre class="r"><code># Lisa&#39;s age and sex
 Simpsons[4, c(&quot;age&quot;, &quot;sex&quot;)]</code></pre>
@@ -637,8 +651,8 @@ AmericanDad[2, c(&quot;age&quot;, &quot;sex&quot;)]</code></pre>
   </script>
 </div>
 </div>
-<div id="using-and" class="section level3" number="3.4.5">
-<h3 number="3.4.5"><span class="header-section-number">3.4.5</span> using <code>$</code> and <code>[]</code></h3>
+<div id="using-and" class="section level3" number="2.4.5">
+<h3 number="2.4.5"><span class="header-section-number">2.4.5</span> using <code>$</code> and <code>[]</code></h3>
 <p>Because the dollar-sign returns a vector, we can subset this output by combing it with brackets (<code>[]</code>)</p>
 <pre class="r"><code># Bart&#39;s age
 Simpsons$age[3]
@@ -648,8 +662,8 @@ Simpsons$age[3]
 AmericanDad$age[3]
 #&gt; [1] 15</code></pre>
 </div>
-<div id="using-6" class="section level3" number="3.4.6">
-<h3 number="3.4.6"><span class="header-section-number">3.4.6</span> using <code>$</code> &amp; <code>==</code></h3>
+<div id="using-6" class="section level3" number="2.4.6">
+<h3 number="2.4.6"><span class="header-section-number">2.4.6</span> using <code>$</code> &amp; <code>==</code></h3>
 <p>We can combine <code>$</code> with <code>==</code> to return a logical vector:</p>
 <pre class="r"><code>Simpsons$age == 36
 #&gt; [1] FALSE  TRUE FALSE FALSE
@@ -662,8 +676,8 @@ AmericanDad$age == c(42, 40)
 #&gt; [1]  TRUE  TRUE FALSE FALSE</code></pre>
 <p>This might not seem very helpful, but it comes in handy when we combine this with <code>[]</code>.</p>
 </div>
-<div id="using-and-1" class="section level3" number="3.4.7">
-<h3 number="3.4.7"><span class="header-section-number">3.4.7</span> using <code>[]</code>, <code>$</code> and <code>==</code></h3>
+<div id="using-and-1" class="section level3" number="2.4.7">
+<h3 number="2.4.7"><span class="header-section-number">2.4.7</span> using <code>[]</code>, <code>$</code> and <code>==</code></h3>
 <p>Below we combine the logical output from <code>$</code> and <code>==</code> with <code>[]</code> to subset data frames and tibbles:</p>
 <pre class="r"><code># return Stan and Hayley&#39;s age and sex
 AmericanDad[AmericanDad$age == c(42, 19), ]</code></pre>
@@ -681,8 +695,8 @@ Simpsons[Simpsons$age == 36, ]</code></pre>
 </div>
 <p>Again, we see the output from the data frame (<code>Simpsons</code>) returns a data frame with a row-name (<code>2</code>).</p>
 </div>
-<div id="using-7" class="section level3" number="3.4.8">
-<h3 number="3.4.8"><span class="header-section-number">3.4.8</span> using <code>[[]]</code></h3>
+<div id="using-7" class="section level3" number="2.4.8">
+<h3 number="2.4.8"><span class="header-section-number">2.4.8</span> using <code>[[]]</code></h3>
 <p>We can control the subsetted results for <em>both</em> tibbles and data frames using double brackets (<code>[[]]</code>).</p>
 <p>Let’s review the behavior of single brackets. If we use a single bracket (without commas) and a numerical index, we get the first column in both <code>Simpsons</code> and <code>AmericanDad</code> as a rectangular object.</p>
 <pre class="r"><code># character column from data frame
@@ -701,11 +715,11 @@ str(AmericanDad[[1]])
 #&gt;  chr [1:4] &quot;Stan&quot; &quot;Francine&quot; &quot;Steven&quot; &quot;Hayley&quot;</code></pre>
 </div>
 </div>
-<div id="lists" class="section level2 tabset" number="3.5">
-<h2 class="tabset" number="3.5"><span class="header-section-number">3.5</span> Lists</h2>
+<div id="lists" class="section level2 tabset" number="2.5">
+<h2 class="tabset" number="2.5"><span class="header-section-number">2.5</span> Lists</h2>
 <p>Lists are special kinds of objects. Their contents can be items of different data types <em>and</em> lengths. Read more about lists in <a href="https://adv-r.hadley.nz/vectors-chap.html#lists">Advanced R</a>.</p>
-<div id="create-a-list" class="section level3" number="3.5.1">
-<h3 number="3.5.1"><span class="header-section-number">3.5.1</span> create a <code>list</code></h3>
+<div id="create-a-list" class="section level3" number="2.5.1">
+<h3 number="2.5.1"><span class="header-section-number">2.5.1</span> create a <code>list</code></h3>
 <p>Below we’ll create a list of lesser-known Star Wars characters called <code>sw_list</code>.</p>
 <pre class="r"><code>list(
   name = c(
@@ -741,8 +755,8 @@ str(sw_list)
 #&gt;   ..$ : chr &quot;The Phantom Menace&quot;</code></pre>
 <p>We can see the first few vectors in <code>sw_list</code> looks like a data.frame (<code>name</code> through <code>films</code>), but <code>films</code> has multiple lengths, because each character has been in a varying number of films.</p>
 </div>
-<div id="using-8" class="section level3" number="3.5.2">
-<h3 number="3.5.2"><span class="header-section-number">3.5.2</span> using <code>$</code></h3>
+<div id="using-8" class="section level3" number="2.5.2">
+<h3 number="2.5.2"><span class="header-section-number">2.5.2</span> using <code>$</code></h3>
 <p>If we use the <code>$</code> symbol, R returns the object according to type.</p>
 <pre class="r"><code># heights
 str(sw_list$height)
@@ -757,8 +771,8 @@ str(sw_list$films)
 #&gt;  $ : chr &quot;The Phantom Menace&quot;
 #&gt;  $ : chr &quot;The Phantom Menace&quot;</code></pre>
 </div>
-<div id="using-9" class="section level3" number="3.5.3">
-<h3 number="3.5.3"><span class="header-section-number">3.5.3</span> using <code>[]</code> &amp; <code>[[]]</code></h3>
+<div id="using-9" class="section level3" number="2.5.3">
+<h3 number="2.5.3"><span class="header-section-number">2.5.3</span> using <code>[]</code> &amp; <code>[[]]</code></h3>
 <p>There are two levels for subsetting lists with brackets: <code>[]</code> and <code>[[]]</code>. A great way to think about these two levels of subsetting is captured in the tweet below:</p>
 <blockquote>
 <p>If the #rstats list “<code>x</code>” is a train carrying objects, then <code>x[[5]]</code> is the object in car <code>5</code>; <code>x[4:6]</code> is a train of cars <code>4</code>-<code>6</code>. <a href="https://twitter.com/RLangTip/status/268375867468681216?s=20">One R Tip a Day</a> <span class="citation">[@RLangTip]</span>(<a href="https://twitter.com/RLangTip/" class="uri">https://twitter.com/RLangTip/</a>)</p>
@@ -785,8 +799,8 @@ str(sw_list[[4]])
 #&gt;   ..$ : chr &quot;The Phantom Menace&quot;
 #&gt;   ..$ : chr &quot;The Phantom Menace&quot;</code></pre>
 </div>
-<div id="comparing-and" class="section level3" number="3.5.4">
-<h3 number="3.5.4"><span class="header-section-number">3.5.4</span> comparing <code>$</code>, <code>[]</code>, and <code>[[]]</code></h3>
+<div id="comparing-and" class="section level3" number="2.5.4">
+<h3 number="2.5.4"><span class="header-section-number">2.5.4</span> comparing <code>$</code>, <code>[]</code>, and <code>[[]]</code></h3>
 <p>Below we compare subsetting lists with <code>$</code>, <code>[]</code>, and <code>[[]]</code>. We can see <code>$</code> and <code>[[]]</code> return <code>identical()</code> objects.</p>
 <pre class="r"><code># check $
 str(sw_list$name)
@@ -859,7 +873,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4,h5",
+      selectors: "h1,h2,h3,h4,h5,h6",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

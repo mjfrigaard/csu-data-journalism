@@ -1,0 +1,89 @@
+---
+title: "The R language"
+author: 
+- Martin Frigaard
+date: "`r Sys.Date()`"
+output: memor::pdf_memo
+---
+
+```{r setup}
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+R is an object-oriented, functional programming scripting language, which is the technical way of saying R uses functions (actions) to perform operations objects (data). R is free and open-source software (FOSS) with a massive global community of users and developers who have helped create and maintain tools for data manipulation, graphics, statistics, and machine learning.
+
+Generally speaking, functions are similar to _verbs_, and objects are more like _nouns_.
+
+Functions typically take some object as an `input`s and return an object as an `output`s:
+
+```{r , eval=FALSE}
+function('input') {
+
+    perform command(s) on 'input'
+
+    return output
+}
+output
+```
+
+Not all functions return an output. For example, `install.packages()` downloads and installs R packages into a local folder on our computer, and the `library()` command loads the packages.
+
+```{r , message=FALSE, warning=FALSE, results='hide'}
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+
+*Operators* are symbols (or collections of symbols) for performing arithmetic (`+`, `-`, `*`, `/`), comparisons (`<`, `>`, `=<`, `=>`), and assignment (`<-` and `=`). *Operators* are also functions (see below). 
+
+```{r operators}
+class(`+`)
+class(`<=`)
+class(`<-`)
+```
+
+
+## R packages
+
+R `packages` are collections of commands for a particular purpose or task. R comes 'out of the box' with a handful of useful commands.
+
+For this scenario, we'll be using the `tidyr` and `dplyr` packages for data manipulation. Both packages are part of the `tidyverse,` which is a suite of tools pioneered by RStudio's Chief Scientist [Hadley Wickham](http://hadley.nz/). All packages in the `tidyverse` work well together because they center around a common thread of [tidy data](https://vita.had.co.nz/papers/tidy-data.pdf).
+
+#### Data in R
+
+When we load data into R, these data get stored in a data object. To do things to any data object (manipulate, analyze, visualize, model, etc.), we'll need to use functions. We can write custom functions, or we can use one of the over 10,000 user-written packages available on [CRAN](https://cran.r-project.org/).
+
+
+#### R Code style
+
+The code in this scenario follows the [`tidyverse` style guide](https://style.tidyverse.org/) as closely as possible.
+
+> "*Each line of a comment should begin with the comment symbol and a single space: `#`*"
+
+```{r}
+# comments aren't run in the console
+```
+
+> "*In data analysis code, use comments to record important findings and analysis decisions. If you need comments to explain what your code is doing, consider rewriting your code to be clearer.*"
+
+## Using R functions
+
+If we want to use a function from a package, the syntax for doing this is `package::function()`
+
+For example, below, we'll use the `tidyverse_logo()` function from the `tidyverse` package to view an awesome logo.
+
+```{r tidyverse_logo}
+# click to execute code
+tidyverse::tidyverse_logo()
+```
+
+The `tidyverse::tidyverse_logo()` function can run without any arguments (i.e. nothing inside the parentheses), but we can view the arguments by placing the cursor inside the parenthesis and hitting the <kbd>tab</kbd> key.
+
+We can enter function arguments by position or name (see below).
+
+![](https://github.com/mjfrigaard/katacoda-scenarios/blob/master/figs/00-name-arg.png?raw=true)
+
+![](https://github.com/mjfrigaard/katacoda-scenarios/blob/master/figs/00-position-arg.png?raw=true)
