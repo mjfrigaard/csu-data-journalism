@@ -13,11 +13,13 @@ library(ggplot2)
 opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
-R is an object-oriented, functional programming scripting language, which is the technical way of saying R uses functions (actions) to perform operations objects (data). R is free and open-source software (FOSS) with a massive global community of users and developers who have helped create and maintain tools for data manipulation, graphics, statistics, and machine learning.
+R is an object-oriented, functional programming language for statistical analysis and graphics. R is also a free and open-source software (FOSS) with a massive global community of users and developers who have helped create and maintain tools for data manipulation, graphics, statistics, and machine learning.
 
-Generally speaking, functions are similar to _verbs_, and objects are more like _nouns_.
+## The R language 
 
-Functions typically take some object as an `input`s and return an object as an `output`s:
+The R language is comprised of functions and objects. R uses functions to perform operations (like `mean()`, `sum()`, `lm()` (for linear model)) on objects (vectors, arrays, matrices, data.frames or lists).
+
+Generally speaking, functions are similar to _verbs_, and objects are more like _nouns_. Functions typically take an object as an `input`, perform an operation on that object, and then return an `output` object. 
 
 ```{r , eval=FALSE}
 function('input') {
@@ -28,6 +30,32 @@ function('input') {
 }
 output
 ```
+
+## Creating objects   
+
+R comes with a variety of functions for creating objects. We will start with `c()`, which stands for 'combine' or 'concatenate'. We can print this to the console by supplying the new object and hitting enter/return.
+
+```{r create-c}
+x <- c(2, 5, 18, 4, 7)
+x
+```
+
+
+*A quick note on printing: notice the preceding [1] in the output. *
+
+## Store and explore
+
+Given the relationship between functions and objects, a common workflow is to create (or import) data as an object (`my_data`), apply a function to this object (`function()`), store the output from this function in a new object (`my_result`), and then use other functions to explore the `my_result`: 
+
+```{r store-and-explore}
+# create data  
+
+# apply a function and store in my_result
+my_result <- mean(my_data)
+# explore the result
+summary(my_result)
+```
+
 
 Not all functions return an output. For example, `install.packages()` downloads and installs R packages into a local folder on our computer, and the `library()` command loads the packages.
 
@@ -87,3 +115,6 @@ We can enter function arguments by position or name (see below).
 ![](https://github.com/mjfrigaard/katacoda-scenarios/blob/master/figs/00-name-arg.png?raw=true)
 
 ![](https://github.com/mjfrigaard/katacoda-scenarios/blob/master/figs/00-position-arg.png?raw=true)
+
+
+1. Tacutu, R., Craig, T., Budovsky, A., Wuttke, D., Lehmann, G., Taranukha, D., Costa, J., Fraifeld, V. E., de Magalhaes, J. P. (2013) "Human Ageing Genomic Resources: Integrated databases and tools for the biology and genetics of ageing." Nucleic Acids Research 41(D1):D1027-D1033. 

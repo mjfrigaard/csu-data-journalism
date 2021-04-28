@@ -14,7 +14,7 @@ tagList(rmarkdown::html_dependency_font_awesome())
 
 *in development, comments welcome!*
 
-[Course ###: Data Journalism](http://bit.ly/csuc-dj-course)
+[Journalism 301: Data Journalism](http://bit.ly/csuc-dj-course)
 
 ## Recommended Courses 
 

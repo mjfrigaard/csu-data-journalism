@@ -1,5 +1,5 @@
 ---
-title: "Advanced R Markdown Exercises"
+title: "Creating RMarkdown Reports"
 comment: "*extending R markdown*"
 output: 
   html_document: 
@@ -32,7 +32,7 @@ knitr::opts_chunk$set(warning = FALSE,
                       size = "Huge")
 ```
 
-# Objectives
+## Objectives
 
 This section provides advanced exercises to improve your understanding of R Markdown. 
 
@@ -48,7 +48,7 @@ Please see the [accompanying slides]() for more information.
 6. Interactive figures  
 
 
-### Parameters
+## Parameters
 
 YAML parameters give us the ability to add variables we can later refer to in our document. We will add some parameters to our report to see how these can be used. Add the following code to the YAML header (at the bottom):
 
@@ -199,10 +199,10 @@ inspectdf::inspect_mem(df1 = StarWars, df2 = StarWarsSmall) %>%
 
 When we cache data, a new folder named `your-file-name` + `_cache/html/` is created in the same directory as our R Markdown file. 
 
-We can see the `mk01_advanced-rmarkdown-exercises_cache/html/` folder contents below:
+We can see the `mk01_rmarkdown-reports_cache/html/` folder contents below:
 
-```{r dir_tree-rmarkdown-exercises_cache, echo=FALSE}
-fs::dir_tree("mk01_advanced-rmarkdown-exercises_cache/html/")
+```{r mk01_rmarkdown-reports_cache, echo=FALSE}
+fs::dir_tree("mk01_rmarkdown-reports_cache/html/")
 ```
 
 We can change the location of the data `cache` by specifying `cache.path` either in the code chunk, or in the `setup` chunk.
@@ -316,7 +316,7 @@ Now that we've created a few figures, we can see how these get stored to be used
 We can see the figure we created above `gg_avg_bmi_spec_gend` in the `figure-html` folder below:
 
 ```{r rmarkdown-figure-files, echo=FALSE}
-fs::dir_tree("mk01_advanced-rmarkdown-exercises_files/figure-html", regexp = "gg_avg_bmi_spec_gend")
+fs::dir_tree("mk01_rmarkdown-reports_files/figure-html", regexp = "gg_avg_bmi_spec_gend")
 ```
 
 We can also manually specify where we want the figures saved with `fig.path=`. If we're setting a folder for the figures, we can do it in the code chunk,
