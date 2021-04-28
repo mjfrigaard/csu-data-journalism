@@ -1,0 +1,136 @@
+---
+title: "Iteration"
+output:
+  html_document:
+    df_print: paged
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 4
+    code_download: TRUE
+---
+
+```{r setup}
+library(tidyverse)
+
+# Toy data
+set.seed(1000)
+exams <- list(
+  student1 = round(runif(10, 50, 100)),
+  student2 = round(runif(10, 50, 100)),
+  student3 = round(runif(10, 50, 100)),
+  student4 = round(runif(10, 50, 100)),
+  student5 = round(runif(10, 50, 100))
+)
+
+extra_credit <- list(0, 0, 10, 10, 15)
+```
+
+## Your Turn 1
+
+Here is a list:
+
+```{r}
+## Your Turn 1
+a_list <- list(num = c(8, 9), 
+            log = TRUE,    
+            cha = c("a", "b", "c"))
+```
+
+Here are two subsetting commands. Do they return the same values? Run the code chunk above, _and then_ run the code chunks below to confirm
+
+```{r}
+a_list["num"]
+```
+
+```{r}
+a_list$num
+
+```
+
+## Your Turn 2
+
+What will each of these return? Run the code chunks to confirm.
+
+```{r}
+## Your Turn 2
+vec <- c(-2, -1, 0, 1, 2)
+abs(vec)
+```
+
+```{r}
+lst <- list(-2, -1, 0, 1, 2)
+abs(lst)
+
+```
+
+## Your Turn 3
+
+Run the code in the chunks. What does it return?
+
+```{r}
+## Your Turn 3
+list(student1 = mean(exams$student1),
+     student2 = mean(exams$student2),
+     student3 = mean(exams$student3),
+     student4 = mean(exams$student4),
+     student5 = mean(exams$student5))
+```
+
+```{r}
+map(exams, mean)
+
+```
+
+## Your Turn 4
+
+Calculate the variance (`var()`) of each student’s exam grades.
+
+```{r}
+## Your Turn 4
+
+```
+
+## Your Turn 5
+
+Calculate the max grade (max())for each student. Return the result as a vector.
+
+```{r}
+## Your Turn 5
+
+```
+
+## Your Turn 6
+
+Write a function that counts the best exam twice and then takes the average. Use it to grade all of the students.
+
+1. Write code that solves the problem for a real object  
+2. Wrap the code in `function(){}` to save it  
+3. Add the name of the real object as the function argument 
+
+```{r}
+## Your Turn 6
+
+```
+
+### Your Turn 7
+
+Compute a final grade for each student, where the final grade is the average test score plus any `extra_credit` assigned to the student. Return the results as a double (i.e. numeric) vector.
+
+```{r}
+### Your Turn 7
+
+```
+
+
+
+*** 
+## Appendix 1 - all code used in this training
+```{r, ref.label=knitr::all_labels(),echo=TRUE, eval=FALSE}
+```
+
+***
+## Appendix 2 - R Session Information
+
+```{r}
+sessionInfo()
+```
