@@ -1,0 +1,239 @@
+location,n_vaccinated,perc_of_pop
+World[e],"562,324,298",7.2%
+United States,"140,969,663",42.1%
+China[f],"229,489,000",--
+India,"119,886,252",8.7%
+EU,"96,709,919",21.7%
+United Kingdom,"33,752,885",49.7%
+Brazil,"27,345,796",12.9%
+Germany,"19,854,550",23.7%
+Turkey,"13,287,707",15.8%
+France,"14,102,290",20.7%
+Indonesia,"11,844,579",4.3%
+Russia,"11,445,394",7.8%
+Italy,"12,802,320",21.2%
+Mexico,"12,054,021",9.3%
+Spain,"10,796,466",23.1%
+Chile,"7,953,916",41.6%
+Canada,"11,518,249",30.3%
+Israel,"5,388,860",62.3%
+Poland,"7,765,723",20.5%
+United Arab Emirates[f],"10,254,053",--
+Morocco,"4,731,440",12.8%
+Saudi Arabia[f],"8,444,390",--
+Bangladesh,"5,798,880",3.5%
+Argentina,"6,341,959",14.0%
+Hungary,"3,679,730",38.1%
+Netherlands[f],"5,207,495",--
+Romania,"3,037,698",15.8%
+Colombia,"3,039,713",6.0%
+Belgium,"2,682,515",23.1%
+Serbia,"1,954,709",28.7%
+Portugal,"2,206,549",21.6%
+Japan,"2,080,125",1.6%
+Greece,"2,032,090",19.5%
+Czech Republic,"1,926,440",18.0%
+Austria,"2,045,677",22.7%
+Sweden,"2,086,142",20.7%
+South Korea,"2,409,975",4.7%
+Switzerland,"1,453,331",16.8%
+Singapore,"1,364,124",23.3%
+Cambodia,"1,295,973",7.8%
+Nepal,"2,006,436",6.9%
+Australia[f],"1,937,485",--
+Denmark,"1,222,528",21.1%
+Philippines,"1,529,948",1.4%
+Dominican Republic,"993,804",9.2%
+Finland,"1,529,600",27.6%
+Uruguay,"1,132,434",32.6%
+Norway,"1,217,295",22.4%
+Peru,"867,961",2.6%
+Slovakia,"1,024,688",18.8%
+Qatar[f],"1,442,708",--
+Azerbaijan,"939,460",9.3%
+Ireland,"998,134",20.3%
+Malaysia,"800,996",2.5%
+Hong Kong,"872,458",13.3%
+Pakistan,"1,300,000",0.6%
+Jordan,"1,200,000",11.8%
+Bahrain,"667,979",39.3%
+Nigeria,"1,175,285",0.6%
+Thailand,"972,204",1.4%
+Myanmar,"1,000,000",1.8%
+Kazakhstan,"858,566",4.6%
+Sri Lanka,"925,242",4.3%
+Lithuania,"636,765",23.4%
+Kuwait,"822,000",19.2%
+Ghana,"842,521",2.7%
+Croatia,"627,216",15.3%
+Kenya,"750,471",1.4%
+El Salvador,"718,089",11.1%
+Ecuador,"541,420",3.1%
+Bulgaria,"564,282",8.1%
+Mongolia[f],"707,838",--
+Costa Rica,"450,593",8.8%
+Iran,"518,904",0.6%
+Bolivia,"469,586",4.0%
+Egypt,"660,000",0.6%
+Panama,"431,459",10.0%
+Slovenia,"409,939",19.7%
+Uzbekistan,"544,529",1.6%
+Ukraine,"539,124",1.2%
+Bhutan,"479,686",62.2%
+Angola,"456,349",1.4%
+Ethiopia[f],"430,000",--
+Lebanon,"274,263",4.0%
+Zimbabwe,"353,834",2.4%
+Estonia,"311,731",23.5%
+Albania[f],"400,064",--
+Senegal,"399,915",2.4%
+Tunisia,"320,009",2.7%
+Maldives,"292,413",54.1%
+Rwanda,"349,702",2.7%
+Belarus,"244,000",2.6%
+Malta,"212,593",48.1%
+Iraq,"298,377",0.7%
+South Africa,"292,623",0.5%
+Malawi,"277,442",1.4%
+Uganda,"276,306",0.6%
+Latvia,"222,798",11.8%
+Vietnam,"259,736",0.3%
+Oman,"198,563",3.9%
+Venezuela,"250,000",0.9%
+Afghanistan,"240,000",0.6%
+Cyprus,"176,082",20.1%
+Palestine,"170,109",3.3%
+Laos,"126,072",1.7%
+New Zealand,"140,580",2.9%
+Luxembourg,"130,591",20.9%
+Guatemala,"163,431",0.9%
+Togo,"160,000",1.9%
+Sudan,"140,227",0.3%
+Jamaica,"135,473",4.6%
+Guinea,"89,874",0.7%
+Moldova,"113,135",2.8%
+Seychelles,"66,497",67.6%
+Ivory Coast,"119,663",0.5%
+Somalia,"117,567",0.7%
+Mauritius,"117,323",9.2%
+Guyana,"111,825",14.2%
+Iceland,"80,721",23.6%
+Northern Cyprus,"60,642",15.9%
+Paraguay,"86,305",1.2%
+Macau,"62,155",9.6%
+Curaçao,"68,723",41.9%
+Jersey,"49,413",48.9%
+Algeria[f],"75,000",--
+Barbados,"73,590",25.6%
+Aruba,"53,244",49.9%
+Isle of Man,"54,555",64.2%
+Gibraltar,"36,724",106.8%
+Cayman Islands,"35,307",53.7%
+Nicaragua,"61,625",0.9%
+Montenegro,"39,715",6.3%
+Honduras,"55,000",0.6%
+Mozambique,"57,305",0.2%
+Fiji,"56,000",6.2%
+Equatorial Guinea,"47,410",3.4%
+North Macedonia,"53,193",2.5%
+Bermuda,"30,094",48.3%
+Mali,"49,903",0.2%
+Trinidad and Tobago,"41,669",3.5%
+Guernsey,"32,969",49.2%
+Taiwan[f],"45,387",--
+Sierra Leone,"42,566",0.5%
+Botswana,"41,612",1.8%
+Belize,"39,330",9.9%
+Georgia,"38,553",1.0%
+Suriname,"36,503",6.2%
+Eswatini,"34,897",3.0%
+Antigua and Barbuda,"29,754",30.4%
+Andorra,"21,733",28.1%
+San Marino,"17,368",51.2%
+Turks and Caicos Islands,"15,039",38.8%
+Monaco,"12,758",32.5%
+Saint Lucia[f],"23,941",--
+Dominica,"18,237",25.3%
+Kosovo,"22,096",1.1%
+Bahamas,"21,907",5.6%
+Gambia,"20,922",0.9%
+Faroe Islands,"12,748",26.1%
+Lesotho,"16,000",0.8%
+Bosnia and Herzegovina[f],"15,000",--
+Congo,"14,297",0.3%
+Zambia,"14,012",0.1%
+Saint Vincent and the Grenadines[f],"13,852",--
+Greenland,"8,810",15.5%
+Namibia,"11,971",0.5%
+Grenada,"11,779",10.5%
+Saint Kitts and Nevis,"11,848",22.3%
+Liechtenstein,"7,229",19.0%
+Djibouti,"10,246",1.0%
+São Tomé and Príncipe,"9,724",4.4%
+Gabon,"6,895",0.3%
+Mauritania,"7,038",0.1%
+Anguilla,"6,115",40.8%
+Saint Helena,"3,563",58.7%
+Falkland Islands,"2,632",75.6%
+East Timor,"2,629",0.2%
+Syria,"2,500",0.0%
+Brunei,"2,323",0.5%
+Cape Verde,"2,184",0.4%
+Kyrgyzstan,"2,100",0.0%
+Solomon Islands,"2,000",0.3%
+Montserrat,"1,293",25.9%
+Niger,"1,366",0.0%
+Papua New Guinea,"1,081",0.0%
+South Sudan,947,0.0%
+Libya,750,0.0%
+Armenia,565,0.0%
+Tonga,500,0.5%
+Cameroon,400,0.0%
+Nauru,168,1.6%
+F.S. Micronesia[498],"19,983",19.3%
+Marshall Islands[498],"14,228",24.4%
+Palau[498],"11,685",65.3%
+Vatican City[499][500],22,2.7%
+"Sources
+List of sources by country.
+Notes
+
+^ Latest available data as of this date. Individual country reporting frequency varies.
+
+^ Number of unique individuals who have received at least one dose of a COVID-19 vaccine (unless noted otherwise).
+
+^ Percentage of population that has received at least one dose of a COVID-19 vaccine.
+
+^ May include vaccination of non-citizen workers, which can push totals beyond 100% of the local population.
+
+^ Some countries are not yet reporting first-dose counts. Total dose counts for these countries are not included in the World total.
+
+^ a b c d e f g h i j k l m n This country's data reflects total doses administered, not the first shot only.","Sources
+List of sources by country.
+Notes
+
+^ Latest available data as of this date. Individual country reporting frequency varies.
+
+^ Number of unique individuals who have received at least one dose of a COVID-19 vaccine (unless noted otherwise).
+
+^ Percentage of population that has received at least one dose of a COVID-19 vaccine.
+
+^ May include vaccination of non-citizen workers, which can push totals beyond 100% of the local population.
+
+^ Some countries are not yet reporting first-dose counts. Total dose counts for these countries are not included in the World total.
+
+^ a b c d e f g h i j k l m n This country's data reflects total doses administered, not the first shot only.","Sources
+List of sources by country.
+Notes
+
+^ Latest available data as of this date. Individual country reporting frequency varies.
+
+^ Number of unique individuals who have received at least one dose of a COVID-19 vaccine (unless noted otherwise).
+
+^ Percentage of population that has received at least one dose of a COVID-19 vaccine.
+
+^ May include vaccination of non-citizen workers, which can push totals beyond 100% of the local population.
+
+^ Some countries are not yet reporting first-dose counts. Total dose counts for these countries are not included in the World total.
+
+^ a b c d e f g h i j k l m n This country's data reflects total doses administered, not the first shot only."

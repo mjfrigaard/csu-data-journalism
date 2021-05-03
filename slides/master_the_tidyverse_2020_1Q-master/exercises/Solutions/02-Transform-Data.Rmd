@@ -1,0 +1,344 @@
+---
+title: "Transform Data"
+output:
+  html_document:
+    df_print: paged
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 4
+    code_download: TRUE
+---
+
+```{r setup}
+library(tidyverse)
+library(babynames)
+library(nycflights13)
+
+# Toy datasets to use
+
+pollution <- tribble(
+       ~city,   ~size, ~amount, 
+  "New York", "large",      23,
+  "New York", "small",      14,
+    "London", "large",      22,
+    "London", "small",      16,
+   "Beijing", "large",      121,
+   "Beijing", "small",      56
+)
+
+band <- tribble(
+   ~name,     ~band,
+  "Mick",  "Stones",
+  "John", "Beatles",
+  "Paul", "Beatles"
+)
+
+instrument <- tribble(
+    ~name,   ~plays,
+   "John", "guitar",
+   "Paul",   "bass",
+  "Keith", "guitar"
+)
+
+instrument2 <- tribble(
+    ~artist,   ~plays,
+   "John", "guitar",
+   "Paul",   "bass",
+  "Keith", "guitar"
+)
+```
+
+In the R code chunks below I have used the `head()` function as the datasets are generally 
+large. This reduces the size of the output HTML file. The solution to the Your Turn example
+will not require the use of `head()`.
+
+## babynames
+
+```{r}
+head(babynames)
+  
+```
+
+
+## Your Turn 1
+
+Alter the code to select just the `n` column:
+
+```{r}
+## Your Turn 1
+select(babynames, n) %>%
+  head()
+
+```
+
+## Quiz
+
+Which of these is NOT a way to select the `name` and `n` columns together?
+
+```{r}
+## Quiz
+select(babynames, -c(year, sex, prop))%>%
+  head()
+select(babynames, name:n)%>%
+  head()
+select(babynames, starts_with("n"))%>%
+  head()
+# select(babynames, ends_with("n"))
+
+```
+
+## Your Turn 2
+
+Show:
+
+* All of the names where prop is greater than or equal to 0.08  
+* All of the children named "Sea"  
+* All of the names that have a missing value for `n`  
+
+```{r}
+## Your Turn 2
+filter(babynames, prop >= 0.08)%>%
+  head()
+filter(babynames, name == "Sea")%>%
+  head()
+filter(babynames, is.na(n))
+
+```
+
+## Your Turn 3
+
+Use Boolean operators to alter the code below to return only the rows that contain:
+
+* Girls named Sea  
+* Names that were used by exactly 5 or 6 children in 1880  
+* Names that are one of Acura, Lexus, or Yugo
+
+```{r}
+## Your Turn 3
+filter(babynames, name == "Sea", sex == "F")%>%
+  head()
+filter(babynames, n == 5 | n == 6, year == 1880)%>%
+  head()
+filter(babynames, name %in% c("Acura", "Lexus", "Yugo"))%>%
+  head()
+
+```
+
+## Your Turn 4
+
+Arrange babynames by `n`. Add `prop` as a second (tie breaking) variable to arrange on. Can you tell what the smallest value of `n` is?
+
+```{r}
+## Your Turn 4
+arrange(babynames, n, prop)%>%
+  head()
+
+```
+
+## Your Turn 5
+
+Use `desc()` to find the names with the highest prop.
+Then, use `desc()` to find the names with the highest n.
+
+```{r}
+## Your Turn 5
+arrange(babynames, desc(prop))%>%
+  head()
+arrange(babynames, desc(n))%>%
+  head()
+
+```
+
+## Your Turn 6
+
+Use `%>%` to write a sequence of functions that: 
+
+1. Filter babynames to just the girls that were born in 2015  
+2. Select the `name` and `n` columns  
+3. Arrange the results so that the most popular names are near the top.
+
+```{r}
+## Your Turn 6
+babynames %>% 
+  filter(year == 2015, sex == "F") %>% 
+  select(name, n) %>% 
+  arrange(desc(n))%>%
+  head()
+
+```
+
+## Check your understanding
+
+1. Trim `babynames` to just the rows that contain your `name` and your `sex`  
+2. Trim the result to just the columns that will appear in your graph (not strictly necessary, but useful practice)  
+3. Plot the results as a line graph with `year` on the x axis and `prop` on the y axis
+
+```{r}
+## Exam
+babynames %>% 
+  filter(name == "Garrett", sex == "M") %>%
+  select(year, prop) %>%
+  ggplot() +
+    geom_line(mapping = aes(year, prop))
+
+```
+
+## Your Turn 7
+
+Use summarise() to compute three statistics about the data:
+
+1. The first (minimum) year in the dataset  
+2. The last (maximum) year in the dataset  
+3. The total number of children represented in the data
+
+```{r}
+## Your Turn 7
+babynames %>% 
+  summarise(first = min(year), 
+            last = max(year), 
+            total = sum(n))
+
+```
+
+## Your Turn 8
+
+Extract the rows where `name == "Khaleesi"`. Then use `summarise()` and a summary functions to find:
+
+1. The total number of children named Khaleesi
+2. The first year Khaleesi appeared in the data
+
+```{r}
+## Your Turn 8
+babynames %>% 
+  filter(name == "Khaleesi") %>% 
+  summarise(total = sum(n), first = min(year))
+
+```
+
+## Your Turn 9
+
+Use `group_by()`, `summarise()`, and `arrange()` to display the ten most popular names. Compute popularity as the total number of children of a single gender given a name.
+
+```{r}
+## Your Turn 9
+babynames %>%
+  group_by(name, sex) %>% 
+  summarise(total = sum(n)) %>% 
+  arrange(desc(total)) %>% 
+  ungroup() %>% 
+  slice(1:10) %>% 
+  ggplot() +
+    geom_col(mapping = aes(x = fct_reorder(name, desc(total)), y = total, fill = sex)) +
+    theme_bw() +
+    scale_fill_brewer() +
+    labs(x = "name")
+
+```
+
+## Your Turn 10
+
+Use grouping to calculate and then plot the number of children born each year over time.
+
+```{r}
+## Your Turn 10
+babynames %>%
+  group_by(year) %>% 
+  summarise(n_children = sum(n)) %>% 
+  ggplot() +
+    geom_line(mapping = aes(x = year, y = n_children))
+
+```
+
+## Your Turn 11
+
+Use `min_rank()` and `mutate()` to rank each row in `babynames` from largest `n` to lowest `n`.
+
+```{r}
+## Your Turn 11
+babynames %>% 
+  mutate(rank = min_rank(desc(prop))) %>%
+  head()
+
+```
+
+## Your Turn 12
+
+Compute each name's rank _within its year and sex_. 
+Then compute the median rank _for each combination of name and sex_, and arrange the results from highest median rank to lowest.
+
+```{r}
+## Your Turn 12
+babynames %>% 
+  group_by(year, sex) %>% 
+  mutate(rank = min_rank(desc(prop))) %>% 
+  group_by(name, sex) %>% 
+  summarise(score = median(rank)) %>% 
+  arrange(score) %>%
+  head()
+
+# babynames %>% 
+#   group_by(year, sex) %>% 
+#   mutate(rank = min_rank(desc(prop))) %>% 
+#   group_by(name, sex) %>% 
+#   summarise(score = median(rank)) %>% 
+#   ungroup() %>% 
+#   arrange(score) %>% 
+#   slice(1:10) %>% 
+#   ggplot() +
+#     geom_col(mapping = aes(x = fct_reorder(name, score), y = score, fill = sex)) +
+#     theme_bw() +
+#     scale_fill_brewer() +
+#     labs(x = "name", y = "Median Rank")
+
+```
+
+## Your Turn 13
+
+Which airlines had the largest arrival delays? Complete the code below.
+
+1. Join `airlines` to `flights`
+2. Compute and order the average arrival delays by airline. Display full names, no codes.
+
+```{r}
+## Your Turn 13
+flights %>% 
+  drop_na(arr_delay) %>%
+  left_join(airlines, by = "carrier") %>%
+  group_by(name) %>%
+  summarise(delay = mean(arr_delay)) %>%
+  arrange(delay)%>%
+  head()
+
+```
+
+## Your Turn 14
+
+How many airports in `airports` are serviced by flights originating in New York (i.e. flights in our dataset?) Notice that the column to join on is named `faa` in the **airports** data set and `dest` in the **flights** data set.
+
+
+```{r}
+## Your Turn 14
+flights %>% 
+  drop_na(arr_delay) %>%
+  left_join(airports, by = c("dest" = "faa")) %>%
+  group_by(name) %>%
+  summarise(distance = first(distance), 
+    delay = mean(arr_delay)) %>%
+  arrange(desc(delay))%>%
+  head()
+
+```
+
+
+*** 
+## Appendix 1 - all code used in this training
+```{r, ref.label=knitr::all_labels(),echo=TRUE, eval=FALSE}
+```
+
+***
+## Appendix 2 - R Session Information
+
+```{r}
+sessionInfo()
+```
+

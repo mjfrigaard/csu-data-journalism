@@ -1,0 +1,87 @@
+---
+title: "Introduction to storyboards (under construction)"
+comment: "*narrative data displays with `flexdashboard`*"
+output:
+  html_document: 
+    toc: yes
+    toc_float: yes
+    toc_depth: 6
+    number_sections: yes
+    code_folding: show
+    theme: yeti
+    df_print: paged
+
+always_allow_html: true
+---
+
+
+```{r , include=FALSE}
+library(tidyverse)
+library(skimr)
+library(lubridate)
+library(here)
+library(janitor)
+library(flexdashboard)
+library(ggrepel)
+library(covdata)
+library(showtext)
+library(hrbrthemes)
+# create data folder
+knitr::opts_chunk$set(warning = FALSE,
+                      message = FALSE,
+                      eval = FALSE,
+                      fig.path = "img/",
+                      tidy = FALSE)
+# set width
+options(width = 60, max.print = 60)
+```
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(inspectdf)
+library(reactable)
+library(janitor)
+```
+
+# Objectives
+
+An introduction to storyboard development in R with `flexdashboard`s. 
+
+# Materials
+
+- Slides: https://mjfrigaard.github.io/intro-to-dashboards/Index.html 
+
+- RStudio Project: https://rstudio.cloud/project/2000287
+
+# Previous lessons
+
+
+# Load the `tidyverse` and `flexdashboard`
+
+The main packages we're going to use are `dplyr`, `tidyr`, `ggplot2`, and `flexdashboard`. 
+
+
+```{r packages, eval=FALSE}
+library(tidyverse)
+library(skimr)
+library(janitor)
+library(flexdashboard)
+```
+
+# What should go in a storyboard?
+
+# The YAML header
+
+```yaml
+---
+title: "My Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: scroll
+---
+```
+
+
+

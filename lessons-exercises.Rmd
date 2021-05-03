@@ -59,6 +59,7 @@ cat_bullet(x, "^bk")
 cat_bullet(x, "^mk")
 ```
 
+
 ### Data Visualization
 
 ```{r gg-files, results = 'asis', echo = FALSE, eval=TRUE}

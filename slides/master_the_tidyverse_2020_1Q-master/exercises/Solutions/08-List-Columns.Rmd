@@ -1,0 +1,129 @@
+---
+title: "List-Columns"
+output:
+  html_document:
+    df_print: paged
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 4
+    code_download: TRUE
+---
+
+```{r setup, message=FALSE}
+library(tidyverse)
+library(broom)
+library(gapminder)
+library(stringr)
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+## Your Turn 1
+
+How has life expectancy changed since 1952?
+
+Using `gapminder`, make a line plot of **lifeExp** vs. **year** grouped by **country**. Set alpha to 0.2, to see the results better.
+
+```{r}
+## Your Turn 1
+gapminder %>% 
+  ggplot(mapping = aes(x = year, y = lifeExp, group = country)) +
+    geom_line(alpha = 0.2)
+
+```
+
+## Your Turn 2
+
+1. Group `gapminder` by `country` and `continent` then fit a model and collect the residuals for *each country.*
+
+2. Plot the residuals vs `year` as a line graph, grouped by `country`, with `alpha = 0.2`.
+
+3. Add the following to your plot to facet by `continent`:
+
+    + facet_wrap(~continent)
+
+```{r warning = FALSE}
+## Your Turn 2
+gapminder %>% 
+  group_by(country, continent) %>% 
+  do(lm(lifeExp ~ year, data = .) %>%  augment()) %>%  
+  ggplot() +
+    geom_line(aes(year, .resid, group = country), alpha = 0.2) +
+    facet_wrap(~continent)
+
+```
+
+## Your Turn 3
+
+Complete the code to filter `residuals`, which is the dataset that you made in Your Turn 2, against `bad_fits`, which is the data set that contains just the countries that have an r-squared < 0.25.
+
+Use the result to plot a line graph of `year` vs. `.resid` colored by `country` for each country that had an r-squared < 0.25.
+
+```{r warning = FALSE}
+## Your Turn 3
+bad_fits <- gapminder %>% 
+  group_by(country) %>% 
+  do(lm(lifeExp ~ year, data = .) %>%  glance()) %>% 
+  filter(r.squared < 0.25) 
+
+residuals <- gapminder %>% 
+  group_by(country) %>% 
+  do(lm(lifeExp ~ year, data = .) %>%  augment()) 
+
+residuals %>% 
+  semi_join(bad_fits) %>% 
+  ggplot() +
+    geom_line(aes(year, .resid, color = country))
+
+
+```
+
+## Your Turn 4
+
+Create your own copy of master and then add one more list column: 
+
+* **output** which contains the output of `augment()` for each model
+
+```{r warning = FALSE}
+## Your Turn 4
+fit_model <- function(df) lm(lifeExp ~ year, data = df)
+get_rsq <- function(mod) glance(mod)$r.squared
+get_output <- function(mod) augment(mod)
+
+
+master <- gapminder %>% 
+  group_by(country) %>% 
+  nest() %>% 
+  mutate(model = map(data, fit_model),
+         r.squared = map_dbl(model, get_rsq),
+         output = map(model, get_output))
+master
+
+```
+
+## Your Turn 5
+
+Use master to recreate our plot of the residuals vs `year` for the six countries with an r squared less than 0.25.
+
+```{r}
+## Your Turn 5
+master %>%
+  filter(r.squared < 0.25) %>%
+  unnest(output) %>%
+  ggplot() +
+    geom_line(mapping = aes(x = year, y = .resid, color = country))
+
+```
+
+
+*** 
+## Appendix 1 - all code used in this training
+```{r, ref.label=knitr::all_labels(),echo=TRUE, eval=FALSE}
+```
+
+***
+## Appendix 2 - R Session Information
+
+```{r}
+sessionInfo()
+```

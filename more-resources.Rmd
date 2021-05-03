@@ -2,54 +2,72 @@
 title: "More resources"
 ---
 
-## General R Resources
+# Free resources 
 
-+ [R for Data Science](https://r4ds.had.co.nz/) 
+All of the resources below are available online free of cost. I will do my best to use these as required reading for the course. 
 
-+ [Advanced R](https://adv-r.hadley.nz/)  
+## General Resources for R and the tidyverse 
 
-+ [Hands on Programming with R](https://rstudio-education.github.io/hopr/r-objects.html)
++ [R for Data Science](https://r4ds.had.co.nz/): this is ***the*** reference manual for all things R and the `tidyverse`. **Bookmark this and follow the author ([Hadley Wickham](https://twitter.com/hadleywickham)) on Twitter**
 
-+ [R Language Definition](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects)
++ [Hands on Programming with R](https://rstudio-education.github.io/hopr/r-objects.html): an introductory text for non-programmers by [Garrett Grolemund](https://twitter.com/statgarrett)--Data Scientist and Master Instructor for RStudio--that walks through multiple examples and some excellent programming principles
 
-+ [Tidyverse](https://www.tidyverse.org/)  
+- [R for Journalists](https://learn.r-journalism.com/en/): A fantastic intro to R course designed for journalists by [Andrew Ba Tran](https://twitter.com/abtran). It's a lot like this course, but with less `tidyverse` and more base R :) 
 
-+ [RViews Community Blog](https://rviews.rstudio.com/)
++ [Tidyverse](https://www.tidyverse.org/): the official website for the tidyverse and it's accompanying packages. Features many examples and package vignettes
 
-## R Markdown Resources 
-
-- **YAML**: check out the [`ymlthis` package](https://r-lib.github.io/ymlthis/) for tools and documentation for working with YAML
-
-- **Markdown**: [Commonmark](https://commonmark.org/help/tutorial) has a quick ten-twenty minute tutorial on markdown.
-
-- [R Markdown](https://bookdown.org/yihui/rmarkdown/): A comprehensive but friendly introduction to R Markdown and friends. Free online!
-
-- [R for Data Science](http://r4ds.had.co.nz/): A comprehensive but friendly introduction to the tidyverse. Free online.
-
-- [R Markdown for Scientists](https://rmd4sci.njtierney.com/): R Markdown for Scientists workshop material
-
-## Resources for Data Manipluation 
-
-+ [R for Data Science](https://r4ds.had.co.nz/transform.html) 
-
-+ [Data Wrangling with R](https://cengel.github.io/R-data-wrangling/) 
-
-+ [Stack Overflow questions tagged with `dplyr`](https://stackoverflow.com/questions/tagged/dplyr)
-
-+ [RStudio Community posts tagged `dplyr`](https://community.rstudio.com/tag/dplyr)
-
-## Resources for Data Tidying 
-
-+ [R for Data Science](https://r4ds.had.co.nz/tidy-data.html) 
-
-+ [Stack Overflow questions tagged with `tidyr`](https://stackoverflow.com/questions/tagged/tidyr)
-
-+ [RStudio Community posts tagged `tidyr`](https://community.rstudio.com/tag/tidyr)
++ The [RViews Community Blog](https://rviews.rstudio.com/) regularly posts new packages, features, and all things R-related. 
 
 ## Data Visualization Resources 
 
-+ The [`ggplot2` book](https://ggplot2-book.org/) 
++ The [`ggplot2` book](https://ggplot2-book.org/) (3rd edition) by [Hadley Wickham](https://twitter.com/hadleywickham), [Danielle Navarro](https://twitter.com/djnavarro), and [Thomas Lin Pedersen](https://twitter.com/thomasp85)
 
-+ [`ggplot2`](https://ggplot2.tidyverse.org/) on the tidyverse website 
++ The [`ggplot2`](https://ggplot2.tidyverse.org/) reference on the tidyverse website 
 
-+ [Flowing Data](https://flowingdata.com/) 
++ [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) is an excellent reference by [Claus Wilke](https://twitter.com/ClausWilke) for anything and everything you'd like know about figures and graphs. The text is language-agnostic, but all the graphs and figures were created with ggplot2 and the source code is [freely available](https://github.com/clauswilke/dataviz) to use
+
++ [Data Visualization: A practical introduction](https://socviz.co/) is an excellent resource for getting started with data visualization and R. I also highly recommend following the [author on Twitter](https://twitter.com/kjhealy) and reading his [blog](https://kieranhealy.org/blog/)
+
+
+## R Markdown Resources 
+
+- [This Markdown tutorial by Commonmark](https://commonmark.org/help/tutorial) is ten-twenty minute tutorial on the markdown syntax
+
+- [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/): A comprehensive but friendly introduction to R Markdown and friends
+
+## Resources for Data Manipluation 
+
++ [Data Wrangling with R](https://cengel.github.io/R-data-wrangling/) is a great online text for a deeper dive into data wrangling. 
+
++ [The tidy data chapter](https://r4ds.had.co.nz/tidy-data.html) in R for Data Science.
+
++ [RStudio Community posts tagged `dplyr`](https://community.rstudio.com/tag/dplyr)
+
++ [RStudio Community posts tagged `tidyr`](https://community.rstudio.com/tag/tidyr)
+
++ [Stack Overflow questions tagged with `tidyr`](https://stackoverflow.com/questions/tagged/tidyr)
+
++ [Stack Overflow questions tagged with `dplyr`](https://stackoverflow.com/questions/tagged/dplyr)
+
+
+## Advanced R topics 
+
++ [Advanced R](https://adv-r.hadley.nz/): a great follow-up text to R for Data Science (by the same author).
+
++ [R Language Definition](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects): a comprehensive user manual.
+
+## Advanced Rmarkdown Resources 
+
+- **YAML**: check out the [`ymlthis` package](https://r-lib.github.io/ymlthis/) for tools and documentation for working with YAML
+
+- [The R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/) by [Yihui Xie](https://twitter.com/xieyihui), [Christophe Dervieux](https://twitter.com/chrisderv), [Emily Riederer](https://twitter.com/emilyriederer)
+
+# Non-free resources 
+
+Below are additional resources I've purchased (and not regretted). 
+
+## General Resources for R and the tidyverse 
+
+- [The Art of R programming](https://nostarch.com/artofr.htm) by Norman Matloff is an excellent reference for 'getting under the hood' of the R language.
+
+
