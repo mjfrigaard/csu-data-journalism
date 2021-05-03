@@ -1,0 +1,93 @@
+---
+title: "Lessons and Exercises"
+---
+
+```{r setup, include = FALSE, warning = FALSE}
+library(tidyverse)
+library(stringr)
+library(htmltools)
+tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+```{r file-list, include = FALSE, warning = FALSE}
+# first this defines three functions (has_all_things, parse_yaml, ext_file,  
+# and cat_bullet)
+has_all_things <- function(y, things) {
+  all(match(tolower(things), tolower(y), nomatch = 0) > 0)
+}
+
+parse_yaml <- function(file, n = 30) {
+  rmarkdown:::parse_yaml_front_matter(read_lines(file, n_max = n))
+}
+
+ext_file <- function(file, ext) paste(file, ext, sep = ".")
+cat_bullet <- function(x, pattern) {
+  x <- x %>% 
+    filter(str_detect(basename, pattern))
+  cat(x$bullet)
+}
+```
+
+```{r create-x, warning=FALSE, include=FALSE}
+x <- tibble(fls = list.files()) %>%
+  mutate(basename = tools::file_path_sans_ext(fls),
+         ext = tools::file_ext(fls)) %>% 
+  group_by(basename) %>% 
+  summarize_all(list) %>% 
+  filter(map_lgl(ext, has_all_things, things = c("Rmd", "html")))
+x <- x %>% 
+  mutate(
+    yaml = basename %>% ext_file("Rmd") %>% map(parse_yaml),
+    title = yaml %>% map_chr("title"),
+    comment = yaml %>% map_chr("comment", .null = ""),
+    href = map2(ext_file(basename, "html"), title, ~ a(href = .x, .y)) %>%
+      map_chr(as.character),
+    bullet = map2_chr(href, comment, ~ paste("*", .x, .y, "\n")))
+```
+
+### Introduction to R & RStudio
+
+```{r bk-files, results='asis', echo=FALSE, eval=TRUE}
+# this uses the `bk` as a prefix and identifier for the 'background' section
+cat_bullet(x, "^bk")
+```
+
+### Reproducible Analysis With R Markdown
+
+```{r mk-files, results='asis', echo=FALSE, eval=TRUE}
+# this uses the `mk` as a prefix and identifier for the 'markdown' section
+cat_bullet(x, "^mk")
+```
+
+### Data Visualization
+
+```{r gg-files, results = 'asis', echo = FALSE, eval=TRUE}
+# here we see the 'gg' for ggplot2 
+cat_bullet(x, "^gg")
+```
+
+### Data Manipulation and Transformation
+
+```{r dt-files, results = 'asis', echo = FALSE}
+# here we see the 'dt' as core dplyr/tidyr lessons
+cat_bullet(x, "^dt")
+```
+
+### Building storyboards with flexdashboard
+
+*(under construction)*
+
+```{r sh-files, results = 'asis', echo = FALSE, eval=TRUE}
+# and the `sh` for shiny
+cat_bullet(x, "^sh")
+```
+
+### Programming
+
+```{r pr-files, results = 'asis', echo = FALSE, eval=TRUE}
+# and the `pr` for programming
+cat_bullet(x, "^pr")
+```
+
+This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+
