@@ -41,13 +41,13 @@ ranking,company_name,company_type,stock_exch,stock_id,cap_date_original,largest_
 6,Abbott Laboratories,Pharma,NYSE, ABT,Dec 2019,2019-12-01,2015,153.5,67
 6,Abbott Laboratories,Pharma,NYSE, ABT,Dec 2019,2019-12-01,2014,153.5,67.9
 6,Abbott Laboratories,Pharma,NYSE, ABT,Dec 2019,2019-12-01,2013,153.5,59.3
-7,Amgen,Biotech,NASDAQ, AMGN,Dec 2019,2019-12-01,2019,145.8,144.6
-7,Amgen,Biotech,NASDAQ, AMGN,Dec 2019,2019-12-01,2018,145.8,128.8
-7,Amgen,Biotech,NASDAQ, AMGN,Dec 2019,2019-12-01,2017,145.8,126.2
-7,Amgen,Biotech,NASDAQ, AMGN,Dec 2019,2019-12-01,2016,145.8,108.9
-7,Amgen,Biotech,NASDAQ, AMGN,Dec 2019,2019-12-01,2015,145.8,122.5
-7,Amgen,Biotech,NASDAQ, AMGN,Dec 2019,2019-12-01,2014,145.8,93.1
-7,Amgen,Biotech,NASDAQ, AMGN,Dec 2019,2019-12-01,2013,145.8,78.7
+7,Amgen,Biotech,"NASDAQ", AMGN,Dec 2019,2019-12-01,2019,145.8,144.6
+7,Amgen,Biotech,"NASDAQ", AMGN,Dec 2019,2019-12-01,2018,145.8,128.8
+7,Amgen,Biotech,"NASDAQ", AMGN,Dec 2019,2019-12-01,2017,145.8,126.2
+7,Amgen,Biotech,"NASDAQ", AMGN,Dec 2019,2019-12-01,2016,145.8,108.9
+7,Amgen,Biotech,"NASDAQ", AMGN,Dec 2019,2019-12-01,2015,145.8,122.5
+7,Amgen,Biotech,"NASDAQ", AMGN,Dec 2019,2019-12-01,2014,145.8,93.1
+7,Amgen,Biotech,"NASDAQ", AMGN,Dec 2019,2019-12-01,2013,145.8,78.7
 8,Novo Nordisk,Pharma,NYSE, NVO,Aug 2015,2015-08-01,2019,159.6,137.1
 8,Novo Nordisk,Pharma,NYSE, NVO,Aug 2015,2015-08-01,2018,159.6,111.9
 8,Novo Nordisk,Pharma,NYSE, NVO,Aug 2015,2015-08-01,2017,159.6,131.2
@@ -83,20 +83,20 @@ ranking,company_name,company_type,stock_exch,stock_id,cap_date_original,largest_
 12,  GlaxoSmithKline,Pharma,NYSE, GSK,May 2006,2006-05-01,2015,174.9,97.6
 12,  GlaxoSmithKline,Pharma,NYSE, GSK,May 2006,2006-05-01,2014,174.9,128.9
 12,  GlaxoSmithKline,Pharma,NYSE, GSK,May 2006,2006-05-01,2013,174.9,129.6
-13,Bristol-Myers Squibb,Pharma,NASDAQ, BMY,Jul 2016,2016-07-01,2019,128.3,105
-13,Bristol-Myers Squibb,Pharma,NASDAQ, BMY,Jul 2016,2016-07-01,2018,128.3,85
-13,Bristol-Myers Squibb,Pharma,NASDAQ, BMY,Jul 2016,2016-07-01,2017,128.3,100.3
-13,Bristol-Myers Squibb,Pharma,NASDAQ, BMY,Jul 2016,2016-07-01,2016,128.3,98.2
-13,Bristol-Myers Squibb,Pharma,NASDAQ, BMY,Jul 2016,2016-07-01,2015,128.3,114.8
-13,Bristol-Myers Squibb,Pharma,NASDAQ, BMY,Jul 2016,2016-07-01,2014,128.3,97.6
-13,Bristol-Myers Squibb,Pharma,NASDAQ, BMY,Jul 2016,2016-07-01,2013,128.3,87.2
-14,Gilead Sciences,Biotech,NASDAQ, GILD,Jun 2013,2013-06-01,2019,179.6,82.3
-14,Gilead Sciences,Biotech,NASDAQ, GILD,Jun 2013,2013-06-01,2018,179.6,81.6
-14,Gilead Sciences,Biotech,NASDAQ, GILD,Jun 2013,2013-06-01,2017,179.6,93.6
-14,Gilead Sciences,Biotech,NASDAQ, GILD,Jun 2013,2013-06-01,2016,179.6,96.6
-14,Gilead Sciences,Biotech,NASDAQ, GILD,Jun 2013,2013-06-01,2015,179.6,145.8
-14,Gilead Sciences,Biotech,NASDAQ, GILD,Jun 2013,2013-06-01,2014,179.6,109
-14,Gilead Sciences,Biotech,NASDAQ, GILD,Jun 2013,2013-06-01,2013,179.6,78.4
+13,Bristol-Myers Squibb,Pharma,"NASDAQ", BMY,Jul 2016,2016-07-01,2019,128.3,105
+13,Bristol-Myers Squibb,Pharma,"NASDAQ", BMY,Jul 2016,2016-07-01,2018,128.3,85
+13,Bristol-Myers Squibb,Pharma,"NASDAQ", BMY,Jul 2016,2016-07-01,2017,128.3,100.3
+13,Bristol-Myers Squibb,Pharma,"NASDAQ", BMY,Jul 2016,2016-07-01,2016,128.3,98.2
+13,Bristol-Myers Squibb,Pharma,"NASDAQ", BMY,Jul 2016,2016-07-01,2015,128.3,114.8
+13,Bristol-Myers Squibb,Pharma,"NASDAQ", BMY,Jul 2016,2016-07-01,2014,128.3,97.6
+13,Bristol-Myers Squibb,Pharma,"NASDAQ", BMY,Jul 2016,2016-07-01,2013,128.3,87.2
+14,Gilead Sciences,Biotech,"NASDAQ", GILD,Jun 2013,2013-06-01,2019,179.6,82.3
+14,Gilead Sciences,Biotech,"NASDAQ", GILD,Jun 2013,2013-06-01,2018,179.6,81.6
+14,Gilead Sciences,Biotech,"NASDAQ", GILD,Jun 2013,2013-06-01,2017,179.6,93.6
+14,Gilead Sciences,Biotech,"NASDAQ", GILD,Jun 2013,2013-06-01,2016,179.6,96.6
+14,Gilead Sciences,Biotech,"NASDAQ", GILD,Jun 2013,2013-06-01,2015,179.6,145.8
+14,Gilead Sciences,Biotech,"NASDAQ", GILD,Jun 2013,2013-06-01,2014,179.6,109
+14,Gilead Sciences,Biotech,"NASDAQ", GILD,Jun 2013,2013-06-01,2013,179.6,78.4
 15,Bayer,Pharma,FWB, BAYN,Mar 2015,2015-03-01,2019,129,80.1
 15,Bayer,Pharma,FWB, BAYN,Mar 2015,2015-03-01,2018,129,63.1
 15,Bayer,Pharma,FWB, BAYN,Mar 2015,2015-03-01,2017,129,101.9
@@ -118,13 +118,13 @@ ranking,company_name,company_type,stock_exch,stock_id,cap_date_original,largest_
 17,Sanofi,Pharma,NYSE, SNY,Sep 2014,2014-09-01,2015,151.3,111.8
 17,Sanofi,Pharma,NYSE, SNY,Sep 2014,2014-09-01,2014,151.3,138.1
 17,Sanofi,Pharma,NYSE, SNY,Sep 2014,2014-09-01,2013,151.3,142
-18,Zoetis,Pharma,NASDAQ, ZTS,Aug 2020,2020-08-01,2019,76.6,63.2
-18,Zoetis,Pharma,NASDAQ, ZTS,Aug 2020,2020-08-01,2018,76.6,41.4
-18,Zoetis,Pharma,NASDAQ, ZTS,Aug 2020,2020-08-01,2017,76.6,35.1
-18,Zoetis,Pharma,NASDAQ, ZTS,Aug 2020,2020-08-01,2016,76.6,26.4
-18,Zoetis,Pharma,NASDAQ, ZTS,Aug 2020,2020-08-01,2015,76.6,23.8
-18,Zoetis,Pharma,NASDAQ, ZTS,Aug 2020,2020-08-01,2014,76.6,21.6
-18,Zoetis,Pharma,NASDAQ, ZTS,Aug 2020,2020-08-01,2013,76.6,16.3
+18,Zoetis,Pharma,"NASDAQ", ZTS,Aug 2020,2020-08-01,2019,76.6,63.2
+18,Zoetis,Pharma,"NASDAQ", ZTS,Aug 2020,2020-08-01,2018,76.6,41.4
+18,Zoetis,Pharma,"NASDAQ", ZTS,Aug 2020,2020-08-01,2017,76.6,35.1
+18,Zoetis,Pharma,"NASDAQ", ZTS,Aug 2020,2020-08-01,2016,76.6,26.4
+18,Zoetis,Pharma,"NASDAQ", ZTS,Aug 2020,2020-08-01,2015,76.6,23.8
+18,Zoetis,Pharma,"NASDAQ", ZTS,Aug 2020,2020-08-01,2014,76.6,21.6
+18,Zoetis,Pharma,"NASDAQ", ZTS,Aug 2020,2020-08-01,2013,76.6,16.3
 19, Teva Pharmaceuticals ,Pharma,NYSE, TEVA,Jul 2015,2015-07-01,2019,110.5,48.3
 19, Teva Pharmaceuticals ,Pharma,NYSE, TEVA,Jul 2015,2015-07-01,2018,110.5,16.2
 19, Teva Pharmaceuticals ,Pharma,NYSE, TEVA,Jul 2015,2015-07-01,2017,110.5,24.4
@@ -132,41 +132,41 @@ ranking,company_name,company_type,stock_exch,stock_id,cap_date_original,largest_
 19, Teva Pharmaceuticals ,Pharma,NYSE, TEVA,Jul 2015,2015-07-01,2015,110.5,13.2
 19, Teva Pharmaceuticals ,Pharma,NYSE, TEVA,Jul 2015,2015-07-01,2014,110.5,70.5
 19, Teva Pharmaceuticals ,Pharma,NYSE, TEVA,Jul 2015,2015-07-01,2013,110.5,29.3
-20,Takeda Pharmaceutical,Pharma,NASDAQ, TAK,Dec 2019,2019-12-01,2019,61.5,61.5
-20,Takeda Pharmaceutical,Pharma,NASDAQ, TAK,Dec 2019,2019-12-01,2018,61.5,52.9
-20,Takeda Pharmaceutical,Pharma,NASDAQ, TAK,Dec 2019,2019-12-01,2017,61.5,40.2
-20,Takeda Pharmaceutical,Pharma,NASDAQ, TAK,Dec 2019,2019-12-01,2016,61.5,45.6
-20,Takeda Pharmaceutical,Pharma,NASDAQ, TAK,Dec 2019,2019-12-01,2015,61.5,47.8
-20,Takeda Pharmaceutical,Pharma,NASDAQ, TAK,Dec 2019,2019-12-01,2014,61.5,37.5
-20,Takeda Pharmaceutical,Pharma,NASDAQ, TAK,Dec 2019,2019-12-01,2013,61.5,34.3
-21,Vertex Pharmaceuticals,Pharma,NASDAQ, VRTX,Jul 2020,2020-07-01,2019,78.9,56.3
-21,Vertex Pharmaceuticals,Pharma,NASDAQ, VRTX,Jul 2020,2020-07-01,2018,78.9,42.2
-21,Vertex Pharmaceuticals,Pharma,NASDAQ, VRTX,Jul 2020,2020-07-01,2017,78.9,37.9
-21,Vertex Pharmaceuticals,Pharma,NASDAQ, VRTX,Jul 2020,2020-07-01,2016,78.9,18.3
-21,Vertex Pharmaceuticals,Pharma,NASDAQ, VRTX,Jul 2020,2020-07-01,2015,78.9,31
-21,Vertex Pharmaceuticals,Pharma,NASDAQ, VRTX,Jul 2020,2020-07-01,2014,78.9,28.7
-21,Vertex Pharmaceuticals,Pharma,NASDAQ, VRTX,Jul 2020,2020-07-01,2013,78.9,17.4
-22,Biogen,Biotech,NASDAQ, BIIB,Mar 2015,2015-03-01,2019,111.7,54.7
-22,Biogen,Biotech,NASDAQ, BIIB,Mar 2015,2015-03-01,2018,111.7,63.5
-22,Biogen,Biotech,NASDAQ, BIIB,Mar 2015,2015-03-01,2017,111.7,67.4
-22,Biogen,Biotech,NASDAQ, BIIB,Mar 2015,2015-03-01,2016,111.7,61.6
-22,Biogen,Biotech,NASDAQ, BIIB,Mar 2015,2015-03-01,2015,111.7,68.3
-22,Biogen,Biotech,NASDAQ, BIIB,Mar 2015,2015-03-01,2014,111.7,79.7
-22,Biogen,Biotech,NASDAQ, BIIB,Mar 2015,2015-03-01,2013,111.7,66.1
-23,Illumina,Biotech,NASDAQ, ILMN,Jul 2019,2019-07-01,2019,56,48.2
-23,Illumina,Biotech,NASDAQ, ILMN,Jul 2019,2019-07-01,2018,56,44.1
-23,Illumina,Biotech,NASDAQ, ILMN,Jul 2019,2019-07-01,2017,56,40.2
-23,Illumina,Biotech,NASDAQ, ILMN,Jul 2019,2019-07-01,2016,56,39.4
-23,Illumina,Biotech,NASDAQ, ILMN,Jul 2019,2019-07-01,2015,56,35.4
-23,Illumina,Biotech,NASDAQ, ILMN,Jul 2019,2019-07-01,2014,56,28.6
-23,Illumina,Biotech,NASDAQ, ILMN,Jul 2019,2019-07-01,2013,56,25.7
-24,Regeneron Pharmaceuticals,Biotech,NASDAQ, REGN,Aug 2015,2015-08-01,2019,61.4,41.2
-24,Regeneron Pharmaceuticals,Biotech,NASDAQ, REGN,Aug 2015,2015-08-01,2018,61.4,40.3
-24,Regeneron Pharmaceuticals,Biotech,NASDAQ, REGN,Aug 2015,2015-08-01,2017,61.4,40.4
-24,Regeneron Pharmaceuticals,Biotech,NASDAQ, REGN,Aug 2015,2015-08-01,2016,61.4,39.3
-24,Regeneron Pharmaceuticals,Biotech,NASDAQ, REGN,Aug 2015,2015-08-01,2015,61.4,56.5
-24,Regeneron Pharmaceuticals,Biotech,NASDAQ, REGN,Aug 2015,2015-08-01,2014,61.4,42
-24,Regeneron Pharmaceuticals,Biotech,NASDAQ, REGN,Aug 2015,2015-08-01,2013,61.4,27.4
+20,Takeda Pharmaceutical,Pharma,"NASDAQ", TAK,Dec 2019,2019-12-01,2019,61.5,61.5
+20,Takeda Pharmaceutical,Pharma,"NASDAQ", TAK,Dec 2019,2019-12-01,2018,61.5,52.9
+20,Takeda Pharmaceutical,Pharma,"NASDAQ", TAK,Dec 2019,2019-12-01,2017,61.5,40.2
+20,Takeda Pharmaceutical,Pharma,"NASDAQ", TAK,Dec 2019,2019-12-01,2016,61.5,45.6
+20,Takeda Pharmaceutical,Pharma,"NASDAQ", TAK,Dec 2019,2019-12-01,2015,61.5,47.8
+20,Takeda Pharmaceutical,Pharma,"NASDAQ", TAK,Dec 2019,2019-12-01,2014,61.5,37.5
+20,Takeda Pharmaceutical,Pharma,"NASDAQ", TAK,Dec 2019,2019-12-01,2013,61.5,34.3
+21,Vertex Pharmaceuticals,Pharma,"NASDAQ", VRTX,Jul 2020,2020-07-01,2019,78.9,56.3
+21,Vertex Pharmaceuticals,Pharma,"NASDAQ", VRTX,Jul 2020,2020-07-01,2018,78.9,42.2
+21,Vertex Pharmaceuticals,Pharma,"NASDAQ", VRTX,Jul 2020,2020-07-01,2017,78.9,37.9
+21,Vertex Pharmaceuticals,Pharma,"NASDAQ", VRTX,Jul 2020,2020-07-01,2016,78.9,18.3
+21,Vertex Pharmaceuticals,Pharma,"NASDAQ", VRTX,Jul 2020,2020-07-01,2015,78.9,31
+21,Vertex Pharmaceuticals,Pharma,"NASDAQ", VRTX,Jul 2020,2020-07-01,2014,78.9,28.7
+21,Vertex Pharmaceuticals,Pharma,"NASDAQ", VRTX,Jul 2020,2020-07-01,2013,78.9,17.4
+22,Biogen,Biotech,"NASDAQ", BIIB,Mar 2015,2015-03-01,2019,111.7,54.7
+22,Biogen,Biotech,"NASDAQ", BIIB,Mar 2015,2015-03-01,2018,111.7,63.5
+22,Biogen,Biotech,"NASDAQ", BIIB,Mar 2015,2015-03-01,2017,111.7,67.4
+22,Biogen,Biotech,"NASDAQ", BIIB,Mar 2015,2015-03-01,2016,111.7,61.6
+22,Biogen,Biotech,"NASDAQ", BIIB,Mar 2015,2015-03-01,2015,111.7,68.3
+22,Biogen,Biotech,"NASDAQ", BIIB,Mar 2015,2015-03-01,2014,111.7,79.7
+22,Biogen,Biotech,"NASDAQ", BIIB,Mar 2015,2015-03-01,2013,111.7,66.1
+23,Illumina,Biotech,"NASDAQ", ILMN,Jul 2019,2019-07-01,2019,56,48.2
+23,Illumina,Biotech,"NASDAQ", ILMN,Jul 2019,2019-07-01,2018,56,44.1
+23,Illumina,Biotech,"NASDAQ", ILMN,Jul 2019,2019-07-01,2017,56,40.2
+23,Illumina,Biotech,"NASDAQ", ILMN,Jul 2019,2019-07-01,2016,56,39.4
+23,Illumina,Biotech,"NASDAQ", ILMN,Jul 2019,2019-07-01,2015,56,35.4
+23,Illumina,Biotech,"NASDAQ", ILMN,Jul 2019,2019-07-01,2014,56,28.6
+23,Illumina,Biotech,"NASDAQ", ILMN,Jul 2019,2019-07-01,2013,56,25.7
+24,Regeneron Pharmaceuticals,Biotech,"NASDAQ", REGN,Aug 2015,2015-08-01,2019,61.4,41.2
+24,Regeneron Pharmaceuticals,Biotech,"NASDAQ", REGN,Aug 2015,2015-08-01,2018,61.4,40.3
+24,Regeneron Pharmaceuticals,Biotech,"NASDAQ", REGN,Aug 2015,2015-08-01,2017,61.4,40.4
+24,Regeneron Pharmaceuticals,Biotech,"NASDAQ", REGN,Aug 2015,2015-08-01,2016,61.4,39.3
+24,Regeneron Pharmaceuticals,Biotech,"NASDAQ", REGN,Aug 2015,2015-08-01,2015,61.4,56.5
+24,Regeneron Pharmaceuticals,Biotech,"NASDAQ", REGN,Aug 2015,2015-08-01,2014,61.4,42
+24,Regeneron Pharmaceuticals,Biotech,"NASDAQ", REGN,Aug 2015,2015-08-01,2013,61.4,27.4
 25,Astellas,Pharma,TYO, 4503,Dec 2015,2015-12-01,2019,40.6,32.7
 25,Astellas,Pharma,TYO, 4503,Dec 2015,2015-12-01,2018,40.6,23.8
 25,Astellas,Pharma,TYO, 4503,Dec 2015,2015-12-01,2017,40.6,29.3
@@ -174,20 +174,20 @@ ranking,company_name,company_type,stock_exch,stock_id,cap_date_original,largest_
 25,Astellas,Pharma,TYO, 4503,Dec 2015,2015-12-01,2015,40.6,40.6
 25,Astellas,Pharma,TYO, 4503,Dec 2015,2015-12-01,2014,40.6,35.8
 25,Astellas,Pharma,TYO, 4503,Dec 2015,2015-12-01,2013,40.6,27.6
-26,Daiichi Sankyo,Pharma,NASDAQ, DSNKY,Dec 2019,2019-12-01,2019,45.3,45.3
-26,Daiichi Sankyo,Pharma,NASDAQ, DSNKY,Dec 2019,2019-12-01,2018,45.3,22.7
-26,Daiichi Sankyo,Pharma,NASDAQ, DSNKY,Dec 2019,2019-12-01,2017,45.3,27.5
-26,Daiichi Sankyo,Pharma,NASDAQ, DSNKY,Dec 2019,2019-12-01,2016,45.3,35.3
-26,Daiichi Sankyo,Pharma,NASDAQ, DSNKY,Dec 2019,2019-12-01,2015,45.3,38.8
-26,Daiichi Sankyo,Pharma,NASDAQ, DSNKY,Dec 2019,2019-12-01,2014,45.3,33.2
-26,Daiichi Sankyo,Pharma,NASDAQ, DSNKY,Dec 2019,2019-12-01,2013,45.3,28.7
-27,Alexion Pharmaceuticals,Pharma,NASDAQ, ALXN,Jul 2015,2015-07-01,2019,47,24.3
-27,Alexion Pharmaceuticals,Pharma,NASDAQ, ALXN,Jul 2015,2015-07-01,2018,47,21.7
-27,Alexion Pharmaceuticals,Pharma,NASDAQ, ALXN,Jul 2015,2015-07-01,2017,47,26.7
-27,Alexion Pharmaceuticals,Pharma,NASDAQ, ALXN,Jul 2015,2015-07-01,2016,47,27.4
-27,Alexion Pharmaceuticals,Pharma,NASDAQ, ALXN,Jul 2015,2015-07-01,2015,47,43.1
-27,Alexion Pharmaceuticals,Pharma,NASDAQ, ALXN,Jul 2015,2015-07-01,2014,47,36.7
-27,Alexion Pharmaceuticals,Pharma,NASDAQ, ALXN,Jul 2015,2015-07-01,2013,47,26
+26,Daiichi Sankyo,Pharma,"NASDAQ", DSNKY,Dec 2019,2019-12-01,2019,45.3,45.3
+26,Daiichi Sankyo,Pharma,"NASDAQ", DSNKY,Dec 2019,2019-12-01,2018,45.3,22.7
+26,Daiichi Sankyo,Pharma,"NASDAQ", DSNKY,Dec 2019,2019-12-01,2017,45.3,27.5
+26,Daiichi Sankyo,Pharma,"NASDAQ", DSNKY,Dec 2019,2019-12-01,2016,45.3,35.3
+26,Daiichi Sankyo,Pharma,"NASDAQ", DSNKY,Dec 2019,2019-12-01,2015,45.3,38.8
+26,Daiichi Sankyo,Pharma,"NASDAQ", DSNKY,Dec 2019,2019-12-01,2014,45.3,33.2
+26,Daiichi Sankyo,Pharma,"NASDAQ", DSNKY,Dec 2019,2019-12-01,2013,45.3,28.7
+27,Alexion Pharmaceuticals,Pharma,"NASDAQ", ALXN,Jul 2015,2015-07-01,2019,47,24.3
+27,Alexion Pharmaceuticals,Pharma,"NASDAQ", ALXN,Jul 2015,2015-07-01,2018,47,21.7
+27,Alexion Pharmaceuticals,Pharma,"NASDAQ", ALXN,Jul 2015,2015-07-01,2017,47,26.7
+27,Alexion Pharmaceuticals,Pharma,"NASDAQ", ALXN,Jul 2015,2015-07-01,2016,47,27.4
+27,Alexion Pharmaceuticals,Pharma,"NASDAQ", ALXN,Jul 2015,2015-07-01,2015,47,43.1
+27,Alexion Pharmaceuticals,Pharma,"NASDAQ", ALXN,Jul 2015,2015-07-01,2014,47,36.7
+27,Alexion Pharmaceuticals,Pharma,"NASDAQ", ALXN,Jul 2015,2015-07-01,2013,47,26
 28,Eisai Pharmaceutical,Pharma,TYO, 4523,Dec 2016,2016-12-01,2019,37.3,21.5
 28,Eisai Pharmaceutical,Pharma,TYO, 4523,Dec 2016,2016-12-01,2018,37.3,23
 28,Eisai Pharmaceutical,Pharma,TYO, 4523,Dec 2016,2016-12-01,2017,37.3,24.5
@@ -195,34 +195,34 @@ ranking,company_name,company_type,stock_exch,stock_id,cap_date_original,largest_
 28,Eisai Pharmaceutical,Pharma,TYO, 4523,Dec 2016,2016-12-01,2015,37.3,28.8
 28,Eisai Pharmaceutical,Pharma,TYO, 4523,Dec 2016,2016-12-01,2014,37.3,30.2
 28,Eisai Pharmaceutical,Pharma,TYO, 4523,Dec 2016,2016-12-01,2013,37.3,28.7
-29,Incyte,Pharma,NASDAQ, INCY,Mar 2017,2017-03-01,2019,31.2,18.8
-29,Incyte,Pharma,NASDAQ, INCY,Mar 2017,2017-03-01,2018,31.2,13.5
-29,Incyte,Pharma,NASDAQ, INCY,Mar 2017,2017-03-01,2017,31.2,18.3
-29,Incyte,Pharma,NASDAQ, INCY,Mar 2017,2017-03-01,2016,31.2,15.4
-29,Incyte,Pharma,NASDAQ, INCY,Mar 2017,2017-03-01,2015,31.2,10.6
-29,Incyte,Pharma,NASDAQ, INCY,Mar 2017,2017-03-01,2014,31.2,7.3
-29,Incyte,Pharma,NASDAQ, INCY,Mar 2017,2017-03-01,2013,31.2,4.6
-30,BioMarin,Pharma,NASDAQ, BMRN,Jul 2015,2015-07-01,2019,24,15.2
-30,BioMarin,Pharma,NASDAQ, BMRN,Jul 2015,2015-07-01,2018,24,15.1
-30,BioMarin,Pharma,NASDAQ, BMRN,Jul 2015,2015-07-01,2017,24,18.3
-30,BioMarin,Pharma,NASDAQ, BMRN,Jul 2015,2015-07-01,2016,24,20.4
-30,BioMarin,Pharma,NASDAQ, BMRN,Jul 2015,2015-07-01,2015,24,13.8
-30,BioMarin,Pharma,NASDAQ, BMRN,Jul 2015,2015-07-01,2014,24,12.9
-30,BioMarin,Pharma,NASDAQ, BMRN,Jul 2015,2015-07-01,2013,24,10.8
-31,Genmab,Biotech,NASDAQ, GMAB,Aug 2020,2020-08-01,2019,24.7,14.5
-31,Genmab,Biotech,NASDAQ, GMAB,Aug 2020,2020-08-01,2018,24.7,10.6
-31,Genmab,Biotech,NASDAQ, GMAB,Aug 2020,2020-08-01,2017,24.7,10.8
-31,Genmab,Biotech,NASDAQ, GMAB,Aug 2020,2020-08-01,2016,24.7,10.8
-31,Genmab,Biotech,NASDAQ, GMAB,Aug 2020,2020-08-01,2015,24.7,8.8
-31,Genmab,Biotech,NASDAQ, GMAB,Aug 2020,2020-08-01,2014,24.7,3.8
-31,Genmab,Biotech,NASDAQ, GMAB,Aug 2020,2020-08-01,2013,24.7,2.6
-32,Mylan,Pharma,NASDAQ, MYL,Dec 2015,2015-12-01,2019,38.8,10.4
-32,Mylan,Pharma,NASDAQ, MYL,Dec 2015,2015-12-01,2018,38.8,14.1
-32,Mylan,Pharma,NASDAQ, MYL,Dec 2015,2015-12-01,2017,38.8,27.5
-32,Mylan,Pharma,NASDAQ, MYL,Dec 2015,2015-12-01,2016,38.8,30.3
-32,Mylan,Pharma,NASDAQ, MYL,Dec 2015,2015-12-01,2015,38.8,38.8
-32,Mylan,Pharma,NASDAQ, MYL,Dec 2015,2015-12-01,2014,38.8,33.2
-32,Mylan,Pharma,NASDAQ, MYL,Dec 2015,2015-12-01,2013,38.8,35.7
+29,Incyte,Pharma,"NASDAQ", INCY,Mar 2017,2017-03-01,2019,31.2,18.8
+29,Incyte,Pharma,"NASDAQ", INCY,Mar 2017,2017-03-01,2018,31.2,13.5
+29,Incyte,Pharma,"NASDAQ", INCY,Mar 2017,2017-03-01,2017,31.2,18.3
+29,Incyte,Pharma,"NASDAQ", INCY,Mar 2017,2017-03-01,2016,31.2,15.4
+29,Incyte,Pharma,"NASDAQ", INCY,Mar 2017,2017-03-01,2015,31.2,10.6
+29,Incyte,Pharma,"NASDAQ", INCY,Mar 2017,2017-03-01,2014,31.2,7.3
+29,Incyte,Pharma,"NASDAQ", INCY,Mar 2017,2017-03-01,2013,31.2,4.6
+30,BioMarin,Pharma,"NASDAQ", BMRN,Jul 2015,2015-07-01,2019,24,15.2
+30,BioMarin,Pharma,"NASDAQ", BMRN,Jul 2015,2015-07-01,2018,24,15.1
+30,BioMarin,Pharma,"NASDAQ", BMRN,Jul 2015,2015-07-01,2017,24,18.3
+30,BioMarin,Pharma,"NASDAQ", BMRN,Jul 2015,2015-07-01,2016,24,20.4
+30,BioMarin,Pharma,"NASDAQ", BMRN,Jul 2015,2015-07-01,2015,24,13.8
+30,BioMarin,Pharma,"NASDAQ", BMRN,Jul 2015,2015-07-01,2014,24,12.9
+30,BioMarin,Pharma,"NASDAQ", BMRN,Jul 2015,2015-07-01,2013,24,10.8
+31,Genmab,Biotech,"NASDAQ", GMAB,Aug 2020,2020-08-01,2019,24.7,14.5
+31,Genmab,Biotech,"NASDAQ", GMAB,Aug 2020,2020-08-01,2018,24.7,10.6
+31,Genmab,Biotech,"NASDAQ", GMAB,Aug 2020,2020-08-01,2017,24.7,10.8
+31,Genmab,Biotech,"NASDAQ", GMAB,Aug 2020,2020-08-01,2016,24.7,10.8
+31,Genmab,Biotech,"NASDAQ", GMAB,Aug 2020,2020-08-01,2015,24.7,8.8
+31,Genmab,Biotech,"NASDAQ", GMAB,Aug 2020,2020-08-01,2014,24.7,3.8
+31,Genmab,Biotech,"NASDAQ", GMAB,Aug 2020,2020-08-01,2013,24.7,2.6
+32,Mylan,Pharma,"NASDAQ", MYL,Dec 2015,2015-12-01,2019,38.8,10.4
+32,Mylan,Pharma,"NASDAQ", MYL,Dec 2015,2015-12-01,2018,38.8,14.1
+32,Mylan,Pharma,"NASDAQ", MYL,Dec 2015,2015-12-01,2017,38.8,27.5
+32,Mylan,Pharma,"NASDAQ", MYL,Dec 2015,2015-12-01,2016,38.8,30.3
+32,Mylan,Pharma,"NASDAQ", MYL,Dec 2015,2015-12-01,2015,38.8,38.8
+32,Mylan,Pharma,"NASDAQ", MYL,Dec 2015,2015-12-01,2014,38.8,33.2
+32,Mylan,Pharma,"NASDAQ", MYL,Dec 2015,2015-12-01,2013,38.8,35.7
 36,Bausch Health,Pharma,TSX, BHC,Aug 2020,2020-08-01,2019,31.2,41.5
 36,Bausch Health,Pharma,TSX, BHC,Aug 2020,2020-08-01,2018,31.2,10
 36,Bausch Health,Pharma,TSX, BHC,Aug 2020,2020-08-01,2017,31.2,21

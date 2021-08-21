@@ -59,13 +59,6 @@ cat_bullet(x, "^bk")
 cat_bullet(x, "^mk")
 ```
 
-### Data Visualization
-
-```{r gg-files, results = 'asis', echo = FALSE, eval=TRUE}
-# here we see the 'gg' for ggplot2 
-cat_bullet(x, "^gg")
-```
-
 ### Data Manipulation and Transformation
 
 ```{r dt-files, results = 'asis', echo = FALSE}
@@ -73,7 +66,14 @@ cat_bullet(x, "^gg")
 cat_bullet(x, "^dt")
 ```
 
-### Building storyboards with flexdashboard
+### Data Visualization
+
+```{r gg-files, results = 'asis', echo = FALSE, eval=TRUE}
+# here we see the 'gg' for ggplot2 
+cat_bullet(x, "^gg")
+```
+
+### Building Storyboards with `flexdashboard`
 
 *(under construction)*
 

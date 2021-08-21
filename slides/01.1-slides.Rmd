@@ -119,9 +119,9 @@ knitr::include_graphics("img/login-with-github.png")
 ---
 background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
-# The RStudio.Cloud Workspace
+## The RStudio.Cloud Workspace
 
 ### *This is where your new projects will show up!*
 
@@ -133,7 +133,7 @@ knitr::include_graphics(path = "img/new-rstudio-cloud-env.png")
 ---
 background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Click on the link below:
 
@@ -149,7 +149,7 @@ knitr::include_graphics(path = "img/save-rstudio-cloud-copy.png")
 ---
 background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # What you should see
 
@@ -164,7 +164,7 @@ knitr::include_graphics(path = "img/open-rstudio-cloud-project.png")
 ---
 background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Installing the packages
 

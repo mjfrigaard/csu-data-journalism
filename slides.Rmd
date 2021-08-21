@@ -24,10 +24,4 @@ title: "Slides"
 
 ### Roadmap & RStudio.Cloud Projects
 
-Below is a roadmap for the lessons and materials. Links to RStudio.Cloud project are [here](https://rstudio.cloud/spaces/111399/join?access_code=UiorYWtm0%2BD7qRrCjJK%2Bxxrmcd246SA1UEBLAfOe). 
-
-There is also a pdf download of this file [here](https://github.com/mjfrigaard/r-meetup-tutorials/blob/gh-pages/img/r-trainings-roadmap.pdf).
-
-```{r img-r-trainings-roadmapsvg, echo=FALSE}
-knitr::include_graphics("img/r-trainings-roadmap.png")
-```
+Below is a roadmap for the lessons and materials. 

@@ -282,7 +282,7 @@ gg_avg_bmi_spec_gend
 ````
 
 
-```{r gg_avg_bmi_spec_gend, fig.height=5.5, fig.width=8, echo=FALSE}
+```{r gg_avg_bmi_spec_gend, fig.height=5.5, fig.width=8, echo=FALSE, message=FALSE, warning=FALSE}
 library(hrbrthemes)
 StarWars %>%
   dplyr::filter(!is.na(mass) & !is.na(height) & !is.na(species)) %>%
@@ -301,7 +301,7 @@ StarWars %>%
                 subtitle = "Grouped by species and gender",
                 caption = "source = https://swapi.dev/",
                 x = "Mean BMI", y = "Species") +
-  hrbrthemes::theme_ipsum_rc(axis_text_size = 9,
+  hrbrthemes::theme_ipsum(axis_text_size = 9,
                              axis_title_size = 13,
                              strip_text_size = 13) -> gg_avg_bmi_spec_gend
 gg_avg_bmi_spec_gend

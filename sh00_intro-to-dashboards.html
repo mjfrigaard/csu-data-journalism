@@ -13,7 +13,7 @@
 
 <title>Introduction to Dashboards (under construction)</title>
 
-<script src="site_libs/header-attrs-2.7.2/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -301,12 +301,12 @@ div.tocify {
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
+<div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -363,22 +363,22 @@ div.tocify {
 
 
 <div id="objectives" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
+<h1><span class="header-section-number">1</span> Objectives</h1>
 <p>An introduction to dashboard development in R with <code>flexdashboard</code>s.</p>
 </div>
 <div id="materials" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Materials</h1>
+<h1><span class="header-section-number">2</span> Materials</h1>
 <ul>
 <li><p>Slides: <a href="https://mjfrigaard.github.io/intro-to-dashboards/Index.html" class="uri">https://mjfrigaard.github.io/intro-to-dashboards/Index.html</a></p></li>
 <li><p>RStudio Project: <a href="https://rstudio.cloud/project/2000287" class="uri">https://rstudio.cloud/project/2000287</a></p></li>
 </ul>
 </div>
 <div id="previous-lessons" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Previous lessons</h1>
+<h1><span class="header-section-number">3</span> Previous lessons</h1>
 <p>All of the exercises and lessons are available <a href="https://mjfrigaard.github.io/r-meetup-tutorials/">here</a>, but you can also read more about <a href="https://ggplot2.tidyverse.org/index.html"><code>ggplot2</code></a> on the tidyverse website, and in the <a href="https://r4ds.had.co.nz/data-visualisation.html">Data Visualisation</a> chapter of R for Data Science.</p>
 </div>
 <div id="load-the-tidyverse-and-flexdashboard" class="section level1" number="4">
-<h1 number="4"><span class="header-section-number">4</span> Load the <code>tidyverse</code> and <code>flexdashboard</code></h1>
+<h1><span class="header-section-number">4</span> Load the <code>tidyverse</code> and <code>flexdashboard</code></h1>
 <p>The main packages we’re going to use are <code>dplyr</code>, <code>tidyr</code>, <code>ggplot2</code>, and <code>flexdashboard</code>.</p>
 <pre class="r"><code>library(tidyverse)
 library(skimr)
@@ -386,10 +386,10 @@ library(janitor)
 library(flexdashboard)</code></pre>
 </div>
 <div id="what-should-go-into-a-dashboard" class="section level1" number="5">
-<h1 number="5"><span class="header-section-number">5</span> What should go into a dashboard?</h1>
+<h1><span class="header-section-number">5</span> What should go into a dashboard?</h1>
 </div>
 <div id="the-yaml-header" class="section level1" number="6">
-<h1 number="6"><span class="header-section-number">6</span> The YAML header</h1>
+<h1><span class="header-section-number">6</span> The YAML header</h1>
 <pre class="yaml"><code>---
 title: &quot;My Dashboard&quot;
 output: 
@@ -399,7 +399,7 @@ output:
 ---</code></pre>
 </div>
 <div id="inputs" class="section level1 sidebar" number="7" data-width="200">
-<h1 class="sidebar" number="7" data-width="200"><span class="header-section-number">7</span> Inputs</h1>
+<h1 class="sidebar"><span class="header-section-number">7</span> Inputs</h1>
 <p>Data input.</p>
 <pre class="r"><code>AppleMobRaw &lt;- readr::read_csv(&quot;https://bit.ly/36tTVpe&quot;)
 AppleMobRaw %&gt;% 
@@ -416,33 +416,33 @@ AppleMobRaw %&gt;%
   rename(trans_type = transportation_type) -&gt; TidyApple</code></pre>
 </div>
 <div id="page-1" class="section level1" number="8" data-orientation="columns">
-<h1 number="8" data-orientation="columns"><span class="header-section-number">8</span> Page 1</h1>
+<h1><span class="header-section-number">8</span> Page 1</h1>
 <div id="column" class="section level2 tabset" number="8.1" data-width="400">
-<h2 class="tabset" number="8.1" data-width="400"><span class="header-section-number">8.1</span> Column</h2>
+<h2 class="tabset"><span class="header-section-number">8.1</span> Column</h2>
 <div id="memory-size" class="section level3" number="8.1.1">
-<h3 number="8.1.1"><span class="header-section-number">8.1.1</span> Memory Size</h3>
+<h3><span class="header-section-number">8.1.1</span> Memory Size</h3>
 <pre class="r"><code>TidyApple %&gt;%  
   inspectdf::inspect_mem() %&gt;%  
   inspectdf::show_plot(text_labels = TRUE)</code></pre>
 </div>
 <div id="missing-data" class="section level3" number="8.1.2">
-<h3 number="8.1.2"><span class="header-section-number">8.1.2</span> Missing Data</h3>
+<h3><span class="header-section-number">8.1.2</span> Missing Data</h3>
 <pre class="r"><code>TidyApple %&gt;%
   inspectdf::inspect_na() %&gt;% 
   inspectdf::show_plot(text_labels = TRUE)</code></pre>
 </div>
 </div>
 <div id="column-1" class="section level2 tabset" number="8.2" data-width="400">
-<h2 class="tabset" number="8.2" data-width="400"><span class="header-section-number">8.2</span> Column</h2>
+<h2 class="tabset"><span class="header-section-number">8.2</span> Column</h2>
 <div id="categorical-data" class="section level3" number="8.2.1">
-<h3 number="8.2.1"><span class="header-section-number">8.2.1</span> Categorical Data</h3>
+<h3><span class="header-section-number">8.2.1</span> Categorical Data</h3>
 <pre class="r"><code>TidyApple %&gt;% 
   select_if(is.character) %&gt;% 
   inspectdf::inspect_cat() %&gt;% 
   inspectdf::show_plot(text_labels = TRUE)</code></pre>
 </div>
 <div id="data-imbalances" class="section level3" number="8.2.2">
-<h3 number="8.2.2"><span class="header-section-number">8.2.2</span> Data Imbalances</h3>
+<h3><span class="header-section-number">8.2.2</span> Data Imbalances</h3>
 <pre class="r"><code>TidyApple %&gt;% 
   inspectdf::inspect_imb() %&gt;% 
   inspectdf::show_plot(text_labels = TRUE)</code></pre>
@@ -450,18 +450,18 @@ AppleMobRaw %&gt;%
 </div>
 </div>
 <div id="page-2" class="section level1" number="9" data-orientation="rows">
-<h1 number="9" data-orientation="rows"><span class="header-section-number">9</span> Page 2</h1>
+<h1><span class="header-section-number">9</span> Page 2</h1>
 <div id="row" class="section level2 tabset tabset-fade" number="9.1" data-height="600">
-<h2 class="tabset tabset-fade" number="9.1" data-height="600"><span class="header-section-number">9.1</span> Row</h2>
+<h2 class="tabset tabset-fade"><span class="header-section-number">9.1</span> Row</h2>
 <div id="numeric-data" class="section level3" number="9.1.1">
-<h3 number="9.1.1"><span class="header-section-number">9.1.1</span> Numeric Data</h3>
+<h3><span class="header-section-number">9.1.1</span> Numeric Data</h3>
 <pre class="r"><code>TidyApple %&gt;% 
   select_if(is.numeric) %&gt;% 
   inspectdf::inspect_num() %&gt;% 
   inspectdf::show_plot(text_labels = TRUE)</code></pre>
 </div>
 <div id="distributions-ggridges" class="section level3" number="9.1.2">
-<h3 number="9.1.2"><span class="header-section-number">9.1.2</span> Distributions <code>ggridges</code></h3>
+<h3><span class="header-section-number">9.1.2</span> Distributions <code>ggridges</code></h3>
 <pre class="r"><code>library(ggridges) 
 lab_ridges &lt;- labs(x = &quot;Apple directions requests&quot;,
                    y = &quot;Transportation Types&quot;,
@@ -479,9 +479,9 @@ TidyApple %&gt;%
 </div>
 </div>
 <div id="row-1" class="section level2 tabset tabset-fade" number="9.2" data-height="400">
-<h2 class="tabset tabset-fade" number="9.2" data-height="400"><span class="header-section-number">9.2</span> Row</h2>
+<h2 class="tabset tabset-fade"><span class="header-section-number">9.2</span> Row</h2>
 <div id="topuscities-as-paged_table" class="section level3" number="9.2.1">
-<h3 number="9.2.1"><span class="header-section-number">9.2.1</span> <code>TopUSCities</code> as <code>paged_table</code></h3>
+<h3><span class="header-section-number">9.2.1</span> <code>TopUSCities</code> as <code>paged_table</code></h3>
 <pre class="r"><code>TopUSCities &lt;- TidyApple %&gt;% 
   filter(country == &quot;United States&quot; &amp; 
            region %in% c(&quot;New York City&quot;,&quot;Los Angeles&quot;, 
@@ -489,7 +489,7 @@ TidyApple %&gt;%
 rmarkdown::paged_table(TopUSCities)</code></pre>
 </div>
 <div id="maxuscitiesdriving-as-reactable" class="section level3" number="9.2.2">
-<h3 number="9.2.2"><span class="header-section-number">9.2.2</span> <code>MaxUSCitiesDriving</code> as <code>reactable</code></h3>
+<h3><span class="header-section-number">9.2.2</span> <code>MaxUSCitiesDriving</code> as <code>reactable</code></h3>
 <pre class="r"><code>TopUSCities %&gt;% 
   filter(trans_type == &quot;driving&quot;) %&gt;% 
   group_by(region) %&gt;% 
@@ -502,11 +502,11 @@ reactable(MaxUSCitiesDriving,
 </div>
 </div>
 <div id="page-3" class="section level1" number="10" data-navmenu="More">
-<h1 number="10" data-navmenu="More"><span class="header-section-number">10</span> Page 3</h1>
+<h1><span class="header-section-number">10</span> Page 3</h1>
 <div id="column-2" class="section level2" number="10.1">
-<h2 number="10.1"><span class="header-section-number">10.1</span> Column</h2>
+<h2><span class="header-section-number">10.1</span> Column</h2>
 <div id="chart-e" class="section level3" number="10.1.1">
-<h3 number="10.1.1"><span class="header-section-number">10.1.1</span> Chart E</h3>
+<h3><span class="header-section-number">10.1.1</span> Chart E</h3>
 <pre class="r"><code>lab_top_cities &lt;- labs(x = &quot;Date&quot;, y  = &quot;Direction Requests&quot;, 
      title = &quot;Trends of Relative Activity in Selected US Cities&quot;,
      subtitle = &quot;NY, LA, CH, HOU, PHA, PHL, SATX, SD&quot;, 
@@ -526,11 +526,11 @@ TopUSCities %&gt;%
 </div>
 </div>
 <div id="page-4" class="section level1" number="11" data-navmenu="More">
-<h1 number="11" data-navmenu="More"><span class="header-section-number">11</span> Page 4</h1>
+<h1><span class="header-section-number">11</span> Page 4</h1>
 <div id="column-3" class="section level2" number="11.1">
-<h2 number="11.1"><span class="header-section-number">11.1</span> Column</h2>
+<h2><span class="header-section-number">11.1</span> Column</h2>
 <div id="chart-f" class="section level3" number="11.1.1">
-<h3 number="11.1.1"><span class="header-section-number">11.1.1</span> Chart F</h3>
+<h3><span class="header-section-number">11.1.1</span> Chart F</h3>
 <pre class="r"><code>library(hrbrthemes)
 TopUSCities %&gt;% 
   ggplot(aes(x = date, y = dir_request, 
@@ -594,6 +594,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

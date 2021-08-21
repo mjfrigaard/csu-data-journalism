@@ -13,7 +13,7 @@
 
 <title>Introduction to R Markdown</title>
 
-<script src="site_libs/header-attrs-2.7.2/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -301,12 +301,12 @@ div.tocify {
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
+<div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -363,32 +363,32 @@ div.tocify {
 
 
 <div id="objectives" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
+<h1><span class="header-section-number">1</span> Objectives</h1>
 <p>This section provides some exercises to improve your understanding of R Markdown. Please see the <a href="https://mjfrigaard.github.io/rep-res-rmarkdown/Index.html">accompanying slides</a> for more information.</p>
 <div id="create-a-new-r-markdown-file" class="section level2 tabset" number="1.1">
-<h2 class="tabset" number="1.1"><span class="header-section-number">1.1</span> Create a new R Markdown file</h2>
+<h2 class="tabset"><span class="header-section-number">1.1</span> Create a new R Markdown file</h2>
 <p>We will start by creating a new R Markdown file, and set it to create an HTML document.</p>
 <div id="new-file-icon" class="section level3" number="1.1.1">
-<h3 number="1.1.1"><span class="header-section-number">1.1.1</span> New File icon</h3>
+<h3><span class="header-section-number">1.1.1</span> New File icon</h3>
 <p>We can create a new R Markdown file using the <em>New File</em> icon</p>
 <p><img src="img/new-rmarkdown.png" width="20%" height="20%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="file-tab" class="section level3" number="1.1.2">
-<h3 number="1.1.2"><span class="header-section-number">1.1.2</span> File tab</h3>
+<h3><span class="header-section-number">1.1.2</span> File tab</h3>
 <p>We can also create a new R Markdown file in RStudio using <em>File</em> &gt; <em>New File</em> &gt; <em>R Markdown…</em></p>
 <p><img src="img/new-rmarkdown-02.png" width="45%" height="45%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="save-your-.rmd-file" class="section level3" number="1.1.3">
-<h3 number="1.1.3"><span class="header-section-number">1.1.3</span> Save your .Rmd file</h3>
+<h3><span class="header-section-number">1.1.3</span> Save your .Rmd file</h3>
 <p>We will need to save our <code>.Rmd</code> file before we can knit it, so we’ll save it as this <code>rmarkdown-solutions.Rmd</code>.</p>
 <p><img src="img/save-rmd-file-02.png" width="65%" height="65%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="rmarkdown-yaml" class="section level2 tabset" number="1.2">
-<h2 class="tabset" number="1.2"><span class="header-section-number">1.2</span> RMarkdown: YAML</h2>
+<h2 class="tabset"><span class="header-section-number">1.2</span> RMarkdown: YAML</h2>
 <p>While R Markdown allows us to create a variety of documents formats, the output with the most features is HTML. HTML documents function essentially like a web page, and allow for interactive navigation and displays. This document was written in R Markdown, and we’ll be creating a similar report to keep as a reference.</p>
 <div id="standard-yaml-header" class="section level3" number="1.2.1">
-<h3 number="1.2.1"><span class="header-section-number">1.2.1</span> Standard YAML Header</h3>
+<h3><span class="header-section-number">1.2.1</span> Standard YAML Header</h3>
 <p>Our new <code>.Rmd</code> file should have the following information. <em>Note that indentation and case matters in YAML formatting, so we need to pay extra attention to alignments and spelling.</em></p>
 <pre class="yaml"><code>---
 title: &quot;My Report&quot;
@@ -398,7 +398,7 @@ output: html_document
 ---</code></pre>
 </div>
 <div id="table-of-contents-toc" class="section level3" number="1.2.2">
-<h3 number="1.2.2"><span class="header-section-number">1.2.2</span> Table of Contents (TOC)</h3>
+<h3><span class="header-section-number">1.2.2</span> Table of Contents (TOC)</h3>
 <p>Having an interactive table of contents makes it easier for readers to navigate your report.</p>
 <p>We can add a table of contents (<code>toc: yes</code>) and make sure it ‘floats’ (i.e., remains static when we scroll through the document) with <code>toc_float: true</code>.</p>
 <p>These settings should be placed on an indented line below our <code>html_document:</code> output in the YAML settings:</p>
@@ -414,7 +414,7 @@ output:
 <p><em>Knit</em> the document again and extend the view to see the floating table of contents.</p>
 </div>
 <div id="highlight-themes" class="section level3" number="1.2.3">
-<h3 number="1.2.3"><span class="header-section-number">1.2.3</span> Highlight &amp; Themes</h3>
+<h3><span class="header-section-number">1.2.3</span> Highlight &amp; Themes</h3>
 <p>Highlighting and themes give us some control over the aesthetics in our reports. We can add a new theme and text highlighting to the report with the following YAML options.</p>
 <pre class="yaml"><code>---
 title: &quot;My Report&quot;
@@ -476,6 +476,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

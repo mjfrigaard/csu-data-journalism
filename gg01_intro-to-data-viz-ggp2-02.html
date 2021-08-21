@@ -13,7 +13,7 @@
 
 <title>Data Visualization with ggplot2 (single variable visualizations)</title>
 
-<script src="site_libs/header-attrs-2.7.2/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -301,12 +301,12 @@ div.tocify {
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
+<div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -363,7 +363,7 @@ div.tocify {
 
 
 <div id="outline" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Outline</h1>
+<h1><span class="header-section-number">1</span> Outline</h1>
 <ol style="list-style-type: decimal">
 <li>Import Apple Mobility Data<br />
 </li>
@@ -381,7 +381,7 @@ div.tocify {
 </ol>
 </div>
 <div id="objectives" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Objectives</h1>
+<h1><span class="header-section-number">2</span> Objectives</h1>
 <p>In order to use graphs and figures to effectively communicate with our audience, we need to consider a few things:</p>
 <ol style="list-style-type: decimal">
 <li>Recognize the needs of your audience (who are they, and where are they coming from?)</li>
@@ -403,24 +403,24 @@ div.tocify {
 </ul>
 </div>
 <div id="materials" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Materials</h1>
+<h1><span class="header-section-number">3</span> Materials</h1>
 <ul>
 <li><p>The slides for this lesson are <a href="https://mjfrigaard.github.io/data-viz-as-comm/Index.html">here</a></p></li>
 <li><p><a href="https://rstudio.cloud/project/1983257">RStudio.Cloud Project</a></p></li>
 </ul>
 </div>
 <div id="previous-lessons" class="section level1" number="4">
-<h1 number="4"><span class="header-section-number">4</span> Previous lessons</h1>
+<h1><span class="header-section-number">4</span> Previous lessons</h1>
 <p>All of the exercises and lessons are available <a href="https://mjfrigaard.github.io/r-meetup-tutorials/">here</a>. Read more about <a href="https://ggplot2.tidyverse.org/index.html"><code>ggplot2</code></a> on the tidyverse website, and in the <a href="https://r4ds.had.co.nz/data-visualisation.html">Data Visualisation</a> chapter of R for Data Science.</p>
 </div>
 <div id="load-the-packages" class="section level1" number="5">
-<h1 number="5"><span class="header-section-number">5</span> Load the packages</h1>
+<h1><span class="header-section-number">5</span> Load the packages</h1>
 <p>The main packages we’re going to use are <code>dplyr</code>, <code>tidyr</code>, and <code>ggplot2</code>. These are all part of the <code>tidyverse</code>, so we’ll import this package below:</p>
 <pre class="r"><code>install.packages(&quot;tidyverse&quot;)
 library(tidyverse)</code></pre>
 </div>
 <div id="example-covid-and-mobility" class="section level1" number="6">
-<h1 number="6"><span class="header-section-number">6</span> Example: COVID and Mobility</h1>
+<h1><span class="header-section-number">6</span> Example: COVID and Mobility</h1>
 <p>Assume we received the following questions from a stakeholder:</p>
 <p><strong><em>How has COVID changed our modes of transportation?</em></strong></p>
 <p>Or</p>
@@ -439,7 +439,7 @@ library(tidyverse)</code></pre>
 <li><em>what would the columns and rows look like?</em></li>
 </ul>
 <div id="data-import" class="section level2 tabset" number="6.1">
-<h2 class="tabset" number="6.1"><span class="header-section-number">6.1</span> Data Import</h2>
+<h2 class="tabset"><span class="header-section-number">6.1</span> Data Import</h2>
 <p>We’re going to use the following data to answer the stakeholder’s questions:</p>
 <ul>
 <li>Apple mobility data: <a href="https://covid19.apple.com/mobility" class="uri">https://covid19.apple.com/mobility</a></li>
@@ -447,7 +447,7 @@ library(tidyverse)</code></pre>
 <p>Import the data below</p>
 <pre class="r"><code>AppleMobRaw &lt;- readr::read_csv(&quot;https://bit.ly/36tTVpe&quot;)</code></pre>
 <div id="tidy-applemobraw" class="section level3" number="6.1.1">
-<h3 number="6.1.1"><span class="header-section-number">6.1.1</span> Tidy <code>AppleMobRaw</code></h3>
+<h3><span class="header-section-number">6.1.1</span> Tidy <code>AppleMobRaw</code></h3>
 <p>These data need to be restructured into a tidy format.</p>
 <pre class="r"><code>AppleMobRaw %&gt;% 
   tidyr::pivot_longer(cols = -c(geo_type:country), 
@@ -460,7 +460,7 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="wrangle-applemobraw" class="section level3" number="6.1.2">
-<h3 number="6.1.2"><span class="header-section-number">6.1.2</span> Wrangle <code>AppleMobRaw</code></h3>
+<h3><span class="header-section-number">6.1.2</span> Wrangle <code>AppleMobRaw</code></h3>
 <p>We will remove the missing values from <code>country</code> and <code>sub-region</code></p>
 <pre class="r"><code>AppleMobRaw %&gt;% 
   tidyr::pivot_longer(cols = -c(geo_type:country), 
@@ -487,13 +487,13 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="counting" class="section level2 tabset" number="6.2">
-<h2 class="tabset" number="6.2"><span class="header-section-number">6.2</span> Counting</h2>
+<h2 class="tabset"><span class="header-section-number">6.2</span> Counting</h2>
 <p>One of the most important jobs of analytic work is <a href="https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html">counting things</a>. There are many ways to accomplish this in R, but we’ll stick with the <code>dplyr</code> package because it’s part of the <code>tidyverse</code>.</p>
 <p>The <code>dplyr</code> function for counting responses of a categorical or factor variable is <code>count()</code>, and it works like this:</p>
 <pre class="r"><code>Data %&gt;% 
   count(variable)</code></pre>
 <div id="count" class="section level3" number="6.2.1">
-<h3 number="6.2.1"><span class="header-section-number">6.2.1</span> Count</h3>
+<h3><span class="header-section-number">6.2.1</span> Count</h3>
 <p>So, if we wanted to count the number of different transportation types in the <code>TidyApple</code> data frame, it would look like this,</p>
 <pre class="r"><code>TidyApple %&gt;% 
   dplyr::count(trans_type)</code></pre>
@@ -504,7 +504,7 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="count-sort" class="section level3" number="6.2.2">
-<h3 number="6.2.2"><span class="header-section-number">6.2.2</span> Count &amp; sort</h3>
+<h3><span class="header-section-number">6.2.2</span> Count &amp; sort</h3>
 <p>We can also sort the responses using the <code>sort = TRUE</code> argument.</p>
 <pre class="r"><code>TidyApple %&gt;% 
   dplyr::count(trans_type, sort = TRUE)</code></pre>
@@ -515,7 +515,7 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="iterate-with-count" class="section level3" number="6.2.3">
-<h3 number="6.2.3"><span class="header-section-number">6.2.3</span> Iterate with count</h3>
+<h3><span class="header-section-number">6.2.3</span> Iterate with count</h3>
 <p>We can also combine <code>dplyr::select_if()</code> and <code>purrr::map()</code> to pass the <code>count()</code> function to all the character variables in <code>TidyApple</code>.</p>
 <pre class="r"><code>TidyApple %&gt;% 
   select_if(is.character) %&gt;% 
@@ -537,10 +537,10 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="visualizing-distributions" class="section level1" number="7">
-<h1 number="7"><span class="header-section-number">7</span> Visualizing Distributions</h1>
+<h1><span class="header-section-number">7</span> Visualizing Distributions</h1>
 <p>Before we start looking at relationships <em>between</em> variables, we should examine each variable’s underlying distribution. In the next section, we’re going to cover a few graphs that display variable distributions: histograms, density, violin, and ridgeline plots,</p>
 <div id="histograms" class="section level2 tabset" number="7.1">
-<h2 class="tabset" number="7.1"><span class="header-section-number">7.1</span> Histograms</h2>
+<h2 class="tabset"><span class="header-section-number">7.1</span> Histograms</h2>
 <p>A histogram is a special kind of bar graph–it only takes a single continuous variable (in this case, <code>dir_request</code>), and it displays a relative breakdown of the values.</p>
 <p>The <code>x</code> axis for the histogram will have the direction requests, and the <code>y</code> variable will display a count of the values.</p>
 <pre class="r"><code>lab_hist &lt;- labs(x = &quot;Apple directions requests&quot;,
@@ -548,14 +548,14 @@ library(tidyverse)</code></pre>
      title = &quot;Distribution of Direction Requests&quot;,
      subtitle = &quot;source: https://covid19.apple.com/mobility&quot;)</code></pre>
 <div id="exercise" class="section level3" number="7.1.1">
-<h3 number="7.1.1"><span class="header-section-number">7.1.1</span> exercise</h3>
+<h3><span class="header-section-number">7.1.1</span> exercise</h3>
 <p>Create a histogram of direction requests using <code>dir_request</code></p>
 <pre class="r"><code>TidyApple %&gt;% ggplot() + 
   geom_histogram(aes(x = ____________)) + 
   lab_hist</code></pre>
 </div>
 <div id="solution" class="section level3" number="7.1.2">
-<h3 number="7.1.2"><span class="header-section-number">7.1.2</span> solution</h3>
+<h3><span class="header-section-number">7.1.2</span> solution</h3>
 <p>See blow:</p>
 <pre class="r"><code>TidyApple %&gt;% ggplot() + 
   geom_histogram(aes(x = dir_request)) + 
@@ -564,10 +564,10 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="adjusting-y-axes" class="section level2 tabset" number="7.2">
-<h2 class="tabset" number="7.2"><span class="header-section-number">7.2</span> Adjusting Y Axes</h2>
+<h2 class="tabset"><span class="header-section-number">7.2</span> Adjusting Y Axes</h2>
 <p>We can see the <code>y</code> axis of the histogram is in scientific notation. This might be hard for some audiences to interpret, so we will change this to use the whole number with commas with the <a href="https://scales.r-lib.org/"><code>scales</code> package</a>.</p>
 <div id="exercise-1" class="section level3" number="7.2.1">
-<h3 number="7.2.1"><span class="header-section-number">7.2.1</span> exercise</h3>
+<h3><span class="header-section-number">7.2.1</span> exercise</h3>
 <p>Add the <code>scales::comma</code> value to the <code>scale_y_continuous()</code> function.</p>
 <pre class="r"><code>library(scales)
 TidyApple %&gt;% ggplot() + 
@@ -576,7 +576,7 @@ TidyApple %&gt;% ggplot() +
   lab_hist</code></pre>
 </div>
 <div id="solution-1" class="section level3" number="7.2.2">
-<h3 number="7.2.2"><span class="header-section-number">7.2.2</span> solution</h3>
+<h3><span class="header-section-number">7.2.2</span> solution</h3>
 <p>See below:</p>
 <pre class="r"><code>library(scales)
 TidyApple %&gt;% ggplot() + 
@@ -587,10 +587,10 @@ TidyApple %&gt;% ggplot() +
 </div>
 </div>
 <div id="histogram-shape" class="section level2 tabset" number="7.3">
-<h2 class="tabset" number="7.3"><span class="header-section-number">7.3</span> Histogram Shape</h2>
+<h2 class="tabset"><span class="header-section-number">7.3</span> Histogram Shape</h2>
 <p>We can control the shape of the histogram with the <code>bins</code> argument. The default is <code>30</code>.</p>
 <div id="exercie" class="section level3" number="7.3.1">
-<h3 number="7.3.1"><span class="header-section-number">7.3.1</span> exercie</h3>
+<h3><span class="header-section-number">7.3.1</span> exercie</h3>
 <p>Set <code>bins</code> to <code>15</code>.</p>
 <pre class="r"><code>TidyApple %&gt;% ggplot() + 
   geom_histogram(aes(x = dir_request), bins = __) + 
@@ -598,7 +598,7 @@ TidyApple %&gt;% ggplot() +
   lab_hist</code></pre>
 </div>
 <div id="solution-2" class="section level3" number="7.3.2">
-<h3 number="7.3.2"><span class="header-section-number">7.3.2</span> solution</h3>
+<h3><span class="header-section-number">7.3.2</span> solution</h3>
 <p>See below:</p>
 <pre class="r"><code>TidyApple %&gt;% ggplot() + 
   geom_histogram(aes(x = dir_request), bins = 15) + 
@@ -607,7 +607,7 @@ TidyApple %&gt;% ggplot() +
 <p><img src="img/bins-15-sol-1.png" width="100%" height="100%" /></p>
 </div>
 <div id="exercise-2" class="section level3" number="7.3.3">
-<h3 number="7.3.3"><span class="header-section-number">7.3.3</span> exercise</h3>
+<h3><span class="header-section-number">7.3.3</span> exercise</h3>
 <p>Set <code>bins</code> to <code>45</code> and assign it to <code>gg_hist45</code>.</p>
 <pre class="r"><code>TidyApple %&gt;% ggplot() + 
   geom_histogram(aes(x = dir_request), bins = __) + 
@@ -615,7 +615,7 @@ TidyApple %&gt;% ggplot() +
   lab_hist -&gt; _____________</code></pre>
 </div>
 <div id="solution-3" class="section level3" number="7.3.4">
-<h3 number="7.3.4"><span class="header-section-number">7.3.4</span> solution</h3>
+<h3><span class="header-section-number">7.3.4</span> solution</h3>
 <p>See below:</p>
 <pre class="r"><code>TidyApple %&gt;% ggplot() + 
   geom_histogram(aes(x = dir_request), bins = 45) + 
@@ -625,7 +625,7 @@ TidyApple %&gt;% ggplot() +
 </div>
 </div>
 <div id="density-plots" class="section level2 tabset" number="7.4">
-<h2 class="tabset" number="7.4"><span class="header-section-number">7.4</span> Density Plots</h2>
+<h2 class="tabset"><span class="header-section-number">7.4</span> Density Plots</h2>
 <p>What if we want to see how a continuous variable is distributed across a categorical variable? We did this in the <a href="https://mjfrigaard.github.io/data-viz-intro/Index.html#87">previous lesson with a boxplot</a>.</p>
 <p>Density plots come in handy here (so do <code>geom_boxplot()</code>s!). Read more about the density geom <a href="https://ggplot2.tidyverse.org/reference/geom_density.html">here</a>.</p>
 <p>We are going to create the graph labels so we know what to expect when we build our graph.</p>
@@ -636,7 +636,7 @@ TidyApple %&gt;% ggplot() +
      subtitle = &quot;source: https://covid19.apple.com/mobility&quot;)</code></pre>
 <p>Now we build the density plot, passing the variables so they match our labels above.</p>
 <div id="exercise-3" class="section level3" number="7.4.1">
-<h3 number="7.4.1"><span class="header-section-number">7.4.1</span> exercise</h3>
+<h3><span class="header-section-number">7.4.1</span> exercise</h3>
 <p>Create a density plot of direction requests colored by the type of transportation.</p>
 <pre class="r"><code>TidyApple %&gt;% 
   ggplot() +
@@ -644,7 +644,7 @@ TidyApple %&gt;% ggplot() +
   lab_density</code></pre>
 </div>
 <div id="solution-4" class="section level3" number="7.4.2">
-<h3 number="7.4.2"><span class="header-section-number">7.4.2</span> solution</h3>
+<h3><span class="header-section-number">7.4.2</span> solution</h3>
 <p>See below:</p>
 <pre class="r"><code>TidyApple %&gt;% 
   ggplot() +
@@ -654,7 +654,7 @@ TidyApple %&gt;% ggplot() +
 <p><em>One drawback to density plots is the <code>y</code> axis can be hard to interpret</em></p>
 </div>
 <div id="exercise-4" class="section level3" number="7.4.3">
-<h3 number="7.4.3"><span class="header-section-number">7.4.3</span> exercise</h3>
+<h3><span class="header-section-number">7.4.3</span> exercise</h3>
 <p>Adjust the overlapping densities by setting <code>alpha</code> to <code>1/3</code>. Assign this plot to <code>gg_density</code>.</p>
 <pre class="r"><code>TidyApple %&gt;% 
   ggplot() +
@@ -664,7 +664,7 @@ TidyApple %&gt;% ggplot() +
   lab_density -&gt; __________</code></pre>
 </div>
 <div id="solution-5" class="section level3" number="7.4.4">
-<h3 number="7.4.4"><span class="header-section-number">7.4.4</span> solution</h3>
+<h3><span class="header-section-number">7.4.4</span> solution</h3>
 <p>See below:</p>
 <pre class="r"><code>TidyApple %&gt;% 
   ggplot() +
@@ -677,7 +677,7 @@ gg_density</code></pre>
 </div>
 </div>
 <div id="ridgeline-plots" class="section level2 tabset" number="7.5">
-<h2 class="tabset" number="7.5"><span class="header-section-number">7.5</span> Ridgeline Plots</h2>
+<h2 class="tabset"><span class="header-section-number">7.5</span> Ridgeline Plots</h2>
 <p>Another option is a ridgeline plot (from the <code>ggridges</code> package). These display multiple densities.</p>
 <pre class="r"><code>lab_ridges &lt;- labs(
      title = &quot;Direction Requests by Transportation Type&quot;,
@@ -696,10 +696,10 @@ TidyApple %&gt;%
 <p><img src="img/geom_density_ridges-sol-1.png" width="100%" height="100%" /></p>
 </div>
 <div id="violin-plots" class="section level2 tabset" number="7.6">
-<h2 class="tabset" number="7.6"><span class="header-section-number">7.6</span> Violin Plots</h2>
+<h2 class="tabset"><span class="header-section-number">7.6</span> Violin Plots</h2>
 <p>Another alternative to the density plot is the violin plot.</p>
 <div id="exercise-5" class="section level3" number="7.6.1">
-<h3 number="7.6.1"><span class="header-section-number">7.6.1</span> exercise</h3>
+<h3><span class="header-section-number">7.6.1</span> exercise</h3>
 <ul>
 <li>assign <code>"Apple directions requests"</code> to the <code>x</code> axis</li>
 <li>assign <code>"Transit Type"</code> to the <code>y</code> axis</li>
@@ -711,7 +711,7 @@ TidyApple %&gt;%
      subtitle = &quot;source: https://covid19.apple.com/mobility&quot;)</code></pre>
 </div>
 <div id="solution-6" class="section level3" number="7.6.2">
-<h3 number="7.6.2"><span class="header-section-number">7.6.2</span> solution</h3>
+<h3><span class="header-section-number">7.6.2</span> solution</h3>
 <pre class="r"><code>lab_violin &lt;- labs(x = &quot;Transit Type&quot;,
                    y = &quot;Apple directions requests&quot;,
                    fill = &quot;Transit Type&quot;,
@@ -719,7 +719,7 @@ TidyApple %&gt;%
      subtitle = &quot;source: https://covid19.apple.com/mobility&quot;)</code></pre>
 </div>
 <div id="exercise-6" class="section level3" number="7.6.3">
-<h3 number="7.6.3"><span class="header-section-number">7.6.3</span> exercise</h3>
+<h3><span class="header-section-number">7.6.3</span> exercise</h3>
 <p>Add a <code>geom_violin()</code> to the code below:</p>
 <pre class="r"><code>TidyApple %&gt;% 
   ggplot() +
@@ -728,7 +728,7 @@ TidyApple %&gt;%
   lab_violin</code></pre>
 </div>
 <div id="solution-7" class="section level3" number="7.6.4">
-<h3 number="7.6.4"><span class="header-section-number">7.6.4</span> solution</h3>
+<h3><span class="header-section-number">7.6.4</span> solution</h3>
 <pre class="r"><code>TidyApple %&gt;% 
   ggplot() +
   geom_violin(aes(y = dir_request, x = trans_type, 
@@ -737,7 +737,7 @@ TidyApple %&gt;%
 <p><img src="img/geom_violin-sol-1.png" width="100%" height="100%" /></p>
 </div>
 <div id="exercise-7" class="section level3" number="7.6.5">
-<h3 number="7.6.5"><span class="header-section-number">7.6.5</span> exercise</h3>
+<h3><span class="header-section-number">7.6.5</span> exercise</h3>
 <p>The great thing about <code>ggplot2</code>s layered syntax, is that we can add <code>geoms</code> with similar aesthetics to the same graph! For example, we can see how <code>geom_violin</code>s and <code>geom_boxplot</code>s are related by adding a <code>geom_boxplot()</code> layer to the graph above.</p>
 <pre class="r"><code>TidyApple %&gt;% 
   ggplot() +
@@ -748,7 +748,7 @@ TidyApple %&gt;%
   lab_violin</code></pre>
 </div>
 <div id="solution-8" class="section level3" number="7.6.6">
-<h3 number="7.6.6"><span class="header-section-number">7.6.6</span> solution</h3>
+<h3><span class="header-section-number">7.6.6</span> solution</h3>
 <p>Note we set the <code>alpha</code> to <code>1/5</code> for the <code>geom_violin()</code>, and the <code>color</code> to <code>trans_type</code> for the <code>geom_boxplot()</code>.</p>
 <pre class="r"><code>TidyApple %&gt;% 
   ggplot() +
@@ -761,7 +761,7 @@ TidyApple %&gt;%
 </div>
 </div>
 <div id="export-the-data" class="section level2 tabset" number="7.7">
-<h2 class="tabset" number="7.7"><span class="header-section-number">7.7</span> Export the data</h2>
+<h2 class="tabset"><span class="header-section-number">7.7</span> Export the data</h2>
 <p>You’ll want to export the <code>TidyApple</code> dataset for the next set of exercise.</p>
 <p>The code chunk below exports the dataset as a .csv with a date-stamp.</p>
 <pre class="r"><code>readr::write_csv(x = TidyApple, 
@@ -816,6 +816,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
