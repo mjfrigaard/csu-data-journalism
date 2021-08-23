@@ -4,9 +4,13 @@ title: "Slides"
 
 ### View these slide decks in your bowser or save as PDFs
 
-1. [Week 1: Introduction to Web Technologies](slides/1.0-intro-web-tech.html)
+1. [Week 1: Introduction to Web Technologies](slides/01.0-intro-web-tech.html)
 
-2. [Week 2: R Workflow Best Practices](slides/r-workflow-best-practices/Index.html)
+2. [Week 1 (supplement): R Workflow Best Practices](slides/01.1-r-workflow-best-practices.html)
+
+3. [Week 2: Introduction to R Programming](slides/01.3-intro-r-prog.html)
+
+4. [Week 2 (supplement): R Workflow Best Practices](slides/01.4-rmarkdown.html)
 
 <!--
 
