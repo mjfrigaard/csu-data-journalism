@@ -19,4 +19,5 @@ output:
     theme: yeti
     includes:
       after_body: footer.html
-new_session: true
+    lib_dir: site_libs
+    self_contained: no

@@ -1,12 +1,19 @@
 ---
 title: "R Workflow Best Practices"
-subtitle: "bmRn CSM: managing code, data, and files"  
+subtitle: "Journalism 303: managing code, data, and files"  
 author: 
   - "Martin Frigaard"
 date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
-    css: xaringan-themer.css
+    lib_dir: libs
+    css: ["theme.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}

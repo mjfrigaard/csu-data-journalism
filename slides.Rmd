@@ -4,9 +4,11 @@ title: "Slides"
 
 ### View these slide decks in your bowser or save as PDFs
 
-1. [Introduction to Web Technologies](slides/1.0-intro-web-tech.html)
+1. [Week 1: Introduction to Web Technologies](slides/1.0-intro-web-tech.html)
 
-2. [R Workflow Best Practices](https://mjfrigaard.github.io/r-workflow-best-practices/Index.html#1)
+2. [Week 2: R Workflow Best Practices](slides/r-workflow-best-practices/Index.html)
+
+<!--
 
 3. [Reproducible Data Analysis With R](https://mjfrigaard.github.io/rep-res-rmarkdown/Index.html#1)
 
@@ -20,8 +22,4 @@ title: "Slides"
 
 8. [Introduction to Dashboards](https://mjfrigaard.github.io/intro-to-dashboards/Index.html#1)
 
-9. [Introduction to Shiny Apps](https://mjfrigaard.github.io/intro-to-shiny/Index.html#1)
-
-### Roadmap & RStudio.Cloud Projects
-
-Below is a roadmap for the lessons and materials. 
+--> 

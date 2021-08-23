@@ -22,15 +22,9 @@ knitr::opts_chunk$set(collapse = TRUE,
                       warning = FALSE)
 ```
 
-# Objectives
+# Objective
 
-- compare open-source and proprietary software    
-- explain the differences between using the R console, .R script files, and RStudio   
-- download, install, and set up R and RStudio on your local machine
-
-# Materials
-
-The slides for this section are available [here]().
+- Download, install, and set up R and RStudio on your local machine
 
 # R (a quick background)
 
@@ -45,11 +39,11 @@ We're going to clear up some of the terms and definitions so the R programming l
 
 # Installation
 
-Depending on what kind of computer you have, these instructions will be a little different. The two sections below describe how to install R and RStudio on Mac and Windows machines. An alternative to downloading and installing R and RStudio is using [RStudio.Cloud](https://rstudio.cloud/), which operates entirely in your browser. You'll need to sign up for a free RStudio.cloud account using your Google account or email address, but we recommend using a [Github](https://github.com/) account (also free!).
+Depending on what kind of computer you have, these instructions will be a little different. The two sections below describe how to install R and RStudio on Mac and Windows machines. An alternative to downloading and installing R and RStudio is using [RStudio.Cloud](https://rstudio.cloud/), which operates entirely in your browser. You'll need to sign up for a free RStudio.Cloud account using a [Github](https://github.com/) account (also free!).
 
 ## Installing R on Mac {.tabset}
 
-These steps cover how to install R and RStudio on a Windows machine. The technical details on the operating system and machine are listed below,
+These steps cover how to install R and RStudio on a Mac. The technical details on the operating system and machine are listed below,
 
 ```
 MacBook Pro (13-inch, 2017, Four Thunderbolt 3 Ports)
@@ -77,7 +71,6 @@ Navigate to [CRAN](https://cran.r-project.org/), the The Comprehensive R Archive
 ```{r bk00-01-cran.png, echo=FALSE}
 knitr::include_graphics("img/bk00-01-cran.png")
 ```
-
 
 Click on the [Download R for (Mac) OS X](https://cran.r-project.org/).
 
@@ -207,34 +200,109 @@ knitr::include_graphics("img/bk00-09-rstudio-install-06.png")
 
 ## Installing R on Windows {.tabset}
 
-These steps cover how to install R and RStudio on a Windows machine. The technical details on the operating system and machine are listed below,
+These steps cover how to install R and RStudio on a Windows machine. The technical details on the operating system and machine are listed below.
 
 ### Download R
 
+Head to [CRAN](https://cran.r-project.org/). 
+
+```{r bk00-01-cran.png-2, echo=FALSE}
+knitr::include_graphics("img/bk00-01-cran.png")
+```
+
+[Click on download R for Windows](https://cran.r-project.org/bin/windows/). 
+
 ```{r bk00-10-cran, echo=FALSE}
-# knitr::include_graphics("img/bk00-10-cran.png")
+knitr::include_graphics("img/bk00-10-win-cran.png")
 ```
-
-```{r bk00-10-win-download, echo=FALSE}
-# knitr::include_graphics("img/bk00-10-win-download.png")
-```
-
-
 
 ### Download RStudio
 
+Navigate to [RStudio downloads](https://www.rstudio.com/products/rstudio/download/#download) for Windows
+
+```{r bk00-rtudio-win-download.png, echo=FALSE}
+knitr::include_graphics("img/bk00-rtudio-win-download.png")
+```
+
+Download the RStudio .exe file
+
 ### Download Rtools
+
+Head over to [Rtools](https://cran.r-project.org/bin/windows/Rtools/) 
+
+Download the [`rtools40v2-x86_64.exe` file](https://cran.r-project.org/bin/windows/Rtools/rtools40v2-x86_64.exe). 
+
+```{r bk00-rtools-win-download.png, echo=FALSE}
+knitr::include_graphics("img/bk00-rtools-win-download.png")
+```
+
 
 ### Install R
 
-### Install RStudio
+The steps below outline installing R version 4.1.0 on Windows. The installation steps might look *sightly* different on your machine. Ask me if you get stuck. 
+
+```{r bk00-r-win-install-01.png, echo=FALSE}
+knitr::include_graphics("img/bk00-r-win-install-01.png")
+```
+
+```{r bk00-r-win-install-02.png, echo=FALSE}
+knitr::include_graphics("img/bk00-r-win-install-02.png")
+```
+
+```{r bk00-r-win-install-03.png, echo=FALSE}
+knitr::include_graphics("img/bk00-r-win-install-03.png")
+```
+
+
+```{r bk00-r-win-install-04.png, echo=FALSE}
+knitr::include_graphics("img/bk00-r-win-install-04.png")
+```
+
+
+```{r bk00-r-win-install-05.png, echo=FALSE}
+knitr::include_graphics("img/bk00-r-win-install-05.png")
+```
+
+
+```{r bk00-r-win-install-06.png, echo=FALSE}
+knitr::include_graphics("img/bk00-r-win-install-06.png")
+```
+
+
+```{r bk00-r-win-install-07.png, echo=FALSE}
+knitr::include_graphics("img/bk00-r-win-install-07.png")
+```
+
+
+```{r bk00-r-win-install-08.png, echo=FALSE}
+knitr::include_graphics("img/bk00-r-win-install-08.png")
+```
+
+
+```{r bk00-r-win-install-09.png, echo=FALSE}
+knitr::include_graphics("img/bk00-r-win-install-09.png")
+```
 
 ### Install Rtools
 
-## RStudio.Cloud {.tabset}
+```{r bk00-rtools-install-01.png, echo=FALSE}
+knitr::include_graphics("img/bk00-rtools-install-01.png")
+```
 
-A third option for using RStudio is setting up an [RStudio.Cloud](https://rstudio.cloud/) account. This requires a [Github account](https://github.com/) (**which you should set up first**). RStudio cloud is a service provided by RStudio that exists entirely in your browser. 
+```{r bk00-rtools-install-02.png, echo=FALSE}
+knitr::include_graphics("img/bk00-rtools-install-02.png")
+```
 
-### Create a Github account
+```{r bk00-rtools-install-03.png, echo=FALSE}
+knitr::include_graphics("img/bk00-rtools-install-03.png")
+```
 
-### Create a RStudio.Cloud account
+```{r bk00-rtools-install-04.png, echo=FALSE}
+knitr::include_graphics("img/bk00-rtools-install-04.png")
+```
+
+```{r bk00-rtools-install-05.png, echo=FALSE}
+knitr::include_graphics("img/bk00-rtools-install-05.png")
+```
+
+### Install RStudio
