@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introduction to Web Technologies</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Martin Frigaard" />
+    <meta name="date" content="2021-08-23" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction to Web Technologies
+## Journalism 303
+### Martin Frigaard
+### 2021-08-23
+
+---
+
+
+
+
+
+class: center, middle, inverse
+
+# Data Journalism Web Technologies
+
+---
+class: left, top
+
+## Overview 
+
+.pull-left[
+
+### 1.) What is data journalism? 
+
+#### 1.1) Definitions 
+
+#### 1.2) Examples 
+
+### 2.) Code files for data journalism
+
+#### 2.1) R Code 
+
+]
+
+.pull-right[
+
+#### 2.2) HTML 
+
+#### 2.3) CSS 
+
+### 3) Data file formats
+
+#### 3.1) .CSV
+
+#### 3.2 .XML
+
+#### 3.3) .JSON
+
+]
+
+---
+class: left, top
+
+## What is data journalism?
+
+### 1.1) [Wikipedia](https://en.wikipedia.org/wiki/Data_journalism): 
+
+&gt; "*a journalistic process based on analyzing and filtering large data sets for the purpose of creating or elevating a news story*"
+
+### 1.2) [fivethirtyeight](https://twitter.com/FiveThirtyEight): 
+
+&gt; "*Data-driven news and analysis*"
+
+### 1.3) [the upshot (NYT)](https://twitter.com/UpshotNYT): 
+
+&gt; "*Analytical journalism in words and graphics *" 
+
+---
+class: left, top
+
+## What is data journalism? (Example 1)
+
+&lt;br /&gt;
+
+### FiveThirtyEight's *[How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years](https://projects.fivethirtyeight.com/obama-polling-trends/)*
+
+---
+class: left, top
+
+## What is data journalism? (Example 1)
+
+FiveThirtyEight's *[How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years](https://projects.fivethirtyeight.com/obama-polling-trends/)*
+
+&lt;img src="../img/00-538-example-01.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+
+## What is data journalism? (Example 1)
+
+FiveThirtyEight's *[How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years](https://projects.fivethirtyeight.com/obama-polling-trends/)*
+
+&lt;img src="../img/00-538-example-02.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+
+## What is data journalism? (Example 2)
+
+&lt;br /&gt;
+
+### Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
+
+---
+class: left, top
+
+## What is data journalism? (Example 2)
+
+&gt; Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
+
+
+
+&lt;img src="../img/00-wapo-covid-sparkline.png" width="65%" height="65%" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+
+## What is data journalism? (Example 2)
+
+&gt; Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
+
+&lt;img src="../img/00-wapo-covid.gif" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: left, top
+
+## What is data journalism? (Example 3)
+
+&lt;br /&gt;
+
+### The Pudding's *[‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.](https://pudding.cool/2017/08/the-office/)*
+
+---
+class: left, top
+
+## What is data journalism? (Example 3)
+
+&gt; The Pudding's *[‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.](https://pudding.cool/2017/08/the-office/)*
+
+&lt;img src="../img/00-pudding-office-01.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+
+## What is data journalism? (Example 3)
+
+&gt; The Pudding's *[‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.](https://pudding.cool/2017/08/the-office/)*
+
+&lt;img src="../img/00-pudding-office-02.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+class: center, middle, inverse
+
+# Code for Data Journalists
+
+---
+class: left, top
+
+## `Code` file formats and extensions
+
+### We can determine the language of code by it's `file` extension 
+
+### - `file.R` = R code file (or script)  
+### - `file.html` = HTML code file (or webpage)  
+### - `file.css` = CSS code file (or stylesheet)
+
+---
+class: left, top
+
+## `Code` file formats and extensions
+
+
+### Text editors (like Notepad or TextEdit) can be used to view code files
+
+### Below is the `plot.R` code file in TextEdit
+
+&lt;br /&gt;
+&lt;br /&gt;
+
+&lt;img src="../img/00-textedit.png" width="392" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: left, top
+
+# `R Code`
+
+##* Why do we need to write code?* 
+
+--
+
+### 1) R is an actual ***language***, which means it gives us the ability to express our ideas with precision. 
+
+--
+
+&lt;br /&gt;
+
+### 2) R code is text, so we can use copy + paste and Google
+
+---
+class: left, top
+
+## `R Code`: grammar &amp; syntax
+
+&lt;br /&gt;
+
+--
+
+### - A code's *syntax* defines the rules for it's grammar and punctuation 
+
+&lt;br /&gt;
+
+--
+
+### - The characters and words have specific meanings (just like in English)
+
+---
+class: left, top
+
+## `R Code`: grammar &amp; syntax
+
+&lt;br /&gt;
+
+--
+
+### -  Characters and words have to be written in a particular order for R code work
+
+--
+
+&lt;br /&gt;
+
+### -  In the R, there are two primary components to the grammar (or sytnax): *functions* and *objects*
+
+---
+class: left, top
+
+# `R Code`: R functions &amp; objects
+
+--
+
+.pull-left[
+
+&lt;br /&gt;
+
+### `functions` are like *verbs* 
+
+&lt;br /&gt;
+
+### `objects` are like *nouns*
+
+]
+
+--
+
+.pull-right[
+
+&lt;br /&gt;
+
+### `verb(noun)` 
+
+*is like...* 
+
+&lt;br /&gt;
+
+### `function(object)`
+
+]
+
+
+---
+class: left, top
+
+## `R Code`: A quick example  
+
+### Here is some example R code for building a graph:
+
+&lt;br /&gt;
+
+&lt;img src="../img/00-r-code-example-01.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+&lt;br /&gt; 
+
+&gt; The functions (`ggplot()`) *'do things'* to the objects (`diamonds`)
+
+
+
+---
+class: left, top
+
+## `R Code`: A quick example  
+
+### Here is some example R code for building a graph:
+
+&lt;br /&gt;
+
+&lt;img src="../img/00-r-code-example-02.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+&lt;br /&gt; 
+
+&gt; *We're telling R we want to use the `diamonds` data, and we want the `carat` column on the `x` axis, and the `price` column on the `y`.* 
+
+
+---
+class: left, top
+
+## `R Code`: A quick example  
+
+### Here is some example R code for building a graph:
+
+&lt;br /&gt;
+
+&lt;img src="../img/00-r-code-example-03.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+&lt;br /&gt; 
+
+&gt; *We want the graph to have 'points' (or dots), so we use the `geom_point()` function, and we want the points colored by the `cut` column.* 
+
+
+---
+class: left, top
+
+## `R Code`: A quick example 
+
+.small[
+
+
+```r
+ggplot(data = diamonds, mapping = aes(x = carat, y = price)) + 
+  geom_point(aes(color = cut))
+```
+
+&lt;img src="1.0-intro-web-tech_files/figure-html/plot-1.png" width="55%" height="55%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+class: center, middle, inverse
+
+# Code for Data Journalists
+
+## `HTML` 
+
+---
+class: left, top
+
+## `HTML`
+
+### HTML stands for 'HyperText Markup Language' and is a computer language used to create web pages
+
+--
+
+### HTML code can be run by opening the file containing the code with any web browser (Chrome, Safari, Firefox, etc.)
+
+--
+
+### HTML5 is the current standard 
+
+---
+class: left, top
+
+## `HTML`
+
+### Head over to the [fivethirtyeight landing page](https://fivethirtyeight.com/)
+
+&lt;img src="../img/00-538-html-ref-00.png" width="55%" height="55%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: left, top
+
+## `HTML`
+
+### Right click on the page and click 'view source'
+
+&lt;img src="../img/00-538-html-ref-01.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+
+## `HTML`: structure
+
+### HTML consists of `elements` and `tags`
+
+--
+
+### Elements have a start tag, followed by the element content, followed by an end tag
+
+--
+
+```html
+&lt;element&gt;content&lt;/element&gt;
+```
+
+&lt;img src="../img/00-538-html-ref-02.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+
+## `HTML`: `elements` and `tags`
+
+#### Start tag: 
+
+```html
+&lt;title&gt;
+```
+#### Content: 
+
+```html
+&lt;title&gt;FiveThirtyEight | Nate Silver’s FiveThirtyEight uses statisti...
+```
+
+#### End tag: 
+
+```html
+&lt;title&gt;FiveThirtyEight | Nate Silver’s FiveThirtyEight uses...&lt;/title&gt;
+```
+
+---
+class: left, top
+
+## `HTML`: attributes
+
+### Attributes appear in the start tag and are of the form `attribute="attribute value"`
+
+&lt;br /&gt;
+
+--
+
+### The code below shows the start tag for an `img` element, with an attribute called `src` with a value `"image.png"`
+
+&lt;br /&gt;
+
+--
+
+```html
+&lt;img src="image.png"&gt;
+```
+
+---
+class: left, top
+
+## `HTML`: tags to know 
+
+.small[
+
+```html
+&lt;!-- html comments (not read or displayed by browser) --&gt;
+&lt;!DOCTYPE html&gt; &lt;!-- document type declaration --&gt;
+&lt;html lang="en-US"&gt; &lt;!-- describes the web page --&gt;
+  &lt;head&gt; &lt;!-- header of the HTML document --&gt;
+    &lt;title&gt;&lt;/title&gt; &lt;!-- title of the HTML document --&gt;
+  &lt;/head&gt; 
+  &lt;body&gt; &lt;!-- visible page content --&gt;
+    &lt;h1&gt; &lt;!-- level 1 header (others include h2-h6) --&gt;
+    &lt;!-- href is url, followed by displayed text --&gt;
+      &lt;a 
+      href="https://www.website.com"&gt;A link to website
+      &lt;/a&gt;
+      &lt;!-- src the path to an image file --&gt;
+        &lt;img src="example.com/example.jpg"&gt;
+    &lt;h1/&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+```
+
+]
+
+*Most code is added in the `&lt;body&gt;` element*
+
+
+---
+class: center, middle, inverse
+
+# Code for Data Journalists
+
+## `CSS` 
+
+---
+class: left, top
+
+## `CSS`
+
+--
+
+&lt;br /&gt;
+
+### `CSS` stands for 'Cascading Style Sheets' 
+
+--
+
+&lt;br /&gt;
+
+### `CSS` is used for describing the layout, colors, and fonts of a HTML document 
+
+
+---
+class: left, top
+
+## `CSS`: structure
+
+### `CSS` syntax
+
+.pull-left[
+
+&lt;br /&gt;
+
+```css
+&lt;style&gt;
+    h1 {
+        color: blue;
+    }
+&lt;/style&gt;
+```
+
+
+]
+
+--
+
+.pull-right[
+
++ `&lt;style&gt;` start tag
+  + a **selector** (`h1`) 
+    + an open bracket (`{`) 
+        + **property name** (`color`)
+        + colon (`:`)  
+        + **property value** (`blue`)  
+        + semi-colon (`;`) 
+    + a closed bracket (`}`)
++ `&lt;/style&gt;` end tag
+
+]
+
+
+---
+class: left, top
+
+## `CSS`: use 
+
+### `CSS` is most useful when included in an external CSS file (i.e., `my_style_sheet.css`)
+
+&lt;br /&gt;
+
+--
+
+### We can then reference the `my_style_sheet.css` style sheet using the `&lt;link&gt;` tag
+
+&lt;br /&gt;
+
+--
+
+```html
+&lt;link href="my_style_sheet.css" rel="stylesheet" 
+      type="text/css"&gt;
+```
+
+
+---
+class: center, middle, inverse
+
+# Data file formats
+
+---
+class: left, top
+
+## `Data` file types
+
+### Data comes in a variety of formats, but this course will focus on 'plain text formats'
+
+--
+
+### Text editors can read and write plain text files  
+
+--
+
+### Plain text files are portable across different computer operating systems
+
+---
+class: left, top
+
+## `CSV`: 'comma-separated values' files
+
+### The first line is a "header" and contains column (or variable) names in each of the fields (using letters, digits, and underscores)
+
+--
+
+### Each following line represents a new row (or observation)
+
+--
+
+### Any field *may be* quoted, but fields with embedded commas or double-quote characters *must be* quoted
+
+---
+class: left, top
+
+## `CSV`: 'comma-separated values' files
+
+### How .csv files look in text editors:
+
+```
+name, age, street, city, state, zip
+Sally, 24, 6 Taylor Ave., Commack, NY, 11725 
+Fred, 38, 450 Grant Ave., Fort Dodge, IA, 50501 
+Deb, 48, 661 Spring Drive, Phillipsburg, NJ, 08865
+```
+
+--
+
+### How .csv files look in a spreadsheet:
+
+
+|name  | age|street           |city         |state |zip   |
+|:-----|---:|:----------------|:------------|:-----|:-----|
+|Sally |  24|6 Taylor Ave.    |Commack      |NY    |11725 |
+|Fred  |  38|450 Grant Ave.   |Fort Dodge   |IA    |50501 |
+|Deb   |  48|661 Spring Drive |Phillipsburg |NJ    |08865 |
+
+
+---
+class: left, top
+
+## `XML`: Extensible Markup Language
+
+### `XML` consists of of XML elements with a start tag and an end tag (with plain text content or other XML elements in-between)
+
+--
+
+### The start tag may include attributes of the form `attribute="value"` (case-sensitive)
+
+--
+
+### All attribute values must be enclosed within double-quotes
+
+---
+class: left, top
+
+## `XML`: structure
+
+### Below is a small XML document
+
+.pull-left[
+
+```xml
+&lt;?xml version="2.0"?&gt;
+&lt;heights&gt;
+&lt;filename&gt;heights.txt&lt;/filename&gt;
+&lt;case date="24-JAN-2019"
+      height="78.9"/&gt;
+&lt;/heights&gt;
+```
+]
+
+.pull-right[
+- **`root element`** = `&lt;heights&gt;`  
+- **`start tag`** = `&lt;filename&gt;`  
+- **`content`** = `heights.txt`  
+- **`end tag`** = `&lt;/filename&gt;`    
+- **`element name`** = `case`  
+- **`attribute name`** = `date`  
+- **`attribute value`** = `"24-JAN-2019"`   
+- **`attribute name`** = `height`   
+- **`attribute value`** = `"78.9"` 
+]
+
+--
+
+#### The root element is the `heights` element with `filename` and `case` elements nested within the `heights`
+
+
+---
+class: left, top
+
+## `JSON`: JavaScript Object Notation
+
+### `JSON` is a lightweight data storage format similar in structure to `XML` but different syntax/format
+
+--
+
+### Common format for data from application programming interfaces (APls)
+
+
+
+
+---
+class: left, top
+
+## `JSON`: structure
+
+### Data are stored as:
+
+#### - Numbers (double)
+#### - Strings (double quoted)
+#### - Boolean ( true or false)
+#### - Array (ordered, comma separated enclosed in square brackets`[]`)
+#### - Object (unorderd, comma-separated collection of key:value pairs in curley brackets `{}`)
+
+---
+class: left, top
+
+
+
+
+## `JSON`: structure
+
+.pull-left[
+
+### Recall the .csv format:
+
+&lt;img src="../img/00-csv.png" width="150%" height="150%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+### Same data as JSON:
+
+&lt;img src="../img/00-json.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+class: left, top, inverse
+
+# Recap
+
+### Data journalists use programming languages as a tool to process, store, and display data
+
+### Code is the preferred technology because it's a language and allows us to be precise and expressive
+
+### Plain text data file formats are simple, lowest-common-denominator storage formats
+
+### Data in a plain text formats are usually arranged in rows, with several values on each row 
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
