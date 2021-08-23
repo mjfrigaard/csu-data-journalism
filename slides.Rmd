@@ -10,7 +10,7 @@ title: "Slides"
 
 3. [Week 2: Introduction to R Programming](slides/01.3-intro-r-prog.html)
 
-4. [Week 2 (supplement): R Workflow Best Practices](slides/01.4-rmarkdown.html)
+4. [Week 2 (supplement): Introduction to RMarkdown](slides/01.4-rmarkdown.html)
 
 <!--
 
