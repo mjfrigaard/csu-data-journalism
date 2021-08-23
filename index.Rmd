@@ -12,8 +12,6 @@ tagList(rmarkdown::html_dependency_font_awesome())
 
 ## Course Syllabus 
 
-*in development, comments welcome!*
-
 [Journalism 301: Data Journalism](http://bit.ly/csuc-dj-course)
 
 ## Recommended Courses 
