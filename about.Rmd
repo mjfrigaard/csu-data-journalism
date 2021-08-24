@@ -4,8 +4,8 @@ title: "About This Website"
 
 This is an [R Markdown website](http://rmarkdown.rstudio.com/rmarkdown_websites.html), inspired by the **amazing** tutorials built by [Alison Hill](hhttps://apreshill.github.io/data-vis-labs-2018/) and [Jenny Bryan](https://jennybc.github.io/purrr-tutorial/). 
 
-The source can be found [on GitHub](https://github.com/mjfrigaard/r-meetup-tutorials) and its home on the web is here:
-<https://mjfrigaard.github.io/r-meetup-tutorials/>
+The source can be found [on GitHub](https://github.com/mjfrigaard/csuc-data-journalism) and its home on the web is here:
+<https://mjfrigaard.github.io/csuc-data-journalism/>
 
 Who am I?
 
@@ -17,11 +17,10 @@ Who am I?
 Other tutorials and lessons by me: 
 
   * [Storybench Tutorials](https://www.storybench.org/how-to-calculate-a-rolling-average-in-r/)   
-  * [Tidyverse Tips](https://www.tidyverse.tips/)  
 
 Versions of key packages:
 
-```{r session_info}
+```{r session_info, echo=FALSE}
 devtools::session_info(c("dplyr", "tidyr", "ggplot2", "shiny"))
 ```
 

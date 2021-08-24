@@ -363,29 +363,29 @@ div.tocify {
 
 
 <div id="objectives" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Objectives</h1>
+<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
 <p>This lesson outlines some common data manipulation tasks with <code>dplyr</code>.</p>
 </div>
 <div id="materials" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Materials</h1>
+<h1 number="2"><span class="header-section-number">2</span> Materials</h1>
 <p>The slides for this presentation are <a href="https://mjfrigaard.github.io/data-manip-intro/Index.html#1">here</a>.</p>
 <p>There is also an accompanying RStudio.Cloud project <a href="https://rstudio.cloud/project/1918833">here.</a></p>
 <p>Read more about <code>dplyr</code> <a href="https://dplyr.tidyverse.org/index.html">here</a> on the tidyverse website, or in the <a href="https://r4ds.had.co.nz/transform.html">Data Transformation</a> chapter of R for Data Science.</p>
 </div>
 <div id="load-packages" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Load packages</h1>
+<h1 number="3"><span class="header-section-number">3</span> Load packages</h1>
 <p><code>dplyr</code> is part of the core <code>tidyverse</code> packages, so we install and load this meta-package below.</p>
 <pre class="r"><code>install.packages(&quot;tidyverse&quot;)
 library(tidyverse)</code></pre>
 </div>
 <div id="import-data" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Import data</h1>
+<h1 number="4"><span class="header-section-number">4</span> Import data</h1>
 <p>We’ll cover two methods for importing data into RStudio.</p>
 <div id="import-data-1" class="section level2 tabset" number="4.1">
-<h2 class="tabset"><span class="header-section-number">4.1</span> Import data</h2>
+<h2 class="tabset" number="4.1"><span class="header-section-number">4.1</span> Import data</h2>
 <p>We have the path to the <code>original_starwars</code> data stored in our <code>params</code>, but we will also go over how to build this dataset from <code>dplyr::starwars</code>.</p>
 <div id="import-using-url" class="section level3" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> Import using url</h3>
+<h3 number="4.1.1"><span class="header-section-number">4.1.1</span> Import using url</h3>
 <p>Below we import the <code>original_starwars</code> dataset from the slides using the url. This is similar to providing a local file path (<code>data/original-starwars.csv</code>).</p>
 <pre class="r"><code>read_csv(&quot;https://bit.ly/3qgjqSC&quot;)
 #&gt; Rows: 6 Columns: 6
@@ -403,7 +403,7 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="import-using-params" class="section level3" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> Import using <code>params</code></h3>
+<h3 number="4.1.2"><span class="header-section-number">4.1.2</span> Import using <code>params</code></h3>
 <p>We have the <code>params</code> list from our YAML header, which we can also use to import the data.</p>
 <pre class="yaml"><code>params: 
   data_file: !r file.path(&quot;https://bit.ly/3qgjqSC&quot;)</code></pre>
@@ -425,7 +425,7 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="dplyr-verbs" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> <code>dplyr</code> verbs</h1>
+<h1 number="5"><span class="header-section-number">5</span> <code>dplyr</code> verbs</h1>
 <p>This section covers four common <code>dplyr</code> verbs for data manipulation:</p>
 <ul>
 <li><code>select</code><br />
@@ -437,15 +437,15 @@ library(tidyverse)</code></pre>
 <li><code>mutate</code></li>
 </ul>
 <div id="selecting-columns" class="section level2 tabset" number="5.1">
-<h2 class="tabset"><span class="header-section-number">5.1</span> Selecting columns</h2>
+<h2 class="tabset" number="5.1"><span class="header-section-number">5.1</span> Selecting columns</h2>
 <p>These are exercises to try on your own using the <code>select()</code> function.</p>
 <div id="exercise" class="section level3" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> exercise</h3>
+<h3 number="5.1.1"><span class="header-section-number">5.1.1</span> exercise</h3>
 <p>Alter the code below to select just the <code>name</code> and <code>homeoworld</code> column:</p>
 <pre class="r"><code>select(original_starwars, name, species, homeworld)</code></pre>
 </div>
 <div id="solution" class="section level3" number="5.1.2">
-<h3><span class="header-section-number">5.1.2</span> solution</h3>
+<h3 number="5.1.2"><span class="header-section-number">5.1.2</span> solution</h3>
 <pre class="r"><code>select(original_starwars, name, homeworld)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -454,12 +454,12 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="exercise-1" class="section level3" number="5.1.3">
-<h3><span class="header-section-number">5.1.3</span> exercise</h3>
+<h3 number="5.1.3"><span class="header-section-number">5.1.3</span> exercise</h3>
 <p>Select only the columns starting with the letter <code>h</code>.</p>
 <pre class="r"><code>select(original_starwars, starts_with(&quot;_&quot;))</code></pre>
 </div>
 <div id="solution-1" class="section level3" number="5.1.4">
-<h3><span class="header-section-number">5.1.4</span> solution</h3>
+<h3 number="5.1.4"><span class="header-section-number">5.1.4</span> solution</h3>
 <pre class="r"><code>select(original_starwars, starts_with(&quot;h&quot;))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -469,15 +469,15 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="filtering-rows" class="section level2 tabset" number="5.2">
-<h2 class="tabset"><span class="header-section-number">5.2</span> Filtering rows</h2>
+<h2 class="tabset" number="5.2"><span class="header-section-number">5.2</span> Filtering rows</h2>
 <p>These are some additional exercises for <code>filter()</code>ing data.</p>
 <div id="exercise-2" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> exercise</h3>
+<h3 number="5.2.1"><span class="header-section-number">5.2.1</span> exercise</h3>
 <p>Change the code below so <code>original_starwars</code> only includes the droids.</p>
 <pre class="r"><code>filter(original_starwars, species == &quot;____&quot;)</code></pre>
 </div>
 <div id="solution-2" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> solution</h3>
+<h3 number="5.2.2"><span class="header-section-number">5.2.2</span> solution</h3>
 <pre class="r"><code>filter(original_starwars, species == &quot;Droid&quot;)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -486,13 +486,13 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="exercise-3" class="section level3" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> exercise</h3>
+<h3 number="5.2.3"><span class="header-section-number">5.2.3</span> exercise</h3>
 <p>Change the code below so <code>original_starwars</code> only includes data from the <code>homeworld</code>s of <code>Tatooine</code> and <code>Alderaan</code></p>
 <pre class="r"><code>filter(original_starwars, 
        homeworld %in% c(&quot;________&quot;, &quot;________&quot;))</code></pre>
 </div>
 <div id="solution-3" class="section level3" number="5.2.4">
-<h3><span class="header-section-number">5.2.4</span> solution</h3>
+<h3 number="5.2.4"><span class="header-section-number">5.2.4</span> solution</h3>
 <pre class="r"><code>filter(original_starwars, 
        homeworld %in% c(&quot;Tatooine&quot;, &quot;Alderaan&quot;))</code></pre>
 <div data-pagedtable="false">
@@ -503,15 +503,15 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="arranging-data" class="section level2 tabset" number="5.3">
-<h2 class="tabset"><span class="header-section-number">5.3</span> Arranging data</h2>
+<h2 class="tabset" number="5.3"><span class="header-section-number">5.3</span> Arranging data</h2>
 <p><code>arrange()</code> sorts variables on their content, numeric or character.</p>
 <div id="exercise-4" class="section level3" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> exercise</h3>
+<h3 number="5.3.1"><span class="header-section-number">5.3.1</span> exercise</h3>
 <p>Sort <code>original_starwars</code> according to the <code>hair_color</code>.</p>
 <pre class="r"><code>arrange(original_starwars, &quot;____ _____&quot;)</code></pre>
 </div>
 <div id="solution-4" class="section level3" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> solution</h3>
+<h3 number="5.3.2"><span class="header-section-number">5.3.2</span> solution</h3>
 <p>Note that the missing values are sorted to the bottom.</p>
 <pre class="r"><code>arrange(original_starwars, hair_color)</code></pre>
 <div data-pagedtable="false">
@@ -521,12 +521,12 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="exercise-5" class="section level3" number="5.3.3">
-<h3><span class="header-section-number">5.3.3</span> exercise</h3>
+<h3 number="5.3.3"><span class="header-section-number">5.3.3</span> exercise</h3>
 <p>Sort <code>original_starwars</code> by <code>height</code> and <code>mass</code>, descending.</p>
 <pre class="r"><code>arrange(original_starwars, desc(______, ____))</code></pre>
 </div>
 <div id="solution-5" class="section level3" number="5.3.4">
-<h3><span class="header-section-number">5.3.4</span> solution</h3>
+<h3 number="5.3.4"><span class="header-section-number">5.3.4</span> solution</h3>
 <pre class="r"><code>arrange(original_starwars, desc(height, mass))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -537,16 +537,16 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="mutate-columns" class="section level2 tabset" number="5.4">
-<h2 class="tabset"><span class="header-section-number">5.4</span> Mutate columns</h2>
+<h2 class="tabset" number="5.4"><span class="header-section-number">5.4</span> Mutate columns</h2>
 <p><code>mutate()</code> can create new columns, or change existing columns.</p>
 <div id="exercise-6" class="section level3" number="5.4.1">
-<h3><span class="header-section-number">5.4.1</span> exercise</h3>
+<h3 number="5.4.1"><span class="header-section-number">5.4.1</span> exercise</h3>
 <p>Alter the code below to create a <code>bmi</code> column for <code>starwars</code> characters in <code>original_starwars</code>.</p>
 <pre class="r"><code>mutate(original_starwars, 
        bmi = ____ / ((______ / 100) ^ 2))</code></pre>
 </div>
 <div id="solution-6" class="section level3" number="5.4.2">
-<h3><span class="header-section-number">5.4.2</span> solution</h3>
+<h3 number="5.4.2"><span class="header-section-number">5.4.2</span> solution</h3>
 <p>Note the use of parentheses here.</p>
 <pre class="r"><code>mutate(original_starwars, 
        bmi = mass / ((height / 100) ^ 2))</code></pre>
@@ -557,14 +557,14 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="exercise-7" class="section level3" number="5.4.3">
-<h3><span class="header-section-number">5.4.3</span> exercise</h3>
+<h3 number="5.4.3"><span class="header-section-number">5.4.3</span> exercise</h3>
 <p>Round the new <code>bmi</code> variable to 1 digit.</p>
 <pre class="r"><code>mutate(original_starwars, 
        bmi = mass / ((height / 100) ^ 2),
        bmi = _____(___, digits = _))</code></pre>
 </div>
 <div id="solution-7" class="section level3" number="5.4.4">
-<h3><span class="header-section-number">5.4.4</span> solution</h3>
+<h3 number="5.4.4"><span class="header-section-number">5.4.4</span> solution</h3>
 <pre class="r"><code>mutate(original_starwars, 
        bmi = mass / ((height / 100) ^ 2),
        bmi = round(bmi, digits = 1))</code></pre>
@@ -577,20 +577,20 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="the-pipe" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> The pipe</h1>
+<h1 number="6"><span class="header-section-number">6</span> The pipe</h1>
 <p>Clearly written code makes it easier for machines <em>and</em> humans to read. The pipe (<code>%&gt;%</code>) from <code>magrittr</code> package allows us to chain together multiple operations into functional ‘pipelines’.</p>
 <div id="function-pipelines" class="section level2 tabset" number="6.1">
-<h2 class="tabset"><span class="header-section-number">6.1</span> Function pipelines</h2>
+<h2 class="tabset" number="6.1"><span class="header-section-number">6.1</span> Function pipelines</h2>
 <p>The pipe (<code>%&gt;%</code>) takes an object that comes before it, and it drops the object into the function that comes after it.</p>
 <div id="exercise-8" class="section level3" number="6.1.1">
-<h3><span class="header-section-number">6.1.1</span> exercise</h3>
+<h3 number="6.1.1"><span class="header-section-number">6.1.1</span> exercise</h3>
 <p>Rewrite the code below to use the pipe</p>
 <pre class="r"><code>select(filter(
           original_starwars, mass &lt; ___), 
               ____, hair_color, _______, homeworld)</code></pre>
 </div>
 <div id="solution-8" class="section level3" number="6.1.2">
-<h3><span class="header-section-number">6.1.2</span> solution</h3>
+<h3 number="6.1.2"><span class="header-section-number">6.1.2</span> solution</h3>
 <p>This actually wouldn’t matter what order it was in–both would return the same result.</p>
 <pre class="r"><code>original_starwars %&gt;% 
   filter(mass &lt; 100) %&gt;% 
@@ -602,7 +602,7 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="exercise-9" class="section level3" number="6.1.3">
-<h3><span class="header-section-number">6.1.3</span> exercise</h3>
+<h3 number="6.1.3"><span class="header-section-number">6.1.3</span> exercise</h3>
 <p>Perform the following operations <em>without</em> using the pipe.</p>
 <ol style="list-style-type: decimal">
 <li>create object <code>x</code> with three values, (<code>3</code>, <code>7</code>, <code>12</code>)<br />
@@ -619,7 +619,7 @@ mean_x &lt;- ____(x)
 sqrt(______)</code></pre>
 </div>
 <div id="soluton" class="section level3" number="6.1.4">
-<h3><span class="header-section-number">6.1.4</span> soluton</h3>
+<h3 number="6.1.4"><span class="header-section-number">6.1.4</span> soluton</h3>
 <p>This returns a vector, not a <code>tibble</code>.</p>
 <pre class="r"><code># 1) 
 x &lt;- c(3, 7, 12)
@@ -630,7 +630,7 @@ sqrt(mean_x)
 #&gt; [1] 2.708013</code></pre>
 </div>
 <div id="exercise-10" class="section level3" number="6.1.5">
-<h3><span class="header-section-number">6.1.5</span> exercise</h3>
+<h3 number="6.1.5"><span class="header-section-number">6.1.5</span> exercise</h3>
 <p>Perform the following operations <em>with</em> the pipe.</p>
 <ol style="list-style-type: decimal">
 <li>create object <code>x</code> with three values, (<code>3</code>, <code>7</code>, <code>12</code>)<br />
@@ -644,7 +644,7 @@ sqrt(mean_x)
   ____()</code></pre>
 </div>
 <div id="solution-9" class="section level3" number="6.1.6">
-<h3><span class="header-section-number">6.1.6</span> solution</h3>
+<h3 number="6.1.6"><span class="header-section-number">6.1.6</span> solution</h3>
 <p>Note that we can create a pipeline without even creating an object.</p>
 <pre class="r"><code>c(3, 7, 12) %&gt;% 
   mean() %&gt;% 

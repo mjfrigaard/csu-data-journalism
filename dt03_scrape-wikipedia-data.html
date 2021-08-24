@@ -363,26 +363,26 @@ div.tocify {
 
 
 <div id="objectives" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Objectives</h1>
+<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
 <p>This document outlines some advanced data wrangling with <a href="https://dplyr.tidyverse.org/index.html"><code>dplyr</code></a>, <a href="https://tidyr.tidyverse.org/index.html"><code>tidyr</code></a>, and <a href="https://stringr.tidyverse.org/index.html"><code>stringr</code></a>. Read more in the <a href="https://r4ds.had.co.nz/transform.html">Data Transformation</a> chapter of R for Data Science.</p>
 <div id="load-packages" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Load packages</h2>
+<h2 number="1.1"><span class="header-section-number">1.1</span> Load packages</h2>
 <p>These are all part of the <code>tidyverse</code>, so we install and load this meta-package below.</p>
 <pre class="r"><code># install.packages(&quot;tidyverse&quot;)
 library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="pharmaceutical-companies" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Pharmaceutical Companies</h1>
+<h1 number="2"><span class="header-section-number">2</span> Pharmaceutical Companies</h1>
 <p>In the slides we had well-formatted dataset. In these exercises, we’re going to import some data from the wild (Wikipedia), because most data aren’t ready to visualize and model when we first get them.</p>
 <div id="import-the-data" class="section level2 tabset" number="2.1">
-<h2 class="tabset"><span class="header-section-number">2.1</span> Import the data</h2>
+<h2 class="tabset" number="2.1"><span class="header-section-number">2.1</span> Import the data</h2>
 <p>I Googled “largest pharmaceutical companies” and found <a href="https://en.wikipedia.org/wiki/List_of_largest_biotechnology_and_pharmaceutical_companies">this wikipedia page</a>.</p>
 <p>These packages will help us scrape the data in the table and manipulate it in R.</p>
 <pre class="r"><code>library(xml2)
 library(rvest)</code></pre>
 <div id="read-html" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Read HTML</h3>
+<h3 number="2.1.1"><span class="header-section-number">2.1.1</span> Read HTML</h3>
 <p>The first function I’ll use comes from the <code>xml2</code> <a href="https://blog.rstudio.com/2015/04/21/xml2/">package</a>. <code>xml2::read_html()</code> loads the html from the wikipedia page into an R object I call <code>wiki_html</code>.</p>
 <pre class="r"><code>wiki_html &lt;- xml2::read_html(&quot;https://en.wikipedia.org/wiki/List_of_largest_biotechnology_and_pharmaceutical_companies&quot;)</code></pre>
 <p>We should check the structure of new objects, so we know what we’re working with.</p>
@@ -394,7 +394,7 @@ library(rvest)</code></pre>
 <p>I can see this is a list of two objects (a <code>node</code> and a <code>doc</code>).</p>
 </div>
 <div id="html-nodes-css" class="section level3" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> HTML Nodes (css)</h3>
+<h3 number="2.1.2"><span class="header-section-number">2.1.2</span> HTML Nodes (css)</h3>
 <p>I want the html <code>node</code>, so I will use the <code>html_nodes()</code> function from the <code>rvest</code> <a href="https://github.com/hadley/rvest">package</a>.</p>
 <p>The <code>css</code> argument is set to <code>"table"</code>. Once again I check the structure of the output object.</p>
 <pre class="r"><code>wiki_html_tables &lt;- wiki_html %&gt;% rvest::html_nodes(css = &quot;table&quot;)
@@ -431,7 +431,7 @@ relevant_tables %&gt;% str()</code></pre>
 <p>This returned yet another list of lists! (another set of <code>node</code> and <code>doc</code>).</p>
 </div>
 <div id="extract-html-table" class="section level3" number="2.1.3">
-<h3><span class="header-section-number">2.1.3</span> Extract HTML table</h3>
+<h3 number="2.1.3"><span class="header-section-number">2.1.3</span> Extract HTML table</h3>
 <p>Now I need to use <code>rvest::html_table()</code> function (combined with some bracket sub-setting) to explore this object and learn about it’s contents (read more about how this works <a href="https://dcl-wrangle.stanford.edu/rvest.html#scrape-data-with-rvest">here</a>).</p>
 <p>I will start with position <code>[[1]]</code> and set <code>fill = TRUE</code>.</p>
 <pre class="r"><code>rvest::html_table(relevant_tables[[1]], 
@@ -447,12 +447,12 @@ relevant_tables %&gt;% str()</code></pre>
 </div>
 </div>
 <div id="outline-before-you-start" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Outline before you start</h2>
+<h2 number="2.2"><span class="header-section-number">2.2</span> Outline before you start</h2>
 <p>We have a raw dataset now, and we should make a ‘to-do’ list of what we want the data to look like. I start with data tidying, then move into changes for the individual variables.</p>
 </div>
 </div>
 <div id="wrangle-data" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Wrangle Data</h1>
+<h1 number="3"><span class="header-section-number">3</span> Wrangle Data</h1>
 <p>These data are in a wide format, with each <code>market_cap_in_</code> spread across columns.</p>
 <pre class="r"><code>TopPharmCompRaw</code></pre>
 <div data-pagedtable="false">
@@ -461,10 +461,10 @@ relevant_tables %&gt;% str()</code></pre>
   </script>
 </div>
 <div id="pivot-data" class="section level2 tabset" number="3.1">
-<h2 class="tabset"><span class="header-section-number">3.1</span> Pivot data</h2>
+<h2 class="tabset" number="3.1"><span class="header-section-number">3.1</span> Pivot data</h2>
 <p>Ideally, we want two variables, <code>year</code> and <code>market_cap_us_bil</code>.</p>
 <div id="pivot_longer" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> <code>pivot_longer</code></h3>
+<h3 number="3.1.1"><span class="header-section-number">3.1.1</span> <code>pivot_longer</code></h3>
 <p>We can re-shape <code>TopPharmComp</code> with <code>tidyr::pivot_longer()</code>, but first we need all the variables in the <em>same</em> format. We can do this with <code>mutate_if()</code>.</p>
 <pre class="r"><code>TopPharmCompRaw %&gt;% 
   mutate_if(is.numeric, as.character) %&gt;% 
@@ -485,7 +485,7 @@ relevant_tables %&gt;% str()</code></pre>
 </div>
 </div>
 <div id="format-columns" class="section level2 tabset" number="3.2">
-<h2 class="tabset"><span class="header-section-number">3.2</span> Format Columns</h2>
+<h2 class="tabset" number="3.2"><span class="header-section-number">3.2</span> Format Columns</h2>
 <p>Follow along on each tab for the steps to wrangle the column names:</p>
 <ol style="list-style-type: decimal">
 <li>Each variable in it’s own column:
@@ -498,7 +498,7 @@ relevant_tables %&gt;% str()</code></pre>
 <li>Missing variables formatted correctly (replace <code>-</code> with <code>NA</code>)</li>
 </ol>
 <div id="string-manipulations" class="section level3" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> String manipulations</h3>
+<h3 number="3.2.1"><span class="header-section-number">3.2.1</span> String manipulations</h3>
 <p>We can use <code>janitor::clean_names()</code>, but first we should do some string manipulation to remove the extra characters from the column names.</p>
 <pre class="r"><code>TidyTopPharmComp %&gt;% 
     # get a vector of &#39;dirty&#39; names
@@ -520,7 +520,7 @@ cleaned_names</code></pre>
 ## [5] &quot;market_cap_us_bil&quot;</code></pre>
 </div>
 <div id="janitorclean_names" class="section level3" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> <code>janitor::clean_names</code></h3>
+<h3 number="3.2.2"><span class="header-section-number">3.2.2</span> <code>janitor::clean_names</code></h3>
 <p>Now we can apply the new names (<code>cleaned_names</code>) to <code>TidyTopPharmComp</code> and use <code>janitor::clean_names()</code> to standardize them.</p>
 <pre class="r"><code>TidyTopPharmComp %&gt;% 
     set_names(nm = cleaned_names) %&gt;% 
@@ -532,7 +532,7 @@ cleaned_names</code></pre>
 </div>
 </div>
 <div id="assign-to-data-frame" class="section level3" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> Assign to data frame</h3>
+<h3 number="3.2.3"><span class="header-section-number">3.2.3</span> Assign to data frame</h3>
 <p>If this looks acceptable, we can assign to <code>TopPharmComp</code>.</p>
 <pre class="r"><code>TopPharmComp &lt;- TidyTopPharmComp %&gt;% 
     set_names(nm = cleaned_names) %&gt;% 
@@ -540,7 +540,7 @@ cleaned_names</code></pre>
 </div>
 </div>
 <div id="define-variables" class="section level2 tabset" number="3.3">
-<h2 class="tabset"><span class="header-section-number">3.3</span> Define Variables</h2>
+<h2 class="tabset" number="3.3"><span class="header-section-number">3.3</span> Define Variables</h2>
 <p>We want to split up the following variables into their own columns:</p>
 <ol style="list-style-type: decimal">
 <li>Year as a four-number digit <code>year</code></li>
@@ -555,7 +555,7 @@ cleaned_names</code></pre>
 <li>a <code>ranking</code> variable with a numerically coded rank</li>
 </ol>
 <div id="year" class="section level3" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> <code>year</code></h3>
+<h3 number="3.3.1"><span class="header-section-number">3.3.1</span> <code>year</code></h3>
 <p>We can also wrangle the <code>market_cap_year</code> variable so it only contains the four-number year.</p>
 <pre class="r"><code>TopPharmComp %&gt;% 
   # remove characters
@@ -577,7 +577,7 @@ cleaned_names</code></pre>
                 year = as.integer(year)) -&gt; TopPharmComp</code></pre>
 </div>
 <div id="company_type" class="section level3" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> <code>company_type</code></h3>
+<h3 number="3.3.2"><span class="header-section-number">3.3.2</span> <code>company_type</code></h3>
 <p>Here we <code>separate</code> the <code>company</code> column into two new columns, then use the <code>company_name_etc</code> to create <code>company_type</code></p>
 <pre class="r"><code>TopPharmComp %&gt;% 
   # separate company into 2 columns
@@ -615,7 +615,7 @@ TopPharmComp</code></pre>
 </div>
 </div>
 <div id="stock_exch-stock_id" class="section level3" number="3.3.3">
-<h3><span class="header-section-number">3.3.3</span> <code>stock_exch</code> &amp; <code>stock_id</code></h3>
+<h3 number="3.3.3"><span class="header-section-number">3.3.3</span> <code>stock_exch</code> &amp; <code>stock_id</code></h3>
 <p>We will use the <code>company_etc</code> column to create <code>stock_exch</code> and <code>stock_id</code>. We need to make sure we trim the whitespace from <code>stock_id</code> (after the )</p>
 <pre class="r"><code>TopPharmComp %&gt;% 
   # first separate the columns
@@ -650,7 +650,7 @@ TopPharmComp</code></pre>
 </div>
 </div>
 <div id="largest_market_cap_date" class="section level3" number="3.3.4">
-<h3><span class="header-section-number">3.3.4</span> <code>largest_market_cap_date</code></h3>
+<h3 number="3.3.4"><span class="header-section-number">3.3.4</span> <code>largest_market_cap_date</code></h3>
 <p>Here we’ll use <code>dplyr::rename()</code> to change <code>largest_market_cap_us_bil</code> to <code>_original</code> so we can check our work with <code>remove = FALSE</code>.</p>
 <pre class="r"><code>TopPharmComp %&gt;% 
   # rename column to largest_market_cap_original
@@ -697,7 +697,7 @@ TopPharmComp</code></pre>
 </div>
 </div>
 <div id="company_name" class="section level3" number="3.3.5">
-<h3><span class="header-section-number">3.3.5</span> <code>company_name</code></h3>
+<h3 number="3.3.5"><span class="header-section-number">3.3.5</span> <code>company_name</code></h3>
 <p>We will create a <code>company_name</code> variable using a different <code>sep</code> argument here, and we clean the <code>company_name</code> variable with <code>str_remove_all()</code></p>
 <pre class="r"><code>TopPharmComp %&gt;% 
   # separate company into 2 columns
@@ -738,7 +738,7 @@ TopPharmComp</code></pre>
 </div>
 </div>
 <div id="ranking" class="section level3" number="3.3.6">
-<h3><span class="header-section-number">3.3.6</span> <code>ranking</code></h3>
+<h3 number="3.3.6"><span class="header-section-number">3.3.6</span> <code>ranking</code></h3>
 <p>Here we can use <code>str_remove_all()</code> to remove the extra numbers in <code>rank</code> and create the <code>ranking</code> variable.</p>
 <pre class="r"><code>TopPharmComp %&gt;% 
   dplyr::mutate(ranking = 
@@ -768,7 +768,7 @@ TopPharmComp</code></pre>
 </div>
 </div>
 <div id="missing-values" class="section level3" number="3.3.7">
-<h3><span class="header-section-number">3.3.7</span> Missing Values</h3>
+<h3 number="3.3.7"><span class="header-section-number">3.3.7</span> Missing Values</h3>
 <p>We can see there is a missing value in <code>market_cap_us_bil</code> formatted as <code>-</code>. We can change these with <code>dplyr::na_if()</code></p>
 <pre class="r"><code>TopPharmComp %&gt;% 
   na_if(x = ., y = &quot;-&quot;) %&gt;% 
@@ -784,7 +784,7 @@ TopPharmComp</code></pre>
 </div>
 </div>
 <div id="format-values" class="section level2 tabset" number="3.4">
-<h2 class="tabset"><span class="header-section-number">3.4</span> Format Values</h2>
+<h2 class="tabset" number="3.4"><span class="header-section-number">3.4</span> Format Values</h2>
 <p>Let’s take a look with <code>glimpse()</code> to see how these are formatted.</p>
 <pre class="r"><code># set width
 options(width = 60)
@@ -803,7 +803,7 @@ TopPharmComp %&gt;% glimpse(60)</code></pre>
 ## $ market_cap_us_bil         &lt;chr&gt; &quot;385&quot;, &quot;346.1&quot;, &quot;375.4&quot;,…</code></pre>
 <p>We can see the <code>market_cap_us_bil</code> and <code>largest_market_cap_us_bil</code> are formatted as <code>character</code>s (but they should be <code>double</code>).</p>
 <div id="remove-whitespace" class="section level3" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> Remove whitespace</h3>
+<h3 number="3.4.1"><span class="header-section-number">3.4.1</span> Remove whitespace</h3>
 <p>Remove the whitespace from <code>largest_market_cap_us_bil</code> with <code>stringr::str_trim()</code>.</p>
 <pre class="r"><code>TopPharmComp %&gt;% 
   mutate(
@@ -836,7 +836,7 @@ TopPharmComp %&gt;% glimpse(60)</code></pre>
     market_cap_us_bil = as.numeric(market_cap_us_bil))</code></pre>
 </div>
 <div id="dates" class="section level3" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> Dates</h3>
+<h3 number="3.4.2"><span class="header-section-number">3.4.2</span> Dates</h3>
 <p>We will use the <code>_original</code> suffix again to check our work.</p>
 <pre class="r"><code>TopPharmComp %&gt;% 
   rename(cap_date_original = largest_market_cap_date) %&gt;% 
@@ -868,7 +868,7 @@ TopPharmComp</code></pre>
 </div>
 </div>
 <div id="factors" class="section level3" number="3.4.3">
-<h3><span class="header-section-number">3.4.3</span> Factors</h3>
+<h3 number="3.4.3"><span class="header-section-number">3.4.3</span> Factors</h3>
 <p>We want to keep the order of <code>ranking</code>, so we will format this as an ordered factor. We don’t need to supply any <code>levels</code> because they are already numeric.</p>
 <pre class="r"><code>TopPharmComp &lt;- TopPharmComp %&gt;% 
   mutate(
@@ -885,7 +885,7 @@ TopPharmComp %&gt;% arrange(ranking)</code></pre>
 </div>
 </div>
 <div id="export-data" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Export data</h1>
+<h1 number="4"><span class="header-section-number">4</span> Export data</h1>
 <p>We now have a dataset we can use for modeling or visualizations! We’ll export this to the <code>data</code> folder and use it in the data visualization section.</p>
 <pre class="r"><code>readr::write_csv(x = TopPharmComp, file = &quot;data/TopPharmComp.csv&quot;)</code></pre>
 </div>
