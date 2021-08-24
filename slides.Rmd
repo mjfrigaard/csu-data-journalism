@@ -8,9 +8,17 @@ title: "Slides"
 
 2. [Week 1 (supplement): R Workflow Best Practices](slides/wk-01.1-r-workflow-best-practices.html)
 
-3. [Week 2: Introduction to R Programming](slides/01.3-intro-r-prog.html)
+3. [Week 2: Introduction to R Programming](slides/wk-02.1-intro-r-prog.html)
 
-4. [Week 2 (supplement): Introduction to RMarkdown](slides/01.4-rmarkdown.html)
+4. [Week 2 (supplement): Introduction to RMarkdown](slides/wk-02.2-rmarkdown.html)
+
+5. [Week 3: Data Manipulation with R](slides/wk-03.0-data-manip-intro.html)
+
+6. [Week 3 (supplement): Data Reshaping in R](slides/wk-03.1-data-trans-joins.html)
+
+7. [Week 4: Introduction to Data Visualization with ggplot2](slides/wk-04.0-data-viz-intro.html)
+
+8. [Week 5: Data Visualization Part 2](slides/wk-05.0-data-viz-part-2.html)
 
 <!--
 

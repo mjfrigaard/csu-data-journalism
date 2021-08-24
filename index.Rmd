@@ -1,5 +1,5 @@
 ---
-title: "Welcome to Data Journalism!"
+title: "Journalism 301: Data Journalism"
 author: "Martin Frigaard, Lecturer"
 ---
 
@@ -9,8 +9,6 @@ library(stringr)
 library(htmltools)
 tagList(rmarkdown::html_dependency_font_awesome())
 ```
-
-# Journalism 301: Data Journalism
 
 
 *Department of Journalism and Public Relations*  
@@ -143,13 +141,13 @@ News changes quickly, so I reserve the right to remove, add, or alter any conten
 |                    | Overview of data technologies:                       | [Fifty Years of Journalism and Data: A Brief History](https://gijn.org/2015/11/12/fifty-years-of-journalism-and-data-a-brief-history/) |
 |                    | - html                                               | [Data Journalism in Perspective](https://datajournalism.com/read/handbook/one/introduction/data-journalism-in-perspective)             |
 |                    | - web-browsers                                       | *Exercises:*                                                                                                                           |
-|                    | - xml                                                | [Install R & RStudio](https://mjfrigaard.github.io/csuc-data-journalism/bk00_your-first-r-session.html)                                |
-|                    | - css                                                | [Slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-01.0-intro-web-tech.html)                                         |
-|                    | - binary (proprietary) files                         |                                                                                                                                        |
+|                    | - xml                                                | [Install R & RStudio](https://mjfrigaard.github.io/csuc-data-journalism/wk1-00_your-first-r-session.html)                              |
+|                    | - css                                                | [introduction to data tech slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-01.0-intro-web-tech)                    |
+|                    | - binary (proprietary) files                         | [R best practices slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-01.1-r-workflow-best-practices)                  |
 |                    | - plain text                                         |                                                                                                                                        |
 |                    | - markdown                                           |                                                                                                                                        |
 | Week 2             | What is/are data?                                    | *Reading:*                                                                                                                             |
-|                    | Variables                                            | intro-to-data.pdf                                                                                                                      |
+|                    | Variables                                            | [01-intro-to-R-notes.pdf](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/notes/01-intro-to-R-notes.pdf)                  |
 |                    | Observations                                         | *Exercises:*                                                                                                                           |
 |                    | Datasets (spreadsheets)                              | 1. Installation checkpoints for R/RStudio                                                                                              |
 |                    | Introduction to R and RStudio                        | 2. Screenshots of RStudio.Cloud environment                                                                                            |
@@ -213,7 +211,6 @@ News changes quickly, so I reserve the right to remove, add, or alter any conten
 |                    | Final project draft #1                               |                                                                                                                                        |
 | Week 15            | Final project story editing and revisions            | Final story edits                                                                                                                      |
 | FINALS WEEK        | Submission of final project                          |                                                                                                                                        |
-
 
 
 

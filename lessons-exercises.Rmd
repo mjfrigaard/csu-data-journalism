@@ -45,48 +45,58 @@ x <- x %>%
     bullet = map2_chr(href, comment, ~ paste("*", .x, .y, "\n")))
 ```
 
-### Introduction to R & RStudio
+### Week 1
 
-```{r bk-files, results='asis', echo=FALSE, eval=TRUE}
+```{r wk1-files, results='asis', echo=FALSE, eval=TRUE}
 # this uses the `bk` as a prefix and identifier for the 'background' section
-cat_bullet(x, "^bk")
+cat_bullet(x, "^wk1-")
 ```
 
-### Reproducible Analysis With R Markdown
 
-```{r mk-files, results='asis', echo=FALSE, eval=TRUE}
+### Week 2
+
+```{r wk2-files, results='asis', echo=FALSE, eval=TRUE}
+# this uses the `bk` as a prefix and identifier for the 'background' section
+cat_bullet(x, "^wk2-")
+```
+
+### Week 3
+
+```{r wk3-files, results='asis', echo=FALSE, eval=TRUE}
 # this uses the `mk` as a prefix and identifier for the 'markdown' section
-cat_bullet(x, "^mk")
+cat_bullet(x, "^wk3-")
 ```
 
-### Data Manipulation and Transformation
+### Week 4
 
-```{r dt-files, results = 'asis', echo = FALSE}
+```{r wk4-files, results = 'asis', echo = FALSE}
 # here we see the 'dt' as core dplyr/tidyr lessons
-cat_bullet(x, "^dt")
+cat_bullet(x, "^wk4-")
 ```
 
-### Data Visualization
+### Week 5
 
-```{r gg-files, results = 'asis', echo = FALSE, eval=TRUE}
+```{r wk5-files, results = 'asis', echo = FALSE, eval=TRUE}
 # here we see the 'gg' for ggplot2 
-cat_bullet(x, "^gg")
+cat_bullet(x, "^wk5-")
 ```
 
-### Building Storyboards with `flexdashboard`
+### Week 6
 
 *(under construction)*
 
-```{r sh-files, results = 'asis', echo = FALSE, eval=TRUE}
+```{r wk6-files, results = 'asis', echo = FALSE, eval=TRUE}
 # and the `sh` for shiny
-cat_bullet(x, "^sh")
+cat_bullet(x, "^wk6-")
 ```
 
-### Programming
+### Week 7
+
+*(under construction)*
 
 ```{r pr-files, results = 'asis', echo = FALSE, eval=TRUE}
 # and the `pr` for programming
-cat_bullet(x, "^pr")
+cat_bullet(x, "^wk7-")
 ```
 
 This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).

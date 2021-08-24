@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Introduction to Dashboards (under construction)</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CSUC Data Journalism</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Course outline</a>
+</li>
+<li>
+  <a href="lessons-exercises.html">Lessons and exercises</a>
+</li>
+<li>
+  <a href="slides.html">Slides</a>
+</li>
+<li>
+  <a href="more-resources.html">More resources</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Introduction to Dashboards (under construction)</h1>
+
+</div>
+
+
+<div id="objectives" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
+<p>An introduction to dashboard development in R with <code>flexdashboard</code>s.</p>
+</div>
+<div id="materials" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Materials</h1>
+<ul>
+<li><p>Slides:</p></li>
+<li><p>RStudio Project:</p></li>
+</ul>
+</div>
+<div id="previous-lessons" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Previous lessons</h1>
+<p>All of the exercises and lessons are available <a href="">here</a>, but you can also read more about <a href="https://ggplot2.tidyverse.org/index.html"><code>ggplot2</code></a> on the tidyverse website, and in the <a href="https://r4ds.had.co.nz/data-visualisation.html">Data Visualisation</a> chapter of R for Data Science.</p>
+</div>
+<div id="load-the-tidyverse-and-flexdashboard" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Load the <code>tidyverse</code> and <code>flexdashboard</code></h1>
+<p>The main packages we’re going to use are <code>dplyr</code>, <code>tidyr</code>, <code>ggplot2</code>, and <code>flexdashboard</code>.</p>
+<pre class="r"><code>library(tidyverse)
+library(skimr)
+library(janitor)
+library(flexdashboard)</code></pre>
+</div>
+<div id="what-should-go-into-a-dashboard" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> What should go into a dashboard?</h1>
+</div>
+<div id="the-yaml-header" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> The YAML header</h1>
+<pre class="yaml"><code>---
+title: &quot;My Dashboard&quot;
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: scroll
+---</code></pre>
+</div>
+<div id="inputs" class="section level1 sidebar" number="7" data-width="200">
+<h1 class="sidebar" number="7" data-width="200"><span class="header-section-number">7</span> Inputs</h1>
+<p>Data input.</p>
+<pre class="r"><code>AppleMobRaw &lt;- readr::read_csv(&quot;https://bit.ly/36tTVpe&quot;)
+AppleMobRaw %&gt;% 
+  # transpose data 
+  tidyr::pivot_longer(cols = -c(geo_type:country), 
+    names_to = &quot;date&quot;, values_to = &quot;dir_request&quot;) %&gt;% 
+    # remove missing country data
+  dplyr::filter(!is.na(country) &amp; !is.na(`sub-region`)) %&gt;% 
+  # clean names
+  janitor::clean_names() %&gt;%
+  # date
+  mutate(date = lubridate::ymd(date)) %&gt;% 
+  # create trans_type
+  rename(trans_type = transportation_type) -&gt; TidyApple</code></pre>
+</div>
+<div id="page-1" class="section level1" number="8" data-orientation="columns">
+<h1 number="8" data-orientation="columns"><span class="header-section-number">8</span> Page 1</h1>
+<div id="column" class="section level2 tabset" number="8.1" data-width="400">
+<h2 class="tabset" number="8.1" data-width="400"><span class="header-section-number">8.1</span> Column</h2>
+<div id="memory-size" class="section level3" number="8.1.1">
+<h3 number="8.1.1"><span class="header-section-number">8.1.1</span> Memory Size</h3>
+<pre class="r"><code>TidyApple %&gt;%  
+  inspectdf::inspect_mem() %&gt;%  
+  inspectdf::show_plot(text_labels = TRUE)</code></pre>
+</div>
+<div id="missing-data" class="section level3" number="8.1.2">
+<h3 number="8.1.2"><span class="header-section-number">8.1.2</span> Missing Data</h3>
+<pre class="r"><code>TidyApple %&gt;%
+  inspectdf::inspect_na() %&gt;% 
+  inspectdf::show_plot(text_labels = TRUE)</code></pre>
+</div>
+</div>
+<div id="column-1" class="section level2 tabset" number="8.2" data-width="400">
+<h2 class="tabset" number="8.2" data-width="400"><span class="header-section-number">8.2</span> Column</h2>
+<div id="categorical-data" class="section level3" number="8.2.1">
+<h3 number="8.2.1"><span class="header-section-number">8.2.1</span> Categorical Data</h3>
+<pre class="r"><code>TidyApple %&gt;% 
+  select_if(is.character) %&gt;% 
+  inspectdf::inspect_cat() %&gt;% 
+  inspectdf::show_plot(text_labels = TRUE)</code></pre>
+</div>
+<div id="data-imbalances" class="section level3" number="8.2.2">
+<h3 number="8.2.2"><span class="header-section-number">8.2.2</span> Data Imbalances</h3>
+<pre class="r"><code>TidyApple %&gt;% 
+  inspectdf::inspect_imb() %&gt;% 
+  inspectdf::show_plot(text_labels = TRUE)</code></pre>
+</div>
+</div>
+</div>
+<div id="page-2" class="section level1" number="9" data-orientation="rows">
+<h1 number="9" data-orientation="rows"><span class="header-section-number">9</span> Page 2</h1>
+<div id="row" class="section level2 tabset tabset-fade" number="9.1" data-height="600">
+<h2 class="tabset tabset-fade" number="9.1" data-height="600"><span class="header-section-number">9.1</span> Row</h2>
+<div id="numeric-data" class="section level3" number="9.1.1">
+<h3 number="9.1.1"><span class="header-section-number">9.1.1</span> Numeric Data</h3>
+<pre class="r"><code>TidyApple %&gt;% 
+  select_if(is.numeric) %&gt;% 
+  inspectdf::inspect_num() %&gt;% 
+  inspectdf::show_plot(text_labels = TRUE)</code></pre>
+</div>
+<div id="distributions-ggridges" class="section level3" number="9.1.2">
+<h3 number="9.1.2"><span class="header-section-number">9.1.2</span> Distributions <code>ggridges</code></h3>
+<pre class="r"><code>library(ggridges) 
+lab_ridges &lt;- labs(x = &quot;Apple directions requests&quot;,
+                   y = &quot;Transportation Types&quot;,
+     title = &quot;Direction Requests by Transportation Type&quot;,
+     subtitle = &quot;source: https://covid19.apple.com/mobility&quot;)
+
+
+TidyApple %&gt;%
+  ggplot() +
+  geom_density_ridges(aes(x = dir_request, 
+                          y = trans_type,
+    fill = trans_type), 
+    alpha = 1/5) +
+  lab_ridges</code></pre>
+</div>
+</div>
+<div id="row-1" class="section level2 tabset tabset-fade" number="9.2" data-height="400">
+<h2 class="tabset tabset-fade" number="9.2" data-height="400"><span class="header-section-number">9.2</span> Row</h2>
+<div id="topuscities-as-paged_table" class="section level3" number="9.2.1">
+<h3 number="9.2.1"><span class="header-section-number">9.2.1</span> <code>TopUSCities</code> as <code>paged_table</code></h3>
+<pre class="r"><code>TopUSCities &lt;- TidyApple %&gt;% 
+  filter(country == &quot;United States&quot; &amp; 
+           region %in% c(&quot;New York City&quot;,&quot;Los Angeles&quot;, 
+                         &quot;Chicago&quot;, &quot;Houston&quot;, &quot;Phoenix&quot;))
+rmarkdown::paged_table(TopUSCities)</code></pre>
+</div>
+<div id="maxuscitiesdriving-as-reactable" class="section level3" number="9.2.2">
+<h3 number="9.2.2"><span class="header-section-number">9.2.2</span> <code>MaxUSCitiesDriving</code> as <code>reactable</code></h3>
+<pre class="r"><code>TopUSCities %&gt;% 
+  filter(trans_type == &quot;driving&quot;) %&gt;% 
+  group_by(region) %&gt;% 
+  slice_max(dir_request) %&gt;% 
+  ungroup() -&gt; MaxUSCitiesDriving
+reactable(MaxUSCitiesDriving, 
+              resizable = TRUE, showPageSizeOptions = TRUE, 
+              selection = &quot;multiple&quot;, onClick = &quot;select&quot;)</code></pre>
+</div>
+</div>
+</div>
+<div id="page-3" class="section level1" number="10" data-navmenu="More">
+<h1 number="10" data-navmenu="More"><span class="header-section-number">10</span> Page 3</h1>
+<div id="column-2" class="section level2" number="10.1">
+<h2 number="10.1"><span class="header-section-number">10.1</span> Column</h2>
+<div id="chart-e" class="section level3" number="10.1.1">
+<h3 number="10.1.1"><span class="header-section-number">10.1.1</span> Chart E</h3>
+<pre class="r"><code>lab_top_cities &lt;- labs(x = &quot;Date&quot;, y  = &quot;Direction Requests&quot;, 
+     title = &quot;Trends of Relative Activity in Selected US Cities&quot;,
+     subtitle = &quot;NY, LA, CH, HOU, PHA, PHL, SATX, SD&quot;, 
+     color = &quot;Type&quot;)
+
+TopUSCities %&gt;% 
+  ggplot(aes(x = date, y = dir_request, 
+             group = region, 
+             color = trans_type)) + 
+  geom_line(size = 0.1) + 
+  geom_hline(yintercept = 100, size = 0.2, color = &quot;gray20&quot;) +
+  facet_wrap(region ~ trans_type, ncol = 6) + 
+  theme_minimal() + 
+  theme(legend.position = &quot;top&quot;) +
+  lab_top_cities </code></pre>
+</div>
+</div>
+</div>
+<div id="page-4" class="section level1" number="11" data-navmenu="More">
+<h1 number="11" data-navmenu="More"><span class="header-section-number">11</span> Page 4</h1>
+<div id="column-3" class="section level2" number="11.1">
+<h2 number="11.1"><span class="header-section-number">11.1</span> Column</h2>
+<div id="chart-f" class="section level3" number="11.1.1">
+<h3 number="11.1.1"><span class="header-section-number">11.1.1</span> Chart F</h3>
+<pre class="r"><code>library(hrbrthemes)
+TopUSCities %&gt;% 
+  ggplot(aes(x = date, y = dir_request, 
+             group = region, 
+             color = trans_type)) + 
+  geom_line(size = 0.1) + 
+  geom_hline(yintercept = 100, size = 0.2, color = &quot;gray20&quot;) +
+  facet_wrap(region ~ trans_type, ncol = 6) + 
+  hrbrthemes::theme_ipsum(
+    base_size = 8, 
+    plot_title_size = 12, 
+    strip_text_size = 9, 
+    subtitle_size = 10) + 
+  theme(legend.position = &quot;top&quot;) +
+  lab_top_cities </code></pre>
+</div>
+</div>
+</div>
+
+<i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5,h6",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
