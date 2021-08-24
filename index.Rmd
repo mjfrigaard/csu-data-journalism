@@ -21,7 +21,7 @@ Course website: http://bit.ly/csuc-dj-2021
 
 ## DESCRIPTION
 
-The need for analytic abilities has exploded in the last decade. The desire for evidence-based decisions has extended into nearly every facet of life. We trust algorithms to deliver us online orders, match us with dates, and even find health professionals. Almost all journalism has moved from print to screens, and this has changed the underlying skillset the profession requires.
+The need for analytic abilities exploded in the last decade. The desire for evidence-based decisions extended into nearly every facet of life. We trust algorithms to deliver us online orders, match us with dates, and even find health professionals. Almost all journalism has moved from print to screens, and this has changed the underlying skill set the profession requires.
  
 This course trains students to use the tools (software, methods and theory) required to access, process, analyze and compose findings in the manner of public interest and data journalism. The course will introduce students to the R programming language, data manipulation, and visualizations.
 
@@ -52,17 +52,15 @@ By taking this course, students commit to attending every meeting (absent medica
 
 This course requires that students attend class to learn basic data manipulation and data visualization skills. Therefore, much of the student evaluation, besides the weekly exercises conducted to ensure comprehension, is based on two data journalism projects.
 
-Exercises (credit): These are in-class exercises and homework assignments.  Each missed exercise after the first will cost the student a full letter grade for the course.  Completion of these assignments is obligatory.
+**Exercises (credit)**: These are in-class exercises and homework assignments.  Each missed exercise after the first will cost the student a full letter grade for the course.  Completion of these assignments is obligatory.
 
-Project 1 (30%): Reproduce an exploratory data analysis (EDA) of a given data source and accompanying narrative. This project gives students an opportunity to practice data manipulation, visualization, graphing techniques, presentation and framing.  Length: 1,200-1,500 words.
+**Project 1 (40%)**: Reproduce an exploratory data analysis (EDA) of a given data source and accompanying narrative. This project gives students an opportunity to practice data manipulation, visualization, graphing techniques, presentation and framing.  Length: 1,200-1,500 words.
 
-Project 2 (30%): Storyboard project. Students will choose from a list of data sources, create a sequence of data visualizations and displays, and provide related commentary and narrative. This project will be published online. This project requires the student to use the R programming to examine an issue of social scientific significance. Length: 1,200-1,500 words.
+**Project 2 (40%)**: Storyboard project. Students will choose from a list of data sources, create a sequence of data visualizations and displays, and provide related commentary and narrative. This project will be published online. This project requires the student to use the R programming to examine an issue of social scientific significance. Length: 1,200-1,500 words.
 
-Weekly quizzes (10% total):  These are formative assessments to review material from the previous week.
+**Weekly quizzes (20% total)**:  These are formative assessments to review material from the previous week.
 
-Exams (30% total):  These are, content-wise, cumulative and comprehensive and consist of a variety of question formats, including true-false, matching, multiple choice and fill-in-the-blank.
-
-I will keep the gradebook current in Blackboard.  If you have difficulty with material or concepts, please talk to me.  There will be many opportunities to review material individually, but I need to be aware of any such difficulties.
+I will keep the gradebook current in Blackboard. If you have difficulty with material or concepts, please talk to me. There will be many opportunities to review material individually, but I need to be aware of any such difficulties.
 
 ## THE WEEKLY AGENDA
 
@@ -82,10 +80,11 @@ Students will encounter a fair amount of code in this course. While this is not 
 
 ### Data Journalism texts:
 
-The Data Journalism Handbook, Gray, et al., (2012). Online at http://datajournalismhandbook.org/1.0/en/index.html 
+The Data Journalism Handbook, Gray, et al., (2012). 
+Online at: http://datajournalismhandbook.org/1.0/en/index.html 
 
-The Data Journalism Handbook 2, Gray, et al., (2018). Online at
-https://datajournalism.com/read/handbook/two 
+The Data Journalism Handbook 2, Gray, et al., (2018). 
+Online at: https://datajournalism.com/read/handbook/two 
 
 ### R programming texts:
 
@@ -129,88 +128,89 @@ All tests, quizzes and large presentations will be graded on a 100-point scale. 
 
 ## SCHEDULE
 
-Note the following caveats regarding this schedule.  First, this might be considered an experimental course, where student progress will largely dictate progression of material covered.  Each week, I will assign readings and/or activities that students will be quizzed on the following week.  Whether material is properly understood will dictate the following week's readings.  Further, there will be in-class activities each week, where completion and understanding is noted.  
+Note the following caveats regarding this schedule.  First, this might be considered an experimental course, where student progress will largely dictate progression of material covered. Each week, I will assign readings and/or activities that students will be quizzed on the following week.  Whether material is properly understood will dictate the following week's readings. Further, there will be in-class activities each week, where completion and understanding is noted.  
 
 News changes quickly, so I reserve the right to remove, add, or alter any content that appears below based on current events in the world. The subjects are not mutually exclusive, so we may decide to introduce some topics prior to the scheduled date.
 
 
-|                    |                                                      |                                                                                                                                        |
-|:-------------------|:-----------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|
-| **Date**           | **Subject(s)**                                       | **Activities**                                                                                                                         |
-| Week 1             | Why data journalism? (past, present, future)         | *Reading:*                                                                                                                             |
-|                    | Overview of data technologies:                       | [Fifty Years of Journalism and Data: A Brief History](https://gijn.org/2015/11/12/fifty-years-of-journalism-and-data-a-brief-history/) |
-|                    | - html                                               | [Data Journalism in Perspective](https://datajournalism.com/read/handbook/one/introduction/data-journalism-in-perspective)             |
-|                    | - web-browsers                                       | *Exercises:*                                                                                                                           |
-|                    | - xml                                                | [Install R & RStudio](https://mjfrigaard.github.io/csuc-data-journalism/wk1-00_your-first-r-session.html)                              |
-|                    | - css                                                | [introduction to data tech slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-01.0-intro-web-tech)                    |
-|                    | - binary (proprietary) files                         | [R best practices slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-01.1-r-workflow-best-practices)                  |
-|                    | - plain text                                         |                                                                                                                                        |
-|                    | - markdown                                           |                                                                                                                                        |
-| Week 2             | What is/are data?                                    | *Reading:*                                                                                                                             |
-|                    | Variables                                            | [01-intro-to-R-notes.pdf](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/notes/01-intro-to-R-notes.pdf)                  |
-|                    | Observations                                         | *Exercises:*                                                                                                                           |
-|                    | Datasets (spreadsheets)                              | 1. Installation checkpoints for R/RStudio                                                                                              |
-|                    | Introduction to R and RStudio                        | 2. Screenshots of RStudio.Cloud environment                                                                                            |
-|                    | CRAN                                                 | [Slides]()                                                                                                                             |
-|                    | RStudio installation                                 |                                                                                                                                        |
-|                    | Overview of the IDE                                  |                                                                                                                                        |
-|                    | RStudio Cloud                                        |                                                                                                                                        |
-| Week 3             | Where do we get data?                                | *Reading:*                                                                                                                             |
-|                    | Common data sources                                  | 1. Data is Plural                                                                                                                      |
-|                    | Open data                                            | 2. 538 data                                                                                                                            |
-|                    | Gathering twitter data                               | 3. fivethirtyeight data package                                                                                                        |
-|                    | The rtweet package                                   | 4. rtweet package                                                                                                                      |
-|                    | Installing/updating packages in RStudio              | *Exercises:*                                                                                                                           |
-|                    | Manipulating twitter data                            | tidy data exercises                                                                                                                    |
-|                    | Visualizing twitter data                             | [Slides]()                                                                                                                             |
-| Week 4             | Introduction to ggplot2 (part 1)                     | *Reading:*                                                                                                                             |
-|                    | the grammar of graphics                              | 1. Data tidying                                                                                                                        |
-|                    | geoms                                                | 2. Data transformations                                                                                                                |
-|                    | layers                                               | 3. Understanding and Contrasting the Data and Exploratory News Outlets                                                                 |
-|                    | labels!!                                             | *Exercises:*                                                                                                                           |
-|                    |                                                      | Univariate graphics, labels, exporting graphs                                                                                          |
-|                    |                                                      | [Slides]()                                                                                                                             |
-| Week 5             | Introduction to ggplot2 (part 2)                     | *Reading:*                                                                                                                             |
-|                    | aesthetics                                           | 1. tidyr documentation                                                                                                                 |
-|                    | two variable graphs                                  | 2. Technology of Print: is faster better?                                                                                              |
-|                    | graph types                                          | *Exercises:*                                                                                                                           |
-|                    |                                                      | Exploratory data visualization (EDA) and graph types                                                                                   |
-|                    |                                                      | [Slides]()                                                                                                                             |
-| Week 6             | Intermediate ggplot2 (part 3)                        | *Reading:*                                                                                                                             |
-|                    | accessory packages                                   | https://exts.ggplot2.tidyverse.org/                                                                                                    |
-|                    | themes                                               | *Exercises:*                                                                                                                           |
-| Week 6 (alternate) | Open source data visualization tools                 | Reading                                                                                                                                |
-|                    | Datawrapper                                          | *Exercises:*                                                                                                                           |
-|                    | OpenRefine                                           | [Slides]()                                                                                                                             |
-|                    | Plotly                                               |                                                                                                                                        |
-| Week 7             | Creating a reproducible example                      | *Reading:* webinar for reprex                                                                                                          |
-|                    | StackOverflow, RStudio Community                     | *Exercises:* generate a reprex                                                                                                         |
-|                    | reprex package                                       |                                                                                                                                        |
-|                    | documenting your code                                |                                                                                                                                        |
-| Week 7 (alternate) | Other open source data resources                     |                                                                                                                                        |
-|                    | Beautiful soup (web scraping)                        |                                                                                                                                        |
-|                    | Government data sources (.gov)                       |                                                                                                                                        |
-|                    | APIs                                                 |                                                                                                                                        |
-| Week 8             | Case study: science and technology                   | Project 1: EDA and report building with R markdown                                                                                     |
-|                    | Video games data                                     |                                                                                                                                        |
-| Week 9             | Case study: criminal and social justice              | *Reading:*                                                                                                                             |
-|                    | Texas Department of Justice Website                  | *Exercises:*                                                                                                                           |
-| Week 10            | Case study: media and politics                       | *Reading:*                                                                                                                             |
-|                    | Google trends                                        | *Exercises:*                                                                                                                           |
-| Week 11            | Case study: culture and entertainment                | *Reading:*                                                                                                                             |
-|                    | US Anti-Doping Administration website                | *Exercises:*                                                                                                                           |
-| Week 12            | Final project data collection, cleaning and analysis | *Reading:*                                                                                                                             |
-|                    | data sources                                         | *Exercises:*                                                                                                                           |
-|                    | attribution                                          |                                                                                                                                        |
-|                    | Storyboards                                          |                                                                                                                                        |
-|                    | flexdashboard package                                |                                                                                                                                        |
-|                    | example                                              |                                                                                                                                        |
-| Week 13            | Making sure your work can be seen                    | *Reading:*                                                                                                                             |
-|                    | deploying your work online                           | *Exercises:*                                                                                                                           |
-| Week 14            | Material and project review for meetings;            | Individual meetings                                                                                                                    |
-|                    | Final project draft #1                               |                                                                                                                                        |
-| Week 15            | Final project story editing and revisions            | Final story edits                                                                                                                      |
-| FINALS WEEK        | Submission of final project                          |                                                                                                                                        |
+|                    |                                                      |                                                                                                                                                                    |
+|:-------------------|:-----------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Date**           | **Subject(s)**                                       | **Activities**                                                                                                                                                     |
+| Week 1             | Why data journalism? (past, present, future)         | *Reading:*                                                                                                                                                         |
+|                    | Overview of data technologies:                       | [Fifty Years of Journalism and Data: A Brief History](https://gijn.org/2015/11/12/fifty-years-of-journalism-and-data-a-brief-history/)                             |
+|                    | - html                                               | [Data Journalism in Perspective](https://datajournalism.com/read/handbook/one/introduction/data-journalism-in-perspective)                                         |
+|                    | - web-browsers                                       | *Exercises and slides:*                                                                                                                                            |
+|                    | - xml                                                | [Install R & RStudio](https://mjfrigaard.github.io/csuc-data-journalism/wk1-00_your-first-r-session.html)                                                          |
+|                    | - css                                                | [Intro to R slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-02.1-intro-r-prog.html)                                                            |
+|                    | - binary (proprietary) files                         | [R workflow best practices exercises](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-01.1-r-workflow-best-practices.html)                             |
+|                    | - plain text                                         | [R workflow best practices slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-01.1-r-workflow-best-practices.html)                                |
+|                    | - markdown                                           |                                                                                                                                                                    |
+| Week 2             | What is/are data?                                    | *Reading:*                                                                                                                                                         |
+|                    | - Variables                                          | [01-intro-to-R-notes.pdf](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/notes/01-intro-to-R-notes.pdf)                                              |
+|                    | - Observations                                       | *Exercises and slides:*                                                                                                                                            |
+|                    | - Datasets (spreadsheets)                            | [Intro to R Programming slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-02.1-intro-r-prog.html)                                                |
+|                    | - Introduction to R and RStudio                      | [Introduction to R Markdown slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-02.2-rmarkdown.html)                                               |
+|                    | - CRAN                                               | [Introduction to R Markdown exercises](https://mjfrigaard.github.io/csuc-data-journalism/wk2-02_intro-to-rmarkdown.html)                                           |
+|                    | - RStudio installation                               | [Introduction to Data Manipulation exercises](https://mjfrigaard.github.io/csuc-data-journalism/wk2-03_data-manipulation-intro.html)                               |
+|                    | - Overview of the IDE                                | [Subsetting R Objects exercises](https://mjfrigaard.github.io/csuc-data-journalism/wk2-03_subsetting-r-objects.html)                                               |
+|                    | - RStudio Cloud                                      |                                                                                                                                                                    |
+| Week 3             | Where do we get data?                                | *Reading:*                                                                                                                                                         |
+|                    | - Common data sources                                | 1. [Data is Plural](https://www.data-is-plural.com)                                                                                                                |
+|                    | - Open data                                          | 2. [538 data](https://data.fivethirtyeight.com)                                                                                                                    |
+|                    | - Gathering twitter data                             | 3. [`fivethirtyeight` data package](https://cran.r-project.org/web/packages/fivethirtyeight/vignettes/fivethirtyeight.html)                                        |
+|                    | - The `rtweet` package                               | 4. [`rtweet` package](https://docs.ropensci.org/rtweet/)                                                                                                           |
+|                    | - Installing/updating packages in RStudio            | *Exercises and slides:*                                                                                                                                            |
+|                    | - Manipulating twitter data                          | [Data Manipulation with R slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-03.0-data-manip-intro.html)                                          |
+|                    | - Visualizing twitter data                           | [Data Reshaping in R slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-03.1-data-trans-joins.html)                                               |
+| Week 4             | Introduction to ggplot2 (part 1)                     | *Reading:*                                                                                                                                                         |
+|                    | - the grammar of graphics                            | [Understanding and Contrasting the Data and Exploratory News Outlets](https://mjfrigaard.github.io/csuc-data-journalism/pdfs/understand-contrast-news-outlets.pdf) |
+|                    | - geoms                                              |                                                                                                                                                                    |
+|                    | - layers                                             |                                                                                                                                                                    |
+|                    | - labels!!                                           | *Exercises and slides:*                                                                                                                                            |
+|                    |                                                      | Univariate graphics, labels, exporting graphs                                                                                                                      |
+|                    |                                                      |                                                                                                                                                                    |
+| Week 5             | Introduction to ggplot2 (part 2)                     | *Reading:*                                                                                                                                                         |
+|                    | - aesthetics                                         | 1. tidyr documentation                                                                                                                                             |
+|                    | - two variable graphs                                | 2. Technology of Print: is faster better?                                                                                                                          |
+|                    | - graph types                                        | *Exercises and slides:*                                                                                                                                            |
+|                    |                                                      | Exploratory data visualization (EDA) and graph types                                                                                                               |
+|                    |                                                      |                                                                                                                                                                    |
+| Week 6             | Intermediate ggplot2 (part 3)                        | *Reading:*                                                                                                                                                         |
+|                    | - accessory packages                                 | https://exts.ggplot2.tidyverse.org/                                                                                                                                |
+|                    | - themes                                             | *Exercises and slides:*                                                                                                                                            |
+| Week 6 (alternate) | Open source data visualization tools                 | Reading                                                                                                                                                            |
+|                    | - Datawrapper                                        | *Exercises and slides:*                                                                                                                                            |
+|                    | - OpenRefine                                         |                                                                                                                                                                    |
+|                    | - Plotly                                             |                                                                                                                                                                    |
+| Week 7             | Creating a reproducible example                      | *Reading:* webinar for reprex                                                                                                                                      |
+|                    | - StackOverflow, RStudio Community                   | *Exercises and slides:* generate a reprex                                                                                                                          |
+|                    | - `reprex` package                                   |                                                                                                                                                                    |
+|                    | - documenting your code                              |                                                                                                                                                                    |
+| Week 7 (alternate) | Other open source data resources                     |                                                                                                                                                                    |
+|                    | - Beautiful soup (web scraping)                      |                                                                                                                                                                    |
+|                    | - Government data sources (.gov)                     |                                                                                                                                                                    |
+|                    | - APIs                                               |                                                                                                                                                                    |
+| Week 8             | Case study: science and technology                   | Project 1: EDA and report building with R markdown                                                                                                                 |
+|                    | - Video games data                                   |                                                                                                                                                                    |
+| Week 9             | Case study: criminal and social justice              | *Reading:*                                                                                                                                                         |
+|                    | - Texas Department of Justice Website                | *Exercises and slides:*                                                                                                                                            |
+| Week 10            | Case study: media and politics                       | *Reading:*                                                                                                                                                         |
+|                    | - Google trends                                      | *Exercises and slides:*                                                                                                                                            |
+| Week 11            | Case study: culture and entertainment                | *Reading:*                                                                                                                                                         |
+|                    | - US Anti-Doping Administration website              | *Exercises and slides:*                                                                                                                                            |
+| Week 12            | Final project data collection, cleaning and analysis | *Reading:*                                                                                                                                                         |
+|                    | - data sources                                       | *Exercises and slides:*                                                                                                                                            |
+|                    | - attribution                                        |                                                                                                                                                                    |
+|                    | - Storyboards                                        |                                                                                                                                                                    |
+|                    | - `flexdashboard` package                            |                                                                                                                                                                    |
+|                    | [example]()                                          |                                                                                                                                                                    |
+| Week 13            | Making sure your work can be seen                    | *Reading:*                                                                                                                                                         |
+|                    | deploying your work online                           | *Exercises and slides:*                                                                                                                                            |
+| Week 14            | Material and project review for meetings;            | Individual meetings                                                                                                                                                |
+|                    | Final project draft #1                               |                                                                                                                                                                    |
+| Week 15            | Final project story editing and revisions            | Final story edits                                                                                                                                                  |
+| FINALS WEEK        | Submission of final project                          |                                                                                                                                                                    |
+
 
 
 
