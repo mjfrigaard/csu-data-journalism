@@ -1,6 +1,6 @@
 ---
-title: "Data Visualization with ggplot2 (multiple variable visualizations)"
-comment: "*building graphs with multiple variables, advanced labeling, and facets/small multiples*"
+title: "Data Visualization with ggplot2"
+comment: "*2+ variables, advanced labeling, and facets/small multiples*"
 output: 
   html_document: 
     toc: yes

@@ -1,6 +1,6 @@
 ---
-title: "Data Visualization with ggplot2 (single variable visualizations)"
-comment: "*counting things and variable distributions with density, ridgeline, and violin plots*"
+title: "Data Visualization with ggplot2"
+comment: "*counting things, variable distributions, ridgelines, and violin plots*"
 output: 
   html_document: 
     toc: yes

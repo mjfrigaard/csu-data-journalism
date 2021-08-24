@@ -2,7 +2,13 @@
 title: "More resources"
 ---
 
-## General R Resources
+### Resources for Getting Started 
+
++ [`goodenuffR` package](https://github.com/mjfrigaard/goodenuffR): getting started with R projects
+
++ [Beginners: RStudio Education](https://education.rstudio.com/learn/beginner/): great for learning RStudio and best practices. 
+
+### Resources for Programming in R 
 
 + [R for Data Science](https://r4ds.had.co.nz/) 
 
@@ -16,7 +22,7 @@ title: "More resources"
 
 + [RViews Community Blog](https://rviews.rstudio.com/)
 
-## R Markdown Resources 
+### Resources for R Markdown  
 
 - **YAML**: check out the [`ymlthis` package](https://r-lib.github.io/ymlthis/) for tools and documentation for working with YAML
 
@@ -24,13 +30,13 @@ title: "More resources"
 
 - [R Markdown](https://bookdown.org/yihui/rmarkdown/): A comprehensive but friendly introduction to R Markdown and friends. Free online!
 
-- [R for Data Science](http://r4ds.had.co.nz/): A comprehensive but friendly introduction to the tidyverse. Free online.
+- [R for Data Science](http://r4ds.had.co.nz/): A comprehensive but friendly introduction to the tidyverse. Free online!
 
 - [R Markdown for Scientists](https://rmd4sci.njtierney.com/): R Markdown for Scientists workshop material
 
-## Resources for Data Manipluation 
+### Resources for Data Manipluation & Tidying
 
-+ [R for Data Science](https://r4ds.had.co.nz/transform.html) 
++ [Data transformation chapter: R for Data Science](https://r4ds.had.co.nz/transform.html) 
 
 + [Data Wrangling with R](https://cengel.github.io/R-data-wrangling/) 
 
@@ -38,15 +44,13 @@ title: "More resources"
 
 + [RStudio Community posts tagged `dplyr`](https://community.rstudio.com/tag/dplyr)
 
-## Resources for Data Tidying 
-
-+ [R for Data Science](https://r4ds.had.co.nz/tidy-data.html) 
++ [Tidy Data chapter: R for Data Science](https://r4ds.had.co.nz/tidy-data.html) 
 
 + [Stack Overflow questions tagged with `tidyr`](https://stackoverflow.com/questions/tagged/tidyr)
 
 + [RStudio Community posts tagged `tidyr`](https://community.rstudio.com/tag/tidyr)
 
-## Data Visualization Resources 
+### Resources for Data Visualization  
 
 + The [`ggplot2` book](https://ggplot2-book.org/) 
 
