@@ -363,18 +363,18 @@ div.tocify {
 
 
 <div id="objectives" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
+<h1><span class="header-section-number">1</span> Objectives</h1>
 <p>This lesson covers some basic exposure to R functions and data objects.</p>
 </div>
 <div id="materials" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Materials</h1>
+<h1><span class="header-section-number">2</span> Materials</h1>
 <p>The slides for this section are available <a href="https://mjfrigaard.github.io/intro-to-r-programming/Index.html#1">here</a>.</p>
 </div>
 <div id="r-syntax" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> R Syntax</h1>
+<h1><span class="header-section-number">3</span> R Syntax</h1>
 <p>Two major elements in R programming: functions and objects.</p>
 <div id="functions-objects" class="section level2" number="3.1">
-<h2 number="3.1"><span class="header-section-number">3.1</span> Functions &amp; Objects</h2>
+<h2><span class="header-section-number">3.1</span> Functions &amp; Objects</h2>
 <ul>
 <li><p><strong>Functions</strong> perform operations (calculate a mean, build a table, create a graph, etc.)</p></li>
 <li><p><strong>Objects</strong> hold information (a collection of numbers, dates, words, models results, etc.)</p></li>
@@ -382,34 +382,34 @@ div.tocify {
 </div>
 </div>
 <div id="vectors" class="section level1" number="4">
-<h1 number="4"><span class="header-section-number">4</span> Vectors</h1>
+<h1><span class="header-section-number">4</span> Vectors</h1>
 <p>Vectors are the fundamental data type in R. Most R functions are ‘vectorized’, meaning they’re optimized to work on vectors.</p>
 <div id="atomic-vectors" class="section level2 tabset" number="4.1">
-<h2 class="tabset" number="4.1"><span class="header-section-number">4.1</span> Atomic vectors</h2>
+<h2 class="tabset"><span class="header-section-number">4.1</span> Atomic vectors</h2>
 <p>The “atomic” in atomic vectors means, “<em>of or forming a single irreducible unit or component in a larger system.</em>”</p>
 <div id="logical" class="section level3" number="4.1.1">
-<h3 number="4.1.1"><span class="header-section-number">4.1.1</span> Logical</h3>
+<h3><span class="header-section-number">4.1.1</span> Logical</h3>
 <p>Logical vectors are handy because when we add them together, and the total number tells us how many <code>TRUE</code> values there are.</p>
 <pre class="r"><code>vec_logical &lt;- c(TRUE, FALSE)
 vec_logical
 #&gt; [1]  TRUE FALSE</code></pre>
 </div>
 <div id="integer" class="section level3" number="4.1.2">
-<h3 number="4.1.2"><span class="header-section-number">4.1.2</span> Integer</h3>
+<h3><span class="header-section-number">4.1.2</span> Integer</h3>
 <p>Integer vectors are created with a number and capital letter <code>L</code></p>
 <pre class="r"><code>vec_integer &lt;- c(1L, 10L, 100L)
 vec_integer
 #&gt; [1]   1  10 100</code></pre>
 </div>
 <div id="double" class="section level3" number="4.1.3">
-<h3 number="4.1.3"><span class="header-section-number">4.1.3</span> Double</h3>
+<h3><span class="header-section-number">4.1.3</span> Double</h3>
 <p>Double vectors can be entered as decimals</p>
 <pre class="r"><code>vec_double &lt;- c(0.1, 1.0, 10.01)
 vec_double
 #&gt; [1]  0.10  1.00 10.01</code></pre>
 </div>
 <div id="character" class="section level3" number="4.1.4">
-<h3 number="4.1.4"><span class="header-section-number">4.1.4</span> Character</h3>
+<h3><span class="header-section-number">4.1.4</span> Character</h3>
 <p>Note that character vectors need to be in quotes.</p>
 <pre class="r"><code>vec_character &lt;- c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)
 vec_character
@@ -417,29 +417,29 @@ vec_character
 </div>
 </div>
 <div id="evaluating-vectors" class="section level2 tabset" number="4.2">
-<h2 class="tabset" number="4.2"><span class="header-section-number">4.2</span> Evaluating vectors</h2>
+<h2 class="tabset"><span class="header-section-number">4.2</span> Evaluating vectors</h2>
 <p><strong>Store and explore</strong> - create an object, perform an operation on the object, store the results, then explore the contents with another function.</p>
 <p><img src="img/store-explore.png" width="60%" height="60%" style="display: block; margin: auto;" /></p>
 <div id="typeof" class="section level3" number="4.2.1">
-<h3 number="4.2.1"><span class="header-section-number">4.2.1</span> <code>typeof()</code></h3>
+<h3><span class="header-section-number">4.2.1</span> <code>typeof()</code></h3>
 <p>Explore all vectors with <code>typeof()</code></p>
 <pre class="r"><code>typeof(vec_integer)
 #&gt; [1] &quot;integer&quot;</code></pre>
 </div>
 <div id="is.integer" class="section level3" number="4.2.2">
-<h3 number="4.2.2"><span class="header-section-number">4.2.2</span> <code>is.integer()</code></h3>
+<h3><span class="header-section-number">4.2.2</span> <code>is.integer()</code></h3>
 <p>Integers have no decimals.</p>
 <pre class="r"><code>is.integer(vec_integer)
 #&gt; [1] TRUE</code></pre>
 </div>
 <div id="is.numeric" class="section level3" number="4.2.3">
-<h3 number="4.2.3"><span class="header-section-number">4.2.3</span> <code>is.numeric()</code></h3>
+<h3><span class="header-section-number">4.2.3</span> <code>is.numeric()</code></h3>
 <p>Evaluate numeric vectors with <code>is.numeric()</code></p>
 <pre class="r"><code>is.numeric(vec_double)
 #&gt; [1] TRUE</code></pre>
 </div>
 <div id="is.logical" class="section level3" number="4.2.4">
-<h3 number="4.2.4"><span class="header-section-number">4.2.4</span> <code>is.logical()</code></h3>
+<h3><span class="header-section-number">4.2.4</span> <code>is.logical()</code></h3>
 <p><code>is.logical()</code> to check vectors that are logical.</p>
 <pre class="r"><code>is.logical(vec_logical)
 #&gt; [1] TRUE</code></pre>
@@ -451,17 +451,17 @@ vec_character
 #&gt; [1] FALSE  TRUE  TRUE</code></pre>
 </div>
 <div id="is.character" class="section level3" number="4.2.5">
-<h3 number="4.2.5"><span class="header-section-number">4.2.5</span> <code>is.character()</code></h3>
+<h3><span class="header-section-number">4.2.5</span> <code>is.character()</code></h3>
 <p>Check character vectors with <code>is.character()</code></p>
 <pre class="r"><code>is.character(vec_character)
 #&gt; [1] TRUE</code></pre>
 </div>
 </div>
 <div id="vectorized" class="section level2 tabset" number="4.3">
-<h2 class="tabset" number="4.3"><span class="header-section-number">4.3</span> Vectorized</h2>
+<h2 class="tabset"><span class="header-section-number">4.3</span> Vectorized</h2>
 <p>R is often referred to as a “vector-oriented”, “vectorized”, or “element-wise” language because of the way it deals with vectors. We will show an example of this behavior below:</p>
 <div id="create-sequence-of-values" class="section level3" number="4.3.1">
-<h3 number="4.3.1"><span class="header-section-number">4.3.1</span> Create sequence of values</h3>
+<h3><span class="header-section-number">4.3.1</span> Create sequence of values</h3>
 <p>THe code below creates a sequence of ten values between <code>1.5</code> and <code>10.5</code>.</p>
 <pre class="r"><code>vec_seq_01 &lt;- 1.5:10.5
 length(vec_seq_01)
@@ -470,7 +470,7 @@ vec_seq_01
 #&gt;  [1]  1.5  2.5  3.5  4.5  5.5  6.5  7.5  8.5  9.5 10.5</code></pre>
 </div>
 <div id="vector-operation-by-position" class="section level3" number="4.3.2">
-<h3 number="4.3.2"><span class="header-section-number">4.3.2</span> Vector operation by position</h3>
+<h3><span class="header-section-number">4.3.2</span> Vector operation by position</h3>
 <p>Now we create <code>vec_seq_02</code>, which has a sequence of ten values between <code>0.2</code> and <code>2.0</code>.</p>
 <pre class="r"><code>vec_seq_02 &lt;- c(0.2, 0.4, 0.6, 0.8, 1.0,
                 1.2, 1.4, 1.6, 1.8, 2.0)
@@ -488,7 +488,7 @@ vec_seq_01[3] - vec_seq_02[3]
 #&gt; [1] 2.9</code></pre>
 </div>
 <div id="unequal-lengths" class="section level3" number="4.3.3">
-<h3 number="4.3.3"><span class="header-section-number">4.3.3</span> unequal lengths</h3>
+<h3><span class="header-section-number">4.3.3</span> unequal lengths</h3>
 <p>Both <code>vec_seq_01</code> and <code>vec_seq_02</code> have equal lengths. What happens when we apply vectorized operations to objects of unequal length? Well, R attempts to recycle the operations. We will demonstrate this by creating <code>vec_seq_03</code>, which only has three numbers in it:</p>
 <pre class="r"><code>vec_seq_03 &lt;- vec_seq_02[1:3]
 vec_seq_03
@@ -526,10 +526,10 @@ vec_seq_01 - vec_seq_04
 </div>
 </div>
 <div id="s3-vectors" class="section level2 tabset" number="4.4">
-<h2 class="tabset" number="4.4"><span class="header-section-number">4.4</span> S3 vectors</h2>
+<h2 class="tabset"><span class="header-section-number">4.4</span> S3 vectors</h2>
 <p>S3 vector objects are factors, dates, date-times, durations.</p>
 <div id="factors" class="section level3" number="4.4.1">
-<h3 number="4.4.1"><span class="header-section-number">4.4.1</span> Factors</h3>
+<h3><span class="header-section-number">4.4.1</span> Factors</h3>
 <p>Factors are categorical vectors with a given set of responses.</p>
 <pre class="r"><code>vec_factor &lt;- factor(x = c(&quot;low&quot;, &quot;medium&quot;, &quot;high&quot;))
 vec_factor
@@ -550,31 +550,31 @@ unclass(vec_factor)
 #&gt; [1] &quot;low&quot;    &quot;medium&quot; &quot;high&quot;</code></pre>
 </div>
 <div id="dates" class="section level3" number="4.4.2">
-<h3 number="4.4.2"><span class="header-section-number">4.4.2</span> Dates</h3>
+<h3><span class="header-section-number">4.4.2</span> Dates</h3>
 <p>Dates are stored as <code>double</code> vectors with a class attribute set to <code>Date</code>.</p>
 <pre class="r"><code>vec_date &lt;- c(Sys.Date(), Sys.Date() + 1, Sys.Date() + 2)
 vec_date
-#&gt; [1] &quot;2021-08-24&quot; &quot;2021-08-25&quot; &quot;2021-08-26&quot;
+#&gt; [1] &quot;2021-08-25&quot; &quot;2021-08-26&quot; &quot;2021-08-27&quot;
 attributes(vec_date)
 #&gt; $class
 #&gt; [1] &quot;Date&quot;</code></pre>
 <p><code>unclass()</code> tells us what the actual number is.</p>
 <pre class="r"><code>unclass(vec_date)
-#&gt; [1] 18863 18864 18865</code></pre>
+#&gt; [1] 18864 18865 18866</code></pre>
 </div>
 <div id="date-times" class="section level3" number="4.4.3">
-<h3 number="4.4.3"><span class="header-section-number">4.4.3</span> Date-times</h3>
+<h3><span class="header-section-number">4.4.3</span> Date-times</h3>
 <p>Date-times contain a bit more information than dates.</p>
 <pre class="r"><code>vec_datetime_ct &lt;- as.POSIXct(x = vec_date)
 vec_datetime_ct
-#&gt; [1] &quot;2021-08-23 17:00:00 MST&quot; &quot;2021-08-24 17:00:00 MST&quot;
-#&gt; [3] &quot;2021-08-25 17:00:00 MST&quot;</code></pre>
+#&gt; [1] &quot;2021-08-24 17:00:00 MST&quot; &quot;2021-08-25 17:00:00 MST&quot;
+#&gt; [3] &quot;2021-08-26 17:00:00 MST&quot;</code></pre>
 <p><code>vec_datetime_ct</code> is a <code>double</code> vector</p>
 <pre class="r"><code>typeof(vec_datetime_ct)
 #&gt; [1] &quot;double&quot;</code></pre>
 </div>
 <div id="durations-difftime" class="section level3" number="4.4.4">
-<h3 number="4.4.4"><span class="header-section-number">4.4.4</span> Durations (difftime)</h3>
+<h3><span class="header-section-number">4.4.4</span> Durations (difftime)</h3>
 <p>We need two times to be able to calculate the difftime, but the output is fairly clear.</p>
 <pre class="r"><code>time_01 &lt;- Sys.Date()
 time_02 &lt;- Sys.Date() + 10
@@ -592,13 +592,13 @@ vec_difftime
 </div>
 </div>
 <div id="multidimensional-objects" class="section level1" number="5">
-<h1 number="5"><span class="header-section-number">5</span> Multidimensional objects</h1>
+<h1><span class="header-section-number">5</span> Multidimensional objects</h1>
 <p>In the next sections we’ll cover matrices and arrays, two of R’s multidimensional objects.</p>
 <div id="matrices" class="section level2 tabset" number="5.1">
-<h2 class="tabset" number="5.1"><span class="header-section-number">5.1</span> Matrices</h2>
+<h2 class="tabset"><span class="header-section-number">5.1</span> Matrices</h2>
 <p>These are two-dimensional objects. We can create with <code>matrix()</code>.</p>
 <div id="create-matrices" class="section level3" number="5.1.1">
-<h3 number="5.1.1"><span class="header-section-number">5.1.1</span> Create matrices</h3>
+<h3><span class="header-section-number">5.1.1</span> Create matrices</h3>
 <p>We can make a matrix using our existing vectors.</p>
 <pre class="r"><code>mat_data &lt;- matrix(data = c(vec_double, vec_integer), 
                    nrow = 3, ncol = 2, byrow = FALSE)
@@ -609,24 +609,24 @@ mat_data
 #&gt; [3,] 10.01  100</code></pre>
 </div>
 <div id="check-dimensions" class="section level3" number="5.1.2">
-<h3 number="5.1.2"><span class="header-section-number">5.1.2</span> Check dimensions</h3>
+<h3><span class="header-section-number">5.1.2</span> Check dimensions</h3>
 <p>We can check the dimensions of <code>mat_data</code> with <code>dim()</code>.</p>
 <pre class="r"><code>dim(mat_data)
 #&gt; [1] 3 2</code></pre>
 </div>
 <div id="matrix-positions" class="section level3" number="5.1.3">
-<h3 number="5.1.3"><span class="header-section-number">5.1.3</span> Matrix positions</h3>
+<h3><span class="header-section-number">5.1.3</span> Matrix positions</h3>
 <p>We can subset using position.</p>
 <pre class="r"><code>mat_data[2, 2]
 #&gt; [1] 10</code></pre>
 </div>
 </div>
 <div id="arrays" class="section level2 subset" number="5.2">
-<h2 class="subset" number="5.2"><span class="header-section-number">5.2</span> Arrays</h2>
+<h2 class="subset"><span class="header-section-number">5.2</span> Arrays</h2>
 <p>Arrays are like matrices, but with more dimensions.</p>
 <p><img src="img/array.png" width="45%" height="45%" style="display: block; margin: auto;" /></p>
 <div id="create-an-array" class="section level3" number="5.2.1">
-<h3 number="5.2.1"><span class="header-section-number">5.2.1</span> Create an array</h3>
+<h3><span class="header-section-number">5.2.1</span> Create an array</h3>
 <p>Arrays need three dimensions in the <code>dim</code> argument.</p>
 <pre class="r"><code>dat_array &lt;- array(data = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
                             14, 15, 16, 17, 18), dim = c(3, 3, 2))
@@ -646,7 +646,7 @@ dat_array
 #&gt; [3,]   12   15   18</code></pre>
 </div>
 <div id="matrix-vs.-array" class="section level3" number="5.2.2">
-<h3 number="5.2.2"><span class="header-section-number">5.2.2</span> Matrix vs. Array</h3>
+<h3><span class="header-section-number">5.2.2</span> Matrix vs. Array</h3>
 <p>Matrices are arrays, but arrays are not matrices.</p>
 <pre class="r"><code>class(dat_array)
 #&gt; [1] &quot;array&quot;</code></pre>
@@ -656,14 +656,14 @@ dat_array
 </div>
 </div>
 <div id="rectangular-data-in-r" class="section level1" number="6">
-<h1 number="6"><span class="header-section-number">6</span> Rectangular data in R</h1>
+<h1><span class="header-section-number">6</span> Rectangular data in R</h1>
 <p>If you’re importing spreadsheets, most of the work you’ll do in R will be with rectangular data objects (i.e. <code>data.frame</code>s and <code>tibble</code>s).</p>
 <p><img src="img/data-frame-tibble.png" width="40%" height="40%" style="display: block; margin: auto;" /></p>
 <div id="data-frames" class="section level2 tabset" number="6.1">
-<h2 class="tabset" number="6.1"><span class="header-section-number">6.1</span> Data Frames</h2>
+<h2 class="tabset"><span class="header-section-number">6.1</span> Data Frames</h2>
 <p>Rectangular data with rows and columns.</p>
 <div id="create-data-frames" class="section level3" number="6.1.1">
-<h3 number="6.1.1"><span class="header-section-number">6.1.1</span> Create data frames</h3>
+<h3><span class="header-section-number">6.1.1</span> Create data frames</h3>
 <p>We will create a data frame below using <code>data.frame()</code>. When we create a data frame, the data are transposed (i.e. columns are written left-to-right).</p>
 <pre class="r"><code>DataFrame &lt;- data.frame(character = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), 
                         integer = c(0.1, 1.0, 10.01), 
@@ -678,7 +678,7 @@ DataFrame</code></pre>
 <p><em>NOTE: <code>stringsAsFactors = FALSE</code> is not required as of R version 4.0.0.</em></p>
 </div>
 <div id="inspect-data.frames" class="section level3" number="6.1.2">
-<h3 number="6.1.2"><span class="header-section-number">6.1.2</span> Inspect <code>data.frame</code>s</h3>
+<h3><span class="header-section-number">6.1.2</span> Inspect <code>data.frame</code>s</h3>
 <p>Check the structure of the data.frame with <code>str()</code></p>
 <pre class="r"><code>str(DataFrame)
 #&gt; &#39;data.frame&#39;:    3 obs. of  3 variables:
@@ -688,10 +688,10 @@ DataFrame</code></pre>
 </div>
 </div>
 <div id="tibbles" class="section level2 tabset" number="6.2">
-<h2 class="tabset" number="6.2"><span class="header-section-number">6.2</span> Tibbles</h2>
+<h2 class="tabset"><span class="header-section-number">6.2</span> Tibbles</h2>
 <p>These are special kinds of <code>data.frame</code>s (they print better to the console, and character vectors are never coerced into factors).</p>
 <div id="create-tibbles" class="section level3" number="6.2.1">
-<h3 number="6.2.1"><span class="header-section-number">6.2.1</span> Create <code>tibble</code>s</h3>
+<h3><span class="header-section-number">6.2.1</span> Create <code>tibble</code>s</h3>
 <p>Creating <code>tibble</code>s is <em>not</em> transposed.</p>
 <pre class="r"><code>Tibble &lt;- tibble::tribble(
        ~character, ~integer,  ~logical,
@@ -706,7 +706,7 @@ Tibble</code></pre>
 </div>
 </div>
 <div id="inspect-tibbles" class="section level3" number="6.2.2">
-<h3 number="6.2.2"><span class="header-section-number">6.2.2</span> Inspect <code>tibble</code>s</h3>
+<h3><span class="header-section-number">6.2.2</span> Inspect <code>tibble</code>s</h3>
 <p><code>tibbles</code> are S3 objects, with types <code>tbl_df</code>, <code>tbl</code>, <em>and</em> <code>data.frame</code></p>
 <pre class="r"><code>str(Tibble)
 #&gt; tibble [3 × 3] (S3: tbl_df/tbl/data.frame)
@@ -717,13 +717,13 @@ Tibble</code></pre>
 </div>
 </div>
 <div id="the-catch-all" class="section level1" number="7">
-<h1 number="7"><span class="header-section-number">7</span> The ‘catch-all’</h1>
+<h1><span class="header-section-number">7</span> The ‘catch-all’</h1>
 <p>Lists are unique objects in R because they are <em>recursive vectors</em>. We’ve pointed out that atomic vectors can’t be broken down into smaller components, but a list can store objects of multiple types (character, numeric, logical, etc.), <code>data.frame</code>s, <code>tibble</code>s, and even other lists.</p>
 <div id="lists" class="section level2 tabset" number="7.1">
-<h2 class="tabset" number="7.1"><span class="header-section-number">7.1</span> Lists</h2>
+<h2 class="tabset"><span class="header-section-number">7.1</span> Lists</h2>
 <p>Unlike <code>data.frame</code>s, <code>tibble</code>s (which require each vector to be of equal length), lists can store objects of different types <em>and</em> sizes.</p>
 <div id="create-lists" class="section level3" number="7.1.1">
-<h3 number="7.1.1"><span class="header-section-number">7.1.1</span> Create lists</h3>
+<h3><span class="header-section-number">7.1.1</span> Create lists</h3>
 <p>We can put all the objects we’ve created in <code>dat_list</code>.</p>
 <pre class="r"><code>dat_list &lt;- list(&quot;integer&quot; = vec_integer, 
                  &quot;array&quot; = dat_array,
@@ -771,7 +771,7 @@ dat_list
 #&gt; 3 C            10.0 TRUE</code></pre>
 </div>
 <div id="list-attributes" class="section level3" number="7.1.2">
-<h3 number="7.1.2"><span class="header-section-number">7.1.2</span> List attributes</h3>
+<h3><span class="header-section-number">7.1.2</span> List attributes</h3>
 <p>And we can see all of these elements are stored (with the appropriate name).</p>
 <pre class="r"><code>attributes(dat_list)
 #&gt; $names

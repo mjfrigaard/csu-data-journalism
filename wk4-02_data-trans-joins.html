@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Reshaping and Joining Data in R</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="site_libs/viz-1.8.2/viz.js"></script>
+<link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="site_libs/grViz-binding-1.0.6.1/grViz.js"></script>
+<link href="site_libs/jsoneditor-5.25.6/jsoneditor.min.css" rel="stylesheet" />
+<script src="site_libs/jsoneditor-5.25.6/jsoneditor.min.js"></script>
+<script src="site_libs/jsonedit-binding-3.0.0/jsonedit.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CSUC Data Journalism</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Course outline</a>
+</li>
+<li>
+  <a href="lessons-exercises.html">Lessons and exercises</a>
+</li>
+<li>
+  <a href="slides.html">Slides</a>
+</li>
+<li>
+  <a href="more-resources.html">More resources</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Reshaping and Joining Data in R</h1>
+
+</div>
+
+
+<div id="objectives" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Objectives</h1>
+<p>This document outlines some common data reshaping tasks with <code>tidyr</code>.</p>
+</div>
+<div id="materials" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Materials</h1>
+<p>The slides for this presentation are <a href="">here</a></p>
+<p>There is also an accompanying <a href="">RStudio.Cloud project</a></p>
+<p>Read more about <code>dplyr</code> <a href="https://dplyr.tidyverse.org/index.html">here</a> and <a href="https://tidyr.tidyverse.org/"><code>tidyr</code></a> on the tidyverse website, or in the <a href="https://r4ds.had.co.nz/transform.html">Data Transformation</a> chapter of R for Data Science.</p>
+<div id="load-packages" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Load packages</h2>
+<p><code>tidyr</code> is part of the core <code>tidyverse</code> packages, so we install and load this meta-package below.</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)
+library(tidyverse)</code></pre>
+</div>
+<div id="manging-data" class="section level2 tabset" number="2.2">
+<h2 class="tabset"><span class="header-section-number">2.2</span> Manging data</h2>
+<p>We’re going to use some of the <code>fs</code> package functions for managing our files and data.</p>
+<div id="folder-trees-and-paths" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Folder trees and paths</h3>
+<p>Check your files and folders with <code>dir_tree</code> or <code>dir_ls</code>.</p>
+<pre class="r"><code>fs::dir_tree(&quot;data&quot;, recurse = FALSE)</code></pre>
+<pre><code>## data
+## ├── 2020-11-24-TopPharmCompRaw.csv
+## ├── 2020-12-11-BioTechDrugStocks.csv
+## ├── 2020-12-11-BmrmGoogle.rds
+## ├── 2020-12-20-BioTechStocks.csv
+## ├── 2020-12-24-BioTechStocks.csv
+## ├── 2020-12-29-PricesWide.csv
+## ├── 2020-12-30-PricesWide.csv
+## ├── 2021-05-02-PricesWide.csv
+## ├── 2021-05-02-TidyApple.csv
+## ├── 2021-05-02-TopUSCities.csv
+## ├── 2021-05-02-USCities.csv
+## ├── 2021-08-05-TidyApple.csv
+## ├── 2021-08-05-TopUSCities.csv
+## ├── 2021-08-05-USCities.csv
+## ├── 2021-08-20-TidyApple.csv
+## ├── 2021-08-20-TopUSCities.csv
+## ├── 2021-08-20-USCities.csv
+## ├── 2021-08-23-TidyApple.csv
+## ├── 2021-08-23-TopUSCities.csv
+## ├── 2021-08-23-USCities.csv
+## ├── 2021-08-24-TidyApple.csv
+## ├── 2021-08-24-TopUSCities.csv
+## ├── 2021-08-24-USCities.csv
+## ├── 2021-08-25-TidyApple.csv
+## ├── AppleMobRaw.csv
+## ├── FasterCures.csv
+## ├── Infected.csv
+## ├── LabData.csv
+## ├── LabProc.csv
+## ├── SmallLabData.csv
+## ├── TopPharmComp.csv
+## ├── UsadaBadDates.csv
+## ├── UsadaRaw.csv
+## ├── VisitNAData.csv
+## ├── original-starwars.csv
+## └── starwars.rds</code></pre>
+<p>We can also use <code>dir_ls</code> to get the paths to print to the screen so we can easily import.</p>
+<pre class="r"><code>fs::dir_ls(&quot;data&quot;, recurse = FALSE)</code></pre>
+<pre><code>## data/2020-11-24-TopPharmCompRaw.csv
+## data/2020-12-11-BioTechDrugStocks.csv
+## data/2020-12-11-BmrmGoogle.rds
+## data/2020-12-20-BioTechStocks.csv
+## data/2020-12-24-BioTechStocks.csv
+## data/2020-12-29-PricesWide.csv
+## data/2020-12-30-PricesWide.csv
+## data/2021-05-02-PricesWide.csv
+## data/2021-05-02-TidyApple.csv
+## data/2021-05-02-TopUSCities.csv
+## data/2021-05-02-USCities.csv
+## data/2021-08-05-TidyApple.csv
+## data/2021-08-05-TopUSCities.csv
+## data/2021-08-05-USCities.csv
+## data/2021-08-20-TidyApple.csv
+## data/2021-08-20-TopUSCities.csv
+## data/2021-08-20-USCities.csv
+## data/2021-08-23-TidyApple.csv
+## data/2021-08-23-TopUSCities.csv
+## data/2021-08-23-USCities.csv
+## data/2021-08-24-TidyApple.csv
+## data/2021-08-24-TopUSCities.csv
+## data/2021-08-24-USCities.csv
+## data/2021-08-25-TidyApple.csv
+## data/AppleMobRaw.csv
+## data/FasterCures.csv
+## data/Infected.csv
+## data/LabData.csv
+## data/LabProc.csv
+## data/SmallLabData.csv
+## data/TopPharmComp.csv
+## data/UsadaBadDates.csv
+## data/UsadaRaw.csv
+## data/VisitNAData.csv
+## data/original-starwars.csv
+## data/starwars.rds</code></pre>
+</div>
+<div id="metadata" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Metadata</h3>
+<p><code>fs</code> also gives us the metadata of any folder we have access to. This can come in handy if we’re looking for a specific version of a file, or a file that was created at a specific date.</p>
+<pre class="r"><code>fs::dir_info(&quot;data&quot;, all = TRUE) %&gt;% 
+    dplyr::arrange(desc(modification_time))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["path"],"name":[1],"type":["fs_path"],"align":["right"]},{"label":["type"],"name":[2],"type":["fct"],"align":["left"]},{"label":["size"],"name":[3],"type":["fs_bytes"],"align":["right"]},{"label":["permissions"],"name":[4],"type":["fs_perms"],"align":["right"]},{"label":["modification_time"],"name":[5],"type":["dttm"],"align":["right"]},{"label":["user"],"name":[6],"type":["chr"],"align":["left"]},{"label":["group"],"name":[7],"type":["chr"],"align":["left"]},{"label":["device_id"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["hard_links"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["special_device_id"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["inode"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["block_size"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["blocks"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["flags"],"name":[14],"type":["int"],"align":["right"]},{"label":["generation"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["access_time"],"name":[16],"type":["dttm"],"align":["right"]},{"label":["change_time"],"name":[17],"type":["dttm"],"align":["right"]},{"label":["birth_time"],"name":[18],"type":["dttm"],"align":["right"]}],"data":[{"1":"data/2021-08-25-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-25 11:42:42","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13185216607","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-25 11:42:43","17":"2021-08-25 11:42:42","18":"2021-08-25 11:42:41"},{"1":"data/2021-08-24-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-24 01:07:01","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13182462212","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-24 09:03:50","17":"2021-08-24 01:07:19","18":"2021-08-24 01:07:01"},{"1":"data/2021-08-24-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-24 01:07:01","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13182462213","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-24 09:03:50","17":"2021-08-24 01:07:19","18":"2021-08-24 01:07:01"},{"1":"data/2021-08-24-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-24 01:05:53","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13182461298","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-24 09:03:49","17":"2021-08-24 01:06:38","18":"2021-08-24 01:05:53"},{"1":"data/2021-08-23-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-23 00:33:50","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13181135876","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-24 09:03:49","17":"2021-08-23 00:33:57","18":"2021-08-23 00:33:50"},{"1":"data/2021-08-23-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-23 00:33:49","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13181135871","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-24 09:03:49","17":"2021-08-23 00:33:57","18":"2021-08-23 00:33:49"},{"1":"data/2021-08-23-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-23 00:32:18","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13181133650","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-24 09:03:49","17":"2021-08-23 00:32:18","18":"2021-08-23 00:32:17"},{"1":"data/TopPharmComp.csv","2":"file","3":"16.34K","4":"rw-r--r--","5":"2021-08-23 00:30:23","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13159258413","12":"4096","13":"40","14":"0","15":"0","16":"2021-08-23 00:30:23","17":"2021-08-23 00:30:23","18":"2021-08-05 14:24:13"},{"1":"data/2021-08-20-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-20 18:29:59","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13176816497","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-24 09:03:49","17":"2021-08-20 18:29:59","18":"2021-08-20 14:27:08"},{"1":"data/2021-08-20-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-20 18:29:59","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13176816491","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-24 09:03:49","17":"2021-08-20 18:29:59","18":"2021-08-20 14:27:08"},{"1":"data/2021-08-20-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-20 18:28:46","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13176814567","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-24 09:03:48","17":"2021-08-20 18:28:46","18":"2021-08-20 14:25:45"},{"1":"data/2021-08-05-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-05 14:42:04","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13159285096","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-24 09:03:48","17":"2021-08-05 14:44:01","18":"2021-08-05 14:42:04"},{"1":"data/2021-08-05-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-05 14:42:04","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13159285079","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-24 09:03:48","17":"2021-08-05 14:44:00","18":"2021-08-05 14:42:04"},{"1":"data/2021-08-05-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-05 14:40:58","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13159285090","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-24 09:03:47","17":"2021-08-05 14:44:03","18":"2021-08-05 14:40:58"},{"1":"data/2020-11-24-TopPharmCompRaw.csv","2":"file","3":"3.02K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819073","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-11-BioTechDrugStocks.csv","2":"file","3":"2.29K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819074","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-11-BmrmGoogle.rds","2":"file","3":"26.5K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819059","12":"4096","13":"56","14":"0","15":"0","16":"2021-06-18 13:06:19","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-20-BioTechStocks.csv","2":"file","3":"2.29K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819066","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-24-BioTechStocks.csv","2":"file","3":"2.31K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819105","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-29-PricesWide.csv","2":"file","3":"734","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819077","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-30-PricesWide.csv","2":"file","3":"734","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819054","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2021-05-02-PricesWide.csv","2":"file","3":"754","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819091","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2021-05-02-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819084","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-24 09:03:47","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2021-05-02-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819061","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-24 09:03:47","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2021-05-02-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819063","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-24 09:03:47","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/AppleMobRaw.csv","2":"file","3":"9.39M","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819100","12":"4096","13":"19240","14":"0","15":"0","16":"2021-08-24 09:03:50","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/FasterCures.csv","2":"file","3":"233.1K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819092","12":"4096","13":"472","14":"0","15":"0","16":"2021-08-24 09:03:50","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/Infected.csv","2":"file","3":"549","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819075","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/LabData.csv","2":"file","3":"139","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819072","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-23 00:29:54","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/LabProc.csv","2":"file","3":"164","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819060","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-23 00:29:54","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/SmallLabData.csv","2":"file","3":"93","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819094","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-23 00:29:54","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/UsadaBadDates.csv","2":"file","3":"3.13K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819062","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:41","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/UsadaRaw.csv","2":"file","3":"81.61K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819057","12":"4096","13":"168","14":"0","15":"0","16":"2021-08-24 09:03:50","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/VisitNAData.csv","2":"file","3":"2.71K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819065","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/original-starwars.csv","2":"file","3":"265","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819058","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/starwars.rds","2":"file","3":"19.42K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819055","12":"4096","13":"40","14":"0","15":"0","16":"2021-06-18 13:06:19","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>For example, lets look for the largest <code>file</code> in the <code>data</code> folder.</p>
+<pre class="r"><code>fs::dir_info(&quot;data&quot;, all = TRUE) %&gt;% 
+    filter(type == &quot;file&quot;) %&gt;% 
+    arrange(desc(size)) %&gt;% 
+    select(path, size) %&gt;% 
+    slice(1)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["path"],"name":[1],"type":["fs_path"],"align":["right"]},{"label":["size"],"name":[2],"type":["fs_bytes"],"align":["right"]}],"data":[{"1":"data/2021-05-02-TidyApple.csv","2":"69.88M"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="import-multiple-files" class="section level3" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Import multiple files</h3>
+<p>Lets import all the <code>Lab</code> data files in <code>data</code> using <code>fs</code> and <code>purrr</code>.</p>
+<pre class="r"><code>fs::dir_ls(path = &quot;data&quot;, regexp = &quot;Lab&quot;) %&gt;% 
+    purrr::map_dfr(read_csv, .id = &quot;source&quot;) -&gt; AllLabs</code></pre>
+<pre class="r"><code>AllLabs</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["source"],"name":[1],"type":["chr"],"align":["left"]},{"label":["lab"],"name":[2],"type":["chr"],"align":["left"]},{"label":["value"],"name":[3],"type":["chr"],"align":["left"]},{"label":["ref"],"name":[4],"type":["chr"],"align":["left"]},{"label":["visit"],"name":[5],"type":["date"],"align":["right"]},{"label":["lab_proc"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"data/LabData.csv","2":"Albumin","3":"3.5, 4.2, 5.0","4":"3.4 - 5.4 g/dL","5":"<NA>","6":"NA"},{"1":"data/LabData.csv","2":"Potassium, Whole Blood","3":"1.7, 4.3","4":">6.5-7.0 mmol/L","5":"<NA>","6":"NA"},{"1":"data/LabData.csv","2":"% Hemoglobin A1c","3":"4.1, 4.8","4":"6.50%","5":"<NA>","6":"NA"},{"1":"data/LabProc.csv","2":"NA","3":"NA","4":"NA","5":"2020-10-01","6":"Albumin 3.4 g/dL; Potassium 3.8 mmol/L; A1c 4.8 %"},{"1":"data/LabProc.csv","2":"NA","3":"NA","4":"NA","5":"2020-10-10","6":"Albumin 41 g/dL; A1c 5.0 %"},{"1":"data/LabProc.csv","2":"NA","3":"NA","4":"NA","5":"2020-10-20","6":"Albumin 4.8 g/dL; Potassium 2.2 mmol/L"},{"1":"data/SmallLabData.csv","2":"Albumin","3":"NA","4":"3.4-5.4 g/dL","5":"<NA>","6":"NA"},{"1":"data/SmallLabData.csv","2":"Potassium, Whole Blood","3":"NA","4":"6.5-7.0 mmol/L","5":"<NA>","6":"NA"},{"1":"data/SmallLabData.csv","2":"% Hemoglobin A1c","3":"NA","4":"6.50 %","5":"<NA>","6":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<hr />
+</div>
+</div>
+</div>
+<div id="reshaping-columns-and-rows" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Reshaping Columns and Rows</h1>
+<div id="separate" class="section level2 tabset" number="3.1">
+<h2 class="tabset"><span class="header-section-number">3.1</span> <code>separate()</code></h2>
+<p>This allows us to split columns apart into multiple variables.</p>
+<p>Take a look at <code>SmallLabData</code> below (we’ve used some <code>dplyr</code> and the <code>janitor::remove_empty()</code> function to get <code>SmallLabData</code> from <code>AllLabs</code>).</p>
+<pre class="r"><code>AllLabs %&gt;% 
+    filter(source == &quot;data/SmallLabData.csv&quot;) %&gt;% 
+    select(-source) %&gt;% 
+    janitor::remove_empty() -&gt; SmallLabData</code></pre>
+<pre class="r"><code>SmallLabData</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["lab"],"name":[1],"type":["chr"],"align":["left"]},{"label":["ref"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Albumin","2":"3.4-5.4 g/dL"},{"1":"Potassium, Whole Blood","2":"6.5-7.0 mmol/L"},{"1":"% Hemoglobin A1c","2":"6.50 %"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div id="exercise" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> exercise</h3>
+<p>Separate <code>ref</code> into <code>ref_value</code> and <code>ref_units</code></p>
+<pre class="r"><code>SmallLabData %&gt;% 
+    separate(col = ___, into = c(&quot;_______&quot;, &quot;_______&quot;), sep = &quot; &quot;)</code></pre>
+</div>
+<div id="solution" class="section level3" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> solution</h3>
+<pre class="r"><code>SmallLabData %&gt;% 
+    separate(col = ref, into = c(&quot;ref_value&quot;, &quot;ref_units&quot;), sep = &quot; &quot;)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["lab"],"name":[1],"type":["chr"],"align":["left"]},{"label":["ref_value"],"name":[2],"type":["chr"],"align":["left"]},{"label":["ref_units"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"Albumin","2":"3.4-5.4","3":"g/dL"},{"1":"Potassium, Whole Blood","2":"6.5-7.0","3":"mmol/L"},{"1":"% Hemoglobin A1c","2":"6.50","3":"%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<hr />
+</div>
+</div>
+<div id="separate_rows" class="section level2 tabset" number="3.2">
+<h2 class="tabset"><span class="header-section-number">3.2</span> <code>separate_rows()</code></h2>
+<p><code>separate_rows()</code> is similar to <code>separate()</code>, but drops the values down the rows. This is commonly used when we have more than one value in each column.</p>
+<p>Take a look at <code>LabData</code> below.</p>
+<pre class="r"><code>AllLabs %&gt;% 
+    filter(source == &quot;data/LabData.csv&quot;) %&gt;% 
+    select(-source) %&gt;% 
+    janitor::remove_empty() -&gt; LabData</code></pre>
+<pre class="r"><code>LabData</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["lab"],"name":[1],"type":["chr"],"align":["left"]},{"label":["value"],"name":[2],"type":["chr"],"align":["left"]},{"label":["ref"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"Albumin","2":"3.5, 4.2, 5.0","3":"3.4 - 5.4 g/dL"},{"1":"Potassium, Whole Blood","2":"1.7, 4.3","3":">6.5-7.0 mmol/L"},{"1":"% Hemoglobin A1c","2":"4.1, 4.8","3":"6.50%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div id="exercise-1" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> exercise</h3>
+<p>Put all the <code>value</code>s into their own cell, and make sure the new variable is numeric.</p>
+<pre class="r"><code>LabData %&gt;% 
+  separate_rows(_____, sep = _____, convert = TRUE)</code></pre>
+</div>
+<div id="separate_rows-sol-1" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> <code>separate_rows</code> sol 1</h3>
+<p>Note the <code>convert</code> argument to make <code>value</code> numeric.</p>
+<pre class="r"><code>LabData %&gt;% 
+  separate_rows(value, sep = &quot;, &quot;, convert = TRUE)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["lab"],"name":[1],"type":["chr"],"align":["left"]},{"label":["value"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["ref"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"Albumin","2":"3.5","3":"3.4 - 5.4 g/dL"},{"1":"Albumin","2":"4.2","3":"3.4 - 5.4 g/dL"},{"1":"Albumin","2":"5.0","3":"3.4 - 5.4 g/dL"},{"1":"Potassium, Whole Blood","2":"1.7","3":">6.5-7.0 mmol/L"},{"1":"Potassium, Whole Blood","2":"4.3","3":">6.5-7.0 mmol/L"},{"1":"% Hemoglobin A1c","2":"4.1","3":"6.50%"},{"1":"% Hemoglobin A1c","2":"4.8","3":"6.50%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<hr />
+</div>
+</div>
+<div id="unite" class="section level2 tabset" number="3.3">
+<h2 class="tabset"><span class="header-section-number">3.3</span> <code>unite()</code></h2>
+<p>Just like <code>separate</code>/<code>separate_rows</code> allows us to split up columns, <code>unite()</code> lets us stick them back together!</p>
+<p>Take a look at <code>LabProc</code>.</p>
+<pre class="r"><code>AllLabs %&gt;% 
+    filter(source == &quot;data/LabProc.csv&quot;) %&gt;% 
+    select(-source) %&gt;% 
+    janitor::remove_empty() -&gt; LabProc</code></pre>
+<pre class="r"><code>LabProc</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["visit"],"name":[1],"type":["date"],"align":["right"]},{"label":["lab_proc"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"2020-10-01","2":"Albumin 3.4 g/dL; Potassium 3.8 mmol/L; A1c 4.8 %"},{"1":"2020-10-10","2":"Albumin 41 g/dL; A1c 5.0 %"},{"1":"2020-10-20","2":"Albumin 4.8 g/dL; Potassium 2.2 mmol/L"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div id="exercise-2" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> exercise</h3>
+<p>Separate the labs from each other, and drop them down the rows.</p>
+<pre class="r"><code>LabProc %&gt;% 
+    separate_rows(lab_proc, sep = &quot;___&quot;)</code></pre>
+</div>
+<div id="solution-1" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> solution</h3>
+<p>Separate the labs from each other, and drop them down the rows.</p>
+<pre class="r"><code>LabProc %&gt;% 
+     separate_rows(lab_proc, sep = &quot;; &quot;) </code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["visit"],"name":[1],"type":["date"],"align":["right"]},{"label":["lab_proc"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"2020-10-01","2":"Albumin 3.4 g/dL"},{"1":"2020-10-01","2":"Potassium 3.8 mmol/L"},{"1":"2020-10-01","2":"A1c 4.8 %"},{"1":"2020-10-10","2":"Albumin 41 g/dL"},{"1":"2020-10-10","2":"A1c 5.0 %"},{"1":"2020-10-20","2":"Albumin 4.8 g/dL"},{"1":"2020-10-20","2":"Potassium 2.2 mmol/L"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-3" class="section level3" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> exercise</h3>
+<p>Put <code>lab</code>, <code>value</code>, and <code>units</code> in to their own columns.</p>
+<pre class="r"><code>LabProc %&gt;% 
+    separate_rows(lab_proc, sep = &quot;___&quot;) %&gt;% 
+    separate(col = lab_proc,into = c(&#39;__&#39;, &#39;_____&#39;, &#39;_____&#39;), 
+           sep = &quot; &quot;, convert = ____)</code></pre>
+</div>
+<div id="solution-2" class="section level3" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> solution</h3>
+<p>Put <code>lab</code>, <code>value</code>, and <code>units</code> in to their own columns.</p>
+<pre class="r"><code>LabProc %&gt;% 
+     separate_rows(lab_proc, sep = &quot;; &quot;) %&gt;% 
+     separate(col = lab_proc,into = c(&#39;lab&#39;, &#39;value&#39;, &#39;units&#39;), 
+            sep = &quot; &quot;, convert = TRUE) </code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["visit"],"name":[1],"type":["date"],"align":["right"]},{"label":["lab"],"name":[2],"type":["chr"],"align":["left"]},{"label":["value"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["units"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"2020-10-01","2":"Albumin","3":"3.4","4":"g/dL"},{"1":"2020-10-01","2":"Potassium","3":"3.8","4":"mmol/L"},{"1":"2020-10-01","2":"A1c","3":"4.8","4":"%"},{"1":"2020-10-10","2":"Albumin","3":"41.0","4":"g/dL"},{"1":"2020-10-10","2":"A1c","3":"5.0","4":"%"},{"1":"2020-10-20","2":"Albumin","3":"4.8","4":"g/dL"},{"1":"2020-10-20","2":"Potassium","3":"2.2","4":"mmol/L"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="exercise-4" class="section level3" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> exercise</h3>
+<p>Unite <code>lab</code>, <code>value</code> and <code>units</code> into <code>lab_name</code> (don’t remove the previous columns with <code>remove = FALSE</code>).</p>
+<pre class="r"><code>LabProc %&gt;% 
+    separate_rows(lab_proc, sep = &quot;___&quot;) %&gt;% 
+    separate(col = lab_proc,into = c(&#39;__&#39;, &#39;_____&#39;, &#39;_____&#39;), 
+           sep = &quot; &quot;, convert = ____)
+    unite(col = &quot;_______&quot;, lab:units, sep = &quot; &quot;, remove = _____)</code></pre>
+</div>
+<div id="solution-3" class="section level3" number="3.3.6">
+<h3><span class="header-section-number">3.3.6</span> solution</h3>
+<p>Unite <code>lab</code>, <code>value</code> and <code>units</code> into <code>lab_name</code> (don’t remove the previous columns with <code>remove = FALSE</code>).</p>
+<pre class="r"><code>LabProc %&gt;% 
+     separate_rows(lab_proc, sep = &quot;; &quot;) %&gt;% 
+     separate(col = lab_proc,into = c(&#39;lab&#39;, &#39;value&#39;, &#39;units&#39;), 
+            sep = &quot; &quot;, convert = TRUE) %&gt;% 
+     unite(col = &quot;lab_name&quot;, lab:units, sep = &quot; &quot;, remove = FALSE)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["visit"],"name":[1],"type":["date"],"align":["right"]},{"label":["lab_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["lab"],"name":[3],"type":["chr"],"align":["left"]},{"label":["value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["units"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"2020-10-01","2":"Albumin 3.4 g/dL","3":"Albumin","4":"3.4","5":"g/dL"},{"1":"2020-10-01","2":"Potassium 3.8 mmol/L","3":"Potassium","4":"3.8","5":"mmol/L"},{"1":"2020-10-01","2":"A1c 4.8 %","3":"A1c","4":"4.8","5":"%"},{"1":"2020-10-10","2":"Albumin 41 g/dL","3":"Albumin","4":"41.0","5":"g/dL"},{"1":"2020-10-10","2":"A1c 5 %","3":"A1c","4":"5.0","5":"%"},{"1":"2020-10-20","2":"Albumin 4.8 g/dL","3":"Albumin","4":"4.8","5":"g/dL"},{"1":"2020-10-20","2":"Potassium 2.2 mmol/L","3":"Potassium","4":"2.2","5":"mmol/L"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<hr />
+</div>
+</div>
+</div>
+<div id="joins" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Joins</h1>
+<p>Joins give us the ability to combine multiple datasets on a common column. We’re going to be using the <a href="https://github.com/gadenbuie/starwarsdb"><code>starwarsdb</code> package</a>, which contains data from the <a href="https://swapi.dev/">Star Wars API</a>.</p>
+<p>We’ll load the data below:</p>
+<pre class="r"><code>library(starwarsdb)
+library(dm)</code></pre>
+<div id="starwarsdb" class="section level2 tabset" number="4.1">
+<h2 class="tabset"><span class="header-section-number">4.1</span> <code>starwarsdb</code></h2>
+<p>The code below creates and displays the data model for the tables in this package</p>
+<pre class="r"><code>StarWarsDataModel &lt;- dm_draw(dm = starwars_dm(), 
+                             graph_name = &quot;StarWarsDataModel&quot;)
+StarWarsDataModel</code></pre>
+<div id="htmlwidget-9994d260c92d079a4b40" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9994d260c92d079a4b40">{"x":{"diagram":"#data_model\ndigraph {\ngraph [rankdir=LR tooltip=\"StarWarsDataModel\" ]\n\nnode [margin=0 fontcolor = \"#444444\" ]\n\nedge [color = \"#555555\", arrowsize = 1, ]\n\npack=true\npackmode= \"node\"\n\n  \"films\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\"><U>title<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_people\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_people<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"character\">character<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_planets\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_planets<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"planet\">planet<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_vehicles\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_vehicles<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"vehicle\">vehicle<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"people\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#496567AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#6E989BFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">people<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"homeworld\">homeworld<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"species\">species<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"pilots\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#496567AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#6E989BFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">pilots<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"pilot\">pilot<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"vehicle\">vehicle<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"planets\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#7D2E0AAA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#BC4610FF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">planets<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F1DACFFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"species\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#7D563AAA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#BC8258FF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">species<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F1E6DDFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"vehicles\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#4B3529AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#71503EFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">vehicles<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2DCD8FF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n\"films_people\":\"title\"->\"films\":\"title\"\n\"films_planets\":\"title\"->\"films\":\"title\"\n\"films_vehicles\":\"title\"->\"films\":\"title\"\n\"films_people\":\"character\"->\"people\":\"name\"\n\"pilots\":\"pilot\"->\"people\":\"name\"\n\"films_planets\":\"planet\"->\"planets\":\"name\"\n\"people\":\"homeworld\"->\"planets\":\"name\"\n\"people\":\"species\"->\"species\":\"name\"\n\"films_vehicles\":\"vehicle\"->\"vehicles\":\"name\"\n\"pilots\":\"vehicle\"->\"vehicles\":\"name\"\n}","config":{"engine":null,"options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="exercise-5" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> exercise</h3>
+<p>Load the <code>starwarsdb::films</code> dataset, removing the <code>opening_crawl</code> column, and filter to only episodes 4-6. Store these data in <code>StarWarsFilms</code></p>
+<pre class="r"><code>StarWarsFilms &lt;- starwarsdb::films %&gt;% 
+                    select(-____________) %&gt;% 
+                    filter(episode_id &gt;= ___ &amp; episode_id &lt;= ___)
+StarWarsFilms</code></pre>
+</div>
+<div id="solution-4" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> solution</h3>
+<pre class="r"><code>StarWarsFilms &lt;- starwarsdb::films %&gt;% 
+                    select(-c(opening_crawl, director, producer)) %&gt;% 
+                    filter(episode_id &gt;= 4 &amp; episode_id &lt;= 6)
+StarWarsFilms</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["title"],"name":[1],"type":["chr"],"align":["left"]},{"label":["episode_id"],"name":[2],"type":["int"],"align":["right"]},{"label":["release_date"],"name":[3],"type":["date"],"align":["right"]}],"data":[{"1":"A New Hope","2":"4","3":"1977-05-25"},{"1":"The Empire Strikes Back","2":"5","3":"1980-05-17"},{"1":"Return of the Jedi","2":"6","3":"1983-05-25"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>The first join we will cover is <code>dplyr::left_join()</code>.</p>
+</div>
+</div>
+<div id="left_join" class="section level2 tabset" number="4.2">
+<h2 class="tabset"><span class="header-section-number">4.2</span> <code>left_join</code></h2>
+<p>A <code>left_join</code> keeps all of <code>x</code>, and joins it to all matching rows from dataset <code>y</code></p>
+<div id="exercise-6" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> exercise</h3>
+<p>Left-join <code>StarWarsFilms</code> to <code>starwarsdb::films_vehicles</code> on <code>"title"</code>, then <code>select()</code> the <code>vehicle</code> column, then <code>everything()</code> else.</p>
+<p>Assign to <code>StarWarsFilmVeh</code></p>
+<pre class="r"><code>left_join(x = _____________, 
+          y = starwarsdb::films_vehicles, 
+          by = ______) %&gt;% 
+    select(_____________, 
+           everything()) -&gt; StarWarsFilmVeh
+StarWarsFilmVeh</code></pre>
+</div>
+<div id="solution-5" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>left_join(x = StarWarsFilms, 
+          y = starwarsdb::films_vehicles, 
+          by = &quot;title&quot;) %&gt;% 
+  select(vehicle, 
+         everything()) -&gt; StarWarsFilmVeh
+StarWarsFilmVeh</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["vehicle"],"name":[1],"type":["chr"],"align":["left"]},{"label":["title"],"name":[2],"type":["chr"],"align":["left"]},{"label":["episode_id"],"name":[3],"type":["int"],"align":["right"]},{"label":["release_date"],"name":[4],"type":["date"],"align":["right"]}],"data":[{"1":"CR90 corvette","2":"A New Hope","3":"4","4":"1977-05-25"},{"1":"Star Destroyer","2":"A New Hope","3":"4","4":"1977-05-25"},{"1":"Sentinel-class landing craft","2":"A New Hope","3":"4","4":"1977-05-25"},{"1":"Death Star","2":"A New Hope","3":"4","4":"1977-05-25"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25"},{"1":"Y-wing","2":"A New Hope","3":"4","4":"1977-05-25"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25"},{"1":"TIE Advanced x1","2":"A New Hope","3":"4","4":"1977-05-25"},{"1":"Sand Crawler","2":"A New Hope","3":"4","4":"1977-05-25"},{"1":"T-16 skyhopper","2":"A New Hope","3":"4","4":"1977-05-25"},{"1":"X-34 landspeeder","2":"A New Hope","3":"4","4":"1977-05-25"},{"1":"TIE/LN starfighter","2":"A New Hope","3":"4","4":"1977-05-25"},{"1":"Star Destroyer","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"Y-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"Executor","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"Rebel transport","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"Slave 1","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"Imperial shuttle","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"EF76 Nebulon-B escort frigate","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"TIE/LN starfighter","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"Snowspeeder","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"TIE bomber","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"AT-AT","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"AT-ST","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"Storm IV Twin-Pod cloud car","2":"The Empire Strikes Back","3":"5","4":"1980-05-17"},{"1":"CR90 corvette","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"Star Destroyer","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"Millennium Falcon","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"Y-wing","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"X-wing","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"Executor","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"Rebel transport","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"Imperial shuttle","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"EF76 Nebulon-B escort frigate","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"Calamari Cruiser","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"A-wing","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"B-wing","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"TIE/LN starfighter","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"TIE bomber","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"AT-AT","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"AT-ST","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"Sail barge","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"Bantha-II cargo skiff","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"TIE/IN interceptor","2":"Return of the Jedi","3":"6","4":"1983-05-25"},{"1":"Imperial Speeder Bike","2":"Return of the Jedi","3":"6","4":"1983-05-25"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="inner_join" class="section level2 tabset" number="4.3">
+<h2 class="tabset"><span class="header-section-number">4.3</span> <code>inner_join</code></h2>
+<p>The <code>inner_join()</code> joins dataset <code>x</code> and <code>y</code>, and keeps only matching rows from both.</p>
+<div id="exercise-7" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> exercise</h3>
+<p>Use an <code>inner_join</code> to join <code>StarWarsFilmVeh</code> to <code>starwarsdb::pilots</code> on <code>"vehicle"</code> and assign it to <code>StarWarsFilmVehPil</code>.</p>
+<pre class="r"><code>inner_join(x = StarWarsFilmVeh, 
+           y = _________, 
+           by = _________) -&gt; _____________
+StarWarsFilmVehPil</code></pre>
+</div>
+<div id="solution-6" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>inner_join(x = StarWarsFilmVeh, 
+           y = starwarsdb::pilots, 
+           by = &quot;vehicle&quot;) -&gt; StarWarsFilmVehPil
+StarWarsFilmVehPil</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["vehicle"],"name":[1],"type":["chr"],"align":["left"]},{"label":["title"],"name":[2],"type":["chr"],"align":["left"]},{"label":["episode_id"],"name":[3],"type":["int"],"align":["right"]},{"label":["release_date"],"name":[4],"type":["date"],"align":["right"]},{"label":["pilot"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Chewbacca"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Han Solo"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Lando Calrissian"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Nien Nunb"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Luke Skywalker"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Biggs Darklighter"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Wedge Antilles"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Jek Tono Porkins"},{"1":"TIE Advanced x1","2":"A New Hope","3":"4","4":"1977-05-25","5":"Darth Vader"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Chewbacca"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Han Solo"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Lando Calrissian"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Nien Nunb"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Luke Skywalker"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Biggs Darklighter"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Wedge Antilles"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Jek Tono Porkins"},{"1":"Slave 1","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Boba Fett"},{"1":"Imperial shuttle","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Luke Skywalker"},{"1":"Imperial shuttle","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Chewbacca"},{"1":"Imperial shuttle","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Han Solo"},{"1":"Snowspeeder","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Luke Skywalker"},{"1":"Snowspeeder","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Wedge Antilles"},{"1":"AT-ST","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Chewbacca"},{"1":"Millennium Falcon","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Chewbacca"},{"1":"Millennium Falcon","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Han Solo"},{"1":"Millennium Falcon","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Lando Calrissian"},{"1":"Millennium Falcon","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Nien Nunb"},{"1":"X-wing","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Luke Skywalker"},{"1":"X-wing","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Biggs Darklighter"},{"1":"X-wing","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Wedge Antilles"},{"1":"X-wing","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Jek Tono Porkins"},{"1":"Imperial shuttle","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Luke Skywalker"},{"1":"Imperial shuttle","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Chewbacca"},{"1":"Imperial shuttle","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Han Solo"},{"1":"A-wing","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Arvel Crynyd"},{"1":"AT-ST","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Chewbacca"},{"1":"Imperial Speeder Bike","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Luke Skywalker"},{"1":"Imperial Speeder Bike","2":"Return of the Jedi","3":"6","4":"1983-05-25","5":"Leia Organa"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="right_join" class="section level2 tabset" number="4.4">
+<h2 class="tabset"><span class="header-section-number">4.4</span> <code>right_join</code></h2>
+<p>The <code>right_join()</code> includes all the rows in dataset <code>y</code>, and joins it the matching rows in dataset <code>x</code>.</p>
+<div id="exercise-8" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> exercise</h3>
+<p>Use a <code>right_join()</code> to join <code>StarWarsFilmVehPlt</code> to <code>starwarsdb::films_planets</code> on <code>"title"</code>, keeping all the rows in <code>starwarsdb::films_planets</code>. Use <code>select()</code> to rename <code>planet</code> to <code>film_planet</code> and assign this to <code>StarWarsFilmVehPltPlnt</code></p>
+<pre class="r"><code>right_join(x = __________________, 
+             y = __________________, 
+             by = &quot;title&quot;) %&gt;% 
+  select(vehicle:release_date,
+         film_planet = _______,
+         pilot) -&gt; StarWarsFilmVehPltPlnt</code></pre>
+</div>
+<div id="solution-7" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> solution</h3>
+<p>See below:</p>
+<pre class="r"><code>right_join(x = StarWarsFilmVehPil, 
+           y = starwarsdb::films_planets, 
+           by = &quot;title&quot;) %&gt;% 
+  select(vehicle:release_date,
+         film_planet = planet, 
+         pilot) -&gt; StarWarsFilmVehPltPlnt
+StarWarsFilmVehPltPlnt</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["vehicle"],"name":[1],"type":["chr"],"align":["left"]},{"label":["title"],"name":[2],"type":["chr"],"align":["left"]},{"label":["episode_id"],"name":[3],"type":["int"],"align":["right"]},{"label":["release_date"],"name":[4],"type":["date"],"align":["right"]},{"label":["film_planet"],"name":[5],"type":["chr"],"align":["left"]},{"label":["pilot"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Tatooine","6":"Chewbacca"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Alderaan","6":"Chewbacca"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Yavin IV","6":"Chewbacca"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Tatooine","6":"Han Solo"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Alderaan","6":"Han Solo"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Yavin IV","6":"Han Solo"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Tatooine","6":"Lando Calrissian"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Alderaan","6":"Lando Calrissian"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Yavin IV","6":"Lando Calrissian"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Tatooine","6":"Nien Nunb"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Alderaan","6":"Nien Nunb"},{"1":"Millennium Falcon","2":"A New Hope","3":"4","4":"1977-05-25","5":"Yavin IV","6":"Nien Nunb"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Tatooine","6":"Luke Skywalker"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Alderaan","6":"Luke Skywalker"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Yavin IV","6":"Luke Skywalker"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Tatooine","6":"Biggs Darklighter"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Alderaan","6":"Biggs Darklighter"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Yavin IV","6":"Biggs Darklighter"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Tatooine","6":"Wedge Antilles"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Alderaan","6":"Wedge Antilles"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Yavin IV","6":"Wedge Antilles"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Tatooine","6":"Jek Tono Porkins"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Alderaan","6":"Jek Tono Porkins"},{"1":"X-wing","2":"A New Hope","3":"4","4":"1977-05-25","5":"Yavin IV","6":"Jek Tono Porkins"},{"1":"TIE Advanced x1","2":"A New Hope","3":"4","4":"1977-05-25","5":"Tatooine","6":"Darth Vader"},{"1":"TIE Advanced x1","2":"A New Hope","3":"4","4":"1977-05-25","5":"Alderaan","6":"Darth Vader"},{"1":"TIE Advanced x1","2":"A New Hope","3":"4","4":"1977-05-25","5":"Yavin IV","6":"Darth Vader"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Hoth","6":"Chewbacca"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Dagobah","6":"Chewbacca"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Bespin","6":"Chewbacca"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Ord Mantell","6":"Chewbacca"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Hoth","6":"Han Solo"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Dagobah","6":"Han Solo"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Bespin","6":"Han Solo"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Ord Mantell","6":"Han Solo"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Hoth","6":"Lando Calrissian"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Dagobah","6":"Lando Calrissian"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Bespin","6":"Lando Calrissian"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Ord Mantell","6":"Lando Calrissian"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Hoth","6":"Nien Nunb"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Dagobah","6":"Nien Nunb"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Bespin","6":"Nien Nunb"},{"1":"Millennium Falcon","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Ord Mantell","6":"Nien Nunb"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Hoth","6":"Luke Skywalker"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Dagobah","6":"Luke Skywalker"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Bespin","6":"Luke Skywalker"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Ord Mantell","6":"Luke Skywalker"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Hoth","6":"Biggs Darklighter"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Dagobah","6":"Biggs Darklighter"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Bespin","6":"Biggs Darklighter"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Ord Mantell","6":"Biggs Darklighter"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Hoth","6":"Wedge Antilles"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Dagobah","6":"Wedge Antilles"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Bespin","6":"Wedge Antilles"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Ord Mantell","6":"Wedge Antilles"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Hoth","6":"Jek Tono Porkins"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Dagobah","6":"Jek Tono Porkins"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Bespin","6":"Jek Tono Porkins"},{"1":"X-wing","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Ord Mantell","6":"Jek Tono Porkins"},{"1":"Slave 1","2":"The Empire Strikes Back","3":"5","4":"1980-05-17","5":"Hoth","6":"Boba Fett"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="anti_join" class="section level2 tabset" number="4.5">
+<h2 class="tabset"><span class="header-section-number">4.5</span> <code>anti_join</code></h2>
+<p>The <code>anti_join()</code> keeps all rows in dataset <code>x</code> that <strong>do not</strong> have a match in dataset <code>y</code>. Note the last join created empty values for <code>vehicle</code>, <code>episode_id</code>, <code>release_date</code>, and <code>pilot</code>.</p>
+<pre class="r"><code>StarWarsFilmVehPltPlnt %&gt;% 
+  filter(is.na(episode_id))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["vehicle"],"name":[1],"type":["chr"],"align":["left"]},{"label":["title"],"name":[2],"type":["chr"],"align":["left"]},{"label":["episode_id"],"name":[3],"type":["int"],"align":["right"]},{"label":["release_date"],"name":[4],"type":["date"],"align":["right"]},{"label":["film_planet"],"name":[5],"type":["chr"],"align":["left"]},{"label":["pilot"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"NA","2":"The Phantom Menace","3":"NA","4":"<NA>","5":"Tatooine","6":"NA"},{"1":"NA","2":"The Phantom Menace","3":"NA","4":"<NA>","5":"Naboo","6":"NA"},{"1":"NA","2":"The Phantom Menace","3":"NA","4":"<NA>","5":"Coruscant","6":"NA"},{"1":"NA","2":"Attack of the Clones","3":"NA","4":"<NA>","5":"Tatooine","6":"NA"},{"1":"NA","2":"Attack of the Clones","3":"NA","4":"<NA>","5":"Naboo","6":"NA"},{"1":"NA","2":"Attack of the Clones","3":"NA","4":"<NA>","5":"Coruscant","6":"NA"},{"1":"NA","2":"Attack of the Clones","3":"NA","4":"<NA>","5":"Kamino","6":"NA"},{"1":"NA","2":"Attack of the Clones","3":"NA","4":"<NA>","5":"Geonosis","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Tatooine","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Alderaan","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Dagobah","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Naboo","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Coruscant","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Utapau","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Mustafar","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Kashyyyk","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Polis Massa","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Mygeeto","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Felucia","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Cato Neimoidia","6":"NA"},{"1":"NA","2":"Revenge of the Sith","3":"NA","4":"<NA>","5":"Saleucami","6":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div id="exercise-9" class="section level3" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> exercise</h3>
+<p>Use the <code>anti_join()</code> to join <code>StarWarsFilmVehPltPlnt</code> to <code>StarWarsFilms</code> and create a dataset with only <code>title</code> and <code>film_planet</code> (<em>these should only contain the <code>title</code>s not in <code>StarWarsFilms</code></em>).</p>
+<pre class="r"><code>anti_join(x = StarWarsFilmVehPltPlnt, 
+            y = ____________, 
+            by = c(&quot;title&quot;, &quot;episode_id&quot;, &quot;release_date&quot;)) %&gt;% 
+  select(________, ________)</code></pre>
+</div>
+<div id="solution-8" class="section level3" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> solution</h3>
+<pre class="r"><code>anti_join(x = StarWarsFilmVehPltPlnt, 
+            y = StarWarsFilms, 
+            by = c(&quot;title&quot;, &quot;episode_id&quot;, &quot;release_date&quot;)) %&gt;% 
+  select(title, film_planet)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["title"],"name":[1],"type":["chr"],"align":["left"]},{"label":["film_planet"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"The Phantom Menace","2":"Tatooine"},{"1":"The Phantom Menace","2":"Naboo"},{"1":"The Phantom Menace","2":"Coruscant"},{"1":"Attack of the Clones","2":"Tatooine"},{"1":"Attack of the Clones","2":"Naboo"},{"1":"Attack of the Clones","2":"Coruscant"},{"1":"Attack of the Clones","2":"Kamino"},{"1":"Attack of the Clones","2":"Geonosis"},{"1":"Revenge of the Sith","2":"Tatooine"},{"1":"Revenge of the Sith","2":"Alderaan"},{"1":"Revenge of the Sith","2":"Dagobah"},{"1":"Revenge of the Sith","2":"Naboo"},{"1":"Revenge of the Sith","2":"Coruscant"},{"1":"Revenge of the Sith","2":"Utapau"},{"1":"Revenge of the Sith","2":"Mustafar"},{"1":"Revenge of the Sith","2":"Kashyyyk"},{"1":"Revenge of the Sith","2":"Polis Massa"},{"1":"Revenge of the Sith","2":"Mygeeto"},{"1":"Revenge of the Sith","2":"Felucia"},{"1":"Revenge of the Sith","2":"Cato Neimoidia"},{"1":"Revenge of the Sith","2":"Saleucami"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<hr />
+</div>
+</div>
+</div>
+<div id="nested-data" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Nested data</h1>
+<p>Nested data refers to a dataset in which a column is holding a list of data frames (or <code>tibble</code>s). These can be useful for manipulating data, and we’re going to give an example of using nested data to reshape a column combining two sets of dates.</p>
+<div id="anti-doping-sanctions-database" class="section level2 tabset" number="5.1">
+<h2 class="tabset"><span class="header-section-number">5.1</span> Anti-Doping Sanctions Database</h2>
+<p><code>unnest()</code> deals with nested data, which can be complicated to explain, so we’ll use an example. Run the code below to download data from the <a href="https://www.usada.org/news/sanctions/">Anti-Doping Agency Sanction database</a>.</p>
+<pre class="r"><code>source(&quot;code/create-usada-data.R&quot;)</code></pre>
+<p>These data have two dates (<code>original</code> and <code>updated</code>) in a single column (<code>sanction_announced</code>). <strong>We only want <code>updated</code> dates in their own columns.</strong></p>
+<pre class="r"><code>UsadaBadDates</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["athlete"],"name":[1],"type":["chr"],"align":["left"]},{"label":["sanction_announced"],"name":[2],"type":["chr"],"align":["left"]},{"label":["sport"],"name":[3],"type":["chr"],"align":["left"]},{"label":["substance_reason"],"name":[4],"type":["chr"],"align":["left"]},{"label":["sanction_terms"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"fischbach, dylan","2":"original: 12/18/2015; updated: 04/11/2016","3":"paralympic basketball","4":"non-analytical: refusal to submit to sample collection","5":"2-year suspension - loss of results - additional results disqualified"},{"1":"trafeh, mohamed","2":"original: 12/18/2014; updated: 08/25/2015","3":"track and field","4":"non-analytical: use and possession (epo), and evading sample collection","5":"4-year suspension - loss of results"},{"1":"lea, robert","2":"original: 12/17/2015; updated: 02/25/2016","3":"cycling","4":"noroxycodone","5":"6-month suspension - loss of results"},{"1":"young, jerome","2":"original: 11/10/2004; updated: 06/17/2008","3":"track and field","4":"erythropoietin (epo) and non-analytical: use (epo & hgh)","5":"lifetime suspension - loss of results"},{"1":"hay, amy","2":"original: 10/31/2017; updated: 12/16/2019","3":"weightlifting","4":"ostarine","5":"2-year suspension; loss of results; sanction reduced; unretired - eligible to compete starting 07/25/2020"},{"1":"hunter, adam","2":"original: 10/28/2016; updated: 09/26/2018","3":"mixed martial arts","4":"tamoxifen; boldenone, methandienone, drostanolone, and clenbuterol","5":"2-year suspension - loss of results - additional loss of results"},{"1":"tovar, oscar","2":"original: 10/28/2015; updated: 10/04/2016","3":"cycling","4":"androgenic anabolic steroid","5":"2-year suspension - loss of results - additional results disqualified"},{"1":"dotti, juan pablo","2":"original: 10/20/2011; updated: 06/05/2013","3":"cycling","4":"androgenic anabolic steroid & amphetamine","5":"2-year suspension - loss of results; \\n2-year suspension restarted - loss of results"},{"1":"paparella, flavia","2":"original: 10/19/2020updated: 01/05/2021","3":"cycling","4":"vilanterol","5":"6-month suspension; loss of results - sanction reduced"},{"1":"murdock, vince","2":"original: 09/05/2019; updated: 08/26/2020","3":"mixed martial arts","4":"gw1516","5":"20-month suspension - sanction reduced"},{"1":"thomas, tammy","2":"original: 08/30/2002; updated: 02/13/2017","3":"cycling","4":"norbolethone","5":"lifetime ban - loss of results - sanction reduced"},{"1":"orbon, joane","2":"original: 08/12/2019; updated: 09/10/2019","3":"karate","4":"lgd-4033","5":"9-month suspension; loss of results"},{"1":"bailey, ryan","2":"original: 08/03/2017; updated: 12/01/2017","3":"bobsled and skeleton, track and field","4":"1,3-dimethylbutylamine (dmba)","5":"2-year suspension with 161 day credit - loss of results"},{"1":"garcia del moral, luis","2":"original: 07/10/2012;updated: 10/26/2018","3":"cycling - athlete support personnel","4":"non-analytical","5":"5-year suspension"},{"1":"jones, stirley","2":"original: 06/17/2019; updated: 12/16/2019","3":"paralympic track and field","4":"stanozolol","5":"4-year suspension; loss of results"},{"1":"miyao, paulo","2":"original: 05/10/2017;updated: 11/27/2018","3":"brazilian jiu-jitsu","4":"clomiphene","5":"2-year suspension - loss of results; additional 3 months of suspension - loss of results"},{"1":"moffett, shaun","2":"original: 04/24/2018updated: 10/19/2018","3":"cycling","4":"testosterone and clomiphene","5":"21-month suspension - loss of results; additional 3 months of suspension - loss of results"},{"1":"bruyneel, johan","2":"original: 04/22/2014;updated: 10/24/2018","3":"cycling - athlete support personnel","4":"non-analytical: administration and trafficking","5":"lifetime suspension"},{"1":"celaya lazama, pedro","2":"original: 04/22/2014;updated: 10/24/2018","3":"cycling - athlete support personnel","4":"non-analytical","5":"lifetime suspension"},{"1":"marti, jose","2":"original: 04/22/2014;updated: 10/24/2018","3":"cycling - athlete support personnel","4":"non-analytical","5":"15-year suspension"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div id="str_split" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> <code>str_split</code></h3>
+<p>Use the <code>stringr</code> package’s <code>str_split</code> function to split the bad dates on the <code>"updated"</code> pattern.</p>
+<pre class="r"><code>UsadaBadDates %&gt;%
+        dplyr::mutate(sanction_dates = 
+    # 1) split this on the &quot;updated&quot; pattern
+             stringr::str_split(string = sanction_announced, 
+                                pattern = &quot;updated&quot;)) %&gt;% 
+    # only return what we&#39;re interested in 
+    dplyr::select(athlete, sanction_announced, sanction_dates)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["athlete"],"name":[1],"type":["chr"],"align":["left"]},{"label":["sanction_announced"],"name":[2],"type":["chr"],"align":["left"]},{"label":["sanction_dates"],"name":[3],"type":["list"],"align":["right"]}],"data":[{"1":"fischbach, dylan","2":"original: 12/18/2015; updated: 04/11/2016","3":"<chr [2]>"},{"1":"trafeh, mohamed","2":"original: 12/18/2014; updated: 08/25/2015","3":"<chr [2]>"},{"1":"lea, robert","2":"original: 12/17/2015; updated: 02/25/2016","3":"<chr [2]>"},{"1":"young, jerome","2":"original: 11/10/2004; updated: 06/17/2008","3":"<chr [2]>"},{"1":"hay, amy","2":"original: 10/31/2017; updated: 12/16/2019","3":"<chr [2]>"},{"1":"hunter, adam","2":"original: 10/28/2016; updated: 09/26/2018","3":"<chr [2]>"},{"1":"tovar, oscar","2":"original: 10/28/2015; updated: 10/04/2016","3":"<chr [2]>"},{"1":"dotti, juan pablo","2":"original: 10/20/2011; updated: 06/05/2013","3":"<chr [2]>"},{"1":"paparella, flavia","2":"original: 10/19/2020updated: 01/05/2021","3":"<chr [2]>"},{"1":"murdock, vince","2":"original: 09/05/2019; updated: 08/26/2020","3":"<chr [2]>"},{"1":"thomas, tammy","2":"original: 08/30/2002; updated: 02/13/2017","3":"<chr [2]>"},{"1":"orbon, joane","2":"original: 08/12/2019; updated: 09/10/2019","3":"<chr [2]>"},{"1":"bailey, ryan","2":"original: 08/03/2017; updated: 12/01/2017","3":"<chr [2]>"},{"1":"garcia del moral, luis","2":"original: 07/10/2012;updated: 10/26/2018","3":"<chr [2]>"},{"1":"jones, stirley","2":"original: 06/17/2019; updated: 12/16/2019","3":"<chr [2]>"},{"1":"miyao, paulo","2":"original: 05/10/2017;updated: 11/27/2018","3":"<chr [2]>"},{"1":"moffett, shaun","2":"original: 04/24/2018updated: 10/19/2018","3":"<chr [2]>"},{"1":"bruyneel, johan","2":"original: 04/22/2014;updated: 10/24/2018","3":"<chr [2]>"},{"1":"celaya lazama, pedro","2":"original: 04/22/2014;updated: 10/24/2018","3":"<chr [2]>"},{"1":"marti, jose","2":"original: 04/22/2014;updated: 10/24/2018","3":"<chr [2]>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>This creates a nested column (<code>sanction_dates</code>), which we can deal with by <code>unnest()</code>ing it. Let’s take a better look with <code>listviewer</code> (but only look at <code>athlete</code> and <code>sanction_dates</code>).</p>
+<pre class="r"><code>library(listviewer)
+UsadaBadDates %&gt;%
+        dplyr::mutate(sanction_dates = 
+    # 1) split this on the &quot;updated&quot; pattern
+             stringr::str_split(string = sanction_announced, 
+                                pattern = &quot;updated&quot;)) %&gt;% 
+    # only return what we&#39;re interested in 
+    dplyr::select(athlete, sanction_dates) %&gt;% 
+    listviewer::jsonedit(mode = &quot;view&quot;)</code></pre>
+<div id="htmlwidget-9743be5a988566fa77b7" style="width:672px;height:480px;" class="jsonedit html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9743be5a988566fa77b7">{"x":{"data":{"athlete":["fischbach, dylan","trafeh, mohamed","lea, robert","young, jerome","hay, amy","hunter, adam","tovar, oscar","dotti, juan pablo","paparella, flavia","murdock, vince","thomas, tammy","orbon, joane","bailey, ryan","garcia del moral, luis","jones, stirley","miyao, paulo","moffett, shaun","bruyneel, johan","celaya lazama, pedro","marti, jose"],"sanction_dates":[["original: 12/18/2015; ",": 04/11/2016"],["original: 12/18/2014; ",": 08/25/2015"],["original: 12/17/2015; ",": 02/25/2016"],["original: 11/10/2004; ",": 06/17/2008"],["original: 10/31/2017; ",": 12/16/2019"],["original: 10/28/2016; ",": 09/26/2018"],["original: 10/28/2015; ",": 10/04/2016"],["original: 10/20/2011; ",": 06/05/2013"],["original: 10/19/2020",": 01/05/2021"],["original: 09/05/2019; ",": 08/26/2020"],["original: 08/30/2002; ",": 02/13/2017"],["original: 08/12/2019; ",": 09/10/2019"],["original: 08/03/2017; ",": 12/01/2017"],["original: 07/10/2012;",": 10/26/2018"],["original: 06/17/2019; ",": 12/16/2019"],["original: 05/10/2017;",": 11/27/2018"],["original: 04/24/2018",": 10/19/2018"],["original: 04/22/2014;",": 10/24/2018"],["original: 04/22/2014;",": 10/24/2018"],["original: 04/22/2014;",": 10/24/2018"]]},"options":{"mode":"view","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="unnest" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> <code>unnest</code></h3>
+<p>After unnesting, we can see the dates have been repeated down the rows (like <code>separate_rows()</code>).</p>
+<pre class="r"><code>UsadaBadDates %&gt;%
+        dplyr::mutate(sanction_dates = 
+    # 1) split this on the &quot;updated&quot; pattern
+             stringr::str_split(string = sanction_announced, 
+                                pattern = &quot;updated&quot;)) %&gt;% 
+    # convert the output from split into multiple rows
+        tidyr::unnest(sanction_dates) %&gt;% 
+    # check this to see what is happening 
+    dplyr::select(athlete, sanction_announced, sanction_dates)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["athlete"],"name":[1],"type":["chr"],"align":["left"]},{"label":["sanction_announced"],"name":[2],"type":["chr"],"align":["left"]},{"label":["sanction_dates"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"fischbach, dylan","2":"original: 12/18/2015; updated: 04/11/2016","3":"original: 12/18/2015;"},{"1":"fischbach, dylan","2":"original: 12/18/2015; updated: 04/11/2016","3":": 04/11/2016"},{"1":"trafeh, mohamed","2":"original: 12/18/2014; updated: 08/25/2015","3":"original: 12/18/2014;"},{"1":"trafeh, mohamed","2":"original: 12/18/2014; updated: 08/25/2015","3":": 08/25/2015"},{"1":"lea, robert","2":"original: 12/17/2015; updated: 02/25/2016","3":"original: 12/17/2015;"},{"1":"lea, robert","2":"original: 12/17/2015; updated: 02/25/2016","3":": 02/25/2016"},{"1":"young, jerome","2":"original: 11/10/2004; updated: 06/17/2008","3":"original: 11/10/2004;"},{"1":"young, jerome","2":"original: 11/10/2004; updated: 06/17/2008","3":": 06/17/2008"},{"1":"hay, amy","2":"original: 10/31/2017; updated: 12/16/2019","3":"original: 10/31/2017;"},{"1":"hay, amy","2":"original: 10/31/2017; updated: 12/16/2019","3":": 12/16/2019"},{"1":"hunter, adam","2":"original: 10/28/2016; updated: 09/26/2018","3":"original: 10/28/2016;"},{"1":"hunter, adam","2":"original: 10/28/2016; updated: 09/26/2018","3":": 09/26/2018"},{"1":"tovar, oscar","2":"original: 10/28/2015; updated: 10/04/2016","3":"original: 10/28/2015;"},{"1":"tovar, oscar","2":"original: 10/28/2015; updated: 10/04/2016","3":": 10/04/2016"},{"1":"dotti, juan pablo","2":"original: 10/20/2011; updated: 06/05/2013","3":"original: 10/20/2011;"},{"1":"dotti, juan pablo","2":"original: 10/20/2011; updated: 06/05/2013","3":": 06/05/2013"},{"1":"paparella, flavia","2":"original: 10/19/2020updated: 01/05/2021","3":"original: 10/19/2020"},{"1":"paparella, flavia","2":"original: 10/19/2020updated: 01/05/2021","3":": 01/05/2021"},{"1":"murdock, vince","2":"original: 09/05/2019; updated: 08/26/2020","3":"original: 09/05/2019;"},{"1":"murdock, vince","2":"original: 09/05/2019; updated: 08/26/2020","3":": 08/26/2020"},{"1":"thomas, tammy","2":"original: 08/30/2002; updated: 02/13/2017","3":"original: 08/30/2002;"},{"1":"thomas, tammy","2":"original: 08/30/2002; updated: 02/13/2017","3":": 02/13/2017"},{"1":"orbon, joane","2":"original: 08/12/2019; updated: 09/10/2019","3":"original: 08/12/2019;"},{"1":"orbon, joane","2":"original: 08/12/2019; updated: 09/10/2019","3":": 09/10/2019"},{"1":"bailey, ryan","2":"original: 08/03/2017; updated: 12/01/2017","3":"original: 08/03/2017;"},{"1":"bailey, ryan","2":"original: 08/03/2017; updated: 12/01/2017","3":": 12/01/2017"},{"1":"garcia del moral, luis","2":"original: 07/10/2012;updated: 10/26/2018","3":"original: 07/10/2012;"},{"1":"garcia del moral, luis","2":"original: 07/10/2012;updated: 10/26/2018","3":": 10/26/2018"},{"1":"jones, stirley","2":"original: 06/17/2019; updated: 12/16/2019","3":"original: 06/17/2019;"},{"1":"jones, stirley","2":"original: 06/17/2019; updated: 12/16/2019","3":": 12/16/2019"},{"1":"miyao, paulo","2":"original: 05/10/2017;updated: 11/27/2018","3":"original: 05/10/2017;"},{"1":"miyao, paulo","2":"original: 05/10/2017;updated: 11/27/2018","3":": 11/27/2018"},{"1":"moffett, shaun","2":"original: 04/24/2018updated: 10/19/2018","3":"original: 04/24/2018"},{"1":"moffett, shaun","2":"original: 04/24/2018updated: 10/19/2018","3":": 10/19/2018"},{"1":"bruyneel, johan","2":"original: 04/22/2014;updated: 10/24/2018","3":"original: 04/22/2014;"},{"1":"bruyneel, johan","2":"original: 04/22/2014;updated: 10/24/2018","3":": 10/24/2018"},{"1":"celaya lazama, pedro","2":"original: 04/22/2014;updated: 10/24/2018","3":"original: 04/22/2014;"},{"1":"celaya lazama, pedro","2":"original: 04/22/2014;updated: 10/24/2018","3":": 10/24/2018"},{"1":"marti, jose","2":"original: 04/22/2014;updated: 10/24/2018","3":"original: 04/22/2014;"},{"1":"marti, jose","2":"original: 04/22/2014;updated: 10/24/2018","3":": 10/24/2018"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="filter" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> <code>filter</code></h3>
+<p>We can see all of the updated dates are on a new line, and the original dates still contain the text. Now I can filter out the rows with an original date (because I am only interested in the updated dates).</p>
+<pre class="r"><code>UsadaBadDates %&gt;%
+        dplyr::mutate(sanction_dates = 
+    # 1) split this on the &quot;updated&quot; pattern
+             stringr::str_split(string = sanction_announced, 
+                                pattern = &quot;updated&quot;)) %&gt;% 
+    # 2) convert the output from split into multiple rows
+        tidyr::unnest(sanction_dates) %&gt;% 
+    
+    # 3) remove the &quot;original&quot; dates 
+        dplyr::filter(!str_detect(string = sanction_dates, 
+                                  pattern = &quot;original&quot;)) %&gt;% 
+    # check this to see what is happening 
+    dplyr::select(athlete, sanction_announced, sanction_dates)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["athlete"],"name":[1],"type":["chr"],"align":["left"]},{"label":["sanction_announced"],"name":[2],"type":["chr"],"align":["left"]},{"label":["sanction_dates"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"fischbach, dylan","2":"original: 12/18/2015; updated: 04/11/2016","3":": 04/11/2016"},{"1":"trafeh, mohamed","2":"original: 12/18/2014; updated: 08/25/2015","3":": 08/25/2015"},{"1":"lea, robert","2":"original: 12/17/2015; updated: 02/25/2016","3":": 02/25/2016"},{"1":"young, jerome","2":"original: 11/10/2004; updated: 06/17/2008","3":": 06/17/2008"},{"1":"hay, amy","2":"original: 10/31/2017; updated: 12/16/2019","3":": 12/16/2019"},{"1":"hunter, adam","2":"original: 10/28/2016; updated: 09/26/2018","3":": 09/26/2018"},{"1":"tovar, oscar","2":"original: 10/28/2015; updated: 10/04/2016","3":": 10/04/2016"},{"1":"dotti, juan pablo","2":"original: 10/20/2011; updated: 06/05/2013","3":": 06/05/2013"},{"1":"paparella, flavia","2":"original: 10/19/2020updated: 01/05/2021","3":": 01/05/2021"},{"1":"murdock, vince","2":"original: 09/05/2019; updated: 08/26/2020","3":": 08/26/2020"},{"1":"thomas, tammy","2":"original: 08/30/2002; updated: 02/13/2017","3":": 02/13/2017"},{"1":"orbon, joane","2":"original: 08/12/2019; updated: 09/10/2019","3":": 09/10/2019"},{"1":"bailey, ryan","2":"original: 08/03/2017; updated: 12/01/2017","3":": 12/01/2017"},{"1":"garcia del moral, luis","2":"original: 07/10/2012;updated: 10/26/2018","3":": 10/26/2018"},{"1":"jones, stirley","2":"original: 06/17/2019; updated: 12/16/2019","3":": 12/16/2019"},{"1":"miyao, paulo","2":"original: 05/10/2017;updated: 11/27/2018","3":": 11/27/2018"},{"1":"moffett, shaun","2":"original: 04/24/2018updated: 10/19/2018","3":": 10/19/2018"},{"1":"bruyneel, johan","2":"original: 04/22/2014;updated: 10/24/2018","3":": 10/24/2018"},{"1":"celaya lazama, pedro","2":"original: 04/22/2014;updated: 10/24/2018","3":": 10/24/2018"},{"1":"marti, jose","2":"original: 04/22/2014;updated: 10/24/2018","3":": 10/24/2018"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="str_remove_all" class="section level3" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> <code>str_remove_all</code></h3>
+<p>Now I can clean up the updated <code>sanction_dates</code> and format it.</p>
+<pre class="r"><code>UsadaBadDates %&gt;%
+        dplyr::mutate(sanction_dates = 
+    # 1) split this on the &quot;updated&quot; pattern
+             stringr::str_split(string = sanction_announced, 
+                                pattern = &quot;updated&quot;)) %&gt;% 
+    # 2) convert the output from split into multiple rows
+        tidyr::unnest(sanction_dates) %&gt;% 
+    
+    # 3) remove the &quot;original&quot; dates 
+        dplyr::filter(!str_detect(string = sanction_dates, 
+                                  pattern = &quot;original&quot;)) %&gt;% 
+    # 4) remove the colon from sanction_dates
+        dplyr::mutate(sanction_dates = stringr::str_remove_all(
+                                                      string = sanction_dates,
+                                                      pattern = &quot;:&quot;),
+                      # 5) remove any whitespace
+                      sanction_dates = stringr::str_trim(sanction_dates),
+                      # 6) format as date
+                      sanction_dates = lubridate::mdy(sanction_dates)) %&gt;%
+    # check this to see what is happening 
+    dplyr::select(athlete, sanction_announced, sanction_dates)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["athlete"],"name":[1],"type":["chr"],"align":["left"]},{"label":["sanction_announced"],"name":[2],"type":["chr"],"align":["left"]},{"label":["sanction_dates"],"name":[3],"type":["date"],"align":["right"]}],"data":[{"1":"fischbach, dylan","2":"original: 12/18/2015; updated: 04/11/2016","3":"2016-04-11"},{"1":"trafeh, mohamed","2":"original: 12/18/2014; updated: 08/25/2015","3":"2015-08-25"},{"1":"lea, robert","2":"original: 12/17/2015; updated: 02/25/2016","3":"2016-02-25"},{"1":"young, jerome","2":"original: 11/10/2004; updated: 06/17/2008","3":"2008-06-17"},{"1":"hay, amy","2":"original: 10/31/2017; updated: 12/16/2019","3":"2019-12-16"},{"1":"hunter, adam","2":"original: 10/28/2016; updated: 09/26/2018","3":"2018-09-26"},{"1":"tovar, oscar","2":"original: 10/28/2015; updated: 10/04/2016","3":"2016-10-04"},{"1":"dotti, juan pablo","2":"original: 10/20/2011; updated: 06/05/2013","3":"2013-06-05"},{"1":"paparella, flavia","2":"original: 10/19/2020updated: 01/05/2021","3":"2021-01-05"},{"1":"murdock, vince","2":"original: 09/05/2019; updated: 08/26/2020","3":"2020-08-26"},{"1":"thomas, tammy","2":"original: 08/30/2002; updated: 02/13/2017","3":"2017-02-13"},{"1":"orbon, joane","2":"original: 08/12/2019; updated: 09/10/2019","3":"2019-09-10"},{"1":"bailey, ryan","2":"original: 08/03/2017; updated: 12/01/2017","3":"2017-12-01"},{"1":"garcia del moral, luis","2":"original: 07/10/2012;updated: 10/26/2018","3":"2018-10-26"},{"1":"jones, stirley","2":"original: 06/17/2019; updated: 12/16/2019","3":"2019-12-16"},{"1":"miyao, paulo","2":"original: 05/10/2017;updated: 11/27/2018","3":"2018-11-27"},{"1":"moffett, shaun","2":"original: 04/24/2018updated: 10/19/2018","3":"2018-10-19"},{"1":"bruyneel, johan","2":"original: 04/22/2014;updated: 10/24/2018","3":"2018-10-24"},{"1":"celaya lazama, pedro","2":"original: 04/22/2014;updated: 10/24/2018","3":"2018-10-24"},{"1":"marti, jose","2":"original: 04/22/2014;updated: 10/24/2018","3":"2018-10-24"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="ggplot2" class="section level3" number="5.1.5">
+<h3><span class="header-section-number">5.1.5</span> <code>ggplot2</code></h3>
+<p><strong><em>How far can this pipe go??</em></strong></p>
+<p>Well, when the data are arranged in the way we want, we can test it with a visualization to check the number of sanctions per sport with bad dates.</p>
+<pre class="r"><code>UsadaBadDates %&gt;%
+        dplyr::mutate(sanction_dates = 
+                        
+    # 1) split this on the &quot;updated&quot; pattern
+             stringr::str_split(string = sanction_announced, 
+                                pattern = &quot;updated&quot;)) %&gt;% 
+  
+    # 2) convert the output from split into multiple rows
+        tidyr::unnest(sanction_dates) %&gt;% 
+  
+    # 3) remove the &quot;original&quot; dates 
+        dplyr::filter(!str_detect(string = sanction_dates, 
+                                  pattern = &quot;original&quot;)) %&gt;% 
+    # 4) remove the colon from sanction_dates
+        dplyr::mutate(sanction_dates = stringr::str_remove_all(
+                                                      string = sanction_dates,
+                                                      pattern = &quot;:&quot;),
+                      
+                      # 5) remove any whitespace
+                      sanction_dates = stringr::str_trim(sanction_dates),
+                      
+                      # 6) format as date
+                      sanction_dates = lubridate::mdy(sanction_dates)) %&gt;% 
+  
+    # count by sport
+    dplyr::count(sport, sort = TRUE) %&gt;% 
+  
+    # rename n 
+    rename(`Sport Count` = n,
+            Sport = sport) %&gt;% 
+    ggplot2::ggplot(aes(x = `Sport Count`, 
+                        y = forcats::fct_reorder(as.factor(Sport), `Sport Count`), 
+                        fill = as.character(`Sport Count`))) + 
+    geom_col(show.legend = FALSE) + 
+    labs(x = &quot;Number of Sanctions&quot;, y = &quot;Sport&quot;,
+         title = &quot;Number of Sanctions with Bad Dates&quot;,
+         caption = &quot;source: https://www.usada.org/news/sanctions/&quot;) + 
+    ggthemes::theme_fivethirtyeight() + 
+    ggthemes::scale_fill_few()</code></pre>
+<p><img src="img/visualize-1.png" width="100%" height="100%" /></p>
+</div>
+</div>
+</div>
+
+<i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5,h6",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
