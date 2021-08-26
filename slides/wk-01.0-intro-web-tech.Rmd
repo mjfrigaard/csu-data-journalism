@@ -1,6 +1,6 @@
 ---
-title: "Introduction to Web Technologies"
-subtitle: "Journalism 303"
+title: "Week 1: Introduction to Web Technologies"
+subtitle: "Journalism 303: stuff you'll use from the web"
 author: "Martin Frigaard"
 date: "`r Sys.Date()`"
 output:
@@ -109,7 +109,7 @@ class: left, top
 FiveThirtyEight's *[How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years](https://projects.fivethirtyeight.com/obama-polling-trends/)*
 
 ```{r 00-538-example-01.png, echo=FALSE, out.height='80%', out.width='80%'}
-knitr::include_graphics("../img/00-538-example-01.png")
+knitr::include_graphics("img/00-538-example-01.png")
 ```
 
 ---
@@ -120,7 +120,7 @@ class: left, top
 FiveThirtyEight's *[How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years](https://projects.fivethirtyeight.com/obama-polling-trends/)*
 
 ```{r 00-538-example-02.png, echo=FALSE, out.height='80%', out.width='80%'}
-knitr::include_graphics("../img/00-538-example-02.png")
+knitr::include_graphics("img/00-538-example-02.png")
 ```
 
 ---
@@ -142,7 +142,7 @@ class: left, top
 
 
 ```{r 00-wapo-covid-sparkline.png, echo=FALSE, out.height='65%', out.width='65%'}
-knitr::include_graphics("../img/00-wapo-covid-sparkline.png")
+knitr::include_graphics("img/00-wapo-covid-sparkline.png")
 ```
 
 ---
@@ -153,7 +153,7 @@ class: left, top
 > Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
 
 ```{r 00-wapo-covid.gif, echo=FALSE, out.height='80%', out.width='80%'}
-knitr::include_graphics("../img/00-wapo-covid.gif")
+knitr::include_graphics("img/00-wapo-covid.gif")
 ```
 
 
@@ -174,7 +174,7 @@ class: left, top
 > The Pudding's *[‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.](https://pudding.cool/2017/08/the-office/)*
 
 ```{r 00-pudding-office-01.png, echo=FALSE, out.height='75%', out.width='75%'}
-knitr::include_graphics("../img/00-pudding-office-01.png")
+knitr::include_graphics("img/00-pudding-office-01.png")
 ```
 
 ---
@@ -185,7 +185,7 @@ class: left, top
 > The Pudding's *[‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.](https://pudding.cool/2017/08/the-office/)*
 
 ```{r 00-pudding-office-02.png, echo=FALSE, out.height='70%', out.width='70%'}
-knitr::include_graphics("../img/00-pudding-office-02.png")
+knitr::include_graphics("img/00-pudding-office-02.png")
 ```
 
 ---
@@ -218,7 +218,7 @@ class: left, top
 <br />
 
 ```{r 00-textedit.png, echo=FALSE}
-knitr::include_graphics("../img/00-textedit.png")
+knitr::include_graphics("img/00-textedit.png")
 ```
 
 
@@ -319,7 +319,7 @@ class: left, top
 <br />
 
 ```{r 00-r-code-example-01.png, echo=FALSE, out.height='100%', out.width='100%'}
-knitr::include_graphics("../img/00-r-code-example-01.png")
+knitr::include_graphics("img/00-r-code-example-01.png")
 ```
 
 <br /> 
@@ -338,7 +338,7 @@ class: left, top
 <br />
 
 ```{r 00-r-code-example-02.png, echo=FALSE, out.height='100%', out.width='100%'}
-knitr::include_graphics("../img/00-r-code-example-02.png")
+knitr::include_graphics("img/00-r-code-example-02.png")
 ```
 
 <br /> 
@@ -356,7 +356,7 @@ class: left, top
 <br />
 
 ```{r 00-r-code-example-03.png, echo=FALSE, out.height='100%', out.width='100%'}
-knitr::include_graphics("../img/00-r-code-example-03.png")
+knitr::include_graphics("img/00-r-code-example-03.png")
 ```
 
 <br /> 
@@ -408,7 +408,7 @@ class: left, top
 ### Head over to the [fivethirtyeight landing page](https://fivethirtyeight.com/)
 
 ```{r 00-538-html-ref-00.png, echo=FALSE, out.height='55%', out.width='55%'}
-knitr::include_graphics("../img/00-538-html-ref-00.png")
+knitr::include_graphics("img/00-538-html-ref-00.png")
 ```
 
 
@@ -420,7 +420,7 @@ class: left, top
 ### Right click on the page and click 'view source'
 
 ```{r 00-538-html-ref-01.png, echo=FALSE, out.height='100%', out.width='100%'}
-knitr::include_graphics("../img/00-538-html-ref-01.png")
+knitr::include_graphics("img/00-538-html-ref-01.png")
 ```
 
 ---
@@ -441,7 +441,7 @@ class: left, top
 ```
 
 ```{r 00-538-html-ref-02.png, echo=FALSE, out.height='100%', out.width='100%'}
-knitr::include_graphics("../img/00-538-html-ref-02.png")
+knitr::include_graphics("img/00-538-html-ref-02.png")
 ```
 
 ---
@@ -766,7 +766,7 @@ jsonlite::toJSON(x = x, pretty = TRUE)
 ### Recall the .csv format:
 
 ```{r 00-csv.png, echo=FALSE, out.height='150%', out.width='150%'}
-knitr::include_graphics(path = "../img/00-csv.png")
+knitr::include_graphics(path = "img/00-csv.png")
 ```
 
 ]
@@ -776,7 +776,7 @@ knitr::include_graphics(path = "../img/00-csv.png")
 ### Same data as JSON:
 
 ```{r 00-json.png, echo=FALSE, out.height='70%', out.width='70%'}
-knitr::include_graphics(path = "../img/00-json.png")
+knitr::include_graphics(path = "img/00-json.png")
 ```
 
 ]
@@ -795,3 +795,14 @@ class: left, top, inverse
 
 ### Data in a plain text formats are usually arranged in rows, with several values on each row 
 
+
+```{r chrome_print, echo=FALSE, results='hide', eval=FALSE}
+html_slides <- list.files(".", pattern = ".html")
+pdf_slides <- str_replace(html_slides, 
+  pattern = ".html", 
+  replacement = ".pdf")
+pdf_slides <- paste0("pdfs/", pdf_slides)
+pdf_slides
+
+pagedown::chrome_print(input = html_slides[1], output = pdf_slides[1], timeout = 120)
+```

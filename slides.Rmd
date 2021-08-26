@@ -2,44 +2,155 @@
 title: "Slides"
 ---
 
+```{r setup, include = FALSE, warning = FALSE}
+library(tidyverse)
+library(stringr)
+library(htmltools)
+tagList(rmarkdown::html_dependency_font_awesome())
+```
 
+```{r file-list, include = FALSE, warning = FALSE}
+# first this defines three functions (has_all_things, parse_yaml, ext_file,  
+# and cat_bullet)
+has_all_things <- function(y, things) {
+  all(match(tolower(things), tolower(y), nomatch = 0) > 0)
+}
+
+parse_yaml <- function(file, n = 30) {
+  rmarkdown:::parse_yaml_front_matter(read_lines(file, n_max = n))
+}
+
+ext_file <- function(file, ext) {
+  paste(file, ext, sep = ".")
+}
+```
+
+```{r create-basenames_extensions, warning=FALSE, include=FALSE}
+basenames_extensions <- tibble(fls = list.files("slides")) %>%
+  mutate(basename = tools::file_path_sans_ext(fls),
+         basename = paste0("slides/", basename),
+         ext = tools::file_ext(fls)) %>% 
+  group_by(basename) %>% 
+  summarize_all(list) %>% 
+  filter(map_lgl(ext, has_all_things, things = c("Rmd", "html")))
+# basenames_extensions
+```
+
+```{r create-hrefs_bullets, warning=FALSE, include=FALSE}
+hrefs_bullets <- basenames_extensions %>% 
+  mutate(
+    yaml = basename %>% ext_file("Rmd") %>% map(parse_yaml),
+    title = yaml %>% map_chr("title"),
+    comment = yaml %>% map_chr("subtitle", .null = ""),
+    comment = str_remove_all(string = comment, pattern = "Journalism 303: "),
+    comment = paste0("*", comment, "*"),
+    comment = tolower(comment),
+    href = map2(ext_file(basename, "html"), title, ~ a(href = .x, .y)) %>%
+      map_chr(as.character),
+    bullet = map2_chr(href, comment, ~ paste("*", .x, .y, "\n")),
+    href_pdf = map2(ext_file(basename, "pdf"), title, ~ a(href_pdf = .x, .y)) %>%
+      map_chr(as.character),
+    href_pdf = str_replace_all(string = href_pdf, "href_pdf", "href"),
+    href_pdf = str_replace_all(string = href_pdf, "slides/", "slides/pdfs/"),
+    bullet_pdf = map2_chr(href_pdf, comment, ~ paste("*", .x, .y, "\n")),
+    bullet_pdf = str_replace_all(string = bullet_pdf, "href_pdf", "href"),
+    bullet_pdf = str_remove_all(string = bullet_pdf, pattern = "_pdf")
+    )
+# hrefs_bullets
+```
+
+```{r cat_bullets, warning=FALSE, include=FALSE}
+cat_bullet <- function(x, pattern) {
+  x <- x %>% 
+    filter(str_detect(basename, pattern = pattern)) %>%
+  unnest(ext) %>%
+    filter(ext == "html")
+  cat(x$bullet)
+}
+
+cat_bullet_pdf <- function(x, pattern) {
+  x <- x %>% 
+    filter(str_detect(basename, pattern = pattern)) %>%
+  unnest(ext) %>%
+    filter(ext == "html")
+  cat(x$bullet_pdf)
+}
+```
 
 ## Week 1
 
-1. [Introduction to Web Technologies](slides/wk-01.0-intro-web-tech.html)
 
-2. [R Workflow Best Practices](slides/wk-01.1-r-workflow-best-practices.html)
+```{r wk-01-files, results='asis', echo=FALSE, eval=TRUE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-01")
+```
+
+##### PDFS
+
+```{r cat_bullet_pdf-01, results='asis', echo=FALSE, eval=TRUE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-01")
+```
+
 
 ## Week 2
 
-3. [Introduction to R Programming](slides/wk-02.1-intro-r-prog.html)
 
-4. [Introduction to RMarkdown](slides/wk-02.2-rmarkdown.html)
+```{r wk-02-files, results='asis', echo=FALSE, eval=TRUE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-02")
+```
+
+##### PDFS
+
+```{r cat_bullet_pdf-02, results='asis', echo=FALSE, eval=TRUE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-02")
+```
 
 ## Week 3
 
-5. [Data Manipulation with R](slides/wk-03.0-data-manip-intro.html)
 
-6. [Data Reshaping in R](slides/wk-03.1-data-trans-joins.html)
+```{r wk-03-files, results='asis', echo=FALSE, eval=TRUE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-03")
+```
+
+
+##### PDFS
+
+```{r cat_bullet_pdf-03, results='asis', echo=FALSE, eval=TRUE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-03")
+```
 
 ## Week 4
 
-7. [Introduction to Data Visualization with ggplot2](slides/wk-04.0-data-viz-intro.html)
+```{r wk-04-files, results='asis', echo=FALSE, eval=TRUE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-04")
+```
 
-8. [Data Visualization Part 2](slides/wk-05.0-data-viz-part-2.html)
+##### PDFS
 
-<!--
+```{r cat_bullet_pdf-04, results='asis', echo=FALSE, eval=TRUE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-04")
+```
 
-3. [Reproducible Data Analysis With R](https://mjfrigaard.github.io/rep-res-rmarkdown/Index.html#1)
+## Week 5
 
-4. [Data Manipulation with R](https://mjfrigaard.github.io/data-manip-intro/Index.html#1)
+```{r wk-05-files, results='asis', echo=FALSE, eval=TRUE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-05")
+```
 
-5. [Data Reshaping in R](https://mjfrigaard.github.io/data-transformations-joins/Index.html#1)
+##### PDFS
 
-6. [Introduction to Data Visualization with ggplot2](https://mjfrigaard.github.io/data-viz-intro/Index.html#1)
+```{r cat_bullet_pdf-05, results='asis', echo=FALSE, eval=TRUE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-05")
+```
 
-7. [Data Visualization as Communication](https://mjfrigaard.github.io/data-viz-as-comm/Index.html#1)
+## Week 6
 
-8. [Introduction to Dashboards](https://mjfrigaard.github.io/intro-to-dashboards/Index.html#1)
+```{r wk-06-files, results='asis', echo=FALSE, eval=TRUE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-06")
+```
 
---> 
+##### PDFS
+
+```{r cat_bullet_pdf-06, results='asis', echo=FALSE, eval=TRUE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-06")
+```
+

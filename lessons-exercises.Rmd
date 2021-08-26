@@ -83,8 +83,6 @@ cat_bullet(x, "^wk5-")
 
 ### Week 6
 
-*(under construction)*
-
 ```{r wk6-files, results = 'asis', echo = FALSE, eval=TRUE}
 # and the `sh` for shiny
 cat_bullet(x, "^wk6-")
@@ -94,7 +92,7 @@ cat_bullet(x, "^wk6-")
 
 *(under construction)*
 
-```{r pr-files, results = 'asis', echo = FALSE, eval=TRUE}
+```{r wk7-files, results = 'asis', echo = FALSE, eval=TRUE}
 # and the `pr` for programming
 cat_bullet(x, "^wk7-")
 ```

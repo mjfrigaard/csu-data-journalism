@@ -1,5 +1,5 @@
 ---
-title: "Introduction To R Programming"
+title: "Week 2: Introduction To R Programming"
 subtitle: "Journalism 303: R functions and objects"  
 author: 
   - "Martin Frigaard"
@@ -1223,6 +1223,14 @@ mjfrigaard@gmail.com
 
 
 ```{r chrome_print, echo=FALSE, results='hide', eval=FALSE}
-pagedown::chrome_print("Index.html", output = "pdfs/intro-to-r-programming.pdf")
+html_slides <- list.files(".", pattern = ".html")
+pdf_slides <- str_replace(html_slides, 
+  pattern = ".html", 
+  replacement = ".pdf")
+pdf_slides <- paste0("pdfs/", pdf_slides)
+print_files <- tibble("pdfs" = pdf_slides,
+  "htmls" = html_slides)
+
+pagedown::chrome_print(input = print_files$htmls[3], output = print_files$pdfs[3], timeout = 120)
 ```
 
