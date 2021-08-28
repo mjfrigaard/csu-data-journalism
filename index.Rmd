@@ -152,18 +152,28 @@ News changes quickly, so I reserve the right to remove, add, or alter any conten
   - plain text  
   - markdown
   
-## Reading 
+### Week 1 Reading 
 
 1. [Fifty Years of Journalism and Data: A Brief History](https://gijn.org/2015/11/12/fifty-years-of-journalism-and-data-a-brief-history/)
 2. [Data Journalism in Perspective](https://gijn.org/2015/11/12/fifty-years-of-journalism-and-data-a-brief-history/)
 
-## Exercises 
+### Week 1 Exercises 
+
+These are intended to get you started with R and RStudio.
 
 + [Install R & RStudio](https://mjfrigaard.github.io/csuc-data-journalism/wk1-00_your-first-r-session.html)
 
-## Slides 
+### Week 1 Slides 
 
-[Week 1 slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-01.0-intro-web-tech.html#1)
+These slides give a quick overview of web technologies, plain text (code), and common data files. 
+
++ [Week 1 Intro to web technology html  slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-01.0-intro-web-tech.html#1)
+
++ [Week 1 Intro to web technology pdf  slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-01.0-intro-web-tech.pdf)
+
+Also check out: 
+
+- **Markdown**: [Commonmark](https://commonmark.org/help/tutorial) has a quick ten-twenty minute tutorial on markdown.
 
 ## Week 2
 
@@ -178,156 +188,253 @@ News changes quickly, so I reserve the right to remove, add, or alter any conten
   - Overview of the IDE  
   - RStudio Cloud  
 
-## Reading 
+### Week 2 Reading 
 
-[Intro to data]()
+I've created a pdf reference for some basics of R programming. 
 
-## Exercises 
++ [Intro to R Notes](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/notes/01-intro-to-R-notes.pdf)
 
-[Subsetting R Objects](https://mjfrigaard.github.io/csuc-data-journalism/wk2-01_subsetting-r-objects.html)
+### Week 2 Exercises 
 
-## Slides 
+These exercises will help you understand how to extract pieces of your data in R, and how to use R Markdown. 
 
-[Week 2 slides]()
++ [Subsetting R Objects](https://mjfrigaard.github.io/csuc-data-journalism/wk2-01_subsetting-r-objects.html)
 
-## Slides
++ [RMarkdown in Practice](https://mjfrigaard.github.io/csuc-data-journalism/wk2-02_rmarkdown-in-practice.html)
+
+### Week 2 Slides 
+
++ [RStudio IDE html slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-02.0-rstudio-ide-intro.html#1)
+
++ [RStudio IDE pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-02.0-rstudio-ide-intro.pdf)
+
++ [Introduction To R Programming html slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-02.1-intro-r-prog.html#1)
+
++ [Introduction To R Programming pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-02.1-intro-r-prog.pdf)
+
+Also check out: 
+
+- [R Markdown](https://bookdown.org/yihui/rmarkdown/): A comprehensive but friendly introduction to R Markdown and friends. Free online!
+
 ## Week 3
-Where do we get data? 
-Common data sources 
-Open data 
-Gathering twitter data 
-The rtweet package 
-Installing/updating packages in RStudio
-Manipulating twitter data
-Visualizing twitter data
-## Reading 
-1. Data is Plural 
-2. 538 data 
-3. fivethirtyeight data package
-4. rtweet package 
 
-## Exercises 
-tidy data exercises 
++ Where do we get data? 
+  - Common data sources 
+  - Open data 
+  - The [`rtweet` package](https://docs.ropensci.org/rtweet/) 
 
-## Slides
++ Installing/updating packages in RStudio
+  - Manipulating twitter data
+  - Visualizing twitter data
+  
+### Week 3 Reading 
+
+1. [Data is Plural](https://www.data-is-plural.com/)
+2. [538 data](https://data.fivethirtyeight.com/) 
+3. [`fivethirtyeight` data package](https://github.com/rudeboybert/fivethirtyeight)
+4. [Intro to `rtweet` package](https://docs.ropensci.org/rtweet/articles/rtweet.html) 
+
+### Week 3 Exercises 
+
++ [Introduction to Data Manipulation](https://mjfrigaard.github.io/csuc-data-journalism/wk3-01_data-manipulation-intro.html)
+
++ [Data Visualization with ggplot2 (part 1)](https://mjfrigaard.github.io/csuc-data-journalism/wk3-02_intro-to-data-viz-ggp2-part-01.html)
+
+### Week 3 Slides
+
++ [Introduction to R Markdown html slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-03.0-rmarkdown.html#1)
+
++ [Introduction to R Markdown pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-03.0-rmarkdown.pdf)
+
++ [Data Visualization with ggplot2 (part 1) html slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-03.1-data-viz-intro.html#1)
+
++ [Data Visualization with ggplot2 (part 1) pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-03.1-data-viz-intro.pdf)
+
+
 ## Week 4
-Introduction to ggplot2 (part 1)
-the grammar of graphics 
-geoms 
-layers 
-labels!!
-## Reading 
-1. Data tidying 
-2. Data transformations 
-3. Understanding and Contrasting the Data and Exploratory News Outlets
+
++ Introduction to [`ggplot2`](https://ggplot2-book.org/)   
+  - geoms   
+  - layers  
+  - labels!!
+  
+### Week 4 Reading 
+
+1. [Data tidying](https://r4ds.had.co.nz/tidy-data.html) 
+2. [Data transformations](https://r4ds.had.co.nz/transform.html) 
+3. [Understanding and Contrasting the Data and Exploratory News Outlets](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/pdfs/understand-contrast-news-outlets.pdf)
+
+### Week 4 Exercises 
+
+This week's exercises will cover data manipulation and tidying (restructuring). These might seem a little abstract, but the tasks covered in the exercises are common for getting your data into 'shape' for visualizations. 
+
++ [Introduction to Data Manipulation](https://mjfrigaard.github.io/csuc-data-journalism/wk3-01_data-manipulation-intro.html)
+
++ [Reshaping and Joining Data in R](https://mjfrigaard.github.io/csuc-data-journalism/wk4-02_data-trans-joins.html)
+
+### Week 4 Slides
+
+The slides will cover some basic data manipulation techniques, and intermediate `ggplot2` graphics. 
+
++ [Data Manipulation with R html slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-04.0-data-manip-intro.html#1)
+
++ [Data Manipulation with R pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-04.0-data-manip-intro.pdf)
+
++ [Data Visualization (part 2) html slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-04.1-data-viz-part-2.html#1)
+
++ [Data Visualization (part 2) pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-04.1-data-viz-part-2.pdf)
 
 
-## Exercises 
-Univariate graphics, labels, exporting graphs
 
-## Slides
 ## Week 5
-Introduction to ggplot2 (part 2)
-aesthetics
-two variable graphs 
-graph types  
-## Reading 
-1. tidyr documentation 
+
++ Intermediate `ggplot2` (part 2)  
+  - aesthetics  
+  - two variable graphs  
+  - graph types    
+  
+### Week 5 Reading
+
+1. `tidyr` documentation   
 2. Technology of Print: is faster better?
 
-## Exercises
+### Week 5 Exercises
+
 Exploratory data visualization (EDA) and graph types
 
-## Slides
+### Week 5 Slides
+
 ## Week 6
-Intermediate ggplot2 (part 3)
-accessory packages 
-themes 
-## Reading 
-https://exts.ggplot2.tidyverse.org/ 
 
-## Exercises 
-Week 6 (alternate)
-Open source data visualization tools 
-Datawrapper 
-OpenRefine
-Plotly 
-Reading 
++ advanced `ggplot2` 
+  - accessory packages 
+  - themes 
+  
+### Week 6 Reading
 
-## Exercises 
++ [ggplot2 extensions](https://exts.ggplot2.tidyverse.org/)
 
-## Slides
-## Week 7
-Creating a reproducible example 
-StackOverflow, RStudio Community 
-reprex package
-documenting your code 
-## Reading webinar for reprex
+### Week 6 Exercises 
 
+### Week 6 Slides 
 
-## Exercises generate a reprex
+## Week 7 
+
++ Open source data visualization tools 
+  - Datawrapper 
+  - OpenRefine
+  - Plotly 
+  
++ Other open source data resources   
+  - Beautiful soup (web scraping)   
+  - Government data sources (.gov)   
+  - APIs 
+
+### Week 7 Reading 
+
+### Week 7 Exercises 
+
+### Week 7 Slides
+
 ## Week 7 (alternate)
-Other open source data resources
-Beautiful soup (web scraping)
-Government data sources (.gov) 
-APIs
 
++ Creating a [reproducible example](https://community.rstudio.com/t/faq-whats-a-reproducible-example-reprex-and-how-do-i-create-one/5219)   
+  - [StackOverflow](https://stackoverflow.com/questions/tagged/r), [RStudio Community](https://community.rstudio.com/)  
+  - [reprex package](https://reprex.tidyverse.org/)   
+  - documenting your code  
 
+### Week 7 Reading (alternate)
 
++ [webinar for reprex](https://reprex.tidyverse.org/articles/articles/learn-reprex.html)
+
+### Week 7 Exercises (alternate)
+
++ generate a `reprex`  
+  - send me a url for a post you've created (or a draft post) of a reprex. 
 
 ## Week 8
-Case study: science and technology
 
-Video games data
-Project 1: EDA and report building with R markdown
++ Case study: science and technology  
+  - Video games data    
+  - Project 1: EDA and report building with R markdown  
+  
+### Week 8 Reading 
+
+### Week 8 Exercises 
+
+### Week 8 Slides 
+
 ## Week 9
-Case study: criminal and social justice
 
-Texas Department of Justice Website
-## Reading 
++ Case study: criminal and social justice  
+  - Texas Department of Justice Website  
+  
+### Week 9 Reading 
 
-## Exercises 
+### Week 9 Exercises 
+
+### Week 9 Slides 
+
 ## Week 10
-Case study: media and politics
 
-Google trends 
++ Case study: media and politics  
+  - Google trends   
+  - building maps  
 
+### Week 10 Reading 
 
-## Reading 
+### Week 10 Exercises 
 
-## Exercises 
+### Week 10 Slides 
+
 ## Week 11
-Case study: culture and entertainment
 
-US Anti-Doping Administration website
-## Reading 
++ Case study: culture and entertainment  
+  - US Anti-Doping Administration website  
+  
+### Week 11 Reading 
 
-## Exercises 
+### Week 11 Exercises 
+
+### Week 11 Slides 
+
 ## Week 12
-Final project data collection, cleaning and analysis
-data sources 
-attribution 
-Storyboards 
-flexdashboard package 
-example 
-## Reading 
 
-## Exercises 
++ Final project data collection, cleaning and analysis
+  - data sources 
+  - attribution 
+  - Storyboards (flexdashboard package) 
+
+### Week 12 Reading 
+
+### Week 12 Exercises 
+
+### Week 12 Slides 
+
 ## Week 13
-Making sure your work can be seen
-deploying your work online
-## Reading 
 
-## Exercises 
++ Making sure your work can be seen  
+  - deploying your work online
+  
+### Week 13 Reading 
+
+### Week 13 Exercises 
+
 ## Week 14
-Material and project review for meetings; 
-Final project draft #1
-Individual meetings
+
++ Material and project review for meetings; 
+
+ - Final project draft #1  
+ - Individual meetings (as needed)  
+
 ## Week 15
-Final project story editing and revisions
-Final story edits
-FINALS## Week
-Submission of final project
+
++ Final project story editing and revisions  
+  - Final story edits  
+  
+## Week 16 (FINALS)
+
++ Submission of final project
  
 
 

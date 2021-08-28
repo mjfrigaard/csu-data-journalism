@@ -230,7 +230,7 @@ library(readr)
 PenguinsRaw <- readr::read_csv(file = "~/Downloads/palmerpenguins.csv")
 ```
 
-We can see the `read_csv()` printed a lot of messages to the console to let us know a bit about how the data were imported. We can also check the structure of our data by clicking on it in the **Environments** pane. 
+We can see `read_csv()` printed a lot of messages to the console to let us know a bit about how our .csv file was imported. We can also check the structure of our data by clicking on it in the **Environments** pane. 
 
 ```{r notes-data-view-env-pane, echo=FALSE, fig.align='center', out.width='5in', out.height='3in'}
 knitr::include_graphics("img/notes-data-view-env-pane.png")
@@ -240,7 +240,73 @@ knitr::include_graphics("img/notes-data-view-env-pane.png")
 
 Another great trick for getting data into R comes from the [`datapasta` package](https://milesmcbain.github.io/datapasta/). 
 
-If we open the `palmerpenguins.csv` file from our downloads folder, 
+Let's head over to the [penguins data, stored in the data/ folder in the Github repo for the course website](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/data/penguins.csv). We are going to use our cursor and mouse to highlight the first ten rows of data (see the image below): 
+
+```{r notes-palmers-github, echo=FALSE, fig.align='center', out.width='5in', out.height='3in'}
+knitr::include_graphics("img/notes-palmers-github.png")
+```
+
+We're going to click `*cmd*` or `*ctrl*` + `*c*` to copy the data, then head back to RStudio. 
+
+In the console or a fresh .R script, we are going to enter the following 
+
+```{r tribble_paste, eval=FALSE}
+library(datapasta)
+datapasta::tribble_paste()
+```
+
+And just like that, we see the following in the console:
+
+```{r tribble_paste-result, eval=FALSE, echo=FALSE}
+tibble::tribble(
+     ~species,     ~island, ~bill_length_mm, ~bill_depth_mm, ~flipper_length_mm, ~body_mass_g,     ~sex, ~year,
+     "Adelie", "Torgersen",            39.1,           18.7,               181L,        3750L,   "male", 2007L,
+     "Adelie", "Torgersen",            39.5,           17.4,               186L,        3800L, "female", 2007L,
+     "Adelie", "Torgersen",            40.3,             18,               195L,        3250L, "female", 2007L,
+     "Adelie", "Torgersen",              NA,             NA,                 NA,           NA,       NA, 2007L,
+     "Adelie", "Torgersen",            36.7,           19.3,               193L,        3450L, "female", 2007L,
+     "Adelie", "Torgersen",            39.3,           20.6,               190L,        3650L,   "male", 2007L,
+     "Adelie", "Torgersen",            38.9,           17.8,               181L,        3625L, "female", 2007L,
+     "Adelie", "Torgersen",            39.2,           19.6,               195L,        4675L,   "male", 2007L,
+     "Adelie", "Torgersen",            34.1,           18.1,               193L,        3475L,       NA, 2007L
+     )
+```
+
+```{r notes-tribble-paste, echo=FALSE, fig.align='center', out.width='5in', out.height='1.75in'}
+knitr::include_graphics("img/notes-tribble-paste.png")
+```
+
+Now all we need to do is add the assignment operator (`<-`) and the name for our new dataset (`penguin_sample`). We can print it to the console by just wrapping all the code in parentheses `()`
+
+```{r penguin_sample, eval=FALSE, echo=FALSE}
+(penguin_sample <- tibble::tribble(
+     ~species,     ~island, ~bill_length_mm, ~bill_depth_mm, ~flipper_length_mm, ~body_mass_g,     ~sex, ~year,
+     "Adelie", "Torgersen",            39.1,           18.7,               181L,        3750L,   "male", 2007L,
+     "Adelie", "Torgersen",            39.5,           17.4,               186L,        3800L, "female", 2007L,
+     "Adelie", "Torgersen",            40.3,             18,               195L,        3250L, "female", 2007L,
+     "Adelie", "Torgersen",              NA,             NA,                 NA,           NA,       NA, 2007L,
+     "Adelie", "Torgersen",            36.7,           19.3,               193L,        3450L, "female", 2007L,
+     "Adelie", "Torgersen",            39.3,           20.6,               190L,        3650L,   "male", 2007L,
+     "Adelie", "Torgersen",            38.9,           17.8,               181L,        3625L, "female", 2007L,
+     "Adelie", "Torgersen",            39.2,           19.6,               195L,        4675L,   "male", 2007L,
+     "Adelie", "Torgersen",            34.1,           18.1,               193L,        3475L,       NA, 2007L
+     ))
+```
+
+```{r notes-penguins-tribble-paste, echo=FALSE, fig.align='center', out.width='5in', out.height='1.75in'}
+knitr::include_graphics("img/notes-penguins-tribble-paste.png")
+```
+
+If we're using R Markdown, we will see this below the code chunk: 
+
+```{r notes-penguins-df-print, echo=FALSE, fig.align='center', out.width='5in', out.height='1.75in'}
+knitr::include_graphics("img/notes-penguins-df-print.png")
+```
+
+# Conclusion
+
+We've covered an introduction to R packages (base R and user-written packages), functions and objects, the 'store and explore' workflow, and how to load data into the R environment. Keep the document for future reference! 
+
 
 
 

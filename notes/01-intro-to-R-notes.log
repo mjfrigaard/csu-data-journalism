@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.27)  27 AUG 2021 21:12
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.27)  27 AUG 2021 21:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1351,7 +1351,13 @@ smcp;mapping=tex-text;" at 12.0pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
 e/LinLibertine_R.otf
 (./01-intro-to-R-notes.toc
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
+LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
+(Font)              scaled to size 10.95pt on input line 1.
+Requested font "[LinLibertine_RB.otf]/OT:script=latn;language=dflt;+tnum;+lnum;
+mapping=tex-text;" at 10.95pt
+ -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
+e/LinLibertine_RB.otf
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 6
 .
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1365,7 +1371,7 @@ m
 Requested font "rm-lmr6" at 6.0pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/rm-lmr6.tf
 m
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 6
 .
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1377,7 +1383,7 @@ Requested font "lmmi8" at 8.0pt
 Requested font "lmmi6" at 6.0pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmmi6.tfm
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-1.
+6.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1388,19 +1394,19 @@ Requested font "lmsy8" at 8.0pt
 Requested font "lmsy6" at 6.0pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmsy6.tfm
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-1.
+6.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 1.
+(Font)              <10.95> on input line 6.
 Requested font "lmex10" scaled 1000
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmex10.tfm
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 1.
+(Font)              <8> on input line 6.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 1.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 1.
+(Font)              <6> on input line 6.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 6.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -1413,7 +1419,7 @@ ols/msam10.tfm
 Requested font "msam7" at 6.0pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
 ols/msam7.tfm
-LaTeX Font Info:    Trying to load font information for U+msb on input line 1.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 6.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -1427,11 +1433,11 @@ Requested font "msbm7" at 6.0pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
 ols/msbm7.tfm
 LaTeX Font Info:    Trying to load font information for TS1+LinLibertine(0) on 
-input line 1.
-LaTeX Font Info:    No file TS1LinLibertine(0).fd. on input line 1.
+input line 6.
+LaTeX Font Info:    No file TS1LinLibertine(0).fd. on input line 6.
 
 LaTeX Font Warning: Font shape `TS1/LinLibertine(0)/m/n' undefined
-(Font)              using `TS1/cmr/m/n' instead on input line 1.
+(Font)              using `TS1/cmr/m/n' instead on input line 6.
 
 Requested font "tcrm1095" at 10.95pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095
@@ -1442,12 +1448,6 @@ Requested font "tcrm0800" at 8.0pt
 Requested font "tcrm0600" at 6.0pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/jknappen/ec/tcrm0600
 .tfm
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
-(Font)              scaled to size 10.95pt on input line 5.
-Requested font "[LinLibertine_RB.otf]/OT:script=latn;language=dflt;+tnum;+lnum;
-mapping=tex-text;" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_RB.otf
 )
 \tf@toc=\write5
 \openout5 = `01-intro-to-R-notes.toc'.
@@ -1465,10 +1465,8 @@ LaTeX Font Info:    Font shape `TU/LinLibertine(5)/m/n' will be
 Requested font "[LinLibertine_M.otf]/OT:script=latn;language=dflt;" at 10.95pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
 e/LinLibertine_M.otf
-File: ../img/package-functions.png Graphic file (type bmp)
-<../img/package-functions.png>
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 292.
+(Font)              scaled to size 9.0pt on input line 286.
 Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;m
 apping=tex-text;" at 9.0pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
@@ -1488,9 +1486,9 @@ Requested font "lmsy9" at 9.0pt
 Requested font "lmsy5" at 5.0pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmsy5.tfm
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 292.
+(Font)              <9> on input line 286.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 292.
+(Font)              <5> on input line 286.
 Requested font "msam10" at 9.0pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
 ols/msam10.tfm
@@ -1512,8 +1510,17 @@ Requested font "tcrm0500" at 5.0pt
 [1
 
 ]
+File: ../img/package-functions.png Graphic file (type bmp)
+<../img/package-functions.png>
 File: ../img/function-args.png Graphic file (type bmp)
 <../img/function-args.png>
+LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/sc' will be
+(Font)              scaled to size 9.0pt on input line 315.
+Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;+
+smcp;mapping=tex-text;" at 9.0pt
+ -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
+e/LinLibertine_R.otf
+[2]
 
 Package xcolor Warning: Incompatible color definition on input line 320.
 
@@ -1522,13 +1529,6 @@ LaTeX Font Info:    Font shape `TU/LinLibertine(5)/m/n' will be
 Requested font "[LinLibertine_M.otf]/OT:script=latn;language=dflt;" at 9.0pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
 e/LinLibertine_M.otf
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/sc' will be
-(Font)              scaled to size 9.0pt on input line 325.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;+
-smcp;mapping=tex-text;" at 9.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_R.otf
-[2]
 
 Package xcolor Warning: Incompatible color definition on input line 325.
 
@@ -1586,6 +1586,7 @@ LaTeX Font Info:    Font shape `TU/LinLibertine(5)/m/it' will be
 Requested font "[LinLibertine_MO.otf]/OT:script=latn;language=dflt;" at 9.0pt
  -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
 e/LinLibertine_MO.otf
+[3]
 
 Package xcolor Warning: Incompatible color definition on input line 390.
 
@@ -1595,7 +1596,6 @@ Package xcolor Warning: Incompatible color definition on input line 390.
 
 Package xcolor Warning: Incompatible color definition on input line 401.
 
-[3]
 
 Package xcolor Warning: Incompatible color definition on input line 406.
 
@@ -1632,6 +1632,7 @@ Package hyperref Warning: The anchor of a bookmark and its parent's must not
 
 Package xcolor Warning: Incompatible color definition on input line 463.
 
+[4]
 
 Package xcolor Warning: Incompatible color definition on input line 469.
 
@@ -1641,7 +1642,6 @@ Package xcolor Warning: Incompatible color definition on input line 469.
 
 Package xcolor Warning: Incompatible color definition on input line 479.
 
-[4]
 
 Package xcolor Warning: Incompatible color definition on input line 484.
 
@@ -1669,6 +1669,7 @@ Package xcolor Warning: Incompatible color definition on input line 534.
 
 Package xcolor Warning: Incompatible color definition on input line 540.
 
+[5]
 
 Package xcolor Warning: Incompatible color definition on input line 544.
 
@@ -1686,7 +1687,6 @@ Package xcolor Warning: Incompatible color definition on input line 554.
 
 File: img/notes-env-pane.png Graphic file (type bmp)
 <img/notes-env-pane.png>
-[5]
 
 Package xcolor Warning: Incompatible color definition on input line 575.
 
@@ -1706,8 +1706,13 @@ Package xcolor Warning: Incompatible color definition on input line 587.
 Package xcolor Warning: Incompatible color definition on input line 587.
 
 
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 593.
+
+
 Package xcolor Warning: Incompatible color definition on input line 598.
 
+[6]
 
 Package xcolor Warning: Incompatible color definition on input line 602.
 
@@ -1726,7 +1731,6 @@ Package xcolor Warning: Incompatible color definition on input line 611.
 
 Package xcolor Warning: Incompatible color definition on input line 620.
 
-[6]
 
 Package xcolor Warning: Incompatible color definition on input line 625.
 
@@ -1741,22 +1745,41 @@ Overfull \hbox (0.64465pt too wide) in paragraph at lines 637--637
 
 File: img/notes-data-view-env-pane.png Graphic file (type bmp)
 <img/notes-data-view-env-pane.png>
+[7]
+File: img/notes-palmers-github.png Graphic file (type bmp)
+<img/notes-palmers-github.png>
+
+Package xcolor Warning: Incompatible color definition on input line 673.
+
+
+Package xcolor Warning: Incompatible color definition on input line 678.
+
+
+Package xcolor Warning: Incompatible color definition on input line 678.
+
+File: img/notes-tribble-paste.png Graphic file (type bmp)
+<img/notes-tribble-paste.png>
+File: img/notes-penguins-tribble-paste.png Graphic file (type bmp)
+<img/notes-penguins-tribble-paste.png>
+[8]
+File: img/notes-penguins-df-print.png Graphic file (type bmp)
+<img/notes-penguins-df-print.png>
 
 AED: lastpage setting LastPage
-[7] (./01-intro-to-R-notes.aux)
+[9] (./01-intro-to-R-notes.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `01-intro-to-R-notes.out' has not changed.
-(rerunfilecheck)             Checksum: 211AAC0CC53FBDD1FC11A386B0446DA4;578.
+(rerunfilecheck)             Checksum: A84A6327C4766A743C2E627715707DF2;841.
  ) 
 Here is how much of TeX's memory you used:
- 30302 strings out of 478475
- 578139 string characters out of 5858026
- 837961 words of memory out of 5000000
- 50168 multiletter control sequences out of 15000+600000
+ 30374 strings out of 478475
+ 580633 string characters out of 5858026
+ 837328 words of memory out of 5000000
+ 50236 multiletter control sequences out of 15000+600000
  426731 words of font info for 110 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 87i,12n,117p,530b,454s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 87i,13n,117p,530b,399s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on 01-intro-to-R-notes.pdf (7 pages).
+Output written on 01-intro-to-R-notes.pdf (9 pages).
