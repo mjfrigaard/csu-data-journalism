@@ -33,23 +33,23 @@ options(width = 60)
 
 This document outlines and introduction to data visualization with `ggplot2`. The objectives for this section are: 
 
-- [ ] Explain the problem having a *Grammar of Graphics* solves
+- Explain the problem having a *Grammar of Graphics* solves
 
-- [ ] Define the terms `geom`, `aesthetic` and `layer` 
+- Define the terms `geom`, `aesthetic` and `layer` 
 
-- [ ] Understand the `ggplot2` graph template, and how to use it to build a variety of graphs
+- Understand the `ggplot2` graph template, and how to use it to build a variety of graphs
 
-- [ ] Recognize the differences between global and local aesthetic mappings and mapping and setting aesthetic attributes  
+- Recognize the differences between global and local aesthetic mappings and mapping and setting aesthetic attributes  
 
-## Materials
+# Materials 
 
-The slides for this presentation are [here]()
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
 
-There is also an accompanying [RStudio.Cloud project]()
+View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
 
-## Previous lessons
+## Background 
 
-You might want to revisit the [`dplyr`](https://mjfrigaard.github.io/csuc-data-journalism/dt00_data-manipulations.html) and [`tidyr`](https://mjfrigaard.github.io/csuc-data-journalism/dt01_data-trans-joins-exercises.html) lessons, or check out the [Data Transformation](https://r4ds.had.co.nz/transform.html) and [Tidy Data](https://r4ds.had.co.nz/tidy-data.html) chapters of R for Data Science. 
+You might want to check out the [Data Transformation](https://r4ds.had.co.nz/transform.html) and [Tidy Data](https://r4ds.had.co.nz/tidy-data.html) chapters of R for Data Science. 
 
 ## Load the packages 
 

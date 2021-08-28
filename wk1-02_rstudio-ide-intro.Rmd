@@ -28,7 +28,9 @@ I've included some comments in *italics*--these are just my personal observation
 
 # Materials 
 
-Check out the slides for this section [here](https://mjfrigaard.github.io/r-workflow-best-practices/Index.html#1).
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
+
+View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html)
 
 # Global Settings 
 

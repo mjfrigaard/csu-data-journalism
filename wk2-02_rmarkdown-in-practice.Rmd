@@ -36,7 +36,6 @@ knitr::opts_chunk$set(warning = FALSE,
 
 This section provides advanced exercises to improve your understanding of R Markdown. 
 
-Please see the [accompanying slides]() for more information.
 
 ## Outline
 
@@ -46,6 +45,12 @@ Please see the [accompanying slides]() for more information.
 4. Figure size  
 5. Figure location  
 6. Interactive figures  
+
+## Materials
+
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
+
+View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
 
 
 ## Parameters

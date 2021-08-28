@@ -24,6 +24,12 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Materials 
+
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
+
+View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
+
 # Flow Control Statements
 
 Flow control functions (`if`, `ifelse`, and `switch`) can be used to control data workflows. Below we'll cover R's common flow control statements: `if()`, `else()`, and `switch()`.

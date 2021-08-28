@@ -35,6 +35,12 @@ base::options(
 
 This document compares some data wrangling techniques between [`dplyr`](https://dplyr.tidyverse.org/index.html), [`tidyr`](https://tidyr.tidyverse.org/index.html), and [`data.table`](https://github.com/Rdatatable/data.table). 
 
+# Materials 
+
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
+
+View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
+
 ## Load packages
 
 These are all part of the `tidyverse`, so we install and load this meta-package below. We also install the `data.table` package.

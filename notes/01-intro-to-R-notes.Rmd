@@ -3,36 +3,38 @@ title: "The R language"
 author: 
 - Martin Frigaard
 date: "`r Sys.Date()`"
-output: memor::pdf_memo
+output:
+  memor::pdf_memo:
+    use_profile: false
+    company:
+      name: BioMarin
+      address: Mesa, AZ
+      phone: 503.333.0531
+      email: mjfrigaard@pm.me
+    confidential: false
+    libertine: true
+    chinese: false
+    logo_height: 1.2cm
+    footer_on_first_page: true
+    toc: true
+    lot: true
+    lof: true
+    number_sections: false
+    latex_engine: xelatex
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
 library(memor)
 library(tidyverse)
-opts_chunk$set(warning = FALSE, message = FALSE)
+opts_chunk$set(warning = TRUE, 
+                message = TRUE)
+# opts_knit$set()
 ```
 
 R is an object-oriented, functional programming language for statistical analysis and graphics. R is also a free and open-source software (FOSS) with a massive global community of users and developers who have helped create and maintain tools for data manipulation, graphics, statistics, and machine learning.
 
-## Functions and objects 
-
-The R language is comprised of functions and objects. R uses functions to perform operations (like `mean()`, `sum()`, `lm()` (for linear model)) on objects (vectors, arrays, matrices, data.frames or lists).
-
-Generally speaking, functions are similar to _verbs_, and objects are more like _nouns_. Functions typically take an object as an `input`, perform an operation on that object, and then return an `output` object. 
-
-```{r example-function, eval=FALSE}
-object <- function('input') {
-
-    perform operation(s) on 'input'
-
-    return output
-}
-# view object
-object
-```
-
-## Base R packages 
+# Base R packages 
 
 R `packages` are collections of commands for a particular purpose or task. R comes 'out of the box' with a ton of functions for manipulating, analyzing, and visualizing data. Two of the most commonly used standard packages are `base` and `utils`. 
 
@@ -50,7 +52,7 @@ knitr::include_graphics(path = "../img/function-args.png")
 
 When you're using the `utils::install.packages()` function, the package files are installed from the [Comprehensive R Archive Network](https://cran.r-project.org/), or CRAN. These packages have passed a variety of tests and are generally considered to be more reliable. 
 
-## User-written packages 
+# User-written packages 
 
 Most of the packages we'll be using in this course come from the `tidyverse,` which is a suite of tools pioneered by RStudio's Chief Scientist [Hadley Wickham](http://hadley.nz/). All packages in the `tidyverse` work well together because they center around a common thread of [tidy data](https://vita.had.co.nz/papers/tidy-data.pdf).
 
@@ -63,16 +65,21 @@ library(tidyverse)
 
 **NOTE: Not all functions return an output. Some functions return messages (or prompts), so be sure to check the help files by using `?install.packages` in the console.**
 
-User-written packages can be installed from code repositories like [Github.](https://github.com/) 
+User-written packages can be installed from code repositories like [Github.](https://github.com/). The R ecosystem has over 10,000 user-written packages available on [CRAN](https://cran.r-project.org/).
 
-First you will need to install the `remotes` package from CRAN, then you can use the `remotes::install_github()`
+First you will need to install the `remotes` package from CRAN
 
 ```{r install-remotes, eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
 install.packages("remotes")
+```
+
+Second, you load the package with `library()`
+
+```{r library, , eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
 library(remotes)
 ```
 
-Now we can use the `remotes::install_github()` to download and install the `tidyverse` package. 
+Finally, we use the `remotes::install_github()` to download and install the `tidyverse` package. 
 
 ```{r install-github, eval=FALSE, message=FALSE, warning=FALSE, results='hide'}
 remotes::install_github("tidyverse/tidyverse")
@@ -81,7 +88,25 @@ library(tidyverse)
 
 **Note: when installing packages from Github or other repos, you're getting the 'freshest' version, so there might be bugs or errors. If you run into an issue, look for a version of the package on CRAN**
 
-## Creating objects   
+# Functions and objects 
+
+The R language is comprised of functions and objects. R uses functions to perform operations (like `mean()`, `sum()`, `lm()` (for linear model)) on objects (vectors, arrays, matrices, data.frames or lists).
+
+Generally speaking, functions are similar to _verbs_, and objects are more like _nouns_. Functions typically take an object as an `input`, perform an operation on that object, and then return an `output` object. 
+
+```{r example-function, eval=FALSE}
+object <- function('input') {
+
+    perform operation(s) on 'input'
+
+    return output
+}
+# view object
+object
+```
+
+
+# Creating objects   
 
 R comes with a variety of functions for creating objects. We will start with `c()`, which stands for 'combine' or 'concatenate'. 
 
@@ -109,21 +134,46 @@ str(x)
 
 I recommend using `str()` and `class()` when you're programming in R. Knowing what kind of object you're dealing with will help you determine what you can do with it. 
 
-## Store and explore
+# Store and explore 
 
-Given the relationship between functions and objects, a common workflow is to create (or import) data as an object (`my_data`), apply a function to this object (`log10()`), store the output from this function in a new object (`my_result`), and then use other functions to explore the `my_result`: 
+Given the relationship between functions and objects, a common workflow is '*store and explore*, where we create (or import) some data as an object, apply a function to this object, store the output from this function in a new object, and use *another* function to view the result. 
 
-```{r store-and-explore}
+## Store
+
+Below we create `my_data`, a vector of 12 numbers, and print it to the console. 
+
+```{r my_data}
 # create data  
 my_data <- c(49, 147, 74, 90, 7, -79, 190, 49, -123, -325, 143, 232)
+my_data
+```
+
+
+Next, we apply the `sqrt()` function to this object, and store the output from this function in a new object called `my_result`. 
+
+```{r sqrt, warning = TRUE, message = TRUE}
 # apply a function and store in my_result
 my_result <- sqrt(my_data)
+```
+
+## Warnings and messages 
+
+R usually tells us when we've used a function and it's produced a result we might not expect (like missing values). In this case, this missing values aren't important, but it's a good idea to pay attention to any warnings or messages that are printed to the console. 
+
+## Explore 
+
+Now we use the `summary()` function to explore the contents of `my_result`:
+
+```{r explore}
 # explore the result
 summary(my_result)
 ```
 
+This process (applying functions to data objects, storing the results, and using functions to view their contents) makes up the majority of the R workflow.
 
-*Operators* are symbols (or collections of symbols) for performing arithmetic (`+`, `-`, `*`, `/`), comparisons (`<`, `>`, `=<`, `=>`), and assignment (`<-` and `=`). *Operators* are also functions (see below). 
+# Operators
+
+*Operators* are symbols (or collections of symbols) for performing arithmetic (`+`, `-`, `*`, `/`), comparisons (`<`, `>`, `=<`, `=>`), and assignment (`<-` and `=`). These aren't a new kind of object, though (*operators* are also functions! See below). 
 
 ```{r operators}
 class(`+`)
@@ -132,41 +182,62 @@ class(`<-`)
 ```
 
 
-## Data in R
+# Data in R
 
-When we load data into R, these data get stored in a data object. To do things to any data object (manipulate, analyze, visualize, model, etc.), we'll need to use functions. We can write custom functions, or we can use one of the over 10,000 user-written packages available on [CRAN](https://cran.r-project.org/).
+Before we can do anything to a particular source of data (manipulate, analyze, visualize, model, etc.), we need to import in into the RStudio environment. 
 
+Right now we have three objects in our R environment (`my_data`, `my_result`, and `x`)
 
-## R Code style
-
-The code in this scenario follows the [`tidyverse` style guide](https://style.tidyverse.org/) as closely as possible.
-
-> "*Each line of a comment should begin with the comment symbol and a single space: `#`*"
-
-```{r comments}
-# comments aren't run in the console
+```{r notes-env-pane, echo=FALSE, fig.align='center', out.width='5in', out.height='3in'}
+knitr::include_graphics("img/notes-env-pane.png")
 ```
 
-> "*In data analysis code, use comments to record important findings and analysis decisions. If you need comments to explain what your code is doing, consider rewriting your code to be clearer.*"
+If we want to remove an object from the environment, we can use `rm()`. 
 
-## Using R functions
-
-If we want to use a function from a package, the syntax for doing this is `package::function()`
-
-For example, below, we'll use the `tidyverse_logo()` function from the `tidyverse` package to view an awesome logo.
-
-```{r tidyverse_logo}
-# click to execute code
-tidyverse::tidyverse_logo()
+```{r rm}
+rm(x)
 ```
 
-The `tidyverse::tidyverse_logo()` function can run without any arguments (i.e. nothing inside the parentheses), but we can view the arguments by placing the cursor inside the parenthesis and hitting the <kbd>tab</kbd> key.
+To remove more than one object, separate them with commas. 
 
-We can enter function arguments by position or name (see below).
+```{r rm-comma}
+rm(my_result, my_data)
+```
 
-<!-- ![](https://github.com/mjfrigaard/katacoda-scenarios/blob/master/figs/00-name-arg.png?raw=true) -->
+Now we have an empty environment.
 
-<!-- ![](https://github.com/mjfrigaard/katacoda-scenarios/blob/master/figs/00-position-arg.png?raw=true) -->
+## Loading data from packages 
+
+R comes 'out of the box' with a lot of data in the `datasets` package, which we can view using the command below:
+
+```{r datasets, eval=FALSE}
+library(help = "datasets")
+```
+
+To see the entire list of data--from datasets and any other R packages you've installed--use the `data()` function. 
+
+```{r data-fun, eval=FALSE}
+data()
+```
 
 
-1. Tacutu, R., Craig, T., Budovsky, A., Wuttke, D., Lehmann, G., Taranukha, D., Costa, J., Fraifeld, V. E., de Magalhaes, J. P. (2013) "Human Ageing Genomic Resources: Integrated databases and tools for the biology and genetics of ageing." Nucleic Acids Research 41(D1):D1027-D1033. 
+## Importing data 
+
+If we want to import a data from a local folder (like in our `Downloads` folder), we can use an import function like those from the `readr` package. 
+
+```{r read_csv}
+library(readr)
+PenguinsRaw <- readr::read_csv(file = "~/Downloads/palmerpenguins.csv")
+```
+
+We can see the `read_csv()` printed a lot of messages to the console to let us know a bit about how the data were imported. We can also check the structure of our data by clicking on it in the **Environments** pane. 
+
+```{r notes-data-view-env-pane, echo=FALSE, fig.align='center', out.width='5in', out.height='3in'}
+knitr::include_graphics("img/notes-data-view-env-pane.png")
+```
+
+## Other tricks for getting data 
+
+
+
+

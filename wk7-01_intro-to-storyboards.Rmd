@@ -40,15 +40,13 @@ options(width = 60, max.print = 60)
 
 An introduction to dashboard development in R with `flexdashboard`s. 
 
-# Materials
+# Materials 
 
-- Slides: 
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
 
-- RStudio Project: 
+View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
 
-# Previous lessons
-
-All of the exercises and lessons are available [here](), but you can also read more about [`ggplot2`](https://ggplot2.tidyverse.org/index.html) on the tidyverse website, and in the [Data Visualisation](https://r4ds.had.co.nz/data-visualisation.html) chapter of R for Data Science.
+You can also read more about [`ggplot2`](https://ggplot2.tidyverse.org/index.html) on the tidyverse website, and in the [Data Visualisation](https://r4ds.had.co.nz/data-visualisation.html) chapter of R for Data Science.
 
 # Load the `tidyverse` and `flexdashboard`
 

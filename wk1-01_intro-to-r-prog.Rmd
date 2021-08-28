@@ -28,7 +28,9 @@ This lesson covers some basic exposure to R functions and data objects.
 
 # Materials 
 
-The slides for this section are available [here](https://mjfrigaard.github.io/intro-to-r-programming/Index.html#1).
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
+
+View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
 
 # R Syntax 
 

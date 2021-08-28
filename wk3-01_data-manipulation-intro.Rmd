@@ -31,11 +31,11 @@ original_starwars <- read_csv("https://bit.ly/3qgjqSC")
 
 This lesson outlines some common data manipulation tasks with `dplyr`. 
 
-# Materials
+# Materials 
 
-The slides for this presentation are [here](https://mjfrigaard.github.io/data-manip-intro/Index.html#1). 
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
 
-There is also an accompanying RStudio.Cloud project [here.](https://rstudio.cloud/project/1918833) 
+View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
 
 
 Read more about `dplyr` [here](https://dplyr.tidyverse.org/index.html) on the tidyverse website, or in the [Data Transformation](https://r4ds.had.co.nz/transform.html) chapter of R for Data Science. 

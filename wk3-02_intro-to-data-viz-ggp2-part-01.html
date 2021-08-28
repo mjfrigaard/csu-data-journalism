@@ -365,45 +365,40 @@ div.tocify {
 <div id="objectives" class="section level2" number="0.1">
 <h2 number="0.1"><span class="header-section-number">0.1</span> Objectives</h2>
 <p>This document outlines and introduction to data visualization with <code>ggplot2</code>. The objectives for this section are:</p>
-<ul class="task-list">
-<li><p><input type="checkbox" disabled="" />
-Explain the problem having a <em>Grammar of Graphics</em> solves</p></li>
-<li><p><input type="checkbox" disabled="" />
-Define the terms <code>geom</code>, <code>aesthetic</code> and <code>layer</code></p></li>
-<li><p><input type="checkbox" disabled="" />
-Understand the <code>ggplot2</code> graph template, and how to use it to build a variety of graphs</p></li>
-<li><p><input type="checkbox" disabled="" />
-Recognize the differences between global and local aesthetic mappings and mapping and setting aesthetic attributes</p></li>
+<ul>
+<li><p>Explain the problem having a <em>Grammar of Graphics</em> solves</p></li>
+<li><p>Define the terms <code>geom</code>, <code>aesthetic</code> and <code>layer</code></p></li>
+<li><p>Understand the <code>ggplot2</code> graph template, and how to use it to build a variety of graphs</p></li>
+<li><p>Recognize the differences between global and local aesthetic mappings and mapping and setting aesthetic attributes</p></li>
 </ul>
 </div>
-<div id="materials" class="section level2" number="0.2">
-<h2 number="0.2"><span class="header-section-number">0.2</span> Materials</h2>
-<p>The slides for this presentation are <a href="">here</a></p>
-<p>There is also an accompanying <a href="">RStudio.Cloud project</a></p>
+<div id="materials" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Materials</h1>
+<p>View the slides for this section <a href="https://mjfrigaard.github.io/csuc-data-journalism/slides.html">here</a>.</p>
+<p>View the exercises for this section <a href="https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html">here</a>.</p>
+<div id="background" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Background</h2>
+<p>You might want to check out the <a href="https://r4ds.had.co.nz/transform.html">Data Transformation</a> and <a href="https://r4ds.had.co.nz/tidy-data.html">Tidy Data</a> chapters of R for Data Science.</p>
 </div>
-<div id="previous-lessons" class="section level2" number="0.3">
-<h2 number="0.3"><span class="header-section-number">0.3</span> Previous lessons</h2>
-<p>You might want to revisit the <a href="https://mjfrigaard.github.io/csuc-data-journalism/dt00_data-manipulations.html"><code>dplyr</code></a> and <a href="https://mjfrigaard.github.io/csuc-data-journalism/dt01_data-trans-joins-exercises.html"><code>tidyr</code></a> lessons, or check out the <a href="https://r4ds.had.co.nz/transform.html">Data Transformation</a> and <a href="https://r4ds.had.co.nz/tidy-data.html">Tidy Data</a> chapters of R for Data Science.</p>
-</div>
-<div id="load-the-packages" class="section level2" number="0.4">
-<h2 number="0.4"><span class="header-section-number">0.4</span> Load the packages</h2>
+<div id="load-the-packages" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Load the packages</h2>
 <p>The main packages we’re going to use are <code>ggplot2</code>, <code>dplyr</code>, and <code>tidyr</code>. These are all part of the <code>tidyverse</code>, so we’ll import this package below:</p>
 <pre class="r"><code>install.packages(&quot;tidyverse&quot;)
 library(tidyverse)</code></pre>
 </div>
-<div id="import-data" class="section level2 tabset" number="0.5">
-<h2 class="tabset" number="0.5"><span class="header-section-number">0.5</span> Import data</h2>
+<div id="import-data" class="section level2 tabset" number="1.3">
+<h2 class="tabset" number="1.3"><span class="header-section-number">1.3</span> Import data</h2>
 <p>For this section, we’re going to be using the datasets in the <code>ggplot2</code> package. Normally we import data ‘in the wild’, but for these examples we want to focus on the <code>ggplot2</code> grammar, not necessarily the data processing/wrangling steps.</p>
 <p>We’re going to start with the <code>ggplot2::diamonds</code> dataset. This contains `<em>A dataset containing the prices and other attributes of almost 54,000 diamonds.</em></p>
-<div id="exercise" class="section level3" number="0.5.1">
-<h3 number="0.5.1"><span class="header-section-number">0.5.1</span> exercise</h3>
+<div id="exercise" class="section level3" number="1.3.1">
+<h3 number="1.3.1"><span class="header-section-number">1.3.1</span> exercise</h3>
 <p>Use <code>dplyr::glimpse()</code>, <code>utils::head()</code>, and <code>utils::tail()</code>, to view the <code>diamonds</code> dataset.</p>
 <pre class="r"><code>dplyr::glimpse(________)
 utils::____(ggplot2::diamonds)
 utils::____(ggplot2::diamonds)</code></pre>
 </div>
-<div id="solution" class="section level3" number="0.5.2">
-<h3 number="0.5.2"><span class="header-section-number">0.5.2</span> solution</h3>
+<div id="solution" class="section level3" number="1.3.2">
+<h3 number="1.3.2"><span class="header-section-number">1.3.2</span> solution</h3>
 <p>See the solution below:</p>
 <pre class="r"><code>dplyr::glimpse(ggplot2::diamonds)</code></pre>
 <pre><code>## Rows: 53,940
@@ -432,22 +427,22 @@ utils::____(ggplot2::diamonds)</code></pre>
 </div>
 </div>
 </div>
-<div id="intro-to-ggplot2" class="section level2" number="0.6">
-<h2 number="0.6"><span class="header-section-number">0.6</span> Intro to <code>ggplot2</code></h2>
+<div id="intro-to-ggplot2" class="section level2" number="1.4">
+<h2 number="1.4"><span class="header-section-number">1.4</span> Intro to <code>ggplot2</code></h2>
 <p>Within the <code>tidyverse</code>, the <code>ggplot2</code> package provides a grammar (or set of rules) to develop a rich vocabulary for building data visualizations. Knowing how to use <code>ggplot2</code>’s grammar also gives us an excellent mental model for thinking about individual graphical elements.</p>
 </div>
-<div id="terms-and-definitions-geoms-and-aesthetics" class="section level2 tabset" number="0.7">
-<h2 class="tabset" number="0.7"><span class="header-section-number">0.7</span> Terms and definitions: geoms and aesthetics</h2>
+<div id="terms-and-definitions-geoms-and-aesthetics" class="section level2 tabset" number="1.5">
+<h2 class="tabset" number="1.5"><span class="header-section-number">1.5</span> Terms and definitions: geoms and aesthetics</h2>
 <p>The <em>geom</em> (or geometric object) is the fundamental building block in the <code>ggplot2</code> language. <code>geom</code>s are the shape or element we will see on the graph or plot, and include things like points or lines, bars, etc. <code>geoms</code> also have <code>aes</code>thetic mappings, which are visual properties of the shape on the plot or graph (i.e. the color of the point, the size of the lines, the position or shape of the bars, etc.).</p>
 <p>So every graph or plot has a <code>geom</code>, and all <code>geom</code>s will also have some visual properties called <code>aes</code>thetics.</p>
-<div id="exercise-1" class="section level3" number="0.7.1">
-<h3 number="0.7.1"><span class="header-section-number">0.7.1</span> exercise</h3>
+<div id="exercise-1" class="section level3" number="1.5.1">
+<h3 number="1.5.1"><span class="header-section-number">1.5.1</span> exercise</h3>
 <p>Use the pipe syntax below to apply the <code>ggplot2::ggplot()</code> and <code>ggplot2::aes()</code> functions to the <code>WikiCovid</code> data.</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::_______(ggplot2::___())</code></pre>
 </div>
-<div id="solution-1" class="section level3" number="0.7.2">
-<h3 number="0.7.2"><span class="header-section-number">0.7.2</span> solution</h3>
+<div id="solution-1" class="section level3" number="1.5.2">
+<h3 number="1.5.2"><span class="header-section-number">1.5.2</span> solution</h3>
 <p>See the solution below:</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes())</code></pre>
@@ -455,8 +450,8 @@ utils::____(ggplot2::diamonds)</code></pre>
 <p>When we combine a dataset with the <code>ggplot2::ggplot()</code> and <code>ggplot2::aes()</code> functions, we get a blank canvas. This is the base layer for <code>ggplot2</code> graphs. Next we will see what happens when we ‘map’ variables to their respective positions (<code>x</code> and <code>y</code>).</p>
 </div>
 </div>
-<div id="build-labels-first" class="section level2 tabset" number="0.8">
-<h2 class="tabset" number="0.8"><span class="header-section-number">0.8</span> Build labels first!</h2>
+<div id="build-labels-first" class="section level2 tabset" number="1.6">
+<h2 class="tabset" number="1.6"><span class="header-section-number">1.6</span> Build labels first!</h2>
 <p>I <strong>strongly suggest</strong> building labels first when making a figure or graph because it forces us to think about what we should expect to see. For example, if we want to see <code>price</code> on the <code>y</code> and <code>carat</code> on the <code>x</code>, we can create these labels (along with a <code>title</code> and <code>caption</code>) using the <code>ggplot2::labs()</code> function below.</p>
 <p><em>Note the use of the <code>paste0()</code> function to ensure the date matches the same day we scraped the data.</em></p>
 <pre class="r"><code>labs_caratVSprice &lt;- ggplot2::labs(
@@ -466,28 +461,28 @@ utils::____(ggplot2::diamonds)</code></pre>
                               y = &quot;Price in US dollars&quot;)</code></pre>
 <p>Now we can refer to the labels to add the variables to our existing canvas.</p>
 </div>
-<div id="mapping-aesthetics" class="section level2 tabset" number="0.9">
-<h2 class="tabset" number="0.9"><span class="header-section-number">0.9</span> Mapping aesthetics</h2>
+<div id="mapping-aesthetics" class="section level2 tabset" number="1.7">
+<h2 class="tabset" number="1.7"><span class="header-section-number">1.7</span> Mapping aesthetics</h2>
 <p>We’re going to take the <code>diamonds</code> dataset, and pipe (<code>%&gt;%</code>) it over to the <code>ggplot()</code> and <code>aes()</code> function (short for aesthetics). This ‘initializes’ the <code>ggplot2</code> plot, and the <code>aes()</code> function tells <code>ggplot2</code> which variables we want ‘mapped’ to each location or position aesthetic.</p>
 <p>See the example below:</p>
 <p><img src="img/ggplot2-diamonds-template.png" width="796" /></p>
 <p>Structuring the code this way makes it easier to separate the input dataset (<code>DataSet</code>) from the code that initializes the plot (<code>ggplot(aes())</code>). In the future, this comes in handy if we want to manipulate the data before creating a graph.</p>
-<div id="exercise-2" class="section level3" number="0.9.1">
-<h3 number="0.9.1"><span class="header-section-number">0.9.1</span> exercise</h3>
+<div id="exercise-2" class="section level3" number="1.7.1">
+<h3 number="1.7.1"><span class="header-section-number">1.7.1</span> exercise</h3>
 <p>Use the labels to guide you in filling in the <code>aes()</code> function below:</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = _____, y = ______)) </code></pre>
 </div>
-<div id="solution-2" class="section level3" number="0.9.2">
-<h3 number="0.9.2"><span class="header-section-number">0.9.2</span> solution</h3>
+<div id="solution-2" class="section level3" number="1.7.2">
+<h3 number="1.7.2"><span class="header-section-number">1.7.2</span> solution</h3>
 <p>See the solution below:</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price))</code></pre>
 <p><img src="img/mapping-aes-sol-1.png" width="864" /></p>
 </div>
 </div>
-<div id="adding-layers-with" class="section level2 tabset" number="0.10">
-<h2 class="tabset" number="0.10"><span class="header-section-number">0.10</span> Adding layers with <code>+</code></h2>
+<div id="adding-layers-with" class="section level2 tabset" number="1.8">
+<h2 class="tabset" number="1.8"><span class="header-section-number">1.8</span> Adding layers with <code>+</code></h2>
 <p>Up to this point, we’ve been using the pipe (<code>%&gt;%</code>) to combine function calls into clear, readable, linear code ‘pipelines’. <code>ggplot2</code> deviates from this syntax and uses the <code>+</code> symbol for adding layers to plot objects. This can be confusing at first, but it becomes clear as soon as you identify where the plot is initialized.</p>
 <p>We currently have a dataset (<code>diamonds</code>) and a label object in our working environment (<code>labs_caratVSprice</code>). If we check the structure at each step, we can see where the plot’s been created (and it’s appropriate to use the <code>+</code> symbol).</p>
 <pre class="r"><code># use class() to check what is being &#39;piped&#39; to ggplot(aes()):
@@ -502,15 +497,15 @@ diamonds %&gt;% class()</code></pre>
 <pre class="r"><code>class(labs_caratVSprice)</code></pre>
 <pre><code>## [1] &quot;labels&quot;</code></pre>
 <p><img src="img/ggplot-initialized.png" width="700" /></p>
-<div id="exercise-3" class="section level3" number="0.10.1">
-<h3 number="0.10.1"><span class="header-section-number">0.10.1</span> exercise</h3>
+<div id="exercise-3" class="section level3" number="1.8.1">
+<h3 number="1.8.1"><span class="header-section-number">1.8.1</span> exercise</h3>
 <p>Add the label object <code>labs_caratVSprice</code> to the code below to assign put labels on the graph object.</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price)) _ # &lt;- use the appropriate symbol!
   _______________</code></pre>
 </div>
-<div id="solution-3" class="section level3" number="0.10.2">
-<h3 number="0.10.2"><span class="header-section-number">0.10.2</span> solution</h3>
+<div id="solution-3" class="section level3" number="1.8.2">
+<h3 number="1.8.2"><span class="header-section-number">1.8.2</span> solution</h3>
 <p>See the solution below:</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price)) + 
@@ -519,19 +514,19 @@ diamonds %&gt;% class()</code></pre>
 <p>This is starting to look more like a graph! We have the <code>x</code> and <code>y</code> axis defined, the <code>title</code> tells us what we should expect to see, and the <code>caption</code> gives us a clue to the data source.</p>
 </div>
 </div>
-<div id="adding-geometric-layers" class="section level2 tabset" number="0.11">
-<h2 class="tabset" number="0.11"><span class="header-section-number">0.11</span> Adding geometric layers</h2>
+<div id="adding-geometric-layers" class="section level2 tabset" number="1.9">
+<h2 class="tabset" number="1.9"><span class="header-section-number">1.9</span> Adding geometric layers</h2>
 <p>Now that we have <code>price</code> and <code>carat</code> mapped to their respective aesthetic positions, we will add another <code>geom</code> layer. Layers are to <code>ggplto2</code> graphs what sentences are to paragraphs, We construct sentences with verbs and nouns, and separate them with punctuation. Layers are built using geoms and aesthetics, and we separate these layers using the <code>+</code> symbol.</p>
-<div id="exercise-4" class="section level3" number="0.11.1">
-<h3 number="0.11.1"><span class="header-section-number">0.11.1</span> exercise</h3>
+<div id="exercise-4" class="section level3" number="1.9.1">
+<h3 number="1.9.1"><span class="header-section-number">1.9.1</span> exercise</h3>
 <p>Add the <code>geom_point()</code> to the code below, before the labels:</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price)) + 
   _________() + 
   labs_caratVSprice</code></pre>
 </div>
-<div id="solution-4" class="section level3" number="0.11.2">
-<h3 number="0.11.2"><span class="header-section-number">0.11.2</span> solution</h3>
+<div id="solution-4" class="section level3" number="1.9.2">
+<h3 number="1.9.2"><span class="header-section-number">1.9.2</span> solution</h3>
 <p>See the solution below:</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price)) + 
@@ -541,8 +536,8 @@ diamonds %&gt;% class()</code></pre>
 <p>There we have it! Our first graph! Now we’re going to add a few more aesthetics like <code>color</code> and <code>size</code>.</p>
 </div>
 </div>
-<div id="ggplot2-a-template" class="section level2" number="0.12">
-<h2 number="0.12"><span class="header-section-number">0.12</span> <code>ggplot2</code>: A template</h2>
+<div id="ggplot2-a-template" class="section level2" number="1.10">
+<h2 number="1.10"><span class="header-section-number">1.10</span> <code>ggplot2</code>: A template</h2>
 <p>We’ve just built our first graph with <code>ggplot2</code>, so lets take a second to see what we’ve learned:</p>
 <ol style="list-style-type: decimal">
 <li>Start with a dataset (<code>diamonds</code>)</li>
@@ -556,23 +551,23 @@ diamonds %&gt;% class()</code></pre>
 <p><img src="img/ggplot2-template-01.png" width="706" /></p>
 <p>As you can see, the <code>geom</code> functions come with their own set of aesthetic mappings, which we will explore next. But first, we need to cover the difference between mapping aesthetics globally vs. mapping variables locally.</p>
 </div>
-<div id="global-vs.-local-aesthetics" class="section level2 tabset" number="0.13">
-<h2 class="tabset" number="0.13"><span class="header-section-number">0.13</span> Global vs. local aesthetics</h2>
+<div id="global-vs.-local-aesthetics" class="section level2 tabset" number="1.11">
+<h2 class="tabset" number="1.11"><span class="header-section-number">1.11</span> Global vs. local aesthetics</h2>
 <p>When we mapped <code>carat</code> and <code>price</code> to the <code>x</code> and <code>y</code> axis inside <code>ggplot2(mapping = aes())</code>, we set these positions globally, which means they will be inherited at each layer of the graph. See the figure below:</p>
 <p><img src="img/global-mappings.png" width="922" /></p>
 <p>Each <code>geom</code> function also comes with it’s own options for aesthetic mappings, which we can use to customize the graph at each layer.</p>
 <p><img src="img/local-mappings.png" width="936" /></p>
 <p>We will see how this works with a few exercises.</p>
-<div id="exercise-5" class="section level3" number="0.13.1">
-<h3 number="0.13.1"><span class="header-section-number">0.13.1</span> exercise</h3>
+<div id="exercise-5" class="section level3" number="1.11.1">
+<h3 number="1.11.1"><span class="header-section-number">1.11.1</span> exercise</h3>
 <p>Map the <code>cut</code> variable to the <code>color</code> aesthetic inside the global <code>ggplot(aes())</code> functions (<code>cut</code> is the <em>quality of the cut (Fair, Good, Very Good, Premium, Ideal)</em>).</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price, _____ = ___)) + 
   ggplot2::geom_point() + 
   labs_caratVSprice</code></pre>
 </div>
-<div id="solution-5" class="section level3" number="0.13.2">
-<h3 number="0.13.2"><span class="header-section-number">0.13.2</span> solution</h3>
+<div id="solution-5" class="section level3" number="1.11.2">
+<h3 number="1.11.2"><span class="header-section-number">1.11.2</span> solution</h3>
 <p>See the solution below:</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price, color = cut)) + 
@@ -581,16 +576,16 @@ diamonds %&gt;% class()</code></pre>
 <p><img src="img/global-aes-color-sol-1.png" width="864" /></p>
 <p>As we can see, there were five levels to the <code>cut</code> variable, and each level has it’s own unique color.</p>
 </div>
-<div id="exercise-6" class="section level3" number="0.13.3">
-<h3 number="0.13.3"><span class="header-section-number">0.13.3</span> exercise</h3>
+<div id="exercise-6" class="section level3" number="1.11.3">
+<h3 number="1.11.3"><span class="header-section-number">1.11.3</span> exercise</h3>
 <p>Add the <code>clarity</code> variable to the <code>geom_point(aes())</code> function below to map the values to different colors locally (<code>clarity</code> is “<em>a measurement of how clear the diamond is (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))</em>”).</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price, color = cut)) + 
   ggplot2::geom_point(aes(_____ = ___)) + 
   labs_caratVSprice</code></pre>
 </div>
-<div id="solution-6" class="section level3" number="0.13.4">
-<h3 number="0.13.4"><span class="header-section-number">0.13.4</span> solution</h3>
+<div id="solution-6" class="section level3" number="1.11.4">
+<h3 number="1.11.4"><span class="header-section-number">1.11.4</span> solution</h3>
 <p>See the solution below:</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price, color = cut)) + 
@@ -600,11 +595,11 @@ diamonds %&gt;% class()</code></pre>
 <p>Note that the <code>color = cut</code> mapping inside the global setting is overridden by the local mapping inside the <code>geom_point()</code> function, and we can see there is a clear relationship between clarity and <code>carat</code>.</p>
 </div>
 </div>
-<div id="additional-aesthetic-mappings" class="section level2 tabset" number="0.14">
-<h2 class="tabset" number="0.14"><span class="header-section-number">0.14</span> Additional aesthetic mappings</h2>
+<div id="additional-aesthetic-mappings" class="section level2 tabset" number="1.12">
+<h2 class="tabset" number="1.12"><span class="header-section-number">1.12</span> Additional aesthetic mappings</h2>
 <p>The points in the graph above are all stacked on top of each other. This is called over-plotting, and we can fix it with the <code>alpha</code> argument.</p>
-<div id="exercise-7" class="section level3" number="0.14.1">
-<h3 number="0.14.1"><span class="header-section-number">0.14.1</span> exercise</h3>
+<div id="exercise-7" class="section level3" number="1.12.1">
+<h3 number="1.12.1"><span class="header-section-number">1.12.1</span> exercise</h3>
 <p>Set the <code>alpha</code> argument to <code>1/3</code> inside the <code>geom_point()</code>, after the <code>aes()</code> function.</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price, color = cut)) +  
@@ -612,8 +607,8 @@ diamonds %&gt;% class()</code></pre>
              _____ = _/_) + 
   labs_caratVSprice</code></pre>
 </div>
-<div id="solution-7" class="section level3" number="0.14.2">
-<h3 number="0.14.2"><span class="header-section-number">0.14.2</span> solution</h3>
+<div id="solution-7" class="section level3" number="1.12.2">
+<h3 number="1.12.2"><span class="header-section-number">1.12.2</span> solution</h3>
 <p>See solution below:</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price, color = cut)) +  
@@ -623,8 +618,8 @@ diamonds %&gt;% class()</code></pre>
 <p><img src="img/alpha-point-sol-1.png" width="864" /></p>
 </div>
 </div>
-<div id="setting-vs.-mapping" class="section level2 tabset" number="0.15">
-<h2 class="tabset" number="0.15"><span class="header-section-number">0.15</span> Setting vs. mapping</h2>
+<div id="setting-vs.-mapping" class="section level2 tabset" number="1.13">
+<h2 class="tabset" number="1.13"><span class="header-section-number">1.13</span> Setting vs. mapping</h2>
 <p>When we map a variable to an aesthetic like <code>color</code>, different values for this variable (<code>"Fair"</code>, <code>"Good"</code>, <code>"Very Good"</code>, <code>"Premium"</code>, <code>"Ideal"</code>) to different colors. You can access these colors using the <code>ggplot2::build()</code> function, then extracting the information stored in data <code>data[[1]]$colour</code>:</p>
 <pre class="r"><code># create plot
 p &lt;- diamonds %&gt;% 
@@ -640,16 +635,16 @@ base::unique(ggbld$data[[1]]$colour)</code></pre>
 <p>These colors have a hexadecimal code and are matched up in the plot legend:</p>
 <p><img src="img/color-mapping.png" width="271" /></p>
 <p>Mapping involves assigning variable values to visual attributes, but setting involves assigning aesthetic attributes manually. We will explore the differences below:</p>
-<div id="exercise-8" class="section level3" number="0.15.1">
-<h3 number="0.15.1"><span class="header-section-number">0.15.1</span> exercise</h3>
+<div id="exercise-8" class="section level3" number="1.13.1">
+<h3 number="1.13.1"><span class="header-section-number">1.13.1</span> exercise</h3>
 <p>Set the color aesthetic to <code>"dodgerblue"</code> inside the <code>geom_point()</code> function.</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price)) + 
   ggplot2::geom_point(color = _____________) + 
   labs_caratVSprice</code></pre>
 </div>
-<div id="solution-8" class="section level3" number="0.15.2">
-<h3 number="0.15.2"><span class="header-section-number">0.15.2</span> solution</h3>
+<div id="solution-8" class="section level3" number="1.13.2">
+<h3 number="1.13.2"><span class="header-section-number">1.13.2</span> solution</h3>
 <p>See the solution below:</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price)) + 
@@ -657,8 +652,8 @@ base::unique(ggbld$data[[1]]$colour)</code></pre>
   labs_caratVSprice</code></pre>
 <p><img src="img/setting-color-sol-1.png" width="864" /></p>
 </div>
-<div id="mapping-setting" class="section level3" number="0.15.3">
-<h3 number="0.15.3"><span class="header-section-number">0.15.3</span> mapping ≠ setting</h3>
+<div id="mapping-setting" class="section level3" number="1.13.3">
+<h3 number="1.13.3"><span class="header-section-number">1.13.3</span> mapping ≠ setting</h3>
 <p>If you accidentally map a color value you meant to set by placing it inside the <code>aes()</code> function, you will see the following:</p>
 <pre class="r"><code>diamonds %&gt;% 
   ggplot2::ggplot(ggplot2::aes(x = carat, y = price)) + 
@@ -668,9 +663,10 @@ base::unique(ggbld$data[[1]]$colour)</code></pre>
 <p>Here we can see the value (<code>"dodgerblue"</code>) is assigned as a level in the <code>colour</code> scale, but the color is assigned to a default visual attribute.</p>
 </div>
 </div>
-<div id="review" class="section level2" number="0.16">
-<h2 number="0.16"><span class="header-section-number">0.16</span> Review</h2>
+<div id="review" class="section level2" number="1.14">
+<h2 number="1.14"><span class="header-section-number">1.14</span> Review</h2>
 <p>We’ve covered an introduction on how the grammar of graphics is implemented in <code>ggplot2</code>, and how using a template can guide us in building a huge variety of graphs. We learned that it’s best to start with graph labels to make sure we’re seeing what we were expecting, We demonstrated how global mappings are inhereted at each graph layer, and that we can override these mappings by providing local aesthetics. We’ve also seen the difference between setting and mapping aesthetic attributes to a graph layer.</p>
+</div>
 </div>
 
 <i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>

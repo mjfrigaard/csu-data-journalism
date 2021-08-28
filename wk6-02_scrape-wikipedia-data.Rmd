@@ -35,6 +35,13 @@ base::options(
 
 This document outlines some advanced data wrangling with [`dplyr`](https://dplyr.tidyverse.org/index.html), [`tidyr`](https://tidyr.tidyverse.org/index.html), and [`stringr`](https://stringr.tidyverse.org/index.html). Read more in the [Data Transformation](https://r4ds.had.co.nz/transform.html) chapter of R for Data Science.
 
+
+# Materials 
+
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
+
+View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
+
 ## Load packages
 
 These are all part of the `tidyverse`, so we install and load this meta-package below.
