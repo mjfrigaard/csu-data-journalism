@@ -238,6 +238,10 @@ knitr::include_graphics("img/notes-data-view-env-pane.png")
 
 ## Other tricks for getting data 
 
+Another great trick for getting data into R comes from the [`datapasta` package](https://milesmcbain.github.io/datapasta/). 
+
+If we open the `palmerpenguins.csv` file from our downloads folder, 
+
 
 
 
