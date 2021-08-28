@@ -295,8 +295,8 @@ The slides will cover some basic data manipulation techniques, and intermediate 
   
 ### Week 5 Reading
 
-1. `tidyr` documentation   
-2. Technology of Print: is faster better?
+1. [`tidyr` pivoting documentation](https://tidyr.tidyverse.org/articles/pivot.html)   
+2. [Technology of Print: is faster better?](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/pdfs/the-technology-of-print-is-faster-better-from-mit-technology-review-1984-08.pdf)
 
 ### Week 5 Exercises
 
@@ -312,7 +312,7 @@ Exploratory data visualization (EDA) and graph types
   
 ### Week 6 Reading
 
-+ [ggplot2 extensions](https://exts.ggplot2.tidyverse.org/)
+1. [ggplot2 extensions](https://exts.ggplot2.tidyverse.org/)   
 
 ### Week 6 Exercises 
 

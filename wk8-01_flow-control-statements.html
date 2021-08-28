@@ -362,14 +362,19 @@ div.tocify {
 </div>
 
 
-<div id="flow-control-statements" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Flow Control Statements</h1>
+<div id="materials" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Materials</h1>
+<p>View the slides for this section <a href="https://mjfrigaard.github.io/csuc-data-journalism/slides.html">here</a>.</p>
+<p>View the exercises for this section <a href="https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html">here</a>.</p>
+</div>
+<div id="flow-control-statements" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Flow Control Statements</h1>
 <p>Flow control functions (<code>if</code>, <code>ifelse</code>, and <code>switch</code>) can be used to control data workflows. Below we’ll cover R’s common flow control statements: <code>if()</code>, <code>else()</code>, and <code>switch()</code>.</p>
-<div id="if" class="section level2 tabset" number="1.1">
-<h2 class="tabset" number="1.1"><span class="header-section-number">1.1</span> <code>if</code></h2>
+<div id="if" class="section level2 tabset" number="2.1">
+<h2 class="tabset" number="2.1"><span class="header-section-number">2.1</span> <code>if</code></h2>
 <p>The <code>if()</code> statement can be used to control exactly what operations are carried out in a given chunk of code.</p>
-<div id="if-and-cat" class="section level3" number="1.1.1">
-<h3 number="1.1.1"><span class="header-section-number">1.1.1</span> <code>if()</code> and <code>cat()</code></h3>
+<div id="if-and-cat" class="section level3" number="2.1.1">
+<h3 number="2.1.1"><span class="header-section-number">2.1.1</span> <code>if()</code> and <code>cat()</code></h3>
 <p>Below is a straightforward <code>if()</code> statement that tests if a given condition is <code>TRUE</code>.</p>
 <pre class="r"><code>if (TRUE) {
   cat(&quot;The if() condition is true&quot;)
@@ -382,8 +387,8 @@ if (x &gt; 0) {
 }
 #&gt; x value is greater than 0</code></pre>
 </div>
-<div id="if-with-else" class="section level3" number="1.1.2">
-<h3 number="1.1.2"><span class="header-section-number">1.1.2</span> <code>if()</code> with <code>else()</code></h3>
+<div id="if-with-else" class="section level3" number="2.1.2">
+<h3 number="2.1.2"><span class="header-section-number">2.1.2</span> <code>if()</code> with <code>else()</code></h3>
 <p>Now what if we wanted to our code to do something when the if condition was <em>not</em> satisfied?</p>
 <p>Below we create <code>y</code> and set it equal to <code>5</code>, then we test to see if <code>x</code> is greater than <code>y</code>. If it isn’t we print the second statement (and the value of <code>y</code>)</p>
 <pre class="r"><code>y &lt;- 5
@@ -405,8 +410,8 @@ if (x &gt; y) {# FALSE
 #&gt; If x is &lt; y, and y is &gt; 4, What is x + y?  5</code></pre>
 <p>When testing <code>if()</code>/<code>else()</code> statements, I like to use comments to document what I should expect from each condition.</p>
 </div>
-<div id="vectorized-ifelse" class="section level3" number="1.1.3">
-<h3 number="1.1.3"><span class="header-section-number">1.1.3</span> vectorized <code>ifelse()</code></h3>
+<div id="vectorized-ifelse" class="section level3" number="2.1.3">
+<h3 number="2.1.3"><span class="header-section-number">2.1.3</span> vectorized <code>ifelse()</code></h3>
 <p>Recall that <code>TRUE</code> = <code>1</code> and <code>FALSE</code> = <code>0</code>.</p>
 <pre class="r"><code>sum(FALSE, FALSE)
 #&gt; [1] 0
@@ -442,13 +447,13 @@ length(conditions_01[1]) &gt; 1
 #&gt; [1] FALSE</code></pre>
 </div>
 </div>
-<div id="switch" class="section level2 tabset" number="1.2">
-<h2 class="tabset" number="1.2"><span class="header-section-number">1.2</span> <code>switch</code></h2>
+<div id="switch" class="section level2 tabset" number="2.2">
+<h2 class="tabset" number="2.2"><span class="header-section-number">2.2</span> <code>switch</code></h2>
 <p>We can use <code>switch()</code> in place of nested <code>if</code> <code>else</code> statements to select among several alternative results.</p>
 <pre class="r"><code>switch(EXPR = , ... = )</code></pre>
 <p>The <code>EXPR</code> in <code>switch()</code> must evaluate to a number or a character vector of length <code>1</code>.</p>
-<div id="re-write-nested-ifelse" class="section level3" number="1.2.1">
-<h3 number="1.2.1"><span class="header-section-number">1.2.1</span> re-write nested <code>ifelse</code></h3>
+<div id="re-write-nested-ifelse" class="section level3" number="2.2.1">
+<h3 number="2.2.1"><span class="header-section-number">2.2.1</span> re-write nested <code>ifelse</code></h3>
 <p>Consider the nested if else statement below:</p>
 <pre class="r"><code># define string value
 am_dad_char &lt;- &quot;Steven&quot;
@@ -477,8 +482,8 @@ am_dad_age
 )
 #&gt; [1] 15</code></pre>
 </div>
-<div id="switch-alternatives" class="section level3" number="1.2.2">
-<h3 number="1.2.2"><span class="header-section-number">1.2.2</span> <code>switch()</code> alternatives</h3>
+<div id="switch-alternatives" class="section level3" number="2.2.2">
+<h3 number="2.2.2"><span class="header-section-number">2.2.2</span> <code>switch()</code> alternatives</h3>
 <p>While the <code>EXPR</code> needs to be either a string or numeric value, the alternatives (<code>...</code>) can be multiple types. See the examples below:</p>
 <pre class="r"><code># switch on a string?
 switch(&quot;string&quot;,

@@ -22,6 +22,8 @@ title: "More resources"
 
 + [RViews Community Blog](https://rviews.rstudio.com/)
 
++ [Rstudio Cheatsheets](https://github.com/rstudio/cheatsheets)
+
 ### Resources for R Markdown  
 
 - **YAML**: check out the [`ymlthis` package](https://r-lib.github.io/ymlthis/) for tools and documentation for working with YAML
