@@ -155,7 +155,7 @@ News changes quickly, so I reserve the right to remove, add, or alter any conten
 ### Week 1 Reading 
 
 1. [Fifty Years of Journalism and Data: A Brief History](https://gijn.org/2015/11/12/fifty-years-of-journalism-and-data-a-brief-history/)
-2. [Data Journalism in Perspective](https://gijn.org/2015/11/12/fifty-years-of-journalism-and-data-a-brief-history/)
+2. [Data Journalism in Perspective](https://datajournalism.com/read/handbook/one/introduction/data-journalism-in-perspective)
 
 ### Week 1 Exercises 
 
