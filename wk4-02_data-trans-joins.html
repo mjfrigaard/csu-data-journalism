@@ -41,7 +41,7 @@
 <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <script src="site_libs/viz-1.8.2/viz.js"></script>
 <link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="site_libs/grViz-binding-1.0.6.9000/grViz.js"></script>
+<script src="site_libs/grViz-binding-1.0.6.1/grViz.js"></script>
 <link href="site_libs/jsoneditor-5.25.6/jsoneditor.min.css" rel="stylesheet" />
 <script src="site_libs/jsoneditor-5.25.6/jsoneditor.min.js"></script>
 <script src="site_libs/jsonedit-binding-3.0.0/jsonedit.js"></script>
@@ -370,25 +370,25 @@ div.tocify {
 
 
 <div id="objectives" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Objectives</h1>
+<h1><span class="header-section-number">1</span> Objectives</h1>
 <p>This document outlines some common data reshaping tasks with <code>tidyr</code>.</p>
 </div>
 <div id="materials" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Materials</h1>
+<h1><span class="header-section-number">2</span> Materials</h1>
 <p>View the slides for this section <a href="https://mjfrigaard.github.io/csuc-data-journalism/slides.html">here</a>.</p>
 <p>View the exercises for this section <a href="https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html">here</a>.</p>
 <p>Read more about <code>dplyr</code> <a href="https://dplyr.tidyverse.org/index.html">here</a> and <a href="https://tidyr.tidyverse.org/"><code>tidyr</code></a> on the tidyverse website, or in the <a href="https://r4ds.had.co.nz/transform.html">Data Transformation</a> chapter of R for Data Science.</p>
 <div id="load-packages" class="section level2" number="2.1">
-<h2 number="2.1"><span class="header-section-number">2.1</span> Load packages</h2>
+<h2><span class="header-section-number">2.1</span> Load packages</h2>
 <p><code>tidyr</code> is part of the core <code>tidyverse</code> packages, so we install and load this meta-package below.</p>
 <pre class="r"><code>install.packages(&quot;tidyverse&quot;)
 library(tidyverse)</code></pre>
 </div>
 <div id="manging-data" class="section level2 tabset" number="2.2">
-<h2 class="tabset" number="2.2"><span class="header-section-number">2.2</span> Manging data</h2>
+<h2 class="tabset"><span class="header-section-number">2.2</span> Manging data</h2>
 <p>We’re going to use some of the <code>fs</code> package functions for managing our files and data.</p>
 <div id="folder-trees-and-paths" class="section level3" number="2.2.1">
-<h3 number="2.2.1"><span class="header-section-number">2.2.1</span> Folder trees and paths</h3>
+<h3><span class="header-section-number">2.2.1</span> Folder trees and paths</h3>
 <p>Check your files and folders with <code>dir_tree</code> or <code>dir_ls</code>.</p>
 <pre class="r"><code>fs::dir_tree(&quot;data&quot;, recurse = FALSE)</code></pre>
 <pre><code>## data
@@ -419,6 +419,9 @@ library(tidyverse)</code></pre>
 ## ├── 2021-08-25-TopUSCities.csv
 ## ├── 2021-08-25-USCities.csv
 ## ├── 2021-08-27-TidyApple.csv
+## ├── 2021-08-27-TopUSCities.csv
+## ├── 2021-08-27-USCities.csv
+## ├── 2021-08-31-TidyApple.csv
 ## ├── AppleMobRaw.csv
 ## ├── FasterCures.csv
 ## ├── Infected.csv
@@ -462,6 +465,9 @@ library(tidyverse)</code></pre>
 ## data/2021-08-25-TopUSCities.csv
 ## data/2021-08-25-USCities.csv
 ## data/2021-08-27-TidyApple.csv
+## data/2021-08-27-TopUSCities.csv
+## data/2021-08-27-USCities.csv
+## data/2021-08-31-TidyApple.csv
 ## data/AppleMobRaw.csv
 ## data/FasterCures.csv
 ## data/Infected.csv
@@ -478,13 +484,13 @@ library(tidyverse)</code></pre>
 ## data/starwars.rds</code></pre>
 </div>
 <div id="metadata" class="section level3" number="2.2.2">
-<h3 number="2.2.2"><span class="header-section-number">2.2.2</span> Metadata</h3>
+<h3><span class="header-section-number">2.2.2</span> Metadata</h3>
 <p><code>fs</code> also gives us the metadata of any folder we have access to. This can come in handy if we’re looking for a specific version of a file, or a file that was created at a specific date.</p>
 <pre class="r"><code>fs::dir_info(&quot;data&quot;, all = TRUE) %&gt;% 
     dplyr::arrange(desc(modification_time))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["path"],"name":[1],"type":["fs_path"],"align":["right"]},{"label":["type"],"name":[2],"type":["fct"],"align":["left"]},{"label":["size"],"name":[3],"type":["fs_bytes"],"align":["right"]},{"label":["permissions"],"name":[4],"type":["fs_perms"],"align":["right"]},{"label":["modification_time"],"name":[5],"type":["dttm"],"align":["right"]},{"label":["user"],"name":[6],"type":["chr"],"align":["left"]},{"label":["group"],"name":[7],"type":["chr"],"align":["left"]},{"label":["device_id"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["hard_links"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["special_device_id"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["inode"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["block_size"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["blocks"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["flags"],"name":[14],"type":["int"],"align":["right"]},{"label":["generation"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["access_time"],"name":[16],"type":["dttm"],"align":["right"]},{"label":["change_time"],"name":[17],"type":["dttm"],"align":["right"]},{"label":["birth_time"],"name":[18],"type":["dttm"],"align":["right"]}],"data":[{"1":"data/2021-08-27-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-27 22:49:06","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"38818663","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-27 22:49:06","17":"2021-08-27 22:49:06","18":"2021-08-27 22:49:06"},{"1":"data/penguins.csv","2":"file","3":"14.88K","4":"rw-r--r--","5":"2021-08-27 21:20:37","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"38749831","12":"4096","13":"32","14":"0","15":"0","16":"2021-08-27 21:20:48","17":"2021-08-27 21:20:38","18":"2021-08-27 21:20:37"},{"1":"data/.DS_Store","2":"file","3":"6K","4":"rw-r--r--","5":"2021-08-27 21:18:24","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419654","12":"4096","13":"16","14":"0","15":"0","16":"2021-08-27 21:18:27","17":"2021-08-27 21:18:24","18":"2021-06-18 13:06:19"},{"1":"data/palmerpenguins.csv","2":"file","3":"51.85K","4":"rw-r--r--","5":"2021-08-27 21:06:27","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"38748006","12":"4096","13":"104","14":"0","15":"0","16":"2021-08-27 21:18:40","17":"2021-08-27 21:18:25","18":"2021-08-27 21:06:27"},{"1":"data/2021-08-25-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-25 18:11:55","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"37255830","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-27 20:12:02","17":"2021-08-25 18:11:55","18":"2021-08-25 11:44:51"},{"1":"data/2021-08-25-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-25 18:11:55","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"37255841","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-27 20:12:02","17":"2021-08-25 18:11:55","18":"2021-08-25 11:44:51"},{"1":"data/2021-08-25-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-25 18:10:37","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"37256412","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-27 20:12:02","17":"2021-08-25 18:10:37","18":"2021-08-25 11:42:42"},{"1":"data/TopPharmComp.csv","2":"file","3":"16.34K","4":"rw-r--r--","5":"2021-08-25 18:03:46","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419677","12":"4096","13":"40","14":"0","15":"0","16":"2021-08-25 18:03:47","17":"2021-08-25 18:03:46","18":"2021-06-18 13:06:19"},{"1":"data/2021-08-24-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-24 09:01:20","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"36500419","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-27 20:12:02","17":"2021-08-24 09:01:20","18":"2021-08-24 01:07:01"},{"1":"data/2021-08-24-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-24 09:01:20","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"36500415","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-27 20:12:02","17":"2021-08-24 09:01:20","18":"2021-08-24 01:07:01"},{"1":"data/2021-08-24-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-24 09:00:00","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"36499491","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-27 20:12:02","17":"2021-08-24 09:00:00","18":"2021-08-24 01:05:52"},{"1":"data/2021-08-23-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-23 23:02:20","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"35700373","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-27 20:12:02","17":"2021-08-23 23:02:20","18":"2021-08-23 00:33:50"},{"1":"data/2021-08-23-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-23 23:02:20","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"35700356","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-27 20:12:02","17":"2021-08-23 23:02:20","18":"2021-08-23 00:33:49"},{"1":"data/2021-08-23-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-23 23:01:18","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"35700372","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-27 20:12:01","17":"2021-08-23 23:01:18","18":"2021-08-23 00:32:18"},{"1":"data/2021-08-20-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-20 14:27:08","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"35532218","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-27 20:12:01","17":"2021-08-21 18:31:08","18":"2021-08-20 14:27:08"},{"1":"data/2021-08-20-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-20 14:27:08","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"35532216","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-27 20:12:01","17":"2021-08-21 18:31:08","18":"2021-08-20 14:27:08"},{"1":"data/2021-08-20-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-20 14:25:45","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"35532161","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-27 20:12:01","17":"2021-08-21 18:31:08","18":"2021-08-20 14:25:45"},{"1":"data/2021-08-05-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-05 15:44:32","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"29404915","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-27 20:12:01","17":"2021-08-05 15:44:32","18":"2021-08-05 14:42:04"},{"1":"data/2021-08-05-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-05 15:44:31","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"29404907","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-27 20:12:01","17":"2021-08-05 15:44:31","18":"2021-08-05 14:42:04"},{"1":"data/2021-08-05-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-05 15:43:18","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"29403708","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-27 20:12:00","17":"2021-08-05 15:43:18","18":"2021-08-05 14:40:57"},{"1":"data/starwars.rds","2":"file","3":"19.42K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419682","12":"4096","13":"40","14":"0","15":"0","16":"2021-06-18 13:06:27","17":"2021-06-18 13:06:27","18":"2021-06-18 13:06:19"},{"1":"data/original-starwars.csv","2":"file","3":"265","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419681","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-13 15:05:32","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/VisitNAData.csv","2":"file","3":"2.71K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419680","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-13 15:05:32","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/UsadaRaw.csv","2":"file","3":"81.61K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419679","12":"4096","13":"168","14":"0","15":"0","16":"2021-08-27 20:12:02","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/UsadaBadDates.csv","2":"file","3":"3.13K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419678","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-13 15:05:32","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/SmallLabData.csv","2":"file","3":"93","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419676","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-25 18:01:57","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/LabProc.csv","2":"file","3":"164","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419675","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-25 18:01:57","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/LabData.csv","2":"file","3":"139","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419674","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-25 18:01:57","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/Infected.csv","2":"file","3":"549","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419673","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-13 15:05:32","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/FasterCures.csv","2":"file","3":"233.1K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419672","12":"4096","13":"472","14":"0","15":"0","16":"2021-08-27 20:12:02","17":"2021-06-18 13:06:27","18":"2021-06-18 13:06:19"},{"1":"data/AppleMobRaw.csv","2":"file","3":"9.39M","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419671","12":"4096","13":"19240","14":"0","15":"0","16":"2021-08-27 20:12:02","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/2021-05-02-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419670","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-27 20:12:00","17":"2021-06-18 13:06:27","18":"2021-06-18 13:06:19"},{"1":"data/2021-05-02-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419669","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-27 20:12:00","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/2021-05-02-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419664","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-27 20:12:00","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/2021-05-02-PricesWide.csv","2":"file","3":"754","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419663","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-13 15:05:32","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-30-PricesWide.csv","2":"file","3":"734","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419662","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-13 15:05:32","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-29-PricesWide.csv","2":"file","3":"734","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419661","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-13 15:05:32","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-24-BioTechStocks.csv","2":"file","3":"2.31K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419660","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-13 15:05:32","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-20-BioTechStocks.csv","2":"file","3":"2.29K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419659","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-13 15:05:32","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-11-BmrmGoogle.rds","2":"file","3":"26.5K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419657","12":"4096","13":"56","14":"0","15":"0","16":"2021-06-18 13:06:26","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-11-BioTechDrugStocks.csv","2":"file","3":"2.29K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419656","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-13 15:05:32","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"},{"1":"data/2020-11-24-TopPharmCompRaw.csv","2":"file","3":"3.02K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777221","9":"1","10":"0","11":"3419655","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-13 15:05:32","17":"2021-06-18 13:06:26","18":"2021-06-18 13:06:19"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["path"],"name":[1],"type":["fs_path"],"align":["right"]},{"label":["type"],"name":[2],"type":["fct"],"align":["left"]},{"label":["size"],"name":[3],"type":["fs_bytes"],"align":["right"]},{"label":["permissions"],"name":[4],"type":["fs_perms"],"align":["right"]},{"label":["modification_time"],"name":[5],"type":["dttm"],"align":["right"]},{"label":["user"],"name":[6],"type":["chr"],"align":["left"]},{"label":["group"],"name":[7],"type":["chr"],"align":["left"]},{"label":["device_id"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["hard_links"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["special_device_id"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["inode"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["block_size"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["blocks"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["flags"],"name":[14],"type":["int"],"align":["right"]},{"label":["generation"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["access_time"],"name":[16],"type":["dttm"],"align":["right"]},{"label":["change_time"],"name":[17],"type":["dttm"],"align":["right"]},{"label":["birth_time"],"name":[18],"type":["dttm"],"align":["right"]}],"data":[{"1":"data/2021-08-31-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-31 10:24:30","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13195396953","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-31 10:24:29","17":"2021-08-31 10:24:30","18":"2021-08-31 10:24:29"},{"1":"data/2021-08-27-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-27 22:50:17","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13189737786","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-30 17:05:36","17":"2021-08-27 22:50:30","18":"2021-08-27 22:50:17"},{"1":"data/2021-08-27-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-27 22:50:17","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13189737787","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-30 17:05:36","17":"2021-08-27 22:50:30","18":"2021-08-27 22:50:17"},{"1":"data/2021-08-27-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-27 22:49:06","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13189736881","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-30 17:05:34","17":"2021-08-27 22:49:48","18":"2021-08-27 22:49:06"},{"1":"data/penguins.csv","2":"file","3":"14.88K","4":"rw-r--r--","5":"2021-08-27 21:20:37","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13189611040","12":"4096","13":"32","14":"0","15":"0","16":"2021-08-27 21:20:44","17":"2021-08-27 21:20:43","18":"2021-08-27 21:20:37"},{"1":"data/palmerpenguins.csv","2":"file","3":"51.85K","4":"rw-r--r--","5":"2021-08-27 21:06:27","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13189607717","12":"4096","13":"104","14":"0","15":"0","16":"2021-08-30 17:05:36","17":"2021-08-27 21:18:27","18":"2021-08-27 21:06:27"},{"1":"data/TopPharmComp.csv","2":"file","3":"16.34K","4":"rw-r--r--","5":"2021-08-25 11:45:55","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13159258413","12":"4096","13":"40","14":"0","15":"0","16":"2021-08-25 11:45:56","17":"2021-08-25 11:45:55","18":"2021-08-05 14:24:13"},{"1":"data/2021-08-25-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-25 11:44:51","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13185219937","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-30 17:05:34","17":"2021-08-25 11:44:52","18":"2021-08-25 11:44:51"},{"1":"data/2021-08-25-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-25 11:44:51","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13185219932","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-30 17:05:34","17":"2021-08-25 11:44:51","18":"2021-08-25 11:44:51"},{"1":"data/2021-08-25-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-25 11:42:42","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13185216607","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-30 17:05:32","17":"2021-08-25 11:43:13","18":"2021-08-25 11:42:41"},{"1":"data/2021-08-24-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-24 01:07:01","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13182462212","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-30 17:05:31","17":"2021-08-24 01:07:19","18":"2021-08-24 01:07:01"},{"1":"data/2021-08-24-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-24 01:07:01","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13182462213","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-30 17:05:31","17":"2021-08-24 01:07:19","18":"2021-08-24 01:07:01"},{"1":"data/2021-08-24-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-24 01:05:53","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13182461298","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-30 17:05:27","17":"2021-08-24 01:06:38","18":"2021-08-24 01:05:53"},{"1":"data/2021-08-23-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-23 00:33:50","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13181135876","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-30 17:05:27","17":"2021-08-23 00:33:57","18":"2021-08-23 00:33:50"},{"1":"data/2021-08-23-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-23 00:33:49","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13181135871","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-30 17:05:27","17":"2021-08-23 00:33:57","18":"2021-08-23 00:33:49"},{"1":"data/2021-08-23-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-23 00:32:18","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13181133650","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-30 17:05:25","17":"2021-08-23 00:32:18","18":"2021-08-23 00:32:17"},{"1":"data/2021-08-20-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-20 18:29:59","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13176816497","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-30 17:05:25","17":"2021-08-20 18:29:59","18":"2021-08-20 14:27:08"},{"1":"data/2021-08-20-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-20 18:29:59","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13176816491","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-30 17:05:25","17":"2021-08-20 18:29:59","18":"2021-08-20 14:27:08"},{"1":"data/2021-08-20-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-20 18:28:46","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13176814567","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-30 17:05:24","17":"2021-08-20 18:28:46","18":"2021-08-20 14:25:45"},{"1":"data/2021-08-05-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-08-05 14:42:04","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13159285096","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-30 17:05:24","17":"2021-08-05 14:44:01","18":"2021-08-05 14:42:04"},{"1":"data/2021-08-05-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-08-05 14:42:04","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13159285079","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-30 17:05:24","17":"2021-08-05 14:44:00","18":"2021-08-05 14:42:04"},{"1":"data/2021-08-05-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-08-05 14:40:58","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13159285090","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-30 17:05:23","17":"2021-08-05 14:44:03","18":"2021-08-05 14:40:58"},{"1":"data/2020-11-24-TopPharmCompRaw.csv","2":"file","3":"3.02K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819073","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-11-BioTechDrugStocks.csv","2":"file","3":"2.29K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819074","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-11-BmrmGoogle.rds","2":"file","3":"26.5K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819059","12":"4096","13":"56","14":"0","15":"0","16":"2021-06-18 13:06:19","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-20-BioTechStocks.csv","2":"file","3":"2.29K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819066","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-24-BioTechStocks.csv","2":"file","3":"2.31K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819105","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-29-PricesWide.csv","2":"file","3":"734","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819077","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2020-12-30-PricesWide.csv","2":"file","3":"734","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819054","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2021-05-02-PricesWide.csv","2":"file","3":"754","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819091","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2021-05-02-TidyApple.csv","2":"file","3":"69.88M","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819084","12":"4096","13":"143120","14":"0","15":"0","16":"2021-08-30 17:05:22","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2021-05-02-TopUSCities.csv","2":"file","3":"475.88K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819061","12":"4096","13":"952","14":"0","15":"0","16":"2021-08-30 17:05:23","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/2021-05-02-USCities.csv","2":"file","3":"6.09M","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819063","12":"4096","13":"12480","14":"0","15":"0","16":"2021-08-30 17:05:23","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/AppleMobRaw.csv","2":"file","3":"9.39M","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819100","12":"4096","13":"19240","14":"0","15":"0","16":"2021-08-30 17:05:36","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/FasterCures.csv","2":"file","3":"233.1K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819092","12":"4096","13":"472","14":"0","15":"0","16":"2021-08-30 17:05:36","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/Infected.csv","2":"file","3":"549","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819075","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/LabData.csv","2":"file","3":"139","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819072","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-25 11:42:44","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/LabProc.csv","2":"file","3":"164","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819060","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-25 11:42:44","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/SmallLabData.csv","2":"file","3":"93","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819094","12":"4096","13":"8","14":"0","15":"0","16":"2021-08-25 11:42:44","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/UsadaBadDates.csv","2":"file","3":"3.13K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819062","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:41","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/UsadaRaw.csv","2":"file","3":"81.61K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819057","12":"4096","13":"168","14":"0","15":"0","16":"2021-08-30 17:05:36","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/VisitNAData.csv","2":"file","3":"2.71K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819065","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/original-starwars.csv","2":"file","3":"265","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819058","12":"4096","13":"8","14":"0","15":"0","16":"2021-06-18 13:06:40","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"},{"1":"data/starwars.rds","2":"file","3":"19.42K","4":"rw-r--r--","5":"2021-06-18 13:06:19","6":"mjfrigaard","7":"staff","8":"16777220","9":"1","10":"0","11":"13114819055","12":"4096","13":"40","14":"0","15":"0","16":"2021-06-18 13:06:19","17":"2021-07-27 09:11:29","18":"2021-06-18 13:06:19"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>For example, lets look for the largest <code>file</code> in the <code>data</code> folder.</p>
@@ -500,7 +506,7 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="import-multiple-files" class="section level3" number="2.2.3">
-<h3 number="2.2.3"><span class="header-section-number">2.2.3</span> Import multiple files</h3>
+<h3><span class="header-section-number">2.2.3</span> Import multiple files</h3>
 <p>Lets import all the <code>Lab</code> data files in <code>data</code> using <code>fs</code> and <code>purrr</code>.</p>
 <pre class="r"><code>fs::dir_ls(path = &quot;data&quot;, regexp = &quot;Lab&quot;) %&gt;% 
     purrr::map_dfr(read_csv, .id = &quot;source&quot;) -&gt; AllLabs</code></pre>
@@ -515,9 +521,9 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="reshaping-columns-and-rows" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Reshaping Columns and Rows</h1>
+<h1><span class="header-section-number">3</span> Reshaping Columns and Rows</h1>
 <div id="separate" class="section level2 tabset" number="3.1">
-<h2 class="tabset" number="3.1"><span class="header-section-number">3.1</span> <code>separate()</code></h2>
+<h2 class="tabset"><span class="header-section-number">3.1</span> <code>separate()</code></h2>
 <p>This allows us to split columns apart into multiple variables.</p>
 <p>Take a look at <code>SmallLabData</code> below (we’ve used some <code>dplyr</code> and the <code>janitor::remove_empty()</code> function to get <code>SmallLabData</code> from <code>AllLabs</code>).</p>
 <pre class="r"><code>AllLabs %&gt;% 
@@ -531,13 +537,13 @@ library(tidyverse)</code></pre>
   </script>
 </div>
 <div id="exercise" class="section level3" number="3.1.1">
-<h3 number="3.1.1"><span class="header-section-number">3.1.1</span> exercise</h3>
+<h3><span class="header-section-number">3.1.1</span> exercise</h3>
 <p>Separate <code>ref</code> into <code>ref_value</code> and <code>ref_units</code></p>
 <pre class="r"><code>SmallLabData %&gt;% 
     separate(col = ___, into = c(&quot;_______&quot;, &quot;_______&quot;), sep = &quot; &quot;)</code></pre>
 </div>
 <div id="solution" class="section level3" number="3.1.2">
-<h3 number="3.1.2"><span class="header-section-number">3.1.2</span> solution</h3>
+<h3><span class="header-section-number">3.1.2</span> solution</h3>
 <pre class="r"><code>SmallLabData %&gt;% 
     separate(col = ref, into = c(&quot;ref_value&quot;, &quot;ref_units&quot;), sep = &quot; &quot;)</code></pre>
 <div data-pagedtable="false">
@@ -549,7 +555,7 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="separate_rows" class="section level2 tabset" number="3.2">
-<h2 class="tabset" number="3.2"><span class="header-section-number">3.2</span> <code>separate_rows()</code></h2>
+<h2 class="tabset"><span class="header-section-number">3.2</span> <code>separate_rows()</code></h2>
 <p><code>separate_rows()</code> is similar to <code>separate()</code>, but drops the values down the rows. This is commonly used when we have more than one value in each column.</p>
 <p>Take a look at <code>LabData</code> below.</p>
 <pre class="r"><code>AllLabs %&gt;% 
@@ -563,13 +569,13 @@ library(tidyverse)</code></pre>
   </script>
 </div>
 <div id="exercise-1" class="section level3" number="3.2.1">
-<h3 number="3.2.1"><span class="header-section-number">3.2.1</span> exercise</h3>
+<h3><span class="header-section-number">3.2.1</span> exercise</h3>
 <p>Put all the <code>value</code>s into their own cell, and make sure the new variable is numeric.</p>
 <pre class="r"><code>LabData %&gt;% 
   separate_rows(_____, sep = _____, convert = TRUE)</code></pre>
 </div>
 <div id="separate_rows-sol-1" class="section level3" number="3.2.2">
-<h3 number="3.2.2"><span class="header-section-number">3.2.2</span> <code>separate_rows</code> sol 1</h3>
+<h3><span class="header-section-number">3.2.2</span> <code>separate_rows</code> sol 1</h3>
 <p>Note the <code>convert</code> argument to make <code>value</code> numeric.</p>
 <pre class="r"><code>LabData %&gt;% 
   separate_rows(value, sep = &quot;, &quot;, convert = TRUE)</code></pre>
@@ -582,7 +588,7 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="unite" class="section level2 tabset" number="3.3">
-<h2 class="tabset" number="3.3"><span class="header-section-number">3.3</span> <code>unite()</code></h2>
+<h2 class="tabset"><span class="header-section-number">3.3</span> <code>unite()</code></h2>
 <p>Just like <code>separate</code>/<code>separate_rows</code> allows us to split up columns, <code>unite()</code> lets us stick them back together!</p>
 <p>Take a look at <code>LabProc</code>.</p>
 <pre class="r"><code>AllLabs %&gt;% 
@@ -596,13 +602,13 @@ library(tidyverse)</code></pre>
   </script>
 </div>
 <div id="exercise-2" class="section level3" number="3.3.1">
-<h3 number="3.3.1"><span class="header-section-number">3.3.1</span> exercise</h3>
+<h3><span class="header-section-number">3.3.1</span> exercise</h3>
 <p>Separate the labs from each other, and drop them down the rows.</p>
 <pre class="r"><code>LabProc %&gt;% 
     separate_rows(lab_proc, sep = &quot;___&quot;)</code></pre>
 </div>
 <div id="solution-1" class="section level3" number="3.3.2">
-<h3 number="3.3.2"><span class="header-section-number">3.3.2</span> solution</h3>
+<h3><span class="header-section-number">3.3.2</span> solution</h3>
 <p>Separate the labs from each other, and drop them down the rows.</p>
 <pre class="r"><code>LabProc %&gt;% 
      separate_rows(lab_proc, sep = &quot;; &quot;) </code></pre>
@@ -613,7 +619,7 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="exercise-3" class="section level3" number="3.3.3">
-<h3 number="3.3.3"><span class="header-section-number">3.3.3</span> exercise</h3>
+<h3><span class="header-section-number">3.3.3</span> exercise</h3>
 <p>Put <code>lab</code>, <code>value</code>, and <code>units</code> in to their own columns.</p>
 <pre class="r"><code>LabProc %&gt;% 
     separate_rows(lab_proc, sep = &quot;___&quot;) %&gt;% 
@@ -621,7 +627,7 @@ library(tidyverse)</code></pre>
            sep = &quot; &quot;, convert = ____)</code></pre>
 </div>
 <div id="solution-2" class="section level3" number="3.3.4">
-<h3 number="3.3.4"><span class="header-section-number">3.3.4</span> solution</h3>
+<h3><span class="header-section-number">3.3.4</span> solution</h3>
 <p>Put <code>lab</code>, <code>value</code>, and <code>units</code> in to their own columns.</p>
 <pre class="r"><code>LabProc %&gt;% 
      separate_rows(lab_proc, sep = &quot;; &quot;) %&gt;% 
@@ -634,7 +640,7 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="exercise-4" class="section level3" number="3.3.5">
-<h3 number="3.3.5"><span class="header-section-number">3.3.5</span> exercise</h3>
+<h3><span class="header-section-number">3.3.5</span> exercise</h3>
 <p>Unite <code>lab</code>, <code>value</code> and <code>units</code> into <code>lab_name</code> (don’t remove the previous columns with <code>remove = FALSE</code>).</p>
 <pre class="r"><code>LabProc %&gt;% 
     separate_rows(lab_proc, sep = &quot;___&quot;) %&gt;% 
@@ -643,7 +649,7 @@ library(tidyverse)</code></pre>
     unite(col = &quot;_______&quot;, lab:units, sep = &quot; &quot;, remove = _____)</code></pre>
 </div>
 <div id="solution-3" class="section level3" number="3.3.6">
-<h3 number="3.3.6"><span class="header-section-number">3.3.6</span> solution</h3>
+<h3><span class="header-section-number">3.3.6</span> solution</h3>
 <p>Unite <code>lab</code>, <code>value</code> and <code>units</code> into <code>lab_name</code> (don’t remove the previous columns with <code>remove = FALSE</code>).</p>
 <pre class="r"><code>LabProc %&gt;% 
      separate_rows(lab_proc, sep = &quot;; &quot;) %&gt;% 
@@ -660,21 +666,21 @@ library(tidyverse)</code></pre>
 </div>
 </div>
 <div id="joins" class="section level1" number="4">
-<h1 number="4"><span class="header-section-number">4</span> Joins</h1>
+<h1><span class="header-section-number">4</span> Joins</h1>
 <p>Joins give us the ability to combine multiple datasets on a common column. We’re going to be using the <a href="https://github.com/gadenbuie/starwarsdb"><code>starwarsdb</code> package</a>, which contains data from the <a href="https://swapi.dev/">Star Wars API</a>.</p>
 <p>We’ll load the data below:</p>
 <pre class="r"><code>library(starwarsdb)
 library(dm)</code></pre>
 <div id="starwarsdb" class="section level2 tabset" number="4.1">
-<h2 class="tabset" number="4.1"><span class="header-section-number">4.1</span> <code>starwarsdb</code></h2>
+<h2 class="tabset"><span class="header-section-number">4.1</span> <code>starwarsdb</code></h2>
 <p>The code below creates and displays the data model for the tables in this package</p>
 <pre class="r"><code>StarWarsDataModel &lt;- dm_draw(dm = starwars_dm(), 
                              graph_name = &quot;StarWarsDataModel&quot;)
 StarWarsDataModel</code></pre>
-<div id="htmlwidget-210170a07685119e283e" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-210170a07685119e283e">{"x":{"diagram":"#data_model\ndigraph {\ngraph [rankdir=LR tooltip=\"StarWarsDataModel\" ]\n\nnode [margin=0 fontcolor = \"#444444\" ]\n\nedge [color = \"#555555\", arrowsize = 1, ]\n\npack=true\npackmode= \"node\"\n\n  \"films\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\"><U>title<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_people\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_people<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"character\">character<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_planets\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_planets<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"planet\">planet<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_vehicles\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_vehicles<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"vehicle\">vehicle<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"people\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#496567AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#6E989BFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">people<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"homeworld\">homeworld<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"species\">species<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"pilots\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#496567AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#6E989BFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">pilots<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"pilot\">pilot<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"vehicle\">vehicle<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"planets\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#7D2E0AAA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#BC4610FF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">planets<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F1DACFFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"species\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#7D563AAA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#BC8258FF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">species<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F1E6DDFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"vehicles\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#4B3529AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#71503EFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">vehicles<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2DCD8FF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n\"films_people\":\"title\"->\"films\":\"title\"\n\"films_planets\":\"title\"->\"films\":\"title\"\n\"films_vehicles\":\"title\"->\"films\":\"title\"\n\"films_people\":\"character\"->\"people\":\"name\"\n\"pilots\":\"pilot\"->\"people\":\"name\"\n\"films_planets\":\"planet\"->\"planets\":\"name\"\n\"people\":\"homeworld\"->\"planets\":\"name\"\n\"people\":\"species\"->\"species\":\"name\"\n\"films_vehicles\":\"vehicle\"->\"vehicles\":\"name\"\n\"pilots\":\"vehicle\"->\"vehicles\":\"name\"\n}","config":{"engine":null,"options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-efecbc4545e7f4229ef4" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-efecbc4545e7f4229ef4">{"x":{"diagram":"#data_model\ndigraph {\ngraph [rankdir=LR tooltip=\"StarWarsDataModel\" ]\n\nnode [margin=0 fontcolor = \"#444444\" ]\n\nedge [color = \"#555555\", arrowsize = 1, ]\n\npack=true\npackmode= \"node\"\n\n  \"films\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\"><U>title<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_people\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_people<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"character\">character<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_planets\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_planets<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"planet\">planet<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"films_vehicles\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#818478AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#C2C7B5FF\" BORDER=\"0\"><FONT COLOR=\"#000000\">films_vehicles<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"title\">title<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F2F3F0FF\" PORT=\"vehicle\">vehicle<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"people\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#496567AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#6E989BFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">people<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"homeworld\">homeworld<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"species\">species<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"pilots\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#496567AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#6E989BFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">pilots<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"pilot\">pilot<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2EAEBFF\" PORT=\"vehicle\">vehicle<\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"planets\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#7D2E0AAA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#BC4610FF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">planets<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F1DACFFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"species\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#7D563AAA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#BC8258FF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">species<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#F1E6DDFF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n  \"vehicles\" [label = <<TABLE ALIGN=\"LEFT\" BORDER=\"1\" CELLBORDER=\"0\" CELLSPACING=\"0\" COLOR=\"#4B3529AA\">\n    <TR>\n      <TD COLSPAN=\"1\" BGCOLOR=\"#71503EFF\" BORDER=\"0\"><FONT COLOR=\"#FFFFFF\">vehicles<\/FONT>\n<\/TD>\n    <\/TR>\n    <TR>\n      <TD ALIGN=\"LEFT\" BGCOLOR=\"#E2DCD8FF\" PORT=\"name\"><U>name<\/U><\/TD>\n    <\/TR>\n  <\/TABLE>>, shape = \"plaintext\"] \n\n\"films_people\":\"title\"->\"films\":\"title\"\n\"films_planets\":\"title\"->\"films\":\"title\"\n\"films_vehicles\":\"title\"->\"films\":\"title\"\n\"films_people\":\"character\"->\"people\":\"name\"\n\"pilots\":\"pilot\"->\"people\":\"name\"\n\"films_planets\":\"planet\"->\"planets\":\"name\"\n\"people\":\"homeworld\"->\"planets\":\"name\"\n\"people\":\"species\"->\"species\":\"name\"\n\"films_vehicles\":\"vehicle\"->\"vehicles\":\"name\"\n\"pilots\":\"vehicle\"->\"vehicles\":\"name\"\n}","config":{"engine":null,"options":null}},"evals":[],"jsHooks":[]}</script>
 <div id="exercise-5" class="section level3" number="4.1.1">
-<h3 number="4.1.1"><span class="header-section-number">4.1.1</span> exercise</h3>
+<h3><span class="header-section-number">4.1.1</span> exercise</h3>
 <p>Load the <code>starwarsdb::films</code> dataset, removing the <code>opening_crawl</code> column, and filter to only episodes 4-6. Store these data in <code>StarWarsFilms</code></p>
 <pre class="r"><code>StarWarsFilms &lt;- starwarsdb::films %&gt;% 
                     select(-____________) %&gt;% 
@@ -682,7 +688,7 @@ StarWarsDataModel</code></pre>
 StarWarsFilms</code></pre>
 </div>
 <div id="solution-4" class="section level3" number="4.1.2">
-<h3 number="4.1.2"><span class="header-section-number">4.1.2</span> solution</h3>
+<h3><span class="header-section-number">4.1.2</span> solution</h3>
 <pre class="r"><code>StarWarsFilms &lt;- starwarsdb::films %&gt;% 
                     select(-c(opening_crawl, director, producer)) %&gt;% 
                     filter(episode_id &gt;= 4 &amp; episode_id &lt;= 6)
@@ -696,10 +702,10 @@ StarWarsFilms</code></pre>
 </div>
 </div>
 <div id="left_join" class="section level2 tabset" number="4.2">
-<h2 class="tabset" number="4.2"><span class="header-section-number">4.2</span> <code>left_join</code></h2>
+<h2 class="tabset"><span class="header-section-number">4.2</span> <code>left_join</code></h2>
 <p>A <code>left_join</code> keeps all of <code>x</code>, and joins it to all matching rows from dataset <code>y</code></p>
 <div id="exercise-6" class="section level3" number="4.2.1">
-<h3 number="4.2.1"><span class="header-section-number">4.2.1</span> exercise</h3>
+<h3><span class="header-section-number">4.2.1</span> exercise</h3>
 <p>Left-join <code>StarWarsFilms</code> to <code>starwarsdb::films_vehicles</code> on <code>"title"</code>, then <code>select()</code> the <code>vehicle</code> column, then <code>everything()</code> else.</p>
 <p>Assign to <code>StarWarsFilmVeh</code></p>
 <pre class="r"><code>left_join(x = _____________, 
@@ -710,7 +716,7 @@ StarWarsFilms</code></pre>
 StarWarsFilmVeh</code></pre>
 </div>
 <div id="solution-5" class="section level3" number="4.2.2">
-<h3 number="4.2.2"><span class="header-section-number">4.2.2</span> solution</h3>
+<h3><span class="header-section-number">4.2.2</span> solution</h3>
 <p>See below:</p>
 <pre class="r"><code>left_join(x = StarWarsFilms, 
           y = starwarsdb::films_vehicles, 
@@ -726,10 +732,10 @@ StarWarsFilmVeh</code></pre>
 </div>
 </div>
 <div id="inner_join" class="section level2 tabset" number="4.3">
-<h2 class="tabset" number="4.3"><span class="header-section-number">4.3</span> <code>inner_join</code></h2>
+<h2 class="tabset"><span class="header-section-number">4.3</span> <code>inner_join</code></h2>
 <p>The <code>inner_join()</code> joins dataset <code>x</code> and <code>y</code>, and keeps only matching rows from both.</p>
 <div id="exercise-7" class="section level3" number="4.3.1">
-<h3 number="4.3.1"><span class="header-section-number">4.3.1</span> exercise</h3>
+<h3><span class="header-section-number">4.3.1</span> exercise</h3>
 <p>Use an <code>inner_join</code> to join <code>StarWarsFilmVeh</code> to <code>starwarsdb::pilots</code> on <code>"vehicle"</code> and assign it to <code>StarWarsFilmVehPil</code>.</p>
 <pre class="r"><code>inner_join(x = StarWarsFilmVeh, 
            y = _________, 
@@ -737,7 +743,7 @@ StarWarsFilmVeh</code></pre>
 StarWarsFilmVehPil</code></pre>
 </div>
 <div id="solution-6" class="section level3" number="4.3.2">
-<h3 number="4.3.2"><span class="header-section-number">4.3.2</span> solution</h3>
+<h3><span class="header-section-number">4.3.2</span> solution</h3>
 <p>See below:</p>
 <pre class="r"><code>inner_join(x = StarWarsFilmVeh, 
            y = starwarsdb::pilots, 
@@ -751,10 +757,10 @@ StarWarsFilmVehPil</code></pre>
 </div>
 </div>
 <div id="right_join" class="section level2 tabset" number="4.4">
-<h2 class="tabset" number="4.4"><span class="header-section-number">4.4</span> <code>right_join</code></h2>
+<h2 class="tabset"><span class="header-section-number">4.4</span> <code>right_join</code></h2>
 <p>The <code>right_join()</code> includes all the rows in dataset <code>y</code>, and joins it the matching rows in dataset <code>x</code>.</p>
 <div id="exercise-8" class="section level3" number="4.4.1">
-<h3 number="4.4.1"><span class="header-section-number">4.4.1</span> exercise</h3>
+<h3><span class="header-section-number">4.4.1</span> exercise</h3>
 <p>Use a <code>right_join()</code> to join <code>StarWarsFilmVehPlt</code> to <code>starwarsdb::films_planets</code> on <code>"title"</code>, keeping all the rows in <code>starwarsdb::films_planets</code>. Use <code>select()</code> to rename <code>planet</code> to <code>film_planet</code> and assign this to <code>StarWarsFilmVehPltPlnt</code></p>
 <pre class="r"><code>right_join(x = __________________, 
              y = __________________, 
@@ -764,7 +770,7 @@ StarWarsFilmVehPil</code></pre>
          pilot) -&gt; StarWarsFilmVehPltPlnt</code></pre>
 </div>
 <div id="solution-7" class="section level3" number="4.4.2">
-<h3 number="4.4.2"><span class="header-section-number">4.4.2</span> solution</h3>
+<h3><span class="header-section-number">4.4.2</span> solution</h3>
 <p>See below:</p>
 <pre class="r"><code>right_join(x = StarWarsFilmVehPil, 
            y = starwarsdb::films_planets, 
@@ -781,7 +787,7 @@ StarWarsFilmVehPltPlnt</code></pre>
 </div>
 </div>
 <div id="anti_join" class="section level2 tabset" number="4.5">
-<h2 class="tabset" number="4.5"><span class="header-section-number">4.5</span> <code>anti_join</code></h2>
+<h2 class="tabset"><span class="header-section-number">4.5</span> <code>anti_join</code></h2>
 <p>The <code>anti_join()</code> keeps all rows in dataset <code>x</code> that <strong>do not</strong> have a match in dataset <code>y</code>. Note the last join created empty values for <code>vehicle</code>, <code>episode_id</code>, <code>release_date</code>, and <code>pilot</code>.</p>
 <pre class="r"><code>StarWarsFilmVehPltPlnt %&gt;% 
   filter(is.na(episode_id))</code></pre>
@@ -791,7 +797,7 @@ StarWarsFilmVehPltPlnt</code></pre>
   </script>
 </div>
 <div id="exercise-9" class="section level3" number="4.5.1">
-<h3 number="4.5.1"><span class="header-section-number">4.5.1</span> exercise</h3>
+<h3><span class="header-section-number">4.5.1</span> exercise</h3>
 <p>Use the <code>anti_join()</code> to join <code>StarWarsFilmVehPltPlnt</code> to <code>StarWarsFilms</code> and create a dataset with only <code>title</code> and <code>film_planet</code> (<em>these should only contain the <code>title</code>s not in <code>StarWarsFilms</code></em>).</p>
 <pre class="r"><code>anti_join(x = StarWarsFilmVehPltPlnt, 
             y = ____________, 
@@ -799,7 +805,7 @@ StarWarsFilmVehPltPlnt</code></pre>
   select(________, ________)</code></pre>
 </div>
 <div id="solution-8" class="section level3" number="4.5.2">
-<h3 number="4.5.2"><span class="header-section-number">4.5.2</span> solution</h3>
+<h3><span class="header-section-number">4.5.2</span> solution</h3>
 <pre class="r"><code>anti_join(x = StarWarsFilmVehPltPlnt, 
             y = StarWarsFilms, 
             by = c(&quot;title&quot;, &quot;episode_id&quot;, &quot;release_date&quot;)) %&gt;% 
@@ -814,10 +820,10 @@ StarWarsFilmVehPltPlnt</code></pre>
 </div>
 </div>
 <div id="nested-data" class="section level1" number="5">
-<h1 number="5"><span class="header-section-number">5</span> Nested data</h1>
+<h1><span class="header-section-number">5</span> Nested data</h1>
 <p>Nested data refers to a dataset in which a column is holding a list of data frames (or <code>tibble</code>s). These can be useful for manipulating data, and we’re going to give an example of using nested data to reshape a column combining two sets of dates.</p>
 <div id="anti-doping-sanctions-database" class="section level2 tabset" number="5.1">
-<h2 class="tabset" number="5.1"><span class="header-section-number">5.1</span> Anti-Doping Sanctions Database</h2>
+<h2 class="tabset"><span class="header-section-number">5.1</span> Anti-Doping Sanctions Database</h2>
 <p><code>unnest()</code> deals with nested data, which can be complicated to explain, so we’ll use an example. Run the code below to download data from the <a href="https://www.usada.org/news/sanctions/">Anti-Doping Agency Sanction database</a>.</p>
 <pre class="r"><code>source(&quot;code/create-usada-data.R&quot;)</code></pre>
 <p>These data have two dates (<code>original</code> and <code>updated</code>) in a single column (<code>sanction_announced</code>). <strong>We only want <code>updated</code> dates in their own columns.</strong></p>
@@ -828,7 +834,7 @@ StarWarsFilmVehPltPlnt</code></pre>
   </script>
 </div>
 <div id="str_split" class="section level3" number="5.1.1">
-<h3 number="5.1.1"><span class="header-section-number">5.1.1</span> <code>str_split</code></h3>
+<h3><span class="header-section-number">5.1.1</span> <code>str_split</code></h3>
 <p>Use the <code>stringr</code> package’s <code>str_split</code> function to split the bad dates on the <code>"updated"</code> pattern.</p>
 <pre class="r"><code>UsadaBadDates %&gt;%
         dplyr::mutate(sanction_dates = 
@@ -852,11 +858,11 @@ UsadaBadDates %&gt;%
     # only return what we&#39;re interested in 
     dplyr::select(athlete, sanction_dates) %&gt;% 
     listviewer::jsonedit(mode = &quot;view&quot;)</code></pre>
-<div id="htmlwidget-fd4e4b54dd03f9cc5e99" style="width:672px;height:480px;" class="jsonedit html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fd4e4b54dd03f9cc5e99">{"x":{"data":{"athlete":["fischbach, dylan","trafeh, mohamed","lea, robert","young, jerome","hay, amy","hunter, adam","tovar, oscar","dotti, juan pablo","paparella, flavia","murdock, vince","thomas, tammy","orbon, joane","bailey, ryan","garcia del moral, luis","jones, stirley","miyao, paulo","moffett, shaun","bruyneel, johan","celaya lazama, pedro","marti, jose"],"sanction_dates":[["original: 12/18/2015; ",": 04/11/2016"],["original: 12/18/2014; ",": 08/25/2015"],["original: 12/17/2015; ",": 02/25/2016"],["original: 11/10/2004; ",": 06/17/2008"],["original: 10/31/2017; ",": 12/16/2019"],["original: 10/28/2016; ",": 09/26/2018"],["original: 10/28/2015; ",": 10/04/2016"],["original: 10/20/2011; ",": 06/05/2013"],["original: 10/19/2020",": 01/05/2021"],["original: 09/05/2019; ",": 08/26/2020"],["original: 08/30/2002; ",": 02/13/2017"],["original: 08/12/2019; ",": 09/10/2019"],["original: 08/03/2017; ",": 12/01/2017"],["original: 07/10/2012;",": 10/26/2018"],["original: 06/17/2019; ",": 12/16/2019"],["original: 05/10/2017;",": 11/27/2018"],["original: 04/24/2018",": 10/19/2018"],["original: 04/22/2014;",": 10/24/2018"],["original: 04/22/2014;",": 10/24/2018"],["original: 04/22/2014;",": 10/24/2018"]]},"options":{"mode":"view","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a00bc9ae5a8597e0c7fa" style="width:672px;height:480px;" class="jsonedit html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a00bc9ae5a8597e0c7fa">{"x":{"data":{"athlete":["fischbach, dylan","trafeh, mohamed","lea, robert","young, jerome","hay, amy","hunter, adam","tovar, oscar","dotti, juan pablo","paparella, flavia","murdock, vince","thomas, tammy","orbon, joane","bailey, ryan","garcia del moral, luis","jones, stirley","miyao, paulo","moffett, shaun","bruyneel, johan","celaya lazama, pedro","marti, jose"],"sanction_dates":[["original: 12/18/2015; ",": 04/11/2016"],["original: 12/18/2014; ",": 08/25/2015"],["original: 12/17/2015; ",": 02/25/2016"],["original: 11/10/2004; ",": 06/17/2008"],["original: 10/31/2017; ",": 12/16/2019"],["original: 10/28/2016; ",": 09/26/2018"],["original: 10/28/2015; ",": 10/04/2016"],["original: 10/20/2011; ",": 06/05/2013"],["original: 10/19/2020",": 01/05/2021"],["original: 09/05/2019; ",": 08/26/2020"],["original: 08/30/2002; ",": 02/13/2017"],["original: 08/12/2019; ",": 09/10/2019"],["original: 08/03/2017; ",": 12/01/2017"],["original: 07/10/2012;",": 10/26/2018"],["original: 06/17/2019; ",": 12/16/2019"],["original: 05/10/2017;",": 11/27/2018"],["original: 04/24/2018",": 10/19/2018"],["original: 04/22/2014;",": 10/24/2018"],["original: 04/22/2014;",": 10/24/2018"],["original: 04/22/2014;",": 10/24/2018"]]},"options":{"mode":"view","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="unnest" class="section level3" number="5.1.2">
-<h3 number="5.1.2"><span class="header-section-number">5.1.2</span> <code>unnest</code></h3>
+<h3><span class="header-section-number">5.1.2</span> <code>unnest</code></h3>
 <p>After unnesting, we can see the dates have been repeated down the rows (like <code>separate_rows()</code>).</p>
 <pre class="r"><code>UsadaBadDates %&gt;%
         dplyr::mutate(sanction_dates = 
@@ -874,7 +880,7 @@ UsadaBadDates %&gt;%
 </div>
 </div>
 <div id="filter" class="section level3" number="5.1.3">
-<h3 number="5.1.3"><span class="header-section-number">5.1.3</span> <code>filter</code></h3>
+<h3><span class="header-section-number">5.1.3</span> <code>filter</code></h3>
 <p>We can see all of the updated dates are on a new line, and the original dates still contain the text. Now I can filter out the rows with an original date (because I am only interested in the updated dates).</p>
 <pre class="r"><code>UsadaBadDates %&gt;%
         dplyr::mutate(sanction_dates = 
@@ -896,7 +902,7 @@ UsadaBadDates %&gt;%
 </div>
 </div>
 <div id="str_remove_all" class="section level3" number="5.1.4">
-<h3 number="5.1.4"><span class="header-section-number">5.1.4</span> <code>str_remove_all</code></h3>
+<h3><span class="header-section-number">5.1.4</span> <code>str_remove_all</code></h3>
 <p>Now I can clean up the updated <code>sanction_dates</code> and format it.</p>
 <pre class="r"><code>UsadaBadDates %&gt;%
         dplyr::mutate(sanction_dates = 
@@ -926,7 +932,7 @@ UsadaBadDates %&gt;%
 </div>
 </div>
 <div id="ggplot2" class="section level3" number="5.1.5">
-<h3 number="5.1.5"><span class="header-section-number">5.1.5</span> <code>ggplot2</code></h3>
+<h3><span class="header-section-number">5.1.5</span> <code>ggplot2</code></h3>
 <p><strong><em>How far can this pipe go??</em></strong></p>
 <p>Well, when the data are arranged in the way we want, we can test it with a visualization to check the number of sanctions per sport with bad dates.</p>
 <pre class="r"><code>UsadaBadDates %&gt;%

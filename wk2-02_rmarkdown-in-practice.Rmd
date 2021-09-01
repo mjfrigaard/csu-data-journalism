@@ -22,10 +22,6 @@ always_allow_html: true
 library(tidyverse)
 library(ipcwswitch)
 library(skimr)
-# create data folder
-# folders
-# folders <- c("code", "data", "img", "docs", "pdfs")
-# purrr::map(.x = folders, .f = fs::dir_create)
 knitr::opts_chunk$set(warning = FALSE, 
                       message = FALSE,
                       tidy = FALSE,
