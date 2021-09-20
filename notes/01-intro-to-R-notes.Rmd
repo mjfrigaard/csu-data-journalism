@@ -7,18 +7,17 @@ output:
   memor::pdf_memo:
     use_profile: false
     company:
-      name: BioMarin
+      name: PDG
       address: Mesa, AZ
       phone: 503.333.0531
       email: mjfrigaard@pm.me
     confidential: false
-    libertine: true
+    libertine: false
     chinese: false
-    logo_height: 1.2cm
     footer_on_first_page: true
-    toc: true
-    lot: true
-    lof: true
+    toc: false
+    lot: false
+    lof: false
     number_sections: false
     latex_engine: xelatex
 ---
@@ -33,6 +32,19 @@ opts_chunk$set(warning = TRUE,
 ```
 
 R is an object-oriented, functional programming language for statistical analysis and graphics. R is also a free and open-source software (FOSS) with a massive global community of users and developers who have helped create and maintain tools for data manipulation, graphics, statistics, and machine learning.
+
+
+# Objectives 
+
+- [ ] Describe what an R package is, and how to install a package
+
+- [ ] Explain the difference between CRAN packages and user-written packages 
+
+- [ ] Understand the relationship between R functions and objects 
+
+- [ ] Use the "store and explore" workflow to explore different R objects 
+
+- [ ] Make the connection between R import functions, external data files, and R objects 
 
 # Base R packages 
 
@@ -171,6 +183,11 @@ summary(my_result)
 
 This process (applying functions to data objects, storing the results, and using functions to view their contents) makes up the majority of the R workflow.
 
+```{r store-explore, echo=FALSE, fig.align='center', out.width='5in', out.height='3in'}
+knitr::include_graphics("img/store-explore.png")
+```
+
+
 # Operators
 
 *Operators* are symbols (or collections of symbols) for performing arithmetic (`+`, `-`, `*`, `/`), comparisons (`<`, `>`, `=<`, `=>`), and assignment (`<-` and `=`). These aren't a new kind of object, though (*operators* are also functions! See below). 
@@ -223,11 +240,14 @@ data()
 
 ## Importing data 
 
-If we want to import a data from a local folder (like in our `Downloads` folder), we can use an import function like those from the `readr` package. 
+If we want to import a data from a local folder (like in our `Downloads` folder), we can use an import function like those from the [`readr` package](https://readr.tidyverse.org/). 
 
-```{r read_csv}
+```{r read_csv, eval=FALSE}
 library(readr)
 PenguinsRaw <- readr::read_csv(file = "~/Downloads/palmerpenguins.csv")
+```
+```{r download-and-load-palmerpenguins.csv, echo=FALSE}
+PenguinsRaw <- readr::read_csv(file = "https://raw.githubusercontent.com/mjfrigaard/csuc-data-journalism/main/data/palmerpenguins.csv")
 ```
 
 We can see `read_csv()` printed a lot of messages to the console to let us know a bit about how our .csv file was imported. We can also check the structure of our data by clicking on it in the **Environments** pane. 
@@ -305,7 +325,7 @@ knitr::include_graphics("img/notes-penguins-df-print.png")
 
 # Conclusion
 
-We've covered an introduction to R packages (base R and user-written packages), functions and objects, the 'store and explore' workflow, and how to load data into the R environment. Keep the document for future reference! 
+We've covered an introduction to R packages (base R and user-written packages), functions and objects, the 'store and explore' workflow, and how to load data into the R environment. Keep this document for future reference! 
 
 
 

@@ -139,7 +139,7 @@ News changes quickly, so I reserve the right to remove, add, or alter any conten
 
 
 
-## Week 1 
+## Week 1: Intro to Data Journalism 
 
 + Why data journalism? (past, present, future)
 
@@ -175,7 +175,7 @@ Also check out:
 
 - **Markdown**: [Commonmark](https://commonmark.org/help/tutorial) has a quick ten-twenty minute tutorial on markdown.
 
-## Week 2
+## Week 2: What is/are data?
 
 + What is/are data? 
   - Variables 
@@ -216,7 +216,7 @@ Also check out:
 
 - [R Markdown](https://bookdown.org/yihui/rmarkdown/): A comprehensive but friendly introduction to R Markdown and friends. Free online!
 
-## Week 3
+## Week 3: Data Sources
 
 + Where do we get data? 
   - Common data sources 
@@ -251,7 +251,7 @@ Also check out:
 + [Data Visualization with ggplot2 (part 1) pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-03.1-data-viz-intro.pdf)
 
 
-## Week 4
+## Week 4: Data Visualization 
 
 + Introduction to [`ggplot2`](https://ggplot2-book.org/)   
   - geoms   
@@ -286,7 +286,7 @@ The slides will cover some basic data manipulation techniques, and intermediate 
 
 
 
-## Week 5
+## Week 5: Exploratory Data Analysis
 
 + Intermediate `ggplot2` (part 2)  
   - aesthetics  
@@ -304,7 +304,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 5 Slides
 
-## Week 6
+## Week 6: Advanced Data Visualization
 
 + advanced `ggplot2` 
   - accessory packages 
@@ -318,7 +318,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 6 Slides 
 
-## Week 7 
+## Week 7: Open Source Data Viz Tools 
 
 + Open source data visualization tools 
   - Datawrapper 
@@ -336,7 +336,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 7 Slides
 
-## Week 7 (alternate)
+## Week 7 (alternate): 
 
 + Creating a [reproducible example](https://community.rstudio.com/t/faq-whats-a-reproducible-example-reprex-and-how-do-i-create-one/5219)   
   - [StackOverflow](https://stackoverflow.com/questions/tagged/r), [RStudio Community](https://community.rstudio.com/)  
@@ -352,7 +352,7 @@ Exploratory data visualization (EDA) and graph types
 + generate a `reprex`  
   - send me a url for a post you've created (or a draft post) of a reprex. 
 
-## Week 8
+## Week 8: Science and technology (case study)
 
 + Case study: science and technology  
   - Video games data    
@@ -364,7 +364,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 8 Slides 
 
-## Week 9
+## Week 9: Criminal and social justice (case study)
 
 + Case study: criminal and social justice  
   - Texas Department of Justice Website  
@@ -375,7 +375,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 9 Slides 
 
-## Week 10
+## Week 10: Media and politics (case study)
 
 + Case study: media and politics  
   - Google trends   
@@ -387,7 +387,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 10 Slides 
 
-## Week 11
+## Week 11: Culture and entertainment (case study)
 
 + Case study: culture and entertainment  
   - US Anti-Doping Administration website  
@@ -398,7 +398,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 11 Slides 
 
-## Week 12
+## Week 12: Final Projects (intro)
 
 + Final project data collection, cleaning and analysis
   - data sources 
@@ -411,7 +411,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 12 Slides 
 
-## Week 13
+## Week 13: Final Projects (working session)
 
 + Making sure your work can be seen  
   - deploying your work online
@@ -420,14 +420,14 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 13 Exercises 
 
-## Week 14
+## Week 14: Final Projects (presentation)
 
 + Material and project review for meetings; 
 
  - Final project draft #1  
  - Individual meetings (as needed)  
 
-## Week 15
+## Week 15: Final Projects (presentation)
 
 + Final project story editing and revisions  
   - Final story edits  

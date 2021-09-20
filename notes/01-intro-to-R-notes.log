@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.27)  27 AUG 2021 21:46
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.9.19)  19 SEP 2021 20:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **01-intro-to-R-notes.tex
 (./01-intro-to-R-notes.tex
 LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-07-12> (/Users/mjfrigaard/Library/TinyTeX/texmf-dist
+L3 programming layer <2021-08-27> (/Users/mjfrigaard/Library/TinyTeX/texmf-dist
 /tex/latex/base/article.cls
 Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/base/size11.clo
@@ -146,7 +146,7 @@ Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xpars
 e.sty (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.st
 y
-Package: expl3 2021-07-12 L3 programming layer (loader) 
+Package: expl3 2021-08-27 L3 programming layer (loader) 
 
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xet
 ex.def
@@ -161,7 +161,7 @@ File: l3backend-xetex.def 2021-08-04 L3 backend support: XeTeX
 \g__pdf_backend_annotation_int=\count270
 \g__pdf_backend_link_int=\count271
 ))
-Package: xparse 2021-08-04 L3 Experimental document command parser
+Package: xparse 2021-08-27 L3 Experimental document command parser
 )
 Package: fontspec 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTeX
 
@@ -247,23 +247,48 @@ File: t3enc.def 2001/12/31 T3 encoding
 \tipaTiiicode=\count287
 \tipasavetokens=\toks26
 \tipachecktokens=\toks27
-) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
+) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+(/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+))
+(/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2021/03/14 v2.8c Micro-typographical refinements (RS)
+\MT@toks=\toks28
+\MT@count=\count288
+LaTeX Info: Redefining \textls on input line 790.
+\MT@outer@kern=\dimen154
+LaTeX Info: Redefining \textmicrotypecontext on input line 1374.
+\MT@listname@count=\count289
+
+(/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/microtype/microtype-xet
+ex.def
+File: microtype-xetex.def 2021/03/14 v2.8c Definitions specific to xetex (RS)
+LaTeX Info: Redefining \lsstyle on input line 254.
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2021/03/14 v2.8c microtype main configuration file (RS)
+)) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/geometry/geometry.st
+y
 Package: geometry 2020/01/02 v5.9 Page Geometry
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count288
-\Gm@cntv=\count289
-\c@Gm@tempcnt=\count290
-\Gm@bindingoffset=\dimen154
-\Gm@wd@mp=\dimen155
-\Gm@odd@mp=\dimen156
-\Gm@even@mp=\dimen157
-\Gm@layoutwidth=\dimen158
-\Gm@layoutheight=\dimen159
-\Gm@layouthoffset=\dimen160
-\Gm@layoutvoffset=\dimen161
-\Gm@dimlist=\toks28
+\Gm@cnth=\count290
+\Gm@cntv=\count291
+\c@Gm@tempcnt=\count292
+\Gm@bindingoffset=\dimen155
+\Gm@wd@mp=\dimen156
+\Gm@odd@mp=\dimen157
+\Gm@even@mp=\dimen158
+\Gm@layoutwidth=\dimen159
+\Gm@layoutheight=\dimen160
+\Gm@layouthoffset=\dimen161
+\Gm@layoutvoffset=\dimen162
+\Gm@dimlist=\toks29
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
@@ -305,9 +330,9 @@ Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 )
-\@linkdim=\dimen162
-\Hy@linkcounter=\count291
-\Hy@pagecounter=\count292
+\@linkdim=\dimen163
+\Hy@linkcounter=\count293
+\Hy@pagecounter=\count294
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
 )
@@ -321,7 +346,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count293
+\Hy@SavedSpaceFactor=\count295
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
 
@@ -339,13 +364,13 @@ Package hyperref Info: Plain pages OFF on input line 4207.
 Package hyperref Info: Backreferencing OFF on input line 4212.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4445.
-\c@Hy@tempcnt=\count294
+\c@Hy@tempcnt=\count296
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4804.
-\XeTeXLinkMargin=\dimen163
+\XeTeXLinkMargin=\dimen164
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 
@@ -354,9 +379,9 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count295
-\Field@Width=\dimen164
-\Fld@charsize=\dimen165
+\Fld@menulength=\count297
+\Field@Width=\dimen165
+\Fld@charsize=\dimen166
 Package hyperref Info: Hyper figures OFF on input line 6076.
 Package hyperref Info: Link nesting OFF on input line 6081.
 Package hyperref Info: Hyper index ON on input line 6084.
@@ -370,9 +395,9 @@ LaTeX Info: Redefining \pageref on input line 6150.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count296
-\c@Item=\count297
-\c@Hfootnote=\count298
+\Hy@abspage=\count298
+\c@Item=\count299
+\c@Hfootnote=\count300
 )
 Package hyperref Info: Driver: hxetex.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def
@@ -384,10 +409,10 @@ Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 )
 \pdfm@box=\box57
-\c@Hy@AnnotLevel=\count299
-\HyField@AnnotCount=\count300
-\Fld@listcount=\count301
-\c@bookmark@seq@number=\count302
+\c@Hy@AnnotLevel=\count301
+\HyField@AnnotCount=\count302
+\Fld@listcount=\count303
+\c@bookmark@seq@number=\count304
 
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfil
 echeck.sty
@@ -426,56 +451,56 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 Package color Info: Driver file: xetex.def on input line 149.
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2021/08/12 v3.8 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count303
+\FV@CodeLineNo=\count305
 \FV@InFile=\read2
 \FV@TabBox=\box58
-\c@FancyVerbLine=\count304
-\FV@StepNumber=\count305
+\c@FancyVerbLine=\count306
+\FV@StepNumber=\count307
 \FV@OutFile=\write3
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \OuterFrameSep=\skip53
-\fb@frw=\dimen166
-\fb@frh=\dimen167
-\FrameRule=\dimen168
-\FrameSep=\dimen169
+\fb@frw=\dimen167
+\fb@frh=\dimen168
+\FrameRule=\dimen169
+\FrameSep=\dimen170
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2021-05-07 v4.16 Multi-page Table package (DPC)
 \LTleft=\skip54
 \LTright=\skip55
 \LTpre=\skip56
 \LTpost=\skip57
-\LTchunksize=\count306
-\LTcapwidth=\dimen170
+\LTchunksize=\count308
+\LTcapwidth=\dimen171
 \LT@head=\box59
 \LT@firsthead=\box60
 \LT@foot=\box61
 \LT@lastfoot=\box62
 \LT@gbox=\box63
-\LT@cols=\count307
-\LT@rows=\count308
-\c@LT@tables=\count309
-\c@LT@chunks=\count310
-\LT@p@ftn=\toks29
+\LT@cols=\count309
+\LT@rows=\count310
+\c@LT@tables=\count311
+\c@LT@chunks=\count312
+\LT@p@ftn=\toks30
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen171
-\lightrulewidth=\dimen172
-\cmidrulewidth=\dimen173
-\belowrulesep=\dimen174
-\belowbottomsep=\dimen175
-\aboverulesep=\dimen176
-\abovetopsep=\dimen177
-\cmidrulesep=\dimen178
-\cmidrulekern=\dimen179
-\defaultaddspace=\dimen180
-\@cmidla=\count311
-\@cmidlb=\count312
-\@aboverulesep=\dimen181
-\@belowrulesep=\dimen182
-\@thisruleclass=\count313
-\@lastruleclass=\count314
-\@thisrulewidth=\dimen183
+\heavyrulewidth=\dimen172
+\lightrulewidth=\dimen173
+\cmidrulewidth=\dimen174
+\belowrulesep=\dimen175
+\belowbottomsep=\dimen176
+\aboverulesep=\dimen177
+\abovetopsep=\dimen178
+\cmidrulesep=\dimen179
+\cmidrulekern=\dimen180
+\defaultaddspace=\dimen181
+\@cmidla=\count313
+\@cmidlb=\count314
+\@aboverulesep=\dimen182
+\@belowrulesep=\dimen183
+\@thisruleclass=\count315
+\@lastruleclass=\count316
+\@thisrulewidth=\dimen184
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/titling/titling.sty
 Package: titling 2009/09/04 v2.1d maketitle typesetting
 \thanksmarkwidth=\skip58
@@ -500,563 +525,24 @@ Package: ragged2e 2021/02/05 v3.0 ragged2e Package
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lastpage/lastpage.sty
-Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
-)
-(/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/libertine/libertine.sty
-Package: libertine 2020/03/26 (Bob Tennent) Supports Libertine and Biolinum fon
-ts for all LaTeX engines.
-(/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
-Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
-)
-Requested font "[LinLibertine_R.otf]/OT" at 10.94997pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_R.otf
-Requested font "[LinLibertine_R.otf]/OT" at 10.95003pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_R.otf
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;" at 10.95003
-pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_R.otf
-Requested font "[LinLibertine_RB.otf]/OT:script=latn;language=dflt;" at 10.9500
-3pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_RB.otf
-Requested font "[LinLibertine_RI.otf]/OT:script=latn;language=dflt;" at 10.9500
-3pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_RI.otf
-Requested font "[LinLibertine_RBI.otf]/OT:script=latn;language=dflt;" at 10.950
-03pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_RBI.otf
-
-Package fontspec Info: Font family 'LinLibertine(0)' created for font
-(fontspec)             'LinLibertine' with options [Ligatures = TeX,Extension
-(fontspec)             =
-(fontspec)             .otf,SmallCapsFeatures={Letters=SmallCaps},Ligatures=TeX
-,Numbers
-(fontspec)             = {Monospaced,Lining},Scale = 1,UprightFont =
-(fontspec)             *_R,ItalicFont = *_RI,BoldFont = *_RB,BoldItalicFont =
-(fontspec)             *_RBI].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_R.otf]/OT:script=latn;language=df
-lt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_R.otf]/OT:script=latn;language=df
-lt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RB.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RB.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RI.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RI.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RBI.otf]/OT:script=latn;language=
-dflt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RBI.otf]/OT:script=latn;language=
-dflt;+tnum;+lnum;+smcp;mapping=tex-text;"
-
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 10.95pt on input line 308.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;m
-apping=tex-text;" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_R.otf
-Requested font "[LinBiolinum_R.otf]/OT" at 10.94997pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinBiolinum_R.otf
-Requested font "[LinBiolinum_R.otf]/OT" at 10.95003pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinBiolinum_R.otf
-Requested font "[LinBiolinum_R.otf]/OT:script=latn;language=dflt;" at 10.95003p
-t
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinBiolinum_R.otf
-Requested font "[LinBiolinum_RB.otf]/OT:script=latn;language=dflt;" at 10.95003
-pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinBiolinum_RB.otf
-Requested font "[LinBiolinum_RI.otf]/OT:script=latn;language=dflt;" at 10.95003
-pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinBiolinum_RI.otf
-Requested font "[LinBiolinum_RBO.otf]/OT:script=latn;language=dflt;" at 10.9500
-3pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinBiolinum_RBO.otf
-
-Package fontspec Info: Font family 'LinBiolinum(0)' created for font
-(fontspec)             'LinBiolinum' with options [Ligatures = TeX,Extension =
-(fontspec)             .otf,SmallCapsFeatures={Letters=SmallCaps},Ligatures=TeX
-,Numbers
-(fontspec)             = {Monospaced, Lining},Scale = 1,UprightFont =
-(fontspec)             *_R,ItalicFont = *_RI,BoldFont = *_RB,BoldItalicFont =
-(fontspec)             *_RBO].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_R.otf]/OT:script=latn;language=dfl
-t;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_R.otf]/OT:script=latn;language=dfl
-t;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RB.otf]/OT:script=latn;language=df
-lt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RB.otf]/OT:script=latn;language=df
-lt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RI.otf]/OT:script=latn;language=df
-lt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RI.otf]/OT:script=latn;language=df
-lt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RBO.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RBO.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;+smcp;mapping=tex-text;"
-
-
-Package fontspec Info: Font family 'LinLibertine(1)' created for font
-(fontspec)             'LinLibertine' with options [Ligatures = TeX,Extension
-(fontspec)             = .otf,SmallCapsFeatures={Letters=SmallCaps},Numbers =
-(fontspec)             {Monospaced,Lining},Scale = 1,UprightFont =
-(fontspec)             *_R,ItalicFont = *_RI,BoldFont = *_RB,BoldItalicFont =
-(fontspec)             *_RBI].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_R.otf]/OT:script=latn;language=df
-lt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_R.otf]/OT:script=latn;language=df
-lt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RB.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RB.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RI.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RI.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RBI.otf]/OT:script=latn;language=
-dflt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RBI.otf]/OT:script=latn;language=
-dflt;+tnum;+lnum;+smcp;mapping=tex-text;"
-
-Requested font "[LinLibertine_RZ.otf]/OT" at 10.94997pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_RZ.otf
-Requested font "[LinLibertine_RZ.otf]/OT" at 10.95003pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_RZ.otf
-Requested font "[LinLibertine_RZ.otf]/OT:script=latn;language=dflt;" at 10.9500
-3pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_RZ.otf
-Requested font "[LinLibertine_RZI.otf]/OT:script=latn;language=dflt;" at 10.950
-03pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_RZI.otf
-
-Package fontspec Info: Font family 'LinLibertine(2)' created for font
-(fontspec)             'LinLibertine' with options [Ligatures = TeX,Extension
-(fontspec)             = .otf,SmallCapsFeatures={Letters=SmallCaps},Numbers =
-(fontspec)             { Monospaced, Lining},Scale = 1,UprightFont =
-(fontspec)             *_RZ,ItalicFont = *_RZI,BoldFont = *_RB,BoldItalicFont
-(fontspec)             = *_RBI].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RZ.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RZ.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RB.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RB.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RZI.otf]/OT:script=latn;language=
-dflt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RZI.otf]/OT:script=latn;language=
-dflt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RBI.otf]/OT:script=latn;language=
-dflt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RBI.otf]/OT:script=latn;language=
-dflt;+tnum;+lnum;+smcp;mapping=tex-text;"
-
-
-Package fontspec Info: Font family 'LinLibertine(3)' created for font
-(fontspec)             'LinLibertine' with options [Ligatures = TeX,Extension
-(fontspec)             = .otf,SmallCapsFeatures={Letters=SmallCaps},Numbers =
-(fontspec)             {Monospaced,OldStyle},Scale = 1,UprightFont =
-(fontspec)             *_R,ItalicFont = *_RI,BoldFont = *_RB,BoldItalicFont =
-(fontspec)             *_RBI].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_R.otf]/OT:script=latn;language=df
-lt;+tnum;+onum;mapping=tex-text;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_R.otf]/OT:script=latn;language=df
-lt;+tnum;+onum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RB.otf]/OT:script=latn;language=d
-flt;+tnum;+onum;mapping=tex-text;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RB.otf]/OT:script=latn;language=d
-flt;+tnum;+onum;+smcp;mapping=tex-text;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RI.otf]/OT:script=latn;language=d
-flt;+tnum;+onum;mapping=tex-text;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RI.otf]/OT:script=latn;language=d
-flt;+tnum;+onum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RBI.otf]/OT:script=latn;language=
-dflt;+tnum;+onum;mapping=tex-text;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_RBI.otf]/OT:script=latn;language=
-dflt;+tnum;+onum;+smcp;mapping=tex-text;"
-
-Requested font "[LinLibertine_DR.otf]/OT" at 10.94997pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_DR.otf
-Requested font "[LinLibertine_DR.otf]/OT" at 10.95003pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_DR.otf
-Requested font "[LinLibertine_DR.otf]/OT:script=latn;language=dflt;" at 10.9500
-3pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_DR.otf
-
-Package fontspec Info: Font family 'LinLibertine(4)' created for font
-(fontspec)             'LinLibertine' with options [Ligatures = TeX,Extension
-(fontspec)             = .otf,SmallCapsFeatures={Letters=SmallCaps},Numbers =
-(fontspec)             {Monospaced,Lining},UprightFont = *_DR,ItalicFont =
-(fontspec)             *_RI,BoldFont = *_RB,BoldItalicFont = *_RBI].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[LinLibertine_DR.otf]/OT:script=latn;language=dflt;+
-tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->"[LinLibertine_RB.otf]/OT:script=latn;language=dflt;+
-tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->"[LinLibertine_RB.otf]/OT:script=latn;language=dflt;+
-tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->"[LinLibertine_RI.otf]/OT:script=latn;language=dflt;+
-tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->"[LinLibertine_RI.otf]/OT:script=latn;language=dflt;+
-tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->"[LinLibertine_RBI.otf]/OT:script=latn;language=dflt;
-+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->"[LinLibertine_RBI.otf]/OT:script=latn;language=dflt;
-+tnum;+lnum;+smcp;mapping=tex-text;"
-
-
-Package fontspec Info: Font family 'LinBiolinum(1)' created for font
-(fontspec)             'LinBiolinum' with options [Ligatures = TeX,Extension =
-(fontspec)             .otf,SmallCapsFeatures={Letters=SmallCaps},Numbers =
-(fontspec)             {Monospaced, Lining},Scale = 1,UprightFont =
-(fontspec)             *_R,ItalicFont = *_RI,BoldFont = *_RB,BoldItalicFont =
-(fontspec)             *_RBO].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_R.otf]/OT:script=latn;language=dfl
-t;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_R.otf]/OT:script=latn;language=dfl
-t;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RB.otf]/OT:script=latn;language=df
-lt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RB.otf]/OT:script=latn;language=df
-lt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RI.otf]/OT:script=latn;language=df
-lt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RI.otf]/OT:script=latn;language=df
-lt;+tnum;+lnum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RBO.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;mapping=tex-text;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RBO.otf]/OT:script=latn;language=d
-flt;+tnum;+lnum;+smcp;mapping=tex-text;"
-
-
-Package fontspec Info: Font family 'LinBiolinum(2)' created for font
-(fontspec)             'LinBiolinum' with options [Ligatures = TeX,Extension =
-(fontspec)             .otf,SmallCapsFeatures={Letters=SmallCaps},Numbers =
-(fontspec)             {Monospaced, OldStyle},Scale = 1,UprightFont =
-(fontspec)             *_R,ItalicFont = *_RI,BoldFont = *_RB,BoldItalicFont =
-(fontspec)             *_RBO].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_R.otf]/OT:script=latn;language=dfl
-t;+tnum;+onum;mapping=tex-text;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_R.otf]/OT:script=latn;language=dfl
-t;+tnum;+onum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RB.otf]/OT:script=latn;language=df
-lt;+tnum;+onum;mapping=tex-text;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RB.otf]/OT:script=latn;language=df
-lt;+tnum;+onum;+smcp;mapping=tex-text;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RI.otf]/OT:script=latn;language=df
-lt;+tnum;+onum;mapping=tex-text;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RI.otf]/OT:script=latn;language=df
-lt;+tnum;+onum;+smcp;mapping=tex-text;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RBO.otf]/OT:script=latn;language=d
-flt;+tnum;+onum;mapping=tex-text;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinBiolinum_RBO.otf]/OT:script=latn;language=d
-flt;+tnum;+onum;+smcp;mapping=tex-text;"
-
-Requested font "[LinLibertine_M.otf]/OT" at 10.94997pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_M.otf
-Requested font "[LinLibertine_M.otf]/OT" at 10.95003pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_M.otf
-Requested font "[LinLibertine_M.otf]/OT:script=latn;language=dflt;" at 10.95003
-pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_M.otf
-Requested font "[LinLibertine_MB.otf]/OT:script=latn;language=dflt;" at 10.9500
-3pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_MB.otf
-Requested font "[LinLibertine_MO.otf]/OT:script=latn;language=dflt;" at 10.9500
-3pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_MO.otf
-Requested font "[LinLibertine_MBO.otf]/OT:script=latn;language=dflt;" at 10.950
-03pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_MBO.otf
-
-Package fontspec Info: Font family 'LinLibertine(5)' created for font
-(fontspec)             'LinLibertine' with options [Extension =
-(fontspec)             .otf,HyphenChar=None,WordSpace={1,0,0},HyphenChar=None,P
-unctuationSpace=WordSpace,Scale
-(fontspec)             = 1,UprightFont = *_M,ItalicFont = *_MO,BoldFont =
-(fontspec)             *_MB,BoldItalicFont = *_MBO].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_M.otf]/OT:script=latn;language=df
-lt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
-(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
-(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop:
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_MB.otf]/OT:script=latn;language=d
-flt;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
-(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
-(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop:
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_MO.otf]/OT:script=latn;language=d
-flt;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
-(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
-(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop:
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_MBO.otf]/OT:script=latn;language=
-dflt;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
-(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
-(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop:
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-
-
-Package fontspec Info: Font family 'LinLibertine(6)' created for font
-(fontspec)             'LinLibertine' with options [Extension =
-(fontspec)             .otf,HyphenChar=None,Scale = 1,UprightFont =
-(fontspec)             *_M,ItalicFont = *_MO,BoldFont = *_MB,BoldItalicFont =
-(fontspec)             *_MBO].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_M.otf]/OT:script=latn;language=df
-lt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_MB.otf]/OT:script=latn;language=d
-flt;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_MO.otf]/OT:script=latn;language=d
-flt;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[LinLibertine_MBO.otf]/OT:script=latn;language=
-dflt;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-
-Requested font "[LinBiolinum_K.otf]/OT" at 10.94997pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinBiolinum_K.otf
-Requested font "[LinBiolinum_K.otf]/OT" at 10.95003pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinBiolinum_K.otf
-Requested font "[LinBiolinum_K.otf]/OT:script=latn;language=dflt;" at 10.95003p
-t
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinBiolinum_K.otf
-
-Package fontspec Info: Font family 'LinBiolinum_K(0)' created for font
-(fontspec)             'LinBiolinum_K' with options [Extension =
-(fontspec)             .otf,HyphenChar=None,BoldFont={},ItalicFont={},SmallCaps
-Font={}].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[LinBiolinum_K.otf]/OT:script=latn;language=dflt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-
-Requested font "[LinLibertine_I.otf]/OT" at 10.94997pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_I.otf
-Requested font "[LinLibertine_I.otf]/OT" at 10.95003pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_I.otf
-Requested font "[LinLibertine_I.otf]/OT:script=latn;language=dflt;" at 10.95003
-pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_I.otf
-
-Package fontspec Info: Font family 'LinLibertine_I(0)' created for font
-(fontspec)             'LinLibertine_I' with options [Extension =
-(fontspec)             .otf,HyphenChar=None,BoldFont={},ItalicFont={},SmallCaps
-Font={}].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[LinLibertine_I.otf]/OT:script=latn;language=dflt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-
-LaTeX Info: Redefining \oldstylenums on input line 474.
-LaTeX Info: Redefining \liningnums on input line 475.
-
-(/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/libertine/LinLibertine_
-R.tex)
-(/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/libertine/LinBiolinum_R
-.tex)
-(/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/libertine/LinBiolinum_K
-.tex)
-(/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/libertine/LinLibertine_
-I.tex) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/libertine/LKey.t
-ex)) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/was/gensymb.sty
+Package: lastpage 2021/09/03 v1.2n Refers to last page's name (HMM; JPG)
+) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/was/gensymb.sty
 Package: gensymb 2003/07/02 v1.0 (WaS)
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/tools/array.sty
 Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
-\col@sep=\dimen184
+\col@sep=\dimen185
 \ar@mcellbox=\box64
-\extrarowheight=\dimen185
-\NC@list=\toks30
+\extrarowheight=\dimen186
+\NC@list=\toks31
 \extratabsurround=\skip75
 \backup@length=\skip76
 \ar@cellbox=\box65
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip77
-\multirow@cntb=\count315
+\multirow@cntb=\count317
 \multirow@dima=\skip78
-\bigstrutjot=\dimen186
+\bigstrutjot=\dimen187
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
@@ -1073,22 +559,22 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen187
-\WF@size=\dimen188
-\c@WF@wrappedlines=\count316
+\wrapoverhang=\dimen188
+\WF@size=\dimen189
+\c@WF@wrappedlines=\count318
 \WF@box=\box66
-\WF@everypar=\toks31
+\WF@everypar=\toks32
 Package: wrapfig 2003/01/31  v 3.6
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count317
-\float@exts=\toks32
+\c@float@type=\count319
+\float@exts=\toks33
 \float@box=\box67
-\@float@everytoks=\toks33
+\@float@everytoks=\toks34
 \@floatcapt=\box68
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
-\everycr=\toks34
+\everycr=\toks35
 \minrowclearance=\skip79
 )
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.sty
@@ -1103,27 +589,27 @@ Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box69
-\sift@deathcycles=\count318
-\@vwid@loff=\dimen189
-\@vwid@roff=\dimen190
+\sift@deathcycles=\count320
+\@vwid@loff=\dimen190
+\@vwid@roff=\dimen191
 )
-\c@taburow=\count319
-\tabu@nbcols=\count320
-\tabu@cnt=\count321
-\tabu@Xcol=\count322
-\tabu@alloc=\count323
-\tabu@nested=\count324
-\tabu@target=\dimen191
-\tabu@spreadtarget=\dimen192
-\tabu@naturalX=\dimen193
-\tabucolX=\dimen194
-\tabu@Xsum=\dimen195
-\extrarowdepth=\dimen196
-\abovetabulinesep=\dimen197
-\belowtabulinesep=\dimen198
-\tabustrutrule=\dimen199
-\tabu@thebody=\toks35
-\tabu@footnotes=\toks36
+\c@taburow=\count321
+\tabu@nbcols=\count322
+\tabu@cnt=\count323
+\tabu@Xcol=\count324
+\tabu@alloc=\count325
+\tabu@nested=\count326
+\tabu@target=\dimen192
+\tabu@spreadtarget=\dimen193
+\tabu@naturalX=\dimen194
+\tabucolX=\dimen195
+\tabu@Xsum=\dimen196
+\extrarowdepth=\dimen197
+\abovetabulinesep=\dimen198
+\belowtabulinesep=\dimen199
+\tabustrutrule=\dimen256
+\tabu@thebody=\toks36
+\tabu@footnotes=\toks37
 \tabu@box=\box70
 \tabu@arstrutbox=\box71
 \tabu@hleads=\box72
@@ -1148,14 +634,14 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \TPTL@width=\skip81
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen256
-\c@nlinenum=\count325
-\TeXr@lab=\toks37
+\rotheadsize=\dimen257
+\c@nlinenum=\count327
+\TeXr@lab=\toks38
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/footmisc/footmisc.sty
 Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
-\FN@temptoken=\toks38
-\footnotemargin=\dimen257
-\c@pp@next@reset=\count326
+\FN@temptoken=\toks39
+\footnotemargin=\dimen258
+\c@pp@next@reset=\count328
 Package footmisc Info: Declaring symbol style bringhurst on input line 855.
 Package footmisc Info: Declaring symbol style chicago on input line 863.
 Package footmisc Info: Declaring symbol style wiley on input line 872.
@@ -1168,17 +654,17 @@ Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
 Package: caption 2020/10/26 v3.5g Customizing captions (AR)
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
-\captionmargin=\dimen258
-\captionmargin@=\dimen259
-\captionwidth=\dimen260
-\caption@tempdima=\dimen261
-\caption@indent=\dimen262
-\caption@parindent=\dimen263
-\caption@hangindent=\dimen264
+\captionmargin=\dimen259
+\captionmargin@=\dimen260
+\captionwidth=\dimen261
+\caption@tempdima=\dimen262
+\caption@indent=\dimen263
+\caption@parindent=\dimen264
+\caption@hangindent=\dimen265
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count327
-\c@continuedfloat=\count328
+\c@caption@flags=\count329
+\c@continuedfloat=\count330
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: longtable package is loaded.
@@ -1204,58 +690,70 @@ Package: titlesec 2021/07/05 v2.14 Sectioning titles
 \ttl@box=\box75
 \beforetitleunit=\skip91
 \aftertitleunit=\skip92
-\ttl@plus=\dimen265
-\ttl@minus=\dimen266
-\ttl@toksa=\toks39
-\titlewidth=\dimen267
-\titlewidthlast=\dimen268
-\titlewidthfirst=\dimen269
+\ttl@plus=\dimen266
+\ttl@minus=\dimen267
+\ttl@toksa=\toks40
+\titlewidth=\dimen268
+\titlewidthlast=\dimen269
+\titlewidthfirst=\dimen270
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2019/06/20 v3.9 Customized lists
-\enitkv@toks@=\toks40
+\enitkv@toks@=\toks41
 \labelindent=\skip93
-\enit@outerparindent=\dimen270
-\enit@toks=\toks41
+\enit@outerparindent=\dimen271
+\enit@toks=\toks42
 \enit@inbox=\box76
-\enit@count@id=\count329
-\enitdp@description=\count330
+\enit@count@id=\count331
+\enitdp@description=\count332
 )
 \tbspace=\skip94
 (./01-intro-to-R-notes.aux)
 \openout1 = `01-intro-to-R-notes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 259.
-LaTeX Font Info:    ... okay on input line 259.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 259.
-LaTeX Font Info:    ... okay on input line 259.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 259.
-LaTeX Font Info:    ... okay on input line 259.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 259.
-LaTeX Font Info:    ... okay on input line 259.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 259.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 258.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
-59.
+58.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 259.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 259.
-LaTeX Font Info:    ... okay on input line 259.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 259.
-LaTeX Font Info:    ... okay on input line 259.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 259.
-LaTeX Font Info:    ... okay on input line 259.
-LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 259.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 258.
 LaTeX Font Info:    Trying to load font information for T3+cmr on input line 25
-9.
+8.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/tipa/t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
-LaTeX Font Info:    ... okay on input line 259.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 259.
-LaTeX Font Info:    ... okay on input line 259.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 259.
-LaTeX Font Info:    ... okay on input line 259.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Info: Redefining \microtypecontext on input line 258.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using protrusion set `basicmath'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of spacing.
+Package microtype Info: No adjustment of kerning.
+
+(/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-LatinModer
+nRoman.cfg
+File: mt-LatinModernRoman.cfg 2021/02/21 v1.1 microtype config. file: Latin Mod
+ern Roman (RS)
+)
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1290,7 +788,7 @@ LaTeX Font Info:    ... okay on input line 259.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 259.
+Package hyperref Info: Link coloring ON on input line 258.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1300,462 +798,291 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 lestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count331
+\c@section@level=\count333
 )
-LaTeX Info: Redefining \ref on input line 259.
-LaTeX Info: Redefining \pageref on input line 259.
-LaTeX Info: Redefining \nameref on input line 259.
+LaTeX Info: Redefining \ref on input line 258.
+LaTeX Info: Redefining \pageref on input line 258.
+LaTeX Info: Redefining \nameref on input line 258.
 (./01-intro-to-R-notes.out) (./01-intro-to-R-notes.out)
 \@outlinefile=\write4
 \openout4 = `01-intro-to-R-notes.out'.
 
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 259.
+(lastpage)             ! on input line 258.
 \symgns@font=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `gns@font' in version `bold'
-(Font)                  TS1/LinLibertine(0)/m/n --> TS1/LinLibertine(0)/b/n on 
-input line 259.
-Package gensymb Info: Math companion symbols declared on input line 259.
-LaTeX Info: Redefining \degree on input line 259.
-LaTeX Info: Redefining \celsius on input line 259.
+(Font)                  TS1/lmr/m/n --> TS1/lmr/b/n on input line 258.
+Package gensymb Info: Math companion symbols declared on input line 258.
+LaTeX Info: Redefining \degree on input line 258.
+LaTeX Info: Redefining \celsius on input line 258.
 Package gensymb Info: Using text companion symbols for \degree, \celsius and \p
-erthousand on input line 259.
-LaTeX Info: Redefining \ohm on input line 259.
-Package gensymb Info: Using \textohm for \ohm on input line 259.
-Package gensymb Info: Using \textmu for \micro on input line 259.
+erthousand on input line 258.
+LaTeX Info: Redefining \ohm on input line 258.
+Package gensymb Info: Using \textohm for \ohm on input line 258.
+Package gensymb Info: Using \textmu for \micro on input line 258.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 17.28pt on input line 260.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;m
-apping=tex-text;" at 17.28pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_R.otf
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 260.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;m
-apping=tex-text;" at 12.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_R.otf
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/sc' will be
-(Font)              scaled to size 10.95pt on input line 268.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;+
-smcp;mapping=tex-text;" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_R.otf
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/sc' will be
-(Font)              scaled to size 12.0pt on input line 268.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;+
-smcp;mapping=tex-text;" at 12.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_R.otf
-(./01-intro-to-R-notes.toc
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
-(Font)              scaled to size 10.95pt on input line 1.
-Requested font "[LinLibertine_RB.otf]/OT:script=latn;language=dflt;+tnum;+lnum;
-mapping=tex-text;" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_RB.otf
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 6
-.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
+75.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Requested font "rm-lmr10" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/rm-lmr10.t
-fm
-Requested font "rm-lmr8" at 8.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/rm-lmr8.tf
-m
-Requested font "rm-lmr6" at 6.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/rm-lmr6.tf
-m
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 6
-.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmr' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
+75.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Requested font "lmmi10" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmmi10.tfm
-Requested font "lmmi8" at 8.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmmi8.tfm
-Requested font "lmmi6" at 6.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmmi6.tfm
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-6.
+275.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Requested font "lmsy10" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmsy10.tfm
-Requested font "lmsy8" at 8.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmsy8.tfm
-Requested font "lmsy6" at 6.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmsy6.tfm
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-6.
+275.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 6.
-Requested font "lmex10" scaled 1000
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmex10.tfm
+(Font)              <10.95> on input line 275.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 6.
+(Font)              <8> on input line 275.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 6.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 6.
+(Font)              <6> on input line 275.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 275
+.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-Requested font "msam10" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
-ols/msam10.tfm
-Requested font "msam10" at 8.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
-ols/msam10.tfm
-Requested font "msam7" at 6.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
-ols/msam7.tfm
-LaTeX Font Info:    Trying to load font information for U+msb on input line 6.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 275
+.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-Requested font "msbm10" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
-ols/msbm10.tfm
-Requested font "msbm10" at 8.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
-ols/msbm10.tfm
-Requested font "msbm7" at 6.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
-ols/msbm7.tfm
-LaTeX Font Info:    Trying to load font information for TS1+LinLibertine(0) on 
-input line 6.
-LaTeX Font Info:    No file TS1LinLibertine(0).fd. on input line 6.
-
-LaTeX Font Warning: Font shape `TS1/LinLibertine(0)/m/n' undefined
-(Font)              using `TS1/cmr/m/n' instead on input line 6.
-
-Requested font "tcrm1095" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095
-.tfm
-Requested font "tcrm0800" at 8.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/jknappen/ec/tcrm0800
-.tfm
-Requested font "tcrm0600" at 6.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/jknappen/ec/tcrm0600
-.tfm
-)
-\tf@toc=\write5
-\openout5 = `01-intro-to-R-notes.toc'.
-
-(./01-intro-to-R-notes.lot)
-\tf@lot=\write6
-\openout6 = `01-intro-to-R-notes.lot'.
-
-(./01-intro-to-R-notes.lof)
-\tf@lof=\write7
-\openout7 = `01-intro-to-R-notes.lof'.
-
-LaTeX Font Info:    Font shape `TU/LinLibertine(5)/m/n' will be
-(Font)              scaled to size 10.95pt on input line 282.
-Requested font "[LinLibertine_M.otf]/OT:script=latn;language=dflt;" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_M.otf
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 286.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;m
-apping=tex-text;" at 9.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_R.otf
-Requested font "rm-lmr9" at 9.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/rm-lmr9.tf
-m
-Requested font "rm-lmr5" at 5.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/rm-lmr5.tf
-m
-Requested font "lmmi9" at 9.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmmi9.tfm
-Requested font "lmmi5" at 5.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmmi5.tfm
-Requested font "lmsy9" at 9.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmsy9.tfm
-Requested font "lmsy5" at 5.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/lm/lmsy5.tfm
+File: ../img/package-functions.png Graphic file (type bmp)
+<../img/package-functions.png>
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 286.
+(Font)              <9> on input line 305.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 286.
-Requested font "msam10" at 9.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
-ols/msam10.tfm
-Requested font "msam5" at 5.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
-ols/msam5.tfm
-Requested font "msbm10" at 9.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
-ols/msbm10.tfm
-Requested font "msbm5" at 5.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symb
-ols/msbm5.tfm
-Requested font "tcrm0900" at 9.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/jknappen/ec/tcrm0900
-.tfm
-Requested font "tcrm0500" at 5.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/tfm/jknappen/ec/tcrm0500
-.tfm
+(Font)              <5> on input line 305.
 [1
 
 ]
-File: ../img/package-functions.png Graphic file (type bmp)
-<../img/package-functions.png>
 File: ../img/function-args.png Graphic file (type bmp)
 <../img/function-args.png>
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/sc' will be
-(Font)              scaled to size 9.0pt on input line 315.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;+
-smcp;mapping=tex-text;" at 9.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_R.otf
-[2]
 
-Package xcolor Warning: Incompatible color definition on input line 320.
-
-LaTeX Font Info:    Font shape `TU/LinLibertine(5)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 321.
-Requested font "[LinLibertine_M.otf]/OT:script=latn;language=dflt;" at 9.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_M.otf
-
-Package xcolor Warning: Incompatible color definition on input line 325.
+Package xcolor Warning: Incompatible color definition on input line 329.
 
 
-Package xcolor Warning: Incompatible color definition on input line 325.
-
-LaTeX Font Info:    Font shape `TU/LinLibertine(5)/b/n' will be
-(Font)              scaled to size 10.95pt on input line 329.
-Requested font "[LinLibertine_MB.otf]/OT:script=latn;language=dflt;" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_MB.otf
-
-Package xcolor Warning: Incompatible color definition on input line 338.
+Package xcolor Warning: Incompatible color definition on input line 334.
 
 
-Package xcolor Warning: Incompatible color definition on input line 342.
+Package xcolor Warning: Incompatible color definition on input line 334.
+
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 338.
+
+Package xcolor Warning: Incompatible color definition on input line 347.
 
 
-Package xcolor Warning: Incompatible color definition on input line 342.
+Package xcolor Warning: Incompatible color definition on input line 351.
 
 
-Package xcolor Warning: Incompatible color definition on input line 346.
-
-
-Package xcolor Warning: Incompatible color definition on input line 350.
-
-
-Package xcolor Warning: Incompatible color definition on input line 350.
+Package xcolor Warning: Incompatible color definition on input line 351.
 
 
 Package xcolor Warning: Incompatible color definition on input line 355.
 
 
-Package xcolor Warning: Incompatible color definition on input line 360.
+Package xcolor Warning: Incompatible color definition on input line 359.
 
 
-Package xcolor Warning: Incompatible color definition on input line 360.
+Package xcolor Warning: Incompatible color definition on input line 359.
 
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/it' will be
-(Font)              scaled to size 10.95pt on input line 374.
-Requested font "[LinLibertine_RI.otf]/OT:script=latn;language=dflt;+tnum;+lnum;
-mapping=tex-text;" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_RI.otf
 
-Package xcolor Warning: Incompatible color definition on input line 379.
+Package xcolor Warning: Incompatible color definition on input line 364.
 
-LaTeX Font Info:    Font shape `TU/LinLibertine(5)/b/n' will be
-(Font)              scaled to size 9.0pt on input line 381.
-Requested font "[LinLibertine_MB.otf]/OT:script=latn;language=dflt;" at 9.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_MB.otf
-LaTeX Font Info:    Font shape `TU/LinLibertine(5)/m/it' will be
-(Font)              scaled to size 9.0pt on input line 387.
-Requested font "[LinLibertine_MO.otf]/OT:script=latn;language=dflt;" at 9.0pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_MO.otf
+[2]
+
+Package xcolor Warning: Incompatible color definition on input line 369.
+
+
+Package xcolor Warning: Incompatible color definition on input line 369.
+
+
+Package xcolor Warning: Incompatible color definition on input line 388.
+
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <9> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 390.
+
+Package xcolor Warning: Incompatible color definition on input line 399.
+
+
+Package xcolor Warning: Incompatible color definition on input line 399.
+
+
+Package xcolor Warning: Incompatible color definition on input line 410.
+
+
+Package xcolor Warning: Incompatible color definition on input line 415.
+
+
+Package xcolor Warning: Incompatible color definition on input line 415.
+
+
+Package xcolor Warning: Incompatible color definition on input line 429.
+
+
+Package xcolor Warning: Incompatible color definition on input line 433.
+
+
+Package xcolor Warning: Incompatible color definition on input line 433.
+
+
+Package xcolor Warning: Incompatible color definition on input line 443.
+
 [3]
 
-Package xcolor Warning: Incompatible color definition on input line 390.
+Package xcolor Warning: Incompatible color definition on input line 447.
 
 
-Package xcolor Warning: Incompatible color definition on input line 390.
-
-
-Package xcolor Warning: Incompatible color definition on input line 401.
-
-
-Package xcolor Warning: Incompatible color definition on input line 406.
-
-
-Package xcolor Warning: Incompatible color definition on input line 406.
-
-LaTeX Font Info:    Font shape `TU/LinLibertine(5)/m/it' will be
-(Font)              scaled to size 10.95pt on input line 414.
-Requested font "[LinLibertine_MO.otf]/OT:script=latn;language=dflt;" at 10.95pt
- -> /Users/mjfrigaard/Library/TinyTeX/texmf-dist/fonts/opentype/public/libertin
-e/LinLibertine_MO.otf
-
-Package xcolor Warning: Incompatible color definition on input line 420.
-
-
-Package xcolor Warning: Incompatible color definition on input line 424.
-
-
-Package xcolor Warning: Incompatible color definition on input line 424.
-
-
-Package xcolor Warning: Incompatible color definition on input line 434.
-
-
-Package xcolor Warning: Incompatible color definition on input line 438.
-
-
-Package xcolor Warning: Incompatible color definition on input line 438.
+Package xcolor Warning: Incompatible color definition on input line 447.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 458.
+(hyperref)                be the same. Added a new anchor on input line 467.
 
 
-Package xcolor Warning: Incompatible color definition on input line 463.
+Package xcolor Warning: Incompatible color definition on input line 472.
+
+
+Package xcolor Warning: Incompatible color definition on input line 478.
+
+
+Package xcolor Warning: Incompatible color definition on input line 478.
+
+
+Package xcolor Warning: Incompatible color definition on input line 488.
+
+
+Package xcolor Warning: Incompatible color definition on input line 493.
+
+
+Package xcolor Warning: Incompatible color definition on input line 493.
+
+
+Package xcolor Warning: Incompatible color definition on input line 513.
 
 [4]
 
-Package xcolor Warning: Incompatible color definition on input line 469.
+Package xcolor Warning: Incompatible color definition on input line 518.
 
 
-Package xcolor Warning: Incompatible color definition on input line 469.
+Package xcolor Warning: Incompatible color definition on input line 518.
+
+File: img/store-explore.png Graphic file (type bmp)
+<img/store-explore.png>
+
+Package xcolor Warning: Incompatible color definition on input line 541.
 
 
-Package xcolor Warning: Incompatible color definition on input line 479.
+Package xcolor Warning: Incompatible color definition on input line 545.
 
 
-Package xcolor Warning: Incompatible color definition on input line 484.
+Package xcolor Warning: Incompatible color definition on input line 545.
 
 
-Package xcolor Warning: Incompatible color definition on input line 484.
+Package xcolor Warning: Incompatible color definition on input line 551.
 
 
-Package xcolor Warning: Incompatible color definition on input line 504.
+Package xcolor Warning: Incompatible color definition on input line 555.
 
 
-Package xcolor Warning: Incompatible color definition on input line 509.
+Package xcolor Warning: Incompatible color definition on input line 555.
 
 
-Package xcolor Warning: Incompatible color definition on input line 509.
+Package xcolor Warning: Incompatible color definition on input line 561.
 
 
-Package xcolor Warning: Incompatible color definition on input line 530.
+Package xcolor Warning: Incompatible color definition on input line 565.
 
 
-Package xcolor Warning: Incompatible color definition on input line 534.
-
-
-Package xcolor Warning: Incompatible color definition on input line 534.
-
-
-Package xcolor Warning: Incompatible color definition on input line 540.
-
-[5]
-
-Package xcolor Warning: Incompatible color definition on input line 544.
-
-
-Package xcolor Warning: Incompatible color definition on input line 544.
-
-
-Package xcolor Warning: Incompatible color definition on input line 550.
-
-
-Package xcolor Warning: Incompatible color definition on input line 554.
-
-
-Package xcolor Warning: Incompatible color definition on input line 554.
+Package xcolor Warning: Incompatible color definition on input line 565.
 
 File: img/notes-env-pane.png Graphic file (type bmp)
 <img/notes-env-pane.png>
+[5]
 
-Package xcolor Warning: Incompatible color definition on input line 575.
-
-
-Package xcolor Warning: Incompatible color definition on input line 579.
+Package xcolor Warning: Incompatible color definition on input line 586.
 
 
-Package xcolor Warning: Incompatible color definition on input line 579.
+Package xcolor Warning: Incompatible color definition on input line 590.
 
 
-Package xcolor Warning: Incompatible color definition on input line 583.
+Package xcolor Warning: Incompatible color definition on input line 590.
 
 
-Package xcolor Warning: Incompatible color definition on input line 587.
-
-
-Package xcolor Warning: Incompatible color definition on input line 587.
-
-
-Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 593.
+Package xcolor Warning: Incompatible color definition on input line 594.
 
 
 Package xcolor Warning: Incompatible color definition on input line 598.
 
+
+Package xcolor Warning: Incompatible color definition on input line 598.
+
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 604.
+
+
+Package xcolor Warning: Incompatible color definition on input line 609.
+
+
+Package xcolor Warning: Incompatible color definition on input line 613.
+
+
+Package xcolor Warning: Incompatible color definition on input line 613.
+
+
+Package xcolor Warning: Incompatible color definition on input line 618.
+
+
+Package xcolor Warning: Incompatible color definition on input line 622.
+
+
+Package xcolor Warning: Incompatible color definition on input line 622.
+
+
+Package xcolor Warning: Incompatible color definition on input line 631.
+
 [6]
 
-Package xcolor Warning: Incompatible color definition on input line 602.
+Package xcolor Warning: Incompatible color definition on input line 636.
 
 
-Package xcolor Warning: Incompatible color definition on input line 602.
-
-
-Package xcolor Warning: Incompatible color definition on input line 607.
-
-
-Package xcolor Warning: Incompatible color definition on input line 611.
-
-
-Package xcolor Warning: Incompatible color definition on input line 611.
-
-
-Package xcolor Warning: Incompatible color definition on input line 620.
-
-
-Package xcolor Warning: Incompatible color definition on input line 625.
-
-
-Package xcolor Warning: Incompatible color definition on input line 625.
-
-
-Overfull \hbox (0.64465pt too wide) in paragraph at lines 637--637
-[]\TU/LinLibertine(5)/m/n/9 ## -- Column specification ------------------------
---------------------------------[] 
- []
+Package xcolor Warning: Incompatible color definition on input line 636.
 
 File: img/notes-data-view-env-pane.png Graphic file (type bmp)
 <img/notes-data-view-env-pane.png>
-[7]
 File: img/notes-palmers-github.png Graphic file (type bmp)
 <img/notes-palmers-github.png>
+[7]
 
-Package xcolor Warning: Incompatible color definition on input line 673.
-
-
-Package xcolor Warning: Incompatible color definition on input line 678.
+Package xcolor Warning: Incompatible color definition on input line 684.
 
 
-Package xcolor Warning: Incompatible color definition on input line 678.
+Package xcolor Warning: Incompatible color definition on input line 689.
+
+
+Package xcolor Warning: Incompatible color definition on input line 689.
 
 File: img/notes-tribble-paste.png Graphic file (type bmp)
 <img/notes-tribble-paste.png>
@@ -1767,19 +1094,16 @@ File: img/notes-penguins-df-print.png Graphic file (type bmp)
 
 AED: lastpage setting LastPage
 [9] (./01-intro-to-R-notes.aux)
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
 Package rerunfilecheck Info: File `01-intro-to-R-notes.out' has not changed.
-(rerunfilecheck)             Checksum: A84A6327C4766A743C2E627715707DF2;841.
+(rerunfilecheck)             Checksum: 06080344CFB50CA58F5C498FC7BDAA01;887.
  ) 
 Here is how much of TeX's memory you used:
- 30374 strings out of 478475
- 580633 string characters out of 5858026
- 837328 words of memory out of 5000000
- 50236 multiletter control sequences out of 15000+600000
- 426731 words of font info for 110 fonts, out of 8000000 for 9000
+ 22159 strings out of 478492
+ 394628 string characters out of 5860850
+ 779584 words of memory out of 5000000
+ 42039 multiletter control sequences out of 15000+600000
+ 426037 words of font info for 76 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 87i,13n,117p,530b,399s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 87i,12n,117p,530b,413s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on 01-intro-to-R-notes.pdf (9 pages).

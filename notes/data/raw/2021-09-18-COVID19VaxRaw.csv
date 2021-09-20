@@ -1,0 +1,261 @@
+location,n_vaccinated,perc_of_pop
+World[d],"3,376,011,578",42.9%
+China,"1,095,000,000",75.8%
+India,"586,105,233",42.1%
+European Union,"295,680,233",66.1%
+United States[e],"211,097,597",62.8%
+Brazil,"145,113,195",67.8%
+Japan,"82,677,879",65.6%
+Indonesia,"77,417,488",28.0%
+Mexico,"61,616,895",47.3%
+Germany,"55,703,730",66.4%
+Pakistan,"54,436,916",24.2%
+Turkey,"52,497,989",61.7%
+France,"49,707,676",73.6%
+United Kingdom,"48,528,901",71.2%
+Russia,"46,745,074",32.0%
+Italy[f],"44,130,192",73.1%
+Spain,"37,385,758",80.0%
+South Korea,"35,414,516",69.0%
+Argentina,"28,929,766",63.4%
+Canada,"28,629,817",75.2%
+Thailand,"28,436,015",40.6%
+Vietnam,"26,307,653",26.8%
+Colombia,"24,733,487",48.2%
+Saudi Arabia,"23,022,910",65.2%
+Iran,"22,943,141",27.0%
+Malaysia,"21,863,951",66.7%
+Bangladesh,"21,559,401",13.0%
+Morocco,"20,362,745",54.5%
+Poland,"19,601,546",51.9%
+Philippines,"18,697,647",16.8%
+Australia,"14,768,715",57.3%
+Chile,"14,671,991",76.4%
+Sri Lanka,"13,690,202",63.7%
+Peru,"12,354,190",37.0%
+Netherlands,"12,068,854",70.3%
+Cambodia,"11,608,143",68.5%
+Taiwan,"11,593,038",48.6%
+South Africa,"11,367,049",18.9%
+Ecuador,"10,699,102",59.8%
+Uzbekistan,"9,787,973",28.8%
+United Arab Emirates,"9,059,751",90.7%
+Portugal,"8,846,756",87.0%
+Belgium,"8,515,499",73.2%
+Egypt,"7,743,420",7.4%
+Cuba,"7,461,666",65.9%
+Kazakhstan,"7,228,047",38.0%
+Sweden,"7,070,462",69.6%
+Venezuela,"6,822,809",23.8%
+Greece,"6,349,134",61.2%
+Ukraine,"6,248,153",14.4%
+Nepal,"6,083,124",20.5%
+Israel,"6,059,158",68.9%
+Czechia,"6,040,218",56.3%
+Dominican Republic,"5,957,432",54.4%
+Hungary,"5,855,039",60.8%
+Algeria,"5,815,039",13.0%
+Austria,"5,640,345",62.4%
+Romania,"5,347,116",27.9%
+Switzerland,"5,270,807",60.5%
+Myanmar,"4,944,654",9.0%
+Singapore,"4,654,992",78.9%
+Tunisia,"4,610,453",38.6%
+Azerbaijan,"4,570,812",44.7%
+Denmark,"4,440,213",76.4%
+Hong Kong,"4,387,270",58.1%
+Iraq,"4,203,578",10.2%
+Bolivia,"4,161,019",35.2%
+Nigeria,"4,146,028",2.0%
+Finland,"4,094,729",73.8%
+Norway,"4,046,955",74.0%
+Guatemala,"4,017,554",22.0%
+El Salvador,"3,875,388",59.5%
+Ireland,"3,745,660",75.2%
+Jordan,"3,615,365",35.2%
+Costa Rica,"3,144,786",61.2%
+New Zealand,"3,015,345",62.0%
+Serbia,"2,990,502",44.0%
+Honduras,"2,947,650",29.3%
+Zimbabwe,"2,930,550",19.4%
+Panama,"2,891,906",66.0%
+Uruguay,"2,716,920",78.0%
+Oman,"2,710,021",51.9%
+Kuwait,"2,668,082",61.6%
+Laos,"2,650,948",35.9%
+Paraguay,"2,550,991",35.3%
+Kenya,"2,439,528",4.4%
+Slovakia,"2,415,058",44.2%
+Ethiopia,"2,414,898",2.0%
+Qatar,"2,360,308",80.5%
+Mongolia,"2,248,549",67.5%
+Tajikistan,"2,168,537",22.2%
+Mozambique,"1,864,229",5.8%
+Rwanda,"1,827,371",13.8%
+Croatia,"1,775,653",43.5%
+Belarus,"1,751,254",18.6%
+Lithuania,"1,720,418",64.0%
+Angola,"1,510,880",4.5%
+Lebanon,"1,499,846",22.2%
+Palestine,"1,271,801",24.4%
+Libya,"1,246,217",17.9%
+Senegal,"1,203,066",7.0%
+Ivory Coast,"1,193,877",4.4%
+Bahrain,"1,159,989",66.3%
+Bulgaria,"1,089,066",15.8%
+Slovenia,"1,078,766",51.9%
+Uganda,"1,030,447",2.2%
+Guinea,"953,942",7.1%
+Georgia,"935,094",23.5%
+Albania,"911,372",31.7%
+Latvia,"888,910",47.6%
+Ghana,"865,422",2.8%
+Mauritius,"842,642",66.2%
+Afghanistan,"773,002",1.9%
+North Macedonia,"767,653",36.9%
+Kyrgyzstan,"762,691",11.5%
+Estonia,"745,168",56.2%
+Malawi,"742,169",3.8%
+Kosovo,"710,945",36.8%
+Sudan,"648,840",1.4%
+Bosnia and Herzegovina,"634,063",19.4%
+Cyprus,"589,098",66.3%
+Moldova,"573,001",14.2%
+Fiji,"569,958",63.1%
+Bhutan,"567,220",72.7%
+Trinidad and Tobago,"555,534",39.6%
+Jamaica,"506,797",17.0%
+Nicaragua,"490,472",7.3%
+Malta,"418,251",81.3%
+Luxembourg,"416,918",65.7%
+Togo,"414,249",4.9%
+Timor-Leste,"408,918",30.4%
+Niger,"404,246",1.6%
+Maldives,"390,644",71.9%
+Botswana,"365,655",15.2%
+Cameroon,"363,773",1.3%
+Tanzania,"350,000",0.6%
+Guyana,"341,600",43.2%
+Macao,"338,450",51.4%
+Mauritania,"311,544",6.5%
+Zambia,"311,049",1.6%
+Yemen,"308,025",1.0%
+Mali,"284,052",1.4%
+Iceland,"281,141",81.9%
+Cabo Verde,"272,501",48.5%
+Brunei,"237,015",53.7%
+Namibia,"232,051",9.0%
+Somalia,"231,089",1.4%
+Montenegro,"229,399",36.5%
+Suriname,"216,889",36.6%
+Armenia,"215,278",7.2%
+Madagascar,"210,666",0.7%
+Equatorial Guinea,"210,358",14.5%
+Congo,"207,265",3.7%
+Syria,"201,379",1.1%
+Sierra Leone,"181,065",2.2%
+Eswatini,"180,709",15.4%
+Belize,"180,196",44.5%
+Gambia,"179,910",7.2%
+Comoros,"174,765",19.7%
+Burkina Faso,"166,160",0.8%
+Northern Cyprus,"160,361",42.0%
+Benin,"152,669",1.2%
+French Polynesia,"146,890",52.0%
+Barbados,"123,950",43.1%
+Papua New Guinea,"114,419",1.2%
+Bahamas,"105,753",26.6%
+Liberia,"104,545",2.0%
+Central African Republic,"102,591",2.1%
+Guernsey,"101,487[g]",
+New Caledonia,"101,168",35.1%
+Curaçao,"97,150",59.0%
+Samoa,"97,032",48.5%
+Chad,"86,821",0.5%
+Democratic Republic of the Congo,"85,182",0.1%
+Gabon,"84,214",3.7%
+Aruba,"80,606",75.2%
+Jersey,"76,818",76.0%
+Seychelles,"74,719",75.5%
+Solomon Islands,"74,573",10.6%
+Lesotho,"71,597",3.3%
+Isle of Man,"65,430",76.6%
+South Sudan,"55,182",0.5%
+Cayman Islands,"54,167",81.5%
+Andorra,"51,599",66.7%
+Sao Tome and Principe,"45,088",20.2%
+Antigua and Barbuda,"43,949",44.5%
+Bermuda,"43,549",70.1%
+Saint Lucia,"42,594",23.1%
+Tonga,"41,130",38.5%
+Greenland,"40,922",72.0%
+Haiti,"40,198",0.3%
+Djibouti,"39,923",4.0%
+Gibraltar,"39,837",118.2%
+Vanuatu,"39,347",12.5%
+Faroe Islands,"37,568",76.6%
+Turkmenistan,"32,240",0.5%
+Grenada,"28,511",25.2%
+Guinea-Bissau,"28,097",1.4%
+Turks and Caicos Islands,"27,220",69.4%
+Monaco,"26,672",67.5%
+Sint Maarten,"25,516",58.8%
+Saint Kitts and Nevis,"24,968",46.6%
+Kiribati,"24,429",20.1%
+San Marino,"24,329",71.5%
+Liechtenstein,"23,699",62.0%
+Dominica,"23,300",32.3%
+Saint Vincent and the Grenadines,"19,512",17.5%
+Caribbean Netherlands,"19,109",72.3%
+British Virgin Islands,"18,405",60.5%
+Cook Islands,"11,416",65.0%
+Anguilla,"9,498",62.8%
+Nauru,"7,612",70.0%
+Tuvalu,"6,167",51.7%
+Wallis and Futuna,"4,952",44.6%
+"St. Helena, Ascension, Tristan","4,361",71.8%
+Falkland Islands,"2,632",75.6%
+Montserrat,"1,466",29.4%
+Niue,"1,184",73.2%
+Tokelau,968,70.8%
+Pitcairn,47,100.0%
+".mw-parser-output .reflist{font-size:90%;margin-bottom:0.5em;list-style-type:decimal}.mw-parser-output .reflist .references{font-size:100%;margin-bottom:0;list-style-type:inherit}.mw-parser-output .reflist-columns-2{column-width:30em}.mw-parser-output .reflist-columns-3{column-width:25em}.mw-parser-output .reflist-columns{margin-top:0.3em}.mw-parser-output .reflist-columns ol{margin-top:0}.mw-parser-output .reflist-columns li{page-break-inside:avoid;break-inside:avoid-column}.mw-parser-output .reflist-upper-alpha{list-style-type:upper-alpha}.mw-parser-output .reflist-upper-roman{list-style-type:upper-roman}.mw-parser-output .reflist-lower-alpha{list-style-type:lower-alpha}.mw-parser-output .reflist-lower-greek{list-style-type:lower-greek}.mw-parser-output .reflist-lower-roman{list-style-type:lower-roman}
+^ The Oxford–AstraZeneca COVID-19 vaccine is codenamed AZD1222,[40] and later supplied under trade names, including Vaxzevria[41] and Covishield.[42]
+
+^ Number of people who have received at least one dose of a COVID-19 vaccine (unless noted otherwise).
+
+^ Percentage of population that has received at least one dose of a COVID-19 vaccine. May include vaccination of non-citizens, which can push totals beyond 100% of the local population.
+
+^ Countries which do not report the number of people who have received at least one dose are not included in the world total.
+
+^ Includes Freely Associated States
+
+^ Includes Vatican City
+
+^ This country's data are the number of vaccine doses administered, not the first dose only.",".mw-parser-output .reflist{font-size:90%;margin-bottom:0.5em;list-style-type:decimal}.mw-parser-output .reflist .references{font-size:100%;margin-bottom:0;list-style-type:inherit}.mw-parser-output .reflist-columns-2{column-width:30em}.mw-parser-output .reflist-columns-3{column-width:25em}.mw-parser-output .reflist-columns{margin-top:0.3em}.mw-parser-output .reflist-columns ol{margin-top:0}.mw-parser-output .reflist-columns li{page-break-inside:avoid;break-inside:avoid-column}.mw-parser-output .reflist-upper-alpha{list-style-type:upper-alpha}.mw-parser-output .reflist-upper-roman{list-style-type:upper-roman}.mw-parser-output .reflist-lower-alpha{list-style-type:lower-alpha}.mw-parser-output .reflist-lower-greek{list-style-type:lower-greek}.mw-parser-output .reflist-lower-roman{list-style-type:lower-roman}
+^ The Oxford–AstraZeneca COVID-19 vaccine is codenamed AZD1222,[40] and later supplied under trade names, including Vaxzevria[41] and Covishield.[42]
+
+^ Number of people who have received at least one dose of a COVID-19 vaccine (unless noted otherwise).
+
+^ Percentage of population that has received at least one dose of a COVID-19 vaccine. May include vaccination of non-citizens, which can push totals beyond 100% of the local population.
+
+^ Countries which do not report the number of people who have received at least one dose are not included in the world total.
+
+^ Includes Freely Associated States
+
+^ Includes Vatican City
+
+^ This country's data are the number of vaccine doses administered, not the first dose only.",".mw-parser-output .reflist{font-size:90%;margin-bottom:0.5em;list-style-type:decimal}.mw-parser-output .reflist .references{font-size:100%;margin-bottom:0;list-style-type:inherit}.mw-parser-output .reflist-columns-2{column-width:30em}.mw-parser-output .reflist-columns-3{column-width:25em}.mw-parser-output .reflist-columns{margin-top:0.3em}.mw-parser-output .reflist-columns ol{margin-top:0}.mw-parser-output .reflist-columns li{page-break-inside:avoid;break-inside:avoid-column}.mw-parser-output .reflist-upper-alpha{list-style-type:upper-alpha}.mw-parser-output .reflist-upper-roman{list-style-type:upper-roman}.mw-parser-output .reflist-lower-alpha{list-style-type:lower-alpha}.mw-parser-output .reflist-lower-greek{list-style-type:lower-greek}.mw-parser-output .reflist-lower-roman{list-style-type:lower-roman}
+^ The Oxford–AstraZeneca COVID-19 vaccine is codenamed AZD1222,[40] and later supplied under trade names, including Vaxzevria[41] and Covishield.[42]
+
+^ Number of people who have received at least one dose of a COVID-19 vaccine (unless noted otherwise).
+
+^ Percentage of population that has received at least one dose of a COVID-19 vaccine. May include vaccination of non-citizens, which can push totals beyond 100% of the local population.
+
+^ Countries which do not report the number of people who have received at least one dose are not included in the world total.
+
+^ Includes Freely Associated States
+
+^ Includes Vatican City
+
+^ This country's data are the number of vaccine doses administered, not the first dose only."
