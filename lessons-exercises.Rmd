@@ -45,57 +45,114 @@ x <- x %>%
     bullet = map2_chr(href, comment, ~ paste("*", .x, .y, "\n")))
 ```
 
-### Week 1
+### Week 1 (2021-08-23)
 
 ```{r wk1-files, results='asis', echo=FALSE, eval=TRUE}
-# this uses the `bk` as a prefix and identifier for the 'background' section
 cat_bullet(x, "^wk1-")
 ```
 
 
-### Week 2
+### Week 2 (2021-08-30)
 
 ```{r wk2-files, results='asis', echo=FALSE, eval=TRUE}
-# this uses the `bk` as a prefix and identifier for the 'background' section
 cat_bullet(x, "^wk2-")
 ```
 
-### Week 3
+### Week 3 (2021-09-06)
+
+***Labor day, Campus closed***
+
+### Week 3 (2021-09-13)
 
 ```{r wk3-files, results='asis', echo=FALSE, eval=TRUE}
-# this uses the `mk` as a prefix and identifier for the 'markdown' section
 cat_bullet(x, "^wk3-")
 ```
 
-### Week 4
+### Week 4 (2021-09-20)
 
 ```{r wk4-files, results = 'asis', echo = FALSE}
-# here we see the 'dt' as core dplyr/tidyr lessons
 cat_bullet(x, "^wk4-")
 ```
 
-### Week 5
+### Week 5 (2021-09-27)
 
 ```{r wk5-files, results = 'asis', echo = FALSE, eval=TRUE}
 # here we see the 'gg' for ggplot2 
 cat_bullet(x, "^wk5-")
 ```
 
-### Week 6
+### Week 6 (2021-10-04)
 
 ```{r wk6-files, results = 'asis', echo = FALSE, eval=TRUE}
-# and the `sh` for shiny
 cat_bullet(x, "^wk6-")
 ```
 
-### Week 7
+### Week 7 (2021-10-11)
 
 *(under construction)*
 
 ```{r wk7-files, results = 'asis', echo = FALSE, eval=TRUE}
-# and the `pr` for programming
 cat_bullet(x, "^wk7-")
 ```
+
+### Week 8 (2021-10-18)
+
+*(under construction)*
+
+```{r wk8-files, results = 'asis', echo = FALSE, eval=TRUE}
+cat_bullet(x, "^wk8-")
+```
+
+### Week 9 (2021-10-25)
+
+```{r wk9-files, results = 'asis', echo = FALSE, eval=TRUE}
+cat_bullet(x, "^wk9-")
+```
+
+### Week 10 (2021-11-01)
+
+```{r wk10-files, results = 'asis', echo = FALSE, eval=TRUE}
+cat_bullet(x, "^wk10-")
+```
+
+### Week 11 (2021-11-08)
+
+```{r wk11-files, results = 'asis', echo = FALSE, eval=TRUE}
+# and the `pr` for programming
+cat_bullet(x, "^wk11-")
+```
+
+### Week 12 (2021-11-15)
+
+```{r wk12-files, results = 'asis', echo = FALSE, eval=TRUE}
+cat_bullet(x, "^wk12-")
+```
+
+### Week 13 (2021-11-22)
+
+```{r wk13-files, results = 'asis', echo = FALSE, eval=TRUE}
+cat_bullet(x, "^wk13-")
+```
+
+### Week 14 (2021-11-29)
+
+```{r wk14-files, results = 'asis', echo = FALSE, eval=TRUE}
+cat_bullet(x, "^wk14-")
+```
+
+### Week 15 (2021-12-06)
+
+```{r wk15-files, results = 'asis', echo = FALSE, eval=TRUE}
+cat_bullet(x, "^wk15-")
+```
+
+### Week 16 (2021-12-13)
+
+```{r wk16-files, results = 'asis', echo = FALSE, eval=TRUE}
+cat_bullet(x, "^wk16-")
+```
+
+
 
 This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 

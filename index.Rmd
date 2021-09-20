@@ -137,9 +137,7 @@ Note the following caveats regarding this schedule.  First, this might be consid
 News changes quickly, so I reserve the right to remove, add, or alter any content that appears below based on current events in the world. The subjects are not mutually exclusive, so we may decide to introduce some topics prior to the scheduled date.
 
 
-
-
-## Week 1: Intro to Data Journalism 
+## Week 1 (2021-08-23): Intro to Data Journalism 
 
 + Why data journalism? (past, present, future)
 
@@ -175,7 +173,7 @@ Also check out:
 
 - **Markdown**: [Commonmark](https://commonmark.org/help/tutorial) has a quick ten-twenty minute tutorial on markdown.
 
-## Week 2: What is/are data?
+## Week 2 (2021-08-30): What is/are data?
 
 + What is/are data? 
   - Variables 
@@ -216,14 +214,18 @@ Also check out:
 
 - [R Markdown](https://bookdown.org/yihui/rmarkdown/): A comprehensive but friendly introduction to R Markdown and friends. Free online!
 
-## Week 3: Data Sources
+## Week 3 (2021-09-06): (**Labor Day. Campus closed**)
+
+## Week 3 (2021-09-13): Data Sources
 
 + Where do we get data? 
+
   - Common data sources 
   - Open data 
   - The [`rtweet` package](https://docs.ropensci.org/rtweet/) 
 
 + Installing/updating packages in RStudio
+
   - Manipulating twitter data
   - Visualizing twitter data
   
@@ -251,7 +253,7 @@ Also check out:
 + [Data Visualization with ggplot2 (part 1) pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-03.1-data-viz-intro.pdf)
 
 
-## Week 4: Data Visualization 
+## Week 4 (2021-09-20): Data Visualization 
 
 + Introduction to [`ggplot2`](https://ggplot2-book.org/)   
   - geoms   
@@ -286,7 +288,7 @@ The slides will cover some basic data manipulation techniques, and intermediate 
 
 
 
-## Week 5: Exploratory Data Analysis
+## Week 5 (2021-09-27): Exploratory Data Analysis
 
 + Intermediate `ggplot2` (part 2)  
   - aesthetics  
@@ -300,11 +302,15 @@ The slides will cover some basic data manipulation techniques, and intermediate 
 
 ### Week 5 Exercises
 
-Exploratory data visualization (EDA) and graph types
++ [Advanced Data Transformation and Manipulation](https://mjfrigaard.github.io/csuc-data-journalism/wk5-01_adv-data-manip-joins.html)
+
++ [Data Visualization with `ggplot2` (part 3)](https://mjfrigaard.github.io/csuc-data-journalism/wk5-02_intro-to-data-viz-ggp2-part-03.html)
 
 ### Week 5 Slides
 
-## Week 6: Advanced Data Visualization
+
+
+## Week 6 (2021-10-04): Advanced Data Visualization
 
 + advanced `ggplot2` 
   - accessory packages 
@@ -318,7 +324,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 6 Slides 
 
-## Week 7: Open Source Data Viz Tools 
+## Week 7 (2021-10-11): Open Source Data Viz Tools 
 
 + Open source data visualization tools 
   - Datawrapper 
@@ -352,7 +358,7 @@ Exploratory data visualization (EDA) and graph types
 + generate a `reprex`  
   - send me a url for a post you've created (or a draft post) of a reprex. 
 
-## Week 8: Science and technology (case study)
+## Week 8 (2021-10-18): Science and technology (case study)
 
 + Case study: science and technology  
   - Video games data    
@@ -364,7 +370,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 8 Slides 
 
-## Week 9: Criminal and social justice (case study)
+## Week 9 (2021-10-25): Criminal and social justice (case study)
 
 + Case study: criminal and social justice  
   - Texas Department of Justice Website  
@@ -375,7 +381,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 9 Slides 
 
-## Week 10: Media and politics (case study)
+## Week 10 (2021-11-01): Media and politics (case study)
 
 + Case study: media and politics  
   - Google trends   
@@ -387,7 +393,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 10 Slides 
 
-## Week 11: Culture and entertainment (case study)
+## Week 11 (2021-11-08): Culture and entertainment (case study)
 
 + Case study: culture and entertainment  
   - US Anti-Doping Administration website  
@@ -398,7 +404,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 11 Slides 
 
-## Week 12: Final Projects (intro)
+## Week 12 (2021-11-15): Final Projects (intro)
 
 + Final project data collection, cleaning and analysis
   - data sources 
@@ -411,7 +417,7 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 12 Slides 
 
-## Week 13: Final Projects (working session)
+## Week 13 (2021-11-22): Final Projects (working session)
 
 + Making sure your work can be seen  
   - deploying your work online
@@ -420,19 +426,19 @@ Exploratory data visualization (EDA) and graph types
 
 ### Week 13 Exercises 
 
-## Week 14: Final Projects (presentation)
+## Week 14 (2021-11-29): Final Projects (presentation)
 
 + Material and project review for meetings; 
 
  - Final project draft #1  
  - Individual meetings (as needed)  
 
-## Week 15: Final Projects (presentation)
+## Week 15 (2021-12-06): Final Projects (presentation)
 
 + Final project story editing and revisions  
   - Final story edits  
   
-## Week 16 (FINALS)
+## Week 16 (2021-12-13) (FINALS)
 
 + Submission of final project
  

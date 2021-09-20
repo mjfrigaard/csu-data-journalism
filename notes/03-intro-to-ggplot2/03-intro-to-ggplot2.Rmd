@@ -1,27 +1,82 @@
 ---
-title: "An Introduction to ggplot2: the grammar of graphics"
+title: 'An Introduction to ggplot2: the grammar of graphics'
+
+# Use letters for affiliations
 author:
-- Data Journalism 
-- Martin Frigaard
-date: "`r Sys.Date()`"
-output:
-  memor::pdf_memo:
-    use_profile: false
-    company:
-      name: PDG
-      address: Mesa, AZ
-      phone: 503.333.0531
-      email: mjfrigaard@pm.me
-    confidential: false
-    libertine: false
-    chinese: false
-    footer_on_first_page: true
-    toc: false
-    lot: false
-    lof: false
-    number_sections: false
-    latex_engine: xelatex
+  - name: Martin Frigaard
+    affiliation: a
+address:
+  - code: a
+    address: CSU, Chico
+    
+# Optional: line of arbitrary text with additional information.
+# Could be used, for example, to mention the bibliographic info in a post-print.
+# If not specified, defaults to "This version was compiled on \today"
+#date_subtitle: Published in *Journal of Statistical Software*, 2018
+
+# For footer text  TODO(fold into template, allow free form two-authors)
+#lead_author_surname: Author and Author
+
+# Place eg a DOI URL or CRAN Package URL here
+doi_footer: "https://mjfrigaard.github.io/csuc-data-journalism/"
+
+# Abstract
+abstract: |
+  `ggplot2` is part of the `tidyverse`, which is a collection of opinionated packages from RStudio that ['*you're likely to use in everyday data analyses.*'](https://www.tidyverse.org/packages/).
+
+# Optional: Acknowledgements
+#acknowledgements: |
+#  This .
+
+# Optional: One or more keywords
+keywords:
+  - ggplot2
+  - RStudio
+
+# Paper size for the document, values of letter and a4
+papersize: letter
+
+# Font size of the document, values of 9pt (default), 10pt, 11pt and 12pt
+fontsize: 12pt
+
+# Optional: Force one-column layout, default is two-column
+one_column: true
+
+# Optional: Enables lineno mode, but only if one_column mode is also true
+#lineno: true
+
+# Optional: Enable one-sided layout, default is two-sided
+#one_sided: true
+
+# Optional: Enable section numbering, default is unnumbered
+#numbersections: true
+
+# Optional: Specify the depth of section number, default is 5
+#secnumdepth: 5
+
+# Optional: Skip inserting final break between acknowledgements, default is false
+skip_final_break: true
+
+# Optional: Bibliography 
+#bibliography: pinp
+
+# Optional: Enable a 'Draft' watermark on the document
+#watermark: true
+
+# Customize footer, eg by referencing the vignette
+#footer_contents: "YourPackage Vignette"
+
+# Produce a pinp document
+output: pinp::pinp
+
+# Required: Vignette metadata for inclusion in a package.
+#vignette: >
+#  %\VignetteIndexEntry{YourPackage-vignetteentry}
+#  %\VignetteKeywords{YourPackage, r, anotherkeyword}
+#  %\VignettePackage{YourPackage}
+#  %\VignetteEngine{knitr::rmarkdown}
 ---
+
 
 ```{r setup, include=FALSE}
 library(knitr)
@@ -51,8 +106,6 @@ options(scipen = 999)
 - [ ] Build a graph one layer at a time using the `ggplot` template 
 
 # What is `ggplot2`?
-
-`ggplot2` is part of the `tidyverse`, which is a collection of opinionated packages from RStudio that ['*you're likely to use in everyday data analyses.*'](https://www.tidyverse.org/packages/)
 
  The `ggplot2` package is an implementation of the ["Grammar of Graphics"](https://amzn.to/2MRRCAB) by Leland Wilkinson. This text outlines a foundation for understanding the components of just about every graph or figure we've encountered (and some we haven't). `ggplot2` extends these concepts into a powerful grammar for developing data visualizations in R.
  
@@ -90,27 +143,27 @@ The pipe (`%>%`) is what's referred to as syntactic sugar (yes, that's [really a
 Writing R code using the pipe operator makes it easier to combine function calls, and it's easier for to read. For example, consider a single function call: 
 
 ```{r pipe-args-01.png, echo=FALSE, fig.align='center', out.width='4in', out.height='1in'}
-knitr::include_graphics("img/pipe-args-01.png")
+knitr::include_graphics("../img/pipe-args-01.png")
 ```
 
 The pipe allows us to write this as, "take the *input* and apply this  *function()*" 
 
 ```{r pipe-args-02.png, echo=FALSE, fig.align='center', out.width='5in', out.height='1in'}
-knitr::include_graphics("img/pipe-args-02.png")
+knitr::include_graphics("../img/pipe-args-02.png")
 ```
 
 Writing code this way might not seem like it's a big improvement in clarity, but consider a more complicated series of function calls: 
 
 
 ```{r pipe-args-03.png, echo=FALSE, fig.align='center', out.width='5.7in', out.height='1in'}
-knitr::include_graphics("img/pipe-args-03.png")
+knitr::include_graphics("../img/pipe-args-03.png")
 ```
 If we want to apply a two functions, we have to write them so the output from the first function is an input for the second function--which means they have to written inside-out! 
 
 If we use the pipe operator, the code looks like this: 
 
 ```{r pipe-args-04.png, echo=FALSE, fig.align='center', out.width='4.2in', out.height='1.5in'}
-knitr::include_graphics("img/pipe-args-04.png")
+knitr::include_graphics("../img/pipe-args-04.png")
 ```
 
 Now we can take the **`input`**, apply the first **`function()`**, then pass the output from the first function to the second **`function()`** and store this in the **`output`**. 
@@ -193,7 +246,7 @@ By placing the `data = .` on the right-hand side of the pipe operator (`%>%`) in
 See the figure below:
 
 ```{r pipe-data-args.png, echo=FALSE, fig.align='center', out.width='6in', out.height='3in'}
-knitr::include_graphics("img/pipe-data-args.png")
+knitr::include_graphics("../img/pipe-data-args.png")
 ```
 
 We can demonstrate this in the code section below: 
@@ -290,7 +343,7 @@ When we give the `qplot()` function a single numerical variable, it assumes we w
 The histogram displays the `avg_facebook_likes` variable by splitting up the `x` axis into `bins`, then plotting the count for each number of observations in each bin on the `y` axis.
 
 ```{r corbyn-histogram.png, echo=FALSE, fig.align='center', out.width='7in', out.height='5in'}
-knitr::include_graphics("img/corbyn-histogram.png")
+knitr::include_graphics("../img/corbyn-histogram.png")
 ```
 
 # Visualize a single variable: box-plots
@@ -313,7 +366,7 @@ Pensions %>%
 The box-plot gives us an idea of `pop_65_percent`'s distribution using the white box to show where the median (middle value), 1st and 3rd quartiles, higher/lower values, and outliers (see image below). 
 
 ```{r pensions-boxplot.png, echo=FALSE, fig.align='center', out.width='5in', out.height='3.5in'}
-knitr::include_graphics("img/pensions-boxplot.png")
+knitr::include_graphics("../img/pensions-boxplot.png")
 ```
 
 # Visualizing a numerical and categorical variable
@@ -383,7 +436,7 @@ If you read the [Medium article](https://medium.economist.com/mistakes-weve-draw
 
 
 ```{r original-brexit.png, echo=FALSE, fig.align='center', out.width='7in', out.height='4in'}
-knitr::include_graphics("img/original-brexit.png")
+knitr::include_graphics("../img/original-brexit.png")
 ```
 
 In order to re-create these graphs, we'll need to restructure the `Brexit` data with the `tidyr::pivot_longer()` function from the [`tidyr` package](https://tidyr.tidyverse.org/reference/pivot_longer.html).
@@ -525,7 +578,7 @@ This is starting to look more like the graph in the medium article, but we still
 For example, from the 'Original' graph in the medium article, the points are slightly transparent. The `alpha` is the transparency argument, and it's available inside nearly every `geom`. 
 
 ```{r original-brexit-02, echo=FALSE, fig.align='center', out.width='7in', out.height='4in'}
-knitr::include_graphics("img/original-brexit.png")
+knitr::include_graphics("../img/original-brexit.png")
 ```
 
 We can add the `alpha` argument inside the `ggplot2::geom_point()` function, and specify either a decimal, fraction, or numeric value. In this case, we want the value set to `1/3`.
@@ -604,7 +657,7 @@ ggp_brexit_global_colors_text
 These labels match up with the Medium article graph below: 
 
 ```{r original-brexit-03, echo=FALSE, fig.align='center', out.width='7in', out.height='4in'}
-knitr::include_graphics("img/original-brexit.png")
+knitr::include_graphics("../img/original-brexit.png")
 ```
 
 In the next step, we will move the `y` axis over to the right-hand side of the graph.
@@ -683,5 +736,5 @@ ggp_brexit_labs +
 This looks pretty close, right? Compare to the image below:
 
 ```{r original-brexit-05, echo=FALSE, fig.align='center', out.width='7in', out.height='4in'}
-knitr::include_graphics("img/original-brexit.png")
+knitr::include_graphics("../img/original-brexit.png")
 ```
