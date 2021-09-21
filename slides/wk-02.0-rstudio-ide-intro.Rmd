@@ -1,5 +1,5 @@
 ---
-title: "Week 2: The RStudio IDE"
+title: "The RStudio IDE"
 subtitle: "Journalism 303: Using RStudio to manage code, data, and files"  
 author: 
   - "Martin Frigaard"

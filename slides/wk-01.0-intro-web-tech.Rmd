@@ -1,5 +1,5 @@
 ---
-title: "Week 1: Introduction to Web Technologies"
+title: "Introduction to Web Technologies"
 subtitle: "Journalism 303: stuff you'll use from the web"
 author: "Martin Frigaard"
 date: "`r Sys.Date()`"
