@@ -64,26 +64,35 @@ For these first few exercises, we're going to be using data from the [`fivethirt
 
 There are multiple ways data can be 'less-than tidy.' We'll start with a common example, which is two variables (and their values) stored in a single column.  
 
-Below is a subset of the `endorsements_2020` dataset. Read more about the `endorsements_2020` dataset by typing `??endorsements_2020` into the console. 
+Below is a subset of the `endorsements_2020` dataset named `EndorseSample`. Read more about the `endorsements_2020` dataset by typing `??endorsements_2020` into the console. 
 
 ```{r EndorseSample}
 EndorseSample <- readr::read_csv("https://bit.ly/3ubyhAc")
 head(EndorseSample)
 ```
 
-Notice the location variable has two values (state and city) stored in the same column. 
+Notice the `location` variable has two values (`state` and `city`) stored in the same column. 
 
-In another example of un-tidy data, we'll look at the dataset below which comes from 
+In another example of un-tidy data, we'll look at the dataset below which comes from the `fandango` dataset. 
 
-```{r}
+```{r FandangoSample}
+FandangoSample <- readr::read_csv(file = "https://bit.ly/3AMu9ZN")
 fandango %>% 
-  select(film, year, rottentomatoes_user, rt_user_norm) %>% 
-  mutate(rottentomatoes_scores = paste0(rottentomatoes_user, " ; ", rt_user_norm)) %>% 
-  select(film, year, rottentomatoes_scores)
-  separate_rows(fandango_scores, sep = " ; ")
+  mutate(
+    rottentomatoes_scores = paste0(rottentomatoes_user, "%", "/", rt_user_norm, " out of 5")) %>% 
+  select(film, year, rottentomatoes_scores) %>% 
+  slice_sample(n = 20) %>% 
+  write_csv(x = ., file = "data/FandangoSample.csv")
+# head(FandangoSample)
 ```
 
-`rottentomatoes_user` and `rt_user_norm`
+This dataset has two *similar* scores combined into a single column `rottentomatoes_scores`
+
++ `rottentomatoes_user`: The Rotten Tomatoes user score for the film  
+
++ `rt_user_norm`: The Rotten Tomatoes user score for the film , normalized to a 0 to 5 point system  
+
+In the next few exercises, we'll go over how (and *when*) to use `separate()`, `separate_rows()`, and `unite()` these variables.
 
 
 ***
@@ -94,37 +103,20 @@ fandango %>%
 
 This allows us to split columns apart into multiple variables. 
 
-Take a look at `SmallLabData` below (we've used some `dplyr` and the `janitor::remove_empty()` function to get `SmallLabData` from `AllLabs`).
+Take a look at `EndorseSample` below:
 
-```{r import-SmallLabData, eval=FALSE, message=FALSE, warning=FALSE}
-AllLabs %>% 
-    filter(source == "data/SmallLabData.csv") %>% 
-    select(-source) %>% 
-    janitor::remove_empty() -> SmallLabData
-```
-
-```{r import-AllLabs-csv, echo=FALSE, message=FALSE, warning=FALSE}
-LabData <- read_csv("https://bit.ly/36rqow3")
-LabData %>% janitor::clean_names() -> LabData
-
-SmallLabData <- read_csv("https://bit.ly/37jHYBm")
-SmallLabData %>% janitor::clean_names() -> SmallLabData
-
-LabProc <- read_csv("https://bit.ly/2KZjAh6")
-LabProc %>% janitor::clean_names() -> LabProc
+```{r glimpse-EndorseSample, eval=TRUE}
+glimpse(EndorseSample)
 ```
 
 
-```{r SmallLabData}
-SmallLabData
-```
 
 ### exercise 
 
-Separate `ref` into `ref_value` and `ref_units`
+Separate `location` into `state` and `city`
 
 ```{r separate-ex, eval=FALSE}
-SmallLabData %>% 
+EndorseSample %>% 
     separate(col = ___, into = c("_______", "_______"), sep = " ")
 ```
 
@@ -132,27 +124,20 @@ SmallLabData %>%
 ### solution 
 
 ```{r separate-sol}
-SmallLabData %>% 
-    separate(col = ref, into = c("ref_value", "ref_units"), sep = " ")
+EndorseSample %>% 
+    separate(col = location, into = c("state", "city"), sep = ", ")
 ```
 
 ***
 
 ## `separate_rows()`  {.tabset}
 
-`separate_rows()` is similar to `separate()`, but drops the values down the rows. This is commonly used when we have more than one value in each column. 
+`separate_rows()` is similar to `separate()`, but drops the values down the rows. This is commonly used when we have more than one *similar* value in each column. 
 
-Take a look at `LabData` below. 
+Take a look at `FandangoSample` below. 
 
-```{r import-LabData, eval=FALSE, message=FALSE, warning=FALSE}
-AllLabs %>% 
-    filter(source == "data/LabData.csv") %>% 
-    select(-source) %>% 
-    janitor::remove_empty() -> LabData
-```
-
-```{r LabData}
-LabData
+```{r glimpse-FandangoSample}
+glimpse(FandangoSample)
 ```
 
 ### exercise 
@@ -165,13 +150,13 @@ LabData %>%
 ```
 
 
-### `separate_rows` sol 1
+### solution
 
 Note the `convert` argument to make `value` numeric. 
 
 ```{r separate_rows-solution}
-LabData %>% 
-  separate_rows(value, sep = ", ", convert = TRUE)
+FandangoSample %>% 
+  separate_rows(rottentomatoes_scores, sep = " ; ")
 ```
 
 ***
