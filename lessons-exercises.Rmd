@@ -91,7 +91,6 @@ cat_bullet(x, "^lessons-exercises/wk4-")
 ### Week 5 (2021-09-27)
 
 ```{r wk5-files, results = 'asis', echo = FALSE, eval=TRUE}
-# here we see the 'gg' for ggplot2 
 cat_bullet(x, "^lessons-exercises/wk5-")
 ```
 

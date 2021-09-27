@@ -147,8 +147,6 @@ cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-05")
 
 ## Week 6 (2021-10-04)
 
-*(under construction)*
-
 ```{r wk-06-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-06")
 ```
@@ -161,15 +159,13 @@ cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-06")
 
 ## Week 7 (2021-10-11)
 
-*(under construction)*
-
-```{r wk-07-files, results='asis', echo=FALSE, eval=FALSE}
+```{r wk-07-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-07")
 ```
 
 ##### PDFS
 
-```{r cat_bullet_pdf-07, results='asis', echo=FALSE, eval=FALSE}
+```{r cat_bullet_pdf-07, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-07")
 ```
 
