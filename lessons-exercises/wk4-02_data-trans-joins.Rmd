@@ -184,13 +184,19 @@ FandangoSample
 Just like `separate`/`separate_rows` allows us to split up columns, `unite()` lets us stick them back together!
 
 ```{r DailyShowSample}
-DailyShowSample <- readr::read_csv("")
-daily_show_guests %>%
+DailyShowSample <- readr::read_csv("https://bit.ly/3kPZtBD")
+# daily_show_guests %>%
+#   separate(raw_guest_list, c('first_name', 'last_name', 'last_name2'), sep = " ") %>%
+#   filter(is.na(last_name2)) %>% 
+#   select(-last_name2) %>% 
+#   slice_sample(n = 10) %>%
+#   write_csv(x = ., "data/DailyShowSample.csv")
+head(daily_show_guests %>%
   separate(raw_guest_list, c('first_name', 'last_name', 'last_name2'), sep = " ") %>%
   filter(is.na(last_name2)) %>% 
   select(-last_name2) %>% 
   slice_sample(n = 10) %>%
-  write_csv(x = ., "data/DailyShowSample.csv")
+  write_csv(x = ., "data/DailyShowSample.csv"))
 ```
 
 
