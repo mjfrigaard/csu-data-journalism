@@ -57,10 +57,10 @@ There are two principles for tidy data:
 2. Rows hold *observations*    
 3. Cells (the intersection of rows and columns) hold *values*  
 
-
-### Types of 'un-tidy' data 
-
 For these first few exercises, we're going to be using data from the [`fivethirtyeight` package](https://fivethirtyeight-r.netlify.app/).
+
+
+### `EndorseSample`
 
 There are multiple ways data can be 'less-than tidy.' We'll start with a common example, which is two variables (and their values) stored in a single column.  
 
@@ -72,6 +72,8 @@ head(EndorseSample)
 ```
 
 Notice the `location` variable has two values (`state` and `city`) stored in the same column. 
+
+### `FandangoSample`
 
 In another example of un-tidy data, we'll look at the dataset below which comes from the `fandango` dataset. 
 
@@ -86,12 +88,20 @@ This dataset has two *similar* scores combined into a single column `rottentomat
 
 + `rt_user_norm`: The Rotten Tomatoes user score for the film , normalized to a 0 to 5 point system (expressed as 'score `out of 5`')
 
-In the next few exercises, we'll go over how (and *when*) to use `separate()`, `separate_rows()`, and `unite()` these variables.
+### `DailyShowSample`
 
+Below is a sample from the `daily_show_guests` dataset. The guests names are separated into `first_name` and `last_name` columns. 
+
+```{r DailyShowSample}
+DailyShowSample <- readr::read_csv("https://bit.ly/3kPZtBD")
+head(DailyShowSample)
+```
 
 ***
 
 # Reshaping Columns and Rows 
+
+In the next few exercises, we'll go over how (and *when*) to use `separate()`, `separate_rows()`, and `unite()` these variables.
 
 ## `separate()`  {.tabset}
 
@@ -100,9 +110,8 @@ This allows us to split columns apart into multiple variables.
 Take a look at `EndorseSample` below:
 
 ```{r glimpse-EndorseSample, eval=TRUE}
-glimpse(EndorseSample)
+EndorseSample
 ```
-
 
 
 ### exercise 
@@ -131,26 +140,26 @@ EndorseSample %>%
 Take a look at `FandangoSample` below. 
 
 ```{r glimpse-FandangoSample}
-glimpse(FandangoSample)
+FandangoSample
 ```
 
 ### exercise 
 
-Put all the `value`s into their own cell, and make sure the new variable is numeric. 
+Put all the `value`s into their own cell.
 
 ```{r separate_rows-ex, eval=FALSE}
-LabData %>% 
-  separate_rows(_____, sep = _____, convert = TRUE)
+FandangoSample %>% 
+  separate_rows(____________________, sep = ___)
 ```
 
 
 ### solution
 
-Note the `convert` argument to make `value` numeric. 
+Put all the `value`s into their own cell.
 
 ```{r separate_rows-solution}
 FandangoSample %>% 
-  separate_rows(rottentomatoes_scores, sep = "/", convert = TRUE)
+  separate_rows(rottentomatoes_scores, sep = "/")
 ```
 
 This isn't as clear as it could be, so we will use `mutate()`, `case_when()`, and `str_detect()` to create an index variable for the `rottentomatoes_scores`, which we will call `rottentomatoes_score`. 
@@ -181,101 +190,32 @@ FandangoSample
 
 ## `unite()` {.tabset} 
 
-Just like `separate`/`separate_rows` allows us to split up columns, `unite()` lets us stick them back together!
+Just like `separate`/`separate_rows` allows us to split up columns, `unite()` lets us stick them back together! Take a look at `DailyShowSample`.
 
-```{r DailyShowSample}
-DailyShowSample <- readr::read_csv("https://bit.ly/3kPZtBD")
-# daily_show_guests %>%
-#   separate(raw_guest_list, c('first_name', 'last_name', 'last_name2'), sep = " ") %>%
-#   filter(is.na(last_name2)) %>% 
-#   select(-last_name2) %>% 
-#   slice_sample(n = 10) %>%
-#   write_csv(x = ., "data/DailyShowSample.csv")
-head(daily_show_guests %>%
-  separate(raw_guest_list, c('first_name', 'last_name', 'last_name2'), sep = " ") %>%
-  filter(is.na(last_name2)) %>% 
-  select(-last_name2) %>% 
-  slice_sample(n = 10) %>%
-  write_csv(x = ., "data/DailyShowSample.csv"))
+```{r review-DailyShowSample}
+DailyShowSample
 ```
 
 
-Take a look at `LabProc`.
-
-```{r import-LabProc, message=FALSE, warning=FALSE, eval=FALSE}
-AllLabs %>% 
-    filter(source == "data/LabProc.csv") %>% 
-    select(-source) %>% 
-    janitor::remove_empty() -> LabProc
-```
-
-```{r LabProc}
-LabProc
-```
-
-### exercise 
-
-Separate the labs from each other, and drop them down the rows. 
-
-```{r unite-separate_rows, eval=FALSE}
-LabProc %>% 
-    separate_rows(lab_proc, sep = "___")
-```
-
-### solution
-
-Separate the labs from each other, and drop them down the rows.
-
-```{r unite-solution-1}
-LabProc %>% 
-     separate_rows(lab_proc, sep = "; ") 
-```
-
-### exercise 
-
-Put `lab`, `value`, and `units` in to their own columns.
-
-```{r unite-separate_rows-separate, eval=FALSE}
-LabProc %>% 
-    separate_rows(lab_proc, sep = "___") %>% 
-    separate(col = lab_proc,into = c('__', '_____', '_____'), 
-           sep = " ", convert = ____)
-```
-
-### solution
-
-Put `lab`, `value`, and `units` in to their own columns.
-
-```{r unite-solution-2}
-LabProc %>% 
-     separate_rows(lab_proc, sep = "; ") %>% 
-     separate(col = lab_proc,into = c('lab', 'value', 'units'), 
-            sep = " ", convert = TRUE) 
-```
+We can see the guests have had their names in separate columns (`first_name` and `last_name`).
 
 
 ### exercise 
 
-Unite `lab`, `value` and `units` into `lab_name` (don't remove the previous columns with `remove = FALSE`).
+Unite `first_name` and `last_name` into `guest_name` (don't remove the previous columns with `remove = FALSE`).
 
 ```{r unite, eval=FALSE}
-LabProc %>% 
-    separate_rows(lab_proc, sep = "___") %>% 
-    separate(col = lab_proc,into = c('__', '_____', '_____'), 
-           sep = " ", convert = ____)
-    unite(col = "_______", lab:units, sep = " ", remove = _____)
+DailyShowSample %>% 
+    unite(col = "_______", first_name:last_name, sep = " ", remove = _____)
 ```
 
 ### solution
 
-Unite `lab`, `value` and `units` into `lab_name` (don't remove the previous columns with `remove = FALSE`).
+Unite `first_name` and `last_name` into `guest_name` (don't remove the previous columns with `remove = FALSE`).
 
 ```{r unite-solution-3}
-LabProc %>% 
-     separate_rows(lab_proc, sep = "; ") %>% 
-     separate(col = lab_proc,into = c('lab', 'value', 'units'), 
-            sep = " ", convert = TRUE) %>% 
-     unite(col = "lab_name", lab:units, sep = " ", remove = FALSE)
+DailyShowSample %>% 
+    unite(col = "guest_name", first_name:last_name, sep = " ", remove = FALSE)
 ```
 
 ***
