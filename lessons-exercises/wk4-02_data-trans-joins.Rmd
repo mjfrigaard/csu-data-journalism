@@ -17,6 +17,8 @@ always_allow_html: true
 ```{r , include=FALSE}
 library(tidyverse)
 library(skimr)
+library(fivethirtyeight)
+library(fivethirtyeightdata)
 # create data folder
 knitr::opts_chunk$set(warning = FALSE, 
                       message = FALSE,
@@ -26,7 +28,7 @@ knitr::opts_chunk$set(warning = FALSE,
 
 # Objectives 
 
-This document outlines some common data reshaping tasks with `tidyr`. 
+This document outlines some common data reshaping tasks with `tidyr` and introduces the concept of *tidy data*. 
 
 # Materials 
 
@@ -38,21 +40,41 @@ Read more about `dplyr` [here](https://dplyr.tidyverse.org/index.html) and [`tid
 
 ## Load packages 
 
-`tidyr` is part of the core `tidyverse` packages, so we install and load this meta-package below. 
+`tidyr` is part of the core `tidyverse` packages, so we install and load this meta-package below. We're also going to be using data from the [`fivethirtyeight` package](https://fivethirtyeight-r.netlify.app/).
 
 ```{r packages, eval=FALSE}
 install.packages("tidyverse")
 library(tidyverse)
+library(fivethirtyeight)
 ```
 
 
-## Manging data {.tabset}
+## Tidy data {.tabset}
 
-We're going to use some of the `fs` package functions for managing our files and data. 
+There are two principles for tidy data: 
 
-### Folder trees and paths
+1. Columns hold *variables*    
+2. Rows hold *observations*    
+3. Cells (the intersection of rows and columns) hold *values*  
 
-Check your files and folders with `dir_tree` or `dir_ls`. 
+
+### Types of 'un-tidy' data 
+
+There are multiple ways data can be 'less-than tidy.' We'll start with a common example, which is two variables (and their values) stored in a single column.  
+
+Below is a subset of the `endorsements_2020` dataset. 
+
+
+```{r EndorseSample}
+EndorseSample <- tidyr::unite(data = endorsements_2020, "location", c(state, city), sep = ", ", remove = FALSE) %>% 
+  filter(!is.na(city) & !is.na(date)) %>% 
+  slice_sample(n = 10) %>% 
+  select(date, position, location, endorser, endorsee, 
+         points, order)
+write_csv(x = EndorseSample, "data/EndorseSample.csv")
+```
+
+
 
 ```{r dir_tree}
 fs::dir_tree("data", recurse = FALSE)
