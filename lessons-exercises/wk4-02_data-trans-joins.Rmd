@@ -40,7 +40,7 @@ Read more about `dplyr` [here](https://dplyr.tidyverse.org/index.html) and [`tid
 
 ## Load packages 
 
-`tidyr` is part of the core `tidyverse` packages, so we install and load this meta-package below. We're also going to be using data from the [`fivethirtyeight` package](https://fivethirtyeight-r.netlify.app/).
+`tidyr` is part of the core `tidyverse` packages, so we install and load this meta-package below. 
 
 ```{r packages, eval=FALSE}
 install.packages("tidyverse")
@@ -60,63 +60,31 @@ There are two principles for tidy data:
 
 ### Types of 'un-tidy' data 
 
+For these first few exercises, we're going to be using data from the [`fivethirtyeight` package](https://fivethirtyeight-r.netlify.app/).
+
 There are multiple ways data can be 'less-than tidy.' We'll start with a common example, which is two variables (and their values) stored in a single column.  
 
-Below is a subset of the `endorsements_2020` dataset. 
-
+Below is a subset of the `endorsements_2020` dataset. Read more about the `endorsements_2020` dataset by typing `??endorsements_2020` into the console. 
 
 ```{r EndorseSample}
-EndorseSample <- tidyr::unite(data = endorsements_2020, "location", c(state, city), sep = ", ", remove = FALSE) %>% 
-  filter(!is.na(city) & !is.na(date)) %>% 
-  slice_sample(n = 10) %>% 
-  select(date, position, location, endorser, endorsee, 
-         points, order)
-write_csv(x = EndorseSample, "data/EndorseSample.csv")
+EndorseSample <- readr::read_csv("https://bit.ly/3ubyhAc")
+head(EndorseSample)
 ```
 
+Notice the location variable has two values (state and city) stored in the same column. 
 
+In another example of un-tidy data, we'll look at the dataset below which comes from 
 
-```{r dir_tree}
-fs::dir_tree("data", recurse = FALSE)
+```{r}
+fandango %>% 
+  select(film, year, rottentomatoes_user, rt_user_norm) %>% 
+  mutate(rottentomatoes_scores = paste0(rottentomatoes_user, " ; ", rt_user_norm)) %>% 
+  select(film, year, rottentomatoes_scores)
+  separate_rows(fandango_scores, sep = " ; ")
 ```
 
-We can also use `dir_ls` to get the paths to print to the screen so we can easily import. 
+`rottentomatoes_user` and `rt_user_norm`
 
-```{r dir_ls}
-fs::dir_ls("data", recurse = FALSE)
-```
-
-### Metadata 
-
-`fs` also gives us the metadata of any folder we have access to. This can come in handy if we're looking for a specific version of a file, or a file that was created at a specific date. 
-
-```{r fs-fir-info}
-fs::dir_info("data", all = TRUE) %>% 
-    dplyr::arrange(desc(modification_time))
-```
-
-For example, lets look for the largest `file` in the `data` folder. 
-
-```{r largest-file}
-fs::dir_info("data", all = TRUE) %>% 
-    filter(type == "file") %>% 
-    arrange(desc(size)) %>% 
-    select(path, size) %>% 
-    slice(1)
-```
-
-### Import multiple files 
-
-Lets import all the `Lab` data files in `data` using `fs` and `purrr`. 
-
-```{r import-labs}
-fs::dir_ls(path = "data", regexp = "Lab") %>% 
-    purrr::map_dfr(read_csv, .id = "source") -> AllLabs
-```
-
-```{r AllLabs}
-AllLabs
-```
 
 ***
 
