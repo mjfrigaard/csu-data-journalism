@@ -125,18 +125,14 @@ TopPharmCompRaw <- rvest::html_table(relevant_tables[[1]],
                   fill = TRUE)
 ```
 
-```{r export-TopPharmCompRaw, echo=FALSE, error=TRUE, message=FALSE, warning=FALSE}
-library(readr)
-# little fail-safe here to export the current data as-is and read it back in just in case the data change in the future... 
-# write_csv(x = TopPharmCompRaw, path = "data/2020-11-24-TopPharmCompRaw.csv")
-# read back in
-TopPharmCompRaw <- read_csv(file = "https://bit.ly/3orq1YT")
-```
-
 
 ## Outline before you start 
 
 We have a raw dataset now, and we should make a 'to-do' list of what we want the data to look like. I start with data tidying, then move into changes for the individual variables. 
+
+1. Restructure the data (as needed)  
+2. Create column names  
+3. Wrangle/format variables 
 
 # Wrangle Data 
 
@@ -145,7 +141,6 @@ These data are in a wide format, with each `market_cap_in_` spread across column
 ```{r view-TopPharmCompRaw}
 TopPharmCompRaw
 ```
-
 
 ## Pivot data {.tabset}
 
@@ -173,7 +168,7 @@ TidyTopPharmComp <- TopPharmCompRaw %>%
                       values_to = "market_cap_us_bil")
 ```
 
-## Format Columns {.tabset}
+## Format Column Names {.tabset}
 
 Follow along on each tab for the steps to wrangle the column names:
 
@@ -183,7 +178,7 @@ Follow along on each tab for the steps to wrangle the column names:
 2. Properly formatted values (numeric, factor, etc.)   
 3. Missing variables formatted correctly (replace `-` with `NA`)
 
-### String manipulations
+### Create vector of names
 
 We can use `janitor::clean_names()`, but first we should do some string manipulation to remove the extra characters from the column names. 
 
@@ -205,8 +200,6 @@ TidyTopPharmComp %>%
 cleaned_names
 ```
 
-### `janitor::clean_names`
-
 Now we can apply the new names (`cleaned_names`) to `TidyTopPharmComp` and use `janitor::clean_names()` to standardize them. 
 
 ```{r clean_names}
@@ -227,7 +220,7 @@ TopPharmComp <- TidyTopPharmComp %>%
 
 
 
-## Define Variables {.tabset}
+## Define Variables 
 
 We want to split up the following variables into their own columns: 
 
@@ -239,11 +232,15 @@ We want to split up the following variables into their own columns:
 6. `company_name` a variable containing *only* the company name 
 7. a `ranking` variable with a numerically coded rank
 
-### `year`
+## `year` {.tabset}
 
-We can also wrangle the `market_cap_year` variable so it only contains the four-number year.
+We can also wrangle the `market_cap_year` variable so it only contains the four-number year. 
 
-```{r check-market_cap_year}
+### Remove characters 
+
+Here we use the `\\D` regular expression to remove all non-numbers. 
+
+```{r year}
 TopPharmComp %>% 
   # remove characters
   dplyr::mutate(year = str_remove_all(string = year, pattern = "\\D"),
@@ -252,9 +249,11 @@ TopPharmComp %>%
                 year = as.integer(year))
 ```
 
+### Assign `year` 
+
 Let's assign `year` to `TopPharmComp`
 
-```{r assign-TopPharmComp}
+```{r assign-year}
 TopPharmComp %>% 
   # remove characters
   dplyr::mutate(year = str_remove_all(string = year, pattern = "\\D"),
@@ -263,76 +262,133 @@ TopPharmComp %>%
                 year = as.integer(year)) -> TopPharmComp
 ```
 
-### `company_type`
+## `company_name` {.tabset}
 
-Here we `separate` the `company` column into two new columns, then use the `company_name_etc` to create `company_type`
+We want the name of the company (and only it's name) in it's own column. 
+
+### `distinct()`
+
+The first thing we will do is take a look at the `distinct()` of companies in this dataset. 
+
+```{r distinct}
+TopPharmComp %>% 
+  distinct(company)
+```
+
+We can see a lot of text garbage (`\n` and `\\`), so we'll remove this first and create our `company_name` column 
+
+### Remove newline characters
+
+We can remove newline characters with `str_remove_all()` from `stringr`. 
+
+```{r company_name}
+TopPharmComp %>% 
+  mutate(company_name = str_remove_all(company, "\n|//")) %>% 
+  distinct(company, company_name)
+```
+
+### Remove numeric bracket contents
+
+This looks good-now we want to remove anything after the first open bracket `[`. I can Google "matching string contents in brackets in R" and get this  [answer](https://stackoverflow.com/questions/50462907/regex-in-r-to-match-strings-in-square-brackets), which I can adapt to include `\\d` for all digits. 
+
+```{r str_remove_all-brackets}
+TopPharmComp %>% 
+  mutate(
+    company_name = str_remove_all(company, "\n|//"),
+    company_name = str_remove_all(company_name, "(\\[\\d\\])")
+    ) %>% 
+  distinct(company, company_name)
+```
+
+### Replace non-numeric bracket contents
+
+Now we want to replace all of the `[P]` or `[B]` with a space and a dash, which I can do with `str_replace_all()` and `\\D` for all non-digits.
+
+```{r str_replace_all}
+TopPharmComp %>% 
+  mutate(
+    company_name = str_remove_all(company, "\n|//"),
+    company_name = str_remove_all(company_name, "(\\[\\d\\])"),
+    company_name = str_replace_all(company_name, "(\\[\\D\\])", " - ")
+    ) %>% 
+  distinct(company, company_name)
+```
+
+### Separate `company_name` from `stock_info` 
+
+Here we `separate` the `company_name` column into two new columns, 
 
 ```{r check-company_type}
 TopPharmComp %>% 
+  mutate(
+    company_name = str_remove_all(company, "\n|//"),
+    company_name = str_remove_all(company_name, "(\\[\\d\\])"),
+    company_name = str_replace_all(company_name, "(\\[\\D\\])", " - ")
+    ) %>%  
   # separate company into 2 columns
-  separate(col = company, into = c("company_name_etc", "company_etc"), 
-           sep = "\\]", 
+  separate(col = company_name, into = c("company_name", "stock_info"), 
+           sep = " - ", 
            remove = FALSE) %>% 
-  # create categories
-  mutate(company_type = case_when(
-    str_detect(string = company_name_etc, pattern = "\\[P$") ~ "Pharma", 
-    str_detect(string = company_name_etc, pattern = "\\[B$") ~ "Biotech")) %>% 
-  # check our work
-  dplyr::select(contains("comp"))
+  distinct(company, company_name, stock_info)
 ```
 
-These categories look are correct, so we can assign `company_type` to `TopPharmComp`.
+These look are correct, so we can assign `company_name` to `TopPharmComp`.
 
-```{r assign-company_type}
+```{r assign-company_name}
 TopPharmComp <- TopPharmComp %>% 
+  mutate(
+    company_name = str_remove_all(company, "\n|//"),
+    company_name = str_remove_all(company_name, "(\\[\\d\\])"),
+    company_name = str_replace_all(company_name, "(\\[\\D\\])", " - ")
+    ) %>%  
   # separate company into 2 columns
-  separate(col = company, into = c("company_name_etc", "company_etc"), 
-           sep = "\\]", 
-           remove = FALSE) %>% 
-  # create categories
-  mutate(company_type = case_when(
-    str_detect(string = company_name_etc, pattern = "\\[P$") ~ "Pharma", 
-    str_detect(string = company_name_etc, pattern = "\\[B$") ~ "Biotech")) %>% 
-  # remove company_name_etc
-  select(-company_name_etc)
+  separate(col = company_name, into = c("company_name", "stock_info"), 
+           sep = " - ", 
+           remove = FALSE)
 TopPharmComp
 ```
 
-### `stock_exch` & `stock_id`
+## `stock_exch` & `stock_id` {.tabset}
 
-We will use the `company_etc` column to create `stock_exch` and `stock_id`. We need to make sure we trim the whitespace from `stock_id` (after the )
+Now we have the `stock_exch` and `stock_id` stored in `stock_info`--we will create two new columns for each piece of data. 
+
+### `stock_exch`
+
+We will use the `company_etc` column to create `stock_exch` and `stock_id`. 
 
 ```{r check-stock_exch-stock_id}
 TopPharmComp %>% 
   # first separate the columns
-    separate(col = company_etc, 
+    separate(col = stock_info, 
              into = c("stock_exch", "stock_id"), 
              sep = ":", remove = FALSE) %>% 
   # check our work
   select(company,
-         company_etc, 
-         contains("stock"))
+           contains("stock")) %>% 
+  distinct()
 ```
 
-The `sep` argument helps us a lot here, so we can create two new variables with minimal steps! We'll assign to `TopPharmComp`.
+
+### `stock_id`
+
+This looks good, but we also need to make sure we trim the white space from `stock_id` (after the colon). The `sep` argument helps us a lot here, so we can create two new variables with minimal steps! We'll assign to `TopPharmComp`.
 
 ```{r assign-stock_exch-stock_id}
-TopPharmComp %>% 
+TopPharmComp <- TopPharmComp %>% 
   # first separate the columns
-    separate(col = company_etc, 
+    separate(col = stock_info, 
              into = c("stock_exch", "stock_id"), 
-             sep = ":", remove = FALSE) %>% 
-  select(rank, 
-         contains("comp"),
-         contains("stock"),
-         everything(), 
-         -company_etc) -> TopPharmComp
+             sep = ":", remove = FALSE) 
 TopPharmComp
 ```
 
-### `largest_market_cap_date`
+## `largest_market_cap_us_bil` & `largest_market_cap_date` {.tabset}
 
 Here we'll use `dplyr::rename()` to change `largest_market_cap_us_bil` to `_original` so we can check our work with `remove = FALSE`.
+
+### separate market cap & date
+
+We want to separate the `largest_market_cap_original` column into `largest_market_cap_us_bil` and `largest_market_cap_date` on the first open parenthesis. 
 
 ```{r check-largest_market_cap_date}
 TopPharmComp %>% 
@@ -343,17 +399,19 @@ TopPharmComp %>%
            into = c('largest_market_cap_us_bil', 'largest_market_cap_date'),
            sep = "\\(", 
            remove = FALSE) %>% 
-  # remove parenthesis
-  mutate(largest_market_cap_date = 
-           str_remove_all(largest_market_cap_date, pattern = "\\)$")) %>% 
-  # check our work
-  select(contains("large"))
+  distinct(largest_market_cap_original, largest_market_cap_us_bil, 
+    largest_market_cap_date)
 ```
 
-Now we have the month and year separated into `largest_market_cap_date`--we can assign to `TopPharmComp`
 
-```{r assign-largest_market_cap_date}}
- TopPharmComp %>% 
+We see some messages and warnings (which we will ignore), but this looks like it's creating the two columns we want. We just need to clean up the dates a bit. 
+
+### Remove parenthesis 
+
+Now we remove the remaining parenthesis. 
+
+```{r str_remove_all-paren}
+TopPharmComp %>% 
   # rename column to largest_market_cap_original
   dplyr::rename(largest_market_cap_original = largest_market_cap_us_bil) %>% 
   # separate into two columns
@@ -361,59 +419,91 @@ Now we have the month and year separated into `largest_market_cap_date`--we can 
            into = c('largest_market_cap_us_bil', 'largest_market_cap_date'),
            sep = "\\(", 
            remove = FALSE) %>% 
-  # remove parenthesis
+  # remove parenthesis from date
   mutate(largest_market_cap_date = 
            str_remove_all(largest_market_cap_date, pattern = "\\)$")) %>% 
-  # reorganize
-  select(rank, 
-         contains("comp"),
-         contains("stock"),
-         contains("large"),
-         everything(), 
-         -largest_market_cap_original) -> TopPharmComp
-TopPharmComp
-```
-
-
-### `company_name`
-
-We will create a `company_name` variable using a different `sep` argument here, and we clean the `company_name` variable with `str_remove_all()`
-
-```{r check-company_name}
-TopPharmComp %>% 
-  # separate company into 2 columns
-  separate(col = company, into = c("company_name", "company_junk"), 
-           sep = "\\[",
-           remove = FALSE) %>% 
-  # remove preceding \
-  mutate(company_name = 
-           str_remove_all(string = company_name, pattern = "^/")) %>% 
   # check our work
-  select(company, company_name, company_junk)
+    distinct(largest_market_cap_original, largest_market_cap_us_bil, 
+    largest_market_cap_date)
 ```
 
-This gives us only the name in `company_name`. We can assign and remove `company_junk`.
+### Format dates and numbers 
 
-```{r assign-company_name}
+Now we have the month and year separated into `largest_market_cap_date`, but we should convert this into a date and the `largest_market_cap_us_bil` column into a number. 
+
+```{r format-date-and-number}
 TopPharmComp %>% 
-  # separate company into 2 columns
-  separate(col = company, into = c("company_name", "company_junk"), 
-           sep = "\\[",
+  # rename column to largest_market_cap_original
+  dplyr::rename(largest_market_cap_original = largest_market_cap_us_bil) %>% 
+  # separate into two columns
+  separate(col = largest_market_cap_original, 
+           into = c('largest_market_cap_us_bil', 'largest_market_cap_date'),
+           sep = "\\(", 
            remove = FALSE) %>% 
-  # remove preceding \
-  mutate(company_name = 
-           str_remove_all(string = company_name, pattern = "^/")) %>% 
-  # reorganize
-  select(rank, 
-         contains("comp"),
-         contains("stock"),
-         contains("large"),
-         everything(),
-         -c(company, company_junk)) -> TopPharmComp
+  # remove parenthesis from date
+  mutate(
+    largest_market_cap_date = str_remove_all(largest_market_cap_date, pattern = "\\)$"),
+    # date
+    largest_market_cap_date = lubridate::my(largest_market_cap_date), 
+    # number
+    largest_market_cap_us_bil = as.numeric(largest_market_cap_us_bil)
+    ) %>% 
+    # check our work
+    distinct(largest_market_cap_original, largest_market_cap_us_bil, 
+    largest_market_cap_date)
+```
+
+These look good--we can assign to `TopPharmComp`
+
+```{r assign-largest_market_cap_date-largest_market_cap_us_bil}
+ TopPharmComp <- TopPharmComp %>% 
+  # rename column to largest_market_cap_original
+  dplyr::rename(largest_market_cap_original = largest_market_cap_us_bil) %>% 
+  # separate into two columns
+  separate(col = largest_market_cap_original, 
+           into = c('largest_market_cap_us_bil', 'largest_market_cap_date'),
+           sep = "\\(", 
+           remove = FALSE) %>% 
+  # remove parenthesis from date
+  mutate(
+    largest_market_cap_date = str_remove_all(largest_market_cap_date, pattern = "\\)$"),
+    # date
+    largest_market_cap_date = lubridate::my(largest_market_cap_date), 
+    # number
+    largest_market_cap_us_bil = as.numeric(largest_market_cap_us_bil)
+    )
 TopPharmComp
 ```
 
-### `ranking`
+## `market_cap_us_bil` {.tabset}
+
+The `market_cap_us_bil` column has a few extra characters from the Wikipedia table (they use `-` as missing). We know how to remove this with str_remove_all() and we can format this as a number with `as.numeric()`
+
+```{r market_cap_us_bil}
+TopPharmComp %>% 
+  mutate(
+    market_cap_us_bil = str_remove_all(market_cap_us_bil, "-"), 
+    market_cap_us_bil = as.numeric(market_cap_us_bil)
+    ) %>% 
+  distinct(market_cap_us_bil)
+```
+
+Looks good! Assign it to `TopPharmComp`
+
+```{r assign-market_cap_us_bil}
+TopPharmComp <- TopPharmComp %>% 
+  mutate(
+    market_cap_us_bil = str_remove_all(market_cap_us_bil, "-"), 
+    market_cap_us_bil = as.numeric(market_cap_us_bil)
+    )
+TopPharmComp
+```
+
+## `ranking` & `company_type` {.tabset}
+
+The `rank` variable will come in handy for plotting, but we will rename it as `ranking`. We also want to differentiate between `[B]` – Biotechnology company and `[P]` – Pharmaceutical company.
+
+### Remove extra numbers from rank
 
 Here we can use `str_remove_all()` to remove the extra numbers in `rank` and create the `ranking` variable.
 
@@ -424,124 +514,103 @@ TopPharmComp %>%
   select(contains("rank"))
 ```
 
-We assign this to `TopPharmComp` and move onto the missing values.
+We assign this to `TopPharmComp`.
 
 ```{r assign-ranking}
 TopPharmComp <- TopPharmComp %>% 
   dplyr::mutate(ranking = 
-          stringr::str_remove_all(string = rank, pattern = " \\d$")) %>% 
-  select(ranking, 
-         contains("comp"),
-         contains("stock"),
-         contains("large"),
-         everything(),
-         # remove rank
-         -rank)
+          stringr::str_remove_all(string = rank, pattern = " \\d$")) 
 TopPharmComp
 ```
 
-### Missing Values
+### Identify company type 
 
-We can see there is a missing value in `market_cap_us_bil` formatted as `-`. We can change these with `dplyr::na_if()`
+Now we combine `case_when()` with `str_detect()` for the company type. 
 
-```{r check-na_if}
+```{r company_type}
 TopPharmComp %>% 
-  na_if(x = ., y = "-") %>% 
-  select(market_cap_us_bil)
+  mutate(
+    company_type = case_when(
+    str_detect(company, "[P]") ~ "Pharmaceutical company",
+    str_detect(company, "[B]") ~ "Biotechnology company",
+    TRUE ~ NA_character_
+    )) %>% 
+  distinct(company, company_type)
 ```
 
-We can assign this and move onto formatting the variables. 
 
-```{r assign-na_if}
+We assign `company_type` to `TopPharmComp`.
+
+```{r assign-company_type}
 TopPharmComp <- TopPharmComp %>% 
-  na_if(x = ., y = "-") 
+  mutate(
+    company_type = case_when(
+    str_detect(company, "[P]") ~ "Pharmaceutical company",
+    str_detect(company, "[B]") ~ "Biotechnology company",
+    TRUE ~ NA_character_
+    ))
+TopPharmComp
 ```
 
-## Format Values {.tabset}
+
+## Reorganize columns {.tabset}
+
+The data still contains all of the original columns, but now we're confident we can remove these. 
+
+### Preview wrangled data 
 
 Let's take a look with `glimpse()` to see how these are formatted. 
 
 ```{r TopPharmComp-glimpse}
 # set width
-options(width = 60)
+options(width = 78)
 # view transposed data
-TopPharmComp %>% glimpse(60)
+TopPharmComp %>% glimpse()
 ```
 
-We can see the `market_cap_us_bil` and `largest_market_cap_us_bil` are formatted as `character`s (but they should be `double`).
+### Select new columns
 
-### Remove whitespace  
+We'll do this by only selecting the new columns. Notice we change the name of `year` to `market_cap_year`, 
 
-Remove the whitespace from `largest_market_cap_us_bil` with `stringr::str_trim()`.
-
-```{r check-str_trim}
-TopPharmComp %>% 
-  mutate(
-    largest_market_cap_us_bil = str_trim(string = largest_market_cap_us_bil, 
-                                         side = "both"),
-    largest_market_cap_us_bil = as.numeric(largest_market_cap_us_bil))
+```{r preview-TopPharmComp-cols}
+select(TopPharmComp, 
+  ranking,
+  company_name, 
+  company_type,
+  largest_market_cap_us_bil, 
+  market_cap_us_bil, 
+  market_cap_year = year, 
+  stock_exch, 
+  stock_id)
 ```
 
-This is working on the `largest_market_cap_us_bil`. We will also format `market_cap_us_bil` as a numeric value.
+We'll assign this to `TopPharmComp` 
 
-```{r check-str_trim-as-numeric-check-market_cap_us_bil}
-TopPharmComp %>% 
-  mutate(
-    largest_market_cap_us_bil = str_trim(string = largest_market_cap_us_bil, 
-                                         side = "both"),
-    largest_market_cap_us_bil = as.numeric(largest_market_cap_us_bil), 
-    market_cap_us_bil = as.numeric(market_cap_us_bil))
-```
-
-Assign this to `TopPharmComp`.
-
-```{r assign-str_trim}
-TopPharmComp <- TopPharmComp %>% 
-  mutate(
-    largest_market_cap_us_bil = str_trim(string = largest_market_cap_us_bil, 
-                                         side = "both"),
-    largest_market_cap_us_bil = as.numeric(largest_market_cap_us_bil), 
-    market_cap_us_bil = as.numeric(market_cap_us_bil))
-```
-
-
-### Dates  
-
-We will use the `_original` suffix again to check our work. 
-
-```{r check-lubridate-my}
-TopPharmComp %>% 
-  rename(cap_date_original = largest_market_cap_date) %>% 
-  mutate(largest_market_cap_date = lubridate::my(cap_date_original)) %>% 
-  dplyr::select(contains("date"))
-```
-
-This is giving us the date in `largest_market_cap_date`, but each day is rounded to the first day of the relative month (which is OK). Assign to `TopPharmComp` (but keep `cap_date_original`).
-
-```{r assign-lubridate-my}
-TopPharmComp <- TopPharmComp %>% 
-  # rename
-  rename(cap_date_original = largest_market_cap_date) %>% 
-  # change format 
-  mutate(largest_market_cap_date = lubridate::my(cap_date_original)) %>% 
-  # reorganize
-  select(ranking, 
-         contains("comp"),
-         contains("stock"),
-         contains("date"),
-         year,
-         contains("us_bil"))
+```{r assign-TopPharmComp-cols}
+TopPharmComp <- select(TopPharmComp, 
+  ranking,
+  company_name, 
+  company_type,
+  largest_market_cap_us_bil, 
+  market_cap_us_bil, 
+  market_cap_year = year, 
+  stock_exch, 
+  stock_id)
 TopPharmComp
 ```
 
-### Factors  
 
-We want to keep the order of `ranking`, so we will format this as an ordered factor. We don't need to supply any `levels` because they are already numeric. 
+## (Optional) convert ranking to factor {.tabset}  
+
+We want to keep the order of `ranking`, so another option is to convert this to a factor. 
+
+### `ordered = TRUE`
+
+If we format `ranking` as an ordered factor, we don't need to supply any `levels` because they are already numeric. 
 
 ```{r factor-ranking}
 TopPharmComp <- TopPharmComp %>% 
   mutate(
-    ranking = as.integer(ranking),
     ranking = factor(ranking, ordered = TRUE))
 # check
 TopPharmComp %>% arrange(ranking)
@@ -552,6 +621,12 @@ TopPharmComp %>% arrange(ranking)
 We now have a dataset we can use for modeling or visualizations! We'll export this to the `data` folder.
 
 ```{r export-TopPharmComp}
-readr::write_csv(x = TopPharmComp, file = "data/TopPharmComp.csv")
+# fs::dir_tree("data")
+wikipedia_top_pharm_export_file <- paste0(lubridate::today(), "-TopPharmComp.csv")
+wikipedia_top_pharm_export_file
+```
+
+```{r wikipedia_top_pharm_export_file}
+readr::write_csv(x = TopPharmComp, file = wikipedia_top_pharm_export_file)
 ```
 
