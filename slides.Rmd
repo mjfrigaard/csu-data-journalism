@@ -108,7 +108,7 @@ cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-02")
 
 ***Labor day, Campus closed***
 
-## Week 3 (2021-09-13)
+## Week 4 (2021-09-13)
 
 
 ```{r wk-03-files, results='asis', echo=FALSE, eval=TRUE}
@@ -121,7 +121,7 @@ cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-03")
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-03")
 ```
 
-## Week 4 (2021-09-20)
+## Week 5 (2021-09-20)
 
 ```{r wk-04-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-04")
@@ -133,7 +133,7 @@ cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-04")
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-04")
 ```
 
-## Week 5 (2021-09-27)
+## Week 6 (2021-09-27)
 
 ```{r wk-05-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-05")
@@ -145,7 +145,7 @@ cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-05")
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-05")
 ```
 
-## Week 6 (2021-10-04)
+## Week 7 (2021-10-04)
 
 ```{r wk-06-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-06")
@@ -157,7 +157,7 @@ cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-06")
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-06")
 ```
 
-## Week 7 (2021-10-11)
+## Week 8 (2021-10-11)
 
 ```{r wk-07-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-07")
@@ -169,9 +169,8 @@ cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-07")
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-07")
 ```
 
-## Week 8 (2021-10-18)
+## Week 9 (2021-10-18)
 
-*(under construction)*
 
 ```{r wk-08-files, results='asis', echo=FALSE, eval=FALSE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-08")
@@ -183,9 +182,8 @@ cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-08")
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-08")
 ```
 
-## Week 9 (2021-10-25)
+## Week 10 (2021-10-25)
 
-*(under construction)*
 
 ```{r wk-09-files, results='asis', echo=FALSE, eval=FALSE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-09")
@@ -197,7 +195,7 @@ cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-09")
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-09")
 ```
 
-## Week 10 (2021-11-01)
+## Week 11 (2021-11-01)
 
 ```{r wk-10-files, results='asis', echo=FALSE, eval=FALSE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-10")
@@ -210,7 +208,7 @@ cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-10")
 ```
 
 
-## Week 11 (2021-11-08)
+## Week 12 (2021-11-08)
 
 ```{r wk-11-files, results='asis', echo=FALSE, eval=FALSE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-11")
@@ -222,7 +220,7 @@ cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-11")
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-11")
 ```
 
-## Week 12 (2021-11-15)
+## Week 13 (2021-11-15)
 
 ```{r wk-12-files, results='asis', echo=FALSE, eval=FALSE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-12")
@@ -234,7 +232,7 @@ cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-12")
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-12")
 ```
 
-## Week 13 (2021-11-22)
+## Week 14 (2021-11-22)
 
 ```{r wk-13-files, results='asis', echo=FALSE, eval=FALSE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-13")
@@ -246,7 +244,7 @@ cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-13")
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-13")
 ```
 
-## Week 14 (2021-11-29)
+## Week 15 (2021-11-29)
 
 ```{r wk-14-files, results='asis', echo=FALSE, eval=FALSE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-14")
@@ -258,7 +256,7 @@ cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-14")
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-14")
 ```
 
-## Week 15 (2021-12-06)
+## Week 16 (2021-12-06)
 
 ```{r wk-15-files, results='asis', echo=FALSE, eval=FALSE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-15")
@@ -270,14 +268,3 @@ cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-15")
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-15")
 ```
 
-## Week 16 (2021-12-13)
-
-```{r wk-16-files, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-16")
-```
-
-##### PDFS
-
-```{r cat_bullet_pdf-16, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-16")
-```
