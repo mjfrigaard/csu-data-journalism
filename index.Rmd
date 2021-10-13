@@ -177,14 +177,13 @@ Also check out:
 I've created a pdf reference for some basics of R programming. 
 + [Intro to R Notes](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/notes/01-intro-to-R-notes.pdf)
 
-
 Also check out: 
 
 - [R Markdown](https://bookdown.org/yihui/rmarkdown/): A comprehensive but friendly introduction to R Markdown and friends. Free online!
 
 ## Week 3 (2021-09-06): (**Labor Day. Campus closed**)
 
-## Week 4 (2021-09-13): Data Sources
+## Week 4 (2021-09-13): Introduction to R programming
 
 + Where do we get data? 
 
@@ -197,6 +196,11 @@ Also check out:
   - Manipulating twitter data
   - Visualizing twitter data
   
++ Introduction to [`ggplot2`](https://ggplot2-book.org/)   
+  - geoms   
+  - layers  
+  - labels!!
+  
 ### Week 4 Reading 
 
 This week we cover the basics of R functions and data objects, and a brief introduction to R Markdown. 
@@ -206,34 +210,19 @@ This week we cover the basics of R functions and data objects, and a brief intro
 3. [`fivethirtyeight` data package](https://github.com/rudeboybert/fivethirtyeight)
 4. [Intro to `rtweet` package](https://docs.ropensci.org/rtweet/articles/rtweet.html) 
 
-### Week 4 Exercises 
+## Week 5 (2021-09-20): Data Manipulation  
+
+This week we will cover the basic `dplyr` verbs for data manipulation 
 
 
-
-### Week 3 Slides
-
-
-
-
-## Week 4 (2021-09-20): Data Visualization 
-
-+ Introduction to [`ggplot2`](https://ggplot2-book.org/)   
-  - geoms   
-  - layers  
-  - labels!!
-  
-### Week 4 Reading 
 
 1. [Data tidying](https://r4ds.had.co.nz/tidy-data.html) 
 2. [Data transformations](https://r4ds.had.co.nz/transform.html) 
-3. [Understanding and Contrasting the Data and Exploratory News Outlets](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/pdfs/understand-contrast-news-outlets.pdf)
+  
+### Week 4 Reading 
 
-### Week 4 Exercises 
-
-This week's exercises will cover data manipulation and tidying (restructuring). These might seem a little abstract, but the tasks covered in the exercises are common for getting your data into 'shape' for visualizations. 
-
-
-### Week 4 Slides
+1. [`dplyr` package documentation](https://dplyr.tidyverse.org/)   
+2. [Understanding and Contrasting the Data and Exploratory News Outlets](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/pdfs/understand-contrast-news-outlets.pdf)
 
 The slides will cover some basic data manipulation techniques, and intermediate `ggplot2` graphics. 
 
@@ -249,11 +238,6 @@ The slides will cover some basic data manipulation techniques, and intermediate 
 1. [`tidyr` pivoting documentation](https://tidyr.tidyverse.org/articles/pivot.html)   
 2. [Technology of Print: is faster better?](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/pdfs/the-technology-of-print-is-faster-better-from-mit-technology-review-1984-08.pdf)
 
-### Week 5 Exercises
-
-
-### Week 5 Slides
-
 
 ## Week 6 (2021-10-04): Advanced Data Visualization
 
@@ -264,10 +248,6 @@ The slides will cover some basic data manipulation techniques, and intermediate 
 ### Week 6 Reading
 
 1. [ggplot2 extensions](https://exts.ggplot2.tidyverse.org/)   
-
-### Week 6 Exercises 
-
-### Week 6 Slides 
 
 ## Week 7 (2021-10-11): Open Source Data Viz Tools 
 

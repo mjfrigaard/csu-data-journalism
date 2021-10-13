@@ -132,8 +132,8 @@ wikipedia_top_pharm_export_file <- paste0("data/", lubridate::today(), "-TopPhar
 readr::write_csv(x = TopPharmCompRaw, file = wikipedia_top_pharm_export_file)
 ```
 
-```{r import-TopPharmCompRaw}
-
+```{r import-TopPharmCompRaw, include=FALSE, eval=TRUE}
+TopPharmCompRaw <- readr::read_csv("https://raw.githubusercontent.com/mjfrigaard/csuc-data-journalism/main/lessons-exercises/data/2021-10-13-TopPharmCompRaw.csv")
 ```
 
 ## Outline before you start 
