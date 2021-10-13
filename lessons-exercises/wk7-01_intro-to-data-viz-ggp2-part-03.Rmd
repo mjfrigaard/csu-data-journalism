@@ -1,6 +1,6 @@
 ---
 title: "Data Visualization with ggplot2 (part 3)"
-comment: "*2+ variables, advanced labeling, and facets/small multiples*"
+comment: "*trends, adding text, labeling values, and reference lines*"
 output: 
   html_document: 
     toc: yes
@@ -39,11 +39,10 @@ options(width = 60, max.print = 60)
 
 1. Import Apple Mobility Data
 2. Wrangle Apple Mobility Data
-3. Counting things
-4. Histograms
-5. Density plots
-6. Ridgeline plots
-7. Violin plots
+3. Trends  
+4. Adding text  
+5. Labeling values   
+6. Reference lines  
 
 # Materials 
 
