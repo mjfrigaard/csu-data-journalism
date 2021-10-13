@@ -123,8 +123,18 @@ This looks like the table I want! Let's assign it to a data frame and get wrangl
 ```{r TopPharmCompRaw}
 TopPharmCompRaw <- rvest::html_table(relevant_tables[[1]], 
                   fill = TRUE)
+TopPharmCompRaw
 ```
 
+```{r export-TopPharmCompRaw}
+# fs::dir_tree("data")
+wikipedia_top_pharm_export_file <- paste0("data/", lubridate::today(), "-TopPharmCompRaw.csv")
+readr::write_csv(x = TopPharmCompRaw, file = wikipedia_top_pharm_export_file)
+```
+
+```{r import-TopPharmCompRaw}
+
+```
 
 ## Outline before you start 
 

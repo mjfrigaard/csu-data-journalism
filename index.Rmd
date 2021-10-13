@@ -155,20 +155,6 @@ News changes quickly, so I reserve the right to remove, add, or alter any conten
 1. [Fifty Years of Journalism and Data: A Brief History](https://gijn.org/2015/11/12/fifty-years-of-journalism-and-data-a-brief-history/)
 2. [Data Journalism in Perspective](https://datajournalism.com/read/handbook/one/introduction/data-journalism-in-perspective)
 
-### Week 1 Exercises 
-
-These are intended to get you started with R and RStudio.
-
-+ [Install R & RStudio](https://mjfrigaard.github.io/csuc-data-journalism/wk1-00_your-first-r-session.html)
-
-### Week 1 Slides 
-
-These slides give a quick overview of web technologies, plain text (code), and common data files. 
-
-+ [Week 1 Intro to web technology html  slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-01.0-intro-web-tech.html#1)
-
-+ [Week 1 Intro to web technology pdf  slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-01.0-intro-web-tech.pdf)
-
 Also check out: 
 
 - **Markdown**: [Commonmark](https://commonmark.org/help/tutorial) has a quick ten-twenty minute tutorial on markdown.
@@ -189,26 +175,8 @@ Also check out:
 ### Week 2 Reading 
 
 I've created a pdf reference for some basics of R programming. 
-
 + [Intro to R Notes](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/notes/01-intro-to-R-notes.pdf)
 
-### Week 2 Exercises 
-
-These exercises will help you understand how to extract pieces of your data in R, and how to use R Markdown. 
-
-+ [Subsetting R Objects](https://mjfrigaard.github.io/csuc-data-journalism/wk2-01_subsetting-r-objects.html)
-
-+ [RMarkdown in Practice](https://mjfrigaard.github.io/csuc-data-journalism/wk2-02_rmarkdown-in-practice.html)
-
-### Week 2 Slides 
-
-+ [RStudio IDE html slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-02.0-rstudio-ide-intro.html#1)
-
-+ [RStudio IDE pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-02.0-rstudio-ide-intro.pdf)
-
-+ [Introduction To R Programming html slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-02.1-intro-r-prog.html#1)
-
-+ [Introduction To R Programming pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-02.1-intro-r-prog.pdf)
 
 Also check out: 
 
@@ -216,7 +184,7 @@ Also check out:
 
 ## Week 3 (2021-09-06): (**Labor Day. Campus closed**)
 
-## Week 3 (2021-09-13): Data Sources
+## Week 4 (2021-09-13): Data Sources
 
 + Where do we get data? 
 
@@ -229,28 +197,22 @@ Also check out:
   - Manipulating twitter data
   - Visualizing twitter data
   
-### Week 3 Reading 
+### Week 4 Reading 
+
+This week we cover the basics of R functions and data objects, and a brief introduction to R Markdown. 
 
 1. [Data is Plural](https://www.data-is-plural.com/)
 2. [538 data](https://data.fivethirtyeight.com/) 
 3. [`fivethirtyeight` data package](https://github.com/rudeboybert/fivethirtyeight)
 4. [Intro to `rtweet` package](https://docs.ropensci.org/rtweet/articles/rtweet.html) 
 
-### Week 3 Exercises 
+### Week 4 Exercises 
 
-+ [Introduction to Data Manipulation](https://mjfrigaard.github.io/csuc-data-journalism/wk3-01_data-manipulation-intro.html)
 
-+ [Data Visualization with ggplot2 (part 1)](https://mjfrigaard.github.io/csuc-data-journalism/wk3-02_intro-to-data-viz-ggp2-part-01.html)
 
 ### Week 3 Slides
 
-+ [Introduction to R Markdown html slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-03.0-rmarkdown.html#1)
 
-+ [Introduction to R Markdown pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-03.0-rmarkdown.pdf)
-
-+ [Data Visualization with ggplot2 (part 1) html slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-03.1-data-viz-intro.html#1)
-
-+ [Data Visualization with ggplot2 (part 1) pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-03.1-data-viz-intro.pdf)
 
 
 ## Week 4 (2021-09-20): Data Visualization 
@@ -270,23 +232,10 @@ Also check out:
 
 This week's exercises will cover data manipulation and tidying (restructuring). These might seem a little abstract, but the tasks covered in the exercises are common for getting your data into 'shape' for visualizations. 
 
-+ [Introduction to Data Manipulation](https://mjfrigaard.github.io/csuc-data-journalism/wk3-01_data-manipulation-intro.html)
-
-+ [Reshaping and Joining Data in R](https://mjfrigaard.github.io/csuc-data-journalism/wk4-02_data-trans-joins.html)
 
 ### Week 4 Slides
 
 The slides will cover some basic data manipulation techniques, and intermediate `ggplot2` graphics. 
-
-+ [Data Manipulation with R html slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-04.0-data-manip-intro.html#1)
-
-+ [Data Manipulation with R pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-04.0-data-manip-intro.pdf)
-
-+ [Data Visualization (part 2) html slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-04.1-data-viz-part-2.html#1)
-
-+ [Data Visualization (part 2) pdf slides](https://mjfrigaard.github.io/csuc-data-journalism/slides/pdfs/wk-04.1-data-viz-part-2.pdf)
-
-
 
 ## Week 5 (2021-09-27): Exploratory Data Analysis
 
@@ -302,12 +251,8 @@ The slides will cover some basic data manipulation techniques, and intermediate 
 
 ### Week 5 Exercises
 
-+ [Advanced Data Transformation and Manipulation](https://mjfrigaard.github.io/csuc-data-journalism/wk5-01_adv-data-manip-joins.html)
-
-+ [Data Visualization with `ggplot2` (part 3)](https://mjfrigaard.github.io/csuc-data-journalism/wk5-02_intro-to-data-viz-ggp2-part-03.html)
 
 ### Week 5 Slides
-
 
 
 ## Week 6 (2021-10-04): Advanced Data Visualization

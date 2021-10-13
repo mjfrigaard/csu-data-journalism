@@ -61,12 +61,16 @@ cat_bullet <- function(x, pattern) {
 
 ### Week 1 (2021-08-23)
 
+These are intended to get you started with R and RStudio.
+
 ```{r wk1-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x, "^lessons-exercises/wk1-")
 ```
 
 
 ### Week 2 (2021-08-30)
+
+These exercises will help you understand how to extract pieces of your data in R, and how to use R Markdown. 
 
 ```{r wk2-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x, "^lessons-exercises/wk2-")
