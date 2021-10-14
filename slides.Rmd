@@ -172,13 +172,13 @@ cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-07")
 ## Week 9 (2021-10-18)
 
 
-```{r wk-08-files, results='asis', echo=FALSE, eval=FALSE}
+```{r wk-08-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-08")
 ```
 
 ##### PDFS
 
-```{r cat_bullet_pdf-08, results='asis', echo=FALSE, eval=FALSE}
+```{r cat_bullet_pdf-08, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-08")
 ```
 
