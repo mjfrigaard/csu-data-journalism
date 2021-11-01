@@ -287,23 +287,17 @@ The slides will cover some basic data manipulation techniques, and intermediate 
 - [ggplot2 extensions](https://exts.ggplot2.tidyverse.org/)   
 - [facet to make small multiples](https://socviz.co/groupfacettx.html#facet-to-make-small-multiples)  
 
-## Week 10 (alternate): 
+## Week 10: 
 
-+ Open source data visualization tools 
-  - Datawrapper 
-  - OpenRefine
-  - Plotly 
++ Case study: science and technology
+  - [Video Game Data](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-03-16/readme.md#video-games-and-sliced) 
   
-+ Other open source data resources   
-  - Beautiful soup (web scraping)   
-  - Government data sources (.gov)   
-  - APIs 
-  - documenting your code  
+- Project 1: EDA and report building with R markdown
   
 + generate a `reprex`  
   - send me a url for a post you've created (or a draft post) of a reprex. 
 
-### Week 10 Reading (alternate)
+### Week 10 Reading 
 
 + [webinar for reprex](https://reprex.tidyverse.org/articles/articles/learn-reprex.html)
 
@@ -315,7 +309,7 @@ The slides will cover some basic data manipulation techniques, and intermediate 
 ## Week 11 (2021-11-01): 
 
 + Case study: criminal and social justice  
-  - Texas Department of Justice Website  
+  - Texas Department of Justice Website 
 
 ### Week 11 Reading 
 

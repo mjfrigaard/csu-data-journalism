@@ -1,0 +1,77 @@
+---
+title: "Case Study - Don't Mess With Texas"
+subtitle: "Web scraping, iteration, and dealing with images in R"
+date: '`r Sys.Date()`'
+author: 
+  - "Martin Frigaard"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["theme.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(reprex)
+library(xaringan)
+library(pagedown)
+library(xaringanthemer)
+# folders
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      fig.align = "center", 
+                      dpi = 320, 
+                      fig.height = 4, 
+                      fig.path = "img/")
+options(width = 60, max.print = 60)
+# xaringan::inf_mr()
+```
+
+class: inverse, center, top
+background-image: url(img/test_url.png)
+background-position: 50% 70%
+background-size: 58%
+
+# Case study: Don't mess with Texas
+
+
+---
+class: left, top
+background-image: url(img/tidyverse.png)
+background-position: 95% 8%
+background-size: 8%
+
+# Load the packages 
+
+<br><br><br><br>
+
+```{r packages, eval=FALSE}
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+```{r pckgs, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+---
+class: left, top
+background-image: url(img/rvest.png)
+background-position: 95% 8%
+background-size: 8%
+
+## Outline
+
+### 1. scrape the data with `rvest`  
+
+### 2. store as plain text 
+
+### 3. wrangle variables 
+
+### 4. visualize 
