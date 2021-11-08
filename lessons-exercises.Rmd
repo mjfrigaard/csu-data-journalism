@@ -131,16 +131,12 @@ cat_bullet(x, "^lessons-exercises/wk10-")
 
 ### Week 12 (2021-11-08)
 
-*(under construction)*
-
 ```{r wk11-files, results = 'asis', echo = FALSE, eval=TRUE}
 # and the `pr` for programming
 cat_bullet(x, "^lessons-exercises/wk11-")
 ```
 
 ### Week 13 (2021-11-15)
-
-*(under construction)*
 
 ```{r wk12-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons-exercises/wk12-")

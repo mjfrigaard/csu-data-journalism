@@ -1,6 +1,6 @@
 ---
 title: "Data Visualization (part 2)"
-subtitle: "Journalism 303: Advanced graphing techniques with ggplot2"
+subtitle: "Journalism 303: Intermediate graphing techniques with ggplot2"
 date: '`r Sys.Date()`'
 author: 
   - "Martin Frigaard"

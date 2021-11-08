@@ -37,13 +37,11 @@ options(width = 60, max.print = 60)
 
 # Outline
 
-1. Import Apple Mobility Data
-2. Wrangle Apple Mobility Data
-3. Counting things
-4. Histograms
-5. Density plots
-6. Ridgeline plots
-7. Violin plots
+1. Import Apple Mobility Data 
+2. Facets  
+3. Complete themes  
+4. Adjusting colors   
+5. `geofacet`  
 
 # Materials 
 

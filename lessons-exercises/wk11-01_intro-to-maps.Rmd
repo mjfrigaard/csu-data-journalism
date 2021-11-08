@@ -1,0 +1,525 @@
+---
+title: "Intro to building maps in R"
+comment: "*building maps with ggplot2*"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+    toc_depth: 6
+    number_sections: yes
+    code_folding: show
+    theme: yeti
+    df_print: paged
+
+always_allow_html: true
+---
+
+
+```{r , include=FALSE}
+library(tidyverse)
+library(skimr)
+library(lubridate)
+library(here)
+library(janitor)
+library(socviz)
+library(ggrepel)
+library(covdata)
+library(showtext)
+library(hrbrthemes)
+library(rtweet)
+# create data folder
+knitr::opts_chunk$set(warning = FALSE,
+                      message = FALSE,
+                      fig.path = "img/",
+                      fig.width = 9,
+                      fig.height = 7,
+                      tidy = FALSE)
+# set width
+options(width = 60, max.print = 300)
+TweetsRaw <- read_rds("data/2021-11-07-NFL-TweetsRaw.rds")
+```
+
+# Outline
+
+1. Import Twitter Data
+2. Wrangle Data
+3. Latitude and Longitude Data
+4. Maps with `ggplot2`
+5. Maps with `leaflet`
+
+**NOTE:** this set of exercises is a little different from the previous weeks. Instead of filling in each solution, I will work through an example, then provide a template for you to use on your own (*the code chunks aren't specific, so you can just swap out the hashtag in the `search_tweets()` function, and all the code will run with a new hashtag*).
+
+# Materials 
+
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
+
+View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
+
+# Twitter data 
+
+This lesson will map Twitter data (tweets) based on a search term. We're going to use the [`rtweet` package](https://docs.ropensci.org/rtweet/), which requires you to have a Twitter account. If you're going to be using this application a lot to collect data (which I hope you are!), follow the instructions in the [authentication](https://docs.ropensci.org/rtweet/articles/auth.html) vignette. 
+
+## `rtweet` {.tabset}
+
+We're going to be access Twitter data for these exercises. If you'd like to follow along with your own data, check out the [`rtweet` package](https://docs.ropensci.org/rtweet/) for installation and setup instructions. 
+
+### Searching hashtags 
+
+We're going to demonstrate how to use the `rtweet::search_tweets()` function. 
+
+```{r search_tweets, eval=FALSE}
+library(rtweet)
+TweetsRaw <- search_tweets("#NFL", n = 10000)
+```
+
+You should see the following message when the data collection is complete. If you're having trouble gathering the Twitter data, you should check the `retryonratelimit` argument.
+
+```r
+Searching for users...
+Finished collecting users!
+```
+
+Now let's review what we got! 
+
+### Raw Twitter data 
+
+The output from `rtweet` is rather large (90 columns) 
+
+```{r twitter-data}
+colnames(TweetsRaw)
+```
+
+We only need a subset of these columns to build our map, and fortunately the `rtweet` package comes with some handy functions for reduce this output to a more manageable dataset. 
+
+### Export Raw Data! 
+
+It's always a good idea to export the raw twitter data you've collected, because these data are always subject to change. For example, this tutorial uses data for the `#NFL` hashtag, which was collected on a Sunday. We're not likely to see the same data if we collected data on the following Monday (or Tuesday, for that matter).
+
+```{r export, eval=FALSE}
+# make sure to use a date (or time) stamp!
+write_rds(x = TweetsRaw, "data/2021-11-07-NFL-TweetsRaw.rds")
+```
+
+
+## User data {.tabset}
+
+The `rtweet::users_data()` function separates the 'users' variables from the 'tweet' variables.
+
+### `users_data()` columns
+
+Below I combine the `base::intersect()` and `base::names()` functions to see what variables from `TweetsRaw` will end up in the results from `rtweet::users_data()` (*I added `tibble::as_tibble()` so the variables print nicely to the screen*)
+
+```{r intersect-users_data}
+tibble::as_tibble(base::intersect(x = base::names(rtweet::users_data(TweetsRaw)) ,
+                y = base::names(TweetsRaw)))
+```
+
+Looks like there will be 20 variables in the output from `users_data()`. 
+
+### `TweetsUsers` data
+
+We will separate the user data from the raw data and store this in `TweetsUsers`.
+
+```{r TweetsUsers}
+TweetsUsers <- rtweet::users_data(TweetsRaw)
+glimpse(TweetsUsers)
+```
+
+## Tweets data {.tabset}
+
+The `rtweet::tweets_data()` function separates the "*tweets data from users data object.*"
+
+### `tweets_data()` columns
+
+We repeat the process from above to get a look at the columns we'll get back from the `rtweet::tweets_data()` function: 
+
+```{r intersect-tweets_data}
+tibble::as_tibble(base::intersect(x = base::names(rtweet::tweets_data(TweetsRaw)) ,
+                y = base::names(TweetsRaw)))
+```
+
+This dataset will have 68 columns. 
+
+### `TweetsData` 
+
+We will store the output from `tweets_data()` in the `TweetsData` object. 
+
+```{r TweetsTweets}
+TweetsData <- rtweet::tweets_data(TweetsRaw)
+glimpse(TweetsData)
+```
+
+
+
+## Latitude & longitude data {.tabset}
+
+You may have noticed these data don't have the latitude or longitude data--we will add these variables below.
+
+### `lat_lng()` columns
+
+If we look at the help info on the `rtweet::lat_lng()` function, we can see that this will only add two columns to the `TweetsRaw`,  `lat` and `lng` (for latitude and longitude).
+
+This would result in quite a few variables, but we don't need all the variables from `TweetsRaw`. 
+
+Fortunately, we now know how to combine `dplyr`'s `select()` function to *only* get the variables we want from `TweetsRaw`, which include `user_id`, `created_at`, 
+`screen_name`, `text`, `retweet_count`, `favorite_count`, `country`, `location`, `country_code` `friends_count`, and the new `lat` and `lng` variables. 
+
+```{r TweetsLatLng}
+TweetsLatLng <- rtweet::lat_lng(TweetsRaw) %>% 
+  select(user_id, created_at, screen_name, text, 
+         retweet_count, favorite_count, country, 
+         location, country_code, friends_count, 
+         lat, lng)
+glimpse(TweetsLatLng)
+```
+
+### `lat` & `lng` observations
+
+It's always good to check how many valid observations we have for the `lat` and `lng` columns, because not every Twitter user allows these data to be collected. We can check this with some help from `dplyr::distinct()`
+
+```{r distinct-lat-long}
+dplyr::distinct(.data = TweetsLatLng, lat, lng)
+```
+
+We can see this is a small fraction of the overall twitter data, but it's enough for us to build a map!
+
+## Building maps in `ggplot2` {.tabset}
+
+To build a map with `ggplot2`, we need to have a canvas (i.e. data-points) to plot with. We can do this with the `gggplot2::map_data()` function. 
+
+### `map_data("world)`
+
+The `map_data("world")` returns a dataset from the [`maps` package](https://cran.r-project.org/web/packages/maps/readme/README.html) that is "*suitable for plotting with `ggplot2`*" 
+
+```{r World-data}
+World <- ggplot2::map_data("world")
+World %>% glimpse(78)
+```
+
+The `World` data is a dataset with latitude (`lat`), longitude (`long`), and group (`group`) values across the entire world. We're going to use these values to 'sketch' a map outline using `geom_point()` and `geom_polygon()` below:
+
+### `coord_quickmap()` with points 
+
+Just like with other plots, we want to build the labels first (we'll store some information about the data in the labels so it's clear where it came from).
+
+```{r labs_geom_polygon}
+labs_geom_point <- ggplot2::labs(
+  title = "Basic World Map (geom_point)", 
+  subtitle = "map_data('world')")
+```
+
+We will start by creating a map using `geom_point()` layer, but add the `coord_quickmap()` function (which *projects a portion of the earth, which is approximately spherical, onto a flat 2D plane*):
+
+1. Pipe the data to the `ggplot()` function to initialize the plot 
+2. Add the `geom_point()` layer, specifying the `x` as `long` and `y` as `lat`  
+3. Include labels 
+
+```{r geom_point-coord_quickmap}
+World %>% 
+  ggplot() + 
+  geom_point(aes(long, lat), show.legend = FALSE) +
+  coord_quickmap() + 
+  labs_geom_point
+```
+
+What we've done here is plot data-points that outline each continent (and fit the spherical location of the `long` and `lat` to a 2-D plane). But the points make the continent outlines sloppy--we should be using lines. 
+
+### `coord_quickmap()` with polygons
+
+We want to convert to point outline into lines, which we can do using `geom_polygon()` (read more about this [here](https://ggplot2-book.org/maps.html#polygonmaps)). The steps are very similar:
+
+1. Pipe the data to the `ggplot()` function to initialize the plot 
+2. Add the `geom_polygon()` layer, specifying the `x` as `long`, `y` as `lat`, *and `group` as `group`* 
+3. Include labels 
+
+```{r geom_polygon-01}
+labs_geom_polygon <- ggplot2::labs(
+  title = "Basic World Map (geom_polygon)", 
+  subtitle = "map_data('world')")
+World %>% 
+  ggplot() + 
+  geom_polygon(aes(x = long, y = lat, group = group)) +
+  coord_quickmap() + 
+  labs_geom_polygon
+```
+
+That looks much better, but we should clean it up a bit by removing the `x` and `y` axes, and reducing some of the color contrast. 
+
+### Customizing our map  
+
+1. add `fill`, `color` and `alpha` arguments to lighten the color of the continents    
+2. Include the `ggplot2::theme_void()` layer (specifically designed to remove excess chart junk and give it a 'minimal' look)  
+3. Include labels 
+
+We will save this map as `ggp_word_map`
+
+```{r ggp_word_map}
+ggp_word_map <- World %>% 
+  ggplot() + 
+  geom_polygon(aes(x = long, y = lat, group = group), 
+               # these are outside the aes() function!
+               fill = "grey75", color = "white", alpha = 0.8) +
+  coord_quickmap() + 
+  # add theme
+  ggplot2::theme_void() +
+  # don't forget the labels
+  labs_geom_polygon
+ggp_word_map
+```
+
+This looks much better! Now we're ready to add our Twitter data. 
+
+### Map projections 
+
+The default map in the `geom_polygon()` is what’s referred to as the `mercator` projection. The [Mercator](https://en.wikipedia.org/wiki/Mercator_projection) projection works well for navigation because the meridians are equally spaced (the grid lines that runs north and south), but the parallels (the lines that run east/west around) are not equally spaced. 
+
+This causes a distortion in the land masses at both poles. The map above makes it look like Greenland is roughly 1/2 or 2/3 the size of Africa, when in reality Africa is 14x larger. These are well-known limitations of this projection, so there's nothing wrong with using it (but it's good information to know!) 
+
+## Add twitter data (world) {.tabset}
+
+`ggplot2` has a handy function for creating a map quickly (appropriately called `coord_quickmap()`), and the `mercator` projection is the default setting. If we want to add our data in `TweetsLatLng` to the existing graph, we need to include these data in a new `geom_polygon()` layer. 
+
+### Match variables
+
+Recall that the existing map is using the `World` data (printed below)
+
+```{r World-02}
+glimpse(World)
+```
+
+
+We need to rename `lng` to `long`, (so the match the variables names in the `World` data), and remove the data with empty latitude and longitude. Store these new data in `TweetsMap`. 
+
+```{r TweetsMap-long}
+TweetsMap <- TweetsLatLng %>% 
+  # rename to match
+  dplyr::rename(long = lng) %>%
+  # remove missing
+  filter(!is.na(long) & !is.na(lat))
+glimpse(TweetsMap)
+```
+
+### Add Twitter data layer 
+
+We will update the labels:
+
+```{r labs_rtweet_coord_quickmap}
+labs_rtweet_coord_quickmap <- ggplot2::labs(
+  title = "  #NFL hashtags = World Map (labs_coord_quickmap())", 
+  subtitle = "  rtweet data")
+```
+
+And add a `ggplot2::geom_point()` to include our tweets on the map:
+
+```{r coord_quickmap, message=FALSE, warning=FALSE}
+ggp_word_map +
+        ggplot2::geom_point(data = TweetsMap,
+                        aes(x = long, y = lat)) +
+        # add titles/labels
+        labs_rtweet_coord_quickmap
+```
+
+Now we can see the tweets have been added as data points to the existing map projection! We can see most of these data are limited to the US, so we will build a US map below. 
+
+## US Maps {.tabset}
+
+We can use the `ggplot2::map_data("usa")` function to create a US map (`USmap`) dataset. 
+
+```{r USmap}
+USmap <- ggplot2::map_data("usa") 
+USmap %>% glimpse(78)
+```
+
+We can see these data are very similar to `World`, and have the same `long`, `lat`, and `group` variables. 
+
+### US map (`coord_quickmap()`)
+
+We can plot `USmap` the same way we did above (with `geom_polygon()` and `coord_quickmap()`), after creating a new set of labels: 
+
+1. Create labels (offset by a few spaces)    
+2. Pipe the `USmap` data to the `ggplot()` function to initialize the plot 
+3. Add the `geom_polygon()` layer, specifying the `x` as `long`, `y` as `lat`, *and `group` as `group`* 
+4. Add labels    
+
+```{r ggUSMap}
+labs_geom_polygon_usa <- ggplot2::labs(
+  title = "  US Map (geom_polygon)", 
+  subtitle = "  map_data('usa')")
+USmap %>% 
+  ggplot2::ggplot() +
+  ggplot2::geom_polygon(aes(x = long,
+                            y = lat,
+                            group = group)) + 
+  ggplot2::coord_quickmap() + 
+  labs_geom_polygon_usa
+```
+
+Once again we see this map of the US needs some customizing, so we include the `fill`, `color`, and `alpha` arguments. 
+
+### Customizing US map  
+
+1. add `fill`, `color` and `alpha` arguments to lighten the color of the continents    
+2. Include the `ggplot2::theme_void()` layer (specifically designed to remove excess chart junk and give it a 'minimal' look)  
+3. Include labels 
+
+Save this as `ggp_us_map`
+
+```{r ggp_us_map}
+ggp_us_map <- USmap %>% 
+  ggplot2::ggplot() +
+  ggplot2::geom_polygon(aes(x = long,
+                            y = lat,
+                            group = group),
+                        fill = "grey70", color = "white", alpha = 0.8) + 
+  ggplot2::coord_quickmap() + 
+  ggplot2::theme_void() + 
+  labs_geom_polygon_usa
+ggp_us_map
+```
+
+
+## Adding twitter data (US) {.tabset}
+
+Now we have a canvas to work with--lets filter the `TweetsMap` data to only those tweets from the US using the `country_code` (first we count this variable to see what the codes are).
+
+```{r country_code-usa}
+TweetsMap %>% 
+  count(country_code, sort = TRUE)
+```
+
+It looks like we have 150 tweets from the US--we will store these data in `UsTweets`
+
+```{r filter-usa-count-location}
+UsTweets <- TweetsMap %>% filter(country_code == "US")
+glimpse(UsTweets)
+```
+
+We will updated the labels for the US map. 
+
+### US twitter data (`geom_polygon()`)
+
+1. Create new labels 
+2. Add a `geom_point()` layer to the existing `ggp_us_map`  
+3. Include the `data = UsTweets` argument at this layer, and specify the `x = long` and `y = lat` 
+4. Add labels
+
+```{r labs_coord_quickmap_tweets_usa}
+# new labels
+labs_coord_quickmap_tweets_usa <- ggplot2::labs(
+  title = "#NFL tweets = Basic US Map (coord_quickmap)", 
+  subtitle = "map_data('usa')")
+
+ggp_us_map +
+  # twitter data layer
+  ggplot2::geom_point(data = UsTweets,
+                      aes(x = long, y = lat)) +
+  ggplot2::theme_void() + 
+  labs_coord_quickmap_tweets_usa
+```
+
+We can see this map output is including the tweets from Hawaii (which is skewing the map projection), so we will combine `ggplot2`s layers and `dplyr`s data manipulation functions together to remove these points *without* changing the data in `UsTweets`. 
+
+### Locate outliers
+
+We can use `str_view_all()` to take a look at the `location` variable and see if we can find the Hawaii location:
+
+```{r sort-unique-location}
+# search for ", HI" pattern
+str_view_all(string = UsTweets$location, pattern = ", HI", match = TRUE)
+```
+
+We can see two tweets with `location` as `Honolulu, HI`, so we will `filter()` these data *inside* the `geom_point()` layer in the `data` argument. 
+
+1. Create new labels  
+2. Use `!str_detect()` to remove any observations that match the `Honolulu, HI` pattern  
+3. Change the `size` of the points to `0.9` and the `color` of the points to `"firebrick"`  
+4. Add theme  
+5. Add labels  
+
+```{r remove-HI}
+labs_coord_quickmap_no_hi <- ggplot2::labs(
+  title = "#NFL tweets = Basic US Map (coord_quickmap)", 
+  subtitle = "map_data('usa')",
+  caption = "Tweets from Honolulu, HI have been removed")
+
+ggp_us_map +
+  ggplot2::geom_point(
+    data = filter(UsTweets, 
+                  !str_detect(location, "Honolulu, HI")),
+                      aes(x = long, y = lat),
+                      size = 0.9, # reduce size of points
+                      color = "firebrick") +
+  ggplot2::theme_void() + 
+  labs_coord_quickmap_no_hi
+```
+
+This is looking better, but we should recall we have a few additional variables on the tweets in `UsTweets`. Let's use what we've learned in previous lessons/exercises to view the distribution of `favorite_count` across the various locations in `UsTweets`. 
+
+### Distribution of `favorite_count`
+
+1. Build labels  
+2. Pipe the `UsTweets` data to `filter()` and remove the tweets from Hawaii  
+3. Initiate the plot with `ggplot()` and assign `favorite_count` to the `x` aesthetic  
+4. Add a `geom_density()` layer  
+5. Add `facet_wrap()` and facet the plots by `location`  
+6. Include a `theme_minimal()` to reduce the chart elements  
+7. Add labels  
+
+```{r facet_wrap, fig.height=7, fig.width=9}
+labs_facet_wrap_favorite_count <- ggplot2::labs(
+  title = "Favorite counts by location (US Twitter data)",
+  x = "Favorite count", 
+  y = "count"
+)
+
+UsTweets %>% 
+  filter(!str_detect(location, "Honolulu, HI")) %>% 
+  ggplot(aes(x = favorite_count)) + 
+  geom_density() + 
+  facet_wrap(~ location) + 
+  theme_minimal() + 
+  labs_facet_wrap_favorite_count
+```
+
+One of the drawbacks of the density plot is that the `y` axis is hard to interpret, but it's OK in this case, because this graph is telling us all we need to know: **Some of these aren't like the others**
+
+### Add `favorite_count` to US Map
+
+If we want to add the `favorite_count` variable to the plot, we can do this with the size argument in `geom_point()`, which will make the size of the point relative to the number of `favorite_count` at each `long` and `lat`. 
+
+1. Create new labels using `paste0()` and `mean()` to get the average `created_at` time for the tweets  
+2. Add a `geom_point()` layer to `ggp_us_map`, filtering out the Hawaii locations  
+3. Specify the `x` and `y` as `long` and `lat` inside the `aes()` function, and set `size` to `favorite_count` outside the `aes()` function  
+4. Set the `color` to `"firebrick"` again  
+5. Include a custom `theme()` layer and move the legend using `legend.position = 'bottom'`  
+6. Add labels 
+
+```{r labs_coord_quickmap_favs, fig.height=6, fig.width=8}
+labs_coord_quickmap_favs <- ggplot2::labs(
+  title = "  #NFL Tweets", 
+  subtitle = paste0("  Tweets collected around ", 
+                    mean(UsTweets$created_at, na.rm = TRUE)),
+  size = "Favorites")
+
+ggp_us_map +
+  ggplot2::geom_point(
+    data = filter(UsTweets, 
+                  !str_detect(location, "Honolulu, HI")),
+      aes(x = long, 
+          y = lat, 
+          size = favorite_count),
+          color = "firebrick") +
+  theme(legend.position = 'bottom') +
+  labs_coord_quickmap_favs
+```
+
+
+## Summary  {.tabset}
+
+This has been a very short introduction to maps with `ggplot2`. In the next lesson, we will introduce how to make maps with `leaflet` and `plotly`, two popular mapping packages for creating interactive maps.
+
+Be sure to check out the resources below for building maps: 
+
+1. The [maps chapter of the ggplot2 book](https://ggplot2-book.org/maps.html#maps)  
+2. The [draw maps chapter of Data Visualization: A practical introduction](https://socviz.co/maps.html#maps)  
+3. [This tutorial](https://r-spatial.org/r/2018/10/25/ggplot2-sf.html) from r-spatial for extending ggplot2 with maps   
