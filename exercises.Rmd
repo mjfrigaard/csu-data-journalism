@@ -1,0 +1,114 @@
+---
+title: "Exercises"
+---
+
+```{r setup, include = FALSE, warning = FALSE}
+library(tidyverse)
+library(stringr)
+library(htmltools)
+tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+```{r file-list, include = FALSE, warning = FALSE, eval=FALSE}
+# first this defines three functions (has_all_things, parse_yaml, ext_file,  
+# and cat_bullet)
+has_all_things <- function(y, things) {
+  all(match(tolower(things), tolower(y), nomatch = 0) > 0)
+}
+
+parse_yaml <- function(file, n = 30) {
+  rmarkdown:::parse_yaml_front_matter(read_lines(file, n_max = n))
+}
+
+ext_file <- function(file, ext) {
+  paste(file, ext, sep = ".")
+}
+```
+
+```{r create-basenames_extensions, warning=FALSE, include=FALSE, eval=FALSE}
+basenames_extensions <- tibble(fls = list.files("exercises", 
+                                                recursive = TRUE)) %>% 
+  mutate(basename = tools::file_path_sans_ext(fls),
+         basename = paste0("exercises/", basename),
+         ext = tools::file_ext(fls)) %>% 
+  group_by(basename) %>%
+  summarize_all(list) %>%
+  filter(map_lgl(ext, has_all_things, things = c("Rmd", "html")))
+```
+
+```{r create-hrefs_bullets, warning=FALSE, include=FALSE, eval=FALSE}
+hrefs_bullets <- basenames_extensions %>%
+  mutate(
+    yaml = basename %>% ext_file("Rmd") %>% map(parse_yaml), 
+    comment = yaml %>% map_chr("comment"),
+    # comment = yaml %>% map_chr("comment", .null = ""),
+    comment = str_remove_all(string = comment, pattern = "Journalism 303: "),
+    comment = paste0("_*", comment, "*_"),
+    comment = tolower(comment),
+    href = map2(ext_file(basename, "html"), comment, ~ a(href = .x, .y)) %>%
+      map_chr(as.character),
+    bullet = map2_chr(href, comment, ~ paste("*", .x, .y, "\n")))
+# hrefs_bullets
+```
+
+```{r cat_bullet, warning=FALSE, include=FALSE, eval=FALSE}
+cat_bullet <- function(x, pattern) {
+  x <- hrefs_bullets %>% 
+    filter(str_detect(basename, pattern = pattern)) %>%
+  unnest(ext) %>%
+    filter(ext == "html")
+  cat(x$bullet)
+}
+# cat_bullet(x, "exercises/01-")
+```
+
+
+### Week 1 
+
+This is an introduction to atomic vectors (the basic building block) in R: 
+
+* <a href="https://mjfrigaard.shinyapps.io/csuc-dj-01_vectors/">_**an introduction to atomic vectors in R**_</a> _**basic data structures**_ 
+
+These exercises introduce `data.frame`s and `tibble`s, rectangular data objects in R:
+
+* <a href="https://mjfrigaard.shinyapps.io/csuc-dj-02_data-frames/">_**rectangular data in R**_</a> _**data.frames and tibbles in R**_ 
+
+### Week 2 
+
+After loading or creating a data object in R, we need to be able to extract or manipulate these data. These exercises cover subsetting in R:
+
+* <a href="https://mjfrigaard.shinyapps.io/csuc-dj-03_subsetting/">_**subsetting data in R**_</a> _**extracting data from objects in R**_ 
+
+### Week 3 
+
+### Week 4 
+
+### Week 5 
+
+### Week 6 
+
+### Week 7 
+
+### Week 8 
+
+### Week 9 
+
+### Week 10 
+
+### Week 11 
+
+### Week 12 
+
+### Week 13 
+
+### Week 14 
+
+### Week 15 
+
+### Week 16 
+
+
+
+
+This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+

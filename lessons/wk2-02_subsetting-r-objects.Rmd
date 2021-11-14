@@ -52,7 +52,7 @@ There are three primary methods for subetting objects in are:
 
 ## Vectors {.tabset}
 
-Vectors are the fundamental data type in R. Below we assign five numbers to the vector `vec`. 
+Vectors are the fundamental data type in R. Below we assign five numbers to the vector `num_vec`. 
 
 ```{r num_vec}
 num_vec <- c(2, 9, 4, 3, 7)

@@ -5,8 +5,10 @@ navbar:
   left:
     - text: "Course outline"
       href: index.html
-    - text: "Lessons and exercises"
-      href: lessons-exercises.html
+    - text: "Lessons"
+      href: lessons.html
+    - text: "Exercises"
+      href: exercises.html
     - text: "Slides"
       href: slides.html
     - text: "More resources"

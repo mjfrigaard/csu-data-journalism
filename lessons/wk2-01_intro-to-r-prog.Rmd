@@ -20,6 +20,7 @@ knitr::opts_chunk$set(collapse = TRUE,
                       comment = "#>", 
                       message = FALSE, 
                       warning = FALSE)
+
 ```
 
 # Objectives
@@ -147,6 +148,14 @@ Check character vectors with `is.character()`
 is.character(vec_character)
 ```
 
+## Vector Exercises 
+
+```{r echo=FALSE}
+blogdown::shortcode("learnr", 
+                    url = "https://mjfrigaard.shinyapps.io/csuc-dj-01_vectors/", 
+                    id = "learnr-01-vectors-01")
+```
+
 ## Vectorized {.tabset}
 
 R is often referred to as a "vector-oriented", "vectorized", or "element-wise" language because of the way it deals with vectors. We will show an example of this behavior below: 
@@ -238,7 +247,6 @@ If `vec_seq_01` had a length that was a multiple of `vec_seq_03`, R would've sti
 vec_seq_04 <- vec_seq_02[1:5]
 vec_seq_01 - vec_seq_04
 ```
-
 
 
 ## S3 vectors {.tabset}

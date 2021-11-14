@@ -109,9 +109,12 @@ The `rtweet::users_data()` function separates the 'users' variables from the 'tw
 
 Below I combine the `base::intersect()` and `base::names()` functions to see what variables from `TweetsRaw` will end up in the results from `rtweet::users_data()` (*I added `tibble::as_tibble()` so the variables print nicely to the screen*)
 
+
 ```{r intersect-users_data}
-tibble::as_tibble(base::intersect(x = base::names(rtweet::users_data(TweetsRaw)) ,
-                y = base::names(TweetsRaw)))
+tibble::as_tibble(
+base::intersect(x = base::names(rtweet::users_data(TweetsRaw)) ,
+                y = base::names(TweetsRaw))
+)
 ```
 
 Looks like there will be 20 variables in the output from `users_data()`. 
@@ -216,8 +219,8 @@ We will start by creating a map using `geom_point()` layer, but add the `coord_q
 
 ```{r geom_point-coord_quickmap}
 World %>% 
-  ggplot() + 
-  geom_point(aes(long, lat), show.legend = FALSE) +
+  ggplot() + # initializes graph
+  geom_point(aes(x = long, y = lat), show.legend = FALSE) +
   coord_quickmap() + 
   labs_geom_point
 ```
@@ -406,8 +409,8 @@ We will updated the labels for the US map.
 ```{r labs_coord_quickmap_tweets_usa}
 # new labels
 labs_coord_quickmap_tweets_usa <- ggplot2::labs(
-  title = "#NFL tweets = Basic US Map (coord_quickmap)", 
-  subtitle = "map_data('usa')")
+  title = "  #NFL tweets = Basic US Map (coord_quickmap)", 
+  subtitle = "  map_data('usa')")
 
 ggp_us_map +
   # twitter data layer
@@ -465,7 +468,7 @@ This is looking better, but we should recall we have a few additional variables 
 6. Include a `theme_minimal()` to reduce the chart elements  
 7. Add labels  
 
-```{r facet_wrap, fig.height=7, fig.width=9}
+```{r facet_wrap, fig.height=7, fig.width=9, warning=FALSE}
 labs_facet_wrap_favorite_count <- ggplot2::labs(
   title = "Favorite counts by location (US Twitter data)",
   x = "Favorite count", 
@@ -476,7 +479,7 @@ UsTweets %>%
   filter(!str_detect(location, "Honolulu, HI")) %>% 
   ggplot(aes(x = favorite_count)) + 
   geom_density() + 
-  facet_wrap(~ location) + 
+  facet_wrap(. ~ location) + 
   theme_minimal() + 
   labs_facet_wrap_favorite_count
 ```
