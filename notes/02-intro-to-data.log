@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.9.19)  19 SEP 2021 20:29
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.10.30)  14 NOV 2021 01:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **02-intro-to-data.tex
 (./02-intro-to-data.tex
 LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-08-27> (/Users/mjfrigaard/Library/TinyTeX/texmf-dist
+L3 programming layer <2021-10-18> (/Users/mjfrigaard/Library/TinyTeX/texmf-dist
 /tex/latex/base/article.cls
 Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/base/size11.clo
@@ -146,11 +146,11 @@ Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xpars
 e.sty (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.st
 y
-Package: expl3 2021-08-27 L3 programming layer (loader) 
+Package: expl3 2021-10-18 L3 programming layer (loader) 
 
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xet
 ex.def
-File: l3backend-xetex.def 2021-08-04 L3 backend support: XeTeX
+File: l3backend-xetex.def 2021-10-18 L3 backend support: XeTeX
 (|extractbb --version)
 \c__kernel_sys_dvipdfmx_version_int=\count199
 \l__color_backend_stack_int=\count266
@@ -450,7 +450,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: xetex.def on input line 149.
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2021/08/12 v3.8 verbatim text (tvz,hv)
+Package: fancyvrb 2021/10/15 v3.9 verbatim text (tvz,hv)
 \FV@CodeLineNo=\count305
 \FV@InFile=\read2
 \FV@TabBox=\box58
@@ -825,10 +825,10 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 287.
+(hyperref)                be the same. Added a new anchor on input line 278.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
-24.
+30.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -837,34 +837,34 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
-24.
+30.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-324.
+330.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-324.
+330.
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 324.
+(Font)              <9> on input line 330.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 324.
+(Font)              <6> on input line 330.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 324.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 324
+(Font)              <5> on input line 330.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 330
 .
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 324
+LaTeX Font Info:    Trying to load font information for U+msb on input line 330
 .
 (/Users/mjfrigaard/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -873,286 +873,287 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
 ]
-Overfull \hbox (47.63231pt too wide) in paragraph at lines 385--386
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 365.
+
+
+Overfull \hbox (47.63231pt too wide) in paragraph at lines 379--380
 []\TU/lmtt/m/n/10.95 "https://raw.githubusercontent.com/chadwickbureau/baseball
 databank/master/core/People.csv" 
  []
 
 [2]
 
-Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 393.
+Package xcolor Warning: Incompatible color definition on input line 396.
 
 
-Package xcolor Warning: Incompatible color definition on input line 402.
+Package xcolor Warning: Incompatible color definition on input line 401.
 
 
-Package xcolor Warning: Incompatible color definition on input line 407.
+Package xcolor Warning: Incompatible color definition on input line 401.
 
 
-Package xcolor Warning: Incompatible color definition on input line 407.
+Package xcolor Warning: Incompatible color definition on input line 414.
 
 
-Package xcolor Warning: Incompatible color definition on input line 420.
+Package xcolor Warning: Incompatible color definition on input line 419.
 
 
-Package xcolor Warning: Incompatible color definition on input line 425.
+Package xcolor Warning: Incompatible color definition on input line 419.
 
 
-Package xcolor Warning: Incompatible color definition on input line 425.
+Package xcolor Warning: Incompatible color definition on input line 433.
 
 
-Package xcolor Warning: Incompatible color definition on input line 439.
+Package xcolor Warning: Incompatible color definition on input line 438.
 
 
-Package xcolor Warning: Incompatible color definition on input line 444.
+Package xcolor Warning: Incompatible color definition on input line 438.
 
 
-Package xcolor Warning: Incompatible color definition on input line 444.
+Package xcolor Warning: Incompatible color definition on input line 447.
 
 
-Package xcolor Warning: Incompatible color definition on input line 453.
+Package xcolor Warning: Incompatible color definition on input line 452.
 
 
-Package xcolor Warning: Incompatible color definition on input line 458.
+Package xcolor Warning: Incompatible color definition on input line 452.
 
 
-Package xcolor Warning: Incompatible color definition on input line 458.
+Package xcolor Warning: Incompatible color definition on input line 466.
+
+[3]
+
+Package xcolor Warning: Incompatible color definition on input line 471.
 
 
 Package xcolor Warning: Incompatible color definition on input line 471.
 
-[3]
 
-Package xcolor Warning: Incompatible color definition on input line 476.
-
-
-Package xcolor Warning: Incompatible color definition on input line 476.
+Package xcolor Warning: Incompatible color definition on input line 479.
 
 
-Package xcolor Warning: Incompatible color definition on input line 484.
+Package xcolor Warning: Incompatible color definition on input line 483.
 
 
-Package xcolor Warning: Incompatible color definition on input line 488.
+Package xcolor Warning: Incompatible color definition on input line 483.
 
 
-Package xcolor Warning: Incompatible color definition on input line 488.
+Package xcolor Warning: Incompatible color definition on input line 510.
 
 
 Package xcolor Warning: Incompatible color definition on input line 515.
 
 
-Package xcolor Warning: Incompatible color definition on input line 520.
+Package xcolor Warning: Incompatible color definition on input line 515.
 
 
-Package xcolor Warning: Incompatible color definition on input line 520.
+Package xcolor Warning: Incompatible color definition on input line 524.
 
 
 Package xcolor Warning: Incompatible color definition on input line 529.
 
 
-Package xcolor Warning: Incompatible color definition on input line 534.
+Package xcolor Warning: Incompatible color definition on input line 529.
 
 
-Package xcolor Warning: Incompatible color definition on input line 534.
-
-
-Package xcolor Warning: Incompatible color definition on input line 544.
+Package xcolor Warning: Incompatible color definition on input line 539.
 
 [4]
 
-Package xcolor Warning: Incompatible color definition on input line 548.
+Package xcolor Warning: Incompatible color definition on input line 543.
 
 
-Package xcolor Warning: Incompatible color definition on input line 548.
+Package xcolor Warning: Incompatible color definition on input line 543.
 
 
-Overfull \hbox (7.47pt too wide) in paragraph at lines 558--558
+Overfull \hbox (7.47pt too wide) in paragraph at lines 553--553
 []\TU/lmtt/m/n/9 trying URL 'https://raw.githubusercontent.com/chadwickbureau/b
 aseballdatabank/master/core/People.csv'[] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 584.
+Package xcolor Warning: Incompatible color definition on input line 579.
 
 
-Package xcolor Warning: Incompatible color definition on input line 590.
+Package xcolor Warning: Incompatible color definition on input line 585.
 
 
-Package xcolor Warning: Incompatible color definition on input line 590.
+Package xcolor Warning: Incompatible color definition on input line 585.
+
+
+Package xcolor Warning: Incompatible color definition on input line 603.
 
 
 Package xcolor Warning: Incompatible color definition on input line 607.
 
 
-Package xcolor Warning: Incompatible color definition on input line 611.
-
-
-Package xcolor Warning: Incompatible color definition on input line 611.
+Package xcolor Warning: Incompatible color definition on input line 607.
 
 [5]
 
-Package xcolor Warning: Incompatible color definition on input line 651.
+Package xcolor Warning: Incompatible color definition on input line 648.
 
 
-Package xcolor Warning: Incompatible color definition on input line 655.
+Package xcolor Warning: Incompatible color definition on input line 652.
 
 
-Package xcolor Warning: Incompatible color definition on input line 655.
+Package xcolor Warning: Incompatible color definition on input line 652.
 
 
-Package xcolor Warning: Incompatible color definition on input line 661.
+Package xcolor Warning: Incompatible color definition on input line 658.
 
 
-Package xcolor Warning: Incompatible color definition on input line 665.
+Package xcolor Warning: Incompatible color definition on input line 662.
 
 
-Package xcolor Warning: Incompatible color definition on input line 665.
+Package xcolor Warning: Incompatible color definition on input line 662.
 
 [6]
 
-Package xcolor Warning: Incompatible color definition on input line 698.
+Package xcolor Warning: Incompatible color definition on input line 695.
 
 
-Package xcolor Warning: Incompatible color definition on input line 702.
+Package xcolor Warning: Incompatible color definition on input line 699.
 
 
-Package xcolor Warning: Incompatible color definition on input line 702.
+Package xcolor Warning: Incompatible color definition on input line 699.
 
 
-Package xcolor Warning: Incompatible color definition on input line 708.
+Package xcolor Warning: Incompatible color definition on input line 705.
 
 
-Package xcolor Warning: Incompatible color definition on input line 712.
+Package xcolor Warning: Incompatible color definition on input line 709.
 
 
-Package xcolor Warning: Incompatible color definition on input line 712.
+Package xcolor Warning: Incompatible color definition on input line 709.
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 719.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 716.
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 724.
+(hyperref)                be the same. Added a new anchor on input line 721.
 
 
-Package xcolor Warning: Incompatible color definition on input line 741.
+Package xcolor Warning: Incompatible color definition on input line 738.
 
 
-Package xcolor Warning: Incompatible color definition on input line 745.
+Package xcolor Warning: Incompatible color definition on input line 742.
 
 
-Package xcolor Warning: Incompatible color definition on input line 745.
+Package xcolor Warning: Incompatible color definition on input line 742.
 
 
-Package xcolor Warning: Incompatible color definition on input line 760.
+Package xcolor Warning: Incompatible color definition on input line 757.
 
 
-Package xcolor Warning: Incompatible color definition on input line 764.
+Package xcolor Warning: Incompatible color definition on input line 761.
 
 
-Package xcolor Warning: Incompatible color definition on input line 764.
+Package xcolor Warning: Incompatible color definition on input line 761.
 
 
-Package xcolor Warning: Incompatible color definition on input line 780.
+Package xcolor Warning: Incompatible color definition on input line 777.
 
 [7]
 
-Package xcolor Warning: Incompatible color definition on input line 785.
+Package xcolor Warning: Incompatible color definition on input line 782.
 
 
-Package xcolor Warning: Incompatible color definition on input line 785.
+Package xcolor Warning: Incompatible color definition on input line 782.
 
 
-Package xcolor Warning: Incompatible color definition on input line 794.
+Package xcolor Warning: Incompatible color definition on input line 791.
 
 
-Package xcolor Warning: Incompatible color definition on input line 799.
+Package xcolor Warning: Incompatible color definition on input line 796.
 
 
-Package xcolor Warning: Incompatible color definition on input line 799.
+Package xcolor Warning: Incompatible color definition on input line 796.
 
 
-Package xcolor Warning: Incompatible color definition on input line 818.
+Package xcolor Warning: Incompatible color definition on input line 817.
 
 
-Package xcolor Warning: Incompatible color definition on input line 822.
+Package xcolor Warning: Incompatible color definition on input line 821.
 
 
-Package xcolor Warning: Incompatible color definition on input line 822.
+Package xcolor Warning: Incompatible color definition on input line 821.
 
 
-Package xcolor Warning: Incompatible color definition on input line 832.
+Package xcolor Warning: Incompatible color definition on input line 831.
 
 
-Package xcolor Warning: Incompatible color definition on input line 836.
+Package xcolor Warning: Incompatible color definition on input line 835.
 
 
-Package xcolor Warning: Incompatible color definition on input line 836.
+Package xcolor Warning: Incompatible color definition on input line 835.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 848.
+(hyperref)                be the same. Added a new anchor on input line 847.
 
 
-Package xcolor Warning: Incompatible color definition on input line 865.
+Package xcolor Warning: Incompatible color definition on input line 864.
 
 [8]
 
-Package xcolor Warning: Incompatible color definition on input line 869.
+Package xcolor Warning: Incompatible color definition on input line 868.
 
 
-Package xcolor Warning: Incompatible color definition on input line 869.
+Package xcolor Warning: Incompatible color definition on input line 868.
 
 
-Package xcolor Warning: Incompatible color definition on input line 875.
+Package xcolor Warning: Incompatible color definition on input line 874.
 
 
-Package xcolor Warning: Incompatible color definition on input line 879.
+Package xcolor Warning: Incompatible color definition on input line 878.
 
 
-Package xcolor Warning: Incompatible color definition on input line 879.
+Package xcolor Warning: Incompatible color definition on input line 878.
 
 
-Package xcolor Warning: Incompatible color definition on input line 922.
+Package xcolor Warning: Incompatible color definition on input line 921.
 
 [9]
 
-Package xcolor Warning: Incompatible color definition on input line 926.
+Package xcolor Warning: Incompatible color definition on input line 925.
 
 
-Package xcolor Warning: Incompatible color definition on input line 926.
+Package xcolor Warning: Incompatible color definition on input line 925.
 
 
-Package xcolor Warning: Incompatible color definition on input line 940.
+Package xcolor Warning: Incompatible color definition on input line 939.
 
 
-Package xcolor Warning: Incompatible color definition on input line 946.
+Package xcolor Warning: Incompatible color definition on input line 945.
 
 
-Package xcolor Warning: Incompatible color definition on input line 946.
+Package xcolor Warning: Incompatible color definition on input line 945.
 
 
-Package xcolor Warning: Incompatible color definition on input line 973.
+Package xcolor Warning: Incompatible color definition on input line 972.
 
 
-Package xcolor Warning: Incompatible color definition on input line 977.
+Package xcolor Warning: Incompatible color definition on input line 976.
 
 
-Package xcolor Warning: Incompatible color definition on input line 977.
+Package xcolor Warning: Incompatible color definition on input line 976.
 
 
 AED: lastpage setting LastPage
 [10] (./02-intro-to-data.aux)
 Package rerunfilecheck Info: File `02-intro-to-data.out' has not changed.
-(rerunfilecheck)             Checksum: 95C90DD29506BCA4478D6B6897A797AA;1262.
+(rerunfilecheck)             Checksum: EC7B4920C1023ED00CD50E06A918B928;1351.
  ) 
 Here is how much of TeX's memory you used:
- 21958 strings out of 478492
- 388902 string characters out of 5860850
- 792260 words of memory out of 5000000
- 41862 multiletter control sequences out of 15000+600000
+ 21961 strings out of 478472
+ 389060 string characters out of 5860206
+ 794124 words of memory out of 5000000
+ 41885 multiletter control sequences out of 15000+600000
  417270 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 87i,12n,117p,384b,599s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 87i,13n,117p,384b,503s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on 02-intro-to-data.pdf (10 pages).

@@ -34,15 +34,13 @@ opts_chunk$set(warning = TRUE,
 
 # What is/are data?
 
-I tend to avoid abstract descriptions of what data are (or is) because they remove the necessary elements we need to make sense of them/it (i.e., "*why should we care about these/this data*?"). 
-
 For the sake of simplicity, we're going to use the term data to describe "*something that has been measured.*" As you will see throughout the course, measurement can take many forms and encompasses just about any phenomena we can imagine. I will use the terms measurement and  [metrics](https://www.lexico.com/en/definition/metrics) interchangeably, which are defined as, "*a method of measuring something, or the results obtained from this.*" 
-
-In this course, we're going to focus on the connection between the "data" and "measurement", because deciding what gets measured (and how its measured) is a human activity, and in many cases these decisions are just as important as the data itself.
 
 ## Data are measurements, and measurements are approximations 
 
-Measurements and metrics are usually intended to capture things that matter (otherwise, why measure them?), but it's also important to remember that **all measurements are approximations**. It's unlikely that the question we're trying to answer has a dataset that *perfectly* captures the phenomena of interest. In statistics, a widespread saying is, "[all models are wrong, but some are useful.](https://en.wikipedia.org/wiki/All_models_are_wrong)" While models use measurements and data to explain or predict something, data visualizations visually display these approximations.  
+Measurements and metrics are usually intended to capture things that matter (otherwise, why measure them?), but it's also important to remember that **all measurements are approximations**. It's unlikely that the question we're trying to answer has a dataset that *perfectly* captures the phenomena of interest. This course focuses on using data visualizations (graphs and tables) to display and communicate some phenomena.
+
+In statistics, a widespread saying is, "[all models are wrong, but some are useful.](https://en.wikipedia.org/wiki/All_models_are_wrong)" Models use these approximate measurements to explain or predict, and data visualizations visually display these approximations.  
 
 ## An example question
 
@@ -60,7 +58,7 @@ Below are some examples of follow-up questions we might also consider:
 
 + *What player had the best OBP (on-base percentage) last season?*
 
-As we can see, even a seemingly simple question requires qualifications and operational definitions we need to describe. Before we can design a data visualization, we need to frame the question in a way that can be answered with the available data (or we need to collect data to answer we're interested in), then we can start determining what the best visualization is for displaying the solution.
+As we can see, even a seemingly simple question requires qualifications and operational definitions. Before we can design a data visualization, we need to frame the question in a way that can be answered with the available data (or we need to collect data to answer we're interested in). Only then we can start determining what the best visualization is for displaying and communicating the results.
 
 In our baseball example, we would need to decide on the metrics we'll use to measure 'best hitting', and the criteria for being considered a 'professional baseball player'. Then we need to rewrite our original question, but this time with more precision. This process--of re-framing a question into something we can answer with data--is essential *before we start writing code*.
 
@@ -76,7 +74,7 @@ The 'source' is the origin(s) of the raw data used in a visualization, usually a
 
 *A source usually includes a data dictionary. This document describes the names and content of the variables included in each dataset.*
 
-## Organizing Data 
+### Organizing Data 
 
 In this course, we'll be using the term 'dataset' to describe rectangular data objects (like spreadsheets). Datasets are made up of variables (columns) and observations (rows). At the intersection of each variable and observation is a value, the smallest unit of data in a dataset. 
 
@@ -125,7 +123,7 @@ dataset_name <- "People.csv"
 dataset_name
 ```
 
-### Creating folders in R
+### Creating data folders in R
 
 Since we're downloading a raw data file, we should create a folder on our local machine called `data`, and a subfolder called `raw`. 
 
@@ -149,7 +147,7 @@ Below is a folder tree with the `data/raw` folders listed:
     |-- raw/
 ```
 
-### Downloading data 
+### Downloading data with R
 
 R comes with a function for downloading files, `download.file()`, which we will use to download the `People.csv` file. The `download.file()` function takes two arguments, `url =`  and `destfile = `. 
 
@@ -192,7 +190,7 @@ Below is an updated folder tree with the downloaded 'People.csv' dataset.
         |-- People.csv
 ```
 
-### Importing data 
+### Importing data into R 
 
 We now have the 'People.csv' data downloaded into a local folder, we can import the file into RStudio using one of R's many import functions. 
 
@@ -206,7 +204,7 @@ library(readr)
 readr::read_csv(file = people_file)
 ```
 
-## `tibble`s
+## Rectangular data (`tibble`s)
 
 I've re-written the `read_csv()` function below with the explicit data path. Before we import these data, we should know what to expect. A quick read of the documentation (accessible using `??readr::read_csv` in the console) tells us the value (output) from `read_csv()` will be a `tibble`. Recall what we learned about `tibble`s/`data.frame`s in the [Intro to R Programming: Rectangular data in R](https://mjfrigaard.github.io/csuc-data-journalism/wk1-01_intro-to-r-prog.html#6_Rectangular_data_in_R) exercises. 
 
@@ -218,7 +216,7 @@ RawPeopleTbl <- read_csv(file = "data/raw/People.csv")
 
 When we run this function, we can see it gave us some useful information about the file we imported. We can see the number of columns (`24`) and rows (`20322`). In the section titled, "`Column specification`", we can see the format (`chr`, `dbl`, and `date`) and name (`playerID`, `birthYear`, and `debut`) of the columns (for a refresher on these data types, refer to [data types](https://mjfrigaard.github.io/csuc-data-journalism/slides/wk-02.1-intro-r-prog.html#48) slides)
 
-## `data.frame`s
+## Rectangular data (`data.frame`s)
 
 Just for comparison, we'll compare `readr`'s `read_csv()` to the `read.csv()` function from the `utils` package (loaded 'out of the box' with R). The documentation (accessible using `??utils::read.csv` in the console) tells us the  
 output object will be a `data.frame`, so we will store this in an object named `RawPeopleDf`. 
@@ -274,11 +272,11 @@ RawPeopleTbl[ 2, 14:15]
 RawPeopleDf[ 2, 14:15]
 ```
 
-We're going to be primarily using `tibble`s throughout the course because they have more predictable and reliable behaviors.
+We're going to be primarily using `tibble`s throughout the course because they print more information to the screen (and are a bit more predictable).
 
 ## Variables 
 
-Variables are the columns in a dataset. Sometimes you'll see them referred to as attributes, predictors, outcomes, responses, or features. 
+**Variables are the columns in a dataset.** Sometimes you'll see them referred to as attributes, predictors, outcomes, responses, or features. 
 
 We can check the column names from `RawPeople` using `colnames()` or `names()`. 
 
@@ -310,7 +308,7 @@ An important this to remember about `tibble`s and `data.frame`s in R is that the
 
 ## Observations
 
-Observations are the rows in a dataset. Sometimes you'll see these referred to as cases, records, instances, or samples. The number of rows is printed with `glimpse()` (`Rows: 20,322`), but we can check the number of rows in a dataset using the `nrow()`. 
+**Observations are the rows in a dataset.** Sometimes you'll see these referred to as cases, records, instances, or samples. The number of rows is printed with `glimpse()` (`Rows: 20,322`), but we can check the number of rows in a dataset using the `nrow()`. 
 
 ```{r nrow}
 nrow(PeopleTbl)

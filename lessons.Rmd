@@ -144,23 +144,17 @@ cat_bullet(x, "^lessons/wk12-")
 
 ### Week 14 (2021-11-22)
 
-*(under construction)*
-
 ```{r wk13-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk13-")
 ```
 
 ### Week 15 (2021-11-29)
 
-*(under construction)*
-
 ```{r wk14-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk14-")
 ```
 
 ### Week 16 (2021-12-06)
-
-*(under construction)*
 
 ```{r wk15-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk15-")
