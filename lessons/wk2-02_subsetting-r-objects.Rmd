@@ -50,7 +50,7 @@ There are three primary methods for subetting objects in are:
 3. dollar sign: `$`  
 
 
-## Vectors {.tabset}
+## Vectors 
 
 Vectors are the fundamental data type in R. Below we assign five numbers to the vector `num_vec`. 
 
@@ -109,7 +109,7 @@ small_num_vec <- num_vec[1:3]
 small_num_vec
 ```
 
-## Matrices {.tabset}
+## Matrices 
 
 We'll now move into subsetting higher-dimensional objects. We went over these objects in a [previous lesson](https://mjfrigaard.github.io/r-meetup-tutorials/bk00_functions-and-objects.html#5_Multidimensional_objects).
 
@@ -163,7 +163,7 @@ mat_data[2, 1]
 ```
 
 
-## Arrays {.tabset}
+## Arrays 
 
 Arrays contain a collection of equal-dimension matrices. Just like matrices, they have fixed number of rows and columns, but they also have a third dimension called a *layer*. See the image below for conceptual illustration a three-row, three-column, two-layer array (3 × 3 × 2). 
 
@@ -226,7 +226,7 @@ And here is the returned matrix, presented as columns:
 knitr::include_graphics(path = "img/array-return-cols.png")
 ```
 
-## Data frames/tibbes {.tabset}
+## Data frames/tibbes 
 
 Data frames and tibbles are rectangular representations of data (like spreadsheets). Data frames and tibbles contain vectors of equal length.
 
@@ -395,7 +395,7 @@ str(Simpsons[[1]])
 str(AmericanDad[[1]])
 ```
 
-## Lists {.tabset}
+## Lists 
 
 Lists are special kinds of objects. Their contents can be items of different data types *and* lengths. Read more about lists in [Advanced R](https://adv-r.hadley.nz/vectors-chap.html#lists).
 

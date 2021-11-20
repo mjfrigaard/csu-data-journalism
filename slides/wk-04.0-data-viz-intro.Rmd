@@ -62,7 +62,7 @@ background-size: 8%
 
 ## 3) Recognizing and using `geoms` 
 
-## 4) Facetting graphs
+## 4) Faceting graphs
 
 ---
 class: left, top
@@ -1038,7 +1038,7 @@ background-image: url(img/ggplot2.png)
 background-position: 95% 7%
 background-size: 9%
 
-## Facetting 
+## Faceting 
 
 ### Facet layers display subplots for levels of categorical variables 
 

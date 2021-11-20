@@ -47,7 +47,7 @@ Two major elements in R programming: functions and objects.
 
 Vectors are the fundamental data type in R. Most R functions are 'vectorized', meaning they're optimized to work on vectors. 
 
-## Atomic vectors {.tabset}
+## Atomic vectors 
 
 The "atomic" in atomic vectors means, "*of or forming a single irreducible unit or component in a larger system.*"
 
@@ -87,7 +87,7 @@ vec_character <- c("A", "B", "C")
 vec_character
 ```
 
-## Evaluating vectors {.tabset}
+## Evaluating vectors 
 
 **Store and explore** - create an object, perform an operation on the object, store the results, then explore the contents with another function.
 
@@ -148,15 +148,7 @@ Check character vectors with `is.character()`
 is.character(vec_character)
 ```
 
-## Vector Exercises 
-
-```{r echo=FALSE}
-blogdown::shortcode("learnr", 
-                    url = "https://mjfrigaard.shinyapps.io/csuc-dj-01_vectors/", 
-                    id = "learnr-01-vectors-01")
-```
-
-## Vectorized {.tabset}
+## Vectorized 
 
 R is often referred to as a "vector-oriented", "vectorized", or "element-wise" language because of the way it deals with vectors. We will show an example of this behavior below: 
 
@@ -249,7 +241,7 @@ vec_seq_01 - vec_seq_04
 ```
 
 
-## S3 vectors {.tabset}
+## S3 vectors 
 
 S3 vector objects are factors, dates, date-times, durations.
 
@@ -276,35 +268,65 @@ unclass(vec_factor)
 
 ### Dates 
 
-Dates are stored as `double` vectors with a class attribute set to `Date`.
+R also comes with a few functions for creating dates (`Sys.Date()` and `Sys.time()`). 
 
 ```{r vec_date}
 vec_date <- c(Sys.Date(), Sys.Date() + 1, Sys.Date() + 2)
 vec_date
+```
+
+Dates are stored as `double` vectors with a class attribute set to `"Date"`. 
+
+```{r is.double-vec_date}
+is.double(vec_date)
 attributes(vec_date)
 ```
 
-`unclass()` tells us what the actual number is.
+The number for each date is accessible using the `unclass()` function:
 
 ```{r unclass-vec_date}
 unclass(vec_date)
 ```
 
+The number are related to the [UNIX Epoch time](https://en.wikipedia.org/wiki/Unix_time), which is January 1, 1970 (00:00:00 UTC). 
+
+The Unix epoch serves as a point in time in which the computer can calculate dates *from*.  The actual date and time is arbitrary, but without a fixed point in time, there's no way to quantify or measure a 'date.'
+
+
 ### Date-times 
 
-Date-times contain a bit more information than dates.
+Date-times contain a bit more information than dates. In R, the `POSIX` date format is the time since January 1, 1970 (in the UTC time zone), measured to the nearest second.  
+
+`POSIXct` represents this as a numeric vector, and `POSIXlt` is list of named date/time vectors.
 
 ```{r vec_datetime_ct}
-vec_datetime_ct <- as.POSIXct(x = vec_date)
+vec_datetime_ct <- as.POSIXct(vec_date)
 vec_datetime_ct
-```
-
-`vec_datetime_ct` is a `double` vector 
-
-```{r typeof-vec_datetime_ct}
 typeof(vec_datetime_ct)
 ```
 
+```{r vec_datetime_lt}
+vec_datetime_lt <- as.POSIXlt(vec_date)
+vec_datetime_lt
+typeof(vec_datetime_lt)
+```
+
+For `vec_datetime_ct`, we can access the epoch time with `unclass()`
+
+```{r unclass-vec_datetime_ct}
+unclass(vec_datetime_ct)
+```
+
+In `vec_datetime_lt`, each date/time measurement is in a named vector: 
+
+```{r unclass-vec_datetime_lt}
+unclass(vec_datetime_lt)
+```
+
+
+For the `"Date"` class, the number represents the number of days, and for the `"POSIX` classes, this represents the number of seconds (to the nearest second) since the epoch. 
+
+The `"POSIXct"`/`"POSIXlt"` classes also both contain a time-zone (explore your system's time-zone with `Sys.timezone(location = TRUE)`). 
 
 ### Durations (difftime)
 
@@ -327,7 +349,7 @@ attributes(vec_difftime)
 
 In the next sections we'll cover matrices and arrays, two of R's multidimensional objects.
 
-## Matrices {.tabset}
+## Matrices 
 
 These are two-dimensional objects. We can create with `matrix()`. 
 
@@ -398,7 +420,7 @@ If you're importing spreadsheets, most of the work you'll do in R will be with r
 knitr::include_graphics(path = "img/data-frame-tibble.png")
 ```
 
-## Data Frames {.tabset}
+## Data Frames 
 
 Rectangular data with rows and columns. 
 
@@ -424,7 +446,7 @@ Check the structure of the data.frame with `str()`
 str(DataFrame)
 ```
 
-## Tibbles {.tabset}
+## Tibbles 
 
 These are special kinds of `data.frame`s (they print better to the console, and character vectors are never coerced into factors).
 
@@ -454,7 +476,7 @@ str(Tibble)
 
 Lists are unique objects in R because they are *recursive vectors*. We've pointed out that atomic vectors can't be broken down into smaller components, but a list can store objects of multiple types (character, numeric, logical, etc.), `data.frame`s, `tibble`s, and even other lists. 
 
-## Lists {.tabset}
+## Lists 
 
 Unlike `data.frame`s, `tibble`s (which require each vector to be of equal length), lists can store objects of different types *and* sizes.
 
