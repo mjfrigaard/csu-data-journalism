@@ -54,8 +54,8 @@ View the exercises for this section [here](https://mjfrigaard.github.io/csuc-dat
 We're going to import the data from the previous exercises.  
 
 ```{r import-TidyApple-TopUSCities, message=FALSE, warning=FALSE}
-TidyApple <- readr::read_csv("https://bit.ly/3deFcBy")
-TopUSCities <- readr::read_csv("https://bit.ly/3dYbVub")
+TidyApple <- vroom::vroom("https://bit.ly/3CDGXlB", delim = ",")
+TopUSCities <- vroom::vroom("https://bit.ly/3qXN6H6", delim = ",")
 ```
 
 
@@ -82,11 +82,7 @@ TopUSCities %>%
   lab_top_cities
 ```
 
-
-
 ### solution
-
-See below:
 
 ```{r lab_top_cities-sol}
 lab_top_cities <- labs(x = "Date", y  = "Direction Requests",
@@ -123,8 +119,6 @@ TopUSCities %>%
 
 
 ### solution
-
-See below:
 
 ```{r facet_wrap-2-sol, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 TopUSCities %>%
@@ -170,8 +164,6 @@ TopUSCities %>%
 
 ### solution
 
-See below:
-
 ```{r theme_minimal-sol, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 TopUSCities %>%
   ggplot(aes(x = date, y = dir_request,
@@ -207,8 +199,6 @@ TopUSCities %>%
 ```
 
 ### solution
-
-See below:
 
 ```{r theme-sol, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 TopUSCities %>%
@@ -348,8 +338,6 @@ Top25TransitUSAllT1 %>%
 
 ### solution
 
-See below:
-
 ```{r facet_wrap_paginate-sol, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 Top25TransitUSAllT1 %>%
   # global settings
@@ -412,8 +400,6 @@ Top25TransitUSAllT1 %>%
 
 ### solution
 
-See below:
-
 ```{r scale_color_jcolors-sol, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 Top25TransitUSAllT1 %>%
   # global settings
@@ -465,8 +451,6 @@ USWalkingAdj %>%
 
 ### solution
 
-See below:
-
 ```{r USWalkingAdj-sol}
 USWalkingAdj <- TidyAppleUS %>%
   filter(trans_type == "walking") %>%
@@ -496,8 +480,6 @@ lab_facet_geo <- labs(x = "Date",
 ```
 
 ### solution
-
-See below:
 
 ```{r lab_facet_geo-sol}
 lab_facet_geo <- labs(x = "Date",
@@ -562,8 +544,6 @@ USWalkingAdj %>%
 ```
 
 ### solution
-
-See below:
 
 ```{r facet_geo-sol, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 # set colors

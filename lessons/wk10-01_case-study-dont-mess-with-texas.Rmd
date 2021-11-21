@@ -1,5 +1,5 @@
 ---
-title: "Case Study"
+title: "Case Study (Part 1)"
 comment: "*Don't mess with Texas*"
 output: 
   html_document: 
@@ -52,7 +52,7 @@ library(xml2)
 ```
 
 
-## Scraping the data from HTML websites {.tabset}
+## Scraping the data from HTML websites 
 
 Load the `xml2` package and define the url with the data (here it's `webpage_url`).
 
@@ -100,21 +100,32 @@ ExecutedOffenders %>% glimpse(78)
 
 ### Export raw data 
 
+Create a folder for these data:
+
 ```{r export-raw}
 # create raw folder
-fs::dir_create("data/raw/")
-# fs::dir_tree("data")
+fs::dir_create("../data/wk10-dont-mess-with-texas/")
+fs::dir_tree("../data", recurse = FALSE, regexp = "dont")
+```
+
+Create an exported data file (with the path): 
+
+```{r executed_raw_file}
 # create export path
-executed_raw_file <- paste0("data/raw/", noquote(lubridate::today()), "-ExecutedOffenders.csv")
-# executed_raw_file
-# export
-write_csv(x = ExecutedOffenders, file = executed_raw_file)
-# verify
-fs::dir_tree("data/raw", regexp = "ExecutedOffenders.csv")
+executed_raw_file <- paste0("../data/wk10-dont-mess-with-texas/", noquote(lubridate::today()), "-ExecutedOffenders.csv")
+executed_raw_file
 ```
 
 
-## Identify the links with selector gadget {.tabset}
+```{r export-ExecutedOffenders}
+# export
+write_csv(x = ExecutedOffenders, file = executed_raw_file)
+# verify
+fs::dir_tree("../data/wk10-dont-mess-with-texas/", regexp = "ExecutedOffenders.csv")
+```
+
+
+## Identify the links with selector gadget 
 
 Download the [selector gadget app](https://selectorgadget.com/) for your browser. 
 
@@ -123,7 +134,7 @@ Download the [selector gadget app](https://selectorgadget.com/) for your browser
 You can identify the various elements in a webpage using the selector gadget. Read [this tutorial](https://rvest.tidyverse.org/articles/articles/selectorgadget.html) to see how it works. 
 
 ```{r selector_gadget, out.width='70%', echo=FALSE}
-include_graphics("img/selector_gadget.png")
+include_graphics("../img/selector_gadget.png")
 ```
 
 In order to get the `nodes` from the table, we need to send `webpage` through a few passes of `rvest` functions (`html_nodes` and `html_attr`) with various `css` tags to get the correct URL paths. This took a few tries and some trial and error, but eventually I was able to figure out the the correct combinations to get the `Links` to the pages.
@@ -139,7 +150,6 @@ Links <- webpage %>%
   rvest::html_attr("href")
 # check Links
 Links %>% utils::head(20)
-# str(Links)
 ```
 
 Now `Links` contain:
@@ -248,7 +258,7 @@ Test one of the URLs out in the browser.
 xopen("https://www.tdcj.texas.gov/death_row/dr_info/swearingenlarrylast.html")
 ```
 
-## Create the info pattern {.tabset}
+## Create the info pattern 
 
 Now I want the offender information links (so I omit the links with `last` in the pattern).
 
@@ -366,7 +376,7 @@ ExecutedOffenders %>% dplyr::glimpse(78)
 ```
 
 
-## Create indicator for .html vs .jpgs {.tabset}
+## Create indicator for .html vs .jpgs 
 
 Create a binary variable to identify if this is a `.jpg` or `.html` path and name the new data frame `ExOffndrsComplete`.
 
@@ -397,20 +407,21 @@ ExOffndrsComplete %>%
 
 We now have a data frame we can export into a dated folder. 
 
-```{r tahday}
+```{r export-}
 # create data folder
-fs::dir_create("data/processed")
+export_path <- "../data/wk10-dont-mess-with-texas/processed/"
+fs::dir_create(export_path)
 # create today
 tahday <- as.character(lubridate::today())
-tahday_path <- file.path("data/processed", tahday)
+tahday_path <- paste0(export_path, tahday, "/")
 tahday_path
 # create new data folder
 fs::dir_create(tahday_path)
+# create data path
+tahday_data_path <- paste0(tahday_path, "ExOffndrsComplete.csv")
 # export these data
-readr::write_csv(as.data.frame(ExOffndrsComplete),
-                 path = paste0(tahday_path, "/", 
-                               tahday,"-ExOffndrsComplete.csv"))
-fs::dir_tree("data/processed", regexpr = "-ExOffndrsComplete.csv")
+vroom::vroom_write(x = ExOffndrsComplete, file = tahday_data_path, delim = ",")
+fs::dir_tree(tahday_path, regexpr = "-ExOffndrsComplete.csv")
 ```
 
 
