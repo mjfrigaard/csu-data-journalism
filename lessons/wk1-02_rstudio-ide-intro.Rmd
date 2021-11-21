@@ -54,7 +54,7 @@ We also don't want the workspace to `.RData` on exit, so we will set this to **N
 How your **General** settings should look:
 
 ```{r img-settings, echo=FALSE, out.width='89%', out.height='80%', fig.align='center'}
-knitr::include_graphics(path = "img/settings.png")
+knitr::include_graphics(path = "../img/settings.png")
 ```
 
 ## Code 
@@ -68,7 +68,7 @@ Under **Tools > Global Options...** click on **Code**
 - Save R scripts before sourcing? *can't see how this is a bad thing...*
 
 ```{r code-settings, echo=FALSE, out.width='40%', out.height='40%', fig.align='center'}
-knitr::include_graphics(path = "img/code-settings.png")
+knitr::include_graphics(path = "../img/code-settings.png")
 ```
 
 ### Code display
@@ -78,7 +78,7 @@ knitr::include_graphics(path = "img/code-settings.png")
 - Rainbow parentheses? *add some color to your life!*
 
 ```{r code-display, echo=FALSE, out.width='40%', out.height='40%', fig.align='center'}
-knitr::include_graphics(path = "img/code-display.png")
+knitr::include_graphics(path = "../img/code-display.png")
 ```
 
 ### Code saving
@@ -88,7 +88,7 @@ knitr::include_graphics(path = "img/code-display.png")
 - Text encoding? *I use UTF-8, but ASCII works for special characters*
 
 ```{r code-savings, echo=FALSE, out.width='40%', out.height='40%', fig.align='center'}
-knitr::include_graphics(path = "img/code-savings.png")
+knitr::include_graphics(path = "../img/code-savings.png")
 ```
 
 ### Code completion
@@ -98,7 +98,7 @@ knitr::include_graphics(path = "img/code-savings.png")
 - Completion delay setting? *how quickly do you want help? :)*
 
 ```{r code-completion, echo=FALSE, out.width='40%', out.height='40%', fig.align='center'}
-knitr::include_graphics(path = "img/code-completion.png")
+knitr::include_graphics(path = "../img/code-completion.png")
 ```
 
 
@@ -110,7 +110,7 @@ knitr::include_graphics(path = "img/code-completion.png")
 
 
 ```{r code-diagnostics, echo=FALSE, out.width='40%', out.height='40%', fig.align='center'}
-knitr::include_graphics(path = "img/code-diagnostics.png")
+knitr::include_graphics(path = "../img/code-diagnostics.png")
 ```
 
 
@@ -127,7 +127,7 @@ The console is where we can enter code directly, and where we'll see output. We 
 - Other? *this is a personal preference* 
 
 ```{r console, echo=FALSE, out.width='40%', out.height='40%', fig.align='center'}
-knitr::include_graphics(path = "img/console.png")
+knitr::include_graphics(path = "../img/console.png")
 ```
 
 ## Appearance 
@@ -142,7 +142,7 @@ Under **Tools > Global Options...** click on **Appearance**
 - Editor theme? *check out [`rsthemes` package](https://www.garrickadenbuie.com/project/rsthemes/)*
 
 ```{r appearance, echo=FALSE, out.width='40%', out.height='40%', fig.align='center'}
-knitr::include_graphics(path = "img/appearance.png")
+knitr::include_graphics(path = "../img/appearance.png")
 ```
 
 ## Pane layout 
@@ -158,7 +158,7 @@ Under **Tools > Global Options...** click on **Pane Layout**
   - Files, Packages, Help, Tutorial, Viewer
 
 ```{r default-layout, echo=FALSE, out.width="40%", out.height="40%", fig.align='center'}
-knitr::include_graphics("img/default-layout.png")
+knitr::include_graphics("../img/default-layout.png")
 ```
 
 ### Adding columns
@@ -167,7 +167,7 @@ knitr::include_graphics("img/default-layout.png")
   - add a Source column and rearrange the panes
 
 ```{r add-column-switch-panes, echo=FALSE, out.width="40%", out.height="40%", fig.align='center'}
-knitr::include_graphics("img/add-column-switch-panes.png")
+knitr::include_graphics("../img/add-column-switch-panes.png")
 ```
 
 ### Three column view
@@ -175,7 +175,7 @@ knitr::include_graphics("img/add-column-switch-panes.png")
 Now you see **Source**, **Tutorial**, and **Console** panes on a single screen!
 
 ```{r three-column-layout, echo=FALSE, out.width="65%", out.height="65%", fig.align='center'}
-knitr::include_graphics("img/three-column-layout.png")
+knitr::include_graphics("../img/three-column-layout.png")
 ```
 
 # RStudio projects
@@ -206,13 +206,13 @@ Keep track of all your files with RStudio project files (`.Rproj`).
 Click on '***Project: (New)***' > '***New Project***'
 
 ```{r proj-existing-dir, echo=FALSE, out.width="60%", out.height="60%", fig.align='left'}
-knitr::include_graphics("img/proj-existing-dir.png")
+knitr::include_graphics("../img/proj-existing-dir.png")
 ```
 
 Click on '***Browse***' > '***Create Project***'
 
 ```{r proj-existing-dir-create, echo=FALSE, out.width="60%", out.height="60%", fig.align='center'}
-knitr::include_graphics("img/proj-existing-dir-create.png")
+knitr::include_graphics("../img/proj-existing-dir-create.png")
 ```
 
 
@@ -221,31 +221,31 @@ knitr::include_graphics("img/proj-existing-dir-create.png")
 Click on '***Project: (New)***' > '***New Project***'
 
 ```{r proj-new-dir, echo=FALSE, out.width="60%", out.height="60%", fig.align='left'}
-knitr::include_graphics("img/proj-new-dir.png")
+knitr::include_graphics("../img/proj-new-dir.png")
 ```
 
 Select project type
 
 ```{r proj-new-project, echo=FALSE, out.width="60%", out.height="60%", fig.align='left'}
-knitr::include_graphics("img/proj-new-project.png")
+knitr::include_graphics("../img/proj-new-project.png")
 ```
 
 Create new folder name
 
 ```{r proj-new-dir-name, echo=FALSE, out.width="60%", out.height="60%", fig.align='left'}
-knitr::include_graphics("img/proj-new-dir-name.png")
+knitr::include_graphics("../img/proj-new-dir-name.png")
 ```
 
 Choose parent folder
 
 ```{r proj-new-parent-dir-name, echo=FALSE, out.width="60%", out.height="60%", fig.align='left'}
-knitr::include_graphics("img/proj-new-parent-dir-name.png")
+knitr::include_graphics("../img/proj-new-parent-dir-name.png")
 ```
 
 Use Git (if installed)
 
 ```{r proj-new-dir-version-crtl, echo=FALSE, out.width="60%", out.height="60%"}
-knitr::include_graphics("img/proj-new-dir-version-crtl.png")
+knitr::include_graphics("../img/proj-new-dir-version-crtl.png")
 ```
 
 # Folders and files
@@ -415,7 +415,7 @@ The `fs` package stands for **file system** and is great for locating and access
 View a tree layout of your files with `fs::dir_tree()`.
 
 ```{r dir_tree}
-fs::dir_tree("data")
+fs::dir_tree("../data")
 ```
 
 ### List files 
@@ -423,7 +423,7 @@ fs::dir_tree("data")
 Get the complete path to files using `fs::dir_ls()`.
 
 ```{r dir_ls}
-fs::dir_ls("data")
+fs::dir_ls("../data")
 ```
 
 ## Reproducible examples 
@@ -436,7 +436,7 @@ The [`reprex` package](https://github.com/tidyverse/reprex) was designed to help
 2. Select *Addin* > *Render selection*  
 
 ```{r copy-render-reprex, echo=FALSE, out.width="60%", out.height="60%", fig.align='center'}
-knitr::include_graphics("img/copy-render-reprex.png")
+knitr::include_graphics("../img/copy-render-reprex.png")
 ```
 
 ### Reprex addin 2
@@ -447,7 +447,7 @@ knitr::include_graphics("img/copy-render-reprex.png")
 4. Paste reprex
 
 ```{r paste-reprex.png, echo=FALSE, out.width="60%", out.height="60%", fig.align='center'}
-knitr::include_graphics("img/paste-reprex.png")
+knitr::include_graphics("../img/paste-reprex.png")
 ```
 
 ### Reprex + datapasta
@@ -475,7 +475,7 @@ Know how to use `cd`, `pwd`, `mkdir`, `rm`, `ls`, etc.
 RStudio comes with a Terminal pane for quick access to the command-line
 
 ```{r terminal-pane.png, echo=FALSE, out.width="60%", out.height="60%", fig.align='center'}
-knitr::include_graphics("img/terminal-pane.png")
+knitr::include_graphics("../img/terminal-pane.png")
 ```
 
 
@@ -492,7 +492,7 @@ R comes with a *ton* of accessible help files
 ### The ***Help*** pane
 
 ```{r help-pane, echo=FALSE, out.width="60%", out.height="60%", fig.align='center'}
-knitr::include_graphics("img/help-pane.png")
+knitr::include_graphics("../img/help-pane.png")
 ```
 
 

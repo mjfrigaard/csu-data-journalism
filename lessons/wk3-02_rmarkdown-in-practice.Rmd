@@ -12,7 +12,7 @@ output:
     df_print: paged
     
 params: 
-  data_dir: !r file.path("data/starwars.rds")
+  data_dir: !r file.path("../data/starwars.rds")
   list_vars: !r c("films", "vehicles", "starships")
   
 always_allow_html: true
@@ -375,7 +375,7 @@ StarWarsDataModel %>%
   DiagrammeRsvg::export_svg() %>%
   base::charToRaw() %>%
   rsvg::rsvg_png(height = 1440,
-                 file = "img/StarWarsDataModel.png")
+                 file = "../img/StarWarsDataModel.png")
 ```
 
 

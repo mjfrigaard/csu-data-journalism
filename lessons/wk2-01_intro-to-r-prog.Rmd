@@ -92,7 +92,7 @@ vec_character
 **Store and explore** - create an object, perform an operation on the object, store the results, then explore the contents with another function.
 
 ```{r store-explore, echo=FALSE, out.height='60%', out.width='60%', fig.align='center'}
-knitr::include_graphics(path = "img/store-explore.png")
+knitr::include_graphics(path = "../img/store-explore.png")
 ```
 
 ### `typeof()` 
@@ -381,12 +381,12 @@ mat_data[2, 2]
 ```
 
 
-## Arrays {.subset}
+## Arrays 
 
 Arrays are like matrices, but with more dimensions.
 
 ```{r array-png, out.height='45%', out.width='45%', fig.align='center', echo=FALSE}
-knitr::include_graphics(path = "img/array.png")
+knitr::include_graphics(path = "../img/array.png")
 ```
 
 
@@ -417,7 +417,7 @@ class(mat_data)
 If you're importing spreadsheets, most of the work you'll do in R will be with rectangular data objects (i.e. `data.frame`s and `tibble`s).
 
 ```{r data-frame-tibble, echo=FALSE, out.width='40%', out.height='40%', fig.align='center'}
-knitr::include_graphics(path = "img/data-frame-tibble.png")
+knitr::include_graphics(path = "../img/data-frame-tibble.png")
 ```
 
 ## Data Frames 

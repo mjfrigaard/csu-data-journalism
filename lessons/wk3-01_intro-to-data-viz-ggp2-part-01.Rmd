@@ -24,7 +24,7 @@ knitr::opts_chunk$set(warning = FALSE,
                       tidy = FALSE, 
                       fig.height = 7,
                       fig.width = 9,
-                      fig.path = "img/")
+                      fig.path = "../img/")
 # set width
 options(width = 60)
 ```
@@ -138,7 +138,7 @@ We're going to take the `diamonds` dataset, and pipe (`%>%`) it over to the `ggp
 See the example below: 
 
 ```{r ggplot2-diamonds-template, echo=FALSE}
-knitr::include_graphics("img/ggplot2-diamonds-template.png")
+knitr::include_graphics("../img/ggplot2-diamonds-template.png")
 ```
 
 Structuring the code this way makes it easier to separate the input dataset (`DataSet`) from the code that initializes the plot (`ggplot(aes())`). In the future, this comes in handy if we want to manipulate the data before creating a graph. 
@@ -185,7 +185,7 @@ class(labs_caratVSprice)
 ```
 
 ```{r ggplot-initialized, echo=FALSE}
-knitr::include_graphics("img/ggplot-initialized.png")
+knitr::include_graphics("../img/ggplot-initialized.png")
 ```
 
 ### exercise 
@@ -248,7 +248,7 @@ We've just built our first graph with `ggplot2`, so lets take a second to see wh
 We can make abstract each step and come up with the following template: 
 
 ```{r ggplot2-template-01, echo=FALSE}
-knitr::include_graphics("img/ggplot2-template-01.png")
+knitr::include_graphics("../img/ggplot2-template-01.png")
 ```
 
 As you can see, the `geom` functions come with their own set of aesthetic mappings, which we will explore next. But first, we need to cover the difference between mapping aesthetics globally vs. mapping variables locally.  
@@ -258,13 +258,13 @@ As you can see, the `geom` functions come with their own set of aesthetic mappin
 When we mapped `carat` and `price` to the `x` and `y` axis inside `ggplot2(mapping = aes())`, we set these positions globally, which means they will be inherited at each layer of the graph. See the figure below:
 
 ```{r global-mappings, echo=FALSE}
-knitr::include_graphics("img/global-mappings.png")
+knitr::include_graphics("../img/global-mappings.png")
 ```
 
 Each `geom` function also comes with it's own options for aesthetic mappings, which we can use to customize the graph at each layer. 
 
 ```{r local-mappings, echo=FALSE}
-knitr::include_graphics("img/local-mappings.png")
+knitr::include_graphics("../img/local-mappings.png")
 ```
 
 We will see how this works with a few exercises. 
@@ -359,7 +359,7 @@ base::unique(ggbld$data[[1]]$colour)
 These colors have a hexadecimal code and are matched up in the plot legend: 
 
 ```{r color-mapping, echo=FALSE}
-knitr::include_graphics("img/color-mapping.png")
+knitr::include_graphics("../img/color-mapping.png")
 ```
 
 Mapping involves assigning variable values to visual attributes, but setting involves assigning aesthetic attributes manually. We will explore the differences below: 
@@ -399,4 +399,4 @@ Here we can see the value (`"dodgerblue"`) is assigned as a level in the `colour
 
 ## Review 
 
-We've covered an introduction on how the grammar of graphics is implemented in `ggplot2`, and how using a template can guide us in building a huge variety of graphs. We learned that it's best to start with graph labels to make sure we're seeing what we were expecting, We demonstrated how global mappings are inhereted at each graph layer, and that we can override these mappings by providing local aesthetics. We've also seen the difference between setting and mapping aesthetic attributes to a graph layer. 
+We've covered an introduction on how the grammar of graphics is implemented in `ggplot2`, and how using a template can guide us in building a huge variety of graphs. We learned that it's best to start with graph labels to make sure we're seeing what we were expecting, We demonstrated how global mappings are inherited at each graph layer, and that we can override these mappings by providing local aesthetics. We've also seen the difference between setting and mapping aesthetic attributes to a graph layer. 

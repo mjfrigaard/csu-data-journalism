@@ -168,7 +168,7 @@ mat_data[2, 1]
 Arrays contain a collection of equal-dimension matrices. Just like matrices, they have fixed number of rows and columns, but they also have a third dimension called a *layer*. See the image below for conceptual illustration a three-row, three-column, two-layer array (3 × 3 × 2). 
 
 ```{r array-png, out.height='45%', out.width='45%', fig.align='center', echo=FALSE}
-knitr::include_graphics(path = "img/array.png")
+knitr::include_graphics(path = "../img/array.png")
 ```
 
 ### create an array
@@ -217,13 +217,13 @@ array_dat[1, , ]
 Here is the original arrangement of the first rows:
 
 ```{r array-subset, echo=FALSE, out.height='35%', out.width='35%', fig.align='left'}
-knitr::include_graphics(path = "img/array-subset.png")
+knitr::include_graphics(path = "../img/array-subset.png")
 ```
 
 And here is the returned matrix, presented as columns:
 
 ```{r array-return-cols, echo=FALSE, out.height='35%', out.width='35%', fig.align='right'}
-knitr::include_graphics(path = "img/array-return-cols.png")
+knitr::include_graphics(path = "../img/array-return-cols.png")
 ```
 
 ## Data frames/tibbes 

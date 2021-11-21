@@ -69,25 +69,25 @@ Model Name:	MacBook Pro
 Navigate to [CRAN](https://cran.r-project.org/), the The Comprehensive R Archive Network.
 
 ```{r 01-cran.png, echo=FALSE}
-knitr::include_graphics("img/01-cran.png")
+knitr::include_graphics("../img/01-cran.png")
 ```
 
 Click on the [Download R for (Mac) OS X](https://cran.r-project.org/).
 
 ```{r 02-mac-download, echo=FALSE}
-knitr::include_graphics("img/02-mac-download.png")
+knitr::include_graphics("../img/02-mac-download.png")
 ```
 
 Download the R package:
 
 ```{r 03-mac-r-pkg, echo=FALSE}
-knitr::include_graphics("img/03-mac-r-pkg.png")
+knitr::include_graphics("../img/03-mac-r-pkg.png")
 ```
 
 Download the R installer package into your Applications folder.
 
 ```{r 05-mac-r-app-folder, echo=FALSE}
-knitr::include_graphics("img/05-mac-r-app-folder.png")
+knitr::include_graphics("../img/05-mac-r-app-folder.png")
 ```
 
 ### Download RStudio
@@ -95,13 +95,13 @@ knitr::include_graphics("img/05-mac-r-app-folder.png")
 Navigate to [RStudio downloads](https://www.rstudio.com/products/rstudio/download/#download) for Macs
 
 ```{r 04-mac-rstudio-download, echo=FALSE}
-knitr::include_graphics("img/04-mac-rstudio-download.png")
+knitr::include_graphics("../img/04-mac-rstudio-download.png")
 ```
 
 Download the RStudio .dmg into your Applications folder.
 
 ```{r 06-mac-rstudio-app-folder, echo=FALSE}
-knitr::include_graphics("img/06-mac-rstudio-app-folder.png")
+knitr::include_graphics("../img/06-mac-rstudio-app-folder.png")
 ```
 
 
@@ -110,7 +110,7 @@ knitr::include_graphics("img/06-mac-rstudio-app-folder.png")
 You'll need to install Xcode to compile R packages, which you can find in the [Mac App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12).
 
 ```{r 07-mac-xcode-app-store, echo=FALSE}
-knitr::include_graphics("img/07-mac-xcode-app-store.png")
+knitr::include_graphics("../img/07-mac-xcode-app-store.png")
 ```
 
 Open the App Store on your local machine and click on the 'Develop' tab. Click on the 'Get' icon (*mine says 'open' because I already Xcode installed*).
@@ -118,7 +118,7 @@ Open the App Store on your local machine and click on the 'Develop' tab. Click o
 Follow the instructions to install Xcode just like you would any other application on your Mac.
 
 ```{r 08-mac-xcode-app-get, echo=FALSE}
-knitr::include_graphics("img/08-mac-xcode-app-get.png")
+knitr::include_graphics("../img/08-mac-xcode-app-get.png")
 ```
 
 
@@ -127,37 +127,37 @@ knitr::include_graphics("img/08-mac-xcode-app-get.png")
 Open your Applications folder and click on the R package installer.
 
 ```{r 09-r-install-01, echo=FALSE}
-knitr::include_graphics("img/09-r-install-01.png")
+knitr::include_graphics("../img/09-r-install-01.png")
 ```
 
 This will open the installer package, click on 'Continue' until you're asked to 'Agree'
 
 ```{r 09-r-install-02, echo=FALSE}
-knitr::include_graphics("img/09-r-install-02.png")
+knitr::include_graphics("../img/09-r-install-02.png")
 ```
 
 Click 'Agree'
 
 ```{r 09-r-install-03, echo=FALSE}
-knitr::include_graphics("img/09-r-install-03.png")
+knitr::include_graphics("../img/09-r-install-03.png")
 ```
 
 All the package installer to install R on your machine. 
 
 ```{r 09-r-install-04, echo=FALSE}
-knitr::include_graphics("img/09-r-install-04.png")
+knitr::include_graphics("../img/09-r-install-04.png")
 ```
 
 Wait for R to finishing installing...
 
 ```{r 09-r-install-05, echo=FALSE}
-knitr::include_graphics("img/09-r-install-05.png")
+knitr::include_graphics("../img/09-r-install-05.png")
 ```
 
 Click 'Close' when the application is installed. 
 
 ```{r 09-r-install-06, echo=FALSE}
-knitr::include_graphics("img/09-r-install-06.png")
+knitr::include_graphics("../img/09-r-install-06.png")
 ```
 
 ### Install RStudio
@@ -165,37 +165,37 @@ knitr::include_graphics("img/09-r-install-06.png")
 Open your Applications folder and click on the RStudio .dmg installer.
 
 ```{r 09-rstudio-install-01, echo=FALSE}
-knitr::include_graphics("img/09-rstudio-install-01.png")
+knitr::include_graphics("../img/09-rstudio-install-01.png")
 ```
 
 Drag and drop the 'RStudio.app' icon into the 'Applications' folder. 
 
 ```{r 09-rstudio-install-02, echo=FALSE}
-knitr::include_graphics("img/09-rstudio-install-02.png")
+knitr::include_graphics("../img/09-rstudio-install-02.png")
 ```
 
 Wait for the application to finishing copying...
 
 ```{r 09-rstudio-install-03, echo=FALSE}
-knitr::include_graphics("img/09-rstudio-install-03.png")
+knitr::include_graphics("../img/09-rstudio-install-03.png")
 ```
 
 Double-click on the new 'RStudio.App' icon.
 
 ```{r 09-rstudio-install-04, echo=FALSE}
-knitr::include_graphics("img/09-rstudio-install-04.png")
+knitr::include_graphics("../img/09-rstudio-install-04.png")
 ```
 
 We're sure--click 'Open'
 
 ```{r 09-rstudio-install-05, echo=FALSE}
-knitr::include_graphics("img/09-rstudio-install-05.png")
+knitr::include_graphics("../img/09-rstudio-install-05.png")
 ```
 
 Take a look at the RStudio IDE!
 
 ```{r 09-rstudio-install-06, echo=FALSE}
-knitr::include_graphics("img/09-rstudio-install-06.png")
+knitr::include_graphics("../img/09-rstudio-install-06.png")
 ```
 
 ## Installing R on Windows 
@@ -207,13 +207,13 @@ These steps cover how to install R and RStudio on a Windows machine. The technic
 Head to [CRAN](https://cran.r-project.org/). 
 
 ```{r 01-cran.png-2, echo=FALSE}
-knitr::include_graphics("img/01-cran.png")
+knitr::include_graphics("../img/01-cran.png")
 ```
 
 [Click on download R for Windows](https://cran.r-project.org/bin/windows/). 
 
 ```{r 10-cran, echo=FALSE}
-knitr::include_graphics("img/10-win-cran.png")
+knitr::include_graphics("../img/10-win-cran.png")
 ```
 
 ### Download RStudio
@@ -221,7 +221,7 @@ knitr::include_graphics("img/10-win-cran.png")
 Navigate to [RStudio downloads](https://www.rstudio.com/products/rstudio/download/#download) for Windows
 
 ```{r rtudio-win-download.png, echo=FALSE}
-knitr::include_graphics("img/rtudio-win-download.png")
+knitr::include_graphics("../img/rtudio-win-download.png")
 ```
 
 Download the RStudio .exe file
@@ -233,7 +233,7 @@ Head over to [Rtools](https://cran.r-project.org/bin/windows/Rtools/)
 Download the [`rtools40v2-x86_64.exe` file](https://cran.r-project.org/bin/windows/Rtools/rtools40v2-x86_64.exe). 
 
 ```{r rtools-win-download.png, echo=FALSE}
-knitr::include_graphics("img/rtools-win-download.png")
+knitr::include_graphics("../img/rtools-win-download.png")
 ```
 
 
@@ -242,67 +242,67 @@ knitr::include_graphics("img/rtools-win-download.png")
 The steps below outline installing R version 4.1.0 on Windows. The installation steps might look *sightly* different on your machine. Ask me if you get stuck. 
 
 ```{r r-win-install-01.png, echo=FALSE}
-knitr::include_graphics("img/r-win-install-01.png")
+knitr::include_graphics("../img/r-win-install-01.png")
 ```
 
 ```{r r-win-install-02.png, echo=FALSE}
-knitr::include_graphics("img/r-win-install-02.png")
+knitr::include_graphics("../img/r-win-install-02.png")
 ```
 
 ```{r r-win-install-03.png, echo=FALSE}
-knitr::include_graphics("img/r-win-install-03.png")
+knitr::include_graphics("../img/r-win-install-03.png")
 ```
 
 
 ```{r r-win-install-04.png, echo=FALSE}
-knitr::include_graphics("img/r-win-install-04.png")
+knitr::include_graphics("../img/r-win-install-04.png")
 ```
 
 
 ```{r r-win-install-05.png, echo=FALSE}
-knitr::include_graphics("img/r-win-install-05.png")
+knitr::include_graphics("../img/r-win-install-05.png")
 ```
 
 
 ```{r r-win-install-06.png, echo=FALSE}
-knitr::include_graphics("img/r-win-install-06.png")
+knitr::include_graphics("../img/r-win-install-06.png")
 ```
 
 
 ```{r r-win-install-07.png, echo=FALSE}
-knitr::include_graphics("img/r-win-install-07.png")
+knitr::include_graphics("../img/r-win-install-07.png")
 ```
 
 
 ```{r r-win-install-08.png, echo=FALSE}
-knitr::include_graphics("img/r-win-install-08.png")
+knitr::include_graphics("../img/r-win-install-08.png")
 ```
 
 
 ```{r r-win-install-09.png, echo=FALSE}
-knitr::include_graphics("img/r-win-install-09.png")
+knitr::include_graphics("../img/r-win-install-09.png")
 ```
 
 ### Install Rtools
 
 ```{r rtools-install-01.png, echo=FALSE}
-knitr::include_graphics("img/rtools-install-01.png")
+knitr::include_graphics("../img/rtools-install-01.png")
 ```
 
 ```{r rtools-install-02.png, echo=FALSE}
-knitr::include_graphics("img/rtools-install-02.png")
+knitr::include_graphics("../img/rtools-install-02.png")
 ```
 
 ```{r rtools-install-03.png, echo=FALSE}
-knitr::include_graphics("img/rtools-install-03.png")
+knitr::include_graphics("../img/rtools-install-03.png")
 ```
 
 ```{r rtools-install-04.png, echo=FALSE}
-knitr::include_graphics("img/rtools-install-04.png")
+knitr::include_graphics("../img/rtools-install-04.png")
 ```
 
 ```{r rtools-install-05.png, echo=FALSE}
-knitr::include_graphics("img/rtools-install-05.png")
+knitr::include_graphics("../img/rtools-install-05.png")
 ```
 
 ### Install RStudio

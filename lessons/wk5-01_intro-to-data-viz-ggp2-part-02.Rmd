@@ -106,20 +106,31 @@ We did some digging and came up with the following dataset to try and answer the
 
 - Apple mobility data: https://covid19.apple.com/mobility
 
+### Import
+
 Import the data below
 
 ```{r import-AppleMobRaw, message=FALSE, warning=FALSE}
-AppleMobRaw <- readr::read_csv("https://bit.ly/36tTVpe")
+AppleMobRaw <- readr::read_csv("https://bit.ly/3DEDa8T")
 ```
 
-```{r -export-AppleMobRaw-, include=FALSE, eval=TRUE}
-readr::write_csv(AppleMobRaw, file = "data/AppleMobRaw.csv")
+```{r -export-AppleMobRaw-, include=FALSE, eval=FALSE}
+readr::write_csv(AppleMobRaw, file = "../data/AppleMobRaw.csv")
 ```
 
+View the `head()` and `tail()`
 
-### Tidy `AppleMobRaw`
+```{r head-AppleMobRaw}
+head(AppleMobRaw)
+```
 
-These data need to be restructured into a tidy format. 
+```{r tail-AppleMobRaw}
+tail(AppleMobRaw)
+```
+
+### Tidy 
+
+We can see the dates are structured across the columns, so we need to restructure these into a tidy format. Read more about this format [here](https://r4ds.had.co.nz/tidy-data.html).
 
 ```{r pivot_longer}
 AppleMobRaw %>% 
@@ -128,9 +139,9 @@ AppleMobRaw %>%
                       values_to = "dir_request")
 ```
 
-### Wrangle `AppleMobRaw`
+### Missing 
 
-We will remove the missing values from `country` and `sub-region`
+Now that we have the data in a tidy format, we should remove the missing values from `country` and `sub-region`
 
 ```{r filter}
 AppleMobRaw %>% 
@@ -139,6 +150,8 @@ AppleMobRaw %>%
     # remove missing country and missing sub-region data
   dplyr::filter(!is.na(country) & !is.na(`sub-region`))
 ```
+
+### Mutate
 
 Use `mutate()` to create a properly formatted `date` variable, and `rename()` the `transportation_type` variable to `trans_type`. Apply `janitor::clean_names()` to the entire dataset and assign the final output to `TidyApple`.
 
@@ -176,7 +189,7 @@ TidyApple %>%
   dplyr::count(trans_type)
 ```
 
-### Count & sort
+### Sort
 
 We can also sort the responses using the `sort = TRUE` argument. 
 
@@ -185,7 +198,7 @@ TidyApple %>%
   dplyr::count(trans_type, sort = TRUE)
 ```
 
-### Iterate with count
+### Iterate 
 
 We can also combine `dplyr::select_if()` and `purrr::map()` to pass the `count()` function to all the character variables in `TidyApple`. 
 
@@ -231,8 +244,6 @@ TidyApple %>% ggplot() +
 
 ### solution
 
-See blow:
-
 ```{r geom_histogram-sol, message=FALSE, warning=FALSE, fig.height=4, fig.width=6, out.height='100%', out.width='100%'}
 TidyApple %>% ggplot() + 
   geom_histogram(aes(x = dir_request)) + 
@@ -256,8 +267,6 @@ TidyApple %>% ggplot() +
 ```
 
 ### solution
-
-See below:
 
 ```{r scales-sol, message=FALSE, warning=FALSE, fig.height=4, fig.width=6, out.height='100%', out.width='100%'}
 library(scales)
@@ -285,8 +294,6 @@ TidyApple %>% ggplot() +
 
 ### solution
 
-See below:
-
 ```{r bins-15-sol, message=FALSE, warning=FALSE, fig.height=4, fig.width=6, out.height='100%', out.width='100%'}
 TidyApple %>% ggplot() + 
   geom_histogram(aes(x = dir_request), bins = 15) + 
@@ -307,8 +314,6 @@ TidyApple %>% ggplot() +
 
 ### solution
 
-See below:
-
 ```{r bins-45-gg_hist45-sol, message=FALSE, warning=FALSE}
 TidyApple %>% ggplot() + 
   geom_histogram(aes(x = dir_request), bins = 45) + 
@@ -323,13 +328,11 @@ gg_hist45
 
 ## Density Plots {.tabset}
 
-What if we want to see how a continuous variable is distributed across a categorical variable? We did this in the [previous lesson with a boxplot](https://mjfrigaard.github.io/data-viz-intro/Index.html#87).  
+What if we want to see how a continuous variable is distributed across a categorical variable? We covered this in the [previous lesson with a boxplot](https://mjfrigaard.github.io/data-viz-intro/Index.html#87).  
 
 Density plots come in handy here (so do `geom_boxplot()`s!). Read more about the density geom [here](https://ggplot2.tidyverse.org/reference/geom_density.html).
 
-We are going to create the graph labels so we know what to expect when we build our graph. 
-
-We want to see the distribution of the directions request, filled by the levels of transportation type.
+We are going to create the graph labels so we know what to expect when we build our graph, and we want to see the distribution of the directions request, filled by the levels of transportation type.
 
 ```{r lab_density}
 lab_density <- labs(x = "Apple directions requests",
@@ -353,7 +356,7 @@ TidyApple %>%
 
 ### solution
 
-See below:
+*One drawback to density plots is the `y` axis can be hard to interpret*
 
 ```{r density-sol, message=FALSE, warning=FALSE, fig.height=4, fig.width=6, out.height='100%', out.width='100%'}
 TidyApple %>% 
@@ -361,8 +364,6 @@ TidyApple %>%
   geom_density(aes(x = dir_request, fill = trans_type)) + 
   lab_density
 ```
-
-*One drawback to density plots is the `y` axis can be hard to interpret*
 
 ### exercise
 
@@ -378,8 +379,6 @@ TidyApple %>%
 ```
 
 ### solution
-
-See below:
 
 ```{r density-alpha, message=FALSE, warning=FALSE, fig.height=4, fig.width=6, out.height='100%', out.width='100%'}
 TidyApple %>% 
@@ -497,13 +496,11 @@ TidyApple %>%
 
 You'll want to export the `TidyApple` dataset for the next set of exercise. 
 
-The code chunk below exports the dataset as a .csv with a date-stamp. 
+The code chunk below exports the dataset as a .csv.
 
 ```{r export-TidyApple-USCities}
+fs::dir_create("../data/wk5-01-intro-to-ggp2-part-02/")
 readr::write_csv(x = TidyApple, 
-                 file = 
-                 paste0("data/", 
-                        base::noquote(lubridate::today()),
-                                        "-TidyApple.csv"))
+                 file = "../data/wk5-01-intro-to-ggp2-part-02/TidyApple.csv")
 ```
 
