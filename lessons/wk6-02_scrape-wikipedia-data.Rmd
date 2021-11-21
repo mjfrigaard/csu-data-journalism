@@ -55,7 +55,7 @@ library(tidyverse)
 
 In the slides we had well-formatted dataset. In these exercises, we're going to import some data from the wild (Wikipedia), because most data aren't ready to visualize and model when we first get them.
 
-## Import the data {.tabset}
+## Import the data 
 
 I Googled "largest pharmaceutical companies" and found [this wikipedia page](https://en.wikipedia.org/wiki/List_of_largest_biotechnology_and_pharmaceutical_companies). 
 
@@ -127,13 +127,14 @@ TopPharmCompRaw
 ```
 
 ```{r export-TopPharmCompRaw}
-# fs::dir_tree("data")
-wikipedia_top_pharm_export_file <- paste0("data/", lubridate::today(), "-TopPharmCompRaw.csv")
+# fs::dir_create("../data/wk6-02_scrape-wikipedia-data/")
+wikipedia_top_pharm_export_file <- paste0("../data/wk6-02_scrape-wikipedia-data/", lubridate::today(), "-TopPharmCompRaw.csv")
 readr::write_csv(x = TopPharmCompRaw, file = wikipedia_top_pharm_export_file)
+fs::dir_tree("../data/wk6-02_scrape-wikipedia-data/")
 ```
 
 ```{r import-TopPharmCompRaw, include=FALSE, eval=TRUE}
-TopPharmCompRaw <- readr::read_csv("https://raw.githubusercontent.com/mjfrigaard/csuc-data-journalism/main/lessons-exercises/data/2021-10-13-TopPharmCompRaw.csv")
+TopPharmCompRaw <- readr::read_csv("https://raw.githubusercontent.com/mjfrigaard/csuc-data-journalism/main/data/2020-11-24-TopPharmCompRaw.csv")
 ```
 
 ## Outline before you start 
@@ -152,7 +153,7 @@ These data are in a wide format, with each `market_cap_in_` spread across column
 TopPharmCompRaw
 ```
 
-## Pivot data {.tabset}
+## Pivot data 
 
 Ideally, we want two variables, `year` and `market_cap_us_bil`. 
 
@@ -178,7 +179,7 @@ TidyTopPharmComp <- TopPharmCompRaw %>%
                       values_to = "market_cap_us_bil")
 ```
 
-## Format Column Names {.tabset}
+## Format Column Names 
 
 Follow along on each tab for the steps to wrangle the column names:
 
@@ -188,7 +189,7 @@ Follow along on each tab for the steps to wrangle the column names:
 2. Properly formatted values (numeric, factor, etc.)   
 3. Missing variables formatted correctly (replace `-` with `NA`)
 
-### Create vector of names
+### Names
 
 We can use `janitor::clean_names()`, but first we should do some string manipulation to remove the extra characters from the column names. 
 
@@ -218,7 +219,7 @@ TidyTopPharmComp %>%
     janitor::clean_names()
 ```
 
-### Assign to data frame
+### `set_names()` & `clean_names()`
 
 If this looks acceptable, we can assign to `TopPharmComp`.
 
@@ -242,7 +243,7 @@ We want to split up the following variables into their own columns:
 6. `company_name` a variable containing *only* the company name 
 7. a `ranking` variable with a numerically coded rank
 
-## `year` {.tabset}
+## `year` 
 
 We can also wrangle the `market_cap_year` variable so it only contains the four-number year. 
 
@@ -259,7 +260,7 @@ TopPharmComp %>%
                 year = as.integer(year))
 ```
 
-### Assign `year` 
+### `year` 
 
 Let's assign `year` to `TopPharmComp`
 
@@ -272,7 +273,7 @@ TopPharmComp %>%
                 year = as.integer(year)) -> TopPharmComp
 ```
 
-## `company_name` {.tabset}
+## `company_name` 
 
 We want the name of the company (and only it's name) in it's own column. 
 
@@ -358,7 +359,7 @@ TopPharmComp <- TopPharmComp %>%
 TopPharmComp
 ```
 
-## `stock_exch` & `stock_id` {.tabset}
+## `stock_exch` & `stock_id` 
 
 Now we have the `stock_exch` and `stock_id` stored in `stock_info`--we will create two new columns for each piece of data. 
 
@@ -392,7 +393,7 @@ TopPharmComp <- TopPharmComp %>%
 TopPharmComp
 ```
 
-## `largest_market_cap_us_bil` & `largest_market_cap_date` {.tabset}
+## `largest_market_cap_us_bil` & `largest_market_cap_date` 
 
 Here we'll use `dplyr::rename()` to change `largest_market_cap_us_bil` to `_original` so we can check our work with `remove = FALSE`.
 
@@ -485,7 +486,7 @@ These look good--we can assign to `TopPharmComp`
 TopPharmComp
 ```
 
-## `market_cap_us_bil` {.tabset}
+## `market_cap_us_bil` 
 
 The `market_cap_us_bil` column has a few extra characters from the Wikipedia table (they use `-` as missing). We know how to remove this with str_remove_all() and we can format this as a number with `as.numeric()`
 
@@ -509,7 +510,7 @@ TopPharmComp <- TopPharmComp %>%
 TopPharmComp
 ```
 
-## `ranking` & `company_type` {.tabset}
+## `ranking` & `company_type` 
 
 The `rank` variable will come in handy for plotting, but we will rename it as `ranking`. We also want to differentiate between `[B]` – Biotechnology company and `[P]` – Pharmaceutical company.
 
@@ -563,7 +564,7 @@ TopPharmComp
 ```
 
 
-## Reorganize columns {.tabset}
+## Reorganize columns 
 
 The data still contains all of the original columns, but now we're confident we can remove these. 
 
@@ -612,7 +613,7 @@ TopPharmComp
 ```
 
 
-## (Optional) convert ranking to factor {.tabset}  
+## (Optional) convert ranking to factor   
 
 We want to keep the order of `ranking`, so another option is to convert this to a factor. 
 
@@ -630,15 +631,12 @@ TopPharmComp %>% arrange(ranking)
 
 # Export data 
 
-We now have a dataset we can use for modeling or visualizations! We'll export this to the `data` folder.
+We now have a dataset we can use for modeling or visualizations! We'll export this to the `../data/wk6-02_scrape-wikipedia-data/` folder.
 
 ```{r export-TopPharmComp}
-# fs::dir_tree("data")
-wikipedia_top_pharm_export_file <- paste0(lubridate::today(), "-TopPharmComp.csv")
-wikipedia_top_pharm_export_file
-```
-
-```{r wikipedia_top_pharm_export_file}
-readr::write_csv(x = TopPharmComp, file = wikipedia_top_pharm_export_file)
+toppharm_comp_export_file <- paste0("../data/wk6-02_scrape-wikipedia-data/", lubridate::today(), "-TopPharmComp.csv")
+# toppharm_comp_export_file
+readr::write_csv(x = TopPharmComp, file = toppharm_comp_export_file)
+fs::dir_tree("../data/wk6-02_scrape-wikipedia-data/")
 ```
 
