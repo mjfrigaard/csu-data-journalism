@@ -55,12 +55,12 @@ View the exercises for this section [here](https://mjfrigaard.github.io/csuc-dat
 We're going to import the data from the previous exercises.  
 
 ```{r TidyApple}
-TidyApple <- vroom::vroom(file = "https://bit.ly/3CDGXlB")
+TidyApple <- vroom::vroom(file = "https://bit.ly/3CDGXlB", delim = ",")
 head(TidyApple)
 ```
 
 
-```{r export-tidy-apple, eval=TRUE, include=FALSE, message=FALSE, warning=FALSE}
+```{r export-tidy-apple, eval=FALSE, include=FALSE, message=FALSE, warning=FALSE}
 # TidyApple 
 fs::dir_create("../data/wk7-01_intro-to-ggp2-part-03/")
 tidy_apple_out <- paste0("../data/wk7-01_intro-to-ggp2-part-03/", 
@@ -68,7 +68,6 @@ tidy_apple_out <- paste0("../data/wk7-01_intro-to-ggp2-part-03/",
 # tidy_apple_out
 vroom::vroom_write(x = TidyApple, tidy_apple_out, delim = ",")
 ```
-
 
 # Visualizing Trends
 
@@ -166,7 +165,7 @@ USCities %>%
 
 ### solution
 
-Let's see what happens when we use `lab_line_update`.
+The dates updated to the min and max `date` in `USCities`.
 
 ```{r geom-line-us-cities-sol, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 USCities %>%
@@ -176,7 +175,6 @@ USCities %>%
   lab_line_update
 ```
 
-The dates updated to the min and max `date` in `USCities`.
 
 ## Adjusting Line Size {.tabset}
 
@@ -197,7 +195,7 @@ USCities %>%
 
 ### solution
 
-See below:
+Now the trends are easier to see.
 
 ```{r us-cities-line-alpha-sol, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 USCities %>%
@@ -208,7 +206,7 @@ USCities %>%
   lab_line_update
 ```
 
-Now the trends are easier to see.
+
 
 ## Setting Date Range {.tabset}
 
@@ -236,8 +234,6 @@ TidyApple %>%
 ```
 
 ### solution
-
-See below:
 
 ```{r start_date-end_date-skimr-sol}
 # create date objects
@@ -323,8 +319,6 @@ USCitiesMarJun %>%
 
 ### solution
 
-See below:
-
 ```{r USCitiesMarJun-sol}
 USCitiesMarJun <-  TidyApple %>%
   filter(geo_type == "city" &
@@ -352,8 +346,6 @@ lab_annotate <- labs(x = "Date",
 
 
 ### solution
-
-See below:
 
 ```{r create-lab_annotatesol}
 lab_annotate <- labs(x = "Date",
@@ -665,8 +657,6 @@ MaxUSCitiesDriving
 
 ### solution
 
-See below:
-
 ```{r TopUSCities-MaxUSCitiesDriving-sol-01}
 TopUSCities %>%
   filter(trans_type == "driving") %>%
@@ -698,8 +688,6 @@ lab_line_max_drivers <- labs(
 
 
 ### solution
-
-See below:
 
 ```{r lab_line_max_drivers-sol-01}
 lab_line_max_drivers <- labs(
@@ -770,8 +758,6 @@ TopUSCities %>%
 
 ### solution
 
-See below:
-
 ```{r label-plot-sol-01, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 TopUSCities %>%
     ggplot() +
@@ -812,8 +798,6 @@ MinUSCitiesWalking
 ```
 
 ### solution
-
-See below:
 
 ```{r MinUSCitiesWalking-sol}
 TopUSCities %>%
@@ -868,8 +852,6 @@ MinUSCitiesWalking
 
 ### solution
 
-See below:
-
 ```{r min_walking_labels-sol}
 MinUSCitiesWalking %>%
   mutate(min_walking_labels = paste0(region, ", ", date)) -> MinUSCitiesWalking
@@ -910,8 +892,6 @@ TopUSCities %>%
 ```
 
 ### solution
-
-See below:
 
 ```{r label-plot-sol-02, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 TopUSCities %>%
@@ -957,8 +937,6 @@ TopUSCities %>% glimpse(60)
 ```
 
 ### solution
-
-See below:
 
 ```{r focus_on-sol}
 focus_on <- c("New York City", "Los Angeles",
@@ -1022,8 +1000,6 @@ TopUSCities %>%
 
 ### solution
 
-See below:
-
 ```{r TopUSCities-geom_line-sol, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 TopUSCities %>%
   ggplot(aes(x = date, y = dir_request,
@@ -1058,8 +1034,6 @@ TopUSCities %>%
 
 ### solution
 
-See below:
-
 ```{r geom_hline-sol, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
 TopUSCities %>%
   ggplot(aes(x = date, y = dir_request,
@@ -1073,16 +1047,15 @@ TopUSCities %>%
 Reference lines are helpful when we want to examine trends in relation to a particular value.
 
 ```{r export-TopUSCities-USCities, echo=FALSE, include=FALSE}
-ls()
-readr::write_csv(x = TopUSCities, 
-                 file = 
-                 paste0("data/", 
+# top us cities 
+top_us_cities_out <- paste0("../data/wk7-01_intro-to-ggp2-part-03/", 
                         base::noquote(lubridate::today()),
-                                        "-TopUSCities.csv"))
-
-readr::write_csv(x = USCities, 
-                 file = 
-                 paste0("data/", 
+                                        "-TopUSCities.csv")
+# top_us_cities_out
+us_cities_out <- paste0("../data/wk7-01_intro-to-ggp2-part-03/", 
                         base::noquote(lubridate::today()),
-                                        "-USCities.csv"))
+                                        "-USCities.csv")
+# us_cities_out
+vroom::vroom_write(x = TopUSCities, file = top_us_cities_out, delim = ",")
+vroom::vroom_write(x = USCities, file = us_cities_out, delim = ",")
 ```
