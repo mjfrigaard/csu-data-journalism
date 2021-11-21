@@ -134,7 +134,7 @@ fs::dir_tree("../data/wk6-02_scrape-wikipedia-data/")
 ```
 
 ```{r import-TopPharmCompRaw, include=FALSE, eval=TRUE}
-TopPharmCompRaw <- readr::read_csv("https://raw.githubusercontent.com/mjfrigaard/csuc-data-journalism/main/data/2020-11-24-TopPharmCompRaw.csv")
+TopPharmCompRaw <- readr::read_csv("https://raw.githubusercontent.com/mjfrigaard/csuc-data-journalism/main/data/wk6-02_scrape-wikipedia-data/2020-11-24-TopPharmCompRaw.csv")
 ```
 
 ## Outline before you start 
