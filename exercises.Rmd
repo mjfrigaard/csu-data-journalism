@@ -65,17 +65,13 @@ cat_bullet <- function(x, pattern) {
 
 ### Week 1 
 
-This is an introduction to atomic vectors (the basic building block) in R: 
+This is an introduction to atomic vectors (the basic building block) in R:
 
 * <a href="https://mjfrigaard.shinyapps.io/csuc-dj-01_atomic-vectors/">_**an introduction to atomic vectors in R**_</a> _**basic data structures**_ 
 
 S3 vectors are slightly more complex (these include factors, dates, date-times, and difftimes), have multiple classes and attributes, and are an essential part of data analysis and visualization:
 
 * <a href="https://mjfrigaard.shinyapps.io/csuc-dj-02_s3-atomic-vectors/">_**introduction to S3 atomic vectors**_</a> _**factors, dates, date-times and difftimes**_ 
-
-These exercises introduce `data.frame`s and `tibble`s, rectangular data objects in R:
-
-* <a href="https://mjfrigaard.shinyapps.io/csuc-dj-02_data-frames/">_**rectangular data in R**_</a> _**data.frames and tibbles in R**_ 
 
 ### Week 2 
 
