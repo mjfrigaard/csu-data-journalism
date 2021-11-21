@@ -646,7 +646,7 @@ ExOffndrsComplete %&gt;% dplyr::count(jpg_html)</code></pre>
   dplyr::count(jpg_html)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["jpg_html"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"html","2":"5"},{"1":"jpg","2":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["jpg_html"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"html","2":"4"},{"1":"jpg","2":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -670,6 +670,8 @@ tahday_data_path &lt;- paste0(tahday_path, &quot;ExOffndrsComplete.csv&quot;)
 vroom::vroom_write(x = ExOffndrsComplete, file = tahday_data_path, delim = &quot;,&quot;)
 fs::dir_tree(tahday_path, regexpr = &quot;-ExOffndrsComplete.csv&quot;)</code></pre>
 <pre><code>## ../data/wk10-dont-mess-with-texas/processed/2021-11-21/
+## ├── 2021-11-21-ExExOffndrshtml.csv
+## ├── 2021-11-21-ExExOffndrsjpg.csv
 ## └── ExOffndrsComplete.csv</code></pre>
 </div>
 

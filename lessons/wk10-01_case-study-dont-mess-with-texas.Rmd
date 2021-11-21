@@ -1,6 +1,6 @@
 ---
 title: "Case Study (Part 1)"
-comment: "*Don't mess with Texas*"
+comment: "Don't Mess with Texas Part 1: scrape HTML tables"
 output: 
   html_document: 
     toc: yes
