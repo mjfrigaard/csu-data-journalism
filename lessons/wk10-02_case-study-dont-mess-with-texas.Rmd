@@ -1,6 +1,6 @@
 ---
 title: "Case Study (Part 2)"
-comment: "Don't Mess with Texas Part 2: downloading files with `purrr`"
+comment: "Don't Mess with Texas Part 2: iterate and download with `purrr`"
 output: 
   html_document: 
     toc: yes
@@ -45,15 +45,15 @@ In the previous .Rmd, we downloaded the data table from the [Texas Department of
 These data are imported from the .Rmd we used to scrape the website. These data are in the folder below. 
 
 ```{r DirProcessed}
-fs::dir_tree("data/processed")
+fs::dir_tree("../data/wk10-dont-mess-with-texas/")
 ```
 
 This will import the most recent data.
 
 ```{r create-ExecOffenders}
 # fs::dir_ls("data/processed/2021-10-25")
-ExecOffenders <- readr::read_csv("data/processed/2021-10-25/2021-10-25-ExecOffenders.csv")
-ExOffndrsComplete <- readr::read_csv("data/processed/2021-10-25/2021-10-25-ExOffndrsComplete.csv")
+ExecOffenders <- readr::read_csv("https://bit.ly/2Z7pKTI")
+ExOffndrsComplete <- readr::read_csv("https://bit.ly/3oLZdEm")
 ```
 
 In this post, we will use `purrr`s iteration tools to download the images attached to the website profiles.
@@ -82,17 +82,17 @@ test_image <- ExecOffenders %>%
 test_image
 ```
 
+You should see an image in the RStudio viewer pane (like below)
 
 ```{r test-image_read}
 # pass test_image to image_read()
 magick::image_read(test_image)
 ```
 
-You should see an image in the RStudio viewer pane (like below)
 
 ```{r magik_demo.png, out.width='70%', echo=FALSE, eval=TRUE}
 # fs::dir_ls("figs")
-include_graphics("figs/02-test-magic-image.png")
+# knitr::include_graphics("../img/02-test-magic-image.png")
 ```
 
 ### 2. Turn 'it' into a recipe
@@ -112,7 +112,7 @@ jpg_path <- paste0("jpgs/",
 jpg_path %>% utils::head()
 ```
 
-### 3. Use `purrr::purrr::walk2()` to download all files
+### 3. Use `purrr::walk2()` to download all files
 
 Now use the `purrr::walk2()` function to download the files. How does `walk2` work?
 
@@ -146,9 +146,9 @@ purrr::walk2(.x = jpg_url,
 
 You should see the following in your console.
 
-```{r image-walk2.gif, out.width='70%', echo=FALSE}
+```{r image-walk2.gif, out.width='100%', echo=FALSE}
 # fs::dir_ls("figs")
-knitr::include_graphics(path = "figs/2019-11-27-image-walk2.gif")
+knitr::include_graphics(path = "../img/2019-11-27-image-walk2.gif")
 ```
 
 You  will see text similar to the content below.
@@ -167,7 +167,7 @@ You  will see text similar to the content below.
 
 This might take awhile, but when its done, check the number of files in this folder.
 
-```{r check_jpg_download, eval=TRUE, echo=TRUE}
+```{r check_jpg_download, eval=FALSE, echo=TRUE}
 fs::dir_info("jpgs") %>% 
   tibble::as_tibble() %>% 
   dplyr::arrange(desc(size)) %>% 
@@ -179,18 +179,17 @@ There you have it! 380 images of downloaded offenders! Export the data for the n
 
 ```{r tahday}
 # create data folder
-fs::dir_create("data")
-# create processed folder 
-fs::dir_create("data/processed")
+export_path <- "../data/wk10-dont-mess-with-texas/processed/"
+fs::dir_create(export_path)
 # create today
 tahday <- as.character(lubridate::today())
-tahday_path <- file.path("data/processed", tahday)
-# tahday_path
+tahday_path <- paste0(export_path, tahday, "/")
+tahday_path
 # create new data folder
 fs::dir_create(tahday_path)
+# create data path
+tahday_data_path <- paste0(tahday_path, "ExOffndrsComplete.csv")
 # export these data
-readr::write_csv(as.data.frame(ExecOffenders),
-                 file = paste0(tahday_path, "/", 
-                               tahday,"-ExecOffenders.csv"))
-fs::dir_tree("data")
+vroom::vroom_write(x = ExOffndrsComplete, file = tahday_data_path, delim = ",")
+fs::dir_tree(tahday_path, regexpr = "-ExOffndrsComplete.csv")
 ```

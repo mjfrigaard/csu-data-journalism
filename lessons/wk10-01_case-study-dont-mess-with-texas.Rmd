@@ -407,7 +407,7 @@ ExOffndrsComplete %>%
 
 We now have a data frame we can export into a dated folder. 
 
-```{r export-}
+```{r export-all}
 # create data folder
 export_path <- "../data/wk10-dont-mess-with-texas/processed/"
 fs::dir_create(export_path)
