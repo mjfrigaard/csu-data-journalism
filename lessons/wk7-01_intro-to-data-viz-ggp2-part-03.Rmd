@@ -54,17 +54,19 @@ View the exercises for this section [here](https://mjfrigaard.github.io/csuc-dat
 
 We're going to import the data from the previous exercises.  
 
-```{r}
-TidyApple <- vroom::vroom(file = "https://raw.githubusercontent.com/mjfrigaard/csuc-data-journalism/gh-pages/data/2021-04-12-TidyApple.csv", delim = ",")
+```{r TidyApple}
+TidyApple <- vroom::vroom(file = "https://bit.ly/3CDGXlB")
+head(TidyApple)
 ```
 
 
-```{r import-tidy-apple}
+```{r export-tidy-apple, eval=TRUE, include=FALSE, message=FALSE, warning=FALSE}
 # TidyApple 
 fs::dir_create("../data/wk7-01_intro-to-ggp2-part-03/")
 tidy_apple_out <- paste0("../data/wk7-01_intro-to-ggp2-part-03/", 
                          lubridate::today(), "-TidyApple.csv")
-vroom::vroom_write(x = TidyApple, tidy_apple_out)
+# tidy_apple_out
+vroom::vroom_write(x = TidyApple, tidy_apple_out, delim = ",")
 ```
 
 
