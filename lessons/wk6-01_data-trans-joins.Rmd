@@ -66,8 +66,8 @@ There are multiple ways data can be 'less-than tidy.' We'll start with a common 
 
 Below is a subset of the `endorsements_2020` dataset named `EndorseSample`. Read more about the `endorsements_2020` dataset by typing `??endorsements_2020` into the console. 
 
-```{r EndorseSample}
-EndorseSample <- readr::read_csv("https://bit.ly/3ubyhAc")
+```{r EndorseSample, message=FALSE, warning=FALSE}
+EndorseSample <- readr::read_csv("https://bit.ly/3x6wfTg")
 head(EndorseSample)
 ```
 
@@ -77,8 +77,8 @@ Notice the `location` variable has two values (`state` and `city`) stored in the
 
 In another example of un-tidy data, we'll look at the dataset below which comes from the `fandango` dataset. 
 
-```{r FandangoSample}
-FandangoSample <- readr::read_csv(file = "https://bit.ly/3AMu9ZN")
+```{r FandangoSample, message=FALSE, warning=FALSE}
+FandangoSample <- readr::read_csv(file = "https://bit.ly/3kS34yj")
 head(FandangoSample)
 ```
 
@@ -92,8 +92,8 @@ This dataset has two *similar* scores combined into a single column `rottentomat
 
 Below is a sample from the `daily_show_guests` dataset. The guests names are separated into `first_name` and `last_name` columns. 
 
-```{r DailyShowSample}
-DailyShowSample <- readr::read_csv("https://bit.ly/3kPZtBD")
+```{r DailyShowSample, message=FALSE, warning=FALSE}
+DailyShowSample <- readr::read_csv("https://bit.ly/3HGx8XG")
 head(DailyShowSample)
 ```
 
@@ -155,16 +155,7 @@ FandangoSample %>%
 
 ### solution
 
-Put all the `value`s into their own cell.
-
-```{r separate_rows-solution}
-FandangoSample %>% 
-  separate_rows(rottentomatoes_scores, sep = "/")
-```
-
-This isn't as clear as it could be, so we will use `mutate()`, `case_when()`, and `str_detect()` to create an index variable for the `rottentomatoes_scores`, which we will call `rottentomatoes_score`. 
-
-We'll also remove the `%` and `out of 5` text from `rottentomatoes_scores`, and rename this to `rottentomatoes_value`. 
+This isn't as clear as it could be, so we will use `mutate()`, `case_when()`, and `str_detect()` to create an index variable for the `rottentomatoes_scores`, which we will call `rottentomatoes_score`. We'll also remove the `%` and `out of 5` text from `rottentomatoes_scores`, and rename this to `rottentomatoes_value`. 
 
 ```{r FandangoSampleTidy}
 FandangoSampleTidy <- FandangoSample %>% 
@@ -195,7 +186,6 @@ Just like `separate`/`separate_rows` allows us to split up columns, `unite()` le
 ```{r review-DailyShowSample}
 DailyShowSample
 ```
-
 
 We can see the guests have had their names in separate columns (`first_name` and `last_name`).
 
@@ -263,8 +253,6 @@ StarWarsFilms <- starwarsdb::films %>%
 StarWarsFilms
 ```
 
-The first join we will cover is `dplyr::left_join()`.
-
 
 ## `left_join` {.tabset}
 
@@ -287,7 +275,7 @@ StarWarsFilmVeh
 
 ### solution
 
-See below:
+
 
 ```{r StarWarsFilmsPeople}
 left_join(x = StarWarsFilms, 
@@ -315,7 +303,7 @@ StarWarsFilmVehPil
 
 ### solution
 
-See below:
+
 
 ```{r StarWarsFilmVehPil-sol}
 inner_join(x = StarWarsFilmVeh, 
@@ -343,7 +331,7 @@ right_join(x = __________________,
 
 ### solution
 
-See below:
+
 
 ```{r right_join-sol}
 right_join(x = StarWarsFilmVehPil, 
@@ -420,8 +408,6 @@ UsadaBadDates %>%
     dplyr::select(athlete, sanction_announced, sanction_dates)
 ```
 
-
-
 This creates a nested column (`sanction_dates`), which we can deal with by `unnest()`ing it. Let's take a better look with `listviewer` (but only look at `athlete` and `sanction_dates`).
 
 ```{r listviewer}
@@ -450,7 +436,7 @@ UsadaBadDates %>%
     # convert the output from split into multiple rows
         tidyr::unnest(sanction_dates) %>% 
     # check this to see what is happening 
-    dplyr::select(athlete, sanction_announced, sanction_dates)
+        dplyr::select(athlete, sanction_announced, sanction_dates)
 ```
 
 ### `filter` 
@@ -470,7 +456,7 @@ UsadaBadDates %>%
         dplyr::filter(!str_detect(string = sanction_dates, 
                                   pattern = "original")) %>% 
     # check this to see what is happening 
-    dplyr::select(athlete, sanction_announced, sanction_dates)
+        dplyr::select(athlete, sanction_announced, sanction_dates)
 ```
 
 ### `str_remove_all`
