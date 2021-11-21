@@ -36,7 +36,7 @@ knitr::opts_chunk$set(warning = FALSE,
                       tidy = FALSE)
 # set width
 options(width = 60, max.print = 300)
-TweetsRaw <- read_rds("data/2021-11-07-NFL-TweetsRaw.rds")
+TweetsRaw <- read_rds("../data/2021-11-07-NFL-TweetsRaw.rds")
 ```
 
 # Outline
@@ -45,7 +45,6 @@ TweetsRaw <- read_rds("data/2021-11-07-NFL-TweetsRaw.rds")
 2. Wrangle Data
 3. Latitude and Longitude Data
 4. Maps with `ggplot2`
-5. Maps with `leaflet`
 
 **NOTE:** this set of exercises is a little different from the previous weeks. Instead of filling in each solution, I will work through an example, then provide a template for you to use on your own (*the code chunks aren't specific, so you can just swap out the hashtag in the `search_tweets()` function, and all the code will run with a new hashtag*).
 
@@ -59,7 +58,7 @@ View the exercises for this section [here](https://mjfrigaard.github.io/csuc-dat
 
 This lesson will map Twitter data (tweets) based on a search term. We're going to use the [`rtweet` package](https://docs.ropensci.org/rtweet/), which requires you to have a Twitter account. If you're going to be using this application a lot to collect data (which I hope you are!), follow the instructions in the [authentication](https://docs.ropensci.org/rtweet/articles/auth.html) vignette. 
 
-## `rtweet` {.tabset}
+## `rtweet` 
 
 We're going to be access Twitter data for these exercises. If you'd like to follow along with your own data, check out the [`rtweet` package](https://docs.ropensci.org/rtweet/) for installation and setup instructions. 
 
@@ -95,13 +94,15 @@ We only need a subset of these columns to build our map, and fortunately the `rt
 
 It's always a good idea to export the raw twitter data you've collected, because these data are always subject to change. For example, this tutorial uses data for the `#NFL` hashtag, which was collected on a Sunday. We're not likely to see the same data if we collected data on the following Monday (or Tuesday, for that matter).
 
-```{r export, eval=FALSE}
+```{r export, eval=TRUE}
+data_path <- "../data/wk11-01_intro-to-maps/raw/"
+fs::dir_create(data_path)
 # make sure to use a date (or time) stamp!
-write_rds(x = TweetsRaw, "data/2021-11-07-NFL-TweetsRaw.rds")
+rtweet::write_as_csv(x = TweetsRaw, paste0(data_path, "2021-11-07-NFL-TweetsRaw.csv"))
+fs::dir_tree(data_path)
 ```
 
-
-## User data {.tabset}
+## User data 
 
 The `rtweet::users_data()` function separates the 'users' variables from the 'tweet' variables.
 
@@ -128,7 +129,7 @@ TweetsUsers <- rtweet::users_data(TweetsRaw)
 glimpse(TweetsUsers)
 ```
 
-## Tweets data {.tabset}
+## Tweets data 
 
 The `rtweet::tweets_data()` function separates the "*tweets data from users data object.*"
 
@@ -154,7 +155,7 @@ glimpse(TweetsData)
 
 
 
-## Latitude & longitude data {.tabset}
+## Latitude & longitude data 
 
 You may have noticed these data don't have the latitude or longitude data--we will add these variables below.
 
@@ -186,7 +187,7 @@ dplyr::distinct(.data = TweetsLatLng, lat, lng)
 
 We can see this is a small fraction of the overall twitter data, but it's enough for us to build a map!
 
-## Building maps in `ggplot2` {.tabset}
+## Building maps in `ggplot2` 
 
 To build a map with `ggplot2`, we need to have a canvas (i.e. data-points) to plot with. We can do this with the `gggplot2::map_data()` function. 
 
@@ -278,7 +279,7 @@ The default map in the `geom_polygon()` is what’s referred to as the `mercator
 
 This causes a distortion in the land masses at both poles. The map above makes it look like Greenland is roughly 1/2 or 2/3 the size of Africa, when in reality Africa is 14x larger. These are well-known limitations of this projection, so there's nothing wrong with using it (but it's good information to know!) 
 
-## Add twitter data (world) {.tabset}
+## Add twitter data (world) 
 
 `ggplot2` has a handy function for creating a map quickly (appropriately called `coord_quickmap()`), and the `mercator` projection is the default setting. If we want to add our data in `TweetsLatLng` to the existing graph, we need to include these data in a new `geom_polygon()` layer. 
 
@@ -324,7 +325,7 @@ ggp_word_map +
 
 Now we can see the tweets have been added as data points to the existing map projection! We can see most of these data are limited to the US, so we will build a US map below. 
 
-## US Maps {.tabset}
+## US Maps 
 
 We can use the `ggplot2::map_data("usa")` function to create a US map (`USmap`) dataset. 
 
@@ -381,7 +382,7 @@ ggp_us_map
 ```
 
 
-## Adding twitter data (US) {.tabset}
+## Adding twitter data (US) 
 
 Now we have a canvas to work with--lets filter the `TweetsMap` data to only those tweets from the US using the `country_code` (first we count this variable to see what the codes are).
 
@@ -517,7 +518,7 @@ ggp_us_map +
 ```
 
 
-## Summary  {.tabset}
+## Summary  
 
 This has been a very short introduction to maps with `ggplot2`. In the next lesson, we will introduce how to make maps with `leaflet` and `plotly`, two popular mapping packages for creating interactive maps.
 
