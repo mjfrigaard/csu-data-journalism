@@ -70,7 +70,7 @@ cat_bullet(x, "^lessons/wk1-")
 
 ### Week 2 (2021-08-30)
 
-These exercises will help you understand how to extract pieces of your data in R, and how to use R Markdown. 
+These exercises will help you understand how to extract pieces of your data in R. 
 
 ```{r wk2-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk2-")
@@ -82,11 +82,15 @@ cat_bullet(x, "^lessons/wk2-")
 
 ### Week 4 (2021-09-13)
 
+These lessons cover an introduction to [`ggplot2`](https://ggplot2.tidyverse.org/) for data visualizations, and how to use the R Markdown, a "*notebook interface to weave together narrative text and code to produce elegantly formatted output.*"
+
 ```{r wk3-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk3-")
 ```
 
 ### Week 5 (2021-09-20)
+
+Data are rarely collected in a way that's fit for analysis or data visualization. In this lesson we introduce [`dplyr`](https://dplyr.tidyverse.org/), a package designed to handle "*most common data manipulation challenges.*"
 
 ```{r wk4-files, results = 'asis', echo = FALSE}
 cat_bullet(x, "^lessons/wk4-")
@@ -94,11 +98,15 @@ cat_bullet(x, "^lessons/wk4-")
 
 ### Week 6 (2021-09-27)
 
+Now that we've introduced the grammar of `ggplot2`, we can build visualizations that display counts and variable distributions. 
+
 ```{r wk5-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk5-")
 ```
 
 ### Week 7 (2021-10-04)
+
+In previous lessons, we used `dplyr` to manipulate data. In this lesson, we'll be using the `tidyr` package to reshape and restructure data. To demonstrate how these packages work together, we're going to scrape (download) a Wikipedia table of [List of largest biotechnology and pharmaceutical companies](https://en.wikipedia.org/wiki/List_of_largest_biotechnology_and_pharmaceutical_companies). 
 
 ```{r wk6-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk6-")
@@ -106,12 +114,15 @@ cat_bullet(x, "^lessons/wk6-")
 
 ### Week 8 (2021-10-11)
 
+This lesson covers intermediate data visualization techniques like plotting trends, adding help-text to your graph, labeling values to stand out, and using reference lines for comparisons.
+
 ```{r wk7-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk7-")
 ```
 
 ### Week 9 (2021-10-18)
 
+`tidyr` has functions for *generate sequences of data* ([`full_seq()`](https://tidyr.tidyverse.org/reference/full_seq.html)), *creating an output for each combination of any input* ([`expand_grid()`](https://tidyr.tidyverse.org/reference/expand_grid.html)), and *completing missing combinations of data* ([`complete()`](https://tidyr.tidyverse.org/reference/complete.html)). 
 
 ```{r wk8-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk8-")
@@ -119,17 +130,23 @@ cat_bullet(x, "^lessons/wk8-")
 
 ### Week 10 (2021-10-25)
 
+This lesson builds on our previous knowledge of `ggplot2` and introduces facets (small multiples) with [`ggplot2::facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html), [`ggforce::facet_wrap_paginate()`](https://ggforce.data-imaginist.com/reference/facet_wrap_paginate.html), and [`geofacet::facet_geo()`](https://hafen.github.io/geofacet/reference/facet_geo.html)
+
 ```{r wk9-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk9-")
 ```
 
 ### Week 11 (2021-11-01)
 
+This week we cover our first case study using data from the executed offenders database on the [Texas Department of Criminal Justice website](https://www.tdcj.texas.gov/death_row/dr_executed_offenders.html).
+
 ```{r wk10-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk10-")
 ```
 
 ### Week 12 (2021-11-08)
+
+Maps are a great way to give context to any data source. In this lesson, we're going to collect data with the [`rtweet` package](https://github.com/ropensci/rtweet) and use it to build a map with [`ggplot2`](https://ggplot2.tidyverse.org/reference/geom_map.html).
 
 ```{r wk11-files, results = 'asis', echo = FALSE, eval=TRUE}
 # and the `pr` for programming
