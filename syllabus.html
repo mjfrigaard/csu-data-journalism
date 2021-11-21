@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Syllabus</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CSUC Data Journalism</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Course outline</a>
+</li>
+<li>
+  <a href="lessons.html">Lessons</a>
+</li>
+<li>
+  <a href="exercises.html">Exercises</a>
+</li>
+<li>
+  <a href="slides.html">Slides</a>
+</li>
+<li>
+  <a href="syllabus.html">Syllabus</a>
+</li>
+<li>
+  <a href="more-resources.html">More resources</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Syllabus</h1>
+
+</div>
+
+
+<p>Note the following caveats regarding the course schedule:</p>
+<p>First, this might be considered an experimental course, where student progress will largely dictate progression of material covered. Each week, I will assign readings and/or exercises that students will be expected to complete and turn in. Whether material is properly understood will dictate the following week’s readings. Further, the materials on the exercises will cover topics in more depth than the slides, so completion and understanding of the exercises is essential.</p>
+<p>Finally–news changes quickly, so I reserve the right to remove, add, or alter any content that appears below based on current events in the world. The subjects are not mutually exclusive, so we may decide to introduce some topics prior to the scheduled date.</p>
+<div id="week-1" class="section level2">
+<h2>Week 1</h2>
+<div id="date-2021-08-23" class="section level3">
+<h3>Date: 2021-08-23</h3>
+<ul>
+<li><p>Why data journalism? (past, present, future)</p></li>
+<li><p>Overview of data technologies:</p>
+<ul>
+<li>html, web-browsers, xml, css, binary (proprietary) files, plain text, markdown</li>
+</ul></li>
+</ul>
+<p>The week 1 exercises cover installing R, RStudio, and how to navigate the RStudio IDE.</p>
+</div>
+<div id="week-1-reading" class="section level3">
+<h3>Week 1 Reading</h3>
+<ol style="list-style-type: decimal">
+<li><a href="https://gijn.org/2015/11/12/fifty-years-of-journalism-and-data-a-brief-history/">Fifty Years of Journalism and Data: A Brief History</a></li>
+<li><a href="https://datajournalism.com/read/handbook/one/introduction/data-journalism-in-perspective">Data Journalism in Perspective</a></li>
+</ol>
+<p>Also check out:</p>
+<ul>
+<li><strong>Markdown</strong>: <a href="https://commonmark.org/help/tutorial">Commonmark</a> has a quick ten-twenty minute tutorial on markdown.</li>
+</ul>
+</div>
+</div>
+<div id="week-2" class="section level2">
+<h2>Week 2</h2>
+<div id="date-2021-08-30" class="section level3">
+<h3>Date: 2021-08-30</h3>
+<ul>
+<li>What is/are data?
+<ul>
+<li>Variables</li>
+<li>Observations</li>
+<li>Datasets</li>
+</ul></li>
+<li>Introduction to R and RStudio
+<ul>
+<li>CRAN<br />
+</li>
+<li>R programming<br />
+</li>
+<li>Overview of the IDE<br />
+</li>
+<li>RStudio Cloud</li>
+</ul></li>
+</ul>
+</div>
+<div id="week-2-reading" class="section level3">
+<h3>Week 2 Reading</h3>
+<p>I’ve created a pdf reference for some basics of R programming:</p>
+<ul>
+<li><a href="https://github.com/mjfrigaard/csuc-data-journalism/blob/main/notes/01-intro-to-R-notes.pdf">Intro to R Notes</a></li>
+</ul>
+</div>
+</div>
+<div id="week-3" class="section level2">
+<h2>Week 3</h2>
+<div id="date-2021-09-06-labor-day.-campus-closed" class="section level3">
+<h3>Date: 2021-09-06 (<strong>Labor Day. Campus closed</strong>)</h3>
+</div>
+</div>
+<div id="week-4" class="section level2">
+<h2>Week 4</h2>
+<div id="date-2021-09-13" class="section level3">
+<h3>Date: 2021-09-13</h3>
+<ul>
+<li>Introduction to <a href="https://ggplot2-book.org/"><code>ggplot2</code></a> (part 1)
+<ul>
+<li>labels!!</li>
+<li>geoms<br />
+</li>
+<li>layers</li>
+</ul></li>
+<li>Where do we get data?
+<ul>
+<li>Common data sources<br />
+</li>
+<li>Open data<br />
+</li>
+<li>The <a href="https://docs.ropensci.org/rtweet/"><code>rtweet</code> package</a><br />
+</li>
+</ul></li>
+<li>Installing/updating packages in RStudio
+<ul>
+<li>CRAN packages<br />
+</li>
+<li>User-written packages</li>
+</ul></li>
+</ul>
+</div>
+<div id="week-4-reading" class="section level3">
+<h3>Week 4 Reading</h3>
+<p>This week we cover the basics of R functions and data objects, and a brief introduction to R Markdown.</p>
+<ul>
+<li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown</a>: A comprehensive but friendly introduction to R Markdown and friends. Free online!<br />
+</li>
+<li><a href="https://www.data-is-plural.com/">Data is Plural</a><br />
+</li>
+<li><a href="https://data.fivethirtyeight.com/">538 data</a><br />
+</li>
+<li><a href="https://github.com/rudeboybert/fivethirtyeight"><code>fivethirtyeight</code> data package</a><br />
+</li>
+<li><a href="https://docs.ropensci.org/rtweet/articles/rtweet.html">Intro to <code>rtweet</code> package</a></li>
+</ul>
+</div>
+</div>
+<div id="week-5" class="section level2">
+<h2>Week 5</h2>
+<div id="date-2021-09-20" class="section level3">
+<h3>Date: 2021-09-20</h3>
+<p>This week we will cover the basic <code>dplyr</code> verbs for data manipulation</p>
+<ul>
+<li><code>select()</code>, <code>filter()</code>, <code>arrange()</code>, <code>mutate()</code>, <code>group_by()</code> &amp; <code>summarize()</code></li>
+</ul>
+</div>
+<div id="week-5-reading" class="section level3">
+<h3>Week 5 Reading</h3>
+<ul>
+<li><a href="https://r4ds.had.co.nz/transform.html">Data transformations</a><br />
+</li>
+<li><a href="https://dplyr.tidyverse.org/"><code>dplyr</code> package documentation</a><br />
+</li>
+<li><a href="https://github.com/mjfrigaard/csuc-data-journalism/blob/main/pdfs/understand-contrast-news-outlets.pdf">Understanding and Contrasting the Data and Exploratory News Outlets</a></li>
+</ul>
+<p>The slides will cover some basic data manipulation techniques, and intermediate <code>ggplot2</code> graphics.</p>
+</div>
+</div>
+<div id="week-6" class="section level2">
+<h2>Week 6</h2>
+<div id="date-2021-09-27" class="section level3">
+<h3>Date: 2021-09-27</h3>
+<ul>
+<li>Intermediate <code>ggplot2</code> (part 2)
+<ul>
+<li>aesthetics<br />
+</li>
+<li>two variable graphs<br />
+</li>
+<li>graph types</li>
+</ul></li>
+</ul>
+</div>
+<div id="week-6-reading" class="section level3">
+<h3>Week 6 Reading</h3>
+<ul>
+<li><a href="https://github.com/mjfrigaard/csuc-data-journalism/blob/main/pdfs/the-technology-of-print-is-faster-better-from-mit-technology-review-1984-08.pdf">Technology of Print: is faster better?</a></li>
+</ul>
+</div>
+</div>
+<div id="week-7" class="section level2">
+<h2>Week 7</h2>
+<div id="date-2021-10-04" class="section level3">
+<h3>Date: 2021-10-04</h3>
+<ul>
+<li>Advanced data wrangling
+<ul>
+<li>Restructuring data<br />
+</li>
+<li>Pivot functions<br />
+</li>
+<li>scraping Wikipedia tables</li>
+</ul></li>
+</ul>
+</div>
+<div id="week-7-reading" class="section level3">
+<h3>Week 7 Reading</h3>
+<ul>
+<li><a href="https://tidyr.tidyverse.org/articles/pivot.html"><code>tidyr</code> pivoting documentation</a><br />
+</li>
+<li><a href="https://r4ds.had.co.nz/tidy-data.html">Data tidying</a></li>
+</ul>
+</div>
+</div>
+<div id="week-8" class="section level2">
+<h2>Week 8</h2>
+<div id="date-2021-10-11" class="section level3">
+<h3>Date: 2021-10-11</h3>
+<ul>
+<li>Intermediate <code>ggplot2</code> graphing techniques (part 3)
+<ul>
+<li>Trends<br />
+</li>
+<li>Adding text<br />
+</li>
+<li>Labeling values<br />
+</li>
+<li>Reference lines</li>
+</ul></li>
+</ul>
+</div>
+<div id="week-8-reading" class="section level3">
+<h3>Week 8 Reading</h3>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html"><code>ggrepel</code> package</a><br />
+</li>
+<li><a href="https://ggforce.data-imaginist.com/"><code>ggforce</code> package</a><br />
+</li>
+<li><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">adding reference lines to graphs</a><br />
+</li>
+<li><a href="https://clauswilke.com/dataviz/visualizing-trends.html">visualizing trends</a></li>
+</ul>
+</div>
+</div>
+<div id="week-9" class="section level2">
+<h2>Week 9</h2>
+<div id="date-2021-10-18" class="section level3">
+<h3>Date: 2021-10-18</h3>
+<ul>
+<li>Guest speaker (<a href="https://www.aleszu.com/">Aleszu Bajak</a>)<br />
+</li>
+<li>Advanced data wrangling and restructuring
+<ul>
+<li>generating sequences<br />
+</li>
+<li>completing missing data<br />
+</li>
+<li>anti-joins</li>
+</ul></li>
+</ul>
+</div>
+<div id="week-9-reading" class="section level3">
+<h3>Week 9 Reading</h3>
+<ul>
+<li><a href="https://tidyr.tidyverse.org/reference/full_seq.html"><code>full_seq()</code></a><br />
+</li>
+<li><a href="https://tidyr.tidyverse.org/reference/complete.html"><code>complete</code></a><br />
+</li>
+<li><a href="http://zevross.com/blog/2014/08/05/using-the-r-function-anti_join-to-find-unmatched-records/"><code>anti_join</code></a></li>
+</ul>
+</div>
+</div>
+<div id="week-10" class="section level2">
+<h2>Week 10</h2>
+<div id="date-2021-10-25" class="section level3">
+<h3>Date: 2021-10-25</h3>
+<ul>
+<li>Advanced <code>ggplot2</code> graphing techniques (part 4)
+<ul>
+<li>advanced faceting<br />
+</li>
+<li>small multiples</li>
+</ul></li>
+</ul>
+</div>
+<div id="week-10-reading" class="section level3">
+<h3>Week 10 Reading</h3>
+<ul>
+<li><a href="https://hafen.github.io/geofacet/"><code>geofacet</code></a><br />
+</li>
+<li><a href="https://exts.ggplot2.tidyverse.org/">ggplot2 extensions</a><br />
+</li>
+<li><a href="https://socviz.co/groupfacettx.html#facet-to-make-small-multiples">facet to make small multiples</a></li>
+</ul>
+</div>
+</div>
+<div id="week-11-alternate" class="section level2">
+<h2>Week 11 (alternate)</h2>
+<ul>
+<li>generate a <code>reprex</code>
+<ul>
+<li>send me a url for a post you’ve created (or a draft post) of a reprex.</li>
+</ul></li>
+</ul>
+<div id="week-11-reading-alternate" class="section level3">
+<h3>Week 11 Reading (alternate)</h3>
+<ul>
+<li><p><a href="https://reprex.tidyverse.org/articles/articles/learn-reprex.html">webinar for reprex</a></p></li>
+<li><p>Creating a <a href="https://community.rstudio.com/t/faq-whats-a-reproducible-example-reprex-and-how-do-i-create-one/5219">reproducible example</a></p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/tagged/r">StackOverflow</a>, <a href="https://community.rstudio.com/">RStudio Community</a><br />
+</li>
+<li><a href="https://reprex.tidyverse.org/">reprex package</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="week-11" class="section level2">
+<h2>Week 11</h2>
+<div id="date-2021-11-01" class="section level3">
+<h3>Date: 2021-11-01</h3>
+<ul>
+<li>Case study: criminal and social justice
+<ul>
+<li>Texas Department of Justice Website</li>
+</ul></li>
+</ul>
+</div>
+<div id="week-11-reading" class="section level3">
+<h3>Week 11 Reading</h3>
+<ul>
+<li>Texas department of Justice (website)<br />
+</li>
+<li>Capitol punishment data</li>
+</ul>
+</div>
+</div>
+<div id="week-12" class="section level2">
+<h2>Week 12</h2>
+<div id="date-2021-11-08" class="section level3">
+<h3>Date: 2021-11-08</h3>
+<ul>
+<li>Case study: media and politics
+<ul>
+<li>Google trends<br />
+</li>
+<li>building maps</li>
+</ul></li>
+</ul>
+</div>
+<div id="week-12-reading" class="section level3">
+<h3>Week 12 Reading</h3>
+</div>
+</div>
+<div id="week-13" class="section level2">
+<h2>Week 13</h2>
+<div id="date-2021-11-15" class="section level3">
+<h3>Date: 2021-11-15</h3>
+<ul>
+<li>Case study: culture and entertainment
+<ul>
+<li>US Anti-Doping Administration website</li>
+</ul></li>
+</ul>
+</div>
+<div id="week-13-reading" class="section level3">
+<h3>Week 13 Reading</h3>
+</div>
+</div>
+<div id="week-14" class="section level2">
+<h2>Week 14</h2>
+<div id="date-2021-11-22" class="section level3">
+<h3>Date: 2021-11-22</h3>
+<ul>
+<li>Final project data collection, cleaning and analysis
+<ul>
+<li>data sources</li>
+<li>attribution</li>
+<li>Storyboards (flexdashboard package)</li>
+</ul></li>
+<li>Making sure your work can be seen
+<ul>
+<li>deploying your work online</li>
+</ul></li>
+</ul>
+</div>
+<div id="week-14-reading" class="section level3">
+<h3>Week 14 Reading</h3>
+</div>
+</div>
+<div id="week-15" class="section level2">
+<h2>Week 15</h2>
+<div id="date-2021-11-29" class="section level3">
+<h3>Date: 2021-11-29</h3>
+<ul>
+<li><p>Material and project review for meetings;</p></li>
+<li><p>Final project draft #1<br />
+</p></li>
+<li><p>Individual meetings (as needed)</p></li>
+</ul>
+</div>
+</div>
+<div id="week-16" class="section level2">
+<h2>Week 16</h2>
+<div id="date-2021-12-06" class="section level3">
+<h3>Date: 2021-12-06</h3>
+<ul>
+<li>Final project story editing and revisions
+<ul>
+<li>Final story edits</li>
+</ul></li>
+</ul>
+<!-- [Journalism 301: Data Journalism](https://docs.google.com/document/d/e/2PACX-1vS_P_QWJoWEQImjplLG7jd4S7tPPc9o9cudSRsb1XsIG3-9MS-8p3qrZxmxn0z6IwDLEEw92cazAMF-/pub) -->
+</div>
+</div>
+
+<i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

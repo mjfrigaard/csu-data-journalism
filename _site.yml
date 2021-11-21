@@ -11,6 +11,8 @@ navbar:
       href: exercises.html
     - text: "Slides"
       href: slides.html
+    - text: "Syllabus"
+      href: syllabus.html
     - text: "More resources"
       href: more-resources.html
   right:

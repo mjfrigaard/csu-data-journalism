@@ -1,0 +1,270 @@
+---
+title: "Syllabus"
+---
+
+```{r setup, include = FALSE, warning = FALSE}
+library(tidyverse)
+library(stringr)
+library(htmltools)
+tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+Note the following caveats regarding the course schedule: 
+
+First, this might be considered an experimental course, where student progress will largely dictate progression of material covered. Each week, I will assign readings and/or exercises that students will be expected to complete and turn in. Whether material is properly understood will dictate the following week's readings. Further, the materials on the exercises will cover topics in more depth than the slides, so completion and understanding of the exercises is essential.  
+
+Finally--news changes quickly, so I reserve the right to remove, add, or alter any content that appears below based on current events in the world. The subjects are not mutually exclusive, so we may decide to introduce some topics prior to the scheduled date.
+
+## Week 1 
+
+### Date: 2021-08-23 
+
++ Why data journalism? (past, present, future)
+
++ Overview of data technologies: 
+  - html, web-browsers, xml, css, binary (proprietary) files, plain text, markdown
+  
+The week 1 exercises cover installing R, RStudio, and how to navigate the RStudio IDE. 
+  
+### Week 1 Reading 
+
+1. [Fifty Years of Journalism and Data: A Brief History](https://gijn.org/2015/11/12/fifty-years-of-journalism-and-data-a-brief-history/)
+2. [Data Journalism in Perspective](https://datajournalism.com/read/handbook/one/introduction/data-journalism-in-perspective)
+
+Also check out: 
+
+- **Markdown**: [Commonmark](https://commonmark.org/help/tutorial) has a quick ten-twenty minute tutorial on markdown.
+
+## Week 2 
+
+### Date: 2021-08-30
+
++ What is/are data? 
+  - Variables 
+  - Observations 
+  - Datasets 
+
++ Introduction to R and RStudio
+  - CRAN  
+  - R programming    
+  - Overview of the IDE  
+  - RStudio Cloud  
+
+### Week 2 Reading 
+
+I've created a pdf reference for some basics of R programming:   
+
+  + [Intro to R Notes](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/notes/01-intro-to-R-notes.pdf)
+
+## Week 3 
+
+### Date: 2021-09-06 (**Labor Day. Campus closed**)
+
+## Week 4 
+
+### Date: 2021-09-13
+
++ Introduction to [`ggplot2`](https://ggplot2-book.org/) (part 1)   
+  - labels!! 
+  - geoms    
+  - layers   
+ 
++ Where do we get data?    
+  - Common data sources   
+  - Open data   
+  - The [`rtweet` package](https://docs.ropensci.org/rtweet/)   
++ Installing/updating packages in RStudio    
+  - CRAN packages   
+  - User-written packages   
+  
+### Week 4 Reading 
+
+This week we cover the basics of R functions and data objects, and a brief introduction to R Markdown. 
+
+- [R Markdown](https://bookdown.org/yihui/rmarkdown/): A comprehensive but friendly introduction to R Markdown and friends. Free online!  
+- [Data is Plural](https://www.data-is-plural.com/)   
+- [538 data](https://data.fivethirtyeight.com/)     
+- [`fivethirtyeight` data package](https://github.com/rudeboybert/fivethirtyeight)    
+- [Intro to `rtweet` package](https://docs.ropensci.org/rtweet/articles/rtweet.html)   
+
+## Week 5 
+
+### Date: 2021-09-20 
+
+This week we will cover the basic `dplyr` verbs for data manipulation 
+
+- `select()`, `filter()`, `arrange()`, `mutate()`, `group_by()` & `summarize()`
+ 
+  
+### Week 5 Reading 
+
+- [Data transformations](https://r4ds.had.co.nz/transform.html)  
+- [`dplyr` package documentation](https://dplyr.tidyverse.org/)     
+- [Understanding and Contrasting the Data and Exploratory News Outlets](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/pdfs/understand-contrast-news-outlets.pdf)  
+
+The slides will cover some basic data manipulation techniques, and intermediate `ggplot2` graphics. 
+
+## Week 6 
+
+### Date: 2021-09-27
+
++ Intermediate `ggplot2` (part 2)  
+  - aesthetics  
+  - two variable graphs  
+  - graph types    
+  
+### Week 6 Reading
+  
+- [Technology of Print: is faster better?](https://github.com/mjfrigaard/csuc-data-journalism/blob/main/pdfs/the-technology-of-print-is-faster-better-from-mit-technology-review-1984-08.pdf)  
+
+## Week 7 
+
+### Date: 2021-10-04
+
++ Advanced data wrangling    
+  - Restructuring data   
+  - Pivot functions   
+  - scraping Wikipedia tables  
+  
+### Week 7 Reading
+
+- [`tidyr` pivoting documentation](https://tidyr.tidyverse.org/articles/pivot.html)   
+- [Data tidying](https://r4ds.had.co.nz/tidy-data.html)  
+
+## Week 8 
+
+### Date: 2021-10-11
+
++ Intermediate `ggplot2` graphing techniques (part 3)   
+  - Trends    
+  - Adding text    
+  - Labeling values     
+  - Reference lines    
+
+### Week 8 Reading 
+
++ [`ggrepel` package](https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html)  
++ [`ggforce` package](https://ggforce.data-imaginist.com/)  
++ [adding reference lines to graphs](https://ggplot2.tidyverse.org/reference/geom_abline.html)   
++ [visualizing trends](https://clauswilke.com/dataviz/visualizing-trends.html)  
+
+## Week 9 
+
+### Date: 2021-10-18 
+
++ Guest speaker ([Aleszu Bajak](https://www.aleszu.com/))  
++ Advanced data wrangling and restructuring  
+  - generating sequences  
+  - completing missing data  
+  - anti-joins  
+
+### Week 9 Reading 
+
++ [`full_seq()`](https://tidyr.tidyverse.org/reference/full_seq.html)   
++ [`complete`](https://tidyr.tidyverse.org/reference/complete.html)  
++ [`anti_join`](http://zevross.com/blog/2014/08/05/using-the-r-function-anti_join-to-find-unmatched-records/)  
+
+
+## Week 10 
+
+### Date: 2021-10-25
+
++ Advanced `ggplot2` graphing techniques (part 4)   
+  - advanced faceting     
+  - small multiples   
+  
+### Week 10 Reading 
+
+
+- [`geofacet`](https://hafen.github.io/geofacet/)   
+- [ggplot2 extensions](https://exts.ggplot2.tidyverse.org/)   
+- [facet to make small multiples](https://socviz.co/groupfacettx.html#facet-to-make-small-multiples)  
+
+## Week 11 (alternate)
+  
++ generate a `reprex`  
+  - send me a url for a post you've created (or a draft post) of a reprex. 
+
+### Week 11 Reading (alternate)
+
++ [webinar for reprex](https://reprex.tidyverse.org/articles/articles/learn-reprex.html)
+
++ Creating a [reproducible example](https://community.rstudio.com/t/faq-whats-a-reproducible-example-reprex-and-how-do-i-create-one/5219)   
+  - [StackOverflow](https://stackoverflow.com/questions/tagged/r), [RStudio Community](https://community.rstudio.com/)  
+  - [reprex package](https://reprex.tidyverse.org/) 
+
+
+## Week 11 
+
+### Date: 2021-11-01
+
++ Case study: criminal and social justice  
+  - Texas Department of Justice Website 
+
+### Week 11 Reading 
+
++ Texas department of Justice (website)  
++ Capitol punishment data
+
+## Week 12 
+
+### Date: 2021-11-08 
+
++ Case study: media and politics  
+  - Google trends   
+  - building maps  
+  
+### Week 12 Reading 
+
+## Week 13 
+
+### Date: 2021-11-15
+
++ Case study: culture and entertainment  
+  - US Anti-Doping Administration website 
+
+### Week 13 Reading 
+
+## Week 14 
+
+### Date: 2021-11-22
+
++ Final project data collection, cleaning and analysis
+  - data sources 
+  - attribution 
+  - Storyboards (flexdashboard package) 
+
++ Making sure your work can be seen  
+  - deploying your work online
+  
+### Week 14 Reading 
+
+## Week 15 
+
+### Date: 2021-11-29
+
++ Material and project review for meetings; 
+
+ - Final project draft #1  
+ - Individual meetings (as needed)  
+
+## Week 16 
+
+### Date: 2021-12-06
+
++ Final project story editing and revisions  
+  - Final story edits  
+ 
+
+
+
+
+
+
+
+
+
+
+
+<!-- [Journalism 301: Data Journalism](https://docs.google.com/document/d/e/2PACX-1vS_P_QWJoWEQImjplLG7jd4S7tPPc9o9cudSRsb1XsIG3-9MS-8p3qrZxmxn0z6IwDLEEw92cazAMF-/pub) -->
+
