@@ -91,7 +91,7 @@ Nearly all of the data we'll encounter in R will be rectangular (like a spreadsh
 
 `ggplot2` is an excellent package for building data visualizations and graphs in R. These exercises introduce you to the grammar and syntax. 
 
-* <a href="">_**subsetting data in R**_</a> _**extracting data from objects in R**_ 
+* <a href="">_**data visualization R with ggplot2 (part 1)**_</a> _**introduction to data visualization with ggplot2**_ 
 
 ### Week 4 
 
