@@ -1,5 +1,5 @@
 ---
-title: "RMarkdown in Practice"
+title: "R Markdown in Practice"
 comment: "*extending R markdown*"
 output: 
   html_document: 
@@ -92,7 +92,7 @@ Details about the variables in the `StarWars` dataset are accessible in RStudio'
 
 When we read the help file, we find there are three variables that are lists: `films`, `vehicles`, and `starships`. We have list-columns because the Star Wars API exports data as a JSON file, which is not tabular (like a spreadsheet).
 
-### `dplyr::glimpse()`
+### `glimpse()`
 
 We can see a basic transposed display of the `StarWars` data with `dplyr`'s `glimpse()` function.
 
@@ -102,7 +102,7 @@ dplyr::glimpse(StarWars)
 
 `glimpse()` shows us the format and first few values of each variable in `StarWars`.
 
-### `skimr::skim()`
+### `skim()`
 
 Below is a `skimr::skim()` view of the `StarWars` data. We can see each variable broken down by type, along with some summary information.
 
@@ -112,7 +112,7 @@ skimr::skim(StarWars)
 
 The `skimr` package is great for looking at large data summaries. Read more [here](https://docs.ropensci.org/skimr/).
 
-### `listviewer::jsonedit()`
+### `jsonedit()`
 
 If you have JSON or lists (non-rectangular data) in R, sometimes these objects can be hard to visualize. The `jsonedit()` function from `listviewer` makes this easier by giving us an interactive display to click-through.
 
@@ -136,7 +136,7 @@ StarWars <- readr::read_rds(file = params$data_dir)
 
 Re-knit this chunk with the new `cache` option.
 
-### Checking dataset size
+### Dataset size
 
 We can determine the size of our dataset using `object.size()` from the `utils` package (which is loaded by default).
 
@@ -249,7 +249,7 @@ Now the `inspect_mem-StarWars-StarWarsSmall` will only execute *after* the `Star
 
 Graphs and figures are great tools for communicating results, and we want to keep track of all the visualizations we create in our report. R Markdown comes with multiple options for controlling the size, location, and quality of images in our reports.
 
-### Figure size
+### Size
 
 We can adjust the size of our figures with `fig.height=` or `fig.width=`. These both take numeric values, and control the dimensions of the figure in inches. We can also control the size with `out.width=` and `out.height=`.
 
@@ -310,7 +310,7 @@ gg_avg_bmi_spec_gend
 
 We can see this figure fits the page well because we are able to control the size of the height and width.
 
-### Figure location
+### Location
 
 Now that we've created a few figures, we can see how these get stored to be used in the final .html file. Much like the default `cache` settings, when we create graphs in R Markdown, a default folder is created that is `your-file-name` + `_files`, and a subfolder `figure-html` contains the images for the document.
 

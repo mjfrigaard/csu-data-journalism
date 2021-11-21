@@ -82,7 +82,7 @@ library(tidyverse)
 
 # Example: COVID and Mobility
 
-Assume we received the following questions from a stakeholder:
+Assume we received the following questions:
 
 ***How has COVID changed our modes of transportation?***
 
@@ -102,7 +102,7 @@ Questions we should be considering:
 
 ## Data Import {.tabset}
 
-We're going to use the following data to answer the stakeholder's questions:
+We did some digging and came up with the following dataset to try and answer the questions above:
 
 - Apple mobility data: https://covid19.apple.com/mobility
 
@@ -111,6 +111,11 @@ Import the data below
 ```{r import-AppleMobRaw, message=FALSE, warning=FALSE}
 AppleMobRaw <- readr::read_csv("https://bit.ly/36tTVpe")
 ```
+
+```{r -export-AppleMobRaw-, include=FALSE, eval=TRUE}
+readr::write_csv(AppleMobRaw, file = "data/AppleMobRaw.csv")
+```
+
 
 ### Tidy `AppleMobRaw`
 

@@ -36,7 +36,7 @@ View the exercises for this section [here](https://mjfrigaard.github.io/csuc-dat
 
 These can be found under **Tools > Global Options...** 
 
-## General {.tabset}
+## General 
 
 Click on **Tools > Global Options...**, in the **General** section, you will see settings for **Workspace** 
 
@@ -57,7 +57,7 @@ How your **General** settings should look:
 knitr::include_graphics(path = "img/settings.png")
 ```
 
-## Code {.tabset}
+## Code 
 
 Under **Tools > Global Options...** click on **Code** 
 
@@ -114,7 +114,7 @@ knitr::include_graphics(path = "img/code-diagnostics.png")
 ```
 
 
-## Console {.tabset}
+## Console 
 
 Under **Tools > Global Options...** click on **Console** 
 
@@ -130,7 +130,7 @@ The console is where we can enter code directly, and where we'll see output. We 
 knitr::include_graphics(path = "img/console.png")
 ```
 
-## Appearance {.tabset}
+## Appearance 
 
 Under **Tools > Global Options...** click on **Appearance** 
 
@@ -145,7 +145,7 @@ Under **Tools > Global Options...** click on **Appearance**
 knitr::include_graphics(path = "img/appearance.png")
 ```
 
-## Pane layout {.tabset}
+## Pane layout 
 
 Under **Tools > Global Options...** click on **Pane Layout** 
 
@@ -182,7 +182,7 @@ knitr::include_graphics("img/three-column-layout.png")
 
 Keep track of all your files with RStudio project files (`.Rproj`).
 
-## Why RStudio Projects? {.tabset}
+## Why RStudio Projects? 
 
 - Self contained
 *Using R projects keeps track or your current working directory!*
@@ -252,7 +252,7 @@ knitr::include_graphics("img/proj-new-dir-version-crtl.png")
 
 Good folder and file organization saves time and headaches. 
 
-## Folder structure {.tabset}
+## Folder structure 
 
 See the tabs below for some basic guidelines on folder structure and file naming.
 
@@ -298,7 +298,7 @@ project-name/
                   |-- runall.R
 ```
 
-## Naming files {.tabset}
+## Naming files 
 
 Basic rules to follow: 
 
@@ -359,7 +359,7 @@ stringr::str_split_fixed(string = files, pattern = "_", 3)
 > *Adapted from [Jenny Byran's slides](https://speakerdeck.com/jennybc/how-to-name-files)
 
 
-## File paths {.tabset}  
+## File paths   
 
 Use relative rather than absolute file paths
 
@@ -383,7 +383,7 @@ These are specific to a *folder*
 
 This section covers some packages to help manage files and folders. 
 
-## The `here` package {.tabset}  
+## The `here` package   
 
 The `here::set_here()` function solves a lot of file path problems (*especially if you're not using R projects*)
 
@@ -406,7 +406,7 @@ list.files(all.files = TRUE, pattern = "here")
 #> [1] ".here"
 ```
 
-## The `fs` package {.tabset} 
+## The `fs` package  
 
 The `fs` package stands for **file system** and is great for locating and accessing files. 
 
@@ -426,7 +426,7 @@ Get the complete path to files using `fs::dir_ls()`.
 fs::dir_ls("data")
 ```
 
-## Reproducible examples {.tabset}
+## Reproducible examples 
 
 The [`reprex` package](https://github.com/tidyverse/reprex) was designed to help you create a reproducible example
 
@@ -462,7 +462,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/tidyverse/reprex/mast
 
 RStudio also comes with access to a **Terminal** and **Help** pane.
 
-## Terminal pane {.tabset}  
+## Terminal pane   
 
 Learn a handful of command-line tools to make life easier
 
@@ -479,7 +479,7 @@ knitr::include_graphics("img/terminal-pane.png")
 ```
 
 
-## Getting help {.tabset}
+## Getting help 
 
 R comes with a *ton* of accessible help files 
 

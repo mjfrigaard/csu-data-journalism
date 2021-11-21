@@ -41,7 +41,7 @@ We're going to clear up some of the terms and definitions so the R programming l
 
 Depending on what kind of computer you have, these instructions will be a little different. The two sections below describe how to install R and RStudio on Mac and Windows machines. An alternative to downloading and installing R and RStudio is using [RStudio.Cloud](https://rstudio.cloud/), which operates entirely in your browser. You'll need to sign up for a free RStudio.Cloud account using a [Github](https://github.com/) account (also free!).
 
-## Installing R on Mac {.tabset}
+## Installing R on Mac 
 
 These steps cover how to install R and RStudio on a Mac. The technical details on the operating system and machine are listed below,
 
@@ -198,7 +198,7 @@ Take a look at the RStudio IDE!
 knitr::include_graphics("img/09-rstudio-install-06.png")
 ```
 
-## Installing R on Windows {.tabset}
+## Installing R on Windows 
 
 These steps cover how to install R and RStudio on a Windows machine. The technical details on the operating system and machine are listed below.
 

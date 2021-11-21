@@ -57,7 +57,7 @@ We'll cover two methods for importing data into RStudio.
 
 We have the path to the `original_starwars` data stored in our `params`, but we will also go over how to build this dataset from `dplyr::starwars`. 
 
-### Import using url
+### URLs
 
 Below we import the `original_starwars` dataset from the slides using the url. This is similar to providing a local file path (`data/original-starwars.csv`).
 
@@ -65,7 +65,7 @@ Below we import the `original_starwars` dataset from the slides using the url. T
 read_csv("https://bit.ly/3qgjqSC")
 ```
 
-### Import using `params`
+### `params`
 
 We have the `params` list from our YAML header, which we can also use to import the data. 
 
@@ -183,18 +183,17 @@ arrange(original_starwars, hair_color)
 ### exercise 
 
 Sort `original_starwars` by `height` and `mass`, descending. 
-
 ```{r arrange-ex-02, eval=FALSE}
 arrange(original_starwars, desc(______, ____))
 ```
 
 ### solution 
 
+Including two variables is helpful if some of the values 'tie'. 
+
 ```{r arrange-sol-02}
 arrange(original_starwars, desc(height, mass))
 ```
-
-Including two variables is helpful if some of the values 'tie'. 
 
 ## Mutate columns {.tabset}
 

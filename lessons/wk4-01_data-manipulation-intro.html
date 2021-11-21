@@ -280,8 +280,8 @@ library(tidyverse)</code></pre>
 <div id="import-data-1" class="section level2 tabset" number="4.1">
 <h2 class="tabset"><span class="header-section-number">4.1</span> Import data</h2>
 <p>We have the path to the <code>original_starwars</code> data stored in our <code>params</code>, but we will also go over how to build this dataset from <code>dplyr::starwars</code>.</p>
-<div id="import-using-url" class="section level3" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> Import using url</h3>
+<div id="urls" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> URLs</h3>
 <p>Below we import the <code>original_starwars</code> dataset from the slides using the url. This is similar to providing a local file path (<code>data/original-starwars.csv</code>).</p>
 <pre class="r"><code>read_csv(&quot;https://bit.ly/3qgjqSC&quot;)
 #&gt; Rows: 6 Columns: 6
@@ -298,8 +298,8 @@ library(tidyverse)</code></pre>
   </script>
 </div>
 </div>
-<div id="import-using-params" class="section level3" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> Import using <code>params</code></h3>
+<div id="params" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> <code>params</code></h3>
 <p>We have the <code>params</code> list from our YAML header, which we can also use to import the data.</p>
 <pre class="yaml"><code>params: 
   data_file: !r file.path(&quot;https://bit.ly/3qgjqSC&quot;)</code></pre>
@@ -423,13 +423,13 @@ library(tidyverse)</code></pre>
 </div>
 <div id="solution-5" class="section level3" number="5.3.4">
 <h3><span class="header-section-number">5.3.4</span> solution</h3>
+<p>Including two variables is helpful if some of the values ‘tie’.</p>
 <pre class="r"><code>arrange(original_starwars, desc(height, mass))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hair_color"],"name":[4],"type":["chr"],"align":["left"]},{"label":["species"],"name":[5],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"Chewbacca","2":"228","3":"112","4":"brown","5":"Wookiee","6":"Kashyyyk"},{"1":"Han Solo","2":"180","3":"80","4":"brown","5":"Human","6":"Corellia"},{"1":"Luke Skywalker","2":"172","3":"77","4":"blond","5":"Human","6":"Tatooine"},{"1":"C-3PO","2":"167","3":"75","4":"NA","5":"Droid","6":"Tatooine"},{"1":"Leia Organa","2":"150","3":"49","4":"brown","5":"Human","6":"Alderaan"},{"1":"R2-D2","2":"96","3":"32","4":"NA","5":"Droid","6":"Naboo"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>Including two variables is helpful if some of the values ‘tie’.</p>
 </div>
 </div>
 <div id="mutate-columns" class="section level2 tabset" number="5.4">
