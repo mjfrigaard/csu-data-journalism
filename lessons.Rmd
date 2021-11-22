@@ -58,8 +58,7 @@ cat_bullet <- function(x, pattern) {
 }
 ```
 
-
-### Week 1 (2021-08-23)
+### Week 1 
 
 These are intended to get you started with R and RStudio.
 
@@ -67,8 +66,7 @@ These are intended to get you started with R and RStudio.
 cat_bullet(x, "^lessons/wk1-")
 ```
 
-
-### Week 2 (2021-08-30)
+### Week 2 
 
 These exercises will help you understand how to extract pieces of your data in R. 
 
@@ -76,11 +74,7 @@ These exercises will help you understand how to extract pieces of your data in R
 cat_bullet(x, "^lessons/wk2-")
 ```
 
-### Week 3 (2021-09-06)
-
-***Labor day, Campus closed***
-
-### Week 4 (2021-09-13)
+### Week 3 
 
 These lessons cover an introduction to [`ggplot2`](https://ggplot2.tidyverse.org/) for data visualizations, and how to use the R Markdown, a "*notebook interface to weave together narrative text and code to produce elegantly formatted output.*"
 
@@ -88,7 +82,7 @@ These lessons cover an introduction to [`ggplot2`](https://ggplot2.tidyverse.org
 cat_bullet(x, "^lessons/wk3-")
 ```
 
-### Week 5 (2021-09-20)
+### Week 4 
 
 Data are rarely collected in a way that's fit for analysis or data visualization. In this lesson we introduce [`dplyr`](https://dplyr.tidyverse.org/), a package designed to handle "*most common data manipulation challenges.*"
 
@@ -96,7 +90,7 @@ Data are rarely collected in a way that's fit for analysis or data visualization
 cat_bullet(x, "^lessons/wk4-")
 ```
 
-### Week 6 (2021-09-27)
+### Week 5 
 
 Now that we've introduced the grammar of `ggplot2`, we can build visualizations that display counts and variable distributions. 
 
@@ -104,7 +98,7 @@ Now that we've introduced the grammar of `ggplot2`, we can build visualizations 
 cat_bullet(x, "^lessons/wk5-")
 ```
 
-### Week 7 (2021-10-04)
+### Week 6 
 
 In previous lessons, we used `dplyr` to manipulate data. In this lesson, we'll be using the `tidyr` package to reshape and restructure data. To demonstrate how these packages work together, we're going to scrape (download) a Wikipedia table of [List of largest biotechnology and pharmaceutical companies](https://en.wikipedia.org/wiki/List_of_largest_biotechnology_and_pharmaceutical_companies). 
 
@@ -112,7 +106,7 @@ In previous lessons, we used `dplyr` to manipulate data. In this lesson, we'll b
 cat_bullet(x, "^lessons/wk6-")
 ```
 
-### Week 8 (2021-10-11)
+### Week 7 
 
 This lesson covers intermediate data visualization techniques like plotting trends, adding help-text to your graph, labeling values to stand out, and using reference lines for comparisons.
 
@@ -120,7 +114,7 @@ This lesson covers intermediate data visualization techniques like plotting tren
 cat_bullet(x, "^lessons/wk7-")
 ```
 
-### Week 9 (2021-10-18)
+### Week 8 
 
 `tidyr` has functions for *generate sequences of data* ([`full_seq()`](https://tidyr.tidyverse.org/reference/full_seq.html)), *creating an output for each combination of any input* ([`expand_grid()`](https://tidyr.tidyverse.org/reference/expand_grid.html)), and *completing missing combinations of data* ([`complete()`](https://tidyr.tidyverse.org/reference/complete.html)). 
 
@@ -128,7 +122,7 @@ cat_bullet(x, "^lessons/wk7-")
 cat_bullet(x, "^lessons/wk8-")
 ```
 
-### Week 10 (2021-10-25)
+### Week 9 
 
 This lesson builds on our previous knowledge of `ggplot2` and introduces facets (small multiples) with [`ggplot2::facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html), [`ggforce::facet_wrap_paginate()`](https://ggforce.data-imaginist.com/reference/facet_wrap_paginate.html), and [`geofacet::facet_geo()`](https://hafen.github.io/geofacet/reference/facet_geo.html)
 
@@ -136,7 +130,7 @@ This lesson builds on our previous knowledge of `ggplot2` and introduces facets 
 cat_bullet(x, "^lessons/wk9-")
 ```
 
-### Week 11 (2021-11-01)
+### Week 10 
 
 This week we cover our first case study using data from the executed offenders database on the [Texas Department of Criminal Justice website](https://www.tdcj.texas.gov/death_row/dr_executed_offenders.html).
 
@@ -144,7 +138,7 @@ This week we cover our first case study using data from the executed offenders d
 cat_bullet(x, "^lessons/wk10-")
 ```
 
-### Week 12 (2021-11-08)
+### Week 11 
 
 Maps are a great way to give context to any data source. In this lesson, we're going to collect data with the [`rtweet` package](https://github.com/ropensci/rtweet) and use it to build a map with [`ggplot2`](https://ggplot2.tidyverse.org/reference/geom_map.html).
 
@@ -153,28 +147,34 @@ Maps are a great way to give context to any data source. In this lesson, we're g
 cat_bullet(x, "^lessons/wk11-")
 ```
 
-### Week 13 (2021-11-15)
+### Week 12 
 
 ```{r wk12-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk12-")
 ```
 
-### Week 14 (2021-11-22)
+### Week 13 
 
 ```{r wk13-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk13-")
 ```
 
-### Week 15 (2021-11-29)
+### Week 14 
 
 ```{r wk14-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk14-")
 ```
 
-### Week 16 (2021-12-06)
+### Week 15 
 
 ```{r wk15-files, results = 'asis', echo = FALSE, eval=TRUE}
 cat_bullet(x, "^lessons/wk15-")
+```
+
+### Week 16 
+
+```{r wk16-files, results = 'asis', echo = FALSE, eval=TRUE}
+cat_bullet(x, "^lessons/wk16-")
 ```
 
 

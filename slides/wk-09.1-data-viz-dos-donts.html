@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data Visualization Do’s and Don’ts</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Martin Frigaard" />
+    <meta name="date" content="2021-11-22" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+    <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+    <link rel="stylesheet" href="theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Data Visualization Do’s and Don’ts
+## Journalism 303: Graph best practices
+### Martin Frigaard
+### 2021-11-22
+
+---
+
+
+
+
+class: inverse, center, top
+background-image: url(../img/ggplot2.png)
+background-position: 50% 70%
+background-size: 35%
+
+# Graph best practices
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+# Outline
+
+## Types of graphs
+
+.pull-left[
+
+### Distributions &amp; Counts
+
+### Proportions
+
+### Part-to-Whole 
+
+]
+
+.pull-right[
+
+### X vs. Y 
+
+### Uncertainty
+
+### Spatial Data
+
+]
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+# Datasets 
+
+## `palmerpenguins`
+
+## `fivethirtyeight` 
+
+## `ggplot2movies`
+
+Load these datasets below:
+
+
+```r
+library(palmerpenguins)
+library(fivethirtyeight)
+library(ggplot2movies)
+```
+
+---
+class: left, top
+background-image: url(https://allisonhorst.github.io/palmerpenguins/reference/figures/logo.png)
+background-position: 95% 8%
+background-size: 10%
+
+## `palmerpenguins` 
+
+#### [Package website](https://allisonhorst.github.io/palmerpenguins/)
+
+
+```r
+(palmerpenguins::penguins -&gt; penguins)
+```
+
+&lt;div data-pagedtable="false"&gt;
+  &lt;script data-pagedtable-source type="application/json"&gt;
+{"columns":[{"label":["species"],"name":[1],"type":["fct"],"align":["left"]},{"label":["island"],"name":[2],"type":["fct"],"align":["left"]},{"label":["bill_length_mm"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["bill_depth_mm"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["flipper_length_mm"],"name":[5],"type":["int"],"align":["right"]},{"label":["body_mass_g"],"name":[6],"type":["int"],"align":["right"]},{"label":["sex"],"name":[7],"type":["fct"],"align":["left"]},{"label":["year"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"Adelie","2":"Torgersen","3":"39.1","4":"18.7","5":"181","6":"3750","7":"male","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"39.5","4":"17.4","5":"186","6":"3800","7":"female","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"40.3","4":"18.0","5":"195","6":"3250","7":"female","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"NA","4":"NA","5":"NA","6":"NA","7":"NA","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"36.7","4":"19.3","5":"193","6":"3450","7":"female","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"39.3","4":"20.6","5":"190","6":"3650","7":"male","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"38.9","4":"17.8","5":"181","6":"3625","7":"female","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"39.2","4":"19.6","5":"195","6":"4675","7":"male","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"34.1","4":"18.1","5":"193","6":"3475","7":"NA","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"42.0","4":"20.2","5":"190","6":"4250","7":"NA","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"37.8","4":"17.1","5":"186","6":"3300","7":"NA","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"37.8","4":"17.3","5":"180","6":"3700","7":"NA","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"41.1","4":"17.6","5":"182","6":"3200","7":"female","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"38.6","4":"21.2","5":"191","6":"3800","7":"male","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"34.6","4":"21.1","5":"198","6":"4400","7":"male","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"36.6","4":"17.8","5":"185","6":"3700","7":"female","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"38.7","4":"19.0","5":"195","6":"3450","7":"female","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"42.5","4":"20.7","5":"197","6":"4500","7":"male","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"34.4","4":"18.4","5":"184","6":"3325","7":"female","8":"2007"},{"1":"Adelie","2":"Torgersen","3":"46.0","4":"21.5","5":"194","6":"4200","7":"male","8":"2007"},{"1":"Adelie","2":"Biscoe","3":"37.8","4":"18.3","5":"174","6":"3400","7":"female","8":"2007"},{"1":"Adelie","2":"Biscoe","3":"37.7","4":"18.7","5":"180","6":"3600","7":"male","8":"2007"},{"1":"Adelie","2":"Biscoe","3":"35.9","4":"19.2","5":"189","6":"3800","7":"female","8":"2007"},{"1":"Adelie","2":"Biscoe","3":"38.2","4":"18.1","5":"185","6":"3950","7":"male","8":"2007"},{"1":"Adelie","2":"Biscoe","3":"38.8","4":"17.2","5":"180","6":"3800","7":"male","8":"2007"},{"1":"Adelie","2":"Biscoe","3":"35.3","4":"18.9","5":"187","6":"3800","7":"female","8":"2007"},{"1":"Adelie","2":"Biscoe","3":"40.6","4":"18.6","5":"183","6":"3550","7":"male","8":"2007"},{"1":"Adelie","2":"Biscoe","3":"40.5","4":"17.9","5":"187","6":"3200","7":"female","8":"2007"},{"1":"Adelie","2":"Biscoe","3":"37.9","4":"18.6","5":"172","6":"3150","7":"female","8":"2007"},{"1":"Adelie","2":"Biscoe","3":"40.5","4":"18.9","5":"180","6":"3950","7":"male","8":"2007"},{"1":"Adelie","2":"Dream","3":"39.5","4":"16.7","5":"178","6":"3250","7":"female","8":"2007"},{"1":"Adelie","2":"Dream","3":"37.2","4":"18.1","5":"178","6":"3900","7":"male","8":"2007"},{"1":"Adelie","2":"Dream","3":"39.5","4":"17.8","5":"188","6":"3300","7":"female","8":"2007"},{"1":"Adelie","2":"Dream","3":"40.9","4":"18.9","5":"184","6":"3900","7":"male","8":"2007"},{"1":"Adelie","2":"Dream","3":"36.4","4":"17.0","5":"195","6":"3325","7":"female","8":"2007"},{"1":"Adelie","2":"Dream","3":"39.2","4":"21.1","5":"196","6":"4150","7":"male","8":"2007"},{"1":"Adelie","2":"Dream","3":"38.8","4":"20.0","5":"190","6":"3950","7":"male","8":"2007"},{"1":"Adelie","2":"Dream","3":"42.2","4":"18.5","5":"180","6":"3550","7":"female","8":"2007"},{"1":"Adelie","2":"Dream","3":"37.6","4":"19.3","5":"181","6":"3300","7":"female","8":"2007"},{"1":"Adelie","2":"Dream","3":"39.8","4":"19.1","5":"184","6":"4650","7":"male","8":"2007"},{"1":"Adelie","2":"Dream","3":"36.5","4":"18.0","5":"182","6":"3150","7":"female","8":"2007"},{"1":"Adelie","2":"Dream","3":"40.8","4":"18.4","5":"195","6":"3900","7":"male","8":"2007"},{"1":"Adelie","2":"Dream","3":"36.0","4":"18.5","5":"186","6":"3100","7":"female","8":"2007"},{"1":"Adelie","2":"Dream","3":"44.1","4":"19.7","5":"196","6":"4400","7":"male","8":"2007"},{"1":"Adelie","2":"Dream","3":"37.0","4":"16.9","5":"185","6":"3000","7":"female","8":"2007"},{"1":"Adelie","2":"Dream","3":"39.6","4":"18.8","5":"190","6":"4600","7":"male","8":"2007"},{"1":"Adelie","2":"Dream","3":"41.1","4":"19.0","5":"182","6":"3425","7":"male","8":"2007"},{"1":"Adelie","2":"Dream","3":"37.5","4":"18.9","5":"179","6":"2975","7":"NA","8":"2007"},{"1":"Adelie","2":"Dream","3":"36.0","4":"17.9","5":"190","6":"3450","7":"female","8":"2007"},{"1":"Adelie","2":"Dream","3":"42.3","4":"21.2","5":"191","6":"4150","7":"male","8":"2007"},{"1":"Adelie","2":"Biscoe","3":"39.6","4":"17.7","5":"186","6":"3500","7":"female","8":"2008"},{"1":"Adelie","2":"Biscoe","3":"40.1","4":"18.9","5":"188","6":"4300","7":"male","8":"2008"},{"1":"Adelie","2":"Biscoe","3":"35.0","4":"17.9","5":"190","6":"3450","7":"female","8":"2008"},{"1":"Adelie","2":"Biscoe","3":"42.0","4":"19.5","5":"200","6":"4050","7":"male","8":"2008"},{"1":"Adelie","2":"Biscoe","3":"34.5","4":"18.1","5":"187","6":"2900","7":"female","8":"2008"},{"1":"Adelie","2":"Biscoe","3":"41.4","4":"18.6","5":"191","6":"3700","7":"male","8":"2008"},{"1":"Adelie","2":"Biscoe","3":"39.0","4":"17.5","5":"186","6":"3550","7":"female","8":"2008"},{"1":"Adelie","2":"Biscoe","3":"40.6","4":"18.8","5":"193","6":"3800","7":"male","8":"2008"},{"1":"Adelie","2":"Biscoe","3":"36.5","4":"16.6","5":"181","6":"2850","7":"female","8":"2008"},{"1":"Adelie","2":"Biscoe","3":"37.6","4":"19.1","5":"194","6":"3750","7":"male","8":"2008"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## `fivethirtyeight` 
+
+[Package website](https://fivethirtyeight-r.netlify.app/)
+
+*All datasets are listed below with descriptions*
+
+&lt;div data-pagedtable="false"&gt;
+  &lt;script data-pagedtable-source type="application/json"&gt;
+{"columns":[{"label":["dataset"],"name":[1],"type":["chr"],"align":["left"]},{"label":["title"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"US_births_1994_2003","2":"Some People Are Too Superstitious To Have A Baby On Friday The 13th"},{"1":"US_births_2000_2014","2":"Some People Are Too Superstitious To Have A Baby On Friday The 13th"},{"1":"ahca_polls","2":"American Health Care Act Polls"},{"1":"airline_safety","2":"Should Travelers Avoid Flying Airlines That Have Had Crashes in the Past?"},{"1":"antiquities_act","2":"Trump Might Be The First President To Scrap A National Monument"},{"1":"august_senate_polls","2":"How Much Trouble Is Ted Cruz Really In?"},{"1":"avengers","2":"Joining The Avengers Is As Deadly As Jumping Off A Four-Story Building"},{"1":"bachelorette","2":"Bachelorette / Bachelor"},{"1":"bad_drivers","2":"Dear Mona, Which State Has The Worst Drivers?"},{"1":"bechdel","2":"The Dollar-And-Cents Case Against Hollywood's Exclusion of Women"},{"1":"biopics","2":"'Straight Outta Compton' Is The Rare Biopic Not About White Dudes"},{"1":"bob_ross","2":"A Statistical Analysis of the Work of Bob Ross"},{"1":"cabinet_turnover","2":"Two Years In, Turnover In Trump’s Cabinet Is Still Historically High"},{"1":"cand_events_20150114","2":"Looking For Clues: Who Is Going To Run For President In 2016?"},{"1":"cand_events_20150130","2":"Who Will Run For President: Romney Is Out"},{"1":"cand_state_20150114","2":"Looking For Clues: Who Is Going To Run For President In 2016?"},{"1":"cand_state_20150130","2":"Who Will Run For President: Romney Is Out"},{"1":"candy_rankings","2":"Candy Power Ranking"},{"1":"chess_transfers","2":"Chess Transfers"},{"1":"classic_rock_raw_data","2":"Why Classic Rock Isn't What It Used To Be"},{"1":"classic_rock_song_list","2":"Why Classic Rock Isn't What It Used To Be"},{"1":"college_all_ages","2":"The Economic Guide To Picking A College Major"},{"1":"college_grad_students","2":"The Economic Guide To Picking A College Major"},{"1":"college_recent_grads","2":"The Economic Guide To Picking A College Major"},{"1":"comma_survey","2":"Elitist, Superfluous, Or Popular? We Polled Americans on the Oxford Comma"},{"1":"congress_age","2":"Both Republicans And Democrats Have an Age Problem"},{"1":"cousin_marriage","2":"How Many Americans Are Married To Their Cousins?"},{"1":"daily_show_guests","2":"Every Guest Jon Stewart Ever Had On 'The Daily Show'"},{"1":"datasets_master","2":"Master list of all datasets"},{"1":"dem_candidates","2":"Democratic Primary Candidates 2018"},{"1":"democratic_bench","2":"Some Democrats Who Could Step Up If Hillary Isn't Ready For Hillary"},{"1":"drinks","2":"Dear Mona Followup: Where Do People Drink The Most Beer, Wine And Spirits?"},{"1":"drug_use","2":"How Baby Boomers Get High"},{"1":"elasticity_by_district","2":"Political Elasticity Scores"},{"1":"elasticity_by_state","2":"Political Elasticity Scores"},{"1":"elo_blatter","2":"Blatter's Reign At FIFA Hasn't Helped Soccer's Poor"},{"1":"endorsements","2":"Pols And Polls Say The Same Thing: Jeb Bush Is A Weak Front-Runner"},{"1":"endorsements_2020","2":"The 2020 Endorsement Primary - Which Democratic candidates are receiving the most support from prominent members of their party?"},{"1":"fandango","2":"Be Suspicious Of Online Movie Ratings, Especially Fandango's"},{"1":"fifa_audience","2":"How To Break FIFA"},{"1":"fight_songs","2":"Our Guide To The Exuberant Nonsense of College Fight Songs"},{"1":"flying","2":"41 Percent Of Fliers Think You're Rude If You Recline Your Seat"},{"1":"food_world_cup","2":"The FiveThirtyEight International Food Association's 2014 World Cup"},{"1":"forecast_results_2018","2":"How FiveThirtyEight's 2018 Midterm Forecasts Did"},{"1":"foul_balls","2":"We Watched 906 Foul Balls To Find Out Where The Most Dangerous Ones"},{"1":"generic_polllist","2":"Congress Generic Ballot Polls"},{"1":"generic_topline","2":"Congress Generic Ballot Polls"},{"1":"google_trends","2":"The Media Really Started Paying Attention to Puerto Rico When Trump Did"},{"1":"governor_national_forecast","2":"2018 Governors Forecast"},{"1":"governor_state_forecast","2":"2018 Governors Forecast"},{"1":"hate_crimes","2":"Higher Rates Of Hate Crimes Are Tied To Income Inequality"},{"1":"hiphop_cand_lyrics","2":"Hip-Hop Is Turning On Donald Trump"},{"1":"hist_ncaa_bball_casts","2":"The NCAA Bracket: Checking Our Work"},{"1":"hist_senate_preds","2":"How The FiveThirtyEight Senate Forecast Model Works"},{"1":"house_national_forecast","2":"2018 House Forecast"},{"1":"impeachment_polls","2":"Do Americans Support Impeaching Trump?"},{"1":"librarians","2":"Where Are America's Librarians?"},{"1":"love_actually_adj","2":"The Definitive Analysis Of 'Love Actually,' The Greatest Christmas Movie Of Our Time"},{"1":"love_actually_appearance","2":"The Definitive Analysis Of 'Love Actually,' The Greatest Christmas Movie Of Our Time"},{"1":"mad_men","2":"\"Mad Men\" Is Ending. What's Next For The Cast?"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## `ggplot2movies` 
+
+[Package website](https://github.com/hadley/ggplot2movies)
+
+&lt;div data-pagedtable="false"&gt;
+  &lt;script data-pagedtable-source type="application/json"&gt;
+{"columns":[{"label":["title"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["int"],"align":["right"]},{"label":["length"],"name":[3],"type":["int"],"align":["right"]},{"label":["budget"],"name":[4],"type":["int"],"align":["right"]},{"label":["rating"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["mpaa"],"name":[6],"type":["fct"],"align":["left"]},{"label":["genres"],"name":[7],"type":["chr"],"align":["left"]}],"data":[{"1":"100 Mile Rule","2":"2002","3":"98","4":"1100000","5":"5.6","6":"R","7":"comedy"},{"1":"13 Going On 30","2":"2004","3":"98","4":"37000000","5":"6.4","6":"PG-13","7":"drama, comedy, romance"},{"1":"15 Minutes","2":"2001","3":"120","4":"42000000","5":"6.1","6":"R","7":"drama"},{"1":"2 Fast 2 Furious","2":"2003","3":"107","4":"76000000","5":"5.1","6":"PG-13","7":"action"},{"1":"2046","2":"2004","3":"129","4":"12000000","5":"7.6","6":"R","7":"drama, romance"},{"1":"21 Grams","2":"2003","3":"124","4":"20000000","5":"8.0","6":"R","7":"drama"},{"1":"25th Hour","2":"2002","3":"135","4":"15000000","5":"7.8","6":"R","7":"drama"},{"1":"3000 Miles to Graceland","2":"2001","3":"125","4":"62000000","5":"5.4","6":"R","7":"action, comedy"},{"1":"40 Days and 40 Nights","2":"2002","3":"96","4":"17000000","5":"5.4","6":"R","7":"drama, comedy, romance"},{"1":"50 First Dates","2":"2004","3":"99","4":"75000000","5":"6.8","6":"PG-13","7":"comedy, romance"},{"1":"51st State, The","2":"2001","3":"92","4":"28000000","5":"6.1","6":"R","7":"action, comedy"},{"1":"8 Mile","2":"2002","3":"110","4":"41000000","5":"6.8","6":"R","7":"drama"},{"1":"AVP: Alien Vs. Predator","2":"2004","3":"102","4":"45000000","5":"5.4","6":"PG-13","7":"action"},{"1":"Abandon","2":"2002","3":"99","4":"25000000","5":"4.7","6":"PG-13","7":"drama"},{"1":"About Schmidt","2":"2002","3":"125","4":"30000000","5":"7.3","6":"R","7":"drama, comedy"},{"1":"About a Boy","2":"2002","3":"101","4":"27000000","5":"7.5","6":"PG-13","7":"drama, comedy"},{"1":"Absolon","2":"2003","3":"96","4":"8000000","5":"4.1","6":"R","7":"action"},{"1":"Adaptation.","2":"2002","3":"114","4":"19000000","5":"7.9","6":"R","7":"drama, comedy"},{"1":"Adventures of Pluto Nash, The","2":"2002","3":"95","4":"100000000","5":"3.9","6":"PG-13","7":"action, comedy"},{"1":"After the Sunset","2":"2004","3":"97","4":"58000000","5":"6.0","6":"PG-13","7":"action, comedy"},{"1":"Agent Cody Banks","2":"2003","3":"102","4":"26000000","5":"5.5","6":"PG","7":"action, comedy"},{"1":"Agent Cody Banks 2: Destination London","2":"2004","3":"100","4":"26000000","5":"3.8","6":"PG","7":"action, comedy"},{"1":"Air Marshal","2":"2003","3":"90","4":"500000","5":"3.0","6":"R","7":"action"},{"1":"Alamo, The","2":"2004","3":"137","4":"95000000","5":"5.9","6":"PG-13","7":"action, drama"},{"1":"Alexander","2":"2004","3":"175","4":"150000000","5":"5.5","6":"R","7":"drama"},{"1":"Alfie","2":"2004","3":"103","4":"60000000","5":"6.0","6":"R","7":"drama, comedy"},{"1":"Ali","2":"2001","3":"165","4":"107000000","5":"6.4","6":"R","7":"drama"},{"1":"All About the Benjamins","2":"2002","3":"95","4":"14000000","5":"5.4","6":"R","7":"action, comedy"},{"1":"All the Queen's Men","2":"2001","3":"105","4":"25000000","5":"5.0","6":"PG-13","7":"action, drama, comedy"},{"1":"All the Real Girls","2":"2003","3":"108","4":"1000000","5":"6.8","6":"R","7":"drama, romance"},{"1":"Alone in the Dark","2":"2005","3":"96","4":"20000000","5":"2.1","6":"R","7":"action"},{"1":"Along Came Polly","2":"2004","3":"90","4":"42000000","5":"5.8","6":"PG-13","7":"comedy, romance"},{"1":"Along Came a Spider","2":"2001","3":"104","4":"28000000","5":"6.1","6":"R","7":"drama"},{"1":"America's Sweethearts","2":"2001","3":"102","4":"48000000","5":"5.8","6":"PG-13","7":"comedy, romance"},{"1":"American Outlaws","2":"2001","3":"94","4":"35000000","5":"5.5","6":"PG-13","7":"action, comedy"},{"1":"American Pie 2","2":"2001","3":"105","4":"30000000","5":"6.3","6":"R","7":"comedy"},{"1":"American Wedding","2":"2003","3":"103","4":"55000000","5":"6.3","6":"R","7":"comedy"},{"1":"Anchorman: The Legend of Ron Burgundy","2":"2004","3":"104","4":"26000000","5":"6.5","6":"PG-13","7":"comedy"},{"1":"Angel Eyes","2":"2001","3":"102","4":"38000000","5":"5.6","6":"R","7":"drama, romance"},{"1":"Anger Management","2":"2003","3":"106","4":"75000000","5":"6.0","6":"PG-13","7":"comedy"},{"1":"Animal, The","2":"2001","3":"84","4":"22000000","5":"4.8","6":"R","7":"comedy"},{"1":"Animatrix: Final Flight of the Osiris, The","2":"2003","3":"11","4":"5000000","5":"7.6","6":"PG-13","7":"action, animation, short"},{"1":"Antitrust","2":"2001","3":"108","4":"30000000","5":"6.0","6":"PG-13","7":"drama"},{"1":"Antwone Fisher","2":"2002","3":"117","4":"12500000","5":"7.4","6":"PG-13","7":"drama"},{"1":"Anything Else","2":"2003","3":"108","4":"18000000","5":"6.5","6":"R","7":"comedy, romance"},{"1":"Are We There Yet?","2":"2005","3":"95","4":"32000000","5":"3.5","6":"PG","7":"comedy"},{"1":"Around the World in 80 Days","2":"2004","3":"120","4":"110000000","5":"5.7","6":"PG","7":"action, comedy, romance"},{"1":"Artificial Intelligence: AI","2":"2001","3":"146","4":"90000000","5":"6.8","6":"PG-13","7":"drama"},{"1":"Assault on Precinct 13","2":"2005","3":"109","4":"20000000","5":"6.3","6":"R","7":"action, drama"},{"1":"Atlantis: The Lost Empire","2":"2001","3":"95","4":"90000000","5":"6.4","6":"PG","7":"action, animation"},{"1":"Austin Powers in Goldmember","2":"2002","3":"94","4":"63000000","5":"6.2","6":"PG-13","7":"action, comedy"},{"1":"Auto Focus","2":"2002","3":"105","4":"7000000","5":"6.7","6":"R","7":"drama"},{"1":"Avalon","2":"2001","3":"106","4":"8000000","5":"6.8","6":"R","7":"drama, animation"},{"1":"Aviator, The","2":"2004","3":"170","4":"116000000","5":"7.5","6":"PG-13","7":"drama"},{"1":"Baby Boy","2":"2001","3":"130","4":"16000000","5":"6.2","6":"R","7":"drama, romance"},{"1":"Bad Boys II","2":"2003","3":"145","4":"130000000","5":"6.1","6":"R","7":"action, comedy"},{"1":"Bad Company","2":"2002","3":"116","4":"70000000","5":"5.4","6":"PG-13","7":"action, comedy"},{"1":"Bad Santa","2":"2003","3":"98","4":"18000000","5":"7.2","6":"R","7":"comedy"},{"1":"Badge, The","2":"2002","3":"103","4":"6000000","5":"6.3","6":"R","7":"action, drama"},{"1":"Ballad of Jack and Rose, The","2":"2005","3":"112","4":"1500000","5":"6.2","6":"R","7":"drama"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
+
+*We're using `movies_data` (derived version of the `ggplot2movies::movies`)*
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Distributions &amp; Counts
+
+Visualize distributions with `geom_histogram()`
+
+
+```r
+penguins %&gt;% ggplot(aes(x = flipper_length_mm)) + 
+  geom_histogram()
+```
+
+&lt;img src="../img/geom_histogram-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Distributions &amp; Counts
+
+Visualize distributions with  `geom_freqpoly()`
+
+
+```r
+penguins %&gt;% ggplot(aes(x = flipper_length_mm)) + 
+  geom_freqpoly()
+```
+
+&lt;img src="../img/geom_freqpoly-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Distributions &amp; Counts
+
+Visualize distributions with `geom_density()`
+
+
+```r
+penguins %&gt;% ggplot(aes(x = flipper_length_mm)) + 
+  geom_density()
+```
+
+&lt;img src="../img/geom_density-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Distributions &amp; Counts
+
+Visualize counts with [`geom_bar()`](https://ggplot2.tidyverse.org/reference/geom_bar.html)
+
+
+```r
+movies_data %&gt;% ggplot(aes(x = mpaa)) + 
+  geom_bar(aes(fill = mpaa))
+```
+
+&lt;img src="../img/geom_bar-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Comparing Distributions &amp; Counts
+
+Use [`geom_col()`](https://ggplot2.tidyverse.org/reference/geom_bar.html) for comparing two variables 
+
+
+```r
+movies_data %&gt;% ggplot(aes(x = mpaa, y = rating)) + 
+  geom_col(aes(fill = mpaa))
+```
+
+&lt;img src="../img/geom_col-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Comparing Distributions &amp; Counts
+
+Use pie-charts for proportions with [`ggpubr::ggpie`](https://rpkgs.datanovia.com/ggpubr/reference/ggpie.html)
+
+
+```r
+movies_data %&gt;% group_by(mpaa) %&gt;% summarize(avg = mean(rating)) %&gt;% 
+  ggpubr::ggpie(x = "avg", label = "mpaa", fill = "mpaa", 
+        color = "white") + theme(legend.position = "none")
+```
+
+&lt;img src="../img/ggpie-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Comparing Distributions &amp; Counts
+
+Comparing distributions with [`ridgeline plots`](https://wilkelab.org/ggridges/) 
+
+
+```r
+penguins %&gt;% filter(!is.na(sex)) %&gt;% 
+  ggplot(aes(x = bill_length_mm, y = sex, fill = sex)) +
+  ggridges::geom_density_ridges(alpha = 2/3)
+```
+
+&lt;img src="../img/geom_density_ridges-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Comparing Distributions &amp; Counts
+
+Compare distributions with  [`bee-swarm`](https://github.com/eclarke/ggbeeswarm) plots
+
+
+```r
+penguins %&gt;% ggplot(aes(x = island, y = body_mass_g, 
+                        color = island)) + 
+  ggbeeswarm::geom_beeswarm(size = 0.4, alpha = 1/2)
+```
+
+&lt;img src="../img/geom_beeswarm-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Comparing Distributions &amp; Counts
+
+Compare distributions box-plots using  [`geom_boxplot()`](https://ggplot2.tidyverse.org/reference/geom_boxplot.html)
+
+
+```r
+movies_data %&gt;% ggplot(aes(x = mpaa, y = length, fill = mpaa)) + 
+  geom_boxplot(outlier.size = 0.4) + 
+  theme(legend.position = "none")
+```
+
+&lt;img src="../img/geom_boxplot-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Comparing Distributions &amp; Counts
+
+Compare distributions with [`geom_violin()`](https://ggplot2.tidyverse.org/reference/geom_violin.html)
+
+
+```r
+movies_data %&gt;% 
+  ggplot(aes(x = mpaa, y = length, fill = mpaa)) + 
+  geom_violin(alpha = 1/3)
+```
+
+&lt;img src="../img/geom_violin-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Comparing Distributions &amp; Counts
+
+Create dumbbell-plots to compare the difference between two values.
+
+
+
+
+```r
+dumbbell_plot_police_deaths %&gt;% 
+  ggplot(aes(x = `Police Deaths`, y = State, group = paired)) +
+  geom_line(size = 0.1) + geom_point(aes(color = Year), size = 0.2)
+```
+
+&lt;img src="../img/dumbbell-plot-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Part-to-Whole Relationships
+
+Create (stacked) bar charts with `geom_bar()`
+
+
+```r
+penguins %&gt;% filter(!is.na(sex)) %&gt;% 
+  ggplot(aes(x = flipper_length_mm, fill = sex)) + 
+  geom_bar()
+```
+
+&lt;img src="../img/stacked-bar-chart-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Part-to-Whole Relationships
+
+Create (horizontal) diverging bar-charts using `geom_bar()`
+
+
+
+
+```r
+diverging_bar_drug_use %&gt;%
+  ggplot(aes(x = Drug, y = `% using (weighted)`, label = Drug)) +
+  geom_bar(aes(fill = `Category`),
+           stat = "identity", width = .5)
+```
+
+&lt;img src="../img/horizontal-diverging-bar-chart-1.png" width="85%" height="85%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Part-to-Whole Relationships
+
+Create (vertical) diverging bar-charts using `geom_bar()`
+
+
+
+
+```r
+diverging_bar_candy %&gt;% ggplot(aes(x = `sugar % - price %`, 
+ y =  reorder(name, `sugar % - price %`), label = Characteristics)) +
+  geom_bar(aes(fill = `Diff Category`), stat = "identity", 
+           width = .5) + labs(y = " ")
+```
+
+&lt;img src="../img/vertical-diverging-bar-chart-1.png" width="85%" height="85%" style="display: block; margin: auto;" /&gt;
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Part-to-Whole Relationships
+
+Use heatmaps to compare numeric variables across two categorical variables.
+
+
+
+
+
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Part-to-Whole Relationships
+
+Create waffle charts with `ggwaffle`
+
+
+
+
+```r
+penguins_waffle_data %&gt;% ggplot(aes(x, y, fill = group)) + 
+  ggwaffle::geom_waffle() + 
+  theme_waffle() + labs(x = " ", y = " ")
+```
+
+&lt;img src="../img/geom_waffle.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Part-to-Whole Relationships
+
+Create mosaic plots with [`ggmosaic::geom_mosaic()`](https://haleyjeppson.github.io/ggmosaic/)
+
+
+
+
+```r
+flying_mosaic %&gt;% ggplot() + 
+    geom_mosaic(aes(x = product(recline_rude), 
+    fill = recline_often), show.legend = FALSE) + theme_mosaic()
+```
+
+&lt;img src="../img/geom_mosaic-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Part-to-Whole Relationships
+
+Build tree-maps with [`treemapify::geom_treemap()`](https://cran.r-project.org/web/packages/treemapify/vignettes/introduction-to-treemapify.html)
+
+
+
+
+```r
+treemap_candy %&gt;% 
+  ggplot(aes(area = `sugar %`, fill = `price %`, label = name)) +
+  geom_treemap() + geom_treemap_text(min.size = 3, colour = "white", 
+  place = "centre", grow = TRUE)
+```
+
+&lt;img src="../img/geom_treemap-1.png" width="85%" height="85%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Part-to-Whole Relationships
+
+Build dendrograms with [`ggdendro`](https://cran.r-project.org/web/packages/ggdendro/vignettes/ggdendro.html)
+
+
+
+
+```r
+ggplot(ggdendro::segment(rect_police_data)) + 
+geom_segment(aes(x = x, y = y, xend = xend, yend = yend), size = 0.2) + 
+geom_text(data = ggdendro::label(rect_police_data), aes(x = x, y = y, 
+          label = label, hjust = -0.1), size = 1.1) + coord_flip() +
+          scale_y_reverse(expand = c(0.2, 0)) + 
+          labs(x = " ", y = " ")
+```
+
+&lt;img src="../img/ggdendro-1.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## X vs. Y Relationships
+
+SCATTER PLOTS  
++ `geom_point()`  
+
+
+```r
+tidy_candy_rankings &lt;- candy_rankings %&gt;%
+  tidyr::pivot_longer(
+    cols = -c(competitorname, sugarpercent, pricepercent, winpercent), 
+     names_to = "characteristics", values_to = "present") %&gt;%
+  mutate(present = as.logical(present)) %&gt;% arrange(competitorname) %&gt;% 
+  filter(present == TRUE) %&gt;% distinct() %&gt;% 
+  select(-present)
+```
+
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Uncertainty
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## Spatial Data
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
