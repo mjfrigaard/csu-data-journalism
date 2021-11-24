@@ -6,17 +6,17 @@
     <meta name="author" content="Martin Frigaard" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
-    <meta name="description" content="λέξις: a xaringan theme"/>
+    <meta name="description" content="The RStudio IDE"/>
     <meta name="generator" content="xaringan and remark.js"/>
-    <meta name="github-repo" content="jhelvy/lexis"/>
-    <meta name="twitter:title" content="λέξις: a xaringan theme"/>
-    <meta name="twitter:description" content="λέξις: a xaringan theme"/>
+    <meta name="github-repo" content="mjfrigaard/csuc-data-journalism"/>
+    <meta name="twitter:title" content="The RStudio IDE"/>
+    <meta name="twitter:description" content="The RStudio IDE"/>
     <meta name="twitter:url" content="https://mjfrigaard.github.io/csuc-data-journalism/"/>
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:creator" content="@mjfrigaard"/>
     <meta name="twitter:site" content="@mjfrigaard"/>
-    <meta property="og:title" content="λέξις: a xaringan theme"/>
-    <meta property="og:description" content="λέξις: a xaringan theme"/>
+    <meta property="og:title" content="The RStudio IDE"/>
+    <meta property="og:description" content="The RStudio IDE"/>
     <meta property="og:url" content="https://mjfrigaard.github.io/csuc-data-journalism/"/>
     <meta property="og:type" content="website"/>
     <meta property="og:locale" content="en_US"/>
@@ -49,7 +49,7 @@ layout: true
 
 &lt;!-- this adds the link footer to all slides, depends on footer-small class in css--&gt;
 
-&lt;div class="footer-small"&gt;&lt;span&gt;https://github.com/mjfrigaard/csuc-data-journalism&gt;&lt;/div&gt;
+&lt;div class="footer-small"&gt;&lt;span&gt;https://github.com/mjfrigaard/csuc-data-journalism&lt;/div&gt;
 
 ---
 name: title-slide
@@ -62,7 +62,7 @@ class: title-slide, center, middle, inverse
 
 .large[by Martin Frigaard]
 
-Written: September 21 2021
+Written: September 30 2021
 
 Updated: November 24 2021
 
@@ -71,6 +71,7 @@ Updated: November 24 2021
 ]]]
 
 
+---
 class: center, middle
 
 # The RStudio IDE
@@ -82,7 +83,7 @@ class: left, top
 
 ## Change RStudio's Default Settings 
 
-.pull-left[
+.leftcol[
 
 #### Click on **Tools** &gt; **Global Options...**
 
@@ -92,9 +93,9 @@ class: left, top
 
 ]
 
-.pull-right[
+.rightcol[
 
-&lt;img src="../img/settings.png" width="200%" height="200%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/settings.png" width="200%" height="200%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -104,7 +105,7 @@ class: inverse, center, middle
 
 # Customize RStudio 
 
-.pull-left[
+.leftcol[
 ### Code
 ### Console
 ### Appearance
@@ -112,9 +113,9 @@ class: inverse, center, middle
 ### R Markdown
 ]
 
-.pull-right[
+.rightcol[
 
-&lt;img src="../img/setting-options.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/setting-options.png" width="40%" height="40%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -123,19 +124,19 @@ class: left, top
 
 # Code Editing
 
-.pull-left[
+.leftcol[
 
-### - Auto indent?
+## - Auto indent?
 
-### - Continue comment lines?
+## - Continue comment lines?
 
-### - Save R scripts before sourcing?
+## - Save R scripts before sourcing?
 
 ]
 
-.pull-right[
+.rightcol[
 
-&lt;img src="../img/code-settings.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/code-settings.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -145,20 +146,20 @@ class: left, top
 
 # Code Display
 
-.pull-left[
+.leftcol[
 
-### - Margins?
+## - Margins?
 
-### - Scrolling?
+## - Scrolling?
 
-### - Rainbow parentheses?
+## - Rainbow parentheses?
 
 ]
 
 
-.pull-right[
+.rightcol[
 
-&lt;img src="../img/code-display.png" width="120%" height="120%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/code-display.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -167,19 +168,19 @@ class: left, top
 
 # Code Saving
 
-.pull-left[
+.leftcol[
 
-### - Cursor position?
+## - Cursor position?
 
-### - Line endings?
+## - Line endings?
 
-### - Text encoding?
+## - Text encoding?
 
 ]
 
-.pull-right[
+.rightcol[
 
-&lt;img src="../img/code-savings.png" width="120%" height="120%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/code-savings.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -188,20 +189,20 @@ class: left, top
 
 # Code Completion
 
-.pull-left[
+.leftcol[
 
-### - Insert parentheses?
+## - Insert parentheses?
 
-### - Insert spaces?
+## - Insert spaces?
 
-### - Completion delay setting?
+## - Completion delay setting?
 
 ]
 
 
-.pull-right[
+.rightcol[
 
-&lt;img src="../img/code-completion.png" width="120%" height="120%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/code-completion.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -210,20 +211,20 @@ class: left, top
 
 # Code Diagnostics
 
-.pull-left[
+.leftcol[
 
-### - Check your R Code?
+## - Check your R Code?
 
-### - Check other languages?
+## - Check other languages?
 
-### - How long?
+## - How long?
 
 ]
 
 
-.pull-right[
+.rightcol[
 
-&lt;img src="../img/code-diagnostics.png" width="120%" height="120%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/code-diagnostics.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -232,19 +233,19 @@ class: left, top
 
 # Console
 
-.pull-left[
+.leftcol[
 
-### - Display?
+## - Display?
 
-### - Debugging?
+## - Debugging?
 
-### - Other?
+## - Other?
 
 ]
 
-.pull-right[
+.rightcol[
 
-&lt;img src="../img/console.png" width="120%" height="120%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/console.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -253,25 +254,25 @@ class: left, top
 
 # Appearance
 
-.pull-left[
+.leftcol[
 
-### - RStudio theme?
+#### - RStudio theme?
 
-### - Zoom?
+#### - Zoom?
 
-#### - Also hold `⌘` and press `+` on macOS
+##### - Also hold `⌘` and press `+` on macOS
 
-#### - Also hold `ctrl` and press `+` on Windows
+##### - Also hold `ctrl` and press `+` on Windows
 
-### - Font?
+#### - Font?
 
-### - Editor theme?
+#### - Editor theme?
 
 ]
 
-.pull-right[
+.rightcol[
 
-&lt;img src="../img/appearance.png" width="120%" height="120%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/appearance.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -281,23 +282,23 @@ class: left, top
 
 ## Pane layout
 
-.pull-left[
+.leftcol[
 
-### - Source?
+#### - Source?
 
-### - Console?
+#### - Console?
 
-### Combining pane elements?
+#### Combining pane elements?
 
-#### - Plots, Connections, Build, VCS, Presentation 
+##### - Plots, Connections, Build, VCS, Presentation 
 
-#### - Files, Packages, Help, Tutorial, Viewer
+##### - Files, Packages, Help, Tutorial, Viewer
 
 ]
 
-.pull-right[
+.rightcol[
 
-&lt;img src="../img/default-layout.png" width="100%" height="100%" /&gt;
+&lt;img src="img/default-layout.png" width="70%" height="70%" /&gt;
 
 ]
 
@@ -307,14 +308,14 @@ class: left, top
 
 Standard layout options 
 
-&lt;img src="../img/default-layout-view.png" width="100%" height="100%" /&gt;
+&lt;img src="img/default-layout-view.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: left, top
 
 # Pane layout: add column
 
-#### Two screens? 
+### Two screens? 
 
 --
 
@@ -322,15 +323,15 @@ class: left, top
 
 --
 
-.pull-left[
+.leftcol[
 
-&lt;img src="../img/add-pane-column.png" width="90%" height="90%" /&gt;
+&lt;img src="img/add-pane-column.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
 
 ]
 
-.pull-right[
+.rightcol[
 
-&lt;img src="../img/add-column-switch-panes.png" width="90%" height="90%" /&gt;
+&lt;img src="img/add-column-switch-panes.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -341,7 +342,7 @@ class: left, top
 
 Now you see **Source**, **Tutorial**, and **Console** panes on a single screen!
 
-&lt;img src="../img/three-column-layout.png" width="100%" height="100%" /&gt;
+&lt;img src="img/three-column-layout.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: inverse, center, middle
@@ -359,20 +360,35 @@ class: left, top
 --
 ####  Self contained
 
-Using R projects keeps track or your current working directory!
+&gt; Using R projects keeps track or your current working directory!
 
 --
+
 #### Project orientated
 
-.Rproj files make bundling and shipping files and folders easier!
+&gt; .Rproj files make bundling and shipping files and folders easier!
+
+
+---
+class: left, top
+
+# Why RStudio Projects?
+
+### Keep track of all your files with RStudio project files (`.Rproj`). 
 
 --
 
 #### Avoid removing all the files 
 
-???
+**Don't do this!**
 
-keep all the files associated with a project together — input data, R scripts, analytic results, figures.
+
+```r
+rm(list = ls())
+```
+
+
+&gt; `.Rproj` files keep all the files associated with a project together — input data, R scripts, analytic results, figures.
 
 ---
 class: left, top
@@ -383,7 +399,7 @@ class: left, top
 
 --
 
-&lt;img src="../img/proj-existing-dir.png" width="70%" height="70%" /&gt;
+&lt;img src="img/proj-existing-dir.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: left, top
@@ -394,7 +410,7 @@ class: left, top
 
 --
 
-&lt;img src="../img/proj-existing-dir-create.png" width="70%" height="70%" /&gt;
+&lt;img src="img/proj-existing-dir-create.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -404,20 +420,22 @@ class: left, top
 
 --
 
-.pull-left[
+.leftcol[
 
-#### Click on *'Project: (None)'* &gt; *'New Project'* 
+#### Click on .blue[Project: (None)] &gt; .blue[New Project] 
 
-![Up right tick](../img/proj-new-dir.png)
+&lt;img src="img/proj-new-dir.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
 ]
 
 --
 
-.pull-right[
+.rightcol[
 
 #### Select project type
 
-![Up right tick](../img/proj-new-project.png)
+&lt;img src="img/proj-new-project.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
 ]
 
 ---
@@ -427,21 +445,22 @@ class: left, top
 
 --
 
-.pull-left[
+.leftcol[
 
 #### Create new folder name
 
-![](../img/proj-new-dir-name.png)
+&lt;img src="img/proj-new-dir-name.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 --
 
-.pull-right[
+.rightcol[
 
 #### Choose parent folder
 
-![](../img/proj-new-parent-dir-name.png)
+&lt;img src="img/proj-new-parent-dir-name.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
 ]
 
 ---
@@ -451,7 +470,7 @@ class: left, top
 
 #### If you have Git installed, select *'Create a git repository'*
 
-&lt;img src="../img/proj-new-dir-version-crtl.png" width="70%" height="70%" /&gt;
+&lt;img src="img/proj-new-dir-version-crtl.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: left, top
@@ -460,7 +479,7 @@ class: left, top
 
 #### Check for new project name &amp; *Git* pane
 
-&lt;img src="../img/proj-new-dir-view.png" width="80%" height="80%" /&gt;
+&lt;img src="img/proj-new-dir-view.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: inverse, left, middle
@@ -480,33 +499,45 @@ class: inverse, left, middle
 ---
 class: left, top
 
+.leftcol[
+
+.small[
+
+```
+project-name/
+    |-- CITATION
+    |-- project-name.Rproj
+    |-- README.md
+    |-- LICENSE
+    |-- requirements.txt
+    |--data/
+       |--raw/
+            |--raw-birds-data.csv
+       |--processed/
+            |--processed-birds-data.csv
+    |--doc/
+        |-- notebook.Rmd
+        |-- manuscript.Rmd
+        |-- changelog.txt
+    |--results/
+        |-- summarized-results.csv
+    |--code/
+        |-- 01-sightings-import.R
+        |-- 02-sightings-wrangle.R
+        |-- 03-sightings-model.R
+        |-- runall.R
+```
+
+]
+]
+
+.rightcol[
+
+# Folder structure 
+
 #### Adapted from from '[Good enough practices in scientific computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)' 
 
-
-```bash
-project-name/
-            |-- CITATION
-            |-- project-name.Rproj
-            |-- README.md
-            |-- LICENSE
-            |-- requirements.txt
-            |--data/
-                   |--raw/
-                         |--raw-birds-data.csv
-                   |--processed/
-                               |--processed-birds-data.csv
-            |--doc/
-                  |-- notebook.Rmd
-                  |-- manuscript.Rmd
-                  |-- changelog.txt
-            |-- results/
-                  |-- summarized-results.csv
-            |-- code/
-                  |-- 01-sightings-import.R
-                  |-- 02-sightings-wrangle.R
-                  |-- 03-sightings-model.R
-                  |-- runall.R
-```
+]
 
 ---
 class: inverse, center, middle
@@ -516,11 +547,11 @@ class: inverse, center, middle
 ---
 class: left, top
 
-# Naming files*
+# Naming files
 
 ### File names should be: 
 
-.pull-left[
+.leftcol[
 
 #### 1. human readable -&gt; (makes sense)
 
@@ -532,7 +563,7 @@ class: left, top
 
 --
 
-.pull-right[
+.rightcol[
 
 ##### 2020-10-12-270-301-**central-lab-metrics**.csv
 
@@ -542,7 +573,10 @@ class: left, top
 
 ]
 
---
+---
+class: left, top
+
+# Naming files*
 
 We can perform regular expression searches for files like this:
 
@@ -559,7 +593,6 @@ grepl(pattern = "270-301",
 ```
 
 
-
 &gt; *Adapted from [Jenny Byran's slides](https://speakerdeck.com/jennybc/how-to-name-files)
 
 ---
@@ -567,11 +600,9 @@ class: left, top
 
 # Naming files*
 
-### Also acceptable: 
+### Also acceptable: Logical order and underscores `_`
 
 --
-
-Logical order and underscores `_`
 
 
 
@@ -583,11 +614,9 @@ files
 ```
 
 ```
-  [1] "01.0-import_270-301_central-lab-metrics.R" 
-  [2] "02.0-wrangle_270-301_central-lab-metrics.R"
-  [3] "03.0-eda_270-301_central-lab-metrics.R"    
-  [4] "04.0-model_270-301_central-lab-metrics.R"
+  [1] "01.0_import_lab-data.R"  "02.0_wrangle_lab-data.R" "03.0_eda_lab-data.R"
 ```
+
 
 --
 
@@ -597,11 +626,10 @@ stringr::str_split_fixed(string = files, pattern = "_", 3)
 ```
 
 ```
-       [,1]           [,2]      [,3]                   
-  [1,] "01.0-import"  "270-301" "central-lab-metrics.R"
-  [2,] "02.0-wrangle" "270-301" "central-lab-metrics.R"
-  [3,] "03.0-eda"     "270-301" "central-lab-metrics.R"
-  [4,] "04.0-model"   "270-301" "central-lab-metrics.R"
+       [,1]   [,2]      [,3]        
+  [1,] "01.0" "import"  "lab-data.R"
+  [2,] "02.0" "wrangle" "lab-data.R"
+  [3,] "03.0" "eda"     "lab-data.R"
 ```
 
 
@@ -662,18 +690,30 @@ class: left, top
 
 # Terminal pane
 
+.leftcol[
+
 #### Learn a handful of command-line tools to make life easier 
 
 `cd`, `pwd`, `mkdir`, `rm`, `ls`, etc.
 
 #### RStudio comes with a Terminal pane for quick access to the command-line
 
-&lt;img src="../img/terminal-pane.png" width="75%" height="75%" /&gt;
+]
+
+.rightcol[
+
+&lt;img src="img/terminal-pane.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
 
 ---
 class: left, top
 
 # Getting help
+
+.leftcol[
 
 R comes with a *ton* of accessible help files 
 
@@ -682,9 +722,13 @@ R comes with a *ton* of accessible help files
 ?read.csv
 ```
 
+]
 
+.rightcol[
 
-&lt;img src="../img/help-pane.png" width="70%" height="70%" /&gt;
+&lt;img src="img/help-pane.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+]
 
 
 ---
@@ -720,10 +764,20 @@ class: left, top
 
 # Reprex Addin 1
 
-1. Copy code
-2. Select *Addin* &gt; *Render selection*  
+.leftcol40[
 
-&lt;img src="../img/copy-render-reprex.png" width="90%" height="80%" /&gt;
+1. Copy code
+2. Select .blue[Addin] &gt; .blue[Render selection] 
+
+]
+
+.rightcol60[
+
+&lt;img src="img/copy-render-reprex.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
 
 
 ---
@@ -731,12 +785,20 @@ class: left, top
 
 # Reprex Addin 2
 
+.leftcol40[
+
 1. Copy code
-2. Select *Addin* &gt; *Render selection*  
+2. Select .blue[Addin] &gt; .blue[Render selection] 
 3. Wait for console  
 4. Paste reprex
 
-&lt;img src="../img/paste-reprex.png" width="80%" height="80%" /&gt;
+]
+
+.rightcol60[
+
+&lt;img src="img/paste-reprex.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+]
 
 ---
 class: left, top
@@ -748,7 +810,7 @@ class: left, top
 https://reprex.tidyverse.org/articles/articles/datapasta-reprex.html
 
 
-&lt;img src="https://raw.githubusercontent.com/tidyverse/reprex/main/img/datapasta_w_reprex_sheet_to_tribble.gif" width="70%" height="70%" /&gt;
+&lt;img src="https://raw.githubusercontent.com/tidyverse/reprex/main/img/datapasta_w_reprex_sheet_to_tribble.gif" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: left, top

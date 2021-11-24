@@ -1,27 +1,100 @@
 ---
 title: "Introduction To R Programming"
-subtitle: "Journalism 303: R objects and functions"  
-author: 
-  - "Martin Frigaard"
-date: '`r Sys.Date()`'
+subtitle: "R objects and functions"
+author: "Martin Frigaard"
+institute: "California State University | Journalism & Public Relations: Data Journalism"
 output:
   xaringan::moon_reader:
+    css:
+      - default
+      - css/lexis.css
+      - css/lexis-fonts.css
     lib_dir: libs
+    seal: false
     nature:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-
-always_allow_html: true
+      ratio: "16:9"
 ---
 
-```{r setup, include=FALSE}
-library(xaringanthemer)
-library(xaringan)
-library(pagedown)
-library(tidyverse)
+```{r meta, echo=FALSE}
+library(metathis)
+meta() %>%
+  meta_general(
+    description = "Introduction To R Programming",
+    generator = "xaringan and remark.js"
+  ) %>%
+  meta_name("github-repo" = "mjfrigaard/csuc-data-journalism") %>%
+  meta_social(
+    title = "Introduction To R Programming",
+    url = "https://mjfrigaard.github.io/csuc-data-journalism/",
+    og_type = "website",
+    og_author = "Martin Frigaard",
+    twitter_card_type = "summary",
+    twitter_creator = "@mjfrigaard"
+  )
 ```
 
+```{r setup, include=FALSE}
+dateWritten <- format(as.Date('2021-09-30'), format = "%B %d %Y")
+today <- format(Sys.Date(), format = "%B %d %Y")
+library(knitr)
+library(tidyverse)
+library(fontawesome)
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = ''
+)
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = " ",
+    fig.retina = 3 # Better figure resolution
+)
+# Enables the ability to show all slides in a tile overview by pressing "o"
+xaringanExtra::use_tile_view()
+xaringanExtra::use_panelset()
+xaringanExtra::use_clipboard()
+xaringanExtra::use_share_again()
+xaringanExtra::style_share_again(share_buttons = "all")
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,
+  mute_unhighlighted_code = FALSE
+)
+```
+
+layout: true
+
+<!-- this adds the link footer to all slides, depends on footer-small class in css-->
+
+<div class="footer-small"><span>https://github.com/mjfrigaard/csuc-data-journalism</div>
+
+---
+name: title-slide
+class: title-slide, center, middle, inverse
+
+# `r rmarkdown::metadata$title`
+#.fancy[`r rmarkdown::metadata$subtitle`]
+
+<br>
+
+.large[by Martin Frigaard]
+
+Written: `r dateWritten`
+
+Updated: `r today`
+
+.footer-large[.right[.fira[
+<br><br><br><br><br>[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
+]]]
+
+
+---
 class: center, middle
 
 # R Programming
@@ -50,7 +123,8 @@ class: inverse, center, middle
 # Getting Started
 
 
-.pull-right[Image credit: [R Project](https://www.r-project.org)]
+.rightcol[Image credit: [R Project](https://www.r-project.org)]
+
 
 ---
 class: left, top
@@ -61,9 +135,9 @@ Install R from the Comprehensive R Archive Network (CRAN):
 
 https://cran.r-project.org/
 
-
-```{r cran, eval=TRUE, echo=FALSE}
-knitr::include_graphics("../img/cran.png")
+```{r cran, eval=TRUE, out.height='70%', out.width='70%', echo=FALSE, fig.align='center'}
+# copy_slide_images(slide_img = "cran.png")
+knitr::include_graphics("img/cran.png")
 ```
 
 --
@@ -79,7 +153,8 @@ class: left, top
 https://rstudio.com/products/rstudio/download/
 
 ```{r rstudio, eval=TRUE, echo=FALSE}
-knitr::include_graphics("../img/rstudio.png")
+# copy_slide_images(slide_img = "rstudio.png")
+knitr::include_graphics("img/rstudio.png")
 ```
 
 
@@ -93,19 +168,20 @@ https://rstudio.cloud/
 
 
 ```{r rstudio-cloud, eval=TRUE, echo=FALSE}
-knitr::include_graphics("../img/rstudio-cloud.png")
+# copy_slide_images(slide_img = "rstudio-cloud.png")
+knitr::include_graphics("img/rstudio-cloud.png")
 ```
 
 
 ---
-background-image: url("../img/r-console.png")
+background-image: url("img/r-console.png")
 background-size: contain
 class: center, bottom
 
 # The R Console
 
 ---
-background-image: url("../img/rstudio-launch.png")
+background-image: url("img/rstudio-launch.png")
 background-size: contain
 class: left, middle
 
@@ -119,7 +195,7 @@ class: left, top
 
 You can run R commands in the Console by entering them after the `>` operator (see example in R below)
 
-.pull-left[
+.leftcol[
 
 ```{r hello-world}
 print("Hello World")
@@ -129,11 +205,12 @@ print("Hello World")
 
 --
 
-.pull-right[
+.rightcol[
 
 
-```{r commands-console, eval=TRUE, echo=FALSE, out.height="120%", out.width="120%", fig.align='center'}
-knitr::include_graphics("../img/commands-console.png")
+```{r commands-console, eval=TRUE, echo=FALSE, out.height="70%", out.width="70%", fig.align='center'}
+# copy_slide_images(slide_img = "commands-console.png")
+knitr::include_graphics("img/commands-console.png")
 ```
 
 ]
@@ -148,7 +225,8 @@ You can also run them in R scripts (see example in RStudio below)
 --
 
 ```{r script-rstudio, eval=TRUE, echo=FALSE, out.height='110%', out.width='110%', fig.align='center'}
-knitr::include_graphics("../img/script-rstudio.png")
+# copy_slide_images(slide_img = "script-rstudio.png")
+knitr::include_graphics("img/script-rstudio.png")
 ```
 
 ---
@@ -164,7 +242,7 @@ class: inverse, left, middle
 
 --
 
-.pull-left[
+.leftcol[
 
 ## Functions
 
@@ -175,7 +253,7 @@ class: inverse, left, middle
 
 --
 
-.pull-right[
+.rightcol[
 
 ## Objects
 
@@ -250,7 +328,7 @@ class: left
 
 ***
 
-.pull-left[
+.leftcol[
 
 Objects are like nouns: they hold information
 
@@ -264,7 +342,7 @@ object_3 <- "road"
 
 --
 
-.pull-right[
+.rightcol[
 
 Functions are like verbs: they do things to nouns
 
@@ -354,7 +432,8 @@ class: left
 Use tab-completion and the arrow keys in RStudio to explore a packages functions. 
 
 ```{r tab-completion, echo=FALSE}
-knitr::include_graphics("../img/tab-completion.png")
+# copy_slide_images(slide_img = "tab-completion.png")
+knitr::include_graphics("img/tab-completion.png")
 ```
 
 --
@@ -391,7 +470,8 @@ class: left, top
 You can also use the **Packages** pane in RStudio
 
 ```{r install-package, echo=FALSE, fig.align='center', out.height="50%", out.width="50%"}
-knitr::include_graphics("../img/install-package.png")
+# copy_slide_images(slide_img = "tab-completion.png")
+knitr::include_graphics("img/tab-completion.png")
 ```
 
 
@@ -442,7 +522,7 @@ class: left, top
 
 # Types of objects in R 
 
-.pull-left[
+.leftcol[
 
 - **Vectors**
 
@@ -456,7 +536,7 @@ class: left, top
  
  ]
  
- .pull-right[
+ .rightcol[
 
 - **Arrays**
 
@@ -502,7 +582,7 @@ class: left, top
 
 --
 
-.pull-left[
+.leftcol[
 
 A common practice in R is to create an object, perform an operation on that object with a function, and store the results in new object.
 
@@ -512,10 +592,11 @@ We then explore the contents of the new object with another function.
 
 --
 
-.pull-right[
+.rightcol[
 
-```{r store-explore, echo=FALSE, out.height='120%', out.width='120%', fig.align='center'}
-knitr::include_graphics(path = "../img/store-explore.png")
+```{r store-explore, echo=FALSE, out.height='70%', out.width='70%', fig.align='center'}
+# copy_slide_images(slide_img = "store-explore.png")
+knitr::include_graphics(path = "img/store-explore.png")
 ```
 
 ]
@@ -810,7 +891,7 @@ class: left, top
 
 # S3 vectors: date-time help
 
-.pull-left[
+.leftcol[
 
 Read more about date-times by entering the `as.POSIXct` function into the console preceded by a question mark. 
 
@@ -822,10 +903,11 @@ Read more about date-times by entering the `as.POSIXct` function into the consol
 
 --
 
-.pull-right[
+.rightcol[
 
-```{r help-date-time, echo=FALSE, out.height="120%", out.width="120%", fig.align='center'}
-knitr::include_graphics(path = "../img/help-date-time.png")
+```{r help-date-time, echo=FALSE, out.height="70%", out.width="70%", fig.align='center'}
+# copy_slide_images(slide_img = "help-date-time.png")
+knitr::include_graphics(path = "img/help-date-time.png")
 ```
 
 ]
@@ -906,7 +988,7 @@ For example, if I want to get the `10` that's stored in `vec_integer`, I can use
 
 --
 
-.pull-left[
+.leftcol[
 
 ```{r mat_data-subset, highlight.output=c(1,3)}
 mat_data
@@ -916,7 +998,7 @@ mat_data
 
 --
 
-.pull-right[
+.rightcol[
 
 
 ```{r subset-10}
@@ -960,17 +1042,18 @@ Matrices are arrays, but arrays are not matrices.
 
 --
 
-.pull-left[ 
+.leftcol[ 
 
 ```{r array-png, out.height='75%', out.width='75%', fig.align='center', echo=FALSE}
-knitr::include_graphics(path = "../img/array.png")
+# copy_slide_images(slide_img = "array.png")
+knitr::include_graphics(path = "img/array.png")
 ```
 
 ]
 
 --
 
-.pull-right[ 
+.rightcol[ 
 
 ```{r class-array-matrix}
 class(dat_array)
@@ -1052,17 +1135,18 @@ If you're importing spreadsheets, most of the work you'll do in R will be with r
 
 --
 
-.pull-left[
+.leftcol[
 
 ```{r data-frame-tibble, echo=FALSE, out.width='80%', out.height='80%', fig.align='center'}
-knitr::include_graphics(path = "../img/data-frame-tibble.png")
+# copy_slide_images(slide_img = "data-frame-tibble.png")
+knitr::include_graphics(path = "img/data-frame-tibble.png")
 ```
 
 ]
 
 --
 
-.pull-right[
+.rightcol[
 
 *These are the common rectangular data storage object for tabular data in R*
 
@@ -1073,7 +1157,7 @@ class: left
 
 # Data frames & tibbles 
 
-.pull-left[
+.leftcol[
 
 ```{r compare-DataFrame}
 DataFrame
@@ -1081,7 +1165,7 @@ DataFrame
 
 ]
 
-.pull-right[
+.rightcol[
 
 ```{r compare-Tibble}
 Tibble

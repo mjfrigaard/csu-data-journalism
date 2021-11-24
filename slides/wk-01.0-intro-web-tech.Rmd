@@ -157,7 +157,7 @@ class: left, top
 
 .leftcol60[.border[
 
-<img src="img/00-538-example-01.png">
+<img src="img/01-538-example-01.png">
 
 ]]
 
@@ -183,7 +183,7 @@ class: left, top
 
 .leftcol60[.border[
 
-<img src="img/00-538-example-02.png">
+<img src="img/01-538-example-02.png">
 
 ]]
 
@@ -209,7 +209,7 @@ class: left, top
 
 .leftcol45[.border[
 
-<img src="img//00-wapo-covid-sparkline.png">
+<img src="img/01-wapo-covid-sparkline.png">
 
 ]]
 
@@ -231,9 +231,9 @@ class: left, top
 
 .leftcol55[.border[
 
-<img src="img/00-wapo-covid.gif">
+<img src="img/01-wapo-covid.gif">
 
-<!--img/00-wapo-covid.png-->
+<!-- <img src="01-wapo-covid.png"> -->
 
 ]]
 
@@ -260,7 +260,7 @@ class: left, top
 
 <!--00-pudding-office-01.png-->
 
-<img src="img/00-pudding-office-01.png">
+<img src="img/01-pudding-office-01.png">
 
 ]]
 
@@ -268,7 +268,7 @@ class: left, top
 
 .rightcol45[.border[
 
-<img src="img/00-pudding-office-02.png">
+<img src="img/01-pudding-office-02.png">
 
 ]]
 
@@ -321,7 +321,7 @@ class: left, top
 'Below is the plot.R code file in TextEdit'
 ```
 
-<img src="img/00-textedit.png">
+<img src="img/01-textedit.png">
 
 ]]
 
@@ -611,7 +611,7 @@ class: left, top
 
 .leftcol45[.border[
 
-<img src="img/00-538-html-ref-00.png">
+<img src="img/01-538-html-ref-00.png">
 
 ]
 ]
@@ -635,7 +635,7 @@ class: left, top
 
 .border[
 
-<img src="img/00-538-html-ref-01.png">
+<img src="img/01-538-html-ref-01.png">
 
 ]
 
@@ -650,7 +650,7 @@ class: left, top
 
 .border[
 
-<img src="img/00-538-html-ref-02.png">
+<img src="img/01-538-html-ref-02.png">
 
 ]
 
@@ -1042,8 +1042,14 @@ class: left, top, inverse
 
 
 ```{r chrome_print, echo=FALSE, results='hide', eval=FALSE}
-dir_data <- fs::dir_info(path = ".", all = TRUE, recurse = TRUE)
-# str(dir_data)
+html_slides <- list.files(".", pattern = ".html")
+pdf_slides <- str_replace(html_slides, 
+  pattern = ".html", 
+  replacement = ".pdf")
+pdf_slides <- paste0("pdfs/", pdf_slides)
+print_files <- tibble("pdfs" = pdf_slides,
+  "htmls" = html_slides)
 
-pagedown::chrome_print(input = "wk-01.0-intro-web-tech.html", output = "pdf/wk-01.0-intro-web-tech.pdf", timeout = 120)
+
+pagedown::chrome_print(input = print_files$htmls[2], output = print_files$pdfs[2], timeout = 120)
 ```
