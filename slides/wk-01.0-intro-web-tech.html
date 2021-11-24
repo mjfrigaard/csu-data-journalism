@@ -49,7 +49,7 @@ layout: true
 
 &lt;!-- this adds the link footer to all slides, depends on footer-small class in css--&gt;
 
-&lt;div class="footer-small"&gt;&lt;span&gt;https://github.com/mjfrigaard/csuc-data-journalism&gt;&lt;/div&gt;
+&lt;div class="footer-small"&gt;&lt;span&gt;https://github.com/mjfrigaard/csuc-data-journalism&lt;/div&gt;
 
 ---
 name: title-slide
@@ -301,9 +301,17 @@ class: left, top
 
 
 ---
+class: center, middle, inverse
+
+# Code for Data Journalists
+
+## `R` 
+
+
+---
 class: left, top
 
-# But why write code?
+# Why write code?
 
 .leftcol55[
 #### R is a ***language***, which means it gives us the ability to express our ideas with precision
@@ -314,8 +322,6 @@ class: left, top
 --
 
 .rightcol45[
-
-&lt;br&gt;
 
 
 ```r
@@ -330,6 +336,8 @@ mtcars %&gt;% ggplot(aes(mpg, disp)) %&gt;%
   Did you use %&gt;% instead of +?
 ```
 
+&gt; copy + paste error message and Google it!
+
 ]
 
 ---
@@ -343,8 +351,6 @@ class: left, top
 
 #### A code's *syntax* defines the rules for it's grammar and punctuation 
 
-&lt;br&gt;
-
 
 ```r
 add_stuff &lt;- function(x, y) {
@@ -352,6 +358,8 @@ add_stuff &lt;- function(x, y) {
     return(x)
 }
 ```
+
+&gt; `a` plus `b` equals `c`
 
 ]
 
@@ -363,16 +371,16 @@ add_stuff &lt;- function(x, y) {
 
 
 
-&lt;br&gt;
-
 
 ```r
 add_stuff(2, 2)
 ```
 
 ```
-  [1] 2
+  [1] 4
 ```
+
+&gt; `2` plus `2` equals `4`
 
 ]
 
@@ -381,23 +389,19 @@ class: left, top
 
 # `R Code` - grammar &amp; syntax
 
-.leftcol[
-
 ### Characters and words have to be written in a particular order for R code work
+
+.leftcol[
 
 
 ```r
-function(x, y) -&gt; add_stuff }
-    z &lt;- sum(x, y)
-    return(x)
+add_stuff &lt;- function(a, b) {
+    c &lt;- sum(a, b)
+*   return(z)
 }
 ```
 
-```
-  Error: &lt;text&gt;:1:16: unexpected '-&gt;'
-  1: function(x, y) -&gt;
-                     ^
-```
+&gt; `a` plus `b` equals `z`
 
 ]
 
@@ -405,26 +409,35 @@ function(x, y) -&gt; add_stuff }
 
 .rightcol[
 
-### In the R, there are two primary components to the grammar (or sytnax):
 
-&gt; *functions* and *objects*
+
+
+```r
+add_stuff(2, 2)
+```
+
+```
+  Error in add_stuff(2, 2): object 'z' not found
+```
+
+&gt; `2` plus `2` equals `???`
 
 ]
 
 ---
 class: left, top
 
-# `R Code` - R functions &amp; objects
+# `R Code` - the basics
 
 &lt;br&gt;
 
 .leftcol55[
 
-### `objects` are like *nouns*
+## `objects` are like *nouns*
 
 &lt;br /&gt;
 
-### `functions` are like *verbs* 
+## `functions` are like *verbs* 
 
 ]
 
@@ -472,9 +485,9 @@ qplot(data = diamonds,
 
 &lt;br&gt;
 
-&gt; The function (`qplot()`) *does things* to 
-&gt; the objects (the `carat` and `price` columns
-&gt; from the `diamonds` dataset)
+&gt; The `qplot()` function **does things** to 
+&gt; the objects (*the `carat` and `price` columns*
+&gt; *from the `diamonds` dataset*)
 
 ]
 
@@ -502,7 +515,7 @@ qplot(data = diamonds,
 
 &lt;br&gt;
 
-&gt; We're telling R we want to use the `diamonds` data, and we want the `carat` column on the `x` axis, and the `price` column on the `y` 
+&gt; We're telling R we want to use the `diamonds` data to plot the `carat` column on the `x` axis, and the `price` column on the `y` 
 
 ]
 
@@ -530,7 +543,7 @@ qplot(data = diamonds,
 
 &lt;br&gt;
 
-&gt; We want the graph to have 'points' (or dots), so we use the `geom_point()` function, and we want the points colored by the `cut` column.
+&gt; We want the graph to have 'points' (or dots), and we want these points colored by the `cut` column (we use the `"point"` geometric object for points).
 
 ]
 
@@ -551,7 +564,7 @@ qplot(data = diamonds,
 
 .panel[.panel-name[Plot]
 
-&lt;img src="figs/unnamed-chunk-12-1.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figs/unnamed-chunk-13-1.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 ]
 ]
@@ -660,7 +673,9 @@ class: left, top
 
 # `HTML` - attributes
 
-#### Attributes appear in the start tag and are of the form `attribute="attribute value"`
+#### Attributes appear in the start tag  `&lt;tag&gt;` 
+#### Inside tags are `attribute(s)="attribute value(s)"` 
+#### End with `&lt;/tag&gt;`  
 
 --
 
@@ -705,6 +720,8 @@ class: left, top
 --
 
 .rightcol30[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
 
 &gt; *Most of the code is in the* .red[`&lt;body&gt;`]
 
@@ -900,35 +917,52 @@ class: left, top
 
 # `XML` - structure
 
-#### Below is a small XML document
 
-.leftcol40[
+.cols3[
+
+&lt;br&gt;
 
 ```xml
 &lt;?xml version="2.0"?&gt;
 &lt;heights&gt;
-&lt;filename&gt;heights.txt&lt;/filename&gt;
+&lt;filename&gt;ht.txt&lt;/filename&gt;
 &lt;case date="24-JAN-2019"
       height="78.9"/&gt;
 &lt;/heights&gt;
 ```
-]
 
-.rightcol60[
-- .blue[root element] = `&lt;heights&gt;`  
-- .blue[start tag] = `&lt;filename&gt;`  
-- content = `heights.txt`  
-- .blue[end tag] = `&lt;/filename&gt;`    
-- .blue[element name] = `case`  
-- .green[attribute name] = `date`  
-- .red[attribute value] = `"24-JAN-2019"`   
-- .green[attribute name] = `height`   
-- .red[attribute value] = `"78.9"` 
 ]
 
 --
 
+.cols3[
+
+&lt;br&gt;
+
+.center[
+.small[
+.blue[root element] = `&lt;heights&gt;`  
+.blue[start tag] = `&lt;filename&gt;`  
+content = `ht.txt`  
+.blue[end tag] = `&lt;/filename&gt;`    
+.blue[element name] = `case`  
+.green[attribute name] = `date`  
+.red[attribute value] = `"24-JAN-2019"`   
+.green[attribute name] = `height`   
+.red[attribute value] = `"78.9"` 
+]
+]
+
+]
+
+--
+
+.cols3[
+
 &gt; *The root element is the `heights` element with `filename` and `case` elements nested within the `heights`*
+
+]
+
 
 
 ---
@@ -936,11 +970,11 @@ class: left, top
 
 # `JSON` - JavaScript Object Notation
 
-#### `JSON` is a lightweight data storage format similar in structure to `XML` but different syntax/format
+### `JSON` is a lightweight data storage format similar in structure to `XML` but different syntax/format
 
 --
 
-#### Common format for data from application programming interfaces (APls)
+### Common format for data from application programming interfaces (APls)
 
 
 
