@@ -7,7 +7,6 @@ date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: ["theme.css"]
     nature:
       highlightStyle: github
       highlightLines: true
@@ -31,7 +30,7 @@ knitr::opts_chunk$set(warning = FALSE,
 ```
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
-xaringanthemer::style_duo_accent(primary_color = "#035AA6", secondary_color = "#03A696")
+# xaringanthemer::style_duo_accent(primary_color = "#035AA6", secondary_color = "#03A696")
 # xaringan::inf_mr() # for instant knitting and reviewing
 ```
 
@@ -59,7 +58,7 @@ class: left, top
 .pull-right[
 
 ```{r img-settings, echo=FALSE, out.width='200%', out.height='200%', fig.align='center'}
-knitr::include_graphics(path = "img/settings.png")
+knitr::include_graphics(path = "../img/settings.png")
 ```
 
 
@@ -81,7 +80,7 @@ class: inverse, center, middle
 .pull-right[
 
 ```{r setting-options, echo=FALSE, out.width='60%', out.height='60%', fig.align='center'}
-knitr::include_graphics(path = "img/setting-options.png")
+knitr::include_graphics(path = "../img/setting-options.png")
 ```
 
 ]
@@ -104,7 +103,7 @@ class: left, top
 .pull-right[
 
 ```{r code-settings, echo=FALSE, out.width='100%', out.height='100%', fig.align='center'}
-knitr::include_graphics(path = "img/code-settings.png")
+knitr::include_graphics(path = "../img/code-settings.png")
 ```
 
 
@@ -129,7 +128,7 @@ class: left, top
 .pull-right[
 
 ```{r code-display, echo=FALSE, out.width='120%', out.height='120%', fig.align='center'}
-knitr::include_graphics(path = "img/code-display.png")
+knitr::include_graphics(path = "../img/code-display.png")
 ```
 
 ]
@@ -152,7 +151,7 @@ class: left, top
 .pull-right[
 
 ```{r code-savings, echo=FALSE, out.width='120%', out.height='120%', fig.align='center'}
-knitr::include_graphics(path = "img/code-savings.png")
+knitr::include_graphics(path = "../img/code-savings.png")
 ```
 
 ]
@@ -176,7 +175,7 @@ class: left, top
 .pull-right[
 
 ```{r code-completion, echo=FALSE, out.width='120%', out.height='120%', fig.align='center'}
-knitr::include_graphics(path = "img/code-completion.png")
+knitr::include_graphics(path = "../img/code-completion.png")
 ```
 
 ]
@@ -200,7 +199,7 @@ class: left, top
 .pull-right[
 
 ```{r code-diagnostics, echo=FALSE, out.width='120%', out.height='120%', fig.align='center'}
-knitr::include_graphics(path = "img/code-diagnostics.png")
+knitr::include_graphics(path = "../img/code-diagnostics.png")
 ```
 
 ]
@@ -223,7 +222,7 @@ class: left, top
 .pull-right[
 
 ```{r console, echo=FALSE, out.width='120%', out.height='120%', fig.align='center'}
-knitr::include_graphics(path = "img/console.png")
+knitr::include_graphics(path = "../img/console.png")
 ```
 
 ]
@@ -252,7 +251,7 @@ class: left, top
 .pull-right[
 
 ```{r appearance, echo=FALSE, out.width='120%', out.height='120%', fig.align='center'}
-knitr::include_graphics(path = "img/appearance.png")
+knitr::include_graphics(path = "../img/appearance.png")
 ```
 
 ]
@@ -280,7 +279,7 @@ class: left, top
 .pull-right[
 
 ```{r default-layout, echo=FALSE, out.width="100%", out.height="100%"}
-knitr::include_graphics("img/default-layout.png")
+knitr::include_graphics("../img/default-layout.png")
 ```
 
 ]
@@ -292,7 +291,7 @@ knitr::include_graphics("img/default-layout.png")
 Standard layout options 
 
 ```{r default-layout-view, echo=FALSE, out.width="100%", out.height="100%"}
-knitr::include_graphics("img/default-layout-view.png")
+knitr::include_graphics("../img/default-layout-view.png")
 ```
 
 ---
@@ -311,7 +310,7 @@ class: left, top
 .pull-left[
 
 ```{r add-pane-column, echo=FALSE, out.width="90%", out.height="90%"}
-knitr::include_graphics("img/add-pane-column.png")
+knitr::include_graphics("../img/add-pane-column.png")
 ```
 
 ]
@@ -319,7 +318,7 @@ knitr::include_graphics("img/add-pane-column.png")
 .pull-right[
 
 ```{r add-column-switch-panes, echo=FALSE, out.width="90%", out.height="90%"}
-knitr::include_graphics("img/add-column-switch-panes.png")
+knitr::include_graphics("../img/add-column-switch-panes.png")
 ```
 
 ]
@@ -332,7 +331,7 @@ class: left, top
 Now you see **Source**, **Tutorial**, and **Console** panes on a single screen!
 
 ```{r three-column-layout, echo=FALSE, out.width="100%", out.height="100%"}
-knitr::include_graphics("img/three-column-layout.png")
+knitr::include_graphics("../img/three-column-layout.png")
 ```
 
 ---
@@ -376,7 +375,7 @@ class: left, top
 --
 
 ```{r proj-existing-dir, echo=FALSE, out.width="70%", out.height="70%"}
-knitr::include_graphics("img/proj-existing-dir.png")
+knitr::include_graphics("../img/proj-existing-dir.png")
 ```
 
 ---
@@ -389,7 +388,7 @@ class: left, top
 --
 
 ```{r proj-existing-dir-create, echo=FALSE, out.width="70%", out.height="70%"}
-knitr::include_graphics("img/proj-existing-dir-create.png")
+knitr::include_graphics("../img/proj-existing-dir-create.png")
 ```
 
 
@@ -404,7 +403,7 @@ class: left, top
 
 #### Click on *'Project: (None)'* > *'New Project'* 
 
-![Up right tick](img/proj-new-dir.png)
+![Up right tick](../img/proj-new-dir.png)
 ]
 
 --
@@ -413,7 +412,7 @@ class: left, top
 
 #### Select project type
 
-![Up right tick](img/proj-new-project.png)
+![Up right tick](../img/proj-new-project.png)
 ]
 
 ---
@@ -427,7 +426,7 @@ class: left, top
 
 #### Create new folder name
 
-![](img/proj-new-dir-name.png)
+![](../img/proj-new-dir-name.png)
 
 ]
 
@@ -437,7 +436,7 @@ class: left, top
 
 #### Choose parent folder
 
-![](img/proj-new-parent-dir-name.png)
+![](../img/proj-new-parent-dir-name.png)
 ]
 
 ---
@@ -448,7 +447,7 @@ class: left, top
 #### If you have Git installed, select *'Create a git repository'*
 
 ```{r proj-new-dir-version-crtl, echo=FALSE, out.width="70%", out.height="70%"}
-knitr::include_graphics("img/proj-new-dir-version-crtl.png")
+knitr::include_graphics("../img/proj-new-dir-version-crtl.png")
 ```
 
 ---
@@ -459,7 +458,7 @@ class: left, top
 #### Check for new project name & *Git* pane
 
 ```{r proj-new-dir-view, echo=FALSE, out.width="80%", out.height="80%"}
-knitr::include_graphics("img/proj-new-dir-view.png")
+knitr::include_graphics("../img/proj-new-dir-view.png")
 ```
 
 ---
@@ -651,7 +650,7 @@ class: left, top
 #### RStudio comes with a Terminal pane for quick access to the command-line
 
 ```{r terminal-pane.png, echo=FALSE, out.width="75%", out.height="75%"}
-knitr::include_graphics("img/terminal-pane.png")
+knitr::include_graphics("../img/terminal-pane.png")
 ```
 
 ---
@@ -668,7 +667,7 @@ R comes with a *ton* of accessible help files
 
 
 ```{r help-pane, echo=FALSE, out.width="70%", out.height="70%"}
-knitr::include_graphics("img/help-pane.png")
+knitr::include_graphics("../img/help-pane.png")
 ```
 
 
@@ -708,7 +707,7 @@ class: left, top
 2. Select *Addin* > *Render selection*  
 
 ```{r copy-render-reprex, echo=FALSE, out.width="90%", out.height="80%"}
-knitr::include_graphics("img/copy-render-reprex.png")
+knitr::include_graphics("../img/copy-render-reprex.png")
 ```
 
 
@@ -723,7 +722,7 @@ class: left, top
 4. Paste reprex
 
 ```{r paste-reprex.png, echo=FALSE, out.width="80%", out.height="80%"}
-knitr::include_graphics("img/paste-reprex.png")
+knitr::include_graphics("../img/paste-reprex.png")
 ```
 
 ---
@@ -737,7 +736,7 @@ https://reprex.tidyverse.org/articles/articles/datapasta-reprex.html
 
 
 ```{r datapasta_w_reprex_sheet_to_tribble, echo=FALSE, out.width="70%", out.height="70%"}
-knitr::include_graphics("https://raw.githubusercontent.com/tidyverse/reprex/master/img/datapasta_w_reprex_sheet_to_tribble.gif")
+knitr::include_graphics("https://raw.githubusercontent.com/tidyverse/reprex/main/img/datapasta_w_reprex_sheet_to_tribble.gif")
 ```
 
 ---

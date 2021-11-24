@@ -1,192 +1,269 @@
 ---
 title: "Introduction to Web Technologies"
-subtitle: "Journalism 303: stuff you'll use from the web"
+subtitle: "stuff you'll use from the web"
 author: "Martin Frigaard"
-date: "`r Sys.Date()`"
+institute: "California State University | Journalism & Public Relations: Data Journalism"
 output:
   xaringan::moon_reader:
+    css:
+      - default
+      - css/lexis.css
+      - css/lexis-fonts.css
     lib_dir: libs
-    css: ["theme.css"]
+    seal: false
     nature:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-
-always_allow_html: true
+      ratio: "16:9"
 ---
+
+```{r meta, echo=FALSE}
+library(metathis)
+meta() %>%
+  meta_general(
+    description = "λέξις: a xaringan theme",
+    generator = "xaringan and remark.js"
+  ) %>%
+  meta_name("github-repo" = "jhelvy/lexis") %>%
+  meta_social(
+    title = "λέξις: a xaringan theme",
+    url = "https://mjfrigaard.github.io/csuc-data-journalism/",
+    og_type = "website",
+    og_author = "Martin Frigaard",
+    twitter_card_type = "summary",
+    twitter_creator = "@mjfrigaard"
+  )
+```
 
 ```{r setup, include=FALSE}
+dateWritten <- format(as.Date('2021-09-21'), format = "%B %d %Y")
+today <- format(Sys.Date(), format = "%B %d %Y")
+library(knitr)
 library(tidyverse)
-library(gapminder)
-library(here)
-library(xaringan)
-options(htmltools.dir.version = FALSE,
-        tibble.max_extra_cols = 6,
-        tibble.width = 60)
-knitr::opts_chunk$set(echo = TRUE,
-                      warning = FALSE,
-                      message = FALSE,
-                      tidy = FALSE,
-                      fig.align = 'center',
-                      dpi = 320)
-library(xaringanthemer)
-# xaringanthemer::style_duo(primary_color = "#F0FFFF", secondary_color = "#CD0000")
-# xaringanthemer::style_duo_accent(primary_color = "#8B1A1A", secondary_color = "#BABABA")
-# xaringan::inf_mr() # for instant knitting and reviewing
+library(fontawesome)
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = ''
+)
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = " ",
+    fig.retina = 3 # Better figure resolution
+)
+# Enables the ability to show all slides in a tile overview by pressing "o"
+xaringanExtra::use_tile_view()
+xaringanExtra::use_panelset()
+xaringanExtra::use_clipboard()
+xaringanExtra::use_share_again()
+xaringanExtra::style_share_again(share_buttons = "all")
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,
+  mute_unhighlighted_code = FALSE
+)
 ```
 
+layout: true
 
-class: center, middle, inverse
+<!-- this adds the link footer to all slides, depends on footer-small class in css-->
 
-# Data Journalism Web Technologies
+<div class="footer-small"><span>https://github.com/mjfrigaard/csuc-data-journalism></div>
 
 ---
-class: left, top
+name: title-slide
+class: title-slide, center, middle, inverse
 
-## Overview 
+# `r rmarkdown::metadata$title`
+#.fancy[`r rmarkdown::metadata$subtitle`]
 
-.pull-left[
+<br>
 
-### 1.) What is data journalism? 
+.large[by Martin Frigaard]
 
-#### 1.1) Definitions 
+Written: `r dateWritten`
 
-#### 1.2) Examples 
+Updated: `r today`
 
-### 2.) Code files for data journalism
+.footer-large[.right[.fira[
+<br><br><br><br><br>[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
+]]]
 
-#### 2.1) R Code 
+---
+
+# .center[Outline]
+
+.leftcol[
+
+## What is data journalism? 
+
+### - *Definitions & Examples*
+
+## Software 
+
+### *Open source & Proprietary*
 
 ]
 
-.pull-right[
+.rightcol[
 
-#### 2.2) HTML 
+## Code files 
 
-#### 2.3) CSS 
+### *R Code, HTML & CSS*
 
-### 3) Data file formats
+## Data files
 
-#### 3.1) .CSV
+### *.CSV, .XML & .JSON*
 
-#### 3.2) .XML
+]
 
-#### 3.3) .JSON
+---
+
+## .center[What is data journalism?]
+
+#### [Wikipedia](https://en.wikipedia.org/wiki/Data_journalism): 
+
+```{r, eval=FALSE}
+> 'a journalistic process based on analyzing and filtering large data sets for the purpose of creating or elevating a news story'
+```
+
+#### [fivethirtyeight](https://twitter.com/FiveThirtyEight): 
+
+```{r, eval=FALSE}
+> 'Data-driven news and analysis'
+```
+
+#### [the upshot (NYT)](https://twitter.com/UpshotNYT):
+
+```{r, eval=FALSE}
+> 'Analytical journalism in words and graphics'
+```
+
+---
+class: left, top
+
+### Example 1: FiveThirtyEight's *["How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years"](https://projects.fivethirtyeight.com/obama-polling-trends/)*
+
+.leftcol60[.border[
+
+<img src="img/00-538-example-01.png">
+
+]]
+
+--
+
+.rightcol40[
+
+<br>
+
+.red[Interactive graphs]
+
+<br>
+
+.red[Color highlights trend-lines]
+
+]
+
+
+---
+class: left, top
+
+### Example 1: FiveThirtyEight's *["How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years"](https://projects.fivethirtyeight.com/obama-polling-trends/)*
+
+.leftcol60[.border[
+
+<img src="img/00-538-example-02.png">
+
+]]
+
+--
+
+.rightcol40[
+
+<br>
+
+.red[Top plot shows changes over time]
+
+<br>
+
+.red[Selector on bottom allows user to change graph]
+
+]
+
+
+---
+class: left, top
+
+### Example 2: Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
+
+.leftcol45[.border[
+
+<img src="img//00-wapo-covid-sparkline.png">
+
+]]
+
+--
+
+.rightcol55[
+
+.red[interactive graphs]
+
+.red[sparklines in text]
 
 ]
 
 ---
 class: left, top
 
-## What is data journalism?
+### Example 2: Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
 
-### 1.1) [Wikipedia](https://en.wikipedia.org/wiki/Data_journalism): 
 
-> "*a journalistic process based on analyzing and filtering large data sets for the purpose of creating or elevating a news story*"
+.leftcol55[.border[
 
-### 1.2) [fivethirtyeight](https://twitter.com/FiveThirtyEight): 
+<img src="img/00-wapo-covid.gif">
 
-> "*Data-driven news and analysis*"
+<!--img/00-wapo-covid.png-->
 
-### 1.3) [the upshot (NYT)](https://twitter.com/UpshotNYT): 
+]]
 
-> "*Analytical journalism in words and graphics *" 
+--
 
----
-class: left, top
+.rightcol45[
 
-## What is data journalism? (Example 1)
+<br>
 
-<br />
+.red[Animated area chart]
 
-### FiveThirtyEight's *[How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years](https://projects.fivethirtyeight.com/obama-polling-trends/)*
+<br>
 
----
-class: left, top
+.red[Scatter-plot changes color in relation to area chart]
 
-## What is data journalism? (Example 1)
-
-FiveThirtyEight's *[How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years](https://projects.fivethirtyeight.com/obama-polling-trends/)*
-
-```{r 00-538-example-01.png, echo=FALSE, out.height='80%', out.width='80%'}
-knitr::include_graphics("img/00-538-example-01.png")
-```
+]
 
 ---
 class: left, top
 
-## What is data journalism? (Example 1)
+### Example 3: The Pudding's [*‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.*](https://pudding.cool/2017/08/the-office/)
 
-FiveThirtyEight's *[How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years](https://projects.fivethirtyeight.com/obama-polling-trends/)*
+.leftcol55[.border[
 
-```{r 00-538-example-02.png, echo=FALSE, out.height='80%', out.width='80%'}
-knitr::include_graphics("img/00-538-example-02.png")
-```
+<!--00-pudding-office-01.png-->
 
----
-class: left, top
+<img src="img/00-pudding-office-01.png">
 
-## What is data journalism? (Example 2)
+]]
 
-<br />
+--
 
-### Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
+.rightcol45[.border[
 
----
-class: left, top
+<img src="img/00-pudding-office-02.png">
 
-## What is data journalism? (Example 2)
-
-> Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
-
-
-
-```{r 00-wapo-covid-sparkline.png, echo=FALSE, out.height='65%', out.width='65%'}
-knitr::include_graphics("img/00-wapo-covid-sparkline.png")
-```
-
----
-class: left, top
-
-## What is data journalism? (Example 2)
-
-> Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
-
-```{r 00-wapo-covid.gif, echo=FALSE, out.height='80%', out.width='80%'}
-knitr::include_graphics("img/00-wapo-covid.gif")
-```
-
-
----
-class: left, top
-
-## What is data journalism? (Example 3)
-
-<br />
-
-### The Pudding's *[‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.](https://pudding.cool/2017/08/the-office/)*
-
----
-class: left, top
-
-## What is data journalism? (Example 3)
-
-> The Pudding's *[‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.](https://pudding.cool/2017/08/the-office/)*
-
-```{r 00-pudding-office-01.png, echo=FALSE, out.height='75%', out.width='75%'}
-knitr::include_graphics("img/00-pudding-office-01.png")
-```
-
----
-class: left, top
-
-## What is data journalism? (Example 3)
-
-> The Pudding's *[‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.](https://pudding.cool/2017/08/the-office/)*
-
-```{r 00-pudding-office-02.png, echo=FALSE, out.height='70%', out.width='70%'}
-knitr::include_graphics("img/00-pudding-office-02.png")
-```
+]]
 
 ---
 class: center, middle, inverse
@@ -196,186 +273,287 @@ class: center, middle, inverse
 ---
 class: left, top
 
-## `Code` file formats and extensions
+# `Code` file formats and extensions
 
-### We can determine the language of code by it's `file` extension 
+.leftcol45[
 
-### - `file.R` = R code file (or script)  
-### - `file.html` = HTML code file (or webpage)  
-### - `file.css` = CSS code file (or stylesheet)
+<br>
+
+### We can determine the language of code by it's .orange[file extension] 
+
+]
+
+--
+
+.rightcol55[
+
+<br>
+
+#### file.orange[.R] = R code file (or script)  
+#### file.orange[.html] = HTML code file (or webpage)  
+#### file.orange[.css] = CSS code file (or stylesheet)
+
+]
 
 ---
 class: left, top
 
-## `Code` file formats and extensions
+# `Code` file formats and extensions
 
+.leftcol45[
 
-### Text editors (like Notepad or TextEdit) can be used to view code files
+#### Text editors (*like Notepad or TextEdit*) can be used to view code files
 
-### Below is the `plot.R` code file in TextEdit
+]
 
-<br />
-<br />
+--
 
-```{r 00-textedit.png, echo=FALSE}
-knitr::include_graphics("img/00-textedit.png")
+.rightcol55[.border[
+
+```{r , eval=FALSE}
+'Below is the plot.R code file in TextEdit'
 ```
 
+<img src="img/00-textedit.png">
+
+]]
+
 
 ---
 class: left, top
 
-# `R Code`
+# But why write code?
 
-##* Why do we need to write code?* 
+.leftcol55[
+#### R is a ***language***, which means it gives us the ability to express our ideas with precision
+
+#### R code is text, so we can use copy + paste and Google (especially for errors!)
+]
 
 --
 
-### 1) R is an actual ***language***, which means it gives us the ability to express our ideas with precision. 
+.rightcol45[
 
---
+<br>
 
-<br />
+```{r , error=TRUE}
+library(ggplot2)
+mtcars %>% ggplot(aes(mpg, disp)) %>% 
+  geom_point() +  
+  geom_smooth()    
+```
 
-### 2) R code is text, so we can use copy + paste and Google
+]
 
 ---
 class: left, top
 
-## `R Code`: grammar & syntax
-
-<br />
+# `R Code` - grammar & syntax
 
 --
 
-### - A code's *syntax* defines the rules for it's grammar and punctuation 
+.leftcol[
 
-<br />
+#### A code's *syntax* defines the rules for it's grammar and punctuation 
+
+<br>
+
+```{r print-add_stuff, eval=FALSE}
+add_stuff <- function(x, y) {
+    z <- sum(x, y)
+    return(x)
+}
+```
+
+]
 
 --
 
-### - The characters and words have specific meanings (just like in English)
+.rightcol[
+
+#### The characters and words have specific meanings (just like in English)
+
+```{r define-add_stuff, echo=FALSE}
+add_stuff <- function(x, y) {
+    z <- sum(x, y)
+    return(x)
+}
+```
+
+<br>
+
+```{r add_stuff}
+add_stuff(2, 2)
+```
+
+]
 
 ---
 class: left, top
 
-## `R Code`: grammar & syntax
+# `R Code` - grammar & syntax
 
-<br />
+.leftcol[
+
+### Characters and words have to be written in a particular order for R code work
+
+```{r, error=TRUE}
+function(x, y) -> add_stuff }
+    z <- sum(x, y)
+    return(x)
+}
+```
+
+]
 
 --
 
-### -  Characters and words have to be written in a particular order for R code work
+.rightcol[
 
---
+### In the R, there are two primary components to the grammar (or sytnax):
 
-<br />
+> *functions* and *objects*
 
-### -  In the R, there are two primary components to the grammar (or sytnax): *functions* and *objects*
+]
 
 ---
 class: left, top
 
-# `R Code`: R functions & objects
+# `R Code` - R functions & objects
 
---
+<br>
 
-.pull-left[
+.leftcol55[
+
+### `objects` are like *nouns*
 
 <br />
 
 ### `functions` are like *verbs* 
 
-<br />
-
-### `objects` are like *nouns*
-
 ]
 
 --
 
-.pull-right[
+.rightcol45[
 
-<br />
+```{r, eval=FALSE}
+verb(noun)
+```
 
-### `verb(noun)` 
+<br>
 
 *is like...* 
 
-<br />
-
-### `function(object)`
+```{r, eval=FALSE}
+function(object)
+```
 
 ]
 
+---
+class: left, top
+
+# `R Code` - A quick example  
+
+<br>
+
+.leftcol35[
+
+```{r, eval=FALSE}
+qplot(data = diamonds, 
+         x = carat, 
+         y = price, 
+     color = cut, 
+      geom = "point")
+```
+
+]
+
+.rightcol65[
+
+<br>
+
+> The function (`qplot()`) *does things* to 
+> the objects (the `carat` and `price` columns
+> from the `diamonds` dataset)
+
+]
 
 ---
 class: left, top
 
-## `R Code`: A quick example  
+# `R Code` - A quick example  
 
-### Here is some example R code for building a graph:
+<br>
 
-<br />
+.leftcol35[
 
-```{r 00-r-code-example-01.png, echo=FALSE, out.height='100%', out.width='100%'}
-knitr::include_graphics("img/00-r-code-example-01.png")
+```{r, eval=FALSE}
+qplot(data = diamonds, 
+         x = carat, 
+         y = price, 
+     color = cut, 
+      geom = "point")
 ```
 
-<br /> 
+]
 
-> The functions (`ggplot()`) *'do things'* to the objects (`diamonds`)
+.rightcol65[
 
+<br>
 
+> We're telling R we want to use the `diamonds` data, and we want the `carat` column on the `x` axis, and the `price` column on the `y` 
+
+]
 
 ---
 class: left, top
 
-## `R Code`: A quick example  
+# `R Code` - A quick example 
 
-### Here is some example R code for building a graph:
+<br>
 
-<br />
+.leftcol35[
 
-```{r 00-r-code-example-02.png, echo=FALSE, out.height='100%', out.width='100%'}
-knitr::include_graphics("img/00-r-code-example-02.png")
+```{r, eval=FALSE}
+qplot(data = diamonds, 
+         x = carat, 
+         y = price, 
+     color = cut, 
+      geom = "point")
 ```
 
-<br /> 
+]
 
-> *We're telling R we want to use the `diamonds` data, and we want the `carat` column on the `x` axis, and the `price` column on the `y`.* 
+.rightcol65[
 
+<br>
+
+> We want the graph to have 'points' (or dots), so we use the `geom_point()` function, and we want the points colored by the `cut` column.
+
+]
 
 ---
 class: left, top
 
-## `R Code`: A quick example  
+# `R Code` - A quick example 
 
-### Here is some example R code for building a graph:
+.panelset[
+.panel[.panel-name[R Code]
 
-<br />
+```{r qplot-diamonds, fig.show='hide'}
+qplot(data = diamonds, 
+         x = carat, y = price, color = cut, geom = "point")
+```
+]
 
-```{r 00-r-code-example-03.png, echo=FALSE, out.height='100%', out.width='100%'}
-knitr::include_graphics("img/00-r-code-example-03.png")
+.panel[.panel-name[Plot]
+
+```{r ref.label='qplot-diamonds', echo=FALSE, fig.align='center', out.width='60%', out.height='60%'}
 ```
 
-<br /> 
-
-> *We want the graph to have 'points' (or dots), so we use the `geom_point()` function, and we want the points colored by the `cut` column.* 
-
-
----
-class: left, top
-
-## `R Code`: A quick example 
-
-.small[
-
-```{r plot, out.height='55%', out.width='55%'}
-ggplot(data = diamonds, mapping = aes(x = carat, y = price)) + 
-  geom_point(aes(color = cut))
-```
-
+]
 ]
 
 ---
@@ -388,66 +566,77 @@ class: center, middle, inverse
 ---
 class: left, top
 
-## `HTML`
+# `HTML`
 
-### HTML stands for 'HyperText Markup Language' and is a computer language used to create web pages
-
---
-
-### HTML code can be run by opening the file containing the code with any web browser (Chrome, Safari, Firefox, etc.)
+## HTML stands for 'HyperText Markup Language' and is a computer language used to create web pages
 
 --
 
-### HTML5 is the current standard 
+## HTML code can be run by opening the file containing the code with any web browser (Chrome, Safari, Firefox, etc.)
+
+--
+
+## HTML5 is the current standard 
+
+---
+class: left, top
+
+# `HTML`
+
+.leftcol45[.border[
+
+<img src="img/00-538-html-ref-00.png">
+
+]
+]
+
+.rightcol55[
+
+#### Head over to the [fivethirtyeight landing page](https://fivethirtyeight.com/)
+
+#### Right click on the page and click 'view source'
+
+]
 
 ---
 class: left, top
 
 ## `HTML`
 
-### Head over to the [fivethirtyeight landing page](https://fivethirtyeight.com/)
+> We're looking at the HTML code used to build the fivethirtyeight website (note the `<!DOCTYPE html>` at the top of the page)
 
-```{r 00-538-html-ref-00.png, echo=FALSE, out.height='55%', out.width='55%'}
-knitr::include_graphics("img/00-538-html-ref-00.png")
-```
+<br>
 
+.border[
 
----
-class: left, top
+<img src="img/00-538-html-ref-01.png">
 
-## `HTML`
-
-### Right click on the page and click 'view source'
-
-```{r 00-538-html-ref-01.png, echo=FALSE, out.height='100%', out.width='100%'}
-knitr::include_graphics("img/00-538-html-ref-01.png")
-```
+]
 
 ---
 class: left, top
 
-## `HTML`: structure
+# `HTML`: structure
 
 ### HTML consists of `elements` and `tags`
 
 --
 
-### Elements have a start tag, followed by the element content, followed by an end tag
+.border[
+
+<img src="img/00-538-html-ref-02.png">
+
+]
 
 --
 
-```html
-<element>content</element>
-```
+>  Elements have a start tag, followed by the element content, followed by an end tag
 
-```{r 00-538-html-ref-02.png, echo=FALSE, out.height='100%', out.width='100%'}
-knitr::include_graphics("img/00-538-html-ref-02.png")
-```
 
 ---
 class: left, top
 
-## `HTML`: `elements` and `tags`
+## `HTML` - `elements` and `tags`
 
 #### Start tag: 
 
@@ -469,17 +658,9 @@ class: left, top
 ---
 class: left, top
 
-## `HTML`: attributes
+# `HTML` - attributes
 
-### Attributes appear in the start tag and are of the form `attribute="attribute value"`
-
-<br />
-
---
-
-### The code below shows the start tag for an `img` element, with an attribute called `src` with a value `"image.png"`
-
-<br />
+#### Attributes appear in the start tag and are of the form `attribute="attribute value"`
 
 --
 
@@ -487,12 +668,17 @@ class: left, top
 <img src="image.png">
 ```
 
+--
+
+> The code above shows the start tag for an `img` element, with an attribute called `src` with a value `"image.png"`
+
+
 ---
 class: left, top
 
-## `HTML`: tags to know 
+# `HTML` - tags to know 
 
-.small[
+.leftcol70[
 
 ```html
 <!-- html comments (not read or displayed by browser) -->
@@ -516,7 +702,16 @@ class: left, top
 
 ]
 
-*Most code is added in the `<body>` element*
+--
+
+.rightcol30[
+
+> *Most of the code is in the* .red[`<body>`]
+
+]
+
+
+
 
 
 ---
@@ -530,8 +725,6 @@ class: center, middle, inverse
 class: left, top
 
 ## `CSS`
-
---
 
 <br />
 
@@ -547,56 +740,45 @@ class: left, top
 ---
 class: left, top
 
-## `CSS`: structure
+# `CSS` - structure
 
-### `CSS` syntax
+.leftcol55[
 
-.pull-left[
-
-<br />
-
-```css
-<style>
-    h1 {
-        color: blue;
-    }
-</style>
-```
-
+1. `<style>` .green[start tag]   
+2. .yellow[a selector] (`h1`)     
+3. .yellow[an open bracket] (`{`)   
+4. .blue[property name] (`color`)    
+5. .blue[colon] (`:`)    
+6. .blue[property value] (`blue`)    
+7. .blue[semi-colon] (`;`)     
+8. .yellow[a closed bracket] (`}`)    
+9. `</style>` .green[end tag]   
 
 ]
 
 --
 
-.pull-right[
+.rightcol45[
 
-+ `<style>` start tag
-  + a **selector** (`h1`) 
-    + an open bracket (`{`) 
-        + **property name** (`color`)
-        + colon (`:`)  
-        + **property value** (`blue`)  
-        + semi-colon (`;`) 
-    + a closed bracket (`}`)
-+ `</style>` end tag
-
+```css
+    <style>
+        h1 {
+            color: blue;
+        }
+    </style>
+```
 ]
 
 
 ---
 class: left, top
 
-## `CSS`: use 
+# `CSS` - use 
 
-### `CSS` is most useful when included in an external CSS file (i.e., `my_style_sheet.css`)
+<br>
 
-<br />
+#### `CSS` is most useful when included in an external CSS file (i.e., `my_style_sheet.css`)
 
---
-
-### We can then reference the `my_style_sheet.css` style sheet using the `<link>` tag
-
-<br />
 
 --
 
@@ -604,6 +786,10 @@ class: left, top
 <link href="my_style_sheet.css" rel="stylesheet" 
       type="text/css">
 ```
+
+--
+
+> We can then reference the `my_style_sheet.css` style sheet using the `<link>` tag
 
 
 ---
@@ -614,83 +800,90 @@ class: center, middle, inverse
 ---
 class: left, top
 
-## `Data` file types
+# `Data` file types
 
-### Data comes in a variety of formats, but this course will focus on 'plain text formats'
-
---
-
-### Text editors can read and write plain text files  
+#### Data comes in a variety of formats, but this course will focus on 'plain text formats'
 
 --
 
-### Plain text files are portable across different computer operating systems
+#### Text editors can read and write plain text files  
+
+--
+
+#### Plain text files are portable across different computer operating systems
 
 ---
 class: left, top
 
-## `CSV`: 'comma-separated values' files
+# `CSV` - 'comma-separated values' files
 
-### The first line is a "header" and contains column (or variable) names in each of the fields (using letters, digits, and underscores)
-
---
-
-### Each following line represents a new row (or observation)
+#### The first line is a "header" and contains column (or variable) names in each of the fields (using letters, digits, and underscores)
 
 --
 
-### Any field *may be* quoted, but fields with embedded commas or double-quote characters *must be* quoted
+#### Each following line represents a new row (or observation)
+
+--
+
+#### Any field *may be* quoted, but fields with embedded commas or double-quote characters *must be* quoted
 
 ---
 class: left, top
 
-## `CSV`: 'comma-separated values' files
+# `CSV` - 'comma-separated values' files
 
-### How .csv files look in text editors:
+.leftcol[
+
+#### How .csv files look in text editors:
 
 ```
-name, age, street, city, state, zip
-Sally, 24, 6 Taylor Ave., Commack, NY, 11725 
-Fred, 38, 450 Grant Ave., Fort Dodge, IA, 50501 
-Deb, 48, 661 Spring Drive, Phillipsburg, NJ, 08865
+name, city, state
+Sally, Commack, NY
+Fred, Fort Dodge, IA
+Deb, Phillipsburg, NJ
 ```
+
+]
 
 --
 
-### How .csv files look in a spreadsheet:
+.rightcol[
+
+#### How .csv files look in a spreadsheet:
 
 ```{r csv, echo=FALSE, warning=FALSE, message=FALSE}
 knitr::kable(
-readr::read_csv("name, age, street, city, state, zip
-                Sally, 24, 6 Taylor Ave., Commack, NY, 11725 
-                Fred, 38, 450 Grant Ave., Fort Dodge, IA, 50501 
-                Deb, 48, 661 Spring Drive, Phillipsburg, NJ, 08865"))
+readr::read_csv("name, city, state
+Sally, Commack, NY
+Fred, Fort Dodge, IA
+Deb, Phillipsburg, NJ"))
 ```
 
+]
 
 ---
 class: left, top
 
-## `XML`: Extensible Markup Language
+# `XML` - Extensible Markup Language
 
-### `XML` consists of of XML elements with a start tag and an end tag (with plain text content or other XML elements in-between)
-
---
-
-### The start tag may include attributes of the form `attribute="value"` (case-sensitive)
+#### `XML` consists of of XML elements with a start tag and an end tag (with plain text content or other XML elements in-between)
 
 --
 
-### All attribute values must be enclosed within double-quotes
+#### The start tag may include attributes of the form `attribute="value"` (case-sensitive)
+
+--
+
+#### All attribute values must be enclosed within double-quotes
 
 ---
 class: left, top
 
-## `XML`: structure
+# `XML` - structure
 
-### Below is a small XML document
+#### Below is a small XML document
 
-.pull-left[
+.leftcol40[
 
 ```xml
 <?xml version="2.0"?>
@@ -702,81 +895,86 @@ class: left, top
 ```
 ]
 
-.pull-right[
-- **`root element`** = `<heights>`  
-- **`start tag`** = `<filename>`  
-- **`content`** = `heights.txt`  
-- **`end tag`** = `</filename>`    
-- **`element name`** = `case`  
-- **`attribute name`** = `date`  
-- **`attribute value`** = `"24-JAN-2019"`   
-- **`attribute name`** = `height`   
-- **`attribute value`** = `"78.9"` 
+.rightcol60[
+- .blue[root element] = `<heights>`  
+- .blue[start tag] = `<filename>`  
+- content = `heights.txt`  
+- .blue[end tag] = `</filename>`    
+- .blue[element name] = `case`  
+- .green[attribute name] = `date`  
+- .red[attribute value] = `"24-JAN-2019"`   
+- .green[attribute name] = `height`   
+- .red[attribute value] = `"78.9"` 
 ]
 
 --
 
-#### The root element is the `heights` element with `filename` and `case` elements nested within the `heights`
+> *The root element is the `heights` element with `filename` and `case` elements nested within the `heights`*
 
 
 ---
 class: left, top
 
-## `JSON`: JavaScript Object Notation
+# `JSON` - JavaScript Object Notation
 
-### `JSON` is a lightweight data storage format similar in structure to `XML` but different syntax/format
+#### `JSON` is a lightweight data storage format similar in structure to `XML` but different syntax/format
 
 --
 
-### Common format for data from application programming interfaces (APls)
-
+#### Common format for data from application programming interfaces (APls)
 
 
 
 ---
 class: left, top
 
-## `JSON`: structure
+# `JSON` - structure
 
 ### Data are stored as:
 
-#### - Numbers (double)
-#### - Strings (double quoted)
-#### - Boolean ( true or false)
-#### - Array (ordered, comma separated enclosed in square brackets`[]`)
-#### - Object (unorderd, comma-separated collection of key:value pairs in curley brackets `{}`)
+.leftcol[
+
+#### - Numbers (double)  
+#### - Strings (double quoted)  
+#### - Boolean ( true or false)  
+
+]
+
+.rightcol[
+
+#### - Array (ordered, comma separated enclosed in square brackets`[]`)  
+#### - Object (unorderd, comma-separated collection of key:value pairs in curley brackets `{}`)  
+
+]
+
 
 ---
 class: left, top
 
-```{r , include=FALSE, eval=FALSE}
-library(jsonlite)
-x <- readr::read_csv("name, age, street, city, state, zip
-                Sally, 24, 6 Taylor Ave., Commack, NY, 11725 
-                Fred, 38, 450 Grant Ave., Fort Dodge, IA, 50501 
-                Deb, 48, 661 Spring Drive, Phillipsburg, NJ, 08865")
-jsonlite::toJSON(x = x, pretty = TRUE)
-```
-
-
-## `JSON`: structure
+# `JSON` - structure
 
 .pull-left[
 
-### Recall the .csv format:
+#### CSV vs. JSON formats
 
-```{r 00-csv.png, echo=FALSE, out.height='150%', out.width='150%'}
-knitr::include_graphics(path = "img/00-csv.png")
+```markdown
+name, city, state
+Sally, Commack, NY
+Fred, Fort Dodge, IA
+Deb, Phillipsburg, NJ
 ```
 
 ]
 
 .pull-right[
 
-### Same data as JSON:
-
-```{r 00-json.png, echo=FALSE, out.height='70%', out.width='70%'}
-knitr::include_graphics(path = "img/00-json.png")
+```{r , echo=FALSE}
+library(jsonlite)
+x <- readr::read_csv("name, city, state
+Sally, Commack, NY
+Fred, Fort Dodge, IA
+Deb, Phillipsburg, NJ")
+jsonlite::toJSON(x = x, pretty = TRUE)
 ```
 
 ]
@@ -787,22 +985,18 @@ class: left, top, inverse
 
 # Recap
 
-### Data journalists use programming languages as a tool to process, store, and display data
+#### Data journalists use programming languages as a tool to process, store, and display data
 
-### Code is the preferred technology because it's a language and allows us to be precise and expressive
+#### Code is the preferred technology because it's a language and allows us to be precise and expressive
 
-### Plain text data file formats are simple, lowest-common-denominator storage formats
+#### Plain text data file formats are simple, lowest-common-denominator storage formats
 
-### Data in a plain text formats are usually arranged in rows, with several values on each row 
+#### Data in a plain text formats are usually arranged in rows, with several values on each row 
 
 
 ```{r chrome_print, echo=FALSE, results='hide', eval=FALSE}
-html_slides <- list.files(".", pattern = ".html")
-pdf_slides <- str_replace(html_slides, 
-  pattern = ".html", 
-  replacement = ".pdf")
-pdf_slides <- paste0("pdfs/", pdf_slides)
-pdf_slides
+dir_data <- fs::dir_info(path = ".", all = TRUE, recurse = TRUE)
+# str(dir_data)
 
-pagedown::chrome_print(input = html_slides[1], output = pdf_slides[1], timeout = 120)
+pagedown::chrome_print(input = "wk-01.0-intro-web-tech.html", output = "pdf/wk-01.0-intro-web-tech.pdf", timeout = 120)
 ```

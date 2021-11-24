@@ -1,13 +1,12 @@
 ---
 title: "Introduction To R Programming"
-subtitle: "Journalism 303: R functions and objects"  
+subtitle: "Journalism 303: R objects and functions"  
 author: 
   - "Martin Frigaard"
 date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: ["theme.css"]
     nature:
       highlightStyle: github
       highlightLines: true
@@ -64,7 +63,7 @@ https://cran.r-project.org/
 
 
 ```{r cran, eval=TRUE, echo=FALSE}
-knitr::include_graphics("img/cran.png")
+knitr::include_graphics("../img/cran.png")
 ```
 
 --
@@ -80,7 +79,7 @@ class: left, top
 https://rstudio.com/products/rstudio/download/
 
 ```{r rstudio, eval=TRUE, echo=FALSE}
-knitr::include_graphics("img/rstudio.png")
+knitr::include_graphics("../img/rstudio.png")
 ```
 
 
@@ -94,19 +93,19 @@ https://rstudio.cloud/
 
 
 ```{r rstudio-cloud, eval=TRUE, echo=FALSE}
-knitr::include_graphics("img/rstudio-cloud.png")
+knitr::include_graphics("../img/rstudio-cloud.png")
 ```
 
 
 ---
-background-image: url("img/r-console.png")
+background-image: url("../img/r-console.png")
 background-size: contain
 class: center, bottom
 
 # The R Console
 
 ---
-background-image: url("img/rstudio-launch.png")
+background-image: url("../img/rstudio-launch.png")
 background-size: contain
 class: left, middle
 
@@ -134,7 +133,7 @@ print("Hello World")
 
 
 ```{r commands-console, eval=TRUE, echo=FALSE, out.height="120%", out.width="120%", fig.align='center'}
-knitr::include_graphics("img/commands-console.png")
+knitr::include_graphics("../img/commands-console.png")
 ```
 
 ]
@@ -149,7 +148,7 @@ You can also run them in R scripts (see example in RStudio below)
 --
 
 ```{r script-rstudio, eval=TRUE, echo=FALSE, out.height='110%', out.width='110%', fig.align='center'}
-knitr::include_graphics("img/script-rstudio.png")
+knitr::include_graphics("../img/script-rstudio.png")
 ```
 
 ---
@@ -355,7 +354,7 @@ class: left
 Use tab-completion and the arrow keys in RStudio to explore a packages functions. 
 
 ```{r tab-completion, echo=FALSE}
-knitr::include_graphics("img/tab-completion.png")
+knitr::include_graphics("../img/tab-completion.png")
 ```
 
 --
@@ -392,7 +391,7 @@ class: left, top
 You can also use the **Packages** pane in RStudio
 
 ```{r install-package, echo=FALSE, fig.align='center', out.height="50%", out.width="50%"}
-knitr::include_graphics("img/install-package.png")
+knitr::include_graphics("../img/install-package.png")
 ```
 
 
@@ -516,7 +515,7 @@ We then explore the contents of the new object with another function.
 .pull-right[
 
 ```{r store-explore, echo=FALSE, out.height='120%', out.width='120%', fig.align='center'}
-knitr::include_graphics(path = "img/store-explore.png")
+knitr::include_graphics(path = "../img/store-explore.png")
 ```
 
 ]
@@ -826,7 +825,7 @@ Read more about date-times by entering the `as.POSIXct` function into the consol
 .pull-right[
 
 ```{r help-date-time, echo=FALSE, out.height="120%", out.width="120%", fig.align='center'}
-knitr::include_graphics(path = "img/help-date-time.png")
+knitr::include_graphics(path = "../img/help-date-time.png")
 ```
 
 ]
@@ -964,7 +963,7 @@ Matrices are arrays, but arrays are not matrices.
 .pull-left[ 
 
 ```{r array-png, out.height='75%', out.width='75%', fig.align='center', echo=FALSE}
-knitr::include_graphics(path = "img/array.png")
+knitr::include_graphics(path = "../img/array.png")
 ```
 
 ]
@@ -1056,7 +1055,7 @@ If you're importing spreadsheets, most of the work you'll do in R will be with r
 .pull-left[
 
 ```{r data-frame-tibble, echo=FALSE, out.width='80%', out.height='80%', fig.align='center'}
-knitr::include_graphics(path = "img/data-frame-tibble.png")
+knitr::include_graphics(path = "../img/data-frame-tibble.png")
 ```
 
 ]

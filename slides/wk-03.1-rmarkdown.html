@@ -4,9 +4,10 @@
     <title>Introduction to R Markdown</title>
     <meta charset="utf-8" />
     <meta name="author" content="Martin Frigaard" />
-    <meta name="date" content="2021-09-21" />
+    <meta name="date" content="2021-11-23" />
     <script src="libs/header-attrs/header-attrs.js"></script>
-    <link rel="stylesheet" href="theme.css" type="text/css" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
@@ -15,7 +16,7 @@ class: center, middle, inverse, title-slide
 # Introduction to R Markdown
 ## Journalism 303: an introduction to R markdown
 ### Martin Frigaard
-### 2021-09-21
+### 2021-11-23
 
 ---
 
@@ -24,13 +25,13 @@ class: center, middle, inverse, title-slide
 
 
 
-&lt;img src="img/rmarkdown_wizards.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/rmarkdown_wizards.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 .pull-right[Artwork by @allison_horst]
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -47,7 +48,7 @@ https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html
 
 ---
 class: inverse, center
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -83,7 +84,7 @@ class: center, top
 `rmarkdown` combines YAML, markdown, and R code into a markdown document and passes it to `knitr`
 
 
-&lt;img src="img/rmarkdown.png" width="40%" height="40%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/rmarkdown.png" width="40%" height="40%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -93,12 +94,12 @@ class: center, top
 
 `knitr` uses `pandoc` (a universal document conversion tool) to generate the specified document format
 
-&lt;img src="img/knitr.png" width="40%" height="40%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/knitr.png" width="40%" height="40%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 95% 8%
 background-size: 8%
 class: inverse, middle, center
@@ -108,7 +109,7 @@ class: inverse, middle, center
 ### We will create an example HTML report using the R Markdown template provided by RStudio
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 95% 12%
 background-size: 9%
 class: left, top
@@ -130,12 +131,12 @@ class: left, top
 
 ***Or use the drop-down menu***
 
-&lt;img src="img/new-rmarkdown.png" width="40%" height="40%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/new-rmarkdown.png" width="40%" height="40%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 7%
 background-size: 8%
 class: left, top
@@ -148,7 +149,7 @@ class: left, top
 
 If you're in a fresh RStudio.Cloud session, you *might* be asked to install the required packages for R Markdown, Click **Yes**
 
-&lt;img src="img/install-req-packages.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/install-req-packages.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -158,13 +159,13 @@ If you're in a fresh RStudio.Cloud session, you *might* be asked to install the 
 
 You will see RStudio installing the packages in the **Jobs** pane
 
-&lt;img src="img/rmd-pckgs-jobs.png" width="180%" height="180%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/rmd-pckgs-jobs.png" width="180%" height="180%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 93%
 background-size: 8%
 class: middle
@@ -173,11 +174,11 @@ class: middle
 
 ### Enter ***'Title'*** and ***'Author'*** of your report and click ***OK***
 
-&lt;img src="img/rmarkdown-defaults.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/rmarkdown-defaults.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 7%
 background-size: 8%
 class: left, top
@@ -186,10 +187,10 @@ class: left, top
 
 ### Click on the small floppy disk, enter a name (with .Rmd extension), and save your `.Rmd` file
 
-&lt;img src="img/save-rmd-file.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/save-rmd-file.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 93%
 background-size: 8%
 class: left, top
@@ -200,20 +201,20 @@ class: left, top
 
 ### Click on the knit icon (ball of yarn)
 
-&lt;img src="img/knit-rmd-file.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/knit-rmd-file.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 7%
 background-size: 8%
 class: left, center
 
 ## Our First R Markdown Report!
 
-&lt;img src="img/rmarkdown-in-action.png" width="110%" height="110%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/rmarkdown-in-action.png" width="110%" height="110%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 95% 8%
 background-size: 8%
 class: inverse, middle, center
@@ -223,7 +224,7 @@ class: inverse, middle, center
 ## (under the hood)
 
 ---
-background-image: url(img/how-rmd-works.png)
+background-image: url(../img/how-rmd-works.png)
 background-position: 50% 73%
 background-size: 90%
 class: top, center
@@ -235,7 +236,7 @@ class: left, top
 
 # Rmarkdown combines metadata, markdown, *and* R code 
 
-&lt;img src="img/r-plus-md.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/r-plus-md.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 &lt;br&gt;
 
@@ -250,7 +251,7 @@ class: left, top
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -270,7 +271,7 @@ background-size: 8%
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -290,7 +291,7 @@ output: html_document
 ```
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -298,10 +299,10 @@ background-size: 8%
 
 &lt;br&gt;&lt;br&gt;
 
-&lt;img src="img/yaml-formatting-01.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/yaml-formatting-01.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -309,10 +310,10 @@ background-size: 8%
 
 &lt;br&gt;&lt;br&gt;
 
-&lt;img src="img/yaml-formatting-02.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/yaml-formatting-02.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -332,7 +333,7 @@ background-size: 8%
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -347,7 +348,7 @@ background-size: 8%
 ### `toc_depth:` set numerically `0` - `6`
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -365,7 +366,7 @@ output:
 ### Knit the document again
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -373,10 +374,10 @@ background-size: 8%
 
 ### Floating table of contents (rendered)
 
-&lt;img src="img/yaml-toc-settings.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/yaml-toc-settings.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -397,7 +398,7 @@ output:
 ### Knit the document again
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -405,10 +406,10 @@ background-size: 8%
 
 ### Text highlighting and theme options (rendered)
 
-&lt;img src="img/yaml-highlight-theme.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/yaml-highlight-theme.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -416,10 +417,10 @@ background-size: 8%
 
 ### You can change the YAML contents using the settings (small gear)
 
-&lt;img src="img/knitr-settings.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/knitr-settings.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -435,12 +436,12 @@ background-size: 8%
 
 .pull-right[
 
-&lt;img src="img/edit-rmd-output-options.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/edit-rmd-output-options.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -475,7 +476,7 @@ params$data
 ]
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -493,14 +494,14 @@ params:
 Add this code to the end of the document
 
 
-&lt;img src="img/small-pressure.png" width="100%" height="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="../img/small-pressure.png" width="100%" height="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 
 ### Knit the document again 
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -508,10 +509,10 @@ background-size: 8%
 
 We can see the new plot with the reduced sample size
 
-&lt;img src="img/params-plot.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/params-plot.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -531,7 +532,7 @@ Function       | Outputs
 `powerpoint_presentation()`   | PowerPoint (pptx)
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 15%
 
@@ -544,7 +545,7 @@ background-size: 15%
 
 
 ---
-background-image: url(img/markdown.png)
+background-image: url(../img/markdown.png)
 background-position: 93% 10%
 background-size: 8%
 class: left, top
@@ -574,7 +575,7 @@ class: left, top
 ]
 
 ---
-background-image: url(img/markdown.png)
+background-image: url(../img/markdown.png)
 background-position: 93% 10%
 background-size: 8%
 class: left, top
@@ -606,7 +607,7 @@ class: left, top
 ]
 
 ---
-background-image: url(img/markdown.png)
+background-image: url(../img/markdown.png)
 background-position: 93% 10%
 background-size: 8%
 class: left, top
@@ -648,7 +649,7 @@ class: left, top
 
 
 ---
-background-image: url(img/markdown.png)
+background-image: url(../img/markdown.png)
 background-position: 93% 10%
 background-size: 8%
 class: left, top
@@ -670,7 +671,7 @@ https://www.biomarin.com/
 [linked phrase](https://www.biomarin.com/)
 
 ---
-background-image: url(img/markdown.png)
+background-image: url(../img/markdown.png)
 background-position: 93% 10%
 background-size: 15%
 class: left, top
@@ -695,7 +696,7 @@ class: left, top
 
 
 ---
-background-image: url(img/markdown.png)
+background-image: url(../img/markdown.png)
 background-position: 93% 10%
 background-size: 8%
 class: left, top
@@ -728,7 +729,7 @@ $$ equation $$
 
 
 ---
-background-image: url(img/markdown.png)
+background-image: url(../img/markdown.png)
 background-position: 93% 10%
 background-size: 8%
 class: left, top
@@ -756,7 +757,7 @@ superscript^2^
 ]
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -764,10 +765,10 @@ background-size: 8%
 
 Delete the top portion of the markdown in `01-monthly-report.Rmd`. 
 
-&lt;img src="img/delete-rmarkdown.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/delete-rmarkdown.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -791,16 +792,16 @@ background-size: 8%
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
 # Exercise 5: Markdown Formatting (rendered)
 
-&lt;img src="img/rmarkdown-exercise.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/rmarkdown-exercise.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -818,7 +819,7 @@ params:
 ```
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -827,30 +828,30 @@ background-size: 8%
 Make the following changes to the `R Markdown` header sections
 
 
-&lt;img src="img/tabset-markdown.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/tabset-markdown.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ### Knit the document again
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
 # Exercise 6: Tabsets (rendered)
 
-&lt;img src="img/tabset-1-render.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/tabset-1-render.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
 # Exercise 6: Tabsets (rendered)
 
-&lt;img src="img/tabset-2-render.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/tabset-2-render.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 12%
 
@@ -862,7 +863,7 @@ background-size: 12%
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -870,7 +871,7 @@ background-size: 8%
 
 ### The first bit of R code in our RMarkdown file is the `setup` chunk
 
-&lt;img src="img/setup-code-chunk.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/setup-code-chunk.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 --
 
@@ -881,7 +882,7 @@ background-size: 8%
 ### '`include=FALSE`' means this code is run, but not displayed
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -891,10 +892,10 @@ background-size: 8%
 
 ### We can access both the with sytnax below:
 
-&lt;img src="img/knitr-opts-set.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/knitr-opts-set.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -912,7 +913,7 @@ background-size: 8%
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -929,7 +930,7 @@ background-size: 8%
 |`warning`       | do/don't print warnings                      |
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -937,10 +938,10 @@ background-size: 8%
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;img src="img/code-chunks.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/code-chunks.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -948,16 +949,16 @@ background-size: 8%
 
 &lt;br&gt;&lt;br&gt;
 
-&lt;img src="img/code-chunk-fences.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/code-chunk-fences.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
 # Code chunk names and arguments
 
-&lt;img src="img/code-chunk-name-args.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/code-chunk-name-args.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
 
 
 --
@@ -965,7 +966,7 @@ background-size: 8%
 ### See the [knitr web page](https://yihui.name/knitr/options/) for complete list of options
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -974,10 +975,10 @@ background-size: 8%
 ### Use keyboard shortcuts **CMD/CTRL + I** or **ALT/OPTION + I**
 
 
-&lt;img src="img/insert-code-chunk.png" width="23%" height="23%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/insert-code-chunk.png" width="23%" height="23%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -985,11 +986,11 @@ background-size: 8%
 
 ### You can edit code chunk options using the icon (small gear)
 
-&lt;img src="img/code-chunk-settings.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/code-chunk-settings.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -1017,7 +1018,7 @@ names(knitr::knit_engines$get())
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -1035,12 +1036,12 @@ Create a new `Tables` level three header under the `Summary` heading,
 
 Insert the following code chunk under `Tables` (*manually, with the keyboard short-cut, or use the "Insert" button*)
 
-&lt;img src="img/kable-code-chunk.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/kable-code-chunk.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ### Knit the document
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -1048,12 +1049,12 @@ background-size: 8%
 
 We can see the `small_pressure` parameter from the YAML has been rendered in the new `Tables` tab. `kable` tables are great for presenting small, summary tables.
 
-&lt;img src="img/kable-chunk-rendered.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/kable-chunk-rendered.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
 
 Read more about `kable` table options [here](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 96%
 background-size: 8%
 
@@ -1063,12 +1064,12 @@ background-size: 8%
 
 Insert the following code chunk above the `knitr::kable()` output: 
 
-&lt;img src="img/paged-code-chunk.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/paged-code-chunk.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ### Knit the document
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 7% 96%
 background-size: 8%
 
@@ -1076,19 +1077,19 @@ background-size: 8%
 
 ### Paged tables are great for larger datasets
 
-&lt;img src="img/paged-chunk-render.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/paged-chunk-render.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
 # Exercise 8: paged tables
 
-&lt;img src="img/paged-chunk-render.gif" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/paged-chunk-render.gif" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -1099,10 +1100,10 @@ background-size: 8%
 --
 
 
-&lt;img src="img/inline-r-code-01.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/inline-r-code-01.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -1112,11 +1113,11 @@ background-size: 8%
 
 --
 
-&lt;img src="img/inline-r-code-02.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/inline-r-code-02.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
@@ -1139,17 +1140,17 @@ is `r cor(x = cars$speed, y = cars$dist)`
 ### Knit the document again
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 
 # Exercise 9: Add Inline Code (rendered)
 
 
-&lt;img src="img/inline-code-rendered.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/inline-code-rendered.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 50%
 background-size: 20%
 
@@ -1160,7 +1161,7 @@ background-size: 20%
 ## these slides!
 
 ---
-background-image: url(img/rmarkdown.png)
+background-image: url(../img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 8%
 class: left, top

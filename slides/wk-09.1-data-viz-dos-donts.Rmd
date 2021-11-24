@@ -8,7 +8,6 @@ output:
   xaringan::moon_reader:
     df_print: paged
     lib_dir: libs
-    css: ["theme.css"]
     nature:
       highlightStyle: github
       highlightLines: true
@@ -493,12 +492,17 @@ background-size: 10%
 
 Use heatmaps to compare numeric variables across two categorical variables.
 
-```{r heatmap, echo=FALSE}
-# heatmap data
+```{r heatmap_births_2000_2014, echo=FALSE}
+heatmap_births_2000_2014 <- fivethirtyeight::US_births_2000_2014 %>% 
+    mutate(year = factor(year), 
+           weekday = as.character(day_of_week),
+           weekday = factor(weekday)) 
 ```
 
-```{r geom_tile}
-
+```{r geom_raster}
+heatmap_births_2000_2014 %>% 
+  ggplot(aes(weekday, year, fill = births)) + geom_raster() + 
+  scale_fill_distiller(palette = "RdPu")
 ```
 
 
@@ -666,18 +670,69 @@ background-size: 10%
 
 ## X vs. Y Relationships
 
-SCATTER PLOTS  
-+ `geom_point()`  
+Build scatter-plots with [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html) (adjust points with `size`)
 
-```{r tidy_candy_rankings}
-tidy_candy_rankings <- candy_rankings %>%
-  tidyr::pivot_longer(
-    cols = -c(competitorname, sugarpercent, pricepercent, winpercent), 
-     names_to = "characteristics", values_to = "present") %>%
-  mutate(present = as.logical(present)) %>% arrange(competitorname) %>% 
-  filter(present == TRUE) %>% distinct() %>% 
-  select(-present)
+```{r scatter_movie_data, echo=FALSE}
+scatter_movie_data <- movies_data %>% 
+    mutate(budget_mil = budget / 1000000,
+           budget_mil = paste0(budget_mil, " mil"),
+           budget_mil = factor(budget_mil)) %>% 
+    select(title, year, rating, length, 
+           budget, budget_mil, mpaa, genres)
 ```
+
+```{r scatter-plot}
+scatter_movie_data %>% 
+    ggplot(aes(x = length, y = rating)) + 
+    geom_point(size = 0.3)
+```
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## X vs. Y Relationships
+
+Add color with `geom_point(aes(color = ))` and reduce over-plotting with `alpha = `
+
+```{r scatter-plot-color}
+scatter_movie_data %>% 
+    ggplot(aes(x = length, y = rating)) + 
+    geom_point(aes(color = mpaa), size = 0.3, alpha = 1/3)
+```
+
+---
+class: left, top
+background-image: url(../img/ggplot2.png)
+background-position: 95% 8%
+background-size: 10%
+
+## X vs. Y Relationships
+
+Create bubble-charts by setting size to a numerical variable. 
+
+```{r bubble_movie_data, echo=FALSE}
+bubble_movie_data <- movies_data %>% 
+    mutate(`budget (million)` = budget / 1000000,
+           budget_mil_fct = paste0(`budget (million)`, " mil"),
+           budget_mil_fct = factor(budget_mil_fct)) %>% 
+    select(title, year, rating, length, `budget (million)`, 
+           budget, budget_mil_fct, mpaa, genres)
+```
+
+```{r bubble-chart, eval=FALSE}
+bubble_movie_data %>% ggplot(aes(x = length, y = rating)) + 
+  geom_point(aes(color = mpaa, size = `budget (million)`), 
+               alpha = 1/3) + theme(legend.position = "left")
+```
+
+```{r bubble-chart-1-png, echo=FALSE, out.height='80%', out.width='80%'}
+knitr::include_graphics("../img/bubble-chart.png")
+```
+
+
 
 
 ---
@@ -697,3 +752,12 @@ background-size: 10%
 ## Spatial Data
 
 
+```{r tidy_candy_rankings, eval=FALSE, include=FALSE}
+tidy_candy_rankings <- candy_rankings %>%
+  tidyr::pivot_longer(
+    cols = -c(competitorname, sugarpercent, pricepercent, winpercent), 
+     names_to = "characteristics", values_to = "present") %>%
+  mutate(present = as.logical(present)) %>% arrange(competitorname) %>% 
+  filter(present == TRUE) %>% distinct() %>% 
+  select(-present)
+```

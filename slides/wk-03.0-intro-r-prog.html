@@ -4,18 +4,19 @@
     <title>Introduction To R Programming</title>
     <meta charset="utf-8" />
     <meta name="author" content="Martin Frigaard" />
-    <meta name="date" content="2021-09-21" />
+    <meta name="date" content="2021-11-23" />
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
-    <link rel="stylesheet" href="theme.css" type="text/css" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
 # Introduction To R Programming
-## Journalism 303: R functions and objects
+## Journalism 303: R objects and functions
 ### Martin Frigaard
-### 2021-09-21
+### 2021-11-23
 
 ---
 
@@ -62,7 +63,7 @@ Install R from the Comprehensive R Archive Network (CRAN):
 https://cran.r-project.org/
 
 
-&lt;img src="img/cran.png" width="3589" /&gt;
+&lt;img src="../img/cran.png" width="3589" /&gt;
 
 --
 
@@ -76,7 +77,7 @@ class: left, top
 
 https://rstudio.com/products/rstudio/download/
 
-&lt;img src="img/rstudio.png" width="2995" /&gt;
+&lt;img src="../img/rstudio.png" width="2995" /&gt;
 
 
 
@@ -88,18 +89,18 @@ class: left, top
 https://rstudio.cloud/
 
 
-&lt;img src="img/rstudio-cloud.png" width="3600" /&gt;
+&lt;img src="../img/rstudio-cloud.png" width="3600" /&gt;
 
 
 ---
-background-image: url("img/r-console.png")
+background-image: url("../img/r-console.png")
 background-size: contain
 class: center, bottom
 
 # The R Console
 
 ---
-background-image: url("img/rstudio-launch.png")
+background-image: url("../img/rstudio-launch.png")
 background-size: contain
 class: left, middle
 
@@ -131,7 +132,7 @@ print("Hello World")
 .pull-right[
 
 
-&lt;img src="img/commands-console.png" width="120%" height="120%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/commands-console.png" width="120%" height="120%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -144,7 +145,7 @@ You can also run them in R scripts (see example in RStudio below)
 
 --
 
-&lt;img src="img/script-rstudio.png" width="110%" height="110%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/script-rstudio.png" width="110%" height="110%" style="display: block; margin: auto;" /&gt;
 
 ---
 background-image: url("https://www.r-project.org/logo/Rlogo.png")
@@ -381,7 +382,7 @@ class: left
 
 Use tab-completion and the arrow keys in RStudio to explore a packages functions. 
 
-&lt;img src="img/tab-completion.png" width="2123" /&gt;
+&lt;img src="../img/tab-completion.png" width="2123" /&gt;
 
 --
 
@@ -418,7 +419,7 @@ class: left, top
 
 You can also use the **Packages** pane in RStudio
 
-&lt;img src="img/install-package.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/install-package.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -542,7 +543,7 @@ We then explore the contents of the new object with another function.
 
 .pull-right[
 
-&lt;img src="img/store-explore.png" width="120%" height="120%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/store-explore.png" width="120%" height="120%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -844,7 +845,7 @@ vec_date
 ```
 
 ```
-## [1] "2021-09-21" "2021-09-22" "2021-09-23"
+## [1] "2021-11-23" "2021-11-24" "2021-11-25"
 ```
 
 --
@@ -882,7 +883,7 @@ unclass(vec_date)
 ```
 
 ```
-## [1] 18891 18892 18893
+## [1] 18954 18955 18956
 ```
 
 
@@ -903,7 +904,7 @@ vec_date
 ```
 
 ```
-## [1] "2021-09-21" "2021-09-22" "2021-09-23"
+## [1] "2021-11-23" "2021-11-24" "2021-11-25"
 ```
 
 --
@@ -915,8 +916,8 @@ vec_datetime_ct
 ```
 
 ```
-## [1] "2021-09-20 17:00:00 MST" "2021-09-21 17:00:00 MST"
-## [3] "2021-09-22 17:00:00 MST"
+## [1] "2021-11-22 17:00:00 MST" "2021-11-23 17:00:00 MST"
+## [3] "2021-11-24 17:00:00 MST"
 ```
 
 We can see `vec_datetime_ct` stores some additional information. 
@@ -969,7 +970,7 @@ Read more about date-times by entering the `as.POSIXct` function into the consol
 
 .pull-right[
 
-&lt;img src="img/help-date-time.png" width="120%" height="120%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/help-date-time.png" width="120%" height="120%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1175,7 +1176,7 @@ Matrices are arrays, but arrays are not matrices.
 
 .pull-left[ 
 
-&lt;img src="img/array.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/array.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1311,7 +1312,7 @@ If you're importing spreadsheets, most of the work you'll do in R will be with r
 
 .pull-left[
 
-&lt;img src="img/data-frame-tibble.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../img/data-frame-tibble.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
 
 ]
 

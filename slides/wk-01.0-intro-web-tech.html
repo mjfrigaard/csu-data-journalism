@@ -4,164 +4,246 @@
     <title>Introduction to Web Technologies</title>
     <meta charset="utf-8" />
     <meta name="author" content="Martin Frigaard" />
-    <meta name="date" content="2021-09-21" />
     <script src="libs/header-attrs/header-attrs.js"></script>
-    <link rel="stylesheet" href="theme.css" type="text/css" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <meta name="description" content="λέξις: a xaringan theme"/>
+    <meta name="generator" content="xaringan and remark.js"/>
+    <meta name="github-repo" content="jhelvy/lexis"/>
+    <meta name="twitter:title" content="λέξις: a xaringan theme"/>
+    <meta name="twitter:description" content="λέξις: a xaringan theme"/>
+    <meta name="twitter:url" content="https://mjfrigaard.github.io/csuc-data-journalism/"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:creator" content="@mjfrigaard"/>
+    <meta name="twitter:site" content="@mjfrigaard"/>
+    <meta property="og:title" content="λέξις: a xaringan theme"/>
+    <meta property="og:description" content="λέξις: a xaringan theme"/>
+    <meta property="og:url" content="https://mjfrigaard.github.io/csuc-data-journalism/"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Martin Frigaard"/>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/lexis.css" type="text/css" />
+    <link rel="stylesheet" href="css/lexis-fonts.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
-class: center, middle, inverse, title-slide
+
+
+
+
+
+
+layout: true
+
+&lt;!-- this adds the link footer to all slides, depends on footer-small class in css--&gt;
+
+&lt;div class="footer-small"&gt;&lt;span&gt;https://github.com/mjfrigaard/csuc-data-journalism&gt;&lt;/div&gt;
+
+---
+name: title-slide
+class: title-slide, center, middle, inverse
 
 # Introduction to Web Technologies
-## Journalism 303: stuff you’ll use from the web
-### Martin Frigaard
-### 2021-09-21
+#.fancy[stuff you'll use from the web]
+
+&lt;br&gt;
+
+.large[by Martin Frigaard]
+
+Written: September 21 2021
+
+Updated: November 24 2021
+
+.footer-large[.right[.fira[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
+]]]
 
 ---
 
+# .center[Outline]
 
+.leftcol[
 
+## What is data journalism? 
 
+### - *Definitions &amp; Examples*
 
-class: center, middle, inverse
+## Software 
 
-# Data Journalism Web Technologies
-
----
-class: left, top
-
-## Overview 
-
-.pull-left[
-
-### 1.) What is data journalism? 
-
-#### 1.1) Definitions 
-
-#### 1.2) Examples 
-
-### 2.) Code files for data journalism
-
-#### 2.1) R Code 
+### *Open source &amp; Proprietary*
 
 ]
 
-.pull-right[
+.rightcol[
 
-#### 2.2) HTML 
+## Code files 
 
-#### 2.3) CSS 
+### *R Code, HTML &amp; CSS*
 
-### 3) Data file formats
+## Data files
 
-#### 3.1) .CSV
-
-#### 3.2) .XML
-
-#### 3.3) .JSON
+### *.CSV, .XML &amp; .JSON*
 
 ]
 
 ---
-class: left, top
 
-## What is data journalism?
+## .center[What is data journalism?]
 
-### 1.1) [Wikipedia](https://en.wikipedia.org/wiki/Data_journalism): 
+#### [Wikipedia](https://en.wikipedia.org/wiki/Data_journalism): 
 
-&gt; "*a journalistic process based on analyzing and filtering large data sets for the purpose of creating or elevating a news story*"
 
-### 1.2) [fivethirtyeight](https://twitter.com/FiveThirtyEight): 
+```r
+&gt; 'a journalistic process based on analyzing and filtering large data sets for the purpose of creating or elevating a news story'
+```
 
-&gt; "*Data-driven news and analysis*"
+#### [fivethirtyeight](https://twitter.com/FiveThirtyEight): 
 
-### 1.3) [the upshot (NYT)](https://twitter.com/UpshotNYT): 
 
-&gt; "*Analytical journalism in words and graphics *" 
+```r
+&gt; 'Data-driven news and analysis'
+```
 
----
-class: left, top
+#### [the upshot (NYT)](https://twitter.com/UpshotNYT):
 
-## What is data journalism? (Example 1)
 
-&lt;br /&gt;
-
-### FiveThirtyEight's *[How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years](https://projects.fivethirtyeight.com/obama-polling-trends/)*
-
----
-class: left, top
-
-## What is data journalism? (Example 1)
-
-FiveThirtyEight's *[How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years](https://projects.fivethirtyeight.com/obama-polling-trends/)*
-
-&lt;img src="img/00-538-example-01.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+```r
+&gt; 'Analytical journalism in words and graphics'
+```
 
 ---
 class: left, top
 
-## What is data journalism? (Example 1)
+### Example 1: FiveThirtyEight's *["How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years"](https://projects.fivethirtyeight.com/obama-polling-trends/)*
 
-FiveThirtyEight's *[How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years](https://projects.fivethirtyeight.com/obama-polling-trends/)*
+.leftcol60[.border[
 
-&lt;img src="img/00-538-example-02.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/00-538-example-01.png"&gt;
 
----
-class: left, top
+]]
 
-## What is data journalism? (Example 2)
+--
 
-&lt;br /&gt;
+.rightcol40[
 
-### Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
+&lt;br&gt;
 
----
-class: left, top
+.red[Interactive graphs]
 
-## What is data journalism? (Example 2)
+&lt;br&gt;
 
-&gt; Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
+.red[Color highlights trend-lines]
 
-
-
-&lt;img src="img/00-wapo-covid-sparkline.png" width="65%" height="65%" style="display: block; margin: auto;" /&gt;
-
----
-class: left, top
-
-## What is data journalism? (Example 2)
-
-&gt; Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
-
-&lt;img src="img/00-wapo-covid.gif" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+]
 
 
 ---
 class: left, top
 
-## What is data journalism? (Example 3)
+### Example 1: FiveThirtyEight's *["How America’s Thinking Changed Under Obama: Public opinion on 32 big issues over the past eight years"](https://projects.fivethirtyeight.com/obama-polling-trends/)*
 
-&lt;br /&gt;
+.leftcol60[.border[
 
-### The Pudding's *[‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.](https://pudding.cool/2017/08/the-office/)*
+&lt;img src="img/00-538-example-02.png"&gt;
+
+]]
+
+--
+
+.rightcol40[
+
+&lt;br&gt;
+
+.red[Top plot shows changes over time]
+
+&lt;br&gt;
+
+.red[Selector on bottom allows user to change graph]
+
+]
+
 
 ---
 class: left, top
 
-## What is data journalism? (Example 3)
+### Example 2: Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
 
-&gt; The Pudding's *[‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.](https://pudding.cool/2017/08/the-office/)*
+.leftcol45[.border[
 
-&lt;img src="img/00-pudding-office-01.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img//00-wapo-covid-sparkline.png"&gt;
+
+]]
+
+--
+
+.rightcol55[
+
+.red[interactive graphs]
+
+.red[sparklines in text]
+
+]
 
 ---
 class: left, top
 
-## What is data journalism? (Example 3)
+### Example 2: Washington Post's *[Why outbreaks like coronavirus spread exponentially, and how to "flatten the curve"](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/)*
 
-&gt; The Pudding's *[‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.](https://pudding.cool/2017/08/the-office/)*
 
-&lt;img src="img/00-pudding-office-02.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.leftcol55[.border[
+
+&lt;img src="img/00-wapo-covid.gif"&gt;
+
+&lt;!--img/00-wapo-covid.png--&gt;
+
+]]
+
+--
+
+.rightcol45[
+
+&lt;br&gt;
+
+.red[Animated area chart]
+
+&lt;br&gt;
+
+.red[Scatter-plot changes color in relation to area chart]
+
+]
+
+---
+class: left, top
+
+### Example 3: The Pudding's [*‘The Office’ Dialogue in Five Charts: A breakdown of how every character contributed to the show.*](https://pudding.cool/2017/08/the-office/)
+
+.leftcol55[.border[
+
+&lt;!--00-pudding-office-01.png--&gt;
+
+&lt;img src="img/00-pudding-office-01.png"&gt;
+
+]]
+
+--
+
+.rightcol45[.border[
+
+&lt;img src="img/00-pudding-office-02.png"&gt;
+
+]]
 
 ---
 class: center, middle, inverse
@@ -171,181 +253,307 @@ class: center, middle, inverse
 ---
 class: left, top
 
-## `Code` file formats and extensions
+# `Code` file formats and extensions
 
-### We can determine the language of code by it's `file` extension 
+.leftcol45[
 
-### - `file.R` = R code file (or script)  
-### - `file.html` = HTML code file (or webpage)  
-### - `file.css` = CSS code file (or stylesheet)
+&lt;br&gt;
+
+### We can determine the language of code by it's .orange[file extension] 
+
+]
+
+--
+
+.rightcol55[
+
+&lt;br&gt;
+
+#### file.orange[.R] = R code file (or script)  
+#### file.orange[.html] = HTML code file (or webpage)  
+#### file.orange[.css] = CSS code file (or stylesheet)
+
+]
 
 ---
 class: left, top
 
-## `Code` file formats and extensions
+# `Code` file formats and extensions
+
+.leftcol45[
+
+#### Text editors (*like Notepad or TextEdit*) can be used to view code files
+
+]
+
+--
+
+.rightcol55[.border[
 
 
-### Text editors (like Notepad or TextEdit) can be used to view code files
+```r
+'Below is the plot.R code file in TextEdit'
+```
 
-### Below is the `plot.R` code file in TextEdit
+&lt;img src="img/00-textedit.png"&gt;
 
-&lt;br /&gt;
-&lt;br /&gt;
-
-&lt;img src="img/00-textedit.png" width="392" style="display: block; margin: auto;" /&gt;
+]]
 
 
 ---
 class: left, top
 
-# `R Code`
+# But why write code?
 
-##* Why do we need to write code?* 
+.leftcol55[
+#### R is a ***language***, which means it gives us the ability to express our ideas with precision
+
+#### R code is text, so we can use copy + paste and Google (especially for errors!)
+]
 
 --
 
-### 1) R is an actual ***language***, which means it gives us the ability to express our ideas with precision. 
+.rightcol45[
 
---
+&lt;br&gt;
 
-&lt;br /&gt;
 
-### 2) R code is text, so we can use copy + paste and Google
+```r
+library(ggplot2)
+mtcars %&gt;% ggplot(aes(mpg, disp)) %&gt;% 
+  geom_point() +  
+  geom_smooth()    
+```
+
+```
+  Error: `mapping` must be created by `aes()`
+  Did you use %&gt;% instead of +?
+```
+
+]
 
 ---
 class: left, top
 
-## `R Code`: grammar &amp; syntax
-
-&lt;br /&gt;
+# `R Code` - grammar &amp; syntax
 
 --
 
-### - A code's *syntax* defines the rules for it's grammar and punctuation 
+.leftcol[
 
-&lt;br /&gt;
+#### A code's *syntax* defines the rules for it's grammar and punctuation 
+
+&lt;br&gt;
+
+
+```r
+add_stuff &lt;- function(x, y) {
+    z &lt;- sum(x, y)
+    return(x)
+}
+```
+
+]
 
 --
 
-### - The characters and words have specific meanings (just like in English)
+.rightcol[
+
+#### The characters and words have specific meanings (just like in English)
+
+
+
+&lt;br&gt;
+
+
+```r
+add_stuff(2, 2)
+```
+
+```
+  [1] 2
+```
+
+]
 
 ---
 class: left, top
 
-## `R Code`: grammar &amp; syntax
+# `R Code` - grammar &amp; syntax
 
-&lt;br /&gt;
+.leftcol[
+
+### Characters and words have to be written in a particular order for R code work
+
+
+```r
+function(x, y) -&gt; add_stuff }
+    z &lt;- sum(x, y)
+    return(x)
+}
+```
+
+```
+  Error: &lt;text&gt;:1:16: unexpected '-&gt;'
+  1: function(x, y) -&gt;
+                     ^
+```
+
+]
 
 --
 
-### -  Characters and words have to be written in a particular order for R code work
+.rightcol[
 
---
+### In the R, there are two primary components to the grammar (or sytnax):
 
-&lt;br /&gt;
+&gt; *functions* and *objects*
 
-### -  In the R, there are two primary components to the grammar (or sytnax): *functions* and *objects*
+]
 
 ---
 class: left, top
 
-# `R Code`: R functions &amp; objects
+# `R Code` - R functions &amp; objects
 
---
+&lt;br&gt;
 
-.pull-left[
+.leftcol55[
+
+### `objects` are like *nouns*
 
 &lt;br /&gt;
 
 ### `functions` are like *verbs* 
 
-&lt;br /&gt;
-
-### `objects` are like *nouns*
-
 ]
 
 --
 
-.pull-right[
-
-&lt;br /&gt;
-
-### `verb(noun)` 
-
-*is like...* 
-
-&lt;br /&gt;
-
-### `function(object)`
-
-]
-
-
----
-class: left, top
-
-## `R Code`: A quick example  
-
-### Here is some example R code for building a graph:
-
-&lt;br /&gt;
-
-&lt;img src="img/00-r-code-example-01.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
-
-&lt;br /&gt; 
-
-&gt; The functions (`ggplot()`) *'do things'* to the objects (`diamonds`)
-
-
-
----
-class: left, top
-
-## `R Code`: A quick example  
-
-### Here is some example R code for building a graph:
-
-&lt;br /&gt;
-
-&lt;img src="img/00-r-code-example-02.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
-
-&lt;br /&gt; 
-
-&gt; *We're telling R we want to use the `diamonds` data, and we want the `carat` column on the `x` axis, and the `price` column on the `y`.* 
-
-
----
-class: left, top
-
-## `R Code`: A quick example  
-
-### Here is some example R code for building a graph:
-
-&lt;br /&gt;
-
-&lt;img src="img/00-r-code-example-03.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
-
-&lt;br /&gt; 
-
-&gt; *We want the graph to have 'points' (or dots), so we use the `geom_point()` function, and we want the points colored by the `cut` column.* 
-
-
----
-class: left, top
-
-## `R Code`: A quick example 
-
-.small[
+.rightcol45[
 
 
 ```r
-ggplot(data = diamonds, mapping = aes(x = carat, y = price)) + 
-  geom_point(aes(color = cut))
+verb(noun)
 ```
 
-&lt;img src="wk-01.0-intro-web-tech_files/figure-html/plot-1.png" width="55%" height="55%" style="display: block; margin: auto;" /&gt;
+&lt;br&gt;
 
+*is like...* 
+
+
+```r
+function(object)
+```
+
+]
+
+---
+class: left, top
+
+# `R Code` - A quick example  
+
+&lt;br&gt;
+
+.leftcol35[
+
+
+```r
+qplot(data = diamonds, 
+         x = carat, 
+         y = price, 
+     color = cut, 
+      geom = "point")
+```
+
+]
+
+.rightcol65[
+
+&lt;br&gt;
+
+&gt; The function (`qplot()`) *does things* to 
+&gt; the objects (the `carat` and `price` columns
+&gt; from the `diamonds` dataset)
+
+]
+
+---
+class: left, top
+
+# `R Code` - A quick example  
+
+&lt;br&gt;
+
+.leftcol35[
+
+
+```r
+qplot(data = diamonds, 
+         x = carat, 
+         y = price, 
+     color = cut, 
+      geom = "point")
+```
+
+]
+
+.rightcol65[
+
+&lt;br&gt;
+
+&gt; We're telling R we want to use the `diamonds` data, and we want the `carat` column on the `x` axis, and the `price` column on the `y` 
+
+]
+
+---
+class: left, top
+
+# `R Code` - A quick example 
+
+&lt;br&gt;
+
+.leftcol35[
+
+
+```r
+qplot(data = diamonds, 
+         x = carat, 
+         y = price, 
+     color = cut, 
+      geom = "point")
+```
+
+]
+
+.rightcol65[
+
+&lt;br&gt;
+
+&gt; We want the graph to have 'points' (or dots), so we use the `geom_point()` function, and we want the points colored by the `cut` column.
+
+]
+
+---
+class: left, top
+
+# `R Code` - A quick example 
+
+.panelset[
+.panel[.panel-name[R Code]
+
+
+```r
+qplot(data = diamonds, 
+         x = carat, y = price, color = cut, geom = "point")
+```
+]
+
+.panel[.panel-name[Plot]
+
+&lt;img src="figs/unnamed-chunk-12-1.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+]
 ]
 
 ---
@@ -358,60 +566,77 @@ class: center, middle, inverse
 ---
 class: left, top
 
-## `HTML`
+# `HTML`
 
-### HTML stands for 'HyperText Markup Language' and is a computer language used to create web pages
-
---
-
-### HTML code can be run by opening the file containing the code with any web browser (Chrome, Safari, Firefox, etc.)
+## HTML stands for 'HyperText Markup Language' and is a computer language used to create web pages
 
 --
 
-### HTML5 is the current standard 
+## HTML code can be run by opening the file containing the code with any web browser (Chrome, Safari, Firefox, etc.)
+
+--
+
+## HTML5 is the current standard 
+
+---
+class: left, top
+
+# `HTML`
+
+.leftcol45[.border[
+
+&lt;img src="img/00-538-html-ref-00.png"&gt;
+
+]
+]
+
+.rightcol55[
+
+#### Head over to the [fivethirtyeight landing page](https://fivethirtyeight.com/)
+
+#### Right click on the page and click 'view source'
+
+]
 
 ---
 class: left, top
 
 ## `HTML`
 
-### Head over to the [fivethirtyeight landing page](https://fivethirtyeight.com/)
+&gt; We're looking at the HTML code used to build the fivethirtyeight website (note the `&lt;!DOCTYPE html&gt;` at the top of the page)
 
-&lt;img src="img/00-538-html-ref-00.png" width="55%" height="55%" style="display: block; margin: auto;" /&gt;
+&lt;br&gt;
 
+.border[
 
----
-class: left, top
+&lt;img src="img/00-538-html-ref-01.png"&gt;
 
-## `HTML`
-
-### Right click on the page and click 'view source'
-
-&lt;img src="img/00-538-html-ref-01.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 class: left, top
 
-## `HTML`: structure
+# `HTML`: structure
 
 ### HTML consists of `elements` and `tags`
 
 --
 
-### Elements have a start tag, followed by the element content, followed by an end tag
+.border[
+
+&lt;img src="img/00-538-html-ref-02.png"&gt;
+
+]
 
 --
 
-```html
-&lt;element&gt;content&lt;/element&gt;
-```
+&gt;  Elements have a start tag, followed by the element content, followed by an end tag
 
-&lt;img src="img/00-538-html-ref-02.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: left, top
 
-## `HTML`: `elements` and `tags`
+## `HTML` - `elements` and `tags`
 
 #### Start tag: 
 
@@ -433,17 +658,9 @@ class: left, top
 ---
 class: left, top
 
-## `HTML`: attributes
+# `HTML` - attributes
 
-### Attributes appear in the start tag and are of the form `attribute="attribute value"`
-
-&lt;br /&gt;
-
---
-
-### The code below shows the start tag for an `img` element, with an attribute called `src` with a value `"image.png"`
-
-&lt;br /&gt;
+#### Attributes appear in the start tag and are of the form `attribute="attribute value"`
 
 --
 
@@ -451,12 +668,17 @@ class: left, top
 &lt;img src="image.png"&gt;
 ```
 
+--
+
+&gt; The code above shows the start tag for an `img` element, with an attribute called `src` with a value `"image.png"`
+
+
 ---
 class: left, top
 
-## `HTML`: tags to know 
+# `HTML` - tags to know 
 
-.small[
+.leftcol70[
 
 ```html
 &lt;!-- html comments (not read or displayed by browser) --&gt;
@@ -480,7 +702,16 @@ class: left, top
 
 ]
 
-*Most code is added in the `&lt;body&gt;` element*
+--
+
+.rightcol30[
+
+&gt; *Most of the code is in the* .red[`&lt;body&gt;`]
+
+]
+
+
+
 
 
 ---
@@ -494,8 +725,6 @@ class: center, middle, inverse
 class: left, top
 
 ## `CSS`
-
---
 
 &lt;br /&gt;
 
@@ -511,56 +740,45 @@ class: left, top
 ---
 class: left, top
 
-## `CSS`: structure
+# `CSS` - structure
 
-### `CSS` syntax
+.leftcol55[
 
-.pull-left[
-
-&lt;br /&gt;
-
-```css
-&lt;style&gt;
-    h1 {
-        color: blue;
-    }
-&lt;/style&gt;
-```
-
+1. `&lt;style&gt;` .green[start tag]   
+2. .yellow[a selector] (`h1`)     
+3. .yellow[an open bracket] (`{`)   
+4. .blue[property name] (`color`)    
+5. .blue[colon] (`:`)    
+6. .blue[property value] (`blue`)    
+7. .blue[semi-colon] (`;`)     
+8. .yellow[a closed bracket] (`}`)    
+9. `&lt;/style&gt;` .green[end tag]   
 
 ]
 
 --
 
-.pull-right[
+.rightcol45[
 
-+ `&lt;style&gt;` start tag
-  + a **selector** (`h1`) 
-    + an open bracket (`{`) 
-        + **property name** (`color`)
-        + colon (`:`)  
-        + **property value** (`blue`)  
-        + semi-colon (`;`) 
-    + a closed bracket (`}`)
-+ `&lt;/style&gt;` end tag
-
+```css
+    &lt;style&gt;
+        h1 {
+            color: blue;
+        }
+    &lt;/style&gt;
+```
 ]
 
 
 ---
 class: left, top
 
-## `CSS`: use 
+# `CSS` - use 
 
-### `CSS` is most useful when included in an external CSS file (i.e., `my_style_sheet.css`)
+&lt;br&gt;
 
-&lt;br /&gt;
+#### `CSS` is most useful when included in an external CSS file (i.e., `my_style_sheet.css`)
 
---
-
-### We can then reference the `my_style_sheet.css` style sheet using the `&lt;link&gt;` tag
-
-&lt;br /&gt;
 
 --
 
@@ -568,6 +786,10 @@ class: left, top
 &lt;link href="my_style_sheet.css" rel="stylesheet" 
       type="text/css"&gt;
 ```
+
+--
+
+&gt; We can then reference the `my_style_sheet.css` style sheet using the `&lt;link&gt;` tag
 
 
 ---
@@ -578,82 +800,109 @@ class: center, middle, inverse
 ---
 class: left, top
 
-## `Data` file types
+# `Data` file types
 
-### Data comes in a variety of formats, but this course will focus on 'plain text formats'
-
---
-
-### Text editors can read and write plain text files  
+#### Data comes in a variety of formats, but this course will focus on 'plain text formats'
 
 --
 
-### Plain text files are portable across different computer operating systems
+#### Text editors can read and write plain text files  
+
+--
+
+#### Plain text files are portable across different computer operating systems
 
 ---
 class: left, top
 
-## `CSV`: 'comma-separated values' files
+# `CSV` - 'comma-separated values' files
 
-### The first line is a "header" and contains column (or variable) names in each of the fields (using letters, digits, and underscores)
-
---
-
-### Each following line represents a new row (or observation)
+#### The first line is a "header" and contains column (or variable) names in each of the fields (using letters, digits, and underscores)
 
 --
 
-### Any field *may be* quoted, but fields with embedded commas or double-quote characters *must be* quoted
+#### Each following line represents a new row (or observation)
+
+--
+
+#### Any field *may be* quoted, but fields with embedded commas or double-quote characters *must be* quoted
 
 ---
 class: left, top
 
-## `CSV`: 'comma-separated values' files
+# `CSV` - 'comma-separated values' files
 
-### How .csv files look in text editors:
+.leftcol[
+
+#### How .csv files look in text editors:
 
 ```
-name, age, street, city, state, zip
-Sally, 24, 6 Taylor Ave., Commack, NY, 11725 
-Fred, 38, 450 Grant Ave., Fort Dodge, IA, 50501 
-Deb, 48, 661 Spring Drive, Phillipsburg, NJ, 08865
+name, city, state
+Sally, Commack, NY
+Fred, Fort Dodge, IA
+Deb, Phillipsburg, NJ
 ```
 
+]
+
 --
 
-### How .csv files look in a spreadsheet:
+.rightcol[
 
+#### How .csv files look in a spreadsheet:
 
-|name  | age|street           |city         |state |zip   |
-|:-----|---:|:----------------|:------------|:-----|:-----|
-|Sally |  24|6 Taylor Ave.    |Commack      |NY    |11725 |
-|Fred  |  38|450 Grant Ave.   |Fort Dodge   |IA    |50501 |
-|Deb   |  48|661 Spring Drive |Phillipsburg |NJ    |08865 |
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; name &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; city &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; state &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Sally &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Commack &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NY &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fred &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Fort Dodge &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; IA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Deb &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Phillipsburg &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NJ &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
+]
 
 ---
 class: left, top
 
-## `XML`: Extensible Markup Language
+# `XML` - Extensible Markup Language
 
-### `XML` consists of of XML elements with a start tag and an end tag (with plain text content or other XML elements in-between)
-
---
-
-### The start tag may include attributes of the form `attribute="value"` (case-sensitive)
+#### `XML` consists of of XML elements with a start tag and an end tag (with plain text content or other XML elements in-between)
 
 --
 
-### All attribute values must be enclosed within double-quotes
+#### The start tag may include attributes of the form `attribute="value"` (case-sensitive)
+
+--
+
+#### All attribute values must be enclosed within double-quotes
 
 ---
 class: left, top
 
-## `XML`: structure
+# `XML` - structure
 
-### Below is a small XML document
+#### Below is a small XML document
 
-.pull-left[
+.leftcol40[
 
 ```xml
 &lt;?xml version="2.0"?&gt;
@@ -665,71 +914,99 @@ class: left, top
 ```
 ]
 
-.pull-right[
-- **`root element`** = `&lt;heights&gt;`  
-- **`start tag`** = `&lt;filename&gt;`  
-- **`content`** = `heights.txt`  
-- **`end tag`** = `&lt;/filename&gt;`    
-- **`element name`** = `case`  
-- **`attribute name`** = `date`  
-- **`attribute value`** = `"24-JAN-2019"`   
-- **`attribute name`** = `height`   
-- **`attribute value`** = `"78.9"` 
+.rightcol60[
+- .blue[root element] = `&lt;heights&gt;`  
+- .blue[start tag] = `&lt;filename&gt;`  
+- content = `heights.txt`  
+- .blue[end tag] = `&lt;/filename&gt;`    
+- .blue[element name] = `case`  
+- .green[attribute name] = `date`  
+- .red[attribute value] = `"24-JAN-2019"`   
+- .green[attribute name] = `height`   
+- .red[attribute value] = `"78.9"` 
 ]
 
 --
 
-#### The root element is the `heights` element with `filename` and `case` elements nested within the `heights`
+&gt; *The root element is the `heights` element with `filename` and `case` elements nested within the `heights`*
 
 
 ---
 class: left, top
 
-## `JSON`: JavaScript Object Notation
+# `JSON` - JavaScript Object Notation
 
-### `JSON` is a lightweight data storage format similar in structure to `XML` but different syntax/format
+#### `JSON` is a lightweight data storage format similar in structure to `XML` but different syntax/format
 
 --
 
-### Common format for data from application programming interfaces (APls)
-
+#### Common format for data from application programming interfaces (APls)
 
 
 
 ---
 class: left, top
 
-## `JSON`: structure
+# `JSON` - structure
 
 ### Data are stored as:
 
-#### - Numbers (double)
-#### - Strings (double quoted)
-#### - Boolean ( true or false)
-#### - Array (ordered, comma separated enclosed in square brackets`[]`)
-#### - Object (unorderd, comma-separated collection of key:value pairs in curley brackets `{}`)
+.leftcol[
+
+#### - Numbers (double)  
+#### - Strings (double quoted)  
+#### - Boolean ( true or false)  
+
+]
+
+.rightcol[
+
+#### - Array (ordered, comma separated enclosed in square brackets`[]`)  
+#### - Object (unorderd, comma-separated collection of key:value pairs in curley brackets `{}`)  
+
+]
+
 
 ---
 class: left, top
 
-
-
-
-## `JSON`: structure
+# `JSON` - structure
 
 .pull-left[
 
-### Recall the .csv format:
+#### CSV vs. JSON formats
 
-&lt;img src="img/00-csv.png" width="150%" height="150%" style="display: block; margin: auto;" /&gt;
+```markdown
+name, city, state
+Sally, Commack, NY
+Fred, Fort Dodge, IA
+Deb, Phillipsburg, NJ
+```
 
 ]
 
 .pull-right[
 
-### Same data as JSON:
 
-&lt;img src="img/00-json.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+```
+  [
+    {
+      "name": "Sally",
+      "city": "Commack",
+      "state": "NY"
+    },
+    {
+      "name": "Fred",
+      "city": "Fort Dodge",
+      "state": "IA"
+    },
+    {
+      "name": "Deb",
+      "city": "Phillipsburg",
+      "state": "NJ"
+    }
+  ]
+```
 
 ]
 
@@ -739,13 +1016,13 @@ class: left, top, inverse
 
 # Recap
 
-### Data journalists use programming languages as a tool to process, store, and display data
+#### Data journalists use programming languages as a tool to process, store, and display data
 
-### Code is the preferred technology because it's a language and allows us to be precise and expressive
+#### Code is the preferred technology because it's a language and allows us to be precise and expressive
 
-### Plain text data file formats are simple, lowest-common-denominator storage formats
+#### Plain text data file formats are simple, lowest-common-denominator storage formats
 
-### Data in a plain text formats are usually arranged in rows, with several values on each row 
+#### Data in a plain text formats are usually arranged in rows, with several values on each row 
 
 
 
@@ -755,7 +1032,8 @@ class: left, top, inverse
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false
+"countIncrementalSlides": false,
+"ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
