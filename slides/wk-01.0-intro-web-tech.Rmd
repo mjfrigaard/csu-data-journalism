@@ -125,23 +125,30 @@ Updated: `r today`
 
 ## .center[What is data journalism?]
 
+.cols3[
+
 #### [Wikipedia](https://en.wikipedia.org/wiki/Data_journalism): 
 
-```{r, eval=FALSE}
-> 'a journalistic process based on analyzing and filtering large data sets for the purpose of creating or elevating a news story'
-```
+> a journalistic process based on analyzing and filtering large data sets for the purpose of creating or elevating a news story  
+
+]
 
 #### [fivethirtyeight](https://twitter.com/FiveThirtyEight): 
 
-```{r, eval=FALSE}
-> 'Data-driven news and analysis'
-```
+.cols3[
+
+> Data-driven news and analysis  
+
+]
 
 #### [the upshot (NYT)](https://twitter.com/UpshotNYT):
 
-```{r, eval=FALSE}
-> 'Analytical journalism in words and graphics'
-```
+.cols3[
+
+> Analytical journalism   
+> in words and graphics  
+
+]
 
 ---
 class: left, top
