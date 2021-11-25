@@ -372,9 +372,9 @@ class: left, top
 #### A code's *syntax* defines the rules for it's grammar and punctuation 
 
 ```{r print-add_stuff, eval=FALSE}
-add_stuff <- function(x, y) {
-    z <- sum(x, y)
-    return(x)
+add_stuff <- function(a, b) {
+    c <- sum(a, b)
+    return(c)
 }
 ```
 
@@ -419,7 +419,7 @@ add_stuff <- function(a, b) {
 }
 ```
 
-> `a` plus `b` equals `z`
+> `a` plus `b` equals `z`?
 
 ]
 
@@ -1051,5 +1051,5 @@ print_files <- tibble("pdfs" = pdf_slides,
   "htmls" = html_slides)
 
 
-pagedown::chrome_print(input = print_files$htmls[2], output = print_files$pdfs[2], timeout = 120)
+pagedown::chrome_print(input = print_files$htmls[1], output = print_files$pdfs[1], timeout = 120)
 ```

@@ -1,40 +1,146 @@
 ---
 title: "Data Visualization with ggplot2 (part 1)"
-subtitle: "Journalism 303: an introduction to the grammar of graphics"
-author: 
-  - "Martin Frigaard"
-date: '`r Sys.Date()`'
+subtitle: "An introduction to the grammar of graphics"
+author: "Martin Frigaard"
+institute: "California State University | Journalism & Public Relations: Data Journalism"
 output:
   xaringan::moon_reader:
+    css:
+      - default
+      - css/lexis.css
+      - css/lexis-fonts.css
     lib_dir: libs
-    css: ["theme.css"]
+    seal: false
     nature:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-
-always_allow_html: true
+      ratio: "16:9"
 ---
 
-```{r setup, include=FALSE}
-library(tidyverse)
-library(reprex)
-library(xaringan)
-library(pagedown)
-library(xaringanthemer)
-knitr::opts_chunk$set(warning = FALSE, 
-                      message = FALSE, 
-                      fig.align = "center", 
-                      dpi = 480, 
-                      tibble.max_extra_cols = 6, 
-                      tibble.width = 60,
-                      fig.width = 7,
-                      fig.height = 5,
-                      fig.path = "img/")
-options(max.print = 60)
+```{r meta, echo=FALSE}
+library(metathis)
+meta() %>%
+  meta_general(
+    description = "Data Visualization with ggplot2 (part 1)",
+    generator = "xaringan and remark.js"
+  ) %>%
+  meta_name("github-repo" = "mjfrigaard/csuc-data-journalism") %>%
+  meta_social(
+    title = "Data Visualization with ggplot2 (part 1)",
+    url = "https://mjfrigaard.github.io/csuc-data-journalism/",
+    og_type = "website",
+    og_author = "Martin Frigaard",
+    twitter_card_type = "summary",
+    twitter_creator = "@mjfrigaard"
+  )
 ```
 
-```{r ggplot2_masterpiece, out.height="90%", out.width="90%", echo = FALSE}
+```{r setup, include=FALSE}
+dateWritten <- format(as.Date("2021-09-21"), format = "%B %d %Y")
+today <- format(Sys.Date(), format = "%B %d %Y")
+copy_slide_images <- function(slide_img) {
+  # parent image folder
+  parent_img_folder <- "/Users/mjfrigaard/Dropbox/@projects/high-priority/@data-journalism/course-website/csuc-data-journalism/img/"
+  # slides image folder
+  slides_img_folder <- "/Users/mjfrigaard/Dropbox/@projects/high-priority/@data-journalism/course-website/csuc-data-journalism/slides/img/"
+  # slide_image_regex
+  slide_image_regex <- paste0("^", slide_img, "$")
+  # info
+  image_folder_info <- fs::dir_info(parent_img_folder)
+  # cols
+  image_folder_info <- dplyr::select(image_folder_info, img_path = path)
+  # file_name
+  image_folder_info <- dplyr::mutate(image_folder_info,
+    file_name = basename(img_path)
+  )
+  # cols
+  image_folder_info <- dplyr::select(
+    image_folder_info, img_path,
+    file_name
+  )
+
+  # slide_img_path
+  image_folder_info <- dplyr::mutate(image_folder_info,
+    slide_img_path = paste0(slides_img_folder, slide_img)
+  )
+
+  # image_info
+  image_info <- dplyr::filter(
+    image_folder_info,
+    stringr::str_detect(string = file_name, slide_image_regex)
+  )
+
+  image_paths <- dplyr::select(
+    image_info,
+    img_path, slide_img_path
+  )
+
+  from_image <- as.character(image_paths$img_path)
+
+  to_image <- as.character(image_paths$slide_img_path)
+
+  fs::file_copy(from_image, to_image, overwrite = TRUE)
+}
+library(knitr)
+library(tidyverse)
+library(fontawesome)
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = ''
+)
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = " ",
+    fig.retina = 3 # Better figure resolution
+)
+# Enables the ability to show all slides in a tile overview by pressing "o"
+xaringanExtra::use_tile_view()
+xaringanExtra::use_panelset()
+xaringanExtra::use_clipboard()
+xaringanExtra::use_share_again()
+xaringanExtra::style_share_again(share_buttons = "all")
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,
+  mute_unhighlighted_code = FALSE
+)
+```
+
+layout: true
+
+<!-- this adds the link footer to all slides, depends on footer-small class in css-->
+
+<div class="footer-small"><span>https://github.com/mjfrigaard/csuc-data-journalism</div>
+
+---
+name: title-slide
+class: title-slide, center, middle, inverse
+
+# `r rmarkdown::metadata$title`
+#.fancy[`r rmarkdown::metadata$subtitle`]
+
+<br>
+
+.large[by Martin Frigaard]
+
+Written: `r dateWritten`
+
+Updated: `r today`
+
+.footer-large[.right[.fira[
+<br><br><br><br><br>[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
+]]]
+
+
+---
+
+```{r ggplot2_masterpiece, out.height="70%", out.width="70%", echo = FALSE, fig.align='left'}
+# copy_slide_images("ggplot2_masterpiece.png")
 knitr::include_graphics("img/ggplot2_masterpiece.png")
 ```
 
@@ -52,7 +158,7 @@ background-size: 30%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 90% 7%
-background-size: 8%
+background-size: 6%
 
 # Objectives
 
@@ -68,7 +174,7 @@ background-size: 8%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 90% 7%
-background-size: 8%
+background-size: 6%
 
 # Resources 
 
@@ -85,7 +191,7 @@ https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 90% 7%
-background-size: 8%
+background-size: 6%
 
 # Why use `ggplot2` for data visualization?
 
@@ -107,7 +213,7 @@ background-size: 8%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 90% 7%
-background-size: 8%
+background-size: 6%
 
 # Why do we create data visualizations? 
 
@@ -128,7 +234,7 @@ background-size: 8%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 7%
-background-size: 8%
+background-size: 6%
 
 # How should we start creating data visualizations?
 
@@ -151,7 +257,7 @@ background-size: 8%
 ---
 background-image: url(img/ggplot2.png)
 background-position: 96% 8%
-background-size: 8%
+background-size: 6%
 
 ## Layered grammar of graphics
 
@@ -225,7 +331,7 @@ SmallNhanes)
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 20%
-background-size: 8%
+background-size: 6%
 
 ### Quick Tip: Factors
 
@@ -256,7 +362,7 @@ levels(SmallNhanes$health_gen)
 ---
 background-image: url(img/ggplot2.png)
 background-position: 96% 8%
-background-size: 8%
+background-size: 6%
 
 ## Layered grammar of graphics
 
@@ -278,7 +384,7 @@ background-size: 8%
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 93%
-background-size: 8%
+background-size: 6%
 
 # Our First Graph
 
@@ -291,7 +397,7 @@ background-size: 8%
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 93%
-background-size: 8%
+background-size: 6%
 
 ## 1. Use data with pipe to initialize graph
 
@@ -346,7 +452,7 @@ SmallNhanes %>%
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 7%
-background-size: 8%
+background-size: 6%
 
 # `ggplot2` template
 
@@ -405,6 +511,7 @@ background-size: 7%
 --
 
 ```{r graph-elements, echo=FALSE, out.width='100%', out.height='100%'}
+# copy_slide_images("graph-elements.png")
 knitr::include_graphics(path = "img/graph-elements.png")
 ```
 
@@ -428,6 +535,7 @@ background-size: 7%
 ### ***inside the `ggplot()` function*** = setting variables ***globally***
 
 ```{r ggplot2-template-01, echo=FALSE, out.width='100%', out.height='100%'}
+# copy_slide_images("ggplot2-template-01.png")
 knitr::include_graphics(path = "img/ggplot2-template-01.png")
 ```
 
@@ -441,13 +549,14 @@ background-size: 7%
 ### ***inside the `geom()` function*** = setting variables ***locally***
 
 ```{r ggplot2-template-02, echo=FALSE, out.width='100%', out.height='100%'}
+# copy_slide_images("ggplot2-template-02.png")
 knitr::include_graphics(path = "img/ggplot2-template-02.png")
 ```
 
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 7%
-background-size: 8%
+background-size: 6%
 
 # `ggplot2` tip
 
@@ -474,7 +583,7 @@ background-size: 8%
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 7%
-background-size: 8%
+background-size: 6%
 
 ## Your Turn
 
@@ -504,7 +613,7 @@ SmallNhanes %>%
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 7%
-background-size: 8%
+background-size: 6%
 
 ### Your Turn (solution 1)
 
@@ -518,7 +627,7 @@ SmallNhanes %>%
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 7%
-background-size: 8%
+background-size: 6%
 
 ### Your Turn (solution 2)
 
@@ -541,7 +650,7 @@ background-size: 30%
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 7%
-background-size: 8%
+background-size: 6%
 
 ### Variables, Aestheitcs, and Geoms (1)
 
@@ -571,7 +680,7 @@ These have the same aesthetics! What if we added a layer with a variable mapped 
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 7%
-background-size: 8%
+background-size: 6%
 
 ### Variables, Aestheitcs, and Geoms (2)
 
@@ -599,7 +708,7 @@ SmallNhanes %>%
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 7%
-background-size: 8%
+background-size: 6%
 
 ### Variables, Aestheitcs, and Geoms (3)
 
@@ -704,6 +813,7 @@ background-size: 4%
 .pull-right[
 
 ```{r aes-settings, echo=FALSE, out.width='100%', out.height='100%'}
+# copy_slide_images("aes-settings.png")
 knitr::include_graphics(path = "img/aes-settings.png")
 ```
 
@@ -787,7 +897,7 @@ background-size: 30%
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 93%
-background-size: 8%
+background-size: 6%
 
 ## Geoms 
 
@@ -813,7 +923,7 @@ https://bit.ly/ggplot2-cheat
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 7%
-background-size: 8%
+background-size: 6%
 
 ## Your Turn
 
@@ -859,7 +969,7 @@ SmallNhanes %>%
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 7%
-background-size: 8%
+background-size: 6%
 
 ## Your Turn
 
@@ -929,7 +1039,7 @@ SmallNhanes %>%
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 7%
-background-size: 8%
+background-size: 6%
 
 # Adding layers 
 
@@ -1140,7 +1250,7 @@ SmallNhanes %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 90% 7%
-background-size: 8%
+background-size: 6%
 
 # Recap
 

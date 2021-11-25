@@ -7,6 +7,7 @@
 # Version: NA
 #=====================================================================#
 
+# copy_slide_images("")
 
 # packages ----------------------------------------------------------------
 library(tidyverse)
@@ -27,7 +28,7 @@ library(ggdendro)
 
 source("../code/batch_rename_files.R")
 # fs::dir_ls("img")
-# batch_rename_files(path = "img", pattern = "00-", replace = "01-", 
+# batch_rename_files(path = "img", pattern = "00-", replace = "01-",
 #                    prefix = TRUE, extension = "png")
 
 
@@ -45,21 +46,21 @@ image_folder_info <- fs::dir_info(parent_img_folder)
 # cols
 image_folder_info <- dplyr::select(image_folder_info, img_path = path)
 # file_name
-image_folder_info <- dplyr::mutate(image_folder_info, 
+image_folder_info <- dplyr::mutate(image_folder_info,
                                 file_name = basename(img_path))
 # cols
-image_folder_info <- dplyr::select(image_folder_info, img_path, 
+image_folder_info <- dplyr::select(image_folder_info, img_path,
                                    file_name)
 
 # slide_img_path
-image_folder_info <- dplyr::mutate(image_folder_info, 
+image_folder_info <- dplyr::mutate(image_folder_info,
                         slide_img_path = paste0(slides_img_folder, slide_img))
 
 # image_info
-image_info <- dplyr::filter(image_folder_info, 
+image_info <- dplyr::filter(image_folder_info,
        stringr::str_detect(string = file_name, slide_image_regex))
 
-image_paths <- dplyr::select(image_info, 
+image_paths <- dplyr::select(image_info,
                                 img_path, slide_img_path)
 
 from_image <- as.character(image_paths$img_path)
@@ -67,7 +68,7 @@ from_image <- as.character(image_paths$img_path)
 to_image <- as.character(image_paths$slide_img_path)
 
 fs::file_copy(from_image, to_image, overwrite = TRUE)
-    
+
 }
 
 
