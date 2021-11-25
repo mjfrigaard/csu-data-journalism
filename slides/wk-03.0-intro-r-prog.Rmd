@@ -152,7 +152,7 @@ class: left, top
 
 https://rstudio.com/products/rstudio/download/
 
-```{r rstudio, eval=TRUE, echo=FALSE}
+```{r rstudio, out.height='70%', out.width='70%', eval=TRUE, echo=FALSE}
 # copy_slide_images(slide_img = "rstudio.png")
 knitr::include_graphics("img/rstudio.png")
 ```
@@ -167,7 +167,7 @@ class: left, top
 https://rstudio.cloud/
 
 
-```{r rstudio-cloud, eval=TRUE, echo=FALSE}
+```{r rstudio-cloud, out.height='70%', out.width='70%', eval=TRUE, echo=FALSE}
 # copy_slide_images(slide_img = "rstudio-cloud.png")
 knitr::include_graphics("img/rstudio-cloud.png")
 ```
@@ -178,14 +178,14 @@ background-image: url("img/r-console.png")
 background-size: contain
 class: center, bottom
 
-# The R Console
+# .red[The R Console]
 
 ---
 background-image: url("img/rstudio-launch.png")
 background-size: contain
 class: left, middle
 
-# The RStudio IDE
+# .red[The RStudio IDE]
 
 
 ---
@@ -208,7 +208,7 @@ print("Hello World")
 .rightcol[
 
 
-```{r commands-console, eval=TRUE, echo=FALSE, out.height="70%", out.width="70%", fig.align='center'}
+```{r commands-console, eval=TRUE, echo=FALSE, out.height="90%", out.width="90%", fig.align='center'}
 # copy_slide_images(slide_img = "commands-console.png")
 knitr::include_graphics("img/commands-console.png")
 ```
@@ -230,9 +230,7 @@ knitr::include_graphics("img/script-rstudio.png")
 ```
 
 ---
-background-image: url("https://www.r-project.org/logo/Rlogo.png")
-background-size: contain
-class: inverse, left, middle
+class: left, middle
 
 # R Syntax
 
@@ -262,9 +260,9 @@ class: inverse, left, middle
 ]
 
 ---
-class: center, middle
+class: inverse, center, middle
 
-# We use functions to perform operations on objects
+# We use .yellow[functions] to perform operations on .yellow[objects]
 
 ---
 class: left, top
@@ -317,20 +315,16 @@ class(`<-`)
 class(`c`)
 ```
 
---
-
-As we can see, these are **functions**.  
-
 ---
 class: left
 
 # Functions in R
 
-***
+> ***Functions*** perform operations (calculate, model, graph, etc.) on various ***objects*** that contain information (blood pressures, sales, political party affiliation, etc.)
 
 .leftcol[
 
-Objects are like nouns: they hold information
+Objects are similar to nouns: they hold information
 
 ```{r nouns-objects, eval=FALSE}
 object_1 <- "Sally"
@@ -340,11 +334,9 @@ object_3 <- "road"
 
 ]
 
---
-
 .rightcol[
 
-Functions are like verbs: they do things to nouns
+Functions are similar to verbs: they do things to nouns
 
 ```{r verbs-functions, eval=FALSE}
 work()
@@ -354,12 +346,6 @@ implement()
 
 ]
 
---
-
-***
-
-#### ***Functions*** perform operations (calculate, transform, model, graph) on various ***objects*** that contain information (blood pressure measurements, monthly sales, political party affiliation, etc.)
-
 ---
 class: left
 
@@ -367,40 +353,50 @@ class: left
 
 Functions perform operations on objects.
 
---
-
-*Sally works.*
+.cols3[
 
 ```{r verbs-01, eval=FALSE}
-object_1 <- "Sally"
-work(object_1) #<<
+sally_object <- "Sally"
+work(sally_object) #<<
 ```
 
---
+> *Sally works.*
 
-*The dog runs.*
+]
+
+.cols3[
 
 ```{r verbs-02, eval=FALSE}
-object_2 <- "dog"
-run(object_2) #<<
+dog_object <- "dog"
+run(dog_object) #<<
 ```
 
---
+> *The dog runs.*
 
-*Implement the idea.*
+]
+
+.cols3[
 
 ```{r verbs-03, eval=FALSE}
-object_3 <- "idea"
-implement(object_3) #<<
+idea_object <- "idea"
+implement(idea_object) #<<
 ```
+
+> *Implement the idea.*
+
+]
 
 
 ---
 class: left, top
 
-# Packages and functions in R 
+## Packages and functions in R 
 
-Functions are stored in R packages. Fortunately, R comes 'out-of-the-box' with a set of functions for basic data management and statistical calculations.
+.leftcol[
+
+Functions are stored in R packages.
+
+Fortunately, R comes 'out-of-the-box' with a set of functions for basic data management and statistical calculations.
 
 To access the functions in a package, use the following syntax:
 
@@ -408,7 +404,10 @@ To access the functions in a package, use the following syntax:
 package::function(object)
 ```
 
---
+]
+
+
+.rightcol[
 
 The `median()` function comes from the `stats` package.
 
@@ -416,13 +415,15 @@ The `median()` function comes from the `stats` package.
 stats::median(x)
 ```
 
---
-
 The `typeof()` function comes from the `base` package.
 
 ```{r example-max}
 base::typeof(x)
 ```
+
+]
+
+
 
 ---
 class: left
@@ -431,7 +432,7 @@ class: left
 
 Use tab-completion and the arrow keys in RStudio to explore a packages functions. 
 
-```{r tab-completion, echo=FALSE}
+```{r tab-completion, out.height='80%', out.width='80%', fig.align='center', echo=FALSE}
 # copy_slide_images(slide_img = "tab-completion.png")
 knitr::include_graphics("img/tab-completion.png")
 ```
@@ -469,9 +470,9 @@ class: left, top
 
 You can also use the **Packages** pane in RStudio
 
-```{r install-package, echo=FALSE, fig.align='center', out.height="50%", out.width="50%"}
-# copy_slide_images(slide_img = "tab-completion.png")
-knitr::include_graphics("img/tab-completion.png")
+```{r install-package, echo=FALSE, fig.align='center', out.height="40%", out.width="40%"}
+# copy_slide_images(slide_img = "install-package.png")
+knitr::include_graphics("img/install-package.png")
 ```
 
 
@@ -482,29 +483,42 @@ class: left
 
 The code for user-written packages are typically stored in code repository, like [Github.](https://github.com/) 
 
---
+.leftcol40[
 
-To access all of the great user-created packages for R that haven't been uploaded to CRAN, you'll need to install the `devtools` or `remotes` packages. 
+.small[
+
+To access user-written packages, you'll need to install the `devtools` or `remotes` packages.
+
+]
+ 
 
 ```{r devtools-remotes, eval=FALSE}
 install.packages("devtools")
 install.packages("remotes")
 ```
 
---
+]
 
-To install these packages, we can use `devtools::install_github()` or `remotes::install_github()`, and then the author's username and name of the package repository.
+
+
+.rightcol60[
+
+.small[
+
+Use `devtools::install_github()` or `remotes::install_github()` (with the author's username and package repository name)
+
+]
 
 ```{r install_github, eval=FALSE}
 devtools::install_github(<username>/<package>)
 remotes::install_github(<username>/<package>)
 ```
 
-NOTE: you will need an internet connection to load packages 
+]
+
+ 
 
 ---
-background-image: url("https://www.r-project.org/logo/Rlogo.png")
-background-size: contain
 class: inverse, left, middle
 
 # Objects
@@ -592,13 +606,16 @@ We then explore the contents of the new object with another function.
 
 --
 
-.rightcol[
+.rightcol[.border[
 
-```{r store-explore, echo=FALSE, out.height='70%', out.width='70%', fig.align='center'}
+<img src="img/store-explore.png"/>
+
+```{r store-explore, echo=FALSE, out.height='70%', out.width='70%', fig.align='center', eval=FALSE}
 # copy_slide_images(slide_img = "store-explore.png")
-knitr::include_graphics(path = "img/store-explore.png")
+# knitr::include_graphics(path = "img/store-explore.png")
 ```
 
+]
 ]
 
 --
@@ -762,13 +779,13 @@ Factors are integer vectors with two additional attributes: `class` is set to `f
 
 We can check this with `unique()` and `attributes()` functions. 
 
-```{r unique-vec_factor, highlight.output = 2}
+```{r unique-vec_factor}
 unique(vec_factor)
 ```
 
 --
 
-```{r attributes-vec_factor, highlight.output = 1}
+```{r attributes-vec_factor}
 attributes(vec_factor)
 ```
 
@@ -777,29 +794,33 @@ class: left, top
 
 # S3 vectors: factor attributes 
 
-Levels are assigned alphabetically, but we can manually assign the order of factor levels with the `levels` argument in `factor()`.
 
---
+
+.leftcol[
+
+.small[Levels are assigned alphabetically, but we can manually assign the order of factor levels with the `levels` argument in `factor()`.]
 
 ```{r levels}
-vec_factor <- factor(x = c("medium", "high", "low"), 
-                     levels = c("low", "medium", "high"))
+vec_factor <- factor(
+      x = c("medium", "high", "low"), 
+      levels = c("low", "medium", "high"))
 ```
 
---
+]
 
-We can check the levels with `levels()` or `unclass()`
+.rightcol[
+
+.small[We can check the levels with `levels()` or `unclass()`]
 
 ```{r levels-vec_factor}
 levels(vec_factor)
 ```
 
---
-
-```{r unclass-vec_factor, highlight.output = c(1, 3)}
+```{r unclass-vec_factor}
 unclass(vec_factor)
 ```
 
+]
 
 ---
 class: left, top
@@ -808,26 +829,32 @@ class: left, top
 
 Dates are stored as `double` vectors with a `class` attribute set to `Date`.  
 
---
+.leftcol60[
 
-R has a function for getting today's date, `Sys.Date()`. We'll create a `vec_date` using `Sys.Date()` and adding `1` and `2` to this value. 
+.small[
+R has a function for getting today's date, `Sys.Date()`. We'll create a `vec_date` using `Sys.Date()` and adding `1` and `2` to this value.
+]
 
 ```{r vec_date}
-vec_date <- c(Sys.Date(), Sys.Date() + 1, Sys.Date() + 2)
+vec_date <- c(Sys.Date(), 
+              Sys.Date() + 1, 
+              Sys.Date() + 2)
 vec_date
 ```
 
---
+]
 
-We can see adding units to the `Sys.Date()` added days to today's date. 
 
---
-
-The `attributes()` function tells us this vector has it's own class. 
+.rightcol40[
+.small[
+We can see adding units to the `Sys.Date()` added days to today's date. The `attributes()` function tells us this vector has it's own class.
+]
 
 ```{r attributes-vec_date}
 attributes(vec_date)
 ```
+
+]
 
 ---
 class: left, top
@@ -942,7 +969,7 @@ class: left, top
 Difftimes are their own `class` and have a `units` attribute set to whatever we've specified in the `units` argument.
 
 
-```{r attributes-vec_difftime, highlight.output=4}
+```{r attributes-vec_difftime}
 attributes(vec_difftime)
 ```
 
@@ -950,7 +977,7 @@ attributes(vec_difftime)
 
 We can see the actual number stored in the vector with `unclass()`
 
-```{r unclass-vec_difftime, highlight.output=2}
+```{r unclass-vec_difftime}
 unclass(vec_difftime)
 ```
 

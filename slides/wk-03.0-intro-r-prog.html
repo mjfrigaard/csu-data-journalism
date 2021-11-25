@@ -126,7 +126,7 @@ class: left, top
 
 https://rstudio.com/products/rstudio/download/
 
-&lt;img src="img/rstudio.png" width="998" /&gt;
+&lt;img src="img/rstudio.png" width="70%" height="70%" /&gt;
 
 
 
@@ -138,7 +138,7 @@ class: left, top
 https://rstudio.cloud/
 
 
-&lt;img src="img/rstudio-cloud.png" width="1200" /&gt;
+&lt;img src="img/rstudio-cloud.png" width="70%" height="70%" /&gt;
 
 
 ---
@@ -146,14 +146,14 @@ background-image: url("img/r-console.png")
 background-size: contain
 class: center, bottom
 
-# The R Console
+# .red[The R Console]
 
 ---
 background-image: url("img/rstudio-launch.png")
 background-size: contain
 class: left, middle
 
-# The RStudio IDE
+# .red[The RStudio IDE]
 
 
 ---
@@ -181,7 +181,7 @@ print("Hello World")
 .rightcol[
 
 
-&lt;img src="img/commands-console.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/commands-console.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -197,9 +197,7 @@ You can also run them in R scripts (see example in RStudio below)
 &lt;img src="img/script-rstudio.png" width="110%" height="110%" style="display: block; margin: auto;" /&gt;
 
 ---
-background-image: url("https://www.r-project.org/logo/Rlogo.png")
-background-size: contain
-class: inverse, left, middle
+class: left, middle
 
 # R Syntax
 
@@ -229,9 +227,9 @@ class: inverse, left, middle
 ]
 
 ---
-class: center, middle
+class: inverse, center, middle
 
-# We use functions to perform operations on objects
+# We use .yellow[functions] to perform operations on .yellow[objects]
 
 ---
 class: left, top
@@ -301,20 +299,16 @@ class(`c`)
   [1] "function"
 ```
 
---
-
-As we can see, these are **functions**.  
-
 ---
 class: left
 
 # Functions in R
 
-***
+&gt; ***Functions*** perform operations (calculate, model, graph, etc.) on various ***objects*** that contain information (blood pressures, sales, political party affiliation, etc.)
 
 .leftcol[
 
-Objects are like nouns: they hold information
+Objects are similar to nouns: they hold information
 
 
 ```r
@@ -325,11 +319,9 @@ object_3 &lt;- "road"
 
 ]
 
---
-
 .rightcol[
 
-Functions are like verbs: they do things to nouns
+Functions are similar to verbs: they do things to nouns
 
 
 ```r
@@ -340,12 +332,6 @@ implement()
 
 ]
 
---
-
-***
-
-#### ***Functions*** perform operations (calculate, transform, model, graph) on various ***objects*** that contain information (blood pressure measurements, monthly sales, political party affiliation, etc.)
-
 ---
 class: left
 
@@ -353,43 +339,53 @@ class: left
 
 Functions perform operations on objects.
 
---
-
-*Sally works.*
+.cols3[
 
 
 ```r
-object_1 &lt;- "Sally"
-*work(object_1)
+sally_object &lt;- "Sally"
+*work(sally_object)
 ```
 
---
+&gt; *Sally works.*
 
-*The dog runs.*
+]
+
+.cols3[
 
 
 ```r
-object_2 &lt;- "dog"
-*run(object_2)
+dog_object &lt;- "dog"
+*run(dog_object)
 ```
 
---
+&gt; *The dog runs.*
 
-*Implement the idea.*
+]
+
+.cols3[
 
 
 ```r
-object_3 &lt;- "idea"
-*implement(object_3)
+idea_object &lt;- "idea"
+*implement(idea_object)
 ```
+
+&gt; *Implement the idea.*
+
+]
 
 
 ---
 class: left, top
 
-# Packages and functions in R 
+## Packages and functions in R 
 
-Functions are stored in R packages. Fortunately, R comes 'out-of-the-box' with a set of functions for basic data management and statistical calculations.
+.leftcol[
+
+Functions are stored in R packages.
+
+Fortunately, R comes 'out-of-the-box' with a set of functions for basic data management and statistical calculations.
 
 To access the functions in a package, use the following syntax:
 
@@ -398,7 +394,10 @@ To access the functions in a package, use the following syntax:
 package::function(object)
 ```
 
---
+]
+
+
+.rightcol[
 
 The `median()` function comes from the `stats` package.
 
@@ -411,8 +410,6 @@ stats::median(x)
   [1] 5
 ```
 
---
-
 The `typeof()` function comes from the `base` package.
 
 
@@ -424,6 +421,10 @@ base::typeof(x)
   [1] "double"
 ```
 
+]
+
+
+
 ---
 class: left
 
@@ -431,7 +432,7 @@ class: left
 
 Use tab-completion and the arrow keys in RStudio to explore a packages functions. 
 
-&lt;img src="img/tab-completion.png" width="708" /&gt;
+&lt;img src="img/tab-completion.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
 
 --
 
@@ -468,7 +469,7 @@ class: left, top
 
 You can also use the **Packages** pane in RStudio
 
-&lt;img src="img/tab-completion.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/install-package.png" width="40%" height="40%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -478,9 +479,14 @@ class: left
 
 The code for user-written packages are typically stored in code repository, like [Github.](https://github.com/) 
 
---
+.leftcol40[
 
-To access all of the great user-created packages for R that haven't been uploaded to CRAN, you'll need to install the `devtools` or `remotes` packages. 
+.small[
+
+To access user-written packages, you'll need to install the `devtools` or `remotes` packages.
+
+]
+ 
 
 
 ```r
@@ -488,9 +494,17 @@ install.packages("devtools")
 install.packages("remotes")
 ```
 
---
+]
 
-To install these packages, we can use `devtools::install_github()` or `remotes::install_github()`, and then the author's username and name of the package repository.
+
+
+.rightcol60[
+
+.small[
+
+Use `devtools::install_github()` or `remotes::install_github()` (with the author's username and package repository name)
+
+]
 
 
 ```r
@@ -498,11 +512,11 @@ devtools::install_github(&lt;username&gt;/&lt;package&gt;)
 remotes::install_github(&lt;username&gt;/&lt;package&gt;)
 ```
 
-NOTE: you will need an internet connection to load packages 
+]
+
+ 
 
 ---
-background-image: url("https://www.r-project.org/logo/Rlogo.png")
-background-size: contain
 class: inverse, left, middle
 
 # Objects
@@ -590,10 +604,13 @@ We then explore the contents of the new object with another function.
 
 --
 
-.rightcol[
+.rightcol[.border[
 
-&lt;img src="img/store-explore.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/store-explore.png"/&gt;
 
+
+
+]
 ]
 
 --
@@ -816,7 +833,7 @@ unique(vec_factor)
 
 ```
   [1] low    medium high  
-*  Levels: high low medium
+  Levels: high low medium
 ```
 
 --
@@ -827,7 +844,7 @@ attributes(vec_factor)
 ```
 
 ```
-*  $levels
+  $levels
   [1] "high"   "low"    "medium"
   
   $class
@@ -839,19 +856,24 @@ class: left, top
 
 # S3 vectors: factor attributes 
 
-Levels are assigned alphabetically, but we can manually assign the order of factor levels with the `levels` argument in `factor()`.
 
---
+
+.leftcol[
+
+.small[Levels are assigned alphabetically, but we can manually assign the order of factor levels with the `levels` argument in `factor()`.]
 
 
 ```r
-vec_factor &lt;- factor(x = c("medium", "high", "low"), 
-                     levels = c("low", "medium", "high"))
+vec_factor &lt;- factor(
+      x = c("medium", "high", "low"), 
+      levels = c("low", "medium", "high"))
 ```
 
---
+]
 
-We can check the levels with `levels()` or `unclass()`
+.rightcol[
+
+.small[We can check the levels with `levels()` or `unclass()`]
 
 
 ```r
@@ -862,19 +884,18 @@ levels(vec_factor)
   [1] "low"    "medium" "high"
 ```
 
---
-
 
 ```r
 unclass(vec_factor)
 ```
 
 ```
-*  [1] 2 3 1
+  [1] 2 3 1
   attr(,"levels")
-*  [1] "low"    "medium" "high"
+  [1] "low"    "medium" "high"
 ```
 
+]
 
 ---
 class: left, top
@@ -883,13 +904,17 @@ class: left, top
 
 Dates are stored as `double` vectors with a `class` attribute set to `Date`.  
 
---
+.leftcol60[
 
-R has a function for getting today's date, `Sys.Date()`. We'll create a `vec_date` using `Sys.Date()` and adding `1` and `2` to this value. 
+.small[
+R has a function for getting today's date, `Sys.Date()`. We'll create a `vec_date` using `Sys.Date()` and adding `1` and `2` to this value.
+]
 
 
 ```r
-vec_date &lt;- c(Sys.Date(), Sys.Date() + 1, Sys.Date() + 2)
+vec_date &lt;- c(Sys.Date(), 
+              Sys.Date() + 1, 
+              Sys.Date() + 2)
 vec_date
 ```
 
@@ -897,13 +922,13 @@ vec_date
   [1] "2021-11-24" "2021-11-25" "2021-11-26"
 ```
 
---
+]
 
-We can see adding units to the `Sys.Date()` added days to today's date. 
 
---
-
-The `attributes()` function tells us this vector has it's own class. 
+.rightcol40[
+.small[
+We can see adding units to the `Sys.Date()` added days to today's date. The `attributes()` function tells us this vector has it's own class.
+]
 
 
 ```r
@@ -914,6 +939,8 @@ attributes(vec_date)
   $class
   [1] "Date"
 ```
+
+]
 
 ---
 class: left, top
@@ -1071,7 +1098,7 @@ attributes(vec_difftime)
   $class
   [1] "difftime"
   
-*  $units
+  $units
   [1] "days"
 ```
 
@@ -1086,7 +1113,7 @@ unclass(vec_difftime)
 
 ```
   [1] -10
-*  attr(,"units")
+  attr(,"units")
   [1] "days"
 ```
 
