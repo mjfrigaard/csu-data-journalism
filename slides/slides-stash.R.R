@@ -72,13 +72,3 @@ fs::file_copy(from_image, to_image, overwrite = TRUE)
 
 
 copy_slide_images(slide_img = "settings.png")
-# setting-options.png
-copy_slide_images(slide_img = "setting-options.png")
-
-copy_slide_images(slide_img = "code-settings.png")
-
-copy_slide_images("code-display.png")
-
-copy_slide_images("code-savings.png")
-
-copy_slide_images("code-completion.png")

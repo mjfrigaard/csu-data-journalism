@@ -992,7 +992,8 @@ vec_datetime_ct
 ```
 
 ```
-  [1] "2021-11-23 17:00:00 MST" "2021-11-24 17:00:00 MST" "2021-11-25 17:00:00 MST"
+  [1] "2021-11-23 17:00:00 MST" "2021-11-24 17:00:00 MST"
+  [3] "2021-11-25 17:00:00 MST"
 ```
 
 We can see `vec_datetime_ct` stores some additional information. 
@@ -1054,13 +1055,42 @@ class: left, top
 
 # S3 vectors: difftime
 
-Difftimes are durations, so we need to supply two dates, which we will create with `time_01` and `time_02`.
+
+.leftcol[
+
+Difftimes are durations, so we to create them with `time_01` and `time_02`:
 
 
 ```r
 time_01 &lt;- Sys.Date()
 time_02 &lt;- Sys.Date() + 10
-vec_difftime &lt;- difftime(time_01, time_02, units = "days")
+time_01
+```
+
+```
+  [1] "2021-11-24"
+```
+
+```r
+time_02
+```
+
+```
+  [1] "2021-12-04"
+```
+
+]
+
+
+.rightcol[
+
+Difftimes are stored as a `double` vector. 
+
+
+```r
+vec_difftime &lt;- difftime(time_01, 
+                         time_02, 
+                         units = "days")
 vec_difftime
 ```
 
@@ -1068,9 +1098,6 @@ vec_difftime
   Time difference of -10 days
 ```
 
---
-
-Difftimes are stored as a `double` vector. 
 
 
 ```r
@@ -1081,10 +1108,16 @@ typeof(vec_difftime)
   [1] "double"
 ```
 
+]
+
+
+
 ---
 class: left, top
 
 # S3 vectors: difftime attributes
+
+.leftcol[
 
 Difftimes are their own `class` and have a `units` attribute set to whatever we've specified in the `units` argument.
 
@@ -1102,7 +1135,9 @@ attributes(vec_difftime)
   [1] "days"
 ```
 
---
+]
+
+.rightcol[
 
 We can see the actual number stored in the vector with `unclass()`
 
@@ -1117,18 +1152,26 @@ unclass(vec_difftime)
   [1] "days"
 ```
 
+]
+
+
+
 
 ---
 class: left, top
 
 # Matrices 
 
+.leftcol[
+
 A matrix is several vectors stored together into two a two-dimensional object. 
 
 
 ```r
-mat_data &lt;- matrix(data = c(vec_double, vec_integer), 
-                   nrow = 3, ncol = 2, byrow = FALSE)
+mat_data &lt;- matrix(
+              data = c(vec_double, vec_integer), 
+                     nrow = 3, ncol = 2, 
+                     byrow = FALSE)
 mat_data
 ```
 
@@ -1139,7 +1182,9 @@ mat_data
   [3,] 10.01  100
 ```
 
-This is a three-column, two-row matrix. 
+]
+
+.rightcol[
 
 We can check the dimensions of `mat_data` with `dim()`.
 
@@ -1152,6 +1197,12 @@ dim(mat_data)
   [1] 3 2
 ```
 
+This is a three-column, two-row matrix. 
+
+]
+
+
+
 
 ---
 class: left, top
@@ -1160,11 +1211,10 @@ class: left, top
 
 The output in the console tells us where each element is located in `mat_data`. 
 
-For example, if I want to get the `10` that's stored in `vec_integer`, I can use look at the output and use the indexes. 
-
---
 
 .leftcol[
+
+For example, if I want to get the `10` that's stored in `vec_integer`, I can use look at the output and use the indexes. 
 
 
 ```r
@@ -1172,18 +1222,17 @@ mat_data
 ```
 
 ```
-*        [,1] [,2]
+        [,1] [,2]
   [1,]  0.10    1
-*  [2,]  1.00   10
+  [2,]  1.00   10
   [3,] 10.01  100
 ```
 
 ]
 
---
-
 .rightcol[
 
+By placing the index (`[2, 2]`) next to the object, I am telling R, "*only return the value in this position*".
 
 
 ```r
@@ -1193,11 +1242,11 @@ mat_data[2, 2]
 ```
   [1] 10
 ```
+
 ]
 
---
 
-By placing the index (`[2, 2]`) next to the object, I am telling R, "*only return the value in this position*".
+
 
 
 ---
@@ -1205,16 +1254,24 @@ class: left, top
 
 # Arrays
 
+
+.leftcol[
+
 Arrays are like matrices, but they can have more dimensions. 
 
 
 ```r
-dat_array &lt;- array(data = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-                            14, 15, 16, 17, 18), dim = c(3, 3, 2))
+dat_array &lt;- array(
+                data = c(1, 2, 3, 4, 5,
+                        6, 7, 8, 9, 10,
+                        11, 12, 13, 14, 
+                        15, 16, 17, 18), 
+                   dim = c(3, 3, 2))
 ```
 
---
+]
 
+.rightcol[
 
 
 ```r
@@ -1237,25 +1294,26 @@ dat_array
   [3,]   12   15   18
 ```
 
+]
+
+
+
 
 ---
 class: left, top
 
 # Array layers
 
+.leftcol[.border[
+
 `dat_array` contains numbers 1 through 18 in three columns and three rows, stacked in two *layers*. 
 
-Matrices are arrays, but arrays are not matrices. 
+&lt;!-- &lt;img src="img/array.png"/&gt; --&gt;
 
---
+&lt;img src="img/array.png" width="55%" height="55%" style="display: block; margin: auto;" /&gt;
 
-.leftcol[ 
+]]
 
-&lt;img src="img/array.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
-
-]
-
---
 
 .rightcol[ 
 
@@ -1276,6 +1334,9 @@ class(mat_data)
   [1] "matrix" "array"
 ```
 
+&gt; Matrices are arrays, but arrays 
+&gt; are not matrices
+
 ]
 
 ---
@@ -1283,30 +1344,54 @@ class: left, top
 
 # Data Frames
 
+.leftcol[
+
 Data frames are rectangular data with rows and columns (or observations and variables).
 
 
+
 ```r
-DataFrame &lt;- data.frame(character = c("A", "B", "C"), 
-                       integer = c(0.1, 1.0, 10.01), 
-                       logical = c(TRUE, FALSE, TRUE), 
-                        stringsAsFactors = FALSE)
+DataFrame &lt;- data.frame(
+               character = c("A", "B", "C"), 
+               integer = c(0.1, 1.0, 10.01), 
+               logical = c(TRUE, FALSE, TRUE))
+```
+
+
+]
+
+.rightcol[
+
+
+```r
 DataFrame
 ```
 
 ```
-*    character integer logical
+    character integer logical
   1         A    0.10    TRUE
   2         B    1.00   FALSE
   3         C   10.01    TRUE
 ```
 
-NOTE: `stringsAsFactors = FALSE` is not required as of R version 4.0.0.
+.small[
+
+&gt; NOTE: `stringsAsFactors = FALSE` is not 
+&gt; required as of R version 4.0.0.
+
+]
+
+
+]
+
+
 
 ---
 class: left
 
 # Data Frames
+
+.leftcol[
 
 Check the structure of the `data.frame` with `str()`
 
@@ -1316,22 +1401,31 @@ str(DataFrame)
 ```
 
 ```
-*  'data.frame':	3 obs. of  3 variables:
+  'data.frame':	3 obs. of  3 variables:
    $ character: chr  "A" "B" "C"
    $ integer  : num  0.1 1 10
    $ logical  : logi  TRUE FALSE TRUE
 ```
 
+]
+
+.rightcol[
+
 `str()` gives us a transposed view of the `DataFrame` object, and tells us the dimensions of the object.
+
+
+]
+
+
 
 ---
 class: left
 
 # Tibbles 
 
-Tibbles are a special kind of `data.frame` (they print better to the console and character vectors are never coerced into factors). 
+.leftcol[
 
-The syntax to build them is slightly different, too.
+Tibbles are a special kind of `data.frame` (*they print better to the console and character vectors are never coerced into factors*). 
 
 
 ```r
@@ -1340,6 +1434,16 @@ Tibble &lt;- tibble::tribble(
               "A",      0.1,      TRUE,
               "B",        1,     FALSE,
               "C",    10.01,      TRUE)
+```
+
+]
+
+.rightcol[
+
+The syntax to build them is slightly different, too.
+
+
+```r
 Tibble
 ```
 
@@ -1352,11 +1456,15 @@ Tibble
   3 C            10.0 TRUE
 ```
 
+]
+
 
 ---
 class: left
 
 # Tibbles 
+
+.leftcol[
 
 Check the structure of `Tibble`.
 
@@ -1366,34 +1474,46 @@ str(Tibble)
 ```
 
 ```
-*  tibble [3 × 3] (S3: tbl_df/tbl/data.frame)
+  tibble [3 × 3] (S3: tbl_df/tbl/data.frame)
    $ character: chr [1:3] "A" "B" "C"
    $ integer  : num [1:3] 0.1 1 10
    $ logical  : logi [1:3] TRUE FALSE TRUE
 ```
 
---
+]
+
+.rightcol[
+
+&lt;br&gt;&lt;br&gt;
 
 `str()` tells us `tibbles` are `S3` objects, with types  `tbl_df`, `tbl`, and `data.frame`.
+
+
+]
+
+
 
 ---
 class: left, top
 
 # Data frames and tibbles 
 
+
 If you're importing spreadsheets, most of the work you'll do in R will be with rectangular data objects (i.e. `data.frame`s and `tibble`s).
 
 --
 
-.leftcol[
+.leftcol[.border[
 
-&lt;img src="img/data-frame-tibble.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/data-frame-tibble.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 ]
+]
 
---
 
 .rightcol[
+
+&lt;br&gt;&lt;br&gt;
 
 *These are the common rectangular data storage object for tabular data in R*
 
@@ -1404,7 +1524,7 @@ class: left
 
 # Data frames &amp; tibbles 
 
-.leftcol[
+.leftcol[.small[
 
 
 ```r
@@ -1418,9 +1538,11 @@ DataFrame
   3         C   10.01    TRUE
 ```
 
-]
+&gt; the `data.frame` prints the column names and contents
 
-.rightcol[
+]]
+
+.rightcol[.small[
 
 
 ```r
@@ -1436,13 +1558,19 @@ Tibble
   3 C            10.0 TRUE
 ```
 
-]
+&gt; the `tibble` prints the column names, dimensions, formats, and contents
 
---
+]]
+
+---
+class: left
+
+# Data frames &amp; tibbles 
+
 
 If we check the `type` of the `DataFrame` and `Tibble`...
 
---
+.leftcol[
 
 
 ```r
@@ -1453,6 +1581,11 @@ typeof(DataFrame)
   [1] "list"
 ```
 
+]
+
+.rightcol[
+
+
 ```r
 typeof(Tibble)
 ```
@@ -1461,7 +1594,13 @@ typeof(Tibble)
   [1] "list"
 ```
 
-...we see they are `lists`
+]
+
+--
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&gt; ...we see they are `lists`
 
 
 
@@ -1472,6 +1611,8 @@ class: left
 
 Both `data.frame`s and `tibble`s are their own class, 
 
+.leftcol40[
+
 
 ```r
 class(DataFrame)
@@ -1481,6 +1622,11 @@ class(DataFrame)
   [1] "data.frame"
 ```
 
+]
+
+.rightcol60[
+
+
 ```r
 class(Tibble)
 ```
@@ -1489,25 +1635,40 @@ class(Tibble)
   [1] "tbl_df"     "tbl"        "data.frame"
 ```
 
-So we can think of `data.frame`s and `tibble`s as special kinds of *rectangular* lists, made with different types of vectors, with each vector being of equal length.
+]
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&gt; So we can think of `data.frame`s and `tibble`s as special kinds of *rectangular* lists, made with different types of vectors, with each vector being of equal length.
 
 ---
 class: left
 
 # Lists 
 
+.leftcol55[
+
 Lists are special objects because they can contain all other objects (including other lists).
+
+.small[
 
 
 ```r
-dat_list &lt;- list("integer" = vec_integer, 
-                 "array" = dat_array,
-                 "matrix data" = mat_data,
-                 "data frame" = DataFrame, 
-                 "tibble" = Tibble)
+dat_list &lt;- list(
+             "integer" = vec_integer, 
+             "array" = dat_array,
+             "matrix data" = mat_data, 
+             "data frame" = DataFrame, 
+             "tibble" = Tibble)
 ```
 
+]]
+
+.rightcol45[
+
 Lists have a `names` attribute, which we've defined above in double quotes.
+
+.small[
 
 
 ```r
@@ -1515,9 +1676,12 @@ attributes(dat_list)
 ```
 
 ```
-*  $names
+  $names
   [1] "integer"     "array"       "matrix data" "data frame"  "tibble"
 ```
+
+]]
+
 
 ---
 class: left
@@ -1533,14 +1697,14 @@ str(dat_list)
 
 ```
   List of 5
-*   $ integer    : int [1:3] 1 10 100
-*   $ array      : num [1:3, 1:3, 1:2] 1 2 3 4 5 6 7 8 9 10 ...
-*   $ matrix data: num [1:3, 1:2] 0.1 1 10 1 10 ...
-*   $ data frame :'data.frame':	3 obs. of  3 variables:
+   $ integer    : int [1:3] 1 10 100
+   $ array      : num [1:3, 1:3, 1:2] 1 2 3 4 5 6 7 8 9 10 ...
+   $ matrix data: num [1:3, 1:2] 0.1 1 10 1 10 ...
+   $ data frame :'data.frame':	3 obs. of  3 variables:
     ..$ character: chr [1:3] "A" "B" "C"
     ..$ integer  : num [1:3] 0.1 1 10
     ..$ logical  : logi [1:3] TRUE FALSE TRUE
-*   $ tibble     : tibble [3 × 3] (S3: tbl_df/tbl/data.frame)
+   $ tibble     : tibble [3 × 3] (S3: tbl_df/tbl/data.frame)
     ..$ character: chr [1:3] "A" "B" "C"
     ..$ integer  : num [1:3] 0.1 1 10
     ..$ logical  : logi [1:3] TRUE FALSE TRUE

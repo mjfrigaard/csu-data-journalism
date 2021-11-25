@@ -1,49 +1,150 @@
 ---
 title: "Introduction to R Markdown"
-subtitle: "Journalism 303: an introduction to R markdown"
+subtitle: "Combine text, code, and output in one document"
 author: "Martin Frigaard"
-date: "`r Sys.Date()`"
+institute: "California State University | Journalism & Public Relations: Data Journalism"
 output:
   xaringan::moon_reader:
+    css:
+      - default
+      - css/lexis.css
+      - css/lexis-fonts.css
     lib_dir: libs
+    seal: false
     nature:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-
-always_allow_html: true
+      ratio: "16:9"
 ---
+
+```{r meta, echo=FALSE}
+library(metathis)
+meta() %>%
+  meta_general(
+    description = "Introduction to R Markdown",
+    generator = "xaringan and remark.js"
+  ) %>%
+  meta_name("github-repo" = "mjfrigaard/csuc-data-journalism") %>%
+  meta_social(
+    title = "Introduction to R Markdown",
+    url = "https://mjfrigaard.github.io/csuc-data-journalism/",
+    og_type = "website",
+    og_author = "Martin Frigaard",
+    twitter_card_type = "summary",
+    twitter_creator = "@mjfrigaard"
+  )
+```
 
 ```{r setup, include=FALSE}
+copy_slide_images <- function(slide_img) {
+    # parent image folder
+parent_img_folder <- "/Users/mjfrigaard/Dropbox/@projects/high-priority/@data-journalism/course-website/csuc-data-journalism/img/"
+    # slides image folder
+slides_img_folder <- "/Users/mjfrigaard/Dropbox/@projects/high-priority/@data-journalism/course-website/csuc-data-journalism/slides/img/"
+    # slide_image_regex
+    slide_image_regex <- paste0("^", slide_img, "$")
+    # info
+    image_folder_info <- fs::dir_info(parent_img_folder)
+    # cols
+    image_folder_info <- dplyr::select(image_folder_info,
+                                        img_path = path)
+# file_name
+image_folder_info <- dplyr::mutate(image_folder_info,
+                                file_name = basename(img_path))
+# cols
+image_folder_info <- dplyr::select(image_folder_info, 
+                                   img_path, 
+                                   file_name)
+
+# slide_img_path
+image_folder_info <- dplyr::mutate(image_folder_info, 
+        slide_img_path = paste0(slides_img_folder, slide_img))
+
+# image_info
+image_info <- dplyr::filter(image_folder_info, 
+       stringr::str_detect(string = file_name,
+                           slide_image_regex))
+
+image_paths <- dplyr::select(image_info, 
+                            img_path, slide_img_path)
+
+from_image <- as.character(image_paths$img_path)
+to_image <- as.character(image_paths$slide_img_path)
+fs::file_copy(from_image, to_image, overwrite = TRUE)
+    
+}
+
+dateWritten <- format(as.Date('2021-10-03'), format = "%B %d %Y")
+today <- format(Sys.Date(), format = "%B %d %Y")
+library(knitr)
 library(tidyverse)
-library(gapminder)
-library(here)
-options(htmltools.dir.version = FALSE, 
-        tibble.max_extra_cols = 6, 
-        tibble.width = 60)
-knitr::opts_chunk$set(echo = TRUE,
-                      warning = FALSE, 
-                      message = FALSE, 
-                      tidy = FALSE, 
-                      fig.align = 'center',
-                      dpi = 320)
+library(fontawesome)
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = ''
+)
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = " ",
+    fig.retina = 3 # Better figure resolution
+)
+# Enables the ability to show all slides in a tile overview by pressing "o"
+xaringanExtra::use_tile_view()
+xaringanExtra::use_panelset()
+xaringanExtra::use_clipboard()
+xaringanExtra::use_share_again()
+xaringanExtra::style_share_again(share_buttons = "all")
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,
+  mute_unhighlighted_code = FALSE
+)
 ```
 
-```{r xaringan-inf_mr, echo=FALSE, eval=FALSE, include=FALSE}
-# xaringan::inf_mr() # for instant knitting and reviewing
+layout: true
+
+<!-- this adds the link footer to all slides, depends on footer-small class in css-->
+
+<div class="footer-small"><span>https://github.com/mjfrigaard/csuc-data-journalism</div>
+
+---
+name: title-slide
+class: title-slide, center, middle, inverse
+
+# `r rmarkdown::metadata$title`
+#.fancy[`r rmarkdown::metadata$subtitle`]
+
+<br>
+
+.large[by Martin Frigaard]
+
+Written: `r dateWritten`
+
+Updated: `r today`
+
+.footer-large[.right[.fira[
+<br><br><br><br><br>[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
+]]]
+
+---
+
+```{r rmarkdown_wizards, echo=FALSE, out.width="70%", out.height="70%"}
+# copy_slide_images("rmarkdown_wizards.png")
+knitr::include_graphics("img/rmarkdown_wizards.png")
 ```
 
-```{r rmarkdown_wizards, echo=FALSE, out.width="100%", out.height="100%"}
-knitr::include_graphics("../img/rmarkdown_wizards.png")
-```
-
-.pull-right[Artwork by @allison_horst]
+.footer-large[.right[Artwork by @allison_horst]]
 
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Materials 
 
@@ -58,9 +159,9 @@ https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html
 
 ---
 class: inverse, center
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # *What is RMarkdown?*
 
@@ -70,15 +171,15 @@ background-size: 8%
 
 --
 
-### 1) Markdown is a plain text markup language for capturing *human-readable* prose
+### 1) Markdown is a plain text markup language for capturing .blue[human-readable prose]
 
 --
 
-### 2) Data manipulation/graphing/statistical language engines for computing *machine-readable* code
+### 2) Data manipulation/graphing/statistical language engines for computing .blue[machine-readable code]
 
 --
 
-### 3) Multiple *output options* for creating PDFs, Word docs, PowerPoints, HTML, etc.
+### 3) Multiple .blue[output options] for creating PDFs, Word docs, PowerPoints, HTML, etc.
 
 ---
 class: center, top
@@ -87,35 +188,33 @@ class: center, top
 
 ## `rmarkdown` works directly with `knitr`
 
-<br>
-
-.pull-left[
+.leftcol[
 
 `rmarkdown` combines YAML, markdown, and R code into a markdown document and passes it to `knitr`
 
-
-```{r rmarkdown, echo=FALSE, out.width="40%", out.height="40%"}
-knitr::include_graphics("../img/rmarkdown.png")
+```{r rmarkdown, echo=FALSE, fig.align='center', out.width="20%", out.height="20%"}
+knitr::include_graphics("img/rmarkdown.png")
 ```
 
 ]
 
 --
 
-.pull-right[
+.rightcol[
 
 `knitr` uses `pandoc` (a universal document conversion tool) to generate the specified document format
 
-```{r knitr, echo=FALSE, out.width="40%", out.height="40%"}
-knitr::include_graphics("../img/knitr.png")
+```{r knitr, echo=FALSE, echo=FALSE, fig.align='center', out.width="20%", out.height="20%"}
+# copy_slide_images("knitr.png")
+knitr::include_graphics("img/knitr.png")
 ```
 
 ]
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 95% 8%
-background-size: 8%
+background-size: 7%
 class: inverse, middle, center
 
 # Exercises
@@ -123,128 +222,152 @@ class: inverse, middle, center
 ### We will create an example HTML report using the R Markdown template provided by RStudio
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 95% 12%
-background-size: 9%
+background-size: 7%
 class: left, top
 
 # Exercise 1: create a new RMarkdown file
 
-.pull-left[
+.leftcol[
 
-### Click on *'File'* >
+### Click on .red[File] >
 
-### then *'New File'* >
+### then .red[New File] >
 
-### then *'R Markdown'* 
+### then .red[R Markdown] 
 
 ]
 
 
-.pull-right[
+.rightcol[
 
 ***Or use the drop-down menu***
 
-```{r new-rmarkdown, echo = FALSE, out.height="40%", out.width="40%"}
-knitr::include_graphics("../img/new-rmarkdown.png")
+```{r new-rmarkdown, echo = FALSE, out.height="30%", out.width="30%", fig.align='center'}
+# copy_slide_images("new-rmarkdown.png")
+knitr::include_graphics("img/new-rmarkdown.png")
 ```
 
 ]
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 7%
-background-size: 8%
+background-size: 7%
 class: left, top
 
 # Install required packages 
 
-<br>
-
-.pull-left[
+.leftcol[
 
 If you're in a fresh RStudio.Cloud session, you *might* be asked to install the required packages for R Markdown, Click **Yes**
 
-```{r install-req-packages, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/install-req-packages.png")
+.border[
+
+```{r install-req-packages, echo = FALSE, out.height="80%", out.width="80%"}
+# copy_slide_images("install-req-packages.png")
+knitr::include_graphics("img/install-req-packages.png")
 ```
 
-]
+]]
 
 --
 
-.pull-right[
+.rightcol[
 
 You will see RStudio installing the packages in the **Jobs** pane
 
+.border[
+
 ```{r rmd-pckgs-jobs, echo = FALSE, out.height="180%", out.width="180%"}
-knitr::include_graphics("../img/rmd-pckgs-jobs.png")
+# copy_slide_images("rmd-pckgs-jobs.png")
+knitr::include_graphics("img/rmd-pckgs-jobs.png")
 ```
 
-]
+]]
 
 
 ---
-background-image: url(../img/rmarkdown.png)
-background-position: 7% 93%
-background-size: 8%
+background-image: url(img/rmarkdown.png)
+background-position: 93% 7%
+background-size: 7%
 class: middle
 
 # New R Markdown File
 
 ### Enter ***'Title'*** and ***'Author'*** of your report and click ***OK***
 
-```{r rmarkdown-defaults, echo = FALSE, out.height="60%", out.width="60%"}
-knitr::include_graphics("../img/rmarkdown-defaults.png")
+.border[
+
+```{r rmarkdown-defaults, echo = FALSE, out.height="40%", out.width="40%", fig.align='center'}
+# copy_slide_images("rmarkdown-defaults.png")
+knitr::include_graphics("img/rmarkdown-defaults.png")
 ```
+
+]
+
 
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 7%
-background-size: 8%
+background-size: 7%
 class: left, top
 
 # Save your `.Rmd` file
 
 ### Click on the small floppy disk, enter a name (with .Rmd extension), and save your `.Rmd` file
 
-```{r save-rmd-file, echo = FALSE, out.height="60%", out.width="60%"}
-knitr::include_graphics("../img/save-rmd-file.png")
+
+
+```{r save-rmd-file, echo = FALSE, out.height="45%", out.width="45%", fig.align='center'}
+# copy_slide_images("save-rmd-file.png")
+knitr::include_graphics("img/save-rmd-file.png")
 ```
 
+
+
 ---
-background-image: url(../img/rmarkdown.png)
-background-position: 7% 93%
-background-size: 8%
+background-image: url(img/rmarkdown.png)
+background-position: 93% 7%
+background-size: 7%
 class: left, top
 
 # Knit your .Rmd file
 
-### Click on the small gear, select *Preview in Viewer Pane*
+### Click on the small gear, select .blue[Preview in Viewer Pane]
 
 ### Click on the knit icon (ball of yarn)
 
-```{r knit-rmd-file, echo = FALSE, out.height="60%", out.width="60%"}
-knitr::include_graphics("../img/knit-rmd-file.png")
+```{r knit-rmd-file, echo = FALSE, out.height="40%", out.width="40%", fig.align='center'}
+# copy_slide_images("knit-rmd-file.png")
+knitr::include_graphics("img/knit-rmd-file.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 7%
-background-size: 8%
+background-size: 7%
 class: left, center
 
 ## Our First R Markdown Report!
 
-```{r rmarkdown-in-action, echo = FALSE, out.height="110%", out.width="110%"}
-knitr::include_graphics("../img/rmarkdown-in-action.png")
+.border[
+
+```{r rmarkdown-in-action, echo = FALSE, out.height="75%", out.width="75%", fig.align='center'}
+# copy_slide_images("rmarkdown-in-action.png")
+knitr::include_graphics("img/rmarkdown-in-action.png")
 ```
 
+]
+
+
+
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 95% 8%
-background-size: 8%
+background-size: 7%
 class: inverse, middle, center
 
 # How R Markdown Works 
@@ -252,38 +375,46 @@ class: inverse, middle, center
 ## (under the hood)
 
 ---
-background-image: url(../img/how-rmd-works.png)
+background-image: url(img/how-rmd-works.png)
 background-position: 50% 73%
-background-size: 90%
+background-size: 63%
 class: top, center
 
-### R Markdown is made up of three elements
+# R Markdown is made up of three elements
 
 ---
 class: left, top
 
 # Rmarkdown combines metadata, markdown, *and* R code 
 
-```{r r-plus-md, echo = FALSE, out.height="70%", out.width="70%"}
-knitr::include_graphics("../img/r-plus-md.png")
+.leftcol[
+
+```{r r-plus-md, echo = FALSE, out.height="90%", out.width="90%", fig.align='center'}
+# copy_slide_images("r-plus-md.png")
+knitr::include_graphics("img/r-plus-md.png")
 ```
 
-<br>
+]
 
-#### The result is a file framework for creating reproducible reports using YAML, Markdown, and computer code
-
-<br>
+.rightcol[
 
 `.yaml` = Metadata  
 `.md` = Prose   
-`.R` = Code     
+`.R` = Code 
+
+]
+
+<br><br><br><br>
+
+> The result is a file framework for creating reproducible reports using YAML, Markdown, and computer code
+    
 
 
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # R Markdown: YAML
 
@@ -301,9 +432,9 @@ background-size: 8%
 
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # R Markdown: YAML
 
@@ -321,35 +452,37 @@ output: html_document
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # R Markdown: YAML format
 
 <br><br>
 
-```{r yaml-formatting-01, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/yaml-formatting-01.png")
+```{r yaml-formatting-01, echo = FALSE, out.height="70%", out.width="70%", fig.align='center'}
+# copy_slide_images("yaml-formatting-01.png")
+knitr::include_graphics("img/yaml-formatting-01.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # R Markdown: YAML format
 
 <br><br>
 
-```{r yaml-formatting-02, echo = FALSE, out.height="90%", out.width="90%"}
-knitr::include_graphics("../img/yaml-formatting-02.png")
+```{r yaml-formatting-02, echo = FALSE, out.height="60%", out.width="60%", fig.align='center'}
+# copy_slide_images("yaml-formatting-02.png")
+knitr::include_graphics("img/yaml-formatting-02.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # R Markdown: YAML
 
@@ -361,15 +494,13 @@ background-size: 8%
 
 --
 
-<br><br>
-
 > Check out the [YAML Fieldguide](https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html) for a comprehensive list
 
 
 ---
-background-image: url(../img/rmarkdown.png)
-background-position: 7% 96%
-background-size: 8%
+background-image: url(img/rmarkdown.png)
+background-position: 93% 7%
+background-size: 7%
 
 # Example YAML output options
 
@@ -382,13 +513,15 @@ background-size: 8%
 ### `toc_depth:` set numerically `0` - `6`
 
 ---
-background-image: url(../img/rmarkdown.png)
-background-position: 7% 96%
-background-size: 8%
+background-image: url(img/rmarkdown.png)
+background-position: 7% 93%
+background-size: 7%
 
 # Exercise 2: create a floating table of contents
 
-### Change the `output` in the YAML header to the following: 
+### Change the `output` in the YAML header to the following:
+
+.leftcol40[
 
 ```yaml
 output: 
@@ -397,29 +530,42 @@ output:
     toc_float: true
 ```
 
-### Knit the document again
+]
+
+--
+
+.rightcol60[.center[
+
+#### *Knit the document again*
+
+]]
+
+
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 # YAML output options: table of contents 
 
 ### Floating table of contents (rendered)
 
 ```{r yaml-toc-settings, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/yaml-toc-settings.png")
+# copy_slide_images("yaml-toc-settings.png")
+knitr::include_graphics("img/yaml-toc-settings.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 # Exercise 3: text highlighting and themes
 
 ### Add the following two options to your YAML header
+
+.leftcol40[
 
 ```yaml
 output: 
@@ -431,42 +577,57 @@ output:
 
 ```
 
-### Knit the document again
+]
+
+--
+
+.rightcol60[.center[
+
+#### *Knit the document again*
+
+]]
+
+
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 # YAML: text highlighting and theme options 
 
 ### Text highlighting and theme options (rendered)
 
-```{r yaml-highlight-theme, echo = FALSE, out.height="90%", out.width="90%"}
-knitr::include_graphics("../img/yaml-highlight-theme.png")
+```{r yaml-highlight-theme, echo = FALSE, out.height="70%", out.width="70%", fig.align='center'}
+# copy_slide_images("yaml-highlight-theme.png")
+knitr::include_graphics("img/yaml-highlight-theme.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 # More YAML options
 
 ### You can change the YAML contents using the settings (small gear)
 
-```{r knitr-settings, echo = FALSE, out.height="70%", out.width="70%"}
-knitr::include_graphics("../img/knitr-settings.png")
+
+
+```{r knitr-settings, echo = FALSE, out.height="60%", out.width="60%", fig.align='center'}
+# copy_slide_images("knitr-settings.png")
+knitr::include_graphics("img/knitr-settings.png")
 ```
 
+
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 # Edit R Markdown Document Options
 
-.pull-left[
+.leftcol[
 
 #### This window gives us the ability to manually change some of the YAML settings (but not all of them!)
 
@@ -474,24 +635,25 @@ background-size: 8%
 
 --
 
-.pull-right[
+.rightcol[
 
-```{r edit-rmd-output-options, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/edit-rmd-output-options.png")
+```{r edit-rmd-output-options, echo = FALSE, out.height="80%", out.width="80%", fig.align='left'}
+# copy_slide_images("edit-rmd-output-options.png")
+knitr::include_graphics("img/edit-rmd-output-options.png")
 ```
 
 ]
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 # YAML Parameters
 
 ### YAML parameters can be referred to throughout the document
 
-.pull-left[
+.leftcol[
 
 ***Create `params` in YAML header***
 
@@ -505,7 +667,7 @@ params:
 
 --
 
-.pull-right[
+.rightcol[
 
 ***Refer to `params` in .Rmd document***
 
@@ -517,49 +679,75 @@ params$data
 ]
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 # Exercise 4: Using YAML parameters
 
-Add the following `params` option in the YAML header 
+.leftcol40[
+
+#### *Add the following `params` option in the YAML header*
+
+.small[
 
 ```yaml
 params: 
   small_pressure: !r head(pressure)
 ```
 
+]]
+
+
 --
 
-Add this code to the end of the document
+.rightcol60[
 
+#### *Add this code to the end of the document*
+
+<br>
+
+.border[
 
 ```{r small-pressure, echo = FALSE, out.height="100%", out.width="100%", fig.align='left'}
-knitr::include_graphics("../img/small-pressure.png")
+# copy_slide_images("small-pressure.png")
+knitr::include_graphics("img/small-pressure.png")
 ```
 
+<br><br>
 
-### Knit the document again 
+#### *Knit the document again!*
+
+]]
+
+
+ 
 
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 ## See our new plot with the `params`
 
 We can see the new plot with the reduced sample size
 
-```{r params-plot, echo = FALSE, out.height="80%", out.width="80%"}
-knitr::include_graphics("../img/params-plot.png")
+.border[
+
+```{r params-plot, echo = FALSE, out.height="60%", out.width="60%", fig.align='center'}
+# copy_slide_images("params-plot.png")
+knitr::include_graphics("img/params-plot.png")
 ```
 
+]
+
+
+
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # YAML output formats
 
@@ -577,7 +765,7 @@ Function       | Outputs
 `powerpoint_presentation()`   | PowerPoint (pptx)
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 15%
 
@@ -590,48 +778,46 @@ background-size: 15%
 
 
 ---
-background-image: url(../img/markdown.png)
+background-image: url(img/markdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 class: left, top
 
 # Basic Markdown Syntax
 
-## Italics & Bold
 
-<br><br><br><br>
 
-.pull-left[
+.leftcol30[.large[
+
+#### Italics & Bold
 
 ```md
  *italic*   **bold**
  _italic_   __bold__
 ```
 
-]
+]]
 
 --
 
-.pull-right[
+.rightcol70[.center[.large[
 
  *italic*   **bold**  
  _italic_   __bold__
 
-]
+]]]
 
 ---
-background-image: url(../img/markdown.png)
+background-image: url(img/markdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 class: left, top
 
 # Basic Markdown Syntax
 
-## Headers
+.leftcol[.large[
 
-<br><br><br>
-
-.pull-left[
+#### Headers
 
 ```md
 # Header 1
@@ -639,31 +825,29 @@ class: left, top
 ### Header 3
 ```
 
-]
+]]
 
 --
 
-.pull-right[
+.rightcol[.large[.center[
 
 # Header 1  
 ## Header 2  
-### Header 3  
+### Header 3 
 
-]
+]]]
 
 ---
-background-image: url(../img/markdown.png)
+background-image: url(img/markdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 class: left, top
 
 # Basic Markdown Syntax
 
-## Bullets & Numeric Lists
+.leftcol40[
 
-<br><br><br>
-
-.pull-left[
+#### Bullets & Numeric Lists
 
 ```md
  * Item 1
@@ -679,7 +863,7 @@ class: left, top
 
 --
 
-.pull-right[
+.rightcol60[.medium[
 
 * Item 1  
 * Item 2
@@ -689,19 +873,22 @@ class: left, top
 
  1. Item 1
  2. Item 2
-
-]
+ 
+]]
 
 
 ---
-background-image: url(../img/markdown.png)
+background-image: url(img/markdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 class: left, top
 
 # Basic Markdown Syntax
 
-## Hyperlinks 
+
+.leftcol55[
+
+#### Hyperlinks 
 
 ```md
 https://www.biomarin.com/
@@ -709,14 +896,27 @@ https://www.biomarin.com/
 [linked phrase](https://www.biomarin.com/)
 ```
 
-### *becomes...*
+
+
+]
+
 
 --
 
+.rightcol45[
+
+#### *becomes...*
+
+.center[.large[
+
 [linked phrase](https://www.biomarin.com/)
 
+]]]
+
+
+
 ---
-background-image: url(../img/markdown.png)
+background-image: url(img/markdown.png)
 background-position: 93% 10%
 background-size: 15%
 class: left, top
@@ -724,7 +924,11 @@ class: left, top
 
 # Basic Markdown Syntax
 
-## Images 
+.leftcol55[
+
+#### Images 
+
+.small[
 
 ```md
 ![](https://www.r-project.org/logo/Rlogo.png)
@@ -732,29 +936,37 @@ class: left, top
 ![optional caption](https://www.r-project.org/logo/Rlogo.png)
 ```
 
-### *becomes...*
+]]
 
 --
 
-```{r Rlogo.png, echo = FALSE, out.height="30%", out.width="30%"}
+.rightcol45[
+
+#### *becomes...*
+
+```{r Rlogo.png, echo = FALSE, out.height="30%", out.width="30%", fig.align='center'}
 knitr::include_graphics("https://www.r-project.org/logo/Rlogo.png")
 ```
+
+]
+
+
 
 
 
 ---
-background-image: url(../img/markdown.png)
+background-image: url(img/markdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 class: left, top
 
 # Basic Markdown Syntax
 
-<br>
 
-## Math Equations
 
-.pull-left[
+.leftcol[
+
+#### Math Equations
 
 ```md
 $equation$
@@ -766,68 +978,80 @@ $$ equation $$
 
 --
 
-.pull-right[
+<br>
+
+.rightcol[.large[
 
 $equation$
 
 $$ equation $$
 
-]
+]]
 
 
 ---
-background-image: url(../img/markdown.png)
+background-image: url(img/markdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 class: left, top
 
 # Basic Markdown Syntax
 
-## Super scripts & Strike-through 
+ 
 
-.pull-left[
+.leftcol45[
+
+#### Super scripts & Strike-through
 
 ```md
 superscript^2^
 ~~strikethrough~~
 ```
+
 ]
 
 --
 
-.pull-right[
+.rightcol55[.center[
 
- superscript^2^  
+ superscript^2^
 
  ~~strikethrough~~
 
-]
+]]
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 # Exercise 5: Markdown Formatting
 
 Delete the top portion of the markdown in `01-monthly-report.Rmd`. 
 
-```{r delete-rmarkdown, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/delete-rmarkdown.png")
+```{r delete-rmarkdown, echo = FALSE, out.height="70%", out.width="70%", fig.align='center'}
+# copy_slide_images("delete-rmarkdown.png")
+knitr::include_graphics("img/delete-rmarkdown.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 # Exercise 5: Markdown Formatting
+
+.leftcol[
 
 ### Add the text below to your report 
 
 > *This is a monthly report generated with RMarkdown, a literate programming tool for combining text and code.*
 
+]
+
 --
+
+.rightcol[
 
 ### Include the following formatting:
 
@@ -835,26 +1059,30 @@ background-size: 8%
 2. include this hyperlink for `Rmarkdown`: https://rmarkdown.rstudio.com/
 3. format `code` as code. 
 
+]
+
+
 --
 
-### Knit the document when you're finished
+#### *Knit the document when you're finished*
 
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 # Exercise 5: Markdown Formatting (rendered)
 
-```{r rmarkdown-exercise, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/rmarkdown-exercise.png")
+```{r rmarkdown-exercise, echo = FALSE, out.height="90%", out.width="90%", fig.align='center'}
+# copy_slide_images("rmarkdown-exercise.png")
+knitr::include_graphics("img/rmarkdown-exercise.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Exercise 6: Tabsets 
 
@@ -870,45 +1098,48 @@ params:
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Exercise 6: Tabsets 
 
 Make the following changes to the `R Markdown` header sections
 
 
-```{r tabset-markdown, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/tabset-markdown.png")
+```{r tabset-markdown, echo = FALSE, out.height="85%", out.width="85%"}
+# copy_slide_images("tabset-markdown.png")
+knitr::include_graphics("img/tabset-markdown.png")
 ```
 
 ### Knit the document again
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Exercise 6: Tabsets (rendered)
 
-```{r tabset-1-render, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/tabset-1-render.png")
+```{r tabset-1-render, echo = FALSE, out.height="80%", out.width="80%", fig.align='center'}
+# copy_slide_images("tabset-1-render.png")
+knitr::include_graphics("img/tabset-1-render.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Exercise 6: Tabsets (rendered)
 
-```{r tabset-2-render, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/tabset-2-render.png")
+```{r tabset-2-render, echo = FALSE, out.height="80%", out.width="80%", fig.align='center'}
+# copy_slide_images("tabset-2-render.png")
+knitr::include_graphics("img/tabset-2-render.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
 background-size: 12%
 
@@ -920,16 +1151,17 @@ background-size: 12%
 
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Code chunks (`setup`)
 
 ### The first bit of R code in our RMarkdown file is the `setup` chunk
 
 ```{r setup-code-chunk, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/setup-code-chunk.png")
+# copy_slide_images("setup-code-chunk.png")
+knitr::include_graphics("img/setup-code-chunk.png")
 ```
 
 --
@@ -941,9 +1173,9 @@ knitr::include_graphics("../img/setup-code-chunk.png")
 ### '`include=FALSE`' means this code is run, but not displayed
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Code chunks (`setup`)
 
@@ -951,14 +1183,15 @@ background-size: 8%
 
 ### We can access both the with sytnax below:
 
-```{r knitr-opts-set, echo = FALSE, out.height="75%", out.width="75%"}
-knitr::include_graphics("../img/knitr-opts-set.png")
+```{r knitr-opts-set, echo = FALSE, out.height="75%", out.width="75%", fig.align='center'}
+# copy_slide_images("knitr-opts-set.png")
+knitr::include_graphics("img/knitr-opts-set.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Code chunks (`setup`)
 
@@ -974,9 +1207,9 @@ background-size: 8%
 
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Code chunks (`setup`)
 
@@ -991,79 +1224,86 @@ background-size: 8%
 |`warning`       | do/don't print warnings                      |
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Code chunks
 
-<br><br><br><br>
+<br><br>
+
+.border[
 
 ```{r code-chunks, echo = FALSE, out.height="70%", out.width="70%", fig.align='center'}
-knitr::include_graphics("../img/code-chunks.png")
+# copy_slide_images("code-chunks.png")
+knitr::include_graphics("img/code-chunks.png")
 ```
 
+]
+
+
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Code chunk fences
 
 <br><br>
 
-```{r code-chunk-fences, echo = FALSE, out.height="70%", out.width="70%"}
-  knitr::include_graphics("../img/code-chunk-fences.png")
+```{r code-chunk-fences, echo = FALSE, out.height="70%", out.width="70%", fig.align='center'}
+# copy_slide_images("code-chunk-fences.png")
+knitr::include_graphics("img/code-chunk-fences.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Code chunk names and arguments
 
-```{r code-chunk-label-args, echo = FALSE, out.height="80%", out.width="80%"}
-  knitr::include_graphics("../img/code-chunk-name-args.png")
+```{r code-chunk-label-args, echo = FALSE, out.height="60%", out.width="60%", fig.align='center'}
+# copy_slide_images("code-chunk-name-args.png")
+knitr::include_graphics("img/code-chunk-name-args.png")
 ```
 
-
---
-
-### See the [knitr web page](https://yihui.name/knitr/options/) for complete list of options
+> See the [knitr web page](https://yihui.name/knitr/options/) for complete list of options
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Inserting code chunks
 
 ### Use keyboard shortcuts **CMD/CTRL + I** or **ALT/OPTION + I**
 
 
-```{r insert-code-chunk, echo = FALSE, out.height="23%", out.width="23%"}
-knitr::include_graphics("../img/insert-code-chunk.png")
+```{r insert-code-chunk, echo = FALSE, out.height="18%", out.width="18%", fig.align='center'}
+# copy_slide_images("insert-code-chunk.png")
+knitr::include_graphics("img/insert-code-chunk.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Edit code chunk options
 
 ### You can edit code chunk options using the icon (small gear)
 
-```{r code-chunk-settings, echo = FALSE, out.height="50%", out.width="50%"}
-knitr::include_graphics("../img/code-chunk-settings.png")
+```{r code-chunk-settings, echo = FALSE, out.height="40%", out.width="40%", fig.align='center'}
+# copy_slide_images("code-chunk-settings.png")
+knitr::include_graphics("img/code-chunk-settings.png")
 ```
 
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Code Chunk Engines
 
@@ -1073,94 +1313,114 @@ background-size: 8%
 names(knitr::knit_engines$get())
 ```
 
-## Even SAS!
-
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 # Exercise 7: code chunks (kable)
 
-### Create a new heading and code chunk 
+.leftcol45[
 
-Create a new `Tables` level three header under the `Summary` heading, 
+#### Create a new `Tables` level three header under the `Summary` heading, 
+
+.small[
 
 ```md
 ### Tables
 ```
 
---
+]]
 
-Insert the following code chunk under `Tables` (*manually, with the keyboard short-cut, or use the "Insert" button*)
 
-```{r kable-code-chunk, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/kable-code-chunk.png")
+.rightcol55[
+
+#### Insert the following code chunk under `Tables` 
+
+<br>
+```{r kable-code-chunk, echo = FALSE, out.height="100%", out.width="100%", fig.align='center'}
+# copy_slide_images("kable-code-chunk.png")
+knitr::include_graphics("img/kable-code-chunk.png")
 ```
 
-### Knit the document
+]
+
+<br><br><br><br><br><br><br><br>
+
+
+> *insert the code block manually with the keyboard short-cut, or use the "Insert" button*
+
+
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Exercise 7: code chunks (kable rendered)
 
 We can see the `small_pressure` parameter from the YAML has been rendered in the new `Tables` tab. `kable` tables are great for presenting small, summary tables.
 
-```{r kable-chunk-rendered, echo = FALSE, out.height="90%", out.width="90%"}
-knitr::include_graphics("../img/kable-chunk-rendered.png")
+```{r kable-chunk-rendered, echo = FALSE, out.height="82%", out.width="82%", fig.align='center'}
+# copy_slide_images("kable-chunk-rendered.png")
+knitr::include_graphics("img/kable-chunk-rendered.png")
 ```
 
 Read more about `kable` table options [here](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) 
 
 ---
-background-image: url(../img/rmarkdown.png)
-background-position: 93% 96%
-background-size: 8%
+background-image: url(img/rmarkdown.png)
+background-position: 93% 7%
+background-size: 6%
 
 # Exercise 8: code chunks (paged)
 
-### We are going to repeat the process above, but with a larger table (`mtcars`)
+#### We are going to repeat the process above, but with a larger table (`mtcars`)
 
 Insert the following code chunk above the `knitr::kable()` output: 
 
-```{r paged-code-chunk, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/paged-code-chunk.png")
+.border[
+
+```{r paged-code-chunk, echo = FALSE, out.height="80%", out.width="80%", fig.align='center'}
+# copy_slide_images("paged-code-chunk.png")
+knitr::include_graphics("img/paged-code-chunk.png")
 ```
 
-### Knit the document
+]
+
+
+#### Knit the document
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 7% 96%
-background-size: 8%
+background-size: 7%
 
 # Exercise 8: code chunk (paged rendered)
 
 ### Paged tables are great for larger datasets
 
-```{r paged-chunk-render, echo = FALSE, out.height="90%", out.width="90%", fig.align='center'}
-knitr::include_graphics("../img/paged-chunk-render.png")
+```{r paged-chunk-render, echo = FALSE, out.height="75%", out.width="75%", fig.align='center'}
+# copy_slide_images("paged-chunk-render.png")
+knitr::include_graphics("img/paged-chunk-render.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Exercise 8: paged tables
 
-```{r paged-chunk-render-gif, echo = FALSE, out.height="100%", out.width="100%", fig.align='center'}
-knitr::include_graphics("../img/paged-chunk-render.gif")
+```{r paged-chunk-render-gif, echo = FALSE, out.height="70%", out.width="70%", fig.align='center'}
+knitr::include_graphics("img/paged-chunk-render.gif")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Inline R Code
 
@@ -1169,14 +1429,15 @@ background-size: 8%
 --
 
 
-```{r inline-r-code-01, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/inline-r-code-01.png")
+```{r inline-r-code-01, echo = FALSE, out.height="70%", out.width="70%", fig.align='center'}
+# copy_slide_images("inline-r-code-01.png")
+knitr::include_graphics("img/inline-r-code-01.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Inline R Code
 
@@ -1184,47 +1445,65 @@ background-size: 8%
 
 --
 
-```{r inline-r-code-02, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/inline-r-code-02.png")
+```{r inline-r-code-02, echo = FALSE, out.height="80%", out.width="80%", fig.align='center'}
+# copy_slide_images("inline-r-code-02.png")
+knitr::include_graphics("img/inline-r-code-02.png")
 ```
 
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Exercise 9: Add Inline Code
 
-### We're going to add a Pearson correlation between speed and stopping distance to the `01-monthy-report.Rmd` 
+<br>
+
+### We're going to add a Pearson correlation between speed and stopping distance 
+
+.leftcol[
+
+#### Include the following code under the `Summary` level three header
+
+]
 
 --
 
-### Include the following code under the `Summary` level three header
+.rightcol[
 
-```{r inline-code, eval=FALSE}
-The correlation between speed and stopping distance 
-is `r cor(x = cars$speed, y = cars$dist)`
-```
+> The correlation between speed and 
+> stopping distance is 
+> `r cor(x = cars$speed, y = cars$dist)`
+
+]
 
 --
 
-### Knit the document again
+<br><br><br><br><br>
+
+.center[
+
+#### Knit the document again
+
+]
+
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 
 # Exercise 9: Add Inline Code (rendered)
 
 
-```{r inline-code-rendered, echo = FALSE, out.height="100%", out.width="100%"}
-knitr::include_graphics("../img/inline-code-rendered.png")
+```{r inline-code-rendered, echo = FALSE, out.height="80%", out.width="80%", fig.align='center'}
+# copy_slide_images("inline-code-rendered.png")
+knitr::include_graphics("img/inline-code-rendered.png")
 ```
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 50%
 background-size: 20%
 
@@ -1235,9 +1514,9 @@ background-size: 20%
 ## these slides!
 
 ---
-background-image: url(../img/rmarkdown.png)
+background-image: url(img/rmarkdown.png)
 background-position: 93% 10%
-background-size: 8%
+background-size: 7%
 class: left, top
 
 # Resources
@@ -1263,6 +1542,7 @@ pdf_slides <- str_replace(html_slides,
 pdf_slides <- paste0("pdfs/", pdf_slides)
 print_files <- tibble("pdfs" = pdf_slides,
   "htmls" = html_slides)
+# print_files$htmls[4]
 
 pagedown::chrome_print(input = print_files$htmls[4], output = print_files$pdfs[4], timeout = 120)
 ```

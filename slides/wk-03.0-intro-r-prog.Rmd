@@ -944,27 +944,47 @@ class: left, top
 
 # S3 vectors: difftime
 
-Difftimes are durations, so we need to supply two dates, which we will create with `time_01` and `time_02`.
 
-```{r vec_difftime}
+.leftcol[
+
+Difftimes are durations, so we to create them with `time_01` and `time_02`:
+
+```{r time_01-time_02}
 time_01 <- Sys.Date()
 time_02 <- Sys.Date() + 10
-vec_difftime <- difftime(time_01, time_02, units = "days")
+time_01
+time_02
+```
+
+]
+
+
+.rightcol[
+
+Difftimes are stored as a `double` vector. 
+
+```{r vec_difftime}
+vec_difftime <- difftime(time_01, 
+                         time_02, 
+                         units = "days")
 vec_difftime
 ```
 
---
-
-Difftimes are stored as a `double` vector. 
 
 ```{r typeof-vec_difftime}
 typeof(vec_difftime)
 ```
 
+]
+
+
+
 ---
 class: left, top
 
 # S3 vectors: difftime attributes
+
+.leftcol[
 
 Difftimes are their own `class` and have a `units` attribute set to whatever we've specified in the `units` argument.
 
@@ -973,7 +993,9 @@ Difftimes are their own `class` and have a `units` attribute set to whatever we'
 attributes(vec_difftime)
 ```
 
---
+]
+
+.rightcol[
 
 We can see the actual number stored in the vector with `unclass()`
 
@@ -981,27 +1003,43 @@ We can see the actual number stored in the vector with `unclass()`
 unclass(vec_difftime)
 ```
 
+]
+
+
+
 
 ---
 class: left, top
 
 # Matrices 
 
+.leftcol[
+
 A matrix is several vectors stored together into two a two-dimensional object. 
 
 ```{r mat_data}
-mat_data <- matrix(data = c(vec_double, vec_integer), 
-                   nrow = 3, ncol = 2, byrow = FALSE)
+mat_data <- matrix(
+              data = c(vec_double, vec_integer), 
+                     nrow = 3, ncol = 2, 
+                     byrow = FALSE)
 mat_data
 ```
 
-This is a three-column, two-row matrix. 
+]
+
+.rightcol[
 
 We can check the dimensions of `mat_data` with `dim()`.
 
 ```{r dim-mat_data}
 dim(mat_data)
 ```
+
+This is a three-column, two-row matrix. 
+
+]
+
+
 
 
 ---
@@ -1011,31 +1049,29 @@ class: left, top
 
 The output in the console tells us where each element is located in `mat_data`. 
 
-For example, if I want to get the `10` that's stored in `vec_integer`, I can use look at the output and use the indexes. 
-
---
 
 .leftcol[
 
-```{r mat_data-subset, highlight.output=c(1,3)}
+For example, if I want to get the `10` that's stored in `vec_integer`, I can use look at the output and use the indexes. 
+
+```{r mat_data-subset}
 mat_data
 ```
 
 ]
 
---
-
 .rightcol[
 
+By placing the index (`[2, 2]`) next to the object, I am telling R, "*only return the value in this position*".
 
 ```{r subset-10}
 mat_data[2, 2]
 ```
+
 ]
 
---
 
-By placing the index (`[2, 2]`) next to the object, I am telling R, "*only return the value in this position*".
+
 
 
 ---
@@ -1043,19 +1079,31 @@ class: left, top
 
 # Arrays
 
+
+.leftcol[
+
 Arrays are like matrices, but they can have more dimensions. 
 
 ```{r dat_array}
-dat_array <- array(data = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-                            14, 15, 16, 17, 18), dim = c(3, 3, 2))
+dat_array <- array(
+                data = c(1, 2, 3, 4, 5,
+                        6, 7, 8, 9, 10,
+                        11, 12, 13, 14, 
+                        15, 16, 17, 18), 
+                   dim = c(3, 3, 2))
 ```
 
---
+]
 
+.rightcol[
 
 ```{r print-dat_array}
 dat_array
 ```
+
+]
+
+
 
 
 ---
@@ -1063,22 +1111,19 @@ class: left, top
 
 # Array layers
 
+.leftcol[.border[
+
 `dat_array` contains numbers 1 through 18 in three columns and three rows, stacked in two *layers*. 
 
-Matrices are arrays, but arrays are not matrices. 
+<!-- <img src="img/array.png"/> -->
 
---
-
-.leftcol[ 
-
-```{r array-png, out.height='75%', out.width='75%', fig.align='center', echo=FALSE}
+```{r array-png, eval=TRUE, out.height='55%', out.width='55%', fig.align='center', echo=FALSE}
 # copy_slide_images(slide_img = "array.png")
 knitr::include_graphics(path = "img/array.png")
 ```
 
-]
+]]
 
---
 
 .rightcol[ 
 
@@ -1087,6 +1132,9 @@ class(dat_array)
 class(mat_data)
 ```
 
+> Matrices are arrays, but arrays 
+> are not matrices
+
 ]
 
 ---
@@ -1094,48 +1142,91 @@ class: left, top
 
 # Data Frames
 
+.leftcol[
+
 Data frames are rectangular data with rows and columns (or observations and variables).
 
-```{r DataFrame, highlight.output = 1}
-DataFrame <- data.frame(character = c("A", "B", "C"), 
-                       integer = c(0.1, 1.0, 10.01), 
-                       logical = c(TRUE, FALSE, TRUE), 
-                        stringsAsFactors = FALSE)
+
+```{r create-DataFrame}
+DataFrame <- data.frame(
+               character = c("A", "B", "C"), 
+               integer = c(0.1, 1.0, 10.01), 
+               logical = c(TRUE, FALSE, TRUE))
+```
+
+
+]
+
+.rightcol[
+
+```{r print-DataFrame}
 DataFrame
 ```
 
-NOTE: `stringsAsFactors = FALSE` is not required as of R version 4.0.0.
+.small[
+
+> NOTE: `stringsAsFactors = FALSE` is not 
+> required as of R version 4.0.0.
+
+]
+
+
+]
+
+
 
 ---
 class: left
 
 # Data Frames
 
+.leftcol[
+
 Check the structure of the `data.frame` with `str()`
 
-```{r str-DataFrame, highlight.output = 1}
+```{r str-DataFrame}
 str(DataFrame)
 ```
 
+]
+
+.rightcol[
+
 `str()` gives us a transposed view of the `DataFrame` object, and tells us the dimensions of the object.
+
+
+]
+
+
 
 ---
 class: left
 
 # Tibbles 
 
-Tibbles are a special kind of `data.frame` (they print better to the console and character vectors are never coerced into factors). 
+.leftcol[
 
-The syntax to build them is slightly different, too.
+Tibbles are a special kind of `data.frame` (*they print better to the console and character vectors are never coerced into factors*). 
 
-```{r Tibble}
+```{r create-Tibble}
 Tibble <- tibble::tribble(
        ~character, ~integer,  ~logical, #<<
               "A",      0.1,      TRUE,
               "B",        1,     FALSE,
               "C",    10.01,      TRUE)
+```
+
+]
+
+.rightcol[
+
+The syntax to build them is slightly different, too.
+
+```{r print-Tibble}
 Tibble
 ```
+
+]
 
 
 ---
@@ -1143,37 +1234,51 @@ class: left
 
 # Tibbles 
 
+.leftcol[
+
 Check the structure of `Tibble`.
 
-```{r str-tibble, highlight.output=1}
+```{r str-tibble}
 str(Tibble)
 ```
 
---
+]
+
+.rightcol[
+
+<br><br>
 
 `str()` tells us `tibbles` are `S3` objects, with types  `tbl_df`, `tbl`, and `data.frame`.
+
+
+]
+
+
 
 ---
 class: left, top
 
 # Data frames and tibbles 
 
+
 If you're importing spreadsheets, most of the work you'll do in R will be with rectangular data objects (i.e. `data.frame`s and `tibble`s).
 
 --
 
-.leftcol[
+.leftcol[.border[
 
-```{r data-frame-tibble, echo=FALSE, out.width='80%', out.height='80%', fig.align='center'}
+```{r data-frame-tibble, echo=FALSE, out.width='60%', out.height='60%', fig.align='center'}
 # copy_slide_images(slide_img = "data-frame-tibble.png")
 knitr::include_graphics(path = "img/data-frame-tibble.png")
 ```
 
 ]
+]
 
---
 
 .rightcol[
+
+<br><br>
 
 *These are the common rectangular data storage object for tabular data in R*
 
@@ -1184,34 +1289,55 @@ class: left
 
 # Data frames & tibbles 
 
-.leftcol[
+.leftcol[.small[
 
 ```{r compare-DataFrame}
 DataFrame
+```
+
+> the `data.frame` prints the column names and contents
+
+]]
+
+.rightcol[.small[
+
+```{r compare-Tibble}
+Tibble
+```
+
+> the `tibble` prints the column names, dimensions, formats, and contents
+
+]]
+
+---
+class: left
+
+# Data frames & tibbles 
+
+
+If we check the `type` of the `DataFrame` and `Tibble`...
+
+.leftcol[
+
+```{r typeof-DataFrame}
+typeof(DataFrame)
 ```
 
 ]
 
 .rightcol[
 
-```{r compare-Tibble}
-Tibble
+```{r typeof-Tibble}
+typeof(Tibble)
 ```
 
 ]
 
 --
 
-If we check the `type` of the `DataFrame` and `Tibble`...
+<br><br><br><br>
 
---
-
-```{r typeof-DataFrame-Tibble}
-typeof(DataFrame)
-typeof(Tibble)
-```
-
-...we see they are `lists`
+> ...we see they are `lists`
 
 
 
@@ -1222,33 +1348,60 @@ class: left
 
 Both `data.frame`s and `tibble`s are their own class, 
 
-```{r class-DataFrame-Tibble}
+.leftcol40[
+
+```{r class-DataFrame}
 class(DataFrame)
+```
+
+]
+
+.rightcol60[
+
+```{r class-Tibble}
 class(Tibble)
 ```
 
-So we can think of `data.frame`s and `tibble`s as special kinds of *rectangular* lists, made with different types of vectors, with each vector being of equal length.
+]
+
+<br><br><br><br><br>
+
+> So we can think of `data.frame`s and `tibble`s as special kinds of *rectangular* lists, made with different types of vectors, with each vector being of equal length.
 
 ---
 class: left
 
 # Lists 
 
+.leftcol55[
+
 Lists are special objects because they can contain all other objects (including other lists).
 
+.small[
+
 ```{r dat_list}
-dat_list <- list("integer" = vec_integer, 
-                 "array" = dat_array,
-                 "matrix data" = mat_data,
-                 "data frame" = DataFrame, 
-                 "tibble" = Tibble)
+dat_list <- list(
+             "integer" = vec_integer, 
+             "array" = dat_array,
+             "matrix data" = mat_data, 
+             "data frame" = DataFrame, 
+             "tibble" = Tibble)
 ```
+
+]]
+
+.rightcol45[
 
 Lists have a `names` attribute, which we've defined above in double quotes.
 
-```{r attributes-list, highlight.output=1}
+.small[
+
+```{r attributes-list}
 attributes(dat_list)
 ```
+
+]]
+
 
 ---
 class: left
@@ -1257,7 +1410,7 @@ class: left
 
 If we check the structure of the `dat_list`, we see the structure of list, and the structure of the elements in the list.
 
-```{r str-dat_list, highlight.output=c(2,3,4,5,9)}
+```{r str-dat_list}
 str(dat_list)
 ```
 
