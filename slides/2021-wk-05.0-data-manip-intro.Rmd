@@ -1,109 +1,47 @@
 ---
 title: "Data Manipulation with R"
-subtitle: "An introduction to the dplyr package"
-author: "Martin Frigaard"
-institute: "California State University | Journalism & Public Relations: Data Journalism"
+subtitle: "Journalism 303: An introduction to the dplyr package"
+author: 
+  - "Martin Frigaard"
+date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
-    css:
-      - default
-      - css/lexis.css
-      - css/lexis-fonts.css
     lib_dir: libs
-    seal: false
+    css: ["theme.css"]
     nature:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-      ratio: "16:9"
+
+always_allow_html: true
 ---
 
-```{r meta, echo=FALSE}
-library(metathis)
-meta() %>%
-  meta_general(
-    description = "Data Manipulation with R",
-    generator = "xaringan and remark.js"
-  ) %>%
-  meta_name("github-repo" = "mjfrigaard/csuc-data-journalism") %>%
-  meta_social(
-    title = "Data Manipulation with R",
-    url = "https://mjfrigaard.github.io/csuc-data-journalism/",
-    og_type = "website",
-    og_author = "Martin Frigaard",
-    twitter_card_type = "summary",
-    twitter_creator = "@mjfrigaard"
-  )
-```
-
 ```{r setup, include=FALSE}
-dateWritten <- format(as.Date("2021-09-21"), format = "%B %d %Y")
-today <- format(Sys.Date(), format = "%B %d %Y")
-source("../code/copy-slide-images.R")
-library(knitr)
 library(tidyverse)
-library(fontawesome)
-options(
-    htmltools.dir.version = FALSE,
-    knitr.table.format = "html",
-    knitr.kable.NA = ''
-)
-knitr::opts_chunk$set(
-    warning = FALSE,
-    message = FALSE,
-    fig.path = "figs/",
-    fig.width = 7.252,
-    fig.height = 4,
-    comment = " ",
-    fig.retina = 3 # Better figure resolution
-)
-# Enables the ability to show all slides in a tile overview by pressing "o"
-xaringanExtra::use_tile_view()
-xaringanExtra::use_panelset()
-xaringanExtra::use_clipboard()
-xaringanExtra::use_share_again()
-xaringanExtra::style_share_again(share_buttons = "all")
-xaringanExtra::use_extra_styles(
-  hover_code_line = TRUE,
-  mute_unhighlighted_code = FALSE
-)
+library(reprex)
+library(xaringan)
+library(pagedown)
+library(xaringanthemer)
+# chunk options
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.align = "center", 
+                      dpi = 320, fig.height = 4, fig.path = "img/")
+# set options
+options(htmltools.dir.version = FALSE, 
+        tibble.max_extra_cols = 6,
+        ibble.print_max = 6,
+        tibble.width = 60)
 ```
+class: middle, center
+
 
 ```{r inf_mr, eval=FALSE, include=FALSE}
 xaringan::inf_mr()
 ```
 
-layout: true
-
-<!-- this adds the link footer to all slides, depends on footer-small class in css-->
-
-<div class="footer-small"><span>https://github.com/mjfrigaard/csuc-data-journalism</div>
-
----
-name: title-slide
-class: title-slide, center, middle, inverse
-
-# `r rmarkdown::metadata$title`
-#.fancy[`r rmarkdown::metadata$subtitle`]
-
-<br>
-
-.large[by Martin Frigaard]
-
-Written: `r dateWritten`
-
-Updated: `r today`
-
-.footer-large[.right[.fira[
-<br><br><br><br><br>[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
-]]]
-
----
-
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 10%
-background-size: 6%
+background-size: 9%
 
 # Objectives 
 
@@ -117,13 +55,13 @@ background-size: 6%
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 10%
-background-size: 6%
+background-size: 9%
 
 # Materials 
 
 ### Follow along with the exercises:
 
-https://mjfrigaard.github.io/csuc-data-journalism/lessons.html
+https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html
 
 ### A web version of these slides is located:
 
@@ -134,11 +72,11 @@ https://mjfrigaard.github.io/csuc-data-journalism/slides.html
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 10%
-background-size: 6%
+background-size: 9%
 
 # What are common data manipulation tasks?
 
-.leftcol[
+.pull-left[
 
 ### 1. Viewing the dataset
 
@@ -150,7 +88,7 @@ background-size: 6%
 
 --
 
-.rightcol[
+.pull-right[
 
 ### 4. Changing existing columns  
 
@@ -170,31 +108,30 @@ background-size: 35%
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 10%
-background-size: 6%
+background-size: 9%
 
 # `dplyr` = "dee + ply + ARRRR"
 
-.leftcol[
+.pull-left[
 
 #### *Pliers* are tools for grasping or manipulating common objects 
-.border[
-
-```{r pliers, fig.align='center', out.height='55%', out.width='55%', echo=FALSE}
-knitr::include_graphics(path = "img/pliers.png")
-```
-
-]
 
 ]
 
 --
 
-.rightcol[
+.pull-right[
 
 
 #### The `dplyr` package has a variety of verbs for performing common data manipulations
 
 ]
+
+--
+
+```{r pliers, out.height='45%', out.width='45%', echo=FALSE}
+knitr::include_graphics(path = "img/pliers.png")
+```
 
 
 
@@ -202,20 +139,19 @@ knitr::include_graphics(path = "img/pliers.png")
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 90% 10%
-background-size: 6%
+background-size: 9%
 
 # The `starwars` dataset  
 
 ### These data come from the Star Wars API: 
 
-```{r star-wars-jpeg, fig.align='center', out.height='40%', out.width='40%', echo=FALSE}
-# copy_slide_images("star-wars.jpeg")
+```{r star-wars-jpeg, out.height='60%', out.width='60%', echo=FALSE}
 knitr::include_graphics(path = "img/star-wars.jpeg")
 ```
 
 --
 
-#### Read more about the data here:
+### Read more about the data here:
 
 https://dplyr.tidyverse.org/reference/starwars.html
 
@@ -223,7 +159,7 @@ https://dplyr.tidyverse.org/reference/starwars.html
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 9%
-background-size: 6%
+background-size: 9%
 
 # Load the `starwars` dataset
 
@@ -243,14 +179,14 @@ dplyr::starwars
 ---
 class: left, top
 background-image: url(img/dplyr.png)
-background-position: 93% 7%
+background-position: 5% 95%
 background-size: 7%
 
 # Import `original_starwars` 
 
 --
 
-#### Import the data using the url and `readr`
+### Import the data using the url and `readr`
 
 ```{r original_starwars}
 library(readr)
@@ -259,38 +195,31 @@ original_starwars <- read_csv("https://bit.ly/mini-strwrs")
 
 --
 
-#### This loads the dataset into our ***Environment*** pane
+### This loads the dataset into our ***Environment*** pane
 
-.border[
-
-```{r starwars-env, fig.align='center', out.height='90%', out.width='90%', echo=FALSE}
-# copy_slide_images("starwars-env.png")
+```{r starwars-env, out.height='90%', out.width='90%', echo=FALSE}
 knitr::include_graphics(path = "img/starwars-env.png")
 ```
-
-]
-
-
 
 ---
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 90% 10%
-background-size: 6%
+background-size: 9%
 
 # `dplyr` verbs
 
 ### The primary verbs for data manipulation in `dplyr`:
 
-#### `glimpse()`
+### `glimpse()`
 
-#### `select()` 
+### `select()` 
 
-#### `filter()`  
+### `filter()`  
 
-#### `arrange()` 
+### `arrange()` 
 
-#### `mutate()`
+### `mutate()`
 
 
 ---
@@ -299,7 +228,7 @@ background-image: url(img/dplyr.png)
 background-position: 50% 10%
 background-size: 25%
 
-<br><br><br><br><br><br><br><br>
+<br><br><br><br>
 
 # Viewing the data = `glimpse()`
 
@@ -309,7 +238,7 @@ background-size: 25%
 ---
 class: left, top
 background-image: url(img/dplyr.png)
-background-position: 93% 7%
+background-position: 5% 95%
 background-size: 7%
 
 # View = `glimpse()`
@@ -327,7 +256,7 @@ glimpse(original_starwars)
 ---
 class: left, top
 background-image: url(img/dplyr.png)
-background-position: 93% 7%
+background-position: 5% 95%
 background-size: 7%
 
 ## View the data in the ***Console***
@@ -348,19 +277,16 @@ rmarkdown::paged_table(original_starwars)
 ---
 class: left, top
 background-image: url(img/dplyr.png)
-background-position: 93% 7%
+background-position: 5% 95%
 background-size: 7%
 
 ## View the data in the *Data Viewer*
 
 #### View the `original_starwars` dataset using RStudio's data editor
 
-```{r starwars-dataviewer, fig.align='center', out.height='50%', out.width='50%', echo=FALSE}
-# copy_slide_images("starwars-dataviewer.png")
+```{r starwars-dataviewer, out.height='80%', out.width='80%', echo=FALSE}
 knitr::include_graphics(path = "img/starwars-dataviewer.png")
 ```
-
-
 
 ---
 class: inverse, center, middle
@@ -368,15 +294,13 @@ background-image: url(img/dplyr.png)
 background-position: 50% 10%
 background-size: 25%
 
-<br><br><br><br><br><br>
-
 # Choosing columns = `select()`
 
 ---
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 15%
-background-size: 6%
+background-size: 9%
 
 ## Choose columns with `select()`
 
@@ -398,7 +322,7 @@ select(.data = original_starwars, name, homeworld, species)
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 15%
-background-size: 6%
+background-size: 9%
 
 ## Choose columns with `select()`
 
@@ -419,7 +343,7 @@ select(original_starwars, -c(mass, height, hair_color)))
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 9%
-background-size: 6%
+background-size: 9%
 
 # `select()` helpers
 
@@ -439,7 +363,7 @@ Helper                | Outputs
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 15%
-background-size: 6%
+background-size: 9%
 
 ## Choose columns with `select()` 
 
@@ -463,7 +387,7 @@ background-image: url(img/dplyr.png)
 background-position: 50% 15%
 background-size: 20%
 
-<br><br><br><br><br><br>
+<br><br><br><br>
 
 # See the `select()` exercises for more examples!
 
@@ -474,14 +398,14 @@ background-image: url(img/dplyr.png)
 background-position: 50% 10%
 background-size: 25%
 
-<br><br><br><br><br><br>
+<br><br>
 
 # Choosing rows with `filter()`
 
 ---
 class: left, top
 background-image: url(img/dplyr.png)
-background-position: 95% 7%
+background-position: 8% 94%
 background-size: 7%
 
 # Choose rows with `filter()` 
@@ -502,12 +426,12 @@ filter(original_starwars, species == "Human"))
 ---
 class: left top
 background-image: url(img/dplyr.png)
-background-position: 95% 7%
-background-size: 6%
+background-position: 7% 95%
+background-size: 9%
 
 # Choose rows with `filter()` 
 
-#### `filter()` logical conditions include: 
+### `filter()` logical conditions include: 
 
 Logical Test        | Outputs
 :--------------:    | :--------------------------:
@@ -525,8 +449,8 @@ Logical Test        | Outputs
 ---
 class: left, top
 background-image: url(img/dplyr.png)
-background-position: 95% 7%
-background-size: 6%
+background-position: 7% 95%
+background-size: 9%
 
 # Choose rows with `filter()` 
 
@@ -553,7 +477,7 @@ filter(original_starwars,
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 7%
-background-size: 6%
+background-size: 9%
 
 # Choose rows with `filter()` 
 
@@ -579,11 +503,11 @@ filter(original_starwars,
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 7%
-background-size: 6%
+background-size: 9%
 
 # Choose rows with `filter()` 
 
-#### Remember that *any* logical condition works for `filter()`ing, so we can borrow functions from other packages to help us (like `stringr::str_detect()`)
+#### Remember that *any* logical condition works for `filter()`ing, so we can borrow functions from other packages to help us 
 
 --
 
@@ -591,6 +515,10 @@ background-size: 6%
 filter(original_starwars, 
        str_detect(string = name, pattern = "[:digit:]"))
 ```
+
+--
+
+#### The `stringr::str_detect()` function returns a logical condition, so we can use it *inside* `filter()`
 
 --
 
@@ -607,7 +535,7 @@ background-image: url(img/dplyr.png)
 background-position: 50% 15%
 background-size: 20%
 
-<br><br><br><br><br><br><br>
+<br><br><br><br>
 
 # See the `filter()` exercises for more examples!
 
@@ -617,7 +545,7 @@ background-image: url(img/dplyr.png)
 background-position: 50% 10%
 background-size: 25%
 
-<br><br><br><br><br><br>
+<br><br><br>
 
 # Sorting rows with `arrange()`
 
@@ -626,7 +554,7 @@ background-size: 25%
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 7%
-background-size: 6%
+background-size: 10%
 
 # Sort rows with `arrange()`
 
@@ -647,7 +575,7 @@ arrange(original_starwars, height))
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 7%
-background-size: 6%
+background-size: 10%
 
 # Sort rows with `arrange()`
 
@@ -670,28 +598,20 @@ background-image: url(img/dplyr.png)
 background-position: 50% 15%
 background-size: 20%
 
-<br><br><br><br><br><br><br>
+<br><br><br><br>
 
 # See the `arrange()` exercises for more examples!
 
 
 ---
-class: inverse, center, middle
-background-image: url(img/dplyr.png)
-background-position: 50% 10%
-background-size: 25%
-
-<br><br><br><br><br><br>
-
-# Creating columns with `mutate()`
-
----
 class: left, top
 background-image: url(img/dplyr.png)
-background-position: 93% 7%
-background-size: 6%
+background-position: 94% 22%
+background-size: 8%
 
 # Create columns with `mutate()`
+
+### `mutate()` allows us to create new columns
 
 ```{r mutate-01-no-run, eval=FALSE}
 mutate(original_starwars, 
@@ -711,10 +631,14 @@ mutate(original_starwars,
 ---
 class: left, top
 background-image: url(img/dplyr.png)
-background-position: 93% 7%
-background-size: 6%
+background-position: 95% 20%
+background-size: 7%
 
-# Change existing columns with `mutate()` 
+# Create columns with `mutate()`
+
+--
+
+#### `mutate()` allows us to change existing columns, too
 
 ```{r mutate-02-no-run, eval=FALSE}
 mutate(original_starwars, 
@@ -752,7 +676,7 @@ background-image: url(img/dplyr.png)
 background-position: 50% 15%
 background-size: 20%
 
-<br><br><br><br><br><br>
+<br><br><br>
 
 # Write clearer code with the pipe `%>%`
 
@@ -760,7 +684,7 @@ background-size: 20%
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 93% 10%
-background-size: 6%
+background-size: 8%
 
 # The pipe (`%>%`) 
 
@@ -776,31 +700,29 @@ https://magrittr.tidyverse.org/
 
 --
 
-.leftcol[.center[
-
+.pull-left[
 
 ***Mac***
 
 #### `Cmd` + `Shift` + `M`
 
-]]
-
+]
 
 --
 
-.rightcol[.center[
+.pull-right[
 
 ***Windows***
 
 #### `Crtl` + `Shift` + `M`
 
-]]
+]
 
 ---
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 93% 10%
-background-size: 6%
+background-size: 8%
 
 # How the pipe (`%>%`) works 
 
@@ -810,8 +732,7 @@ background-size: 6%
 
 --
 
-```{r pipe-00, fig.align='center', out.height='70%', out.width='70%', echo=FALSE}
-# copy_slide_images("pipe-00.png")
+```{r pipe-00, fig.align='left', out.height='70%', out.width='70%', echo=FALSE}
 knitr::include_graphics(path = "img/pipe-00.png")
 ```
 
@@ -821,8 +742,7 @@ knitr::include_graphics(path = "img/pipe-00.png")
 
 --
 
-```{r pipe-01, fig.align='center', out.height='90%', out.width='90%', echo=FALSE}
-# copy_slide_images("pipe-01.png")
+```{r pipe-01, fig.align='left', out.height='90%', out.width='90%', echo=FALSE}
 knitr::include_graphics(path = "img/pipe-01.png")
 ```
  
@@ -831,7 +751,7 @@ knitr::include_graphics(path = "img/pipe-01.png")
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 93% 10%
-background-size: 6%
+background-size: 8%
 
 # How the pipe (`%>%`) works
 
@@ -839,23 +759,17 @@ background-size: 6%
 
 --
 
-```{r pipe-03, fig.align='center', out.height='48%', out.width='48%', echo=FALSE}
-# copy_slide_images("pipe-03.png")
+```{r pipe-02, fig.align='center', out.height='60%', out.width='60%', echo=FALSE}
 knitr::include_graphics(path = "img/pipe-03.png")
 ```
 
-.center[
-
 ***`%>%` can be read as "then"***
-
-]
-
 
 ---
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 97% 8%
-background-size: 6%
+background-size: 8%
 
 # Creating pipelines of functions
 
@@ -878,12 +792,12 @@ object_04 <- arrange(object_03, desc(bmi))
 ---
 class: left, top
 background-image: url(img/dplyr.png)
-background-position: 97% 8%
-background-size: 6%
+background-position: 10% 95%
+background-size: 8%
 
 # Creating pipelines of functions
 
-### Re-write these functions into a pipeline, ending with a single output (`new_original_starwars`)
+### Re-write these functions into a pipeline, ending with a single output (new_original_starwars)
 
 1. Filter `original_starwars` to only brown-haired characters over 100 cm tall  
 2. Create a `bmi` column using:  `mass / ((height / 100) ^ 2)`    
@@ -903,8 +817,8 @@ original_starwars %>%
 ---
 class: left, top
 background-image: url(img/dplyr.png)
-background-position: 97% 8%
-background-size: 6%
+background-position: 10% 95%
+background-size: 8%
 
 # Creating pipelines of functions
 
@@ -945,7 +859,7 @@ background-size: 20%
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 10% 95%
-background-size: 6%
+background-size: 8%
 
 # Resources for Data Manipluation 
 
@@ -966,8 +880,8 @@ pdf_slides <- str_replace(html_slides,
 pdf_slides <- paste0("pdfs/", pdf_slides)
 print_files <- tibble("pdfs" = pdf_slides,
   "htmls" = html_slides)
-# print_files$pdfs[6]
-# print_files$htmls[6]
+
+
 pagedown::chrome_print(input = print_files$htmls[6], output = print_files$pdfs[6], timeout = 120)
 ```
 
