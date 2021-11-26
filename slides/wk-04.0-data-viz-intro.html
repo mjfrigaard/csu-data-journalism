@@ -75,9 +75,9 @@ Updated: November 26 2021
 
 ---
 
-&lt;img src="img/ggplot2_masterpiece.png" width="70%" height="70%" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="img/ggplot2_masterpiece.png" width="65%" height="65%" style="display: block; margin: auto;" /&gt;
 
-.pull-right[Art by Allison Horst]
+.footer-large[.right[Art by Allison Horst]]
 
 ---
 class: inverse, center
@@ -117,7 +117,7 @@ https://mjfrigaard.github.io/csuc-data-journalism/slides.html
 
 ## Link to exercises 
 
-https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html
+https://mjfrigaard.github.io/csuc-data-journalism/lessons.html
 
 
 ---
@@ -374,18 +374,24 @@ background-image: url(img/ggplot2.png)
 background-position: 95% 90%
 background-size: 6%
 
+.border[
+
 
 ```r
 SmallNhanes %&gt;% 
 * ggplot() # initialize
 ```
 
-&lt;img src="figs/initialize-1.png" width="80%" height="80%" /&gt;
+&lt;img src="figs/initialize-1.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+
+]
 
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 90%
 background-size: 5%
+
+.border[
 
 
 ```r
@@ -393,12 +399,17 @@ SmallNhanes %&gt;%
 * ggplot(mapping = aes(x = weight, y = height)) # map variables
 ```
 
-&lt;img src="figs/mapping-1.png" width="80%" height="80%" /&gt;
+&lt;img src="figs/mapping-1.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
 
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 90%
 background-size: 6%
+
+.border[
 
 
 ```r
@@ -407,7 +418,9 @@ SmallNhanes %&gt;%
 * geom_point() # add geoms
 ```
 
-&lt;img src="figs/geoms-1.png" width="80%" height="80%" /&gt;
+&lt;img src="figs/geoms-1.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+
+]
 
 ---
 background-image: url(img/ggplot2.png)
@@ -581,6 +594,8 @@ background-size: 6%
 
 ### Your Turn (solution 1)
 
+.border[
+
 
 ```r
 SmallNhanes %&gt;% 
@@ -589,7 +604,11 @@ SmallNhanes %&gt;%
   geom_smooth()
 ```
 
-&lt;img src="figs/aes-in-ggplot2-sol-1.png" width="70%" height="70%" /&gt;
+&lt;img src="figs/aes-in-ggplot2-sol-1.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
 
 ---
 background-image: url(img/ggplot2.png)
@@ -597,6 +616,8 @@ background-position: 95% 7%
 background-size: 6%
 
 ### Your Turn (solution 2)
+
+.border[
 
 
 ```r
@@ -606,7 +627,11 @@ SmallNhanes %&gt;%
 * geom_smooth(mapping = aes(x = weight, y = height))
 ```
 
-&lt;img src="figs/aes-in-geom-sol-1.png" width="70%" height="70%" /&gt;
+&lt;img src="figs/aes-in-geom-sol-1.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
 
 ---
 class: inverse, center
@@ -733,13 +758,19 @@ background-size: 4%
 ### Aesthetics: color 
 
 
+.border[
+
+
 ```r
 SmallNhanes %&gt;% 
   ggplot(aes(x = weight, y = height)) + 
 *   geom_point(aes(color = gender))
 ```
 
-&lt;img src="figs/color-1.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figs/color-1.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
 
 ---
 background-image: url(img/ggplot2.png)
@@ -748,6 +779,8 @@ background-size: 4%
 
 ### Aesthetics: size 
 
+.border[
+
 
 ```r
 SmallNhanes %&gt;% 
@@ -755,7 +788,11 @@ SmallNhanes %&gt;%
 *   geom_point(aes(color = gender, size = gender))
 ```
 
-&lt;img src="figs/size-point-1.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figs/size-point-1.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
 
 ---
 background-image: url(img/ggplot2.png)
@@ -764,6 +801,8 @@ background-size: 4%
 
 ### Aesthetics: shape
 
+.border[
+
 
 ```r
 SmallNhanes %&gt;% 
@@ -771,7 +810,11 @@ SmallNhanes %&gt;%
 *   geom_point(aes(color = gender, size = gender, shape = gender))
 ```
 
-&lt;img src="figs/shape-point-1.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figs/shape-point-1.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
 
 ---
 background-image: url(img/ggplot2.png)
@@ -780,6 +823,8 @@ background-size: 4%
 
 ### Aesthetics: alpha (opacity)
 
+.border[
+
 
 ```r
 SmallNhanes %&gt;% 
@@ -787,7 +832,11 @@ SmallNhanes %&gt;%
 *   geom_point(aes(color = gender, alpha = gender))
 ```
 
-&lt;img src="figs/alpha-point-1.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figs/alpha-point-1.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
 
 ---
 background-image: url(img/ggplot2.png)
@@ -823,7 +872,12 @@ background-size: 4%
 
 ### How can we create this plot?
 
+.border[
+
 &lt;img src="figs/red-points-1-1.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+]
+
 
 
 ---
@@ -832,6 +886,8 @@ background-position: 95% 90%
 background-size: 4%
 
 ### Inside `aes()`
+
+.border[
 
 
 ```r
@@ -842,12 +898,17 @@ SmallNhanes %&gt;%
 
 &lt;img src="figs/inside-aes-no-eval-1.png" width="65%" height="65%" style="display: block; margin: auto;" /&gt;
 
+]
+
+
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 90%
 background-size: 4%
 
 ### Outside `aes()`
+
+.border[
 
 
 ```r
@@ -857,6 +918,10 @@ SmallNhanes %&gt;%
 ```
 
 &lt;img src="figs/red-points-1.png" width="65%" height="65%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
 
 
 ---
@@ -877,7 +942,12 @@ SmallNhanes %&gt;%
 
 --
 
+.border[
+
 &lt;img src="figs/inside-aes-no-eval-2-1.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
 
 
 ---
@@ -1071,7 +1141,7 @@ SmallNhanes %&gt;%
 
 .border[
 
-&lt;img src="figs/layer-1-plot-1-1.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figs/layer-1-plot-1-1.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 

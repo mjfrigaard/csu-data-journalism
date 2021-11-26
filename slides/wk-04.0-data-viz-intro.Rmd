@@ -139,12 +139,12 @@ Updated: `r today`
 
 ---
 
-```{r ggplot2_masterpiece, out.height="70%", out.width="70%", echo = FALSE, fig.align='left'}
+```{r ggplot2_masterpiece, out.height="65%", out.width="65%", echo = FALSE, fig.align='center'}
 # copy_slide_images("ggplot2_masterpiece.png")
 knitr::include_graphics("img/ggplot2_masterpiece.png")
 ```
 
-.pull-right[Art by Allison Horst]
+.footer-large[.right[Art by Allison Horst]]
 
 ---
 class: inverse, center
@@ -184,7 +184,7 @@ https://mjfrigaard.github.io/csuc-data-journalism/slides.html
 
 ## Link to exercises 
 
-https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html
+https://mjfrigaard.github.io/csuc-data-journalism/lessons.html
 
 
 ---
@@ -439,31 +439,44 @@ background-image: url(img/ggplot2.png)
 background-position: 95% 90%
 background-size: 6%
 
-```{r initialize, out.height='80%', out.width='80%'}
+.border[
+
+```{r initialize, fig.align='center', out.height='80%', out.width='80%'}
 SmallNhanes %>% 
   ggplot() # initialize #<<
 ```
+
+]
 
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 90%
 background-size: 5%
 
-```{r mapping, out.height='80%', out.width='80%'}
+.border[
+
+```{r mapping, fig.align='center', out.height='80%', out.width='80%'}
 SmallNhanes %>% 
   ggplot(mapping = aes(x = weight, y = height)) # map variables #<<
 ```
+
+]
+
 
 ---
 background-image: url(img/ggplot2.png)
 background-position: 95% 90%
 background-size: 6%
 
-```{r geoms, out.height='80%', out.width='80%'}
+.border[
+
+```{r geoms, fig.align='center', out.height='80%', out.width='80%'}
 SmallNhanes %>% 
   ggplot(mapping = aes(x = weight, y = height)) + 
   geom_point() # add geoms #<<
 ```
+
+]
 
 ---
 background-image: url(img/ggplot2.png)
@@ -640,12 +653,18 @@ background-size: 6%
 
 ### Your Turn (solution 1)
 
-```{r aes-in-ggplot2-sol, out.height='70%', out.width='70%'}
+.border[
+
+```{r aes-in-ggplot2-sol, fig.align='center', out.height='60%', out.width='60%'}
 SmallNhanes %>% 
   ggplot(mapping = aes(x = weight, y = height)) + #<<
   geom_point() + 
   geom_smooth()
 ```
+
+]
+
+
 
 ---
 background-image: url(img/ggplot2.png)
@@ -654,12 +673,18 @@ background-size: 6%
 
 ### Your Turn (solution 2)
 
-```{r aes-in-geom-sol, out.height='70%', out.width='70%'}
+.border[
+
+```{r aes-in-geom-sol, fig.align='center', out.height='60%', out.width='60%'}
 SmallNhanes %>% 
   ggplot() + 
   geom_point(mapping = aes(x = weight, y = height)) + #<< 
   geom_smooth(mapping = aes(x = weight, y = height)) #<< 
 ```
+
+]
+
+
 
 ---
 class: inverse, center
@@ -780,11 +805,17 @@ background-size: 4%
 
 ### Aesthetics: color 
 
-```{r color, out.height='70%', out.width='70%', fig.align='center'}
+
+.border[
+
+```{r color, fig.align='center', out.height='60%', out.width='60%'}
 SmallNhanes %>% 
   ggplot(aes(x = weight, y = height)) + 
     geom_point(aes(color = gender)) #<<
 ```
+
+]
+
 
 ---
 background-image: url(img/ggplot2.png)
@@ -793,11 +824,17 @@ background-size: 4%
 
 ### Aesthetics: size 
 
-```{r size-point, out.height='70%', out.width='70%', fig.align='center'}
+.border[
+
+```{r size-point, fig.align='center', out.height='60%', out.width='60%'}
 SmallNhanes %>% 
   ggplot(aes(x = weight, y = height)) + 
     geom_point(aes(color = gender, size = gender)) #<<
 ```
+
+]
+
+
 
 ---
 background-image: url(img/ggplot2.png)
@@ -806,11 +843,17 @@ background-size: 4%
 
 ### Aesthetics: shape
 
-```{r shape-point, fig.align='center', out.height='70%', out.width='70%'}
+.border[
+
+```{r shape-point, fig.align='center', out.height='60%', out.width='60%'}
 SmallNhanes %>% 
   ggplot(aes(x = weight, y = height)) + 
     geom_point(aes(color = gender, size = gender, shape = gender)) #<<
 ```
+
+]
+
+
 
 ---
 background-image: url(img/ggplot2.png)
@@ -819,11 +862,17 @@ background-size: 4%
 
 ### Aesthetics: alpha (opacity)
 
-```{r alpha-point, fig.align='center', out.height='70%', out.width='70%'}
+.border[
+
+```{r alpha-point, fig.align='center', out.height='60%', out.width='60%'}
 SmallNhanes %>% 
   ggplot(aes(x = weight, y = height)) + 
     geom_point(aes(color = gender, alpha = gender)) #<<
 ```
+
+]
+
+
 
 ---
 background-image: url(img/ggplot2.png)
@@ -862,11 +911,16 @@ background-size: 4%
 
 ### How can we create this plot?
 
+.border[
+
 ```{r red-points-1, echo=FALSE, out.width='70%', out.height='70%', fig.align='center'}
 SmallNhanes %>% 
   ggplot(aes(x = weight, y = height)) + 
   geom_point(color = "red") # outside aes #<<
 ```
+
+]
+
 
 
 ---
@@ -876,11 +930,16 @@ background-size: 4%
 
 ### Inside `aes()`
 
+.border[
+
 ```{r inside-aes-no-eval, fig.align='center', out.height='65%', out.width='65%'}
 SmallNhanes %>% 
   ggplot(aes(x = weight, y = height)) + 
     geom_point(aes(color = "red")) # inside aes #<<
 ```
+
+]
+
 
 ---
 background-image: url(img/ggplot2.png)
@@ -889,11 +948,17 @@ background-size: 4%
 
 ### Outside `aes()`
 
+.border[
+
 ```{r red-points, fig.align='center', out.height='65%', out.width='65%'}
 SmallNhanes %>% 
   ggplot(aes(x = weight, y = height)) + 
   geom_point(color = "red") # outside aes #<<
 ```
+
+]
+
+
 
 
 ---
@@ -913,11 +978,16 @@ SmallNhanes %>%
 
 --
 
+.border[
+
 ```{r inside-aes-no-eval-2, echo=FALSE, out.height='50%', out.width='50%', fig.align='center'}
 SmallNhanes %>% 
   ggplot(aes(x = weight, y = height)) + 
     geom_point(aes(color = "red")) # inside aes #<<
 ```
+
+]
+
 
 
 ---
@@ -1119,7 +1189,7 @@ SmallNhanes %>%
 
 .border[
 
-```{r layer-1-plot-1, echo=FALSE, fig.align='center', out.width='60%', out.height='60%'}
+```{r layer-1-plot-1, echo=FALSE, fig.align='center', out.width='70%', out.height='70%'}
 SmallNhanes %>% 
   ggplot(aes(x = weight, y = height)) + # global #<<
   geom_point(aes(color = gender))
