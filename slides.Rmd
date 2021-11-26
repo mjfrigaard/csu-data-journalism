@@ -77,194 +77,114 @@ cat_bullet_pdf <- function(x, pattern) {
 }
 ```
 
-## Week 1 (2021-08-23)
+## Week 1 
 
 
 ```{r wk-01-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-01")
 ```
 
-##### PDFS
+#### PDFS
 
 ```{r cat_bullet_pdf-01, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-01")
 ```
 
 
-## Week 2 (2021-08-30)
+## Week 2 
 
 
 ```{r wk-02-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-02")
 ```
 
-##### PDFS
+#### PDFS
 
 ```{r cat_bullet_pdf-02, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-02")
 ```
 
-## Week 3 (2021-09-06)
-
-***Labor day, Campus closed***
-
-## Week 4 (2021-09-13)
-
+## Week 3 
 
 ```{r wk-03-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-03")
 ```
 
-##### PDFS
+#### PDFS
 
 ```{r cat_bullet_pdf-03, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-03")
 ```
 
-## Week 5 (2021-09-20)
+## Week 4 
 
 ```{r wk-04-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-04")
 ```
 
-##### PDFS
+#### PDFS
 
 ```{r cat_bullet_pdf-04, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-04")
 ```
 
-## Week 6 (2021-09-27)
+## Week 5 
 
 ```{r wk-05-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-05")
 ```
 
-##### PDFS
+#### PDFS
 
 ```{r cat_bullet_pdf-05, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-05")
 ```
 
-## Week 7 (2021-10-04)
+## Week 6 
 
 ```{r wk-06-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-06")
 ```
 
-##### PDFS
+#### PDFS
 
 ```{r cat_bullet_pdf-06, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-06")
 ```
 
-## Week 8 (2021-10-11)
+## Week 7 
 
 ```{r wk-07-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-07")
 ```
 
-##### PDFS
+#### PDFS
 
 ```{r cat_bullet_pdf-07, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-07")
 ```
 
-## Week 9 (2021-10-18)
-
+## Week 8 
 
 ```{r wk-08-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-08")
 ```
 
-##### PDFS
+#### PDFS
 
 ```{r cat_bullet_pdf-08, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-08")
 ```
 
-## Week 10 (2021-10-25)
+## Week 9 
 
-
-```{r wk-09-files, results='asis', echo=FALSE, eval=FALSE}
+```{r wk-09-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-09")
 ```
 
-##### PDFS
+#### PDFS
 
-```{r cat_bullet_pdf-09, results='asis', echo=FALSE, eval=FALSE}
+```{r cat_bullet_pdf-09, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-09")
-```
-
-## Week 11 (2021-11-01)
-
-```{r wk-10-files, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-10")
-```
-
-##### PDFS
-
-```{r cat_bullet_pdf-10, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-10")
-```
-
-
-## Week 12 (2021-11-08)
-
-```{r wk-11-files, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-11")
-```
-
-##### PDFS
-
-```{r cat_bullet_pdf-11, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-11")
-```
-
-## Week 13 (2021-11-15)
-
-```{r wk-12-files, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-12")
-```
-
-##### PDFS
-
-```{r cat_bullet_pdf-12, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-12")
-```
-
-## Week 14 (2021-11-22)
-
-```{r wk-13-files, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-13")
-```
-
-##### PDFS
-
-```{r cat_bullet_pdf-13, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-13")
-```
-
-## Week 15 (2021-11-29)
-
-```{r wk-14-files, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-14")
-```
-
-##### PDFS
-
-```{r cat_bullet_pdf-14, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-14")
-```
-
-## Week 16 (2021-12-06)
-
-```{r wk-15-files, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-15")
-```
-
-##### PDFS
-
-```{r cat_bullet_pdf-15, results='asis', echo=FALSE, eval=FALSE}
-cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-15")
 ```
 

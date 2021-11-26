@@ -1,0 +1,89 @@
+
+
+
+## Week 10 
+
+
+```{r wk-10-files, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-10")
+```
+
+#### PDFS
+
+```{r cat_bullet_pdf-10, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-10")
+```
+
+## Week 11 
+
+```{r wk-11-files, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-11")
+```
+
+#### PDFS
+
+```{r cat_bullet_pdf-11, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-11")
+```
+
+
+## Week 12 
+
+```{r wk-12-files, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-12")
+```
+
+#### PDFS
+
+```{r cat_bullet_pdf-12, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-12")
+```
+
+## Week 13 
+
+```{r wk-13-files, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-13")
+```
+
+#### PDFS
+
+```{r cat_bullet_pdf-13, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-13")
+```
+
+## Week 14 
+
+```{r wk-14-files, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-14")
+```
+
+#### PDFS
+
+```{r cat_bullet_pdf-14, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-14")
+```
+
+## Week 15 
+
+```{r wk-15-files, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-15")
+```
+
+#### PDFS
+
+```{r cat_bullet_pdf-15, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-15")
+```
+
+## Week 16 
+
+```{r wk-16-files, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-16")
+```
+
+#### PDFS
+
+```{r cat_bullet_pdf-16, results='asis', echo=FALSE, eval=FALSE}
+cat_bullet_pdf(x = hrefs_bullets, pattern = "^slides/wk-16")
+```
+
