@@ -1,104 +1,39 @@
 ---
 title: "Data Visualization (part 2)"
-subtitle: "Intermediate graphing techniques with ggplot2"
-author: "Martin Frigaard"
-institute: "California State University | Journalism & Public Relations: Data Journalism"
+subtitle: "Journalism 303: Intermediate graphing techniques with ggplot2"
+date: '`r Sys.Date()`'
+author: 
+  - "Martin Frigaard"
 output:
   xaringan::moon_reader:
-    css:
-      - default
-      - css/lexis.css
-      - css/lexis-fonts.css
     lib_dir: libs
-    seal: false
+    css: ["theme.css"]
     nature:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-      ratio: "16:9"
----
 
-```{r meta, echo=FALSE}
-library(metathis)
-meta() %>%
-  meta_general(
-    description = "Data Visualization (part 2)",
-    generator = "xaringan and remark.js"
-  ) %>%
-  meta_name("github-repo" = "mjfrigaard/csuc-data-journalism") %>%
-  meta_social(
-    title = "Data Visualization (part 2)",
-    url = "https://mjfrigaard.github.io/csuc-data-journalism/",
-    og_type = "website",
-    og_author = "Martin Frigaard",
-    twitter_card_type = "summary",
-    twitter_creator = "@mjfrigaard"
-  )
-```
+always_allow_html: true
+---
 
 ```{r setup, include=FALSE}
-dateWritten <- format(as.Date("2021-09-21"), format = "%B %d %Y")
-today <- format(Sys.Date(), format = "%B %d %Y")
-source("../code/copy-slide-images.R")
-library(knitr)
 library(tidyverse)
-library(fontawesome)
-options(
-    htmltools.dir.version = FALSE,
-    knitr.table.format = "html",
-    knitr.kable.NA = ''
-)
-knitr::opts_chunk$set(
-    warning = FALSE,
-    message = FALSE,
-    fig.path = "figs/",
-    fig.width = 7.252,
-    fig.height = 4,
-    comment = " ",
-    fig.retina = 3 # Better figure resolution
-)
-# Enables the ability to show all slides in a tile overview by pressing "o"
-xaringanExtra::use_tile_view()
-xaringanExtra::use_panelset()
-xaringanExtra::use_clipboard()
-xaringanExtra::use_share_again()
-xaringanExtra::style_share_again(share_buttons = "all")
-xaringanExtra::use_extra_styles(
-  hover_code_line = TRUE,
-  mute_unhighlighted_code = FALSE
-)
+library(reprex)
+library(xaringan)
+library(pagedown)
+library(xaringanthemer)
+# folders
+folders <- c("code", "data", "img", "pdfs")
+purrr::map(.x = folders, .f = fs::dir_create)
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      fig.align = "center", 
+                      dpi = 320, 
+                      fig.height = 4, 
+                      fig.path = "img/")
+options(width = 60, max.print = 60)
 ```
 
-```{r inf_mr, eval=FALSE, include=FALSE}
-xaringan::inf_mr()
-```
-
-layout: true
-
-<!-- this adds the link footer to all slides, depends on footer-small class in css-->
-
-<div class="footer-small"><span>https://github.com/mjfrigaard/csuc-data-journalism</div>
-
----
-name: title-slide
-class: title-slide, center, middle, inverse
-
-# `r rmarkdown::metadata$title`
-#.fancy[`r rmarkdown::metadata$subtitle`]
-
-<br>
-
-.large[by Martin Frigaard]
-
-Written: `r dateWritten`
-
-Updated: `r today`
-
-.footer-large[.right[.fira[
-<br><br><br><br><br>[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
-]]]
-
----
 class: inverse, center, top
 background-image: url(img/ggplot2.png)
 background-position: 50% 70%
@@ -110,7 +45,7 @@ background-size: 35%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 # Load the packages 
 
@@ -129,11 +64,11 @@ library(tidyverse)
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Outline
 
-.leftcol[
+.pull-left[
 
 ###  Recap `ggplot2`
 
@@ -150,7 +85,7 @@ background-size: 6%
 
 ]
 
-.rightcol[
+.pull-right[
 
 ### Adding Text
 
@@ -176,7 +111,7 @@ https://mjfrigaard.github.io/csuc-data-journalism/slides.html
 
 ## Link to exercises 
 
-https://mjfrigaard.github.io/csuc-data-journalism/lessons.html
+https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html
 
 
 
@@ -192,98 +127,104 @@ background-size: 35%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 # Recap of `ggplot2`
 
 ## In the previous lesson, we covered: 
 
-> 1) The grammar of graphics
+### 1) The grammar of graphics
 
-> + `ggplot2` is a language of *layers*, organized linearly 
-
---
-
-> + `ggplot2`'s layers give us a "*linear ordering of phrases*" to build an infinite number of graphs "*which convey a gnarly network of ideas.*" 
+- `ggplot2` is a language of *layers*, organized linearly 
 
 --
 
-> + "**Infinitely extensible**"
+- `ggplot2`'s layers give us a "*linear ordering of phrases*" to build an infinite number of graphs "*which convey a gnarly network of ideas.*" 
+
+--
+
+- "**Infinitely extensible**"
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 # Recap of `ggplot2` (cont)
 
 ## In the previous lesson, we covered:
 
-> 2) Identifying graph aesthetics 
+### 1) The grammar of graphics
+
+### 2) Identifying graph aesthetics 
 
 --
 
-> *position (`x` and `y`), size, color, shape, etc.*
+- position (`x` and `y`), size, color, shape, etc.
 
 --
 
-.border[
-
-```{r graph-elements, echo=FALSE, fig.align='center', out.width='67%', out.height='70%'}
+```{r graph-elements, echo=FALSE, out.width='100%', out.height='100%'}
 knitr::include_graphics(path = "img/graph-elements.png")
 ```
 
-]
-
-
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 # Recap of `ggplot2` (cont)
 
 ## In the previous lesson, we covered:
 
+### 1) The grammar of graphics
 
-> 3) Recognizing and using `geoms`
+### 2) Identifying graph aesthetics
 
---
-
-> - Scatter plot = `geom_point()`
-
---
-
-> - Box plot = `geom_boxplot()`
+### 3) Recognizing and using `geoms`
 
 --
 
-> - Line graph = `geom_line()`  
+- Scatter plot = `geom_point()`
 
 --
 
-> - Bar graph = `geom_histogram()`, `geom_bar()`, `geom_col()`
+- Box plot = `geom_boxplot()`
+
+--
+
+- Line graph = `geom_line()`  
+
+--
+
+- Bar graph = `geom_histogram()`, `geom_bar()`, `geom_col()`
 
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 # Recap of `ggplot2` (cont)
 
-> 4) Labels and factes (exercises)
+## In the previous lesson, we covered:
+
+### 1) The grammar of graphics
+
+### 2) Identifying graph aesthetics
+
+### 3) Recognizing and using `geoms`
+
+### 4) Labels and factes (exercises)
+
+- **Build labels first!** 
 
 --
 
-> - **Build labels first!** 
-
---
-
-> - Facet for subplots of levels in a grouping variable
+- Facet for subplots of levels in a grouping variable
 
 
 ---
@@ -299,7 +240,7 @@ background-size: 35%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Things to consider (1)
 
@@ -325,7 +266,7 @@ background-size: 6%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Things to consider (2)
 
@@ -346,11 +287,11 @@ background-size: 6%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Getting started 
 
-#### 1) Clearly define the question or problem
+### 1) Clearly define the question or problem
 
 - Start with a general goal, broad question, or novel problem
 
@@ -358,11 +299,17 @@ background-size: 6%
 
 --
 
-#### 2) Matching the measurements to metrics 
+### 2) Matching the measurements to metrics 
 
 - *'Measurements'* are what we care about  
 
 - *'Metrics'* are the available data
+
+--
+
+### 3) Is a data visualization the best choice?
+
+- Not always...
 
 ---
 class: inverse, center, top
@@ -377,25 +324,25 @@ background-size: 35%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 8% 94%
-background-size: 6%
+background-size: 8%
 
 ## Example: How has COVID changed our modes of transportation?
 
 ### What kind of measurements would these be?
 
-*how are people traveling (walk, drive, etc.)*
+***how are people traveling (walk, drive, etc.)***
 
 --
 
 ### What would these data look like?
 
-*what would the .blue[columns] and .blue[rows] look like?*
+***what would the columns and rows look like?***
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 # Apple Mobility Data
 
@@ -417,7 +364,7 @@ AppleMobRaw <- readr::read_csv("https://bit.ly/36tTVpe")
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 # Raw Apple Mobility Data
 
@@ -426,7 +373,7 @@ AppleMobRaw %>% View("Apple")
 ```
 
 
-```{r apple-mob-view, echo=FALSE, fig.align='center', out.width='75%', out.height='75%'}
+```{r apple-mob-view, echo=FALSE, out.width='95%', out.height='95%'}
 knitr::include_graphics(path = "img/apple-mob-view.png")
 ```
 
@@ -442,7 +389,7 @@ background-size: 35%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Wrangling Apple Mobility Data
 
@@ -470,7 +417,7 @@ background-size: 6%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## View Apple Mobility Data (head)
 
@@ -487,7 +434,7 @@ rmarkdown::paged_table(AppleMobRaw %>% head())
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## View Apple Mobility Data (tail)
 
@@ -503,33 +450,31 @@ rmarkdown::paged_table(AppleMobRaw %>% tail())
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Tidying Apple Mobility Data 
 
 Tidy dates and mobility into `date` and `dir_request` ('relative usage of directions')
 
 ```{r tidying-no-show, eval=FALSE}
-AppleMobRaw %>% tidyr::pivot_longer(cols = -c(geo_type:country), 
+AppleMobRaw %>% 
+  tidyr::pivot_longer(cols = -c(geo_type:country), 
     names_to = "date", values_to = "dir_request")
 ```
-
-View the top 10 rows of this output below:
 
 ```{r tidying-show, echo=FALSE}
 rmarkdown::paged_table(AppleMobRaw %>% 
   tidyr::pivot_longer(
     cols = -c(geo_type:country), 
     names_to = "date", 
-    values_to = "dir_request") %>% head(10))
+    values_to = "dir_request"))
 ```
-
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Manipulate Apple Mobility Data
 
@@ -559,20 +504,19 @@ AppleMobRaw %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### New Tidy Apple Mobility Data!
 
 ```{r apple-tidy-view.png, echo=FALSE, out.width='80%', out.height='80%'}
 knitr::include_graphics(path = "img/apple-tidy-view.png")
-# copy_slide_images("apple-tidy-view.png")
 ```
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Assign Apple Mobility Data to `TidyApple`
 
@@ -602,7 +546,7 @@ AppleMobRaw %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### `TidyApple`: Format Variables
 
@@ -623,7 +567,7 @@ TidyApple %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### `TidyApple`: Rename Variables
 
@@ -639,7 +583,7 @@ TidyApple %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### `TidyApple`: Check Formatted Variables
 
@@ -655,7 +599,7 @@ Now we can see `date` is formatted correctly
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### `TidyApple`: Counting
 
@@ -663,7 +607,7 @@ background-size: 6%
 
 Count the `trans_type` variable with `dplyr::count()`
 
-.leftcol[
+.pull-left[
 
 <br>
 
@@ -674,7 +618,7 @@ TidyApple %>%
 
 ]
 
-.rightcol[
+.pull-right[
 
 *Add the `sort = TRUE` argument*
 
@@ -697,7 +641,7 @@ background-size: 35%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## What kinds of question(s) do graphs like these answer?
 
@@ -718,7 +662,7 @@ lab_hist <- labs(x = "Apple directions requests",
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 8% 95%
-background-size: 6%
+background-size: 8%
 
 ## Histogram = single variable distributions
 
@@ -732,14 +676,13 @@ TidyApple %>% ggplot() +
 
 ```{r geom-hist-1-show, echo=FALSE, out.height='60%', out.width='60%'}
 knitr::include_graphics(path = "img/geom-hist-1.png")
-# copy_slide_images("geom-hist-1.png")
 ```
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Histograms: Changing the Y Axis
 
@@ -765,7 +708,7 @@ TidyApple %>% ggplot() +
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Histograms: Changing the Y Axis
 
@@ -773,14 +716,13 @@ background-size: 6%
 
 ```{r geom-hist-scales-1-show, echo=FALSE, out.height='90%', out.width='90%'}
 knitr::include_graphics(path = "img/geom-hist-scales-1.png")
-# copy_slide_images("geom-hist-scales-1.png")
 ```
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Changing Histogram Shape
 
@@ -802,14 +744,13 @@ TidyApple %>% ggplot() +
 
 ```{r bins-15-no-show-1-show, echo=FALSE, out.height='75%', out.width='75%'}
 knitr::include_graphics(path = "img/bins-15-no-show-1.png")
-# copy_slide_images("bins-15-no-show-1.png")
 ```
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Changing Histogram Shape
 
@@ -831,7 +772,6 @@ TidyApple %>% ggplot() +
 
 ```{r bins-45-no-show-1-show, echo=FALSE, out.height='75%', out.width='75%'}
 knitr::include_graphics(path = "img/bins-45-no-show-1.png")
-# copy_slide_images("bins-45-no-show-1.png")
 ```
 
 ---
@@ -854,7 +794,7 @@ How does the distribution of `dir_request` across `trans_type`?
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Density Plots
 
@@ -873,7 +813,7 @@ lab_density <- labs(x = "Apple directions requests",
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Density Plots
 
@@ -899,20 +839,19 @@ TidyApple %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Density Plots
 
 ```{r density-no-show-1-show, echo=FALSE, out.height='85%', out.width='85%'}
 knitr::include_graphics(path = "img/density-no-show-1.png")
-# copy_slide_images("density-no-show-1.png")
 ```
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Density Plots (`alpha`)
 
@@ -942,7 +881,7 @@ TidyApple %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Density Plots (`alpha`)
 
@@ -950,14 +889,13 @@ Now we can see where they overlap
 
 ```{r density-alpha-no-show-1-show, echo=FALSE, out.height='85%', out.width='85%'}
 knitr::include_graphics(path = "img/density-alpha-no-show-1.png")
-# copy_slide_images("density-alpha-no-show-1.png")
 ```
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Violin Plots 
 
@@ -976,7 +914,7 @@ These allow us to add a categorical variable to the `x` axis.
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Violin Plots 
 
@@ -999,7 +937,6 @@ TidyApple %>%
 
 ```{r geom_violin-1-show, echo=FALSE, out.height='85%', out.width='85%'}
 knitr::include_graphics(path = "img/geom_violin-1.png")
-# copy_slide_images("geom_violin-1.png")
 ```
 
 
@@ -1007,7 +944,7 @@ knitr::include_graphics(path = "img/geom_violin-1.png")
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Violin Plots: *confused?*
 
@@ -1037,7 +974,7 @@ TidyApple %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Violin Plots *and* Boxpots
 
@@ -1053,7 +990,6 @@ TidyApple %>%
 
 ```{r geom_violin-geom_boxplot-run-no-show-1-show, echo=FALSE, out.height='95%', out.width='95%'}
 knitr::include_graphics(path = "img/geom_violin-geom_boxplot-run-no-show-1.png")
-# copy_slide_images("geom_violin-geom_boxplot-run-no-show-1.png")
 ```
 
 
@@ -1061,7 +997,7 @@ knitr::include_graphics(path = "img/geom_violin-geom_boxplot-run-no-show-1.png")
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Rideline Plots 
 
@@ -1090,7 +1026,7 @@ TidyApple %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Rideline Plots 
 
@@ -1109,7 +1045,6 @@ TidyApple %>%
 
 ```{r geom_density_ridges-plot-1, echo=FALSE, out.height='80%', out.width='80%'}
 knitr::include_graphics(path = "img/geom_density_ridges-plot-1.png")
-# copy_slide_images("geom_density_ridges-plot-1.png")
 ```
 
 
@@ -1126,7 +1061,7 @@ background-size: 35%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Narrowing date ranges
 
@@ -1150,7 +1085,7 @@ TidyApple %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Check with `skimr` output
 
@@ -1160,7 +1095,6 @@ These are helpful if we're checking a filter on a numerical certain condition (`
 
 ```{r skimr-output-png, echo=FALSE, out.height='100%', out.width='100%', fig.align='left'}
 knitr::include_graphics(path = "img/skimr-output.png")
-# copy_slide_images("skimr-output.png")
 ```
 
 
@@ -1168,7 +1102,7 @@ knitr::include_graphics(path = "img/skimr-output.png")
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Narrow to US Cities (Feb-Jul) 
 
@@ -1192,7 +1126,7 @@ TidyApple %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Line Graph: Labels (1)
 
@@ -1218,7 +1152,7 @@ paste0(min(USCitiesFebJul$date),
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Line Graph: Labels (2)
 
@@ -1246,7 +1180,7 @@ labs(x = "Date",
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Line Graph: Labels (3)
 
@@ -1265,14 +1199,13 @@ USCitiesFebJul %>%
 
 ```{r apply-lab_line_graph-show, echo=FALSE, out.height='100%', out.width='100%', fig.align='center'}
 knitr::include_graphics(path = "img/apply-lab_line_graph-show.png")
-# copy_slide_images("apply-lab_line_graph-show.png")
 ```
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Line Graphs: Overlapping Lines
 
@@ -1280,14 +1213,13 @@ Consider our previous line graph--the lines overlap a bit.
 
 ```{r apply-lab_line_graph-no-run-1-show, echo=FALSE, out.height='100%', out.width='100%', fig.align='center'}
 knitr::include_graphics(path = "img/apply-lab_line_graph-no-run-1.png")
-# copy_slide_images("apply-lab_line_graph-no-run-1.png")
 ```
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Line Graph: Line Size (1)
 
@@ -1307,7 +1239,7 @@ USCitiesFebJul %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Line Graph: Line Size (2)
 
@@ -1327,7 +1259,6 @@ USCitiesFebJul %>%
 ```{r geom_line-smaller-size-1-show, echo=FALSE, out.height='100%', out.width='100%', fig.align='center'}
 knitr::include_graphics(path =
 "img/geom_line-smaller-size-no-show-1.png")
-# copy_slide_images("geom_line-smaller-size-no-show-1.png")
 ```
 
 ---
@@ -1342,7 +1273,7 @@ background-size: 35%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Labeling Missing Data 
 
@@ -1357,7 +1288,6 @@ There is a gap in the direct request data (this is [documented in the data sourc
 ```{r missing-geom_line-smaller-size-1-show, echo=FALSE, out.height='75%', out.width='75%', fig.align='center'}
 knitr::include_graphics(path =
 "img/geom_line-smaller-size-no-show-1.png")
-# copy_slide_images("geom_line-smaller-size-no-show-1.png")
 ```
 
 We should annotate this on a line graph!
@@ -1366,7 +1296,7 @@ We should annotate this on a line graph!
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Create Annotate Data
 
@@ -1385,7 +1315,7 @@ USCitiesMarJun <-  TidyApple %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Annotate Data
 
@@ -1407,7 +1337,7 @@ USCitiesMarJun)
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### `annotate`: Build Labels 
 
@@ -1428,7 +1358,7 @@ labs(x = "Date",
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### `annotate`: Build Line Graph 
 
@@ -1446,7 +1376,7 @@ USCitiesMarJun %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### `annotate`: build coordinate system
 
@@ -1466,7 +1396,7 @@ coord_cartesian(
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### `annotate`: build line segment 
 
@@ -1486,7 +1416,7 @@ annotate(geom = "segment",
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### `annotate`: Build Text Annotatation 
 
@@ -1507,7 +1437,7 @@ annotate(geom = "text",
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 
 ### `annotate`: Combine Layers
@@ -1529,7 +1459,7 @@ gg_line_annotate + # line graph
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 
 ### `annotate`: Complete Graph
@@ -1547,14 +1477,13 @@ gg_line_annotate + # line graph
 ```{r build-annotation-graph-show-1, echo=FALSE, out.height='65%', out.width='65%', fig.align='center'}
 knitr::include_graphics(path =
 "img/build-annotation-graph-show-1.png")
-# copy_slide_images("build-annotation-graph-show-1.png")
 ```
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Labeling Values (Review)
 
@@ -1562,7 +1491,6 @@ In the previous slides, we learned about labeling values with `ggrepel`.
 
 ```{r aes-sol-11-1, echo=FALSE, fig.align='center', out.height='70%', out.width='70%'}
 knitr::include_graphics(path = "img/aes-sol-11-1.png")
-# copy_slide_images("aes-sol-11-1.png")
 ```
 
 Now we're going to extend this to plotting text and values on our graphs!
@@ -1571,7 +1499,7 @@ Now we're going to extend this to plotting text and values on our graphs!
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Highlighting Large US Cities 
 
@@ -1588,7 +1516,7 @@ TopUSCities <- TidyApple %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### View `TopUSCities`
 
@@ -1609,7 +1537,7 @@ rmarkdown::paged_table(TopUSCities)
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Highlighting Peak Driving
 
@@ -1627,7 +1555,7 @@ TopUSCities %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## View `MaxUSCitiesDriving`
 
@@ -1650,7 +1578,7 @@ rmarkdown::paged_table(MaxUSCitiesDriving)
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Create graph labels 
 
@@ -1674,7 +1602,7 @@ lab_line_max_drivers <- labs(
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Create Value Labels 
 
@@ -1689,7 +1617,7 @@ MaxUSCitiesDriving <- MaxUSCitiesDriving %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### View Value Labels 
 
@@ -1710,7 +1638,7 @@ MaxUSCitiesDriving %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Create Line Layer + Label Layer
 
@@ -1736,7 +1664,7 @@ TopUSCities %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### View plot with labels
 
@@ -1760,7 +1688,6 @@ TopUSCities %>%
 
 ```{r plot-with-labels-no-show-1, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 knitr::include_graphics(path = "img/plot-with-labels-no-show-1.png")
-# copy_slide_images("plot-with-labels-no-show-1.png")
 ```
 
 ---
@@ -1775,7 +1702,7 @@ background-size: 35%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Reference Line Data 
 
@@ -1791,7 +1718,7 @@ rmarkdown::paged_table(TopUSCities)
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Reference Line Labels 
 
@@ -1807,7 +1734,7 @@ labs(x = "Date",
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Horizontal Reference Lines
 
@@ -1827,7 +1754,7 @@ TopUSCities %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Horizontal Reference Lines
 
@@ -1843,7 +1770,6 @@ TopUSCities %>%
 
 ```{r geom_hline-show-1, echo=FALSE, fig.align='center', out.height='95%', out.width='95%'}
 knitr::include_graphics(path = "img/geom_hline-show-1.png")
-# copy_slide_images("geom_hline-show-1.png")
 ```
 
 ---
@@ -1858,7 +1784,7 @@ background-size: 35%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Faceting basics 
 
@@ -1881,7 +1807,7 @@ TopUSCities %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Single Variable Facets 
 
@@ -1902,7 +1828,7 @@ TopUSCities %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Multiple Variable Facets 
 
@@ -1923,7 +1849,7 @@ TopUSCities %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ## Multiple Variable Facets 
 
@@ -1942,7 +1868,7 @@ TopUSCities %>%
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Advanced Faceting (`facet_wrap_paginate`)
 
@@ -1950,14 +1876,13 @@ Check out the exercises for more advanced faceting with `facet_wrap_paginate()` 
 
 ```{r facet_wrap_paginate-sol-1-png, echo=FALSE}
 knitr::include_graphics(path = "img/facet_wrap_paginate-sol-1.png")
-# copy_slide_images("facet_wrap_paginate-sol-1.png")
 ```
 
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 ### Advanced Faceting (`facet_geo`)
 
@@ -1965,7 +1890,6 @@ Check out the exercises for more advanced faceting with `facet_geo()` from the `
 
 ```{r facet_geo-sol-1-png, echo=FALSE}
 knitr::include_graphics(path = "img/facet_geo-sol-1.png")
-# copy_slide_images("facet_geo-sol-1.png")
 ```
 
 
@@ -1973,7 +1897,7 @@ knitr::include_graphics(path = "img/facet_geo-sol-1.png")
 class: left, top
 background-image: url(img/ggplot2.png)
 background-position: 95% 8%
-background-size: 6%
+background-size: 8%
 
 # More Resources
 
