@@ -4,33 +4,82 @@
     <title>Data Reshaping in R</title>
     <meta charset="utf-8" />
     <meta name="author" content="Martin Frigaard" />
-    <meta name="date" content="2021-09-27" />
-    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
-    <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-    <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
-    <link rel="stylesheet" href="theme.css" type="text/css" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <meta name="description" content="Data Reshaping in R"/>
+    <meta name="generator" content="xaringan and remark.js"/>
+    <meta name="github-repo" content="mjfrigaard/csuc-data-journalism"/>
+    <meta name="twitter:title" content="Data Reshaping in R"/>
+    <meta name="twitter:description" content="Data Reshaping in R"/>
+    <meta name="twitter:url" content="https://mjfrigaard.github.io/csuc-data-journalism/"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:creator" content="@mjfrigaard"/>
+    <meta name="twitter:site" content="@mjfrigaard"/>
+    <meta property="og:title" content="Data Reshaping in R"/>
+    <meta property="og:description" content="Data Reshaping in R"/>
+    <meta property="og:url" content="https://mjfrigaard.github.io/csuc-data-journalism/"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Martin Frigaard"/>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link href="libs/pagedtable/css/pagedtable.css" rel="stylesheet" />
+    <script src="libs/pagedtable/js/pagedtable.js"></script>
+    <link rel="stylesheet" href="css/lexis.css" type="text/css" />
+    <link rel="stylesheet" href="css/lexis-fonts.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
-class: center, middle, inverse, title-slide
 
-# Data Reshaping in R
-## Journalism 303: Reshaping and joining data in R
-### Martin Frigaard
-### 2021-09-27
+
+
+
+
+
+
+
+layout: true
+
+&lt;!-- this adds the link footer to all slides, depends on footer-small class in css--&gt;
+
+&lt;div class="footer-small"&gt;&lt;span&gt;https://github.com/mjfrigaard/csuc-data-journalism&lt;/div&gt;
 
 ---
+name: title-slide
+class: title-slide, center, middle, inverse
+
+# Data Reshaping in R
+#.fancy[Reshaping and joining data in R]
+
+&lt;br&gt;
+
+.large[by Martin Frigaard]
+
+Written: September 21 2021
+
+Updated: November 27 2021
+
+.footer-large[.right[.fira[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
+]]]
 
 
-
-
-
-
-
+---
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 7%
-background-size: 9%
+background-size: 7%
 
 # Objectives 
 
@@ -45,13 +94,13 @@ background-size: 9%
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 7%
-background-size: 9%
+background-size: 7%
 
 # Materials 
 
 ### Follow along with the exercises:
 
-https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html
+https://mjfrigaard.github.io/csuc-data-journalism/lessons.html
 
 ### A web version of these slides is located: 
 
@@ -62,7 +111,7 @@ https://mjfrigaard.github.io/csuc-data-journalism/slides.html
 class: left, top
 background-image: url(img/dplyr.png)
 background-position: 95% 7%
-background-size: 9%
+background-size: 7%
 
 # Data Manipulation Recap
 
@@ -95,7 +144,7 @@ background-image: url(img/dplyr.png)
 background-position: 50% 10%
 background-size: 35%
 
-# dplyr = a package for *manipulating* data
+# `dplyr` = a package for *manipulating* data
 
 ---
 class: inverse, center, bottom
@@ -103,7 +152,7 @@ background-image: url(img/tidyr.png)
 background-position: 50% 10%
 background-size: 35%
 
-# tidyr = a package for *reshaping* data
+# `tidyr` = a package for *reshaping* data
 
 ---
 class: left, top
@@ -113,15 +162,12 @@ background-size: 12%
 
 # Tidy data 
 
-&lt;br&gt;
-
 ## What are tidy data?
-
 
 
 --
 
-.pull-left[
+.leftcol[
 
 ### Observations are in rows  
 ### Variables are in columns   
@@ -131,9 +177,9 @@ background-size: 12%
 
 --
 
-.pull-right[
+.rightcol[
 
-&lt;img src="img/tidy-data.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/tidy-data.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -146,14 +192,12 @@ background-size: 12%
 
 # Tidy data 
 
-&lt;br&gt;
-
 ### Values are the *intersection* of observations and variables
 
 --
 
  
-&lt;img src="img/intersection.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/intersection.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: left, top
@@ -192,20 +236,29 @@ background-size: 12%
 
 ## Why aren't they tidy? 
 
+.leftcol[
+
 
 ```r
 NotTidy %&gt;% View("NotTidy")
 ```
 
+.border[
+
+&lt;img src="img/NotTidy.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
+
+]]
+
 --
 
-&lt;img src="img/NotTidy.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+.rightcol[.large[
 
---
+&gt; `year` is across columns...  
+&gt; multiple values in cells...  
 
-&gt; `year` is across columns...
+]]
 
-&gt; multiple values in cells...
+
 
 
 ---
@@ -216,28 +269,26 @@ background-size: 8%
 
 ## Tidying un-tidy data 
 
-***
-
 --
 *covered in slides*
 
-#### `pivot_longer()` - wide to long
++ `pivot_longer()` - wide to long
 
-#### `pivot_wider()` - long to wide
++ `pivot_wider()` - long to wide
 
 ***
 
 --
 *covered in exercises*
 
-.pull-left[
+.leftcol[
 
  `separate()` - pull columns apart  
  `separate_rows()` - split columns down rows   
  `unite()` - stick columns together  
 ]
 
-.pull-right[
+.rightcol[
 `unnest()` - flatten columns  
 `uncount()` - duplicate rows according to a weighting variable  
 ]
@@ -247,27 +298,27 @@ background-size: 8%
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 90% 10%
-background-size: 9%
+background-size: 7%
 
 # Quick tip: viewing your data
 
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
 
-### Make sure you view the data before assigning it to an object
+## Make sure you view the data before assigning it to an object
 
-&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
 
-### Use `glimpse()` or `View("Name")`
+## Use `glimpse()` or `View("Name")`
 
 ---
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 8%
-background-size: 9%
+background-size: 7%
 
 ## `tidyr::pivot_longer()`
 
-.pull-left[
+.leftcol[
 
 Make wide data long
 
@@ -285,11 +336,11 @@ NotTidy %&gt;%
 
 --
 
-.pull-right[
+.rightcol[
 
 How it `pivot_longer()` works
 
-&lt;img src="img/NotTidy-2-Tidy.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/NotTidy-2-Tidy.png" width="57%" height="57%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -297,54 +348,77 @@ How it `pivot_longer()` works
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 8%
-background-size: 9%
+background-size: 7%
 
 ## `tidyr::pivot_longer()`
 
 #### How it works: 
 
+
+
+.leftcol[
+
 `cols` = these are the **columns we want to reshape**
 
-
-```r
-NotTidy %&gt;% # we include by omission
-* pivot_longer(cols = -group,
-```
-
---
-
-`names_to` = this is the new variable that will contain the previous **column names**
+.small[
 
 
 ```r
 NotTidy %&gt;% 
-  pivot_longer(cols = -group, # new column
-*              names_to = "year",
+* pivot_longer(cols = -group,
 ```
 
---
+]
 
-`values_to` = this is the new variable that will contain the reshaped **values**
+`names_to` = this is the new variable that will contain the previous **column names**
+
+.small[
 
 
 ```r
 NotTidy %&gt;% 
   pivot_longer(cols = -group, 
-               names_to = "year", # column for values
+*              names_to = "year",
+```
+
+]
+
+
+
+]
+
+--
+
+.rightcol[
+
+`values_to` = this is the new variable that will contain the reshaped **values**
+
+.small[
+
+
+```r
+NotTidy %&gt;% 
+  pivot_longer(cols = -group, 
+               names_to = "year", 
 *              values_to = "rate")
 ```
+
+]
+
+]
+
 
 ---
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 8%
-background-size: 9%
+background-size: 7%
 
 ## `tidyr::pivot_longer()`
 
  
 
-.pull-left[
+.leftcol[
 
 ### Looks correct?
 
@@ -361,19 +435,21 @@ NotTidy %&gt;%
 
 --
 
-.pull-right[
+.rightcol[
 
 ### Not quite
 
-&lt;img src="img/TidyView.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
+.border[
 
-]
+&lt;img src="img/TidyView.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+]]
 
 ---
 class: left, top
 background-image: url(img/tidyr.png)
-background-position: 95% 95%
-background-size: 9%
+background-position: 93% 7%
+background-size: 7%
 
 
 
@@ -382,7 +458,7 @@ background-size: 9%
 
 ### Print `Tidy` to console
 
-.pull-left[
+.leftcol[
 
 
 ```r
@@ -390,47 +466,48 @@ Tidy
 ```
 
 ```
-## # A tibble: 9 × 3
-##   group year  rate   
-*##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  
-## 1 A     2019  102/100
-## 2 A     2020  123/100
-## 3 A     2021  161/100
-## 4 B     2019  179/100
-## 5 B     2020  199/100
-## 6 B     2021  221/100
-## 7 C     2019  223/100
-## 8 C     2020  146/100
-## 9 C     2021  288/100
+  # A tibble: 9 × 3
+    group year  rate   
+    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  
+  1 A     2019  102/100
+  2 A     2020  123/100
+  3 A     2021  161/100
+  4 B     2019  179/100
+  5 B     2020  199/100
+  6 B     2021  221/100
+  7 C     2019  223/100
+  8 C     2020  146/100
+  9 C     2021  288/100
 ```
 
 ]
 
 --
 
-.pull-right[
+.rightcol[
 
 &lt;br&gt;&lt;br&gt;
 
-### *Note the format of the columns*
+#### *Note the format of the columns*
+
+#### *The new `year` variable should be numeric*
 
 ]
 
 ---
 class: left, top
 background-image: url(img/tidyr.png)
-background-position: 95% 95%
-background-size: 9%
+background-position: 93% 7%
+background-size: 7%
 
-## `pivot_longer()` = names_transform
+## `pivot_longer()` = `names_transform`
 
-### The new `year` variable should be numeric
 
 #### We can control this behavior with `names_transform = list()`
 
 --
 
-.pull-left[
+.leftcol[
 
 
 ```r
@@ -447,22 +524,22 @@ NotTidy %&gt;%
 
 --
 
-.pull-right[
+.rightcol[
 
 
 ```
-## # A tibble: 9 × 3
-##   group  year rate   
-*##   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;  
-## 1 A      2019 102/100
-## 2 A      2020 123/100
-## 3 A      2021 161/100
-## 4 B      2019 179/100
-## 5 B      2020 199/100
-## 6 B      2021 221/100
-## 7 C      2019 223/100
-## 8 C      2020 146/100
-## 9 C      2021 288/100
+  # A tibble: 9 × 3
+    group  year rate   
+    &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;  
+  1 A      2019 102/100
+  2 A      2020 123/100
+  3 A      2021 161/100
+  4 B      2019 179/100
+  5 B      2020 199/100
+  6 B      2021 221/100
+  7 C      2019 223/100
+  8 C      2020 146/100
+  9 C      2021 288/100
 ```
 
 ]
@@ -471,58 +548,84 @@ NotTidy %&gt;%
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 8%
-background-size: 9%
+background-size: 7%
 
 ## `pivot_longer()` = names_sep
 
-Create the `SiteRates` data
+Create the `SiteRates` data (example of COVID rates as various hospitals)
 
 
 ```r
 SiteRates &lt;- tibble::tribble(
-             ~site, ~`2019_Q1`, ~`2019_Q2`, ~`2019_Q3`, ~`2019_Q4`,
-          "Boston",         52,         31,         26,       33.4,
-    "Philadelphia",       7.42,       5.51,       5.82,       6.99,
-     "Cincinnati ",       6.73,       4.87,       5.02,       4.66,
-           "Texas",       18.2,       16.6,         17,         19)
+         ~site, ~`2019_Q1`, ~`2019_Q2`, ~`2019_Q3`, ~`2019_Q4`,
+      "Boston",         52,         31,         26,       33.4,
+"Philadelphia",       7.42,       5.51,       5.82,       6.99,
+  "Cincinnati",       6.73,       4.87,       5.02,       4.66,
+       "Texas",       18.2,       16.6,         17,         19)
+```
 
+
+---
+class: left, top
+background-image: url(img/tidyr.png)
+background-position: 95% 8%
+background-size: 7%
+
+## `pivot_longer()` = names_sep
+
+Create the `SiteRates` data (example of COVID rates as various hospitals)
+
+
+
+```r
 SiteRates %&gt;% View("SiteRates")
 ```
 
---
+.border[
 
 &lt;img src="img/SiteRates.png" width="85%" height="85%" style="display: block; margin: auto;" /&gt;
 
+]
+
+
+
+
+
 ---
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## `pivot_longer()` = names_sep
 
-### `SiteRates` has *two* variables in the same column
- 
-&lt;img src="img/SiteRatesView.png" width="85%" height="85%" style="display: block; margin: auto;" /&gt;
+#### `SiteRates` has *two* variables in the same column
 
 #### We can use `names_sep ` uses a pattern to split the column (`_Q`)
 
+.border[
+
+&lt;img src="img/SiteRatesView.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
+
+]
+ 
+
 
 ---
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## `pivot_longer()` = names_sep
 
-#### Add `names_sep = "_Q"`
++ Add `names_sep = "_Q"`
 
-#### `year` and `quarter` should also be numeric
++ `year` and `quarter` should also be numeric
 
 --
 
-.pull-left[
+.leftcol[
 
 
 ```r
@@ -543,18 +646,19 @@ SiteRates %&gt;%
 
 --
 
-.pull-right[
+.rightcol[
 
-&lt;img src="img/TidySites.png" width="69%" height="69%" style="display: block; margin: auto;" /&gt;
+.border[
 
+&lt;img src="img/TidySites.png" width="45%" height="45%" style="display: block; margin: auto;" /&gt;
 
-]
+]]
 
 ---
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## More `pivot_longer()` options
 
@@ -585,7 +689,7 @@ SpaceDogs &lt;- data.frame(
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## More `pivot_longer()` options
 
@@ -595,9 +699,11 @@ SpaceDogs %&gt;%
   View("SpaceDogs")
 ```
 
-&lt;img src="img/SpaceDogs.png" width="85%" height="85%" style="display: block; margin: auto;" /&gt;
+.border[
 
---
+&lt;img src="img/SpaceDogs.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
+
+]
 
 The `SpaceDogs` data has missing values in `name_2` 
 
@@ -609,7 +715,7 @@ The `SpaceDogs` data has missing values in `name_2`
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## More `pivot_longer()` options
 
@@ -629,7 +735,7 @@ background-size: 9%
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## More `pivot_longer()` options
 
@@ -670,13 +776,13 @@ SpaceDogs %&gt;%
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## More `pivot_longer()` options
 
 ### Add these arguments to `pivot_longer()` and add `View()`
 
-.pull-left[
+.leftcol[
 
 
 ```r
@@ -697,11 +803,16 @@ SpaceDogs %&gt;%
 
 --
 
-.pull-right[
+.rightcol[
 
 
 
-&lt;img src="img/TidySpaceDogs.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+.border[
+
+&lt;img src="img/TidySpaceDogs.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
 
 ]
 
@@ -710,26 +821,25 @@ SpaceDogs %&gt;%
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## More `pivot_longer()` options
 
-&lt;br&gt;
+#### We can see the new `dog_id` index
 
-&lt;img src="img/SpaceDogs-2-TidySpaceDogs.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+#### The missing values have been removed
 
 --
 
-### We can see the new `dog_id` index
+&lt;img src="img/SpaceDogs-2-TidySpaceDogs.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
 
-### The missing values have been removed
 
 
 ---
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 # `tidyr::pivot_wider()`
 
@@ -747,55 +857,68 @@ background-size: 9%
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 # `tidyr::pivot_wider()`
 
-&lt;br&gt;
-
 ### Consider the `CatVsDogWide` data 
 
-&lt;br&gt;
-
-.pull-left[
+.leftcol[
 
 #### These data come from this article in the [Washington Post](https://www.washingtonpost.com/news/wonk/wp/2014/07/28/where-cats-are-more-popular-than-dogs-in-the-u-s-and-all-over-the-world/?utm_term=.b50cb49b78b5).
 
 ]
 
-.pull-right[
+--
+
+.rightcol[
+
+.border[
 
 &lt;img src="img/wapo-article.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
-]
+]]
 
 
 ---
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## `tidyr::pivot_wider()`
 
-**Calculate percent pets per household, dog owners, and cat owners**
+&lt;br&gt;
 
+### Create `CatVsDogWide`
+
+&lt;br&gt;
 
 
 ```r
 CatVsDogWide &lt;- tibble::tribble(
-                   ~metric,   ~CA,  ~TX,  ~FL,  ~NY,  ~PA,
-        "no_of_households", 12974, 9002, 7609, 7512, 5172,
-    "no_of_pet_households",  6865, 5265, 4138, 3802, 2942,
-    "no_of_dog_households",  4260, 3960, 2718, 2177, 1702,
-    "no_of_cat_households",  3687, 2544, 2079, 2189, 1748)
-
-CatVsDogWide %&gt;% View("CvDWide")
+               ~metric,   ~CA,  ~TX,  ~FL,  ~NY,  ~PA,
+    "no_of_households", 12974, 9002, 7609, 7512, 5172,
+"no_of_pet_households",  6865, 5265, 4138, 3802, 2942,
+"no_of_dog_households",  4260, 3960, 2718, 2177, 1702,
+"no_of_cat_households",  3687, 2544, 2079, 2189, 1748)
 ```
 
 
 
---
+---
+class: left, top
+background-image: url(img/tidyr.png)
+background-position: 95% 5%
+background-size: 7%
+
+## `tidyr::pivot_wider()`
+
+
+```r
+CatVsDogWide %&gt;% View("CvDWide")
+```
+
 
 &lt;img src="img/CvDWide.png" width="88%" height="88%" style="display: block; margin: auto;" /&gt;
 
@@ -804,17 +927,15 @@ CatVsDogWide %&gt;% View("CvDWide")
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## `tidyr::pivot_wider()`
-
-**Calculate percent pets per household, dog owners, and cat owners**  
 
 Step 1. `pivot_long()` states into `state` column, values into `value` column 
 
 --
 
-.pull-left[
+.leftcol35[
 
 
 ```r
@@ -830,17 +951,17 @@ CatVsDogWide %&gt;%
 
 --
 
-.pull-right[
+.rightcol65[.border[
 
-&lt;img src="img/CvDLong.png" width="57%" height="57%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/CvDLong.png" width="34%" height="34%" style="display: block; margin: auto;" /&gt;
 
-]
+]]
 
 ---
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## `tidyr::pivot_wider()`
 
@@ -863,18 +984,14 @@ CatVsDogWide %&gt;%
 
 --
 
-&lt;img src="img/CvDWide2.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
-
---
-
-*Now these data are in a format to calculate percentages!*
+&lt;img src="img/CvDWide2.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## `tidyr::pivot_wider()`
 
@@ -893,7 +1010,6 @@ Step 3. `mutate()` the `perc` (percentage) columns
 CatVsDogWide %&gt;% 
    pivot_longer(-metric, names_to = "state", values_to = "value") %&gt;% 
    pivot_wider(names_from = "metric", values_from = "value") %&gt;% 
-  
   mutate(
    perc_pet_household = no_of_pet_households / no_of_households * 100,
    perc_pet_household = round(perc_pet_household, digits = 1),
@@ -901,7 +1017,6 @@ CatVsDogWide %&gt;%
    perc_dog_owners = round(perc_dog_owners, digits = 1),
    perc_cat_owners = no_of_cat_households / no_of_households * 100,
    perc_cat_owners = round(perc_cat_owners, digits = 1)) %&gt;%
-  
   View("CvDWide")
 ```
 
@@ -910,7 +1025,7 @@ CatVsDogWide %&gt;%
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
 ## `tidyr::pivot_wider()`
 
@@ -918,20 +1033,28 @@ background-size: 9%
 
 Step 1. `pivot_long()` states into `state` column, values into `value` column    
 Step 2. `pivot_wider()` the `metric` and `values` across columns  
-
---
-
 Step 3. `mutate()` the `perc` (percentage) columns
 
 
 
 --
 
+.border[
+
 &lt;img src="img/CvDWide2-perc.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
---
+]
 
-***We could assign here, but why stop?***   
+
+---
+class: left, top
+background-image: url(img/tidyr.png)
+background-position: 95% 5%
+background-size: 7%
+
+## `tidyr::pivot_wider()`
+
+#### *We could assign here, but why stop?*   
 
 --
 
@@ -941,6 +1064,10 @@ Add `select()` helpers to reorganize data!
 
 
 ```r
+# ...code omitted 
+   perc_cat_owners = no_of_cat_households / no_of_households * 100,
+   perc_cat_owners = round(perc_cat_owners, digits = 1)) %&gt;% 
+    # pass the output from pivot_wider() to select()
   select(state, 
          contains("perc_dog"), contains("perc_cat"))
 ```
@@ -949,12 +1076,9 @@ Add `select()` helpers to reorganize data!
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
-## `tidyr::pivot_wider()`
-
-***Final code:***  
-Here is the complete pipeline
+## `tidyr::pivot_wider()` (***Final code***)
 
 
 ```r
@@ -981,14 +1105,12 @@ CatVsDogWide %&gt;%
 class: left, top
 background-image: url(img/tidyr.png)
 background-position: 95% 5%
-background-size: 9%
+background-size: 7%
 
-## `tidyr::pivot_wider()`
+## `tidyr::pivot_wider()` (***Final output***)
 
-***Final output:***  
-Here is the final summary table
-
-&lt;img src="img/CvsDPercent.png" width="85%" height="85%" style="display: block; margin: auto;" /&gt;
+ 
+&lt;img src="img/CvsDPercent.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -1014,9 +1136,11 @@ background-size: 8%
 class: inverse, center, bottom
 background-image: url(img/dplyr.png)
 background-position: 50% 20%
-background-size: 35%
+background-size: 32%
 
-# dplyr = a package for *manipulating relational* data
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+# `dplyr` = a package for *manipulating relational* data
 
 ---
 background-image: url(img/dplyr.png)
@@ -1046,7 +1170,7 @@ class: left, top
 
 --
 
-*Recall that tibbles and data.frame's are nearly identical 
+*Recall that `tibble`s and `data.frame`'s are nearly identical 
 
 
 ---
@@ -1057,7 +1181,7 @@ class: left, top
 
 # dplyr joins
 
-.pull-left[
+.leftcol[
 
 ### Toy data `X`
 
@@ -1081,7 +1205,7 @@ X &lt;- tibble::tribble(
 
 --
 
-.pull-right[
+.rightcol[
 
 ### Toy data `Y`
 
@@ -1118,7 +1242,9 @@ class: left, top
 
 --
 
-.pull-left[
+.leftcol[
+
+Keep all data from `X`, and only matching data from `Y`
 
 
 ```r
@@ -1128,13 +1254,11 @@ left_join(
   )
 ```
 
-Keep all data from `X`, and only matching data from `Y`
-
 ]
 
 --
 
-.pull-right[
+.rightcol[
 
 This creates:
 
@@ -1159,7 +1283,7 @@ class: left, top
 ---
 background-image: url(img/left-join-02.png)
 background-position: 50% 70%
-background-size: 85%
+background-size: 90%
 class: left, top
 
 # `dplyr` left joins (2)
@@ -1191,20 +1315,20 @@ class: left, top
 
 --
 
-.pull-left[
+.leftcol[
+
+Keep all data from `Y`, and only matching data from `X`
 
 
 ```r
 right_join(x = X, y = Y)
 ```
 
-Keep all data from `Y`, and only matching data from `X`
-
 ]
 
 --
 
-.pull-right[
+.rightcol[
 
 This creates:
 
@@ -1219,7 +1343,7 @@ This creates:
 ---
 background-image: url(img/right-join-01.png)
 background-position: 50% 75%
-background-size: 60%
+background-size: 40%
 class: left, top
 
 # `dplyr` right joins (1)
@@ -1241,7 +1365,7 @@ class: left, top
 ---
 background-image: url(img/right-join-03.png)
 background-position: 50% 75%
-background-size: 90%
+background-size: 92%
 class: left, top
 
 # `dplyr` right joins (3)
@@ -1263,20 +1387,20 @@ class: left, top
 
 --
 
-.pull-left[
+.leftcol[
+
+Keep only the matching data from `X` and `Y`
 
 
 ```r
 inner_join(x = X, y = Y)
 ```
 
-Keep only the matching data from `X` and `Y`
-
 ]
 
 --
 
-.pull-right[
+.rightcol[
 
 This creates:
 
@@ -1291,7 +1415,7 @@ This creates:
 ---
 background-image: url(img/inner-join-01.png)
 background-position: 50% 75%
-background-size: 50%
+background-size: 40%
 class: left, top
 
 # `dplyr` inner joins (1)
@@ -1301,7 +1425,7 @@ class: left, top
 ---
 background-image: url(img/inner-join-02.png)
 background-position: 50% 60%
-background-size: 70%
+background-size: 55%
 class: left, top
 
 # `dplyr` inner joins (2)
@@ -1344,20 +1468,20 @@ class: left, top
 
 --
 
-.pull-left[
+.leftcol[
+
+Keep all data from `Y` and `X`
 
 
 ```r
 full_join(x = X, y = Y)
 ```
 
-Keep all data from `Y` and `X`
-
 ]
 
 --
 
-.pull-right[
+.rightcol[
 
 This creates:
 
@@ -1402,18 +1526,18 @@ class: left, top
 ---
 class: left, top
 background-image: url(img/dplyr.png)
-background-position: 10% 95%
+background-position: 7% 92%
 background-size: 8%
 
 # Resources for Data Tidying 
 
-### 1. [R for Data Science](https://r4ds.had.co.nz/tidy-data.html) 
+#### 1. [R for Data Science](https://r4ds.had.co.nz/tidy-data.html) 
 
-### 2. [Data Wrangling with R](https://cengel.github.io/R-data-wrangling/) 
+#### 2. [Data Wrangling with R](https://cengel.github.io/R-data-wrangling/) 
 
-### 3. [Stack Overflow questions tagged with `tidyr`](https://stackoverflow.com/questions/tagged/tidyr)
+#### 3. [Stack Overflow questions tagged with `tidyr`](https://stackoverflow.com/questions/tagged/tidyr)
 
-### 4. [RStudio Community posts tagged `tidyr`](https://community.rstudio.com/tag/tidyr)
+#### 4. [RStudio Community posts tagged `tidyr`](https://community.rstudio.com/tag/tidyr)
 
 
 
@@ -1423,7 +1547,8 @@ background-size: 8%
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false
+"countIncrementalSlides": false,
+"ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
