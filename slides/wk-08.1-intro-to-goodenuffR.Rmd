@@ -1,38 +1,104 @@
 ---
 title: "Using the goodenuffR package"
-subtitle: "Journalism 303: everything...in its right place"
-date: '`r Sys.Date()`'
-author: 
-  - "Martin Frigaard"
+subtitle: "Everything...in its right place"
+author: "Martin Frigaard"
+institute: "California State University | Journalism & Public Relations: Data Journalism"
 output:
   xaringan::moon_reader:
+    css:
+      - default
+      - css/lexis.css
+      - css/lexis-fonts.css
     lib_dir: libs
-    css: ["theme.css"]
+    seal: false
     nature:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-
-always_allow_html: true
+      ratio: "16:9"
 ---
 
-```{r setup, include=FALSE}
-library(tidyverse)
-library(reprex)
-library(xaringan)
-library(pagedown)
-library(xaringanthemer)
-# folders
-knitr::opts_chunk$set(warning = FALSE, 
-                      message = FALSE, 
-                      fig.align = "center", 
-                      dpi = 320, 
-                      fig.height = 4, 
-                      fig.path = "img/")
-options(width = 60, max.print = 60)
-# xaringan::inf_mr() ----
+```{r meta, echo=FALSE}
+library(metathis)
+meta() %>%
+  meta_general(
+    description = "Using the goodenuffR package",
+    generator = "xaringan and remark.js"
+  ) %>%
+  meta_name("github-repo" = "mjfrigaard/csuc-data-journalism") %>%
+  meta_social(
+    title = "Using the goodenuffR package",
+    url = "https://mjfrigaard.github.io/csuc-data-journalism/",
+    og_type = "website",
+    og_author = "Martin Frigaard",
+    twitter_card_type = "summary",
+    twitter_creator = "@mjfrigaard"
+  )
 ```
 
+```{r setup, include=FALSE}
+dateWritten <- format(as.Date("2021-10-21"), format = "%B %d %Y")
+today <- format(Sys.Date(), format = "%B %d %Y")
+source("../code/copy-slide-images.R")
+library(knitr)
+library(tidyverse)
+library(fontawesome)
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = ''
+)
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "img/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = " ",
+    fig.retina = 3 # Better figure resolution
+)
+# Enables the ability to show all slides in a tile overview by pressing "o"
+xaringanExtra::use_tile_view()
+xaringanExtra::use_panelset()
+xaringanExtra::use_clipboard()
+xaringanExtra::use_share_again()
+xaringanExtra::style_share_again(share_buttons = "all")
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,
+  mute_unhighlighted_code = FALSE
+)
+```
+
+```{r inf_mr, eval=FALSE, include=FALSE}
+xaringan::inf_mr()
+```
+
+layout: true
+
+<!-- this adds the link footer to all slides, depends on footer-small class in css-->
+
+<div class="footer-small"><span>https://github.com/mjfrigaard/csuc-data-journalism</div>
+
+---
+name: title-slide
+class: title-slide, center, middle, inverse
+
+# `r rmarkdown::metadata$title`
+#.fancy[`r rmarkdown::metadata$subtitle`]
+
+<br>
+
+.large[by Martin Frigaard]
+
+Written: `r dateWritten`
+
+Updated: `r today`
+
+.footer-large[.right[.fira[
+<br><br><br><br><br>[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
+]]]
+
+---
 class: inverse, center, top
 background-image: url(img/goodenuffR.png)
 background-position: 50% 70%
@@ -44,13 +110,11 @@ background-size: 35%
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Outline 
 
-<br>
-
-.pull-left[
+.leftcol[
 ### 1) The Problem
 
 ### 2) A Solution 
@@ -60,7 +124,7 @@ background-size: 12%
 ### 4) Quick Start
 ]
 
-.pull-right[
+.rightcol[
 
 ### 5) Package functions 
 
@@ -79,50 +143,83 @@ background-size: 12%
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # The Problem
+
+.leftcol35[
 
 > *Where is my stuff?*
 
+]
+
+.rightcol65[
+
 ### [THE VERGE: FILE NOT FOUND](https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z)
 
-```{r verge-file-not-found.png, echo=FALSE, out.height='75%', out.width='75%'}
+```{r verge-file-not-found.png, echo=FALSE, out.height='95%', out.width='95%'}
 knitr::include_graphics(path = "img/verge-file-not-found.png")
 ```
 
+]
+
+
+
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # The Problem
 
-.pull-left[
+.leftcol70[
 
-### *Where is my stuff?*
-
-]
-
-.pull-right[
-
-```{r files-tweet.JPG, echo=FALSE, out.height='60%', out.width='60%'}
-knitr::include_graphics(path = "img/files-tweet.JPG")
+```{r files-tweet-01, echo=FALSE, out.height='100%', out.width='100%'}
+knitr::include_graphics(path = "img/files-tweet-01.png")
 ```
 
 ]
 
+--
+
+.rightcol30[
+
+> *Store stuff in a particular place*
+
+]
+
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
-# A Solution
+# The Problem
 
+.leftcol[
 
-<br>
+```{r files-tweet-02, echo=FALSE, out.height='100%', out.width='100%'}
+knitr::include_graphics(path = "img/files-tweet-02.png")
+```
+
+]
+
+--
+
+.rightcol[
+
+> *Most soul-destroying "bug" when trying to learn programming*
+
+]
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 8%
+
+# A Solution: `goodenuffR`!
 
 ### Based on the excellent paper, [*Good enough practices in scientific computing*](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
 
@@ -130,30 +227,34 @@ by Greg Wilson, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, T
 
 --
 
-```{r plos-gepisc.png, echo=FALSE}
+.border[
+
+```{r plos-gepisc.png, echo=FALSE, fig.align='center', out.height='60%', out.width='60%'}
 knitr::include_graphics(path = "img/plos-gepisc.png")
 ```
+
+]
+
 
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # A Solution
 
-<br>
-
-### The paper focuses on...
+#### The paper focuses on...
 
 > *"a minimum set of tools and techniques that we believe every researcher can and should consider adopting"*
 
 --
 
-### Specifically
+#### Specifically
 
-.pull-left[
+.leftcol[
+.medium[
 
 + Data management
 
@@ -161,9 +262,10 @@ background-size: 12%
 
 + Collaboration
 
-]
+]]
 
-.pull-right[
+.rightcol[
+.medium[
 
 + Project organization
 
@@ -171,21 +273,21 @@ background-size: 12%
 
 + Manuscripts
 
-]
+]]
 
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # A Solution
 
 
-.pull-left[
+.leftcol[
 
-### `goodenuffR` focuses on
+#### `goodenuffR` focuses on:
 
 + Data management
 
@@ -195,9 +297,11 @@ background-size: 12%
 
 --
 
-.pull-right[
+.rightcol[
 
-### Specifically
+#### Specifically
+
+.code70[
 
 ```bash
 |-- CITATION
@@ -217,14 +321,14 @@ background-size: 12%
 |  |-- runall.py
 ```
 
-]
+]]
 
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Installation
 
@@ -233,6 +337,8 @@ background-size: 12%
 ### Available on GitHub here: 
 
 https://github.com/mjfrigaard/goodenuffR
+
+--
 
 <br>
 
@@ -247,41 +353,68 @@ devtools::install_github("mjfrigaard/goodenuffR")
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Quick Start
+
+.leftcol35[
 
 ### In a fresh RStudio Session
 
-```{r goodenuffR-fresh.png, echo=FALSE, out.height='75%', out.width='75%'}
+]
+
+.rightcol65[.border[
+
+```{r goodenuffR-fresh.png, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 knitr::include_graphics(path = "img/goodenuffR-fresh.png")
 ```
 
+]]
+
+
+
+
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Quick Start
+
+.leftcol35[
 
 ### 1) Install `devtools`, then install and load `goodenuffR`
 
-```{r goodenuffR-install-load.png, echo=FALSE, out.height='50%', out.width='50%'}
+]
+
+.rightcol65[.border[
+
+```{r goodenuffR-install-load.png, echo=FALSE, fig.align='center', out.height='65%', out.width='65%'}
 knitr::include_graphics(path = "img/goodenuffR-install-load.png")
 ```
+
+]]
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Quick Start
+
+.leftcol35[
 
 ### 2) Enter a project name
 
 ### 3) Enter the folder path for your project
+
+]
+
+.rightcol65[
+
+<br><br><br><br>
 
 ```{r , eval=FALSE}
 goodenuffR::goodenuff_project(
@@ -289,66 +422,96 @@ goodenuffR::goodenuff_project(
   folder_path = "/Users/mjfrigaard/Projects")
 ```
 
-<br>
+#### TIP: *use `getwd()` in the Console or `pwd` in the Terminal to locate current folder*
 
-### TIP: *use `getwd()` in the Console or `pwd` in the Terminal to locate current folder*
+]
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Quick Start
+
+.leftcol35[
 
 ### RStudio will open a new session for your project
 
-```{r goodenuffR-new.png, echo=FALSE, out.height='85%', out.width='85%'}
+]
+
+.leftcol65[.border[
+
+```{r goodenuffR-new.png, echo=FALSE, fig.align='center', out.height='90%', out.width='90%'}
 knitr::include_graphics(path = "img/goodenuffR-new.png")
 ```
 
+]]
+
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Quick Start
 
-### 4) Run `goodenuffR::goodenuff_files()`
+.leftcol35[
 
+### 4) Run 
 
+.code70[
 
-```{r goodenuffR-run.png, echo=FALSE, out.height='75%', out.width='75%'}
+```{r goodenuff_files, eval=FALSE}
+goodenuffR::goodenuff_files()
+```
+
+]]
+
+.leftcol65[.border[
+
+```{r goodenuffR-run.png, echo=FALSE, fig.align='center', out.height='80%', out.width='80%'}
 knitr::include_graphics(path = "img/goodenuffR-run.png")
 ```
 
+]]
+
+
+
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Quick Start
 
+.leftcol35[
+
 ### Now you're good (enuff) to go! 
 
-```{r goodenuffR-ready.png, echo=FALSE, out.height='70%', out.width='70%'}
+]
+
+.leftcol65[.border[
+
+```{r goodenuffR-ready.png, echo=FALSE, fig.align='center', out.height='80%', out.width='80%'}
 knitr::include_graphics(path = "img/goodenuffR-ready.png")
 ```
+
+]]
 
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
-## `goodenuff_code()`  
+#### `goodenuff_code()`  
 
-.pull-left[ 
+.leftcol[ 
 
 ### Paper
 
@@ -358,7 +521,7 @@ background-size: 12%
 
 ]
 
-.pull-right[ 
+.rightcol[ 
 
 ### `goodenuffR`
 
@@ -380,13 +543,13 @@ goodenuffR::goodenuff_code()
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
-## `goodenuff_code()` 
+#### `goodenuff_code()` 
 
-.pull-left[ 
+.leftcol[ 
 
 ### Paper
 
@@ -394,7 +557,7 @@ background-size: 12%
 
 ]
 
-.pull-right[ 
+.rightcol[ 
 
 ### `goodenuffR`
 
@@ -416,13 +579,13 @@ Each `code` file has a header:
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
-### `goodenuff_collab()` 
+#### `goodenuff_collab()` 
 
-.pull-left[ 
+.leftcol[ 
 
 ### Paper
 
@@ -433,7 +596,7 @@ background-size: 12%
 
 ]
 
-.pull-right[ 
+.rightcol[ 
 
 ### `goodenuffR`
 
@@ -452,13 +615,13 @@ goodenuffR::goodenuff_collab()
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
-### `goodenuff_data()`   
+#### `goodenuff_data()`   
 
-.pull-left[ 
+.leftcol[ 
 
 ### Paper
 
@@ -467,7 +630,7 @@ background-size: 12%
 
 ]
 
-.pull-right[ 
+.rightcol[ 
 
 ### `goodenuffR`
 
@@ -488,7 +651,7 @@ goodenuffR::goodenuff_data()
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
@@ -496,7 +659,9 @@ background-size: 12%
 
 `data/README.md` provides some guidance on storing and documenting data. 
 
-```{markdown , eval=FALSE}
+.code60[
+
+```
 # Project Data  
 
 For guidance please see:
@@ -515,19 +680,22 @@ source:
 https://swcarpentry.github.io/good-enough-practices-in-scientific-computing/
 ```
 
+]
+
+
+
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
    
-### `goodenuff_doc()`  
+#### `goodenuff_doc()`  
 
-
-.pull-left[ 
+.leftcol[ 
 
 ### Paper
 
@@ -537,7 +705,7 @@ background-size: 12%
 
 ]
 
-.pull-right[ 
+.rightcol[ 
 
 ### `goodenuffR`
 
@@ -555,14 +723,14 @@ goodenuffR::goodenuff_doc()
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
-### `goodenuff_results()`
+#### `goodenuff_results()`
 
 
-.pull-left[ 
+.leftcol[ 
 
 ### Paper
 
@@ -570,7 +738,7 @@ background-size: 12%
 
 ]
 
-.pull-right[ 
+.rightcol[ 
 
 ### `goodenuffR`
 
@@ -588,39 +756,59 @@ goodenuffR::goodenuff_results()
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
-### `goodenuff_files()`
+.leftcol[
 
+#### `goodenuff_files()`
 
+]
 
-```{r goodenuffR-files.png, echo=FALSE, out.height='42%', out.width='42%', fig.align='center'}
+.rightcol[ 
+.border[
+
+```{r goodenuffR-files.png, echo=FALSE, out.height='65%', out.width='65%', fig.align='center'}
 knitr::include_graphics(path = "img/goodenuffR-files.png")
 ```
 
+]]
+
+
 
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 ## BONUS: RMarkdown Template
 
+.leftcol[
+
 ### `goodenuffR` also comes with a `rmarkdown` template: 
 
-```{r new-rmd.png, echo=FALSE, out.height='50%', out.width='50%'}
+]
+
+.rightcol[ 
+
+<br>
+
+.border[
+
+```{r new-rmd.png, echo=FALSE, out.height='75%', out.width='75%', fig.align='center'}
 knitr::include_graphics("img/new-rmd.png")
 ```
+
+]]
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Thank you! 
 
@@ -639,7 +827,8 @@ pdf_slides <- paste0("pdfs/", pdf_slides)
 print_files <- tibble("pdfs" = pdf_slides,
   "htmls" = html_slides)
 
-print_files$htmls[9]
+print_files$htmls[10]
+print_files$pdfs[10]
 
-pagedown::chrome_print(input = print_files$htmls[9], output = print_files$pdfs[9], timeout = 120)
+pagedown::chrome_print(input = print_files$htmls[10], output = print_files$pdfs[10], timeout = 120)
 ```

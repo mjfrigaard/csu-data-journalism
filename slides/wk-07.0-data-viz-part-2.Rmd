@@ -51,7 +51,7 @@ options(
 knitr::opts_chunk$set(
     warning = FALSE,
     message = FALSE,
-    fig.path = "figs/",
+    fig.path = "img/",
     fig.width = 7.252,
     fig.height = 4,
     comment = " ",
@@ -405,7 +405,7 @@ Apple released mobility data:
 
 https://covid19.apple.com/mobility
 
-Import these data below: 
+Import these data below:
 
 ```{r import-AppleMobRaw}
 AppleMobRaw <- readr::read_csv("https://bit.ly/36tTVpe")
@@ -425,10 +425,15 @@ background-size: 6%
 AppleMobRaw %>% View("Apple")
 ```
 
+.border[
 
 ```{r apple-mob-view, echo=FALSE, fig.align='center', out.width='75%', out.height='75%'}
 knitr::include_graphics(path = "img/apple-mob-view.png")
 ```
+
+]
+
+
 
 ---
 class: inverse, center, top
@@ -511,17 +516,16 @@ Tidy dates and mobility into `date` and `dir_request` ('relative usage of direct
 
 ```{r tidying-no-show, eval=FALSE}
 AppleMobRaw %>% tidyr::pivot_longer(cols = -c(geo_type:country), 
-    names_to = "date", values_to = "dir_request")
+    names_to = "date", values_to = "dir_request") %>% 
+    head(5)
 ```
-
-View the top 10 rows of this output below:
 
 ```{r tidying-show, echo=FALSE}
 rmarkdown::paged_table(AppleMobRaw %>% 
   tidyr::pivot_longer(
     cols = -c(geo_type:country), 
     names_to = "date", 
-    values_to = "dir_request") %>% head(10))
+    values_to = "dir_request") %>% head(5))
 ```
 
 
@@ -561,32 +565,41 @@ background-image: url(img/ggplot2.png)
 background-position: 95% 8%
 background-size: 6%
 
-### New Tidy Apple Mobility Data!
+### Create a '`TidyApple`' Mobility Dataset!
 
-```{r apple-tidy-view.png, echo=FALSE, out.width='80%', out.height='80%'}
+.leftcol40[
+
+Assign the output from `pivot_longer()`, `filter()`, and `clean_names()` to `TidyApple`
+
+.code60[
+
+```{r wrangle-assign-show, eval=FALSE}
+TidyApple <- AppleMobRaw %>% 
+  tidyr::pivot_longer(
+      cols = -c(geo_type:country), 
+        names_to = "date", 
+        values_to = "dir_request") %>% 
+        # remove missing country data
+        dplyr::filter(!is.na(country) & 
+            !is.na(`sub-region`)) %>% 
+        # clean names
+        janitor::clean_names()
+TidyApple
+```
+
+]
+
+]
+
+
+.rightcol60[
+
+```{r apple-tidy-view.png, echo=FALSE, fig.align='center', out.width='80%', out.height='80%'}
 knitr::include_graphics(path = "img/apple-tidy-view.png")
 # copy_slide_images("apple-tidy-view.png")
 ```
 
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
-
-### Assign Apple Mobility Data to `TidyApple`
-
-This looks good, so assign to `TidyApple`
-
-```{r wrangle-assign-show, eval=FALSE}
-AppleMobRaw %>% 
-  tidyr::pivot_longer(cols = -c(geo_type:country), 
-    names_to = "date", values_to = "dir_request") %>% 
-  # remove missing country data
-  dplyr::filter(!is.na(country) & !is.na(`sub-region`)) %>% 
-  # clean names
-  janitor::clean_names() -> TidyApple
-```
+]
 
 ```{r wrangle-assign-no-show, echo=FALSE}
 AppleMobRaw %>% 
@@ -604,34 +617,16 @@ background-image: url(img/ggplot2.png)
 background-position: 95% 8%
 background-size: 6%
 
-### `TidyApple`: Format Variables
+# `TidyApple`: Format Variables
 
-Our `TidyApple` data still needs some attention. 
+### + `date` needs to be formatted as a `date`
 
-```{r glimpse-TidyApple}
-glimpse(TidyApple)
-```
-
-The `date` variable needs to be formatted as a `date`
+### + rename `transportation_type` to `trans_type`
 
 ```{r format-date}
-TidyApple %>% 
-  mutate(date = lubridate::ymd(date)) -> TidyApple
-```
-
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
-
-### `TidyApple`: Rename Variables
-
-Let's rename `transportation_type` to `trans_type`
-
-```{r rename}
-TidyApple %>% 
-  rename(trans_type = transportation_type) -> TidyApple
+TidyApple <- TidyApple %>% 
+  mutate(date = lubridate::ymd(date)) %>% 
+  rename(trans_type = transportation_type)
 ```
 
 
@@ -649,7 +644,7 @@ Re-check `TidyApple` data.
 glimpse(TidyApple)
 ```
 
-Now we can see `date` is formatted correctly
+Now we can see `trans_type` and `date` are formatted correctly
 
 ---
 class: left, top
@@ -661,29 +656,40 @@ background-size: 6%
 
 > “*data science is mostly counting things*” - `tabyl` vignette
 
-Count the `trans_type` variable with `dplyr::count()`
-
 .leftcol[
 
-<br>
+Count the `trans_type` variable with `dplyr::count()`
 
-```{r count}
+```{r count-code, eval=FALSE}
 TidyApple %>% 
-  count(trans_type)
+    count(trans_type)
 ```
 
-]
+.small[
+
+```{r paged-count-code, echo=FALSE}
+rmarkdown::paged_table(TidyApple %>% count(trans_type))
+```
+
+]]
 
 .rightcol[
 
-*Add the `sort = TRUE` argument*
+*Add the `sort = TRUE` argument to arrange the counts descending*
 
-```{r count-sort}
+```{r count-sort, eval=FALSE}
 TidyApple %>% 
   count(trans_type, sort = TRUE)
 ```
 
-]
+.small[
+
+```{r paged-count-sort-code, echo=FALSE}
+rmarkdown::paged_table(TidyApple %>% 
+                           count(trans_type, sort = TRUE))
+```
+
+]]
 
 ---
 class: inverse, center, top
@@ -717,23 +723,38 @@ lab_hist <- labs(x = "Apple directions requests",
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
-background-position: 8% 95%
+background-position: 95% 8%
 background-size: 6%
 
 ## Histogram = single variable distributions
 
+.leftcol45[
+
 Create a histogram of `dir_request` with the code below:
 
-```{r geom-hist-no-show, eval=FALSE}
+.code70[
+
+```{r dir_request-geom-hist-code, eval=FALSE}
 TidyApple %>% ggplot() + 
   geom_histogram(aes(x = dir_request)) + #<<
   lab_hist
 ```
 
-```{r geom-hist-1-show, echo=FALSE, out.height='60%', out.width='60%'}
-knitr::include_graphics(path = "img/geom-hist-1.png")
-# copy_slide_images("geom-hist-1.png")
+]]
+
+--
+
+.rightcol55[
+
+.border[
+
+```{r dir_request-geom-hist-show, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
+TidyApple %>% ggplot() + 
+  geom_histogram(aes(x = dir_request)) + #<<
+  lab_hist
 ```
+
+]]
 
 ---
 class: left, top
@@ -742,39 +763,40 @@ background-position: 95% 8%
 background-size: 6%
 
 ## Histograms: Changing the Y Axis
+
+.leftcol45[
 
 Fix the `y` axis numbers with help from the [`scales` package](https://scales.r-lib.org/)
 
-```{r geom-hist-scales-show, eval=FALSE}
+.code70[
+
+```{r geom-hist-scales-code, eval=FALSE}
 library(scales)
 TidyApple %>% ggplot() + 
   geom_histogram(aes(x = dir_request)) + 
-  scale_y_continuous(labels = scales::comma) + #<<
+  scale_y_continuous( #<<
+      labels = scales::comma) + #<<
   lab_hist
 ```
 
-```{r geom-hist-scales, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+]]
+
+--
+
+.rightcol55[
+
+.border[
+
+```{r geom-hist-scales-show, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 library(scales)
 TidyApple %>% ggplot() + 
   geom_histogram(aes(x = dir_request)) + 
-  scale_y_continuous(labels = scales::comma) +
+  scale_y_continuous( #<<
+      labels = scales::comma) + #<<
   lab_hist
 ```
 
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
-
-## Histograms: Changing the Y Axis
-
-<br>
-
-```{r geom-hist-scales-1-show, echo=FALSE, out.height='90%', out.width='90%'}
-knitr::include_graphics(path = "img/geom-hist-scales-1.png")
-# copy_slide_images("geom-hist-scales-1.png")
-```
+]]
 
 ---
 class: left, top
@@ -784,26 +806,38 @@ background-size: 6%
 
 ## Changing Histogram Shape
 
+.leftcol45[
+
 Adjust the shape of the histogram with the `bins` argument
 
-```{r bins-15-show, eval=FALSE}
+.code70[
+
+```{r geom_histogram-bins-15-code, eval=FALSE}
 TidyApple %>% ggplot() + 
-  geom_histogram(aes(x = dir_request), bins = 15) + #<<
-  scale_y_continuous(labels = scales::comma) +
+  geom_histogram(aes(x = dir_request), 
+                 bins = 15) + #<<
+  scale_y_continuous(
+      labels = scales::comma) +
   lab_hist
 ```
 
-```{r bins-15-no-show, include=FALSE}
+]]
+
+--
+
+.rightcol55[.border[
+
+```{r geom_histogram-bins-15-show, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 TidyApple %>% ggplot() + 
-  geom_histogram(aes(x = dir_request), bins = 15) + 
-  scale_y_continuous(labels = scales::comma) +
+  geom_histogram(aes(x = dir_request), 
+                 bins = 15) + #<<
+  scale_y_continuous(
+      labels = scales::comma) +
   lab_hist
 ```
 
-```{r bins-15-no-show-1-show, echo=FALSE, out.height='75%', out.width='75%'}
-knitr::include_graphics(path = "img/bins-15-no-show-1.png")
-# copy_slide_images("bins-15-no-show-1.png")
-```
+]]
+
 
 ---
 class: left, top
@@ -813,26 +847,36 @@ background-size: 6%
 
 ## Changing Histogram Shape
 
+.leftcol45[
+
 Adjust the shape of the histogram with the `bins` argument
 
-```{r bins-45-show, eval=FALSE}
+.code70[
+
+```{r bins-45-code, eval=FALSE}
 TidyApple %>% ggplot() + 
-  geom_histogram(aes(x = dir_request), bins = 45) + #<<
-  scale_y_continuous(labels = scales::comma) +
+  geom_histogram(aes(x = dir_request), 
+                 bins = 45) + #<<
+  scale_y_continuous(
+      labels = scales::comma) +
   lab_hist
 ```
 
-```{r bins-45-no-show, include=FALSE}
+]]
+
+--
+
+.rightcol55[
+.border[
+
+```{r bins-45-no-show, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 TidyApple %>% ggplot() + 
   geom_histogram(aes(x = dir_request), bins = 45) + 
   scale_y_continuous(labels = scales::comma) +
   lab_hist
 ```
 
-```{r bins-45-no-show-1-show, echo=FALSE, out.height='75%', out.width='75%'}
-knitr::include_graphics(path = "img/bins-45-no-show-1.png")
-# copy_slide_images("bins-45-no-show-1.png")
-```
+]]
 
 ---
 class: left, top
@@ -840,15 +884,17 @@ background-image: url(img/ggplot2.png)
 background-position: 8% 95%
 background-size: 6%
 
-## Visualizing variable distributions across groups
+# Visualizing variable distributions across groups
 
-### What questions do these graphs answer?
-
-How does the distribution of `dir_request` across `trans_type`? 
+## What questions do these graphs answer?
 
 --
 
-### We can view this with a density plot, violin plot, or ridgeline plot
+*How does the distribution of `dir_request` across `trans_type`?*
+
+--
+
+## We can view this with a density plot, violin plot, or ridgeline plot
 
 ---
 class: left, top
@@ -877,36 +923,38 @@ background-size: 6%
 
 ## Density Plots
 
+.leftcol45[
+
 Visualize the distribution of `dir_request` across `trans_type` with a `geom_density()`
 
-```{r density, eval=FALSE}
+.code70[
+
+```{r dir_request-density-code, eval=FALSE}
 TidyApple %>% 
   ggplot() +
-  geom_density(aes(x = dir_request, #<<
+  geom_density(aes(x = dir_request, 
                    fill = trans_type)) + #<<
   lab_density
 ```
 
-```{r density-no-show, include=FALSE}
+
+]]
+
+--
+
+.rightcol55[
+
+.border[
+
+```{r dir_request-density-show, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 TidyApple %>% 
   ggplot() +
   geom_density(aes(x = dir_request, 
-                   fill = trans_type)) + 
+                   fill = trans_type)) + #<<
   lab_density
 ```
 
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
-
-## Density Plots
-
-```{r density-no-show-1-show, echo=FALSE, out.height='85%', out.width='85%'}
-knitr::include_graphics(path = "img/density-no-show-1.png")
-# copy_slide_images("density-no-show-1.png")
-```
+]]
 
 ---
 class: left, top
@@ -916,11 +964,13 @@ background-size: 6%
 
 ## Density Plots (`alpha`)
 
-<br>
+.leftcol45[
 
 Adjust the `alpha` so we can see the overlap
 
-```{r density-alpha, eval=FALSE}
+.code70[
+
+```{r dir_request-density-alpha-code, eval=FALSE}
 TidyApple %>% 
   ggplot() +
   geom_density(aes(x = dir_request, 
@@ -929,7 +979,13 @@ TidyApple %>%
   lab_density
 ```
 
-```{r density-alpha-no-show, include=FALSE}
+]]
+
+--
+
+.rightcol55[.border[
+
+```{r dir_request-density-alpha-show, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 TidyApple %>% 
   ggplot() +
   geom_density(aes(x = dir_request, 
@@ -938,20 +994,7 @@ TidyApple %>%
   lab_density
 ```
 
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
-
-## Density Plots (`alpha`)
-
-Now we can see where they overlap
-
-```{r density-alpha-no-show-1-show, echo=FALSE, out.height='85%', out.width='85%'}
-knitr::include_graphics(path = "img/density-alpha-no-show-1.png")
-# copy_slide_images("density-alpha-no-show-1.png")
-```
+]]
 
 ---
 class: left, top
@@ -961,7 +1004,7 @@ background-size: 6%
 
 ## Violin Plots 
 
-Violin plots are alternatives to boxplots. 
+Violin plots are alternatives to box-plots. 
 
 ```{r lab_violin}
 lab_violin <- labs(y = "Apple directions requests",
@@ -970,8 +1013,6 @@ lab_violin <- labs(y = "Apple directions requests",
      subtitle = "source: https://covid19.apple.com/mobility")
 ```
 
-These allow us to add a categorical variable to the `x` axis. 
-
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
@@ -980,7 +1021,30 @@ background-size: 6%
 
 ## Violin Plots 
 
-```{r geom_violin-no-show, eval=FALSE}
+.leftcol45[
+
+Violin plots allow us to add a categorical variable to the `x` axis. 
+
+.code70[
+
+```{r geom_violin-code, eval=FALSE}
+TidyApple %>% 
+  ggplot() +
+  geom_violin(aes(y = dir_request, #<<
+                  x = trans_type, #<<
+                  fill = trans_type)) + #<<
+  lab_violin
+```
+
+]]
+
+--
+
+
+.rightcol55[
+.border[
+
+```{r geom_violin-show, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 TidyApple %>% 
   ggplot() +
   geom_violin(aes(y = dir_request, x = trans_type, #<<
@@ -988,20 +1052,7 @@ TidyApple %>%
   lab_violin
 ```
 
-```{r geom_violin, include=FALSE}
-TidyApple %>% 
-  ggplot() +
-  geom_violin(aes(y = dir_request, x = trans_type, #<<
-                  fill = trans_type)) + #<<
-  lab_violin
-```
-
-
-```{r geom_violin-1-show, echo=FALSE, out.height='85%', out.width='85%'}
-knitr::include_graphics(path = "img/geom_violin-1.png")
-# copy_slide_images("geom_violin-1.png")
-```
-
+]]
 
 ---
 class: left, top
@@ -1011,18 +1062,35 @@ background-size: 6%
 
 ## Violin Plots: *confused?*
 
+.leftcol45[
+
 Add a boxplot layer!
 
-```{r geom_violin-no-run, eval=FALSE}
+.code70[
+
+```{r geom_violin-boxplot-alpha-code, eval=FALSE}
 TidyApple %>% 
   ggplot() +
-  geom_violin(aes(y = dir_request, x = trans_type, #<<
-                  fill = trans_type), alpha = 1/5) #<<
+  geom_violin(aes(y = dir_request, 
+              x = trans_type, 
+              fill = trans_type), 
+              alpha = 1/5) + 
+  geom_boxplot(aes(y = dir_request, #<<
+               x = trans_type, #<<
+               color = trans_type)) + #<<
+  lab_violin
 ```
+
+]]
 
 --
 
-```{r geom_violin-geom_boxplot-no-run, eval=FALSE}
+.rightcol55[
+.border[
+
+<br>
+
+```{r geom_violin-boxplot-alpha-show, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 TidyApple %>% 
   ggplot() +
   geom_violin(aes(y = dir_request, x = trans_type, 
@@ -1032,6 +1100,7 @@ TidyApple %>%
   lab_violin
 ```
 
+]]
 
 ---
 class: left, top
@@ -1041,20 +1110,48 @@ background-size: 6%
 
 ## Violin Plots *and* Boxpots
 
-```{r geom_violin-geom_boxplot-run-no-show, include=FALSE}
+.leftcol45[
+
+We map the same variables to the `x` and `y`, but swap `fill` for `color` in the `geom_boxplot()`.
+
+.code70[
+
+```{r geom_violin-geom_boxplot-run-code, eval=FALSE}
 TidyApple %>% 
   ggplot() +
-  geom_violin(aes(y = dir_request, x = trans_type, 
-                  fill = trans_type), alpha = 1/5) + 
-  geom_boxplot(aes(y = dir_request, x = trans_type, 
-                   color = trans_type)) +
+  geom_violin(aes(y = dir_request, 
+              x = trans_type, 
+              fill = trans_type), 
+              alpha = 1/5) + 
+  geom_boxplot(aes(y = dir_request, #<<
+               x = trans_type, #<<
+               color = trans_type)) + #<<
   lab_violin
 ```
 
-```{r geom_violin-geom_boxplot-run-no-show-1-show, echo=FALSE, out.height='95%', out.width='95%'}
-knitr::include_graphics(path = "img/geom_violin-geom_boxplot-run-no-show-1.png")
-# copy_slide_images("geom_violin-geom_boxplot-run-no-show-1.png")
+]]
+
+--
+
+.rightcol55[
+.border[
+
+<br>
+
+```{r geom_violin-geom_boxplot-run-show, echo=FALSE, out.height='100%', out.width='100%', fig.align='center'}
+TidyApple %>% 
+  ggplot() +
+  geom_violin(aes(y = dir_request, 
+              x = trans_type, 
+              fill = trans_type), 
+              alpha = 1/5) + 
+  geom_boxplot(aes(y = dir_request, #<<
+               x = trans_type, #<<
+               color = trans_type)) + #<<
+  lab_violin
 ```
+
+]]
 
 
 ---
@@ -1067,24 +1164,14 @@ background-size: 6%
 
 Another option is a ridgeline plot (from the `ggridges` package). These display multiple densities. 
 
+#### Labs first! 
+
 ```{r lab_ridges}
 lab_ridges <- labs(x = "Apple directions requests",
                    y = "Transportation Types",
      title = "Direction Requests by Transportation Type",
      subtitle = "source: https://covid19.apple.com/mobility")
 ```
-
-```{r ggridges, eval=FALSE}
-library(ggridges)
-TidyApple %>%  
-  ggplot() + 
-  geom_density_ridges(aes(x = dir_request, 
-                          y = trans_type, 
-                          fill = trans_type), 
-                      alpha = 1/5) + 
-  lab_ridges
-```
-
 
 ---
 class: left, top
@@ -1094,9 +1181,80 @@ background-size: 6%
 
 ## Rideline Plots 
 
-We can adjust the alpha on these just like the density plots.
+.leftcol45[
 
-```{r geom_density_ridges-plot, echo=FALSE}
+The `geom_density_ridges()` function works just like the `geom_density()`, except we can supply a `y` variable. 
+
+.code70[
+
+```{r ggridges-code, eval=FALSE}
+library(ggridges)
+TidyApple %>%  
+  ggplot() + 
+  geom_density_ridges( #<<
+      aes(x = dir_request, 
+          y = trans_type, 
+          fill = trans_type)) + 
+  lab_ridges
+```
+
+]]
+
+--
+
+.rightcol55[
+.border[
+
+<br>
+
+```{r ggridges-show, echo=FALSE, out.height='100%', out.width='100%'}
+library(ggridges)
+TidyApple %>%  
+  ggplot() + 
+  geom_density_ridges(aes(x = dir_request, 
+                          y = trans_type, 
+                          fill = trans_type)) + 
+  lab_ridges
+```
+
+]]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Rideline Plots 
+
+.leftcol45[
+
+We can adjust the `alpha` on these just like the density plots.
+
+.code70[
+
+```{r geom_density_ridges-plot-code, eval=FALSE}
+library(ggridges)
+TidyApple %>%  
+  ggplot() + 
+  geom_density_ridges(
+      aes(x = dir_request, 
+          y = trans_type, 
+          fill = trans_type), 
+      alpha = 1/5) + #<<
+  lab_ridges
+```
+
+]]
+
+--
+
+.rightcol55[
+.border[
+
+<br>
+
+```{r geom_density_ridges-plot-show, echo=FALSE, out.height='100%', out.width='100%'}
 library(ggridges)
 TidyApple %>%  
   ggplot() + 
@@ -1107,12 +1265,7 @@ TidyApple %>%
   lab_ridges
 ```
 
-```{r geom_density_ridges-plot-1, echo=FALSE, out.height='80%', out.width='80%'}
-knitr::include_graphics(path = "img/geom_density_ridges-plot-1.png")
-# copy_slide_images("geom_density_ridges-plot-1.png")
-```
-
-
+]]
 
 ---
 class: inverse, center, top
@@ -1156,13 +1309,9 @@ background-size: 6%
 
 These are helpful if we're checking a filter on a numerical certain condition (`min`, `max`, `mean`, etc.)
 
-<br>
-
-```{r skimr-output-png, echo=FALSE, out.height='100%', out.width='100%', fig.align='left'}
+```{r skimr-output-png, echo=FALSE, out.height='80%', out.width='80%', fig.align='center'}
 knitr::include_graphics(path = "img/skimr-output.png")
-# copy_slide_images("skimr-output.png")
 ```
-
 
 ---
 class: left, top
@@ -1172,11 +1321,7 @@ background-size: 6%
 
 ### Narrow to US Cities (Feb-Jul) 
 
-<br>
-
 Create `USCitiesFebJul` data by filtering to US cities between Feb 1, 2020 and July 31, 2020.
-
-<br>
 
 ```{r USCitiesFebJul}
 TidyApple %>% 
@@ -1186,8 +1331,6 @@ TidyApple %>%
          date <= lubridate::as_date("2020-08-01")) -> USCitiesFebJul
 ```
 
-
-
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
@@ -1196,23 +1339,30 @@ background-size: 6%
 
 ### Line Graph: Labels (1)
 
-Ideally, our labels update whenever the data changes. We can do this with `paste0()`.
+Ideally, our labels update whenever the data changes. 
+
+.code80[
 
 ```{r paste0}
 paste0(min(USCitiesFebJul$date), 
-                       " through ", 
-                       max(USCitiesFebJul$date)) 
+       " through ", 
+       max(USCitiesFebJul$date)) 
 ```
 
---
+]
+
+We can do this by using `paste0()` in our `subtitle`:
+
+.code80[
 
 ```{r subtitle, eval=FALSE}
- subtitle = paste0(
-                    min(USCitiesFebJul$date), # first date
-                    " through ", # plain text
-                    max(USCitiesFebJul$date)  # last date
-                    ), 
+ subtitle = 
+    paste0(min(USCitiesFebJul$date), # first date
+          " through ", # plain text
+          max(USCitiesFebJul$date)),  # last date
 ```
+
+]
 
 ---
 class: left, top
@@ -1222,12 +1372,7 @@ background-size: 6%
 
 ### Line Graph: Labels (2)
 
-<br>
-
 We can then supply the `subtitle` to `labs`
-
-<br><br>
-
 
 ```{r lab_line_graph}
 labs(x = "Date",
@@ -1240,8 +1385,6 @@ labs(x = "Date",
      color = "Transit Type") -> lab_line_graph
 ```
 
-
-
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
@@ -1250,9 +1393,30 @@ background-size: 6%
 
 ### Line Graph: Labels (3)
 
-<br>
+.leftcol45[
 
-```{r apply-lab_line_graph-no-run, include=FALSE}
+We will add `group` and `color` aesthetics to our graph of `dir_request` over time (`date`). 
+
+.code70[
+
+```{r apply-lab_line_graph-code, eval=FALSE}
+USCitiesFebJul %>% 
+  ggplot() +
+  geom_line(aes(x = date, 
+                y = dir_request, 
+            group = trans_type, 
+            color = trans_type)) + 
+    lab_line_graph
+```
+
+]]
+
+--
+
+.rightcol55[
+.border[
+
+```{r apply-lab_line_graph-show, echo=FALSE, out.height='100%', out.width='100%', fig.align='center'}
 USCitiesFebJul %>% 
   ggplot() +
   geom_line(aes(x = date, 
@@ -1262,11 +1426,8 @@ USCitiesFebJul %>%
     lab_line_graph
 ```
 
+]]
 
-```{r apply-lab_line_graph-show, echo=FALSE, out.height='100%', out.width='100%', fig.align='center'}
-knitr::include_graphics(path = "img/apply-lab_line_graph-show.png")
-# copy_slide_images("apply-lab_line_graph-show.png")
-```
 
 ---
 class: left, top
@@ -1278,10 +1439,19 @@ background-size: 6%
 
 Consider our previous line graph--the lines overlap a bit.
 
-```{r apply-lab_line_graph-no-run-1-show, echo=FALSE, out.height='100%', out.width='100%', fig.align='center'}
-knitr::include_graphics(path = "img/apply-lab_line_graph-no-run-1.png")
-# copy_slide_images("apply-lab_line_graph-no-run-1.png")
+.border[
+
+```{r apply-lab_line_graph-show-2, echo=FALSE, out.height='70%', out.width='70%', fig.align='center'}
+USCitiesFebJul %>% 
+  ggplot() +
+  geom_line(aes(x = date, 
+                y = dir_request, 
+                   group = trans_type, 
+                   color = trans_type)) + 
+    lab_line_graph
 ```
+
+]
 
 ---
 class: left, top
@@ -1289,46 +1459,50 @@ background-image: url(img/ggplot2.png)
 background-position: 95% 8%
 background-size: 6%
 
-### Line Graph: Line Size (1)
+### Line Graph: Line Size 
+
+.leftcol45[
 
 We can minimize the size of the line with the `size` aesthetic.
 
-```{r geom_line-smaller-size, eval=FALSE}
+.code70[
+
+
+```{r geom_line-smaller-size-code, eval=FALSE}
 USCitiesFebJul %>% 
   ggplot() +
-  geom_line(aes(x = date, y = dir_request, 
-             group = trans_type, color = trans_type), 
-            # make these slightly smaller
-            size = 0.30) + 
+  geom_line(aes(x = date, 
+                y = dir_request, 
+             group = trans_type, 
+             color = trans_type), 
+    # make these slightly smaller
+            size = 0.20) + 
   lab_line_graph
 ```
 
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
+]]
 
-### Line Graph: Line Size (2)
+--
+
+.rightcol55[
 
 This makes the trends easier to see.
 
-```{r geom_line-smaller-size-no-show, include=FALSE}
+.border[
+
+```{r geom_line-smaller-size-show, echo=FALSE, out.height='100%', out.width='100%', fig.align='center'}
 USCitiesFebJul %>% 
   ggplot() +
-  geom_line(aes(x = date, y = dir_request, 
-             group = trans_type, color = trans_type), 
-            # make these slightly smaller
-            size = 0.30) + 
+  geom_line(aes(x = date, 
+                y = dir_request, 
+             group = trans_type, 
+             color = trans_type), 
+    # make these slightly smaller
+            size = 0.20) + 
   lab_line_graph
 ```
 
-
-```{r geom_line-smaller-size-1-show, echo=FALSE, out.height='100%', out.width='100%', fig.align='center'}
-knitr::include_graphics(path =
-"img/geom_line-smaller-size-no-show-1.png")
-# copy_slide_images("geom_line-smaller-size-no-show-1.png")
-```
+]]
 
 ---
 class: inverse, center, top
@@ -1354,13 +1528,17 @@ There is a gap in the direct request data (this is [documented in the data sourc
 
 --
 
-```{r missing-geom_line-smaller-size-1-show, echo=FALSE, out.height='75%', out.width='75%', fig.align='center'}
-knitr::include_graphics(path =
-"img/geom_line-smaller-size-no-show-1.png")
-# copy_slide_images("geom_line-smaller-size-no-show-1.png")
+.border[
+
+```{r missing-geom_line-smaller-size-1-show, echo=FALSE, out.height='52%', out.width='52%', fig.align='center'}
+USCitiesFebJul %>% ggplot() +
+  geom_line(aes(x = date, y = dir_request, 
+             group = trans_type, color = trans_type), 
+    # make these slightly smaller
+            size = 0.20) + lab_line_graph
 ```
 
-We should annotate this on a line graph!
+]
 
 ---
 class: left, top
@@ -1372,14 +1550,12 @@ background-size: 6%
 
 These data are `filter`ed to US cities between March 1, 2020 to June 30, 2020.
 
-```{r create-USCitiesMarJun-no-run, eval=FALSE}
+```{r create-USCitiesMarJun-code, eval=TRUE}
 USCitiesMarJun <-  TidyApple %>% 
   filter(geo_type == "city" & country == "United States", 
          date >= lubridate::as_date("2020-03-01") & 
          date <= lubridate::as_date("2020-07-01"))
-
 ```
-
 
 ---
 class: left, top
@@ -1387,21 +1563,22 @@ background-image: url(img/ggplot2.png)
 background-position: 95% 8%
 background-size: 6%
 
-### Annotate Data
+### Create Annotate Data
 
-```{r USCitiesMarJun-no-run, eval=FALSE}
+<br>
+
+```{r USCitiesMarJun, eval=FALSE}
 USCitiesMarJun
 ```
 
-```{r USCitiesMarJun-show-no-run, echo=FALSE}
-USCitiesMarJun <-  TidyApple %>% 
-  filter(geo_type == "city" &
-              country == "United States", 
-                date >= lubridate::as_date("2020-03-01") & 
-                  date <= lubridate::as_date("2020-07-01"))
-rmarkdown::paged_table(
-USCitiesMarJun)
+.small[
+
+```{r create-USCitiesMarJun-show, echo=FALSE}
+rmarkdown::paged_table(USCitiesMarJun)
 ```
+
+]
+
 
 ---
 class: left, top
@@ -1414,14 +1591,14 @@ background-size: 6%
 Build our labels first!
 
 ```{r lab_annotation}
-labs(x = "Date",
+lab_annotation <- labs(x = "Date",
      y = "Direction Requests",
      title = "Spring Direction Requests (Mar-Jun) in US Cities",
      subtitle = paste0(min(USCitiesMarJun$date), #<<
                        " through ", 
                        max(USCitiesMarJun$date)), #<<
      caption = "source: https://covid19.apple.com/mobility", 
-     color = "Transit Type") -> lab_annotation
+     color = "Transit Type")
 ```
 
 ---
@@ -1435,11 +1612,11 @@ background-size: 6%
 Build a line graph layer (`gg_line_annotate`)
 
 ```{r gg_line_annotate}
-USCitiesMarJun %>% 
+gg_line_annotate <- USCitiesMarJun %>% 
     ggplot() +
     geom_line(aes(x = date, y = dir_request, 
              group = trans_type, color = trans_type), 
-             size = 0.30) -> gg_line_annotate
+             size = 0.20)
 ```
 
 ---
@@ -1453,13 +1630,11 @@ background-size: 6%
 Add a coordinate system layer (`gg_coord_system`)
 
 ```{r gg_coord_system}
-coord_cartesian(
+gg_coord_system <- coord_cartesian(
  xlim = c(min(USCitiesMarJun$date), 
           max(USCitiesMarJun$date)), 
- 
  ylim = c(min(USCitiesMarJun$dir_request, na.rm = TRUE), 
-          max(USCitiesMarJun$dir_request, na.rm = TRUE))) -> 
-  gg_coord_system
+          max(USCitiesMarJun$dir_request, na.rm = TRUE)))
 ```
 
 ---
@@ -1473,13 +1648,13 @@ background-size: 6%
 Build vertical line segment (`gg_line_segment`)
 
 ```{r gg_line_segment}
-annotate(geom = "segment", 
+gg_line_segment <- annotate(geom = "segment", 
         size = 1, 
         color = "firebrick3",
         x = lubridate::as_date("2020-05-11"), 
         xend = lubridate::as_date("2020-05-11"), 
         y = 270, 
-        yend = 100) -> gg_line_segment
+        yend = 100)
 ```
 
 ---
@@ -1493,15 +1668,14 @@ background-size: 6%
 Build text annotation (`gg_text_annotation`)
 
 ```{r gg_text_annotation}
-annotate(geom = "text",
-           color = "red", 
-           hjust = 0.5, 
-           size = 6,
-           x = lubridate::as_date("2020-05-07"), 
-           y = 300, 
-           label = "Data not available") -> gg_text_annotation
+gg_text_annotation <- annotate(geom = "text",
+       color = "red", 
+       hjust = 0.5, 
+       size = 6,
+       x = lubridate::as_date("2020-05-07"), 
+       y = 300, 
+       label = "Data not available") 
 ```
-
 
 ---
 class: left, top
@@ -1512,9 +1686,12 @@ background-size: 6%
 
 ### `annotate`: Combine Layers
 
+
+.leftcol45[
+
 Now we can use the `ggplot2` syntax to combine these layers...
 
-<br><br>
+.code70[
 
 ```{r build-annotation-graph, eval=FALSE}
 gg_line_annotate + # line graph
@@ -1524,31 +1701,52 @@ gg_line_annotate + # line graph
   lab_annotation # labels
 ```
 
+]]
 
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
+--
 
+.rightcol55[
 
-### `annotate`: Complete Graph
+.border[
 
-...and we see a complete graph!
+<br>
 
-```{r build-annotation-graph-show, echo=FALSE}
-gg_line_annotate + # line graph
-  gg_coord_system + # coordinate system 
-  gg_line_segment + # line annotation
-  gg_text_annotation + # text annotation 
-  lab_annotation # labels
+```{r build-annotation-graph-code, echo=FALSE}
+USCitiesMarJun %>% 
+    ggplot() +
+    geom_line(aes(x = date, y = dir_request, 
+             group = trans_type, color = trans_type), 
+             size = 0.20) + 
+    coord_cartesian(
+     xlim = c(min(USCitiesMarJun$date), 
+          max(USCitiesMarJun$date)), 
+    ylim = c(min(USCitiesMarJun$dir_request, na.rm = TRUE), 
+          max(USCitiesMarJun$dir_request, na.rm = TRUE))) + 
+    annotate(geom = "segment", 
+        size = 1, 
+        color = "firebrick3",
+        x = lubridate::as_date("2020-05-11"), 
+        xend = lubridate::as_date("2020-05-11"), 
+        y = 270, 
+        yend = 100) + 
+    annotate(geom = "text",
+       color = "red", 
+       hjust = 0.5, 
+       size = 6,
+       x = lubridate::as_date("2020-05-07"), 
+       y = 300, 
+       label = "Data not available") + 
+    labs(x = "Date",
+     y = "Direction Requests",
+     title = "Spring Direction Requests (Mar-Jun) in US Cities",
+     subtitle = paste0(min(USCitiesMarJun$date), #<<
+                       " through ", 
+                       max(USCitiesMarJun$date)), #<<
+     caption = "source: https://covid19.apple.com/mobility", 
+     color = "Transit Type")
 ```
 
-```{r build-annotation-graph-show-1, echo=FALSE, out.height='65%', out.width='65%', fig.align='center'}
-knitr::include_graphics(path =
-"img/build-annotation-graph-show-1.png")
-# copy_slide_images("build-annotation-graph-show-1.png")
-```
+]]
 
 ---
 class: left, top
@@ -1560,10 +1758,13 @@ background-size: 6%
 
 In the previous slides, we learned about labeling values with `ggrepel`.
 
-```{r aes-sol-11-1, echo=FALSE, fig.align='center', out.height='70%', out.width='70%'}
+.border[
+
+```{r aes-sol-11-1, echo=FALSE, fig.align='center', out.height='45%', out.width='45%'}
 knitr::include_graphics(path = "img/aes-sol-11-1.png")
-# copy_slide_images("aes-sol-11-1.png")
 ```
+
+]
 
 Now we're going to extend this to plotting text and values on our graphs!
 
@@ -1592,9 +1793,13 @@ background-size: 6%
 
 ### View `TopUSCities`
 
+<br>
+
 ```{r view-TopUSCities, eval=FALSE}
 TopUSCities
 ```
+
+.small[
 
 ```{r TopUSCities-show, echo=FALSE}
 TopUSCities <- TidyApple %>% 
@@ -1604,6 +1809,7 @@ TopUSCities <- TidyApple %>%
 rmarkdown::paged_table(TopUSCities)
 ```
 
+]
 
 ---
 class: left, top
@@ -1616,26 +1822,15 @@ background-size: 6%
 Create a dataset with only the maximum direction request values for `"driving"` per `region`. 
 
 ```{r MaxUSCitiesDriving, eval=FALSE}
-TopUSCities %>% 
+MaxUSCitiesDriving <- TopUSCities %>% 
   filter(trans_type == "driving") %>% 
   group_by(region) %>% 
   slice_max(dir_request) %>% 
-  ungroup() -> MaxUSCitiesDriving
-```
-
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
-
-## View `MaxUSCitiesDriving`
-
-```{r view-MaxUSCitiesDriving, eval=FALSE}
+  ungroup()
 MaxUSCitiesDriving
 ```
 
-<br>
+.small[
 
 ```{r MaxUSCitiesDriving-no-show, echo=FALSE}
 TopUSCities %>% 
@@ -1645,6 +1840,8 @@ TopUSCities %>%
   ungroup() -> MaxUSCitiesDriving
 rmarkdown::paged_table(MaxUSCitiesDriving)
 ```
+
+]
 
 ---
 class: left, top
@@ -1678,6 +1875,8 @@ background-size: 6%
 
 ### Create Value Labels 
 
+.leftcol[
+
 We will also use `paste0()` here to create a variable for the labels that combines the city and date. 
 
 ```{r max_driving_labels-sol-01}
@@ -1685,13 +1884,9 @@ MaxUSCitiesDriving <- MaxUSCitiesDriving %>%
   mutate(max_driving_labels = paste0(region, ", ", date))
 ```
 
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
+]
 
-### View Value Labels 
+.rightcol[
 
 Take a look at the labels we've created 
 
@@ -1700,11 +1895,15 @@ MaxUSCitiesDriving %>%
   select(max_driving_labels)
 ```
 
+.medium[
+
 ```{r max_driving_labels-show, echo=FALSE}
 rmarkdown::paged_table(
 MaxUSCitiesDriving %>% 
   select(max_driving_labels))
 ```
+
+]]
 
 ---
 class: left, top
@@ -1714,7 +1913,43 @@ background-size: 6%
 
 ### Create Line Layer + Label Layer
 
-```{r plot-with-labels-show, eval=FALSE}
+.leftcol45[
+
+.small[
+
+Now we combine the `geom_line()` layer, the `geom_label_repel()` layer, and the `lab_line_max_drivers`. 
+
+]
+
+.code50[
+
+```{r geom_label_repel-plot-with-labels-code, eval=FALSE}
+library(ggrepel)
+TopUSCities %>% 
+    ggplot() + 
+    geom_line(aes(
+            x = date, 
+            y = dir_request, 
+        group = trans_type, 
+        color = trans_type), 
+  # make these slightly smaller again...
+         size = 0.15) + 
+    geom_label_repel(
+        data = MaxUSCitiesDriving,
+        aes(x = date, 
+            y = dir_request, 
+        label = max_driving_labels), 
+  # set color and size...
+        color = "red", 
+         size = 3) + 
+  lab_line_max_drivers
+```
+
+]]
+
+.rightcol55[.border[
+
+```{r geom_label_repel-plot-with-labels-show, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 library(ggrepel)
 TopUSCities %>% 
     ggplot() + 
@@ -1732,36 +1967,8 @@ TopUSCities %>%
   lab_line_max_drivers
 ```
 
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
 
-### View plot with labels
-
-```{r plot-with-labels-no-show, include=FALSE}
-library(ggrepel)
-TopUSCities %>% 
-    ggplot() + 
-    geom_line(aes(x = date, y = dir_request, 
-                  group = trans_type, 
-                  color = trans_type), 
-                  # make these slightly smaller again...
-                  size = 0.15) + 
-    geom_label_repel(data = MaxUSCitiesDriving,
-              aes(x = date, y = dir_request, 
-                  label = max_driving_labels), 
-                  # set color and size...
-                  color = "red", 
-                  size = 3) + 
-  lab_line_max_drivers
-```
-
-```{r plot-with-labels-no-show-1, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
-knitr::include_graphics(path = "img/plot-with-labels-no-show-1.png")
-# copy_slide_images("plot-with-labels-no-show-1.png")
-```
+]]
 
 ---
 class: inverse, center, top
@@ -1787,6 +1994,7 @@ TopUSCities
 rmarkdown::paged_table(TopUSCities)
 ```
 
+
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
@@ -1811,40 +2019,51 @@ background-size: 6%
 
 ## Horizontal Reference Lines
 
+
+
+.leftcol45[
+
+.small[
+
 Add the `geom_hline()` for a horizontal reference line (at `100`)
 
-```{r geom_hline-no-run, eval=FALSE}
+
+]
+
+.code50[
+
+```{r reference-lines-geom_hline-code, eval=FALSE}
 TopUSCities %>% 
-  ggplot(aes(x = date, y = dir_request, 
+  ggplot(aes(x = date, 
+             y = dir_request, 
              group = trans_type, 
              color = trans_type)) + 
   geom_line(size = 0.1) + 
-  geom_hline(yintercept = 100, size = 0.2, color = "gray20") +
+  geom_hline(yintercept = 100, 
+             size = 0.2, 
+             color = "gray20") +
   lab_ref_lines
 ```
 
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
+]]
 
-## Horizontal Reference Lines
+.rightcol55[.border[
 
-```{r geom_hline-show, include=FALSE}
+```{r reference-lines-geom_hline-show, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 TopUSCities %>% 
-  ggplot(aes(x = date, y = dir_request, 
+  ggplot(aes(x = date, 
+             y = dir_request, 
              group = trans_type, 
              color = trans_type)) + 
   geom_line(size = 0.1) + 
-  geom_hline(yintercept = 100, size = 0.2, color = "gray20") +
+  geom_hline(yintercept = 100, 
+             size = 0.2, 
+             color = "gray20") +
   lab_ref_lines
 ```
 
-```{r geom_hline-show-1, echo=FALSE, fig.align='center', out.height='95%', out.width='95%'}
-knitr::include_graphics(path = "img/geom_hline-show-1.png")
-# copy_slide_images("geom_hline-show-1.png")
-```
+]]
+
 
 ---
 class: inverse, center, top
@@ -1862,9 +2081,17 @@ background-size: 6%
 
 ## Faceting basics 
 
+.leftcol45[
+
+.small[
+
 Facets create subplots across levels of a categorical variable.
 
-```{r facet_wrap-1, eval=FALSE}
+]
+
+.code50[
+
+```{r facet_wrap-region-code, eval=FALSE}
 TopUSCities %>% 
   ggplot(aes(x = date, y = dir_request, 
              group = trans_type, 
@@ -1877,15 +2104,13 @@ TopUSCities %>%
   lab_ref_lines
 ```
 
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
+]]
 
-## Single Variable Facets 
+--
 
-```{r facet_wrap-show, echo=FALSE}
+.rightcol55[.border[
+
+```{r facet_wrap-region-show, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 TopUSCities %>% 
   ggplot(aes(x = date, y = dir_request, 
              group = trans_type, 
@@ -1898,6 +2123,9 @@ TopUSCities %>%
   lab_ref_lines
 ```
 
+]]
+
+
 ---
 class: left, top
 background-image: url(img/ggplot2.png)
@@ -1906,7 +2134,41 @@ background-size: 6%
 
 ## Multiple Variable Facets 
 
+.leftcol45[
+
+.small[
+
+Add the `ncol = 5` to specify the number of columns (or rows with `nrow = `)
+
+]
+
+.code50[
+
 ```{r facet_wrap-2vars-1, eval=FALSE}
+TopUSCities %>% 
+  ggplot(aes(x = date, 
+             y = dir_request, 
+             group = region, 
+             color = trans_type)) + 
+  geom_line(size = 0.1) + 
+  geom_hline(yintercept = 100, 
+             size = 0.2, 
+             color = "gray20") +
+  facet_wrap(region ~ trans_type, #<<
+             ncol = 5) + #<<
+  lab_ref_lines
+```
+
+]]
+
+
+--
+
+.rightcol55[.border[
+
+<br>
+
+```{r facet_wrap-2vars-2, echo=FALSE, fig.align='center', out.height='100%', out.width='100%'}
 TopUSCities %>% 
   ggplot(aes(x = date, y = dir_request, 
              group = region, 
@@ -1915,28 +2177,11 @@ TopUSCities %>%
   geom_hline(yintercept = 100, 
              size = 0.2, 
              color = "gray20") +
-  facet_wrap(region ~ trans_type, ncol = 5) + #<<
-  lab_ref_lines
-```
-
----
-class: left, top
-background-image: url(img/ggplot2.png)
-background-position: 95% 8%
-background-size: 6%
-
-## Multiple Variable Facets 
-
-```{r facet_wrap-2vars-2, echo=FALSE}
-TopUSCities %>% 
-  ggplot(aes(x = date, y = dir_request, 
-             group = region, 
-             color = trans_type)) + 
-  geom_line(size = 0.1) + 
-  geom_hline(yintercept = 100, size = 0.2, color = "gray20") +
   facet_wrap(region ~ trans_type, ncol = 5) + 
   lab_ref_lines
 ```
+
+]]
 
 ---
 class: left, top
@@ -1946,12 +2191,24 @@ background-size: 6%
 
 ### Advanced Faceting (`facet_wrap_paginate`)
 
-Check out the exercises for more advanced faceting with `facet_wrap_paginate()` from the `ggforce` package. 
+.leftcol35[
+.medium[
 
-```{r facet_wrap_paginate-sol-1-png, echo=FALSE}
+Check out the exercises for more advanced faceting with `facet_wrap_paginate()` from the [`ggforce` package](https://ggforce.data-imaginist.com/). 
+
+]]
+
+--
+
+.rightcol65[
+
+.border[
+
+```{r facet_wrap_paginate-sol-1, echo=FALSE, fig.align='center', out.height='75%', out.width='75%'}
 knitr::include_graphics(path = "img/facet_wrap_paginate-sol-1.png")
-# copy_slide_images("facet_wrap_paginate-sol-1.png")
 ```
+
+]]
 
 ---
 class: left, top
@@ -1961,12 +2218,25 @@ background-size: 6%
 
 ### Advanced Faceting (`facet_geo`)
 
+.leftcol35[
+.medium[
+
 Check out the exercises for more advanced faceting with `facet_geo()` from the `geofacet` package. 
 
-```{r facet_geo-sol-1-png, echo=FALSE}
+]]
+
+--
+
+
+.rightcol65[
+.border[
+
+```{r facet_geo-sol-1-png, echo=FALSE, fig.align='center', out.height='75%', out.width='75%'}
 knitr::include_graphics(path = "img/facet_geo-sol-1.png")
-# copy_slide_images("facet_geo-sol-1.png")
 ```
+
+]]
+
 
 
 ---
@@ -1994,9 +2264,7 @@ pdf_slides <- paste0("pdfs/", pdf_slides)
 print_files <- tibble("pdfs" = pdf_slides,
   "htmls" = html_slides)
 
-print_files$htmls[8]
-
+# print_files$htmls[8]
+# print_files$pdfs[8]
 pagedown::chrome_print(input = print_files$htmls[8], output = print_files$pdfs[8], timeout = 120)
 ```
-
-

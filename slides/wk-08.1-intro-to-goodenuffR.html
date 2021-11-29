@@ -4,24 +4,75 @@
     <title>Using the goodenuffR package</title>
     <meta charset="utf-8" />
     <meta name="author" content="Martin Frigaard" />
-    <meta name="date" content="2021-10-14" />
-    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
-    <link rel="stylesheet" href="theme.css" type="text/css" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <meta name="description" content="Using the goodenuffR package"/>
+    <meta name="generator" content="xaringan and remark.js"/>
+    <meta name="github-repo" content="mjfrigaard/csuc-data-journalism"/>
+    <meta name="twitter:title" content="Using the goodenuffR package"/>
+    <meta name="twitter:description" content="Using the goodenuffR package"/>
+    <meta name="twitter:url" content="https://mjfrigaard.github.io/csuc-data-journalism/"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:creator" content="@mjfrigaard"/>
+    <meta name="twitter:site" content="@mjfrigaard"/>
+    <meta property="og:title" content="Using the goodenuffR package"/>
+    <meta property="og:description" content="Using the goodenuffR package"/>
+    <meta property="og:url" content="https://mjfrigaard.github.io/csuc-data-journalism/"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Martin Frigaard"/>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/lexis.css" type="text/css" />
+    <link rel="stylesheet" href="css/lexis-fonts.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
-class: center, middle, inverse, title-slide
 
-# Using the goodenuffR package
-## Journalism 303: everything…in its right place
-### Martin Frigaard
-### 2021-10-14
+
+
+
+
+
+
+
+layout: true
+
+&lt;!-- this adds the link footer to all slides, depends on footer-small class in css--&gt;
+
+&lt;div class="footer-small"&gt;&lt;span&gt;https://github.com/mjfrigaard/csuc-data-journalism&lt;/div&gt;
 
 ---
+name: title-slide
+class: title-slide, center, middle, inverse
 
+# Using the goodenuffR package
+#.fancy[Everything...in its right place]
 
+&lt;br&gt;
 
+.large[by Martin Frigaard]
 
+Written: October 21 2021
+
+Updated: November 28 2021
+
+.footer-large[.right[.fira[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
+]]]
+
+---
 class: inverse, center, top
 background-image: url(img/goodenuffR.png)
 background-position: 50% 70%
@@ -33,13 +84,11 @@ background-size: 35%
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Outline 
 
-&lt;br&gt;
-
-.pull-left[
+.leftcol[
 ### 1) The Problem
 
 ### 2) A Solution 
@@ -49,7 +98,7 @@ background-size: 12%
 ### 4) Quick Start
 ]
 
-.pull-right[
+.rightcol[
 
 ### 5) Package functions 
 
@@ -68,33 +117,45 @@ background-size: 12%
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # The Problem
+
+.leftcol35[
 
 &gt; *Where is my stuff?*
 
+]
+
+.rightcol65[
+
 ### [THE VERGE: FILE NOT FOUND](https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z)
 
-&lt;img src="img/verge-file-not-found.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/verge-file-not-found.png" width="95%" height="95%" /&gt;
+
+]
+
+
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # The Problem
 
-.pull-left[
+.leftcol70[
 
-### *Where is my stuff?*
+&lt;img src="img/files-tweet-01.png" width="100%" height="100%" /&gt;
 
 ]
 
-.pull-right[
+--
 
-&lt;img src="img/files-tweet.JPG" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+.rightcol30[
+
+&gt; *Store stuff in a particular place*
 
 ]
 
@@ -102,12 +163,31 @@ background-size: 12%
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
-# A Solution
+# The Problem
 
+.leftcol[
 
-&lt;br&gt;
+&lt;img src="img/files-tweet-02.png" width="100%" height="100%" /&gt;
+
+]
+
+--
+
+.rightcol[
+
+&gt; *Most soul-destroying "bug" when trying to learn programming*
+
+]
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 8%
+
+# A Solution: `goodenuffR`!
 
 ### Based on the excellent paper, [*Good enough practices in scientific computing*](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
 
@@ -115,28 +195,32 @@ by Greg Wilson, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, T
 
 --
 
-&lt;img src="img/plos-gepisc.png" width="486" style="display: block; margin: auto;" /&gt;
+.border[
+
+&lt;img src="img/plos-gepisc.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
 
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # A Solution
 
-&lt;br&gt;
-
-### The paper focuses on...
+#### The paper focuses on...
 
 &gt; *"a minimum set of tools and techniques that we believe every researcher can and should consider adopting"*
 
 --
 
-### Specifically
+#### Specifically
 
-.pull-left[
+.leftcol[
+.medium[
 
 + Data management
 
@@ -144,9 +228,10 @@ background-size: 12%
 
 + Collaboration
 
-]
+]]
 
-.pull-right[
+.rightcol[
+.medium[
 
 + Project organization
 
@@ -154,21 +239,21 @@ background-size: 12%
 
 + Manuscripts
 
-]
+]]
 
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # A Solution
 
 
-.pull-left[
+.leftcol[
 
-### `goodenuffR` focuses on
+#### `goodenuffR` focuses on:
 
 + Data management
 
@@ -178,9 +263,11 @@ background-size: 12%
 
 --
 
-.pull-right[
+.rightcol[
 
-### Specifically
+#### Specifically
+
+.code70[
 
 ```bash
 |-- CITATION
@@ -200,14 +287,14 @@ background-size: 12%
 |  |-- runall.py
 ```
 
-]
+]]
 
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Installation
 
@@ -216,6 +303,8 @@ background-size: 12%
 ### Available on GitHub here: 
 
 https://github.com/mjfrigaard/goodenuffR
+
+--
 
 &lt;br&gt;
 
@@ -231,37 +320,64 @@ devtools::install_github("mjfrigaard/goodenuffR")
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Quick Start
+
+.leftcol35[
 
 ### In a fresh RStudio Session
 
-&lt;img src="img/goodenuffR-fresh.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
+]
+
+.rightcol65[.border[
+
+&lt;img src="img/goodenuffR-fresh.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+]]
+
+
+
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Quick Start
+
+.leftcol35[
 
 ### 1) Install `devtools`, then install and load `goodenuffR`
 
-&lt;img src="img/goodenuffR-install-load.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
+]
+
+.rightcol65[.border[
+
+&lt;img src="img/goodenuffR-install-load.png" width="65%" height="65%" style="display: block; margin: auto;" /&gt;
+
+]]
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Quick Start
+
+.leftcol35[
 
 ### 2) Enter a project name
 
 ### 3) Enter the folder path for your project
+
+]
+
+.rightcol65[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 
 
 ```r
@@ -270,60 +386,91 @@ goodenuffR::goodenuff_project(
   folder_path = "/Users/mjfrigaard/Projects")
 ```
 
-&lt;br&gt;
+#### TIP: *use `getwd()` in the Console or `pwd` in the Terminal to locate current folder*
 
-### TIP: *use `getwd()` in the Console or `pwd` in the Terminal to locate current folder*
+]
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Quick Start
+
+.leftcol35[
 
 ### RStudio will open a new session for your project
 
-&lt;img src="img/goodenuffR-new.png" width="85%" height="85%" style="display: block; margin: auto;" /&gt;
+]
+
+.leftcol65[.border[
+
+&lt;img src="img/goodenuffR-new.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
+
+]]
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Quick Start
 
-### 4) Run `goodenuffR::goodenuff_files()`
+.leftcol35[
+
+### 4) Run 
+
+.code70[
 
 
+```r
+goodenuffR::goodenuff_files()
+```
 
-&lt;img src="img/goodenuffR-run.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
+]]
+
+.leftcol65[.border[
+
+&lt;img src="img/goodenuffR-run.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+
+]]
+
+
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Quick Start
+
+.leftcol35[
 
 ### Now you're good (enuff) to go! 
 
-&lt;img src="img/goodenuffR-ready.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+]
+
+.leftcol65[.border[
+
+&lt;img src="img/goodenuffR-ready.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+
+]]
 
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
-## `goodenuff_code()`  
+#### `goodenuff_code()`  
 
-.pull-left[ 
+.leftcol[ 
 
 ### Paper
 
@@ -333,7 +480,7 @@ background-size: 12%
 
 ]
 
-.pull-right[ 
+.rightcol[ 
 
 ### `goodenuffR`
 
@@ -356,13 +503,13 @@ goodenuffR::goodenuff_code()
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
-## `goodenuff_code()` 
+#### `goodenuff_code()` 
 
-.pull-left[ 
+.leftcol[ 
 
 ### Paper
 
@@ -370,7 +517,7 @@ background-size: 12%
 
 ]
 
-.pull-right[ 
+.rightcol[ 
 
 ### `goodenuffR`
 
@@ -393,13 +540,13 @@ Each `code` file has a header:
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
-### `goodenuff_collab()` 
+#### `goodenuff_collab()` 
 
-.pull-left[ 
+.leftcol[ 
 
 ### Paper
 
@@ -410,7 +557,7 @@ background-size: 12%
 
 ]
 
-.pull-right[ 
+.rightcol[ 
 
 ### `goodenuffR`
 
@@ -430,13 +577,13 @@ goodenuffR::goodenuff_collab()
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
-### `goodenuff_data()`   
+#### `goodenuff_data()`   
 
-.pull-left[ 
+.leftcol[ 
 
 ### Paper
 
@@ -445,7 +592,7 @@ background-size: 12%
 
 ]
 
-.pull-right[ 
+.rightcol[ 
 
 ### `goodenuffR`
 
@@ -467,7 +614,7 @@ goodenuffR::goodenuff_data()
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
@@ -475,8 +622,9 @@ background-size: 12%
 
 `data/README.md` provides some guidance on storing and documenting data. 
 
+.code60[
 
-```markdown
+```
 # Project Data  
 
 For guidance please see:
@@ -495,19 +643,22 @@ source:
 https://swcarpentry.github.io/good-enough-practices-in-scientific-computing/
 ```
 
+]
+
+
+
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
    
-### `goodenuff_doc()`  
+#### `goodenuff_doc()`  
 
-
-.pull-left[ 
+.leftcol[ 
 
 ### Paper
 
@@ -517,7 +668,7 @@ background-size: 12%
 
 ]
 
-.pull-right[ 
+.rightcol[ 
 
 ### `goodenuffR`
 
@@ -536,14 +687,14 @@ goodenuffR::goodenuff_doc()
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
-### `goodenuff_results()`
+#### `goodenuff_results()`
 
 
-.pull-left[ 
+.leftcol[ 
 
 ### Paper
 
@@ -551,7 +702,7 @@ background-size: 12%
 
 ]
 
-.pull-right[ 
+.rightcol[ 
 
 ### `goodenuffR`
 
@@ -570,15 +721,23 @@ goodenuffR::goodenuff_results()
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Package functions 
 
-### `goodenuff_files()`
+.leftcol[
 
+#### `goodenuff_files()`
 
+]
 
-&lt;img src="img/goodenuffR-files.png" width="42%" height="42%" style="display: block; margin: auto;" /&gt;
+.rightcol[ 
+.border[
+
+&lt;img src="img/goodenuffR-files.png" width="65%" height="65%" style="display: block; margin: auto;" /&gt;
+
+]]
+
 
 
 
@@ -586,19 +745,31 @@ background-size: 12%
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 ## BONUS: RMarkdown Template
 
+.leftcol[
+
 ### `goodenuffR` also comes with a `rmarkdown` template: 
 
-&lt;img src="img/new-rmd.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
+]
+
+.rightcol[ 
+
+&lt;br&gt;
+
+.border[
+
+&lt;img src="img/new-rmd.png" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
+
+]]
 
 ---
 class: left, top
 background-image: url(img/goodenuffR.png)
 background-position: 93% 8%
-background-size: 12%
+background-size: 8%
 
 # Thank you! 
 
@@ -608,13 +779,15 @@ background-size: 12%
 
 ### - `mjfrigaard(at)pm.me` email
 
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false
+"countIncrementalSlides": false,
+"ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

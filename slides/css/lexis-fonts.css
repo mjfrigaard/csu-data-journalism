@@ -133,6 +133,9 @@ blockquote {
 .small {
   font-size: 70%;
 }
+.medium {
+  font-size: 80%;
+}
 .large {
   font-size: 160%;
 }

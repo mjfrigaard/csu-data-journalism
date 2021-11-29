@@ -1,0 +1,645 @@
+---
+title: "Using the goodenuffR package"
+subtitle: "Journalism 303: everything...in its right place"
+date: '`r Sys.Date()`'
+author: 
+  - "Martin Frigaard"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["theme.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(reprex)
+library(xaringan)
+library(pagedown)
+library(xaringanthemer)
+# folders
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      fig.align = "center", 
+                      dpi = 320, 
+                      fig.height = 4, 
+                      fig.path = "img/")
+options(width = 60, max.print = 60)
+# xaringan::inf_mr() ----
+```
+
+class: inverse, center, top
+background-image: url(img/goodenuffR.png)
+background-position: 50% 70%
+background-size: 35%
+
+## `goodenuffR` = good enuff practices in R computing 
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Outline 
+
+<br>
+
+.pull-left[
+### 1) The Problem
+
+### 2) A Solution 
+
+### 3) Installation 
+
+### 4) Quick Start
+]
+
+.pull-right[
+
+### 5) Package functions 
+
++ `goodenuff_code()`  
++ `goodenuff_collab()`  
++ `goodenuff_data()`   
++ `goodenuff_doc()`  
++ `goodenuff_results()`
++ `goodenuff_files()`
+
+### 6) Using `goodenuffR`
+
+]
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# The Problem
+
+> *Where is my stuff?*
+
+### [THE VERGE: FILE NOT FOUND](https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z)
+
+```{r verge-file-not-found.png, echo=FALSE, out.height='75%', out.width='75%'}
+knitr::include_graphics(path = "img/verge-file-not-found.png")
+```
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# The Problem
+
+.pull-left[
+
+### *Where is my stuff?*
+
+]
+
+.pull-right[
+
+```{r files-tweet.JPG, echo=FALSE, out.height='60%', out.width='60%'}
+knitr::include_graphics(path = "img/files-tweet.JPG")
+```
+
+]
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# A Solution
+
+
+<br>
+
+### Based on the excellent paper, [*Good enough practices in scientific computing*](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
+
+by Greg Wilson, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, Tracy K. Teal
+
+--
+
+```{r plos-gepisc.png, echo=FALSE}
+knitr::include_graphics(path = "img/plos-gepisc.png")
+```
+
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# A Solution
+
+<br>
+
+### The paper focuses on...
+
+> *"a minimum set of tools and techniques that we believe every researcher can and should consider adopting"*
+
+--
+
+### Specifically
+
+.pull-left[
+
++ Data management
+
++ Software
+
++ Collaboration
+
+]
+
+.pull-right[
+
++ Project organization
+
++ Tracking changes
+
++ Manuscripts
+
+]
+
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# A Solution
+
+
+.pull-left[
+
+### `goodenuffR` focuses on
+
++ Data management
+
++ Project organization
+
+]
+
+--
+
+.pull-right[
+
+### Specifically
+
+```bash
+|-- CITATION
+|-- README
+|-- LICENSE
+|-- requirements.txt
+|-- data
+|  |-- birds_count_table.csv
+|-- doc
+|  |-- notebook.md
+|  |-- manuscript.md
+|  |-- changelog.txt
+|-- results
+|  |-- summarized_results.csv
+|-- src
+|  |-- sightings_analysis.py
+|  |-- runall.py
+```
+
+]
+
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Installation
+
+<br>
+
+### Available on GitHub here: 
+
+https://github.com/mjfrigaard/goodenuffR
+
+<br>
+
+### Install `goodenuffR` using the code below: 
+
+```{r install-goodenuffR, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("mjfrigaard/goodenuffR")
+```
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Quick Start
+
+### In a fresh RStudio Session
+
+```{r goodenuffR-fresh.png, echo=FALSE, out.height='75%', out.width='75%'}
+knitr::include_graphics(path = "img/goodenuffR-fresh.png")
+```
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Quick Start
+
+### 1) Install `devtools`, then install and load `goodenuffR`
+
+```{r goodenuffR-install-load.png, echo=FALSE, out.height='50%', out.width='50%'}
+knitr::include_graphics(path = "img/goodenuffR-install-load.png")
+```
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Quick Start
+
+### 2) Enter a project name
+
+### 3) Enter the folder path for your project
+
+```{r , eval=FALSE}
+goodenuffR::goodenuff_project(
+  project_name = "my awesome project", 
+  folder_path = "/Users/mjfrigaard/Projects")
+```
+
+<br>
+
+### TIP: *use `getwd()` in the Console or `pwd` in the Terminal to locate current folder*
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Quick Start
+
+### RStudio will open a new session for your project
+
+```{r goodenuffR-new.png, echo=FALSE, out.height='85%', out.width='85%'}
+knitr::include_graphics(path = "img/goodenuffR-new.png")
+```
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Quick Start
+
+### 4) Run `goodenuffR::goodenuff_files()`
+
+
+
+```{r goodenuffR-run.png, echo=FALSE, out.height='75%', out.width='75%'}
+knitr::include_graphics(path = "img/goodenuffR-run.png")
+```
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Quick Start
+
+### Now you're good (enuff) to go! 
+
+```{r goodenuffR-ready.png, echo=FALSE, out.height='70%', out.width='70%'}
+knitr::include_graphics(path = "img/goodenuffR-ready.png")
+```
+
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Package functions 
+
+## `goodenuff_code()`  
+
+.pull-left[ 
+
+### Paper
+
+- *readable, reusable, and testable* 
+- *short, single-purpose functions with clearly-defined inputs and outputs*
+- *name all files to reflect their content or function*
+
+]
+
+.pull-right[ 
+
+### `goodenuffR`
+
+```{r goodenuff_code, eval=FALSE}
+goodenuffR::goodenuff_code()
+# └── code
+#    ├── 01-import.R
+#    ├── 02-tidy.R
+#    ├── 03-wrangle.R
+#    ├── 04-visualize.R
+#    ├── 05-model.R
+#    ├── 06-communicate.R
+#    └── runall.R
+```
+
+]
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Package functions 
+
+## `goodenuff_code()` 
+
+.pull-left[ 
+
+### Paper
+
+- *Place a brief explanatory comment at the start of every program*
+
+]
+
+.pull-right[ 
+
+### `goodenuffR`
+
+Each `code` file has a header: 
+
+```{r, eval=FALSE}
+#=======================
+# This is code to create:
+# Authored by and feedback to:
+# MIT License
+# Version:
+#=======================
+```
+
+]
+
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Package functions 
+
+### `goodenuff_collab()` 
+
+.pull-left[ 
+
+### Paper
+
+- *Make the project citable* 
+- *Make the license explicit*
+- *Create an overview of your project*
+- *Make dependencies and requirements explicit*
+
+]
+
+.pull-right[ 
+
+### `goodenuffR`
+
+```{r goodenuff_collab, eval=FALSE}
+goodenuffR::goodenuff_collab()
+# └── CITATION
+# └── LICENSE
+# └── README.Rmd
+# └── requirements.txt
+```
+
+]
+
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Package functions 
+
+### `goodenuff_data()`   
+
+.pull-left[ 
+
+### Paper
+
+- *Save the raw data*
+- *Record all the steps used to process data*
+
+]
+
+.pull-right[ 
+
+### `goodenuffR`
+
+```{r data-tree, eval=FALSE}
+goodenuffR::goodenuff_data()
+# data
+# ├── README.md
+# └── raw
+```
+
+*Folder for keeping `raw/` data separate from other data files*  
+
+*Document in `README.md`*
+
+]
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Package functions 
+
+### `goodenuff_data()` (BONUS!)
+
+`data/README.md` provides some guidance on storing and documenting data. 
+
+```{markdown , eval=FALSE}
+# Project Data  
+
+For guidance please see:
+https://help.osf.io/hc/en-us/articles/360019739054-How-to-Make-a-Data-Dictionary
+
+## Additional Resources
+
+1. Sharing data
+http://bit.ly/data-4-sharing  
+2. Data in spreadsheets
+http://bit.ly/data-in-sheets  
+3. External data (https://r-pkgs.org/)
+https://r-pkgs.org/data.html
+
+source: 
+https://swcarpentry.github.io/good-enough-practices-in-scientific-computing/
+```
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Package functions 
+
+   
+### `goodenuff_doc()`  
+
+
+.pull-left[ 
+
+### Paper
+
+- *Put text documents associated with the project in the `doc` directory*
+- *Add a file called `CHANGELOG.txt` to the project's docs subfolder*
+- *a running lab notebook describing various ideas for the project and how these were implemented*
+
+]
+
+.pull-right[ 
+
+### `goodenuffR`
+
+```{r docs-tree, eval=FALSE}
+goodenuffR::goodenuff_doc() 
+# docs
+# ├── changelog.txt
+# ├── manuscript.Rmd
+# └── notebook.Rmd
+```
+
+]
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Package functions 
+
+### `goodenuff_results()`
+
+
+.pull-left[ 
+
+### Paper
+
+- *Put raw data and metadata in a `data/` directory and files generated during cleanup and analysis in a `results/` directory*
+
+]
+
+.pull-right[ 
+
+### `goodenuffR`
+
+```{r results-tree, eval=FALSE}
+goodenuffR::goodenuff_results()
+# results
+# ├── figures
+# ├── manuscript
+# └── tables
+```
+
+]
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Package functions 
+
+### `goodenuff_files()`
+
+
+
+```{r goodenuffR-files.png, echo=FALSE, out.height='42%', out.width='42%', fig.align='center'}
+knitr::include_graphics(path = "img/goodenuffR-files.png")
+```
+
+
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+## BONUS: RMarkdown Template
+
+### `goodenuffR` also comes with a `rmarkdown` template: 
+
+```{r new-rmd.png, echo=FALSE, out.height='50%', out.width='50%'}
+knitr::include_graphics("img/new-rmd.png")
+```
+
+---
+class: left, top
+background-image: url(img/goodenuffR.png)
+background-position: 93% 8%
+background-size: 12%
+
+# Thank you! 
+
+## Feedback to
+
+### - `@mjfrigaard` on Github and Twitter 
+
+### - `mjfrigaard(at)pm.me` email
+
+```{r chrome_print, echo=FALSE, results='hide', eval=FALSE}
+html_slides <- list.files(".", pattern = ".html")
+pdf_slides <- str_replace(html_slides, 
+  pattern = ".html", 
+  replacement = ".pdf")
+pdf_slides <- paste0("pdfs/", pdf_slides)
+print_files <- tibble("pdfs" = pdf_slides,
+  "htmls" = html_slides)
+
+print_files$htmls[9]
+
+pagedown::chrome_print(input = print_files$htmls[9], output = print_files$pdfs[9], timeout = 120)
+```
