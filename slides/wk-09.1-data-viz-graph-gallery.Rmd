@@ -52,6 +52,7 @@ library(ggbeeswarm)
 library(ggmosaic)
 library(ggcorrplot)
 library(openintro)
+library(ggwaffle)
 library(statebins)
 options(
     htmltools.dir.version = FALSE,
@@ -1864,31 +1865,21 @@ Cartogram Heatmaps ([`statebins`](https://gitlab.com/hrbrmstr/statebins)) are gr
 
 .panelset[
 
-.panel[.panel-name[police Data].code60[
+.panel[.panel-name[Data 1].code60[
 
 ```{r police_killings_carto_heat}
-
-police_killings_carto_heat <- police_killings %>%
+police_killings_carto_heat <- fivethirtyeight::police_killings %>%
   group_by(state) %>%
   summarize(killings = sum(n())) %>%
   ungroup() %>%
   rename(state_abbr = state) %>%
   mutate(state = usdata::abbr2state(state_abbr)) %>%
   filter(!is.na(state))
-
-police_deaths_carto_heat <- police_deaths %>%
-    group_by(state) %>%
-    summarize(deaths = sum(n())) %>%
-    ungroup() %>%
-    rename(state_abbr = state) %>%
-    mutate(state = usdata::abbr2state(state_abbr)) %>%
-    filter(!is.na(state))
-
 ```
 
 ]]
 
-.panel[.panel-name[deaths Code].code80[
+.panel[.panel-name[Code 1].code80[
 
 ```{r statebins-killings, fig.show='hide'}
 statebins::statebins(police_killings_carto_heat,
@@ -1902,7 +1893,7 @@ statebins::statebins(police_killings_carto_heat,
 
 ]]
 
-.panel[.panel-name[deaths Plot]
+.panel[.panel-name[Plot 1]
 
 ```{r plot-statebins-killings, ref.label='statebins-killings', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
 
@@ -1910,7 +1901,22 @@ statebins::statebins(police_killings_carto_heat,
 
 ]
 
-.panel[.panel-name[killings Code].code80[
+.panel[.panel-name[Data 2].code60[
+
+```{r police_deaths_carto_heat}
+police_deaths_carto_heat <- fivethirtyeight::police_deaths %>%
+    group_by(state) %>%
+    summarize(deaths = sum(n())) %>%
+    ungroup() %>%
+    rename(state_abbr = state) %>%
+    mutate(state = usdata::abbr2state(state_abbr)) %>%
+    filter(!is.na(state))
+
+```
+
+]]
+
+.panel[.panel-name[Code 2].code80[
 
 ```{r statebins-deaths, fig.show='hide'}
 statebins::statebins(police_deaths_carto_heat,
@@ -1924,7 +1930,7 @@ statebins::statebins(police_deaths_carto_heat,
 
 ]]
 
-.panel[.panel-name[killings Plot]
+.panel[.panel-name[Plot 2]
 
 ```{r plot-statebins-deaths, ref.label='statebins-deaths', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
 

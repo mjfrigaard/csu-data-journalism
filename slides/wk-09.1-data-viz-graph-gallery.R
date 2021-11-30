@@ -1,5 +1,5 @@
 #=====================================================================#
-# File name: _scratch.R
+# File name: wk-09.1-data-viz-graph-gallery.R
 # This is code to create: misc
 # Authored by and feedback to: mjfrigaard
 # Last updated: 2021-11-22

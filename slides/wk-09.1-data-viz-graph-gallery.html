@@ -1826,30 +1826,22 @@ Cartogram Heatmaps ([`statebins`](https://gitlab.com/hrbrmstr/statebins)) are gr
 
 .panelset[
 
-.panel[.panel-name[police Data].code60[
+.panel[.panel-name[Data 1].code60[
 
 
 ```r
-police_killings_carto_heat &lt;- police_killings %&gt;%
+police_killings_carto_heat &lt;- fivethirtyeight::police_killings %&gt;%
   group_by(state) %&gt;%
   summarize(killings = sum(n())) %&gt;%
   ungroup() %&gt;%
   rename(state_abbr = state) %&gt;%
   mutate(state = usdata::abbr2state(state_abbr)) %&gt;%
   filter(!is.na(state))
-
-police_deaths_carto_heat &lt;- police_deaths %&gt;%
-    group_by(state) %&gt;%
-    summarize(deaths = sum(n())) %&gt;%
-    ungroup() %&gt;%
-    rename(state_abbr = state) %&gt;%
-    mutate(state = usdata::abbr2state(state_abbr)) %&gt;%
-    filter(!is.na(state))
 ```
 
 ]]
 
-.panel[.panel-name[deaths Code].code80[
+.panel[.panel-name[Code 1].code80[
 
 
 ```r
@@ -1864,13 +1856,28 @@ statebins::statebins(police_killings_carto_heat,
 
 ]]
 
-.panel[.panel-name[deaths Plot]
+.panel[.panel-name[Plot 1]
 
 &lt;img src="img/plot-statebins-killings-1.png" width="55%" height="55%" style="display: block; margin: auto;" /&gt;
 
 ]
 
-.panel[.panel-name[killings Code].code80[
+.panel[.panel-name[Data 2].code60[
+
+
+```r
+police_deaths_carto_heat &lt;- fivethirtyeight::police_deaths %&gt;%
+    group_by(state) %&gt;%
+    summarize(deaths = sum(n())) %&gt;%
+    ungroup() %&gt;%
+    rename(state_abbr = state) %&gt;%
+    mutate(state = usdata::abbr2state(state_abbr)) %&gt;%
+    filter(!is.na(state))
+```
+
+]]
+
+.panel[.panel-name[Code 2].code80[
 
 
 ```r
@@ -1885,7 +1892,7 @@ statebins::statebins(police_deaths_carto_heat,
 
 ]]
 
-.panel[.panel-name[killings Plot]
+.panel[.panel-name[Plot 2]
 
 &lt;img src="img/plot-statebins-deaths-1.png" width="55%" height="55%" style="display: block; margin: auto;" /&gt;
 
