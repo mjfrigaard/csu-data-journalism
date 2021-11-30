@@ -34,8 +34,6 @@ This document outlines some common data reshaping tasks with `tidyr` and introdu
 
 View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
 
-View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
-
 Read more about `dplyr` [here](https://dplyr.tidyverse.org/index.html) and [`tidyr`](https://tidyr.tidyverse.org/) on the tidyverse website, or in the [Data Transformation](https://r4ds.had.co.nz/transform.html) chapter of R for Data Science. 
 
 ## Load packages 

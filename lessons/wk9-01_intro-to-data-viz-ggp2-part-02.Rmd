@@ -53,15 +53,15 @@ View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-j
 We're going to import the data from the previous exercises.  
 
 ```{r TidyApple}
-TidyApple <- vroom::vroom(file = "https://bit.ly/3CDGXlB", delim = ",")
+TidyApple <- vroom::vroom(file = "https://bit.ly/3IiwcJs", delim = ",")
 head(TidyApple)
 ```
 
 
 ```{r export-tidy-apple, eval=FALSE, include=FALSE, message=FALSE, warning=FALSE}
 # TidyApple 
-fs::dir_create("../data/wk7-01_intro-to-ggp2-part-03/")
-tidy_apple_out <- paste0("../data/wk7-01_intro-to-ggp2-part-03/", 
+fs::dir_create("../data/wk9-01_intro-to-data-viz-ggp2-part-02/")
+tidy_apple_out <- paste0("../data/wk9-01_intro-to-data-viz-ggp2-part-02/", 
                          lubridate::today(), "-TidyApple.csv")
 # tidy_apple_out
 vroom::vroom_write(x = TidyApple, tidy_apple_out, delim = ",")

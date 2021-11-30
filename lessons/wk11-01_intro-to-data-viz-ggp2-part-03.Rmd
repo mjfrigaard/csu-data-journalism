@@ -54,8 +54,8 @@ View the exercises for this section [here](https://mjfrigaard.github.io/csuc-dat
 We're going to import the data from the previous exercises.  
 
 ```{r import-TidyApple-TopUSCities, message=FALSE, warning=FALSE}
-TidyApple <- vroom::vroom("https://bit.ly/3CDGXlB", delim = ",")
-TopUSCities <- vroom::vroom("https://bit.ly/3qXN6H6", delim = ",")
+TidyApple <- vroom::vroom("https://bit.ly/3IiwcJs", delim = ",")
+TopUSCities <- vroom::vroom("https://bit.ly/3EdaDY9", delim = ",")
 ```
 
 
@@ -92,7 +92,7 @@ lab_top_cities <- labs(x = "Date", y  = "Direction Requests",
 ```
 
 ```{r facet_wrap-sol, fig.height=8, fig.width=10, out.height='100%', out.width='100%', message=FALSE, warning=FALSE}
-TopUSCities %>%
+TopUSCities %>% 
   ggplot(aes(x = date, y = dir_request,
              group = trans_type,
              color = trans_type)) +
