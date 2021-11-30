@@ -1,0 +1,264 @@
+---
+title: "Introduction to storyboards"
+comment: "*building data displays with `flexdashboard`s storyboards*"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+    toc_depth: 6
+    number_sections: yes
+    code_folding: show
+    theme: yeti
+    df_print: paged
+
+always_allow_html: true
+---
+
+
+```{r , include=FALSE}
+library(tidyverse)
+library(skimr)
+library(lubridate)
+library(here)
+library(janitor)
+library(flexdashboard)
+library(ggrepel)
+library(covdata)
+library(showtext)
+library(hrbrthemes)
+# create data folder
+knitr::opts_chunk$set(warning = FALSE,
+                      message = FALSE,
+                      eval = FALSE,
+                      fig.path = "img/",
+                      tidy = FALSE)
+# set width
+options(width = 60, max.print = 60)
+```
+
+# Objectives
+
+An introduction to dashboard development in R with `flexdashboard`s. 
+
+# Materials 
+
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
+
+View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
+
+You can also read more about [`ggplot2`](https://ggplot2.tidyverse.org/index.html) on the tidyverse website, and in the [Data Visualisation](https://r4ds.had.co.nz/data-visualisation.html) chapter of R for Data Science.
+
+# Load the `tidyverse` and `flexdashboard`
+
+The main packages we're going to use are `dplyr`, `tidyr`, `ggplot2`, and `flexdashboard`. 
+
+
+```{r packages, eval=FALSE}
+library(tidyverse)
+library(skimr)
+library(janitor)
+library(flexdashboard)
+```
+
+# What should go into a storyboard?
+
+# The YAML header
+
+```yaml
+---
+title: "My Dashboard"
+output: 
+  flexdashboard::storyboard
+---
+```
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(inspectdf)
+library(reactable)
+library(janitor)
+```
+
+
+<!-- Inputs {.sidebar data-width=200} -->
+<!-- ===================================== -->
+
+<!-- Data input. -->
+
+<!-- ```{r AppleMobRaw, message=FALSE, warning=FALSE} -->
+<!-- AppleMobRaw <- readr::read_csv("https://bit.ly/36tTVpe") -->
+<!-- AppleMobRaw %>%  -->
+<!--   # transpose data  -->
+<!--   tidyr::pivot_longer(cols = -c(geo_type:country),  -->
+<!--     names_to = "date", values_to = "dir_request") %>%  -->
+<!--     # remove missing country data -->
+<!--   dplyr::filter(!is.na(country) & !is.na(`sub-region`)) %>%  -->
+<!--   # clean names -->
+<!--   janitor::clean_names() %>% -->
+<!--   # date -->
+<!--   mutate(date = lubridate::ymd(date)) %>%  -->
+<!--   # create trans_type -->
+<!--   rename(trans_type = transportation_type) -> TidyApple -->
+<!-- ``` -->
+
+
+<!-- Page 1 {data-orientation=columns} -->
+<!-- ======================================================================= -->
+
+<!-- Column {.tabset data-width=400} -->
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ### Memory Size -->
+
+<!-- ```{r inspect_mem} -->
+<!-- TidyApple %>%   -->
+<!--   inspectdf::inspect_mem() %>%   -->
+<!--   inspectdf::show_plot(text_labels = TRUE) -->
+<!-- ``` -->
+
+<!-- ### Missing Data -->
+
+<!-- ```{r inspect_na} -->
+<!-- TidyApple %>% -->
+<!--   inspectdf::inspect_na() %>%  -->
+<!--   inspectdf::show_plot(text_labels = TRUE) -->
+<!-- ``` -->
+
+
+<!-- Column {.tabset data-width=400} -->
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ### Categorical Data -->
+
+<!-- ```{r inspect_cat} -->
+<!-- TidyApple %>%  -->
+<!--   select_if(is.character) %>%  -->
+<!--   inspectdf::inspect_cat() %>%  -->
+<!--   inspectdf::show_plot(text_labels = TRUE) -->
+<!-- ``` -->
+
+<!-- ### Data Imbalances -->
+
+<!-- ```{r inspect_imb} -->
+<!-- TidyApple %>%  -->
+<!--   inspectdf::inspect_imb() %>%  -->
+<!--   inspectdf::show_plot(text_labels = TRUE) -->
+<!-- ``` -->
+
+
+<!-- Page 2 {data-orientation=rows} -->
+<!-- ======================================================================= -->
+
+<!-- Row {.tabset .tabset-fade data-height=600} -->
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ### Numeric Data -->
+
+<!-- ```{r} -->
+<!-- TidyApple %>%  -->
+<!--   select_if(is.numeric) %>%  -->
+<!--   inspectdf::inspect_num() %>%  -->
+<!--   inspectdf::show_plot(text_labels = TRUE) -->
+<!-- ``` -->
+
+<!-- ### Distributions `ggridges` -->
+
+<!-- ```{r ggridges, message=FALSE, warning=FALSE} -->
+<!-- library(ggridges)  -->
+<!-- lab_ridges <- labs(x = "Apple directions requests", -->
+<!--                    y = "Transportation Types", -->
+<!--      title = "Direction Requests by Transportation Type", -->
+<!--      subtitle = "source: https://covid19.apple.com/mobility") -->
+
+
+<!-- TidyApple %>% -->
+<!--   ggplot() + -->
+<!--   geom_density_ridges(aes(x = dir_request,  -->
+<!--                           y = trans_type, -->
+<!--     fill = trans_type),  -->
+<!--     alpha = 1/5) + -->
+<!--   lab_ridges -->
+<!-- ``` -->
+
+<!-- Row {.tabset .tabset-fade data-height=400} -->
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ### `TopUSCities` as `paged_table` -->
+
+<!-- ```{r TopUSCities} -->
+<!-- TopUSCities <- TidyApple %>%  -->
+<!--   filter(country == "United States" &  -->
+<!--            region %in% c("New York City","Los Angeles",  -->
+<!--                          "Chicago", "Houston", "Phoenix")) -->
+<!-- rmarkdown::paged_table(TopUSCities) -->
+<!-- ``` -->
+
+
+<!-- ### `MaxUSCitiesDriving` as `reactable` -->
+
+<!-- ```{r MaxUSCitiesDriving} -->
+<!-- TopUSCities %>%  -->
+<!--   filter(trans_type == "driving") %>%  -->
+<!--   group_by(region) %>%  -->
+<!--   slice_max(dir_request) %>%  -->
+<!--   ungroup() -> MaxUSCitiesDriving -->
+<!-- reactable(MaxUSCitiesDriving,  -->
+<!--               resizable = TRUE, showPageSizeOptions = TRUE,  -->
+<!--               selection = "multiple", onClick = "select") -->
+<!-- ``` -->
+
+<!-- Page 3 {data-navmenu='More'} -->
+<!-- ======================================================================= -->
+
+
+<!-- Column -->
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ### Chart E -->
+
+<!-- ```{r TopUSCities-facet, fig.width=10, fig.height=7} -->
+<!-- lab_top_cities <- labs(x = "Date", y  = "Direction Requests",  -->
+<!--      title = "Trends of Relative Activity in Selected US Cities", -->
+<!--      subtitle = "NY, LA, CH, HOU, PHA, PHL, SATX, SD",  -->
+<!--      color = "Type") -->
+
+<!-- TopUSCities %>%  -->
+<!--   ggplot(aes(x = date, y = dir_request,  -->
+<!--              group = region,  -->
+<!--              color = trans_type)) +  -->
+<!--   geom_line(size = 0.1) +  -->
+<!--   geom_hline(yintercept = 100, size = 0.2, color = "gray20") + -->
+<!--   facet_wrap(region ~ trans_type, ncol = 6) +  -->
+<!--   theme_minimal() +  -->
+<!--   theme(legend.position = "top") + -->
+<!--   lab_top_cities  -->
+<!-- ``` -->
+
+<!-- Page 4 {data-navmenu='More'} -->
+<!-- ======================================================================= -->
+
+<!-- Column -->
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ### Chart F -->
+
+<!-- ```{r hrbrthemes, fig.width=10, fig.height=7} -->
+<!-- library(hrbrthemes) -->
+<!-- TopUSCities %>%  -->
+<!--   ggplot(aes(x = date, y = dir_request,  -->
+<!--              group = region,  -->
+<!--              color = trans_type)) +  -->
+<!--   geom_line(size = 0.1) +  -->
+<!--   geom_hline(yintercept = 100, size = 0.2, color = "gray20") + -->
+<!--   facet_wrap(region ~ trans_type, ncol = 6) +  -->
+<!--   hrbrthemes::theme_ipsum( -->
+<!--     base_size = 8,  -->
+<!--     plot_title_size = 12,  -->
+<!--     strip_text_size = 9,  -->
+<!--     subtitle_size = 10) +  -->
+<!--   theme(legend.position = "top") + -->
+<!--   lab_top_cities  -->
+<!-- ``` -->
+
+

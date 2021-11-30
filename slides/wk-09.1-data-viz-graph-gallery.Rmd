@@ -135,13 +135,13 @@ background-size: 6%
 
 # Outline
 
-## Types of graphs
+## Graph gallery
 
 .leftcol[
 
 ### Distributions & Counts
 
-#### Comparing Distributions & Counts
+#### + Comparing Distributions & Counts
 
 ### Part-to-Whole 
 
@@ -212,9 +212,10 @@ background-size: 6%
 
 #### [Package website](https://fivethirtyeight-r.netlify.app/)
 
-*All datasets are listed below with descriptions*
 
 .small[
+
+*All datasets are listed below with descriptions*
 
 ```{r fivethirtyeight, eval=FALSE}
 datasets("fivethirtyeight")

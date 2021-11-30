@@ -1,0 +1,551 @@
+---
+title: "Data Visualization: Graph Gallery"
+subtitle: "Examples and code of common graphs"
+author: "Martin Frigaard"
+institute: "California State University | Journalism & Public Relations: Data Journalism"
+output:
+  xaringan::moon_reader:
+    css:
+      - default
+      - css/lexis.css
+      - css/lexis-fonts.css
+    lib_dir: libs
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+---
+
+```{r meta, echo=FALSE}
+library(metathis)
+meta() %>%
+  meta_general(
+    description = "Data Visualization: Graph Gallery",
+    generator = "xaringan and remark.js"
+  ) %>%
+  meta_name("github-repo" = "mjfrigaard/csuc-data-journalism") %>%
+  meta_social(
+    title = "Data Visualization: Graph Gallery",
+    url = "https://mjfrigaard.github.io/csuc-data-journalism/",
+    og_type = "website",
+    og_author = "Martin Frigaard",
+    twitter_card_type = "summary",
+    twitter_creator = "@mjfrigaard"
+  )
+```
+
+```{r setup, include=FALSE}
+dateWritten <- format(as.Date('2021-09-21'), format = "%B %d %Y")
+today <- format(Sys.Date(), format = "%B %d %Y")
+library(knitr)
+library(tidyverse)
+library(fontawesome)
+library(ggwaffle)
+library(ggpubr)
+library(ggrepel)
+library(ggridges)
+library(ggtern)
+library(ggsunburst)
+library(ggbeeswarm)
+library(ggmosaic)
+library(ggcorrplot)
+library(openintro)
+library(ggwaffle)
+library(statebins)
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = ''
+)
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "img/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = " ",
+    fig.retina = 3 # Better figure resolution
+)
+# Enables the ability to show all slides in a tile overview by pressing "o"
+xaringanExtra::use_tile_view()
+xaringanExtra::use_panelset()
+xaringanExtra::use_clipboard()
+xaringanExtra::use_share_again()
+xaringanExtra::style_share_again(share_buttons = "all")
+# xaringanExtra::use_extra_styles(
+#   hover_code_line = TRUE,
+#   mute_unhighlighted_code = FALSE
+# )
+# xaringan::inf_mr() ----
+```
+
+```{r funs, include=FALSE, warning=FALSE, message=FALSE}
+# fs::dir_tree("../code")
+source("../code/copy-slide-images.R")
+source("../code/create-movie-data.R")
+source("../code/vcsExtra-datasets-fun.R")
+movies_data <- create_movie_data()
+movies_data <- filter(movies_data, !is.na(budget)) %>%
+  mutate(mpaa = factor(mpaa,
+    levels = c("PG", "PG-13", "R")
+  ))
+```
+
+layout: true
+
+<!-- this adds the link footer to all slides, depends on footer-small class in css-->
+
+<div class="footer-small"><span>https://github.com/mjfrigaard/csuc-data-journalism</div>
+
+---
+name: title-slide
+class: title-slide, center, middle, inverse
+
+# `r rmarkdown::metadata$title`
+#.fancy[`r rmarkdown::metadata$subtitle`]
+
+<br>
+
+.large[by Martin Frigaard]
+
+Written: `r dateWritten`
+
+Updated: `r today`
+
+.footer-large[.right[.fira[
+<br><br><br><br><br>[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
+]]]
+
+---
+class: inverse, center, top
+background-image: url(img/ggplot2.png)
+background-position: 50% 70%
+background-size: 35%
+
+# Graph Gallery
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+### Graph Categories: *The ‘CHRTS’ Families of Chart Types*
+
+.footer[.left[.small[
+
+*"Data Visualisation: A Handbook for Data Driven Design"*, Andy Kirk (2019)
+
+]]]
+
+--
+
+.leftcol[
+
+> #### .blue[Comparing categories and distributions]
+
+> #### .blue[Hierarchies/part-to-whole relationships]
+
+> #### .blue[Correlations and connections]
+
+]
+
+--
+ 
+.rightcol[
+
+> #### .blue[Trends and intervals over time]
+
+> #### .blue[Maps, overlays, and distortions]
+
+]
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+### Directory of Visualizations
+
+.footer[.left[.small[
+
+*"Fundamentals of Data Visualization"*, Claus O. Wilke (2019)
+
+]]]
+
+--
+
+.leftcol[
+
+> #### .red[Amounts]
+
+> #### .red[Distributions]
+
+> #### .red[Proportions]
+
+]
+
+--
+
+.rightcol[
+
+> #### .red[X–Y relationships]
+
+> #### .red[Geospatial Data]
+
+> #### .red[Uncertainty]
+
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+### Comprehensive Graph Gallery
+
+--
+
+.leftcol[
+
+> .blue[Comparing categories and distributions]
+
+> - .red[Amounts]
+
+> - .red[Distributions]
+
+> .blue[Hierarchies/part-to-whole relationships]
+
+> - .red[Proportions]
+
+]
+
+--
+ 
+.rightcol[
+
+> .blue[Correlations and connections]
+
+> - .red[X–Y relationships]
+
+> .blue[Trends and intervals over time]
+
+> - .red[X–Y relationships]
+
+> .blue[Maps, overlays, and distortions]
+
+> - .red[Geospatial Data]
+
+]
+
+.center[.fancy[.large[
+
+.red[Uncertainty] (BONUS!)
+
+]]]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+# Data
+
+.leftcol[
+
+Data come from the following packages:
+
+#### - `palmerpenguins`
+
+#### - `fivethirtyeight` 
+
+#### - `ggplot2movies`
+
+]
+
+--
+
+.rightcol[
+
+Or created using `tribble()`
+
+```{r tribble-code, eval=FALSE}
+tribble(
+  ~`variable 1`, ~`variable 2`,
+            "a",            1,
+            "b",            2,
+            "c",            3)
+```
+
+.small[
+
+
+```{r tribble-print, echo=FALSE}
+rmarkdown::paged_table(
+tribble(
+  ~`variable 1`, ~`variable 2`,
+            "a",            1,
+            "b",            2,
+            "c",            3)
+    )
+```
+
+]]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+### Load datasets packages 
+
+<br>
+
+```{r package-datasets, message=FALSE, warning=FALSE}
+library(palmerpenguins)
+library(fivethirtyeight)
+library(ggplot2movies)
+```
+
+---
+class: left, top
+background-image: url(https://allisonhorst.github.io/palmerpenguins/reference/figures/logo.png)
+background-position: 95% 8%
+background-size: 6%
+
+## `palmerpenguins` 
+
+[`palmerpenguins` package website](https://allisonhorst.github.io/palmerpenguins/)
+
+.small[
+
+```{r penguins}
+palmerpenguins::penguins -> penguins
+```
+
+```{r paged_table-penguins, echo=FALSE}
+rmarkdown::paged_table(penguins)
+```
+
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## `fivethirtyeight` 
+
+[`fivethirtyeight` package website](https://fivethirtyeight-r.netlify.app/)
+
+
+.small[
+
+*All datasets are listed below with descriptions*
+
+```{r fivethirtyeight, eval=FALSE}
+datasets("fivethirtyeight")
+```
+
+```{r paged_table-fivethirtyeight, echo=FALSE}
+rmarkdown::paged_table(datasets("fivethirtyeight"))
+```
+
+]
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## `ggplot2movies` 
+
+[`ggplot2movies` package website](https://github.com/hadley/ggplot2movies)
+
+```{r movies_data, eval=FALSE}
+movies_data
+```
+
+.small[
+
+*We're using `movies_data` (derived version of the `ggplot2movies::movies`)*
+
+```{r paged_table-movies_data, echo=FALSE}
+rmarkdown::paged_table(movies_data)
+```
+
+]
+
+---
+class: inverse, center, top
+background-image: url(img/ggplot2.png)
+background-position: 50% 50%
+background-size: 25%
+
+# Comparing Categories and Distributions
+
+<br><br><br><br><br><br><br><br><br><br><br>
+
+# .fancy[Amounts]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+# .red[Amounts:] .fancy[Bars]
+
+--
+
+.panelset[
+
+.panel[.panel-name[Info].large[
+
+*The bar chart (or graph) is typically used to display counts. Bar charts can be arranged vertically or horizontally, stacked, diverging, or dodged. Bar charts can be built using `geom_bar()` or `geom_col()`*
+
+]]
+
+.panel[.panel-name[Data].code60[
+
+```{r geom_bar-movies_data-code, eval=FALSE}
+movies_data
+```
+
+.small[
+
+```{r geom_bar-movies_data-paged, echo=FALSE}
+rmarkdown::paged_table(movies_data)
+```
+
+]
+
+]]
+
+.panel[.panel-name[R Code].code60[
+
+```{r geom_bar, fig.show='hide'}
+movies_data %>% 
+    ggplot(aes(x = mpaa)) + 
+    geom_bar(aes(fill = mpaa))
+```
+
+]]
+
+.panel[.panel-name[Plot].border[
+
+```{r plot-geom_bar, ref.label='geom_bar', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]]]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+# .red[Amounts:] .fancy[Columns]
+
+--
+
+.panelset[
+
+.panel[.panel-name[Info].large[
+
+*If we want to compare the values of a numerical variable across the levels of a categorical variable, we can use the [`geom_col()`](https://ggplot2.tidyverse.org/reference/geom_bar.html) function.*
+
+]]
+
+.panel[.panel-name[Data].code60[
+
+```{r geom_col-movies_data-code, eval=FALSE}
+movies_data
+```
+
+.small[
+
+```{r geom_col-movies_data-paged, echo=FALSE}
+rmarkdown::paged_table(movies_data)
+```
+
+]
+
+]]
+
+.panel[.panel-name[R Code].code60[
+
+```{r geom_col, fig.show='hide'}
+movies_data %>% 
+    ggplot(aes(x = mpaa, y = rating)) + 
+    geom_col(aes(fill = mpaa))
+```
+
+]]
+
+.panel[.panel-name[Plot].border[
+
+```{r plot-geom_col, ref.label='geom_col', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]]]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+# .red[Amounts:] .fancy[Bars]
+
+.panelset[
+
+.panel[.panel-name[Info].large[
+
+*Description*
+
+]]
+
+.panel[.panel-name[Data].code60[
+
+```{r geom_1_data}
+penguins <- palmerpenguins::penguins
+```
+
+]]
+
+.panel[.panel-name[R Code].code60[
+
+```{r geom_1, fig.show='hide'}
+penguins %>% 
+    ggplot(aes(x = flipper_length_mm)) + 
+    geom_histogram()
+```
+
+]]
+
+.panel[.panel-name[Plot].border[
+
+```{r plot-geom_1, ref.label='geom_1', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]]]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+# .red[Amounts:]

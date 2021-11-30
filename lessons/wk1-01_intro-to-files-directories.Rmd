@@ -1,0 +1,60 @@
+---
+title: "Intro to files and directories"
+comment: "*folders, files, and software*"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+    toc_depth: 6
+    number_sections: yes
+    code_folding: show
+    theme: yeti
+    df_print: paged
+    
+always_allow_html: true
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, 
+                      comment = "#>", 
+                      error = FALSE)
+```
+
+# Objectives 
+
+This lesson covers an introduction to your computers files and folders, how to access/use them, and the software programs we will be using throughout the course.  
+
+# Materials 
+
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
+
+
+## Operating systems 
+
+### Absolute vs relative paths 
+
+Operating system dependent 
+
+## Files
+
+Plain text vs. proprietary 
+
+### .txt 
+
+### .md
+
+### .R
+
+### .html  
+
+### .csv
+
+### .html
+
+## Software 
+
+### Google sheets 
+
+### Excel 
+
+### Libre office 

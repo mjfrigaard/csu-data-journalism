@@ -40,6 +40,14 @@ movies_data <- filter(movies_data, !is.na(budget)) %>%
   ))
 
 
+enframe(1:3)
+enframe(x = c(a = 5, b = 7))
+enframe(list(one = 1,
+            two = 2:3,
+            three = 4:6))
+
+
+
 # penguins data -----------------------------------------------------------
 penguins <- palmerpenguins::penguins
 # set theme ----
@@ -64,15 +72,14 @@ freq <- drug_use %>%
   select(age, n, ends_with("_freq")) %>%
   pivot_longer(-c(age, n), names_to = "drug", values_to = "freq") %>%
   mutate(drug = str_sub(drug, start = 1, end = -6))
-diverging_bar_drug_use <- left_join(x = use, y = freq, by = c("age", "n", "drug")) %>%
+diverging_bar_drug_use <- left_join(x = use, y = freq,
+                                by = c("age", "n", "drug")) %>%
   arrange(age) %>%
-  select(age, n, drug, percent_using = use,
-        median_use = freq) %>%
-    filter(!is.na(median_use) &
-             drug %in% c("alcohol", "cocaine", "marijuana",
-                         "pain_releiver", "meth", "heroin")) %>%
-  mutate(
-    age = as.character(age),
+  select(age, n, drug, percent_using = use, median_use = freq) %>%
+  filter(!is.na(median_use) & drug %in% c("alcohol", "cocaine",
+                                          "marijuana", "pain_releiver",
+                                          "meth", "heroin")) %>%
+  mutate(age = as.character(age),
     perc_using_wt = round((percent_using - mean(percent_using)) / sd(percent_using), 2),
     perc_using_cat = if_else(perc_using_wt < 0, "below", "above"),
     perc_using_cat = factor(perc_using_cat, levels = c("above", "below"))) %>%
@@ -114,9 +121,12 @@ diverging_bar_candy <- candy_rankings %>%
          Characteristics = characteristics,
          `Diff Category` = sugar_price_cat)
 
-diverging_bar_candy %>% ggplot(aes(x = `sugar % - price %`,
- y =  reorder(name, `sugar % - price %`), label = Characteristics)) +
-  geom_bar(aes(fill = `Diff Category`), stat = "identity",
+diverging_bar_candy %>%
+  ggplot(aes(x = `sugar % - price %`,
+            y =  reorder(name, `sugar % - price %`),
+    label = Characteristics)) +
+  geom_bar(aes(fill = `Diff Category`),
+    stat = "identity",
            width = .5) + labs(y = " ")
 
 

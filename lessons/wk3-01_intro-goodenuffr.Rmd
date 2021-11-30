@@ -1,0 +1,32 @@
+---
+title: "Project Organization with `goodenuffR`"
+comment: "*an introduction to the `goodenuffR` package*"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+    toc_depth: 6
+    number_sections: yes
+    code_folding: show
+    theme: yeti
+    df_print: paged
+    
+always_allow_html: true
+---
+
+```{r, echo = FALSE}
+# don't name this setup!
+knitr::opts_chunk$set(collapse = TRUE, 
+                      comment = "#>", 
+                      message = FALSE, 
+                      warning = FALSE)
+
+```
+
+# Objectives
+
+This lesson covers the `goodenuffR` package (for organizing your files and folders). 
+
+# Materials 
+
+View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
