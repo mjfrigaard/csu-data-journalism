@@ -2267,5 +2267,5 @@ print_files <- tibble("pdfs" = pdf_slides,
 print_files$htmls[10]
 print_files$pdfs[10]
 
-pagedown::chrome_print(input = print_files$htmls[8], output = print_files$pdfs[8], timeout = 120)
+pagedown::chrome_print(input = print_files$htmls[10], output = print_files$pdfs[10], timeout = 120)
 ```
