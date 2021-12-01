@@ -39,8 +39,6 @@ This document outlines some advanced data reshaping tasks with `tidyr`. Read mor
 
 View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
 
-View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
-
 ## Load packages 
 
 `tidyr` is part of the core `tidyverse` packages, so we install and load this meta-package below. 

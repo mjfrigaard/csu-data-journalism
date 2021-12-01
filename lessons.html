@@ -282,106 +282,135 @@ $(document).ready(function () {
 
 <div id="week-1" class="section level3">
 <h3>Week 1</h3>
-<p>These are intended to get you started with R and RStudio.</p>
+<p><strong><em>Under construction</em></strong></p>
+<p>Welcome! These first lessons will help you differentiate between different file types, absolute vs. relative folder paths, and installing R and RStudio:</p>
 <ul>
-<li><a href="lessons/wk1-01_your-first-r-session.html">Installing R &amp; RStudio</a> <em>download r, rstudio, and other tools for the course</em></li>
-<li><a href="lessons/wk1-02_rstudio-ide-intro.html">The RStudio IDE</a> <em>tips for managing your code, data, and files</em></li>
+<li><a href="lessons/wk1-01_intro-to-files-directories.html">Intro to files and directories</a> <em>folders, files, and software</em></li>
+<li><a href="lessons/wk1-02_install-r-rstudio.html">Installing R &amp; RStudio</a> <em>download r, rstudio, and other tools for the course</em></li>
 </ul>
 </div>
 <div id="week-2" class="section level3">
 <h3>Week 2</h3>
-<p>These exercises will help you understand how to extract pieces of your data in R.</p>
+<p>This week we will cover the RStudio IDE. Most of your work in the course will be done in this environment, so it’s important to know to navigate the different panes and features.</p>
 <ul>
-<li><a href="lessons/wk2-01_intro-to-r-prog.html">Introduction to R Programming</a> <em>an introduction to functions and objects</em></li>
-<li><a href="lessons/wk2-02_subsetting-r-objects.html">Subsetting R Objects</a> <em>pull out the pieces from any object in r</em></li>
+<li><a href="lessons/wk2-01_rstudio-ide-intro.html">The RStudio IDE</a> <em>tips for managing your code, data, and files</em></li>
 </ul>
 </div>
 <div id="week-3" class="section level3">
 <h3>Week 3</h3>
-<p>These lessons cover an introduction to <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> for data visualizations, and how to use the R Markdown, a “<em>notebook interface to weave together narrative text and code to produce elegantly formatted output.</em>”</p>
+<p><strong><em>Under construction</em></strong></p>
+<p>I’ve written a small R package, <a href="https://github.com/mjfrigaard/goodenuffR"><code>goodenuffR</code></a>, to help organize your code, data, and outputs. It’s based off of the excellent paper, <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510">Good enough practices in scientific computing</a>,</p>
 <ul>
-<li><a href="lessons/wk3-01_intro-to-data-viz-ggp2-part-01.html">Data Visualization with ggplot2 (part 1)</a> <em>an introduction to the grammar of graphics</em></li>
-<li><a href="lessons/wk3-02_rmarkdown-in-practice.html">R Markdown in Practice</a> <em>extending r markdown</em></li>
+<li><a href="lessons/wk3-01_intro-goodenuffr.html">Project Organization with <code>goodenuffR</code></a> <em>an introduction to the <code>goodenuffr</code> package</em></li>
 </ul>
 </div>
 <div id="week-4" class="section level3">
 <h3>Week 4</h3>
-<p>Data are rarely collected in a way that’s fit for analysis or data visualization. In this lesson we introduce <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>, a package designed to handle “<em>most common data manipulation challenges.</em>”</p>
+<p>Now that we’ve covered file organization and the RStudio IDE, we can move onto some R programming. These exercises cover basic R structures (vectors and functions), and help you understand how to extract pieces of your data in R.</p>
 <ul>
-<li><a href="lessons/wk4-01_data-manipulation-intro.html">Introduction to Data Manipulation</a> <em>introduction to wrangling data</em></li>
+<li><a href="lessons/wk4-01_intro-to-r-prog.html">Introduction to R Programming</a> <em>an introduction to functions and objects</em></li>
+<li><a href="lessons/wk4-02_subsetting-r-objects.html">Subsetting R Objects</a> <em>pull out the pieces from any object in r</em></li>
 </ul>
 </div>
 <div id="week-5" class="section level3">
 <h3>Week 5</h3>
-<p>Now that we’ve introduced the grammar of <code>ggplot2</code>, we can build visualizations that display counts and variable distributions.</p>
+<p>These lessons cover how to use the R Markdown, a “<em>notebook interface to weave together narrative text and code to produce elegantly formatted output.</em>”</p>
 <ul>
-<li><a href="lessons/wk5-01_intro-to-data-viz-ggp2-part-02.html">Data Visualization with ggplot2 (part 2)</a> <em>counting things, variable distributions, ridgelines, and violin plots</em></li>
+<li><a href="lessons/wk5-01_rmarkdown-in-practice.html">R Markdown in Practice</a> <em>extending r markdown</em></li>
 </ul>
 </div>
 <div id="week-6" class="section level3">
 <h3>Week 6</h3>
-<p>In previous lessons, we used <code>dplyr</code> to manipulate data. In this lesson, we’ll be using the <code>tidyr</code> package to reshape and restructure data. To demonstrate how these packages work together, we’re going to scrape (download) a Wikipedia table of <a href="https://en.wikipedia.org/wiki/List_of_largest_biotechnology_and_pharmaceutical_companies">List of largest biotechnology and pharmaceutical companies</a>.</p>
+<p>So far, we’ve covered some basic R syntax. You’ve seen common R data objects (vectors, matrices, arrays, data frames, tibbles, and lists) and functions (<code>str()</code>, <code>typeof()</code>, <code>class()</code>, etc.).</p>
+<p>The <code>tidyverse</code> is an “<em>opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.</em>” Ninety percent of the code you’ll see in this course uses the <code>tidyverse</code> philosophy, which makes it easier to write (and read).</p>
 <ul>
-<li><a href="lessons/wk6-01_data-trans-joins.html">Reshaping and Joining Data in R</a> <em>transpose, pivot, split, and combine data</em></li>
-<li><a href="lessons/wk6-02_scrape-wikipedia-data.html">Scraping Wikipedia Tables</a> <em>advanced wrangling example</em></li>
+<li><a href="lessons/wk6-01_intro-to-tidyverse.html">The Tidyverse</a> <em>an introduction to tidyverse (pipes, tibbles, and the grammar of graphics)</em></li>
 </ul>
 </div>
 <div id="week-7" class="section level3">
 <h3>Week 7</h3>
-<p>This lesson covers intermediate data visualization techniques like plotting trends, adding help-text to your graph, labeling values to stand out, and using reference lines for comparisons.</p>
+<p>Now that we’ve introduced the tidyverse (and the <code>%&gt;%</code>), we’re going to extend this knowledge to <code>ggplot2</code>, a popular data visualization package.</p>
 <ul>
-<li><a href="lessons/wk7-01_intro-to-data-viz-ggp2-part-03.html">Data Visualization with ggplot2 (part 3)</a> <em>trends, adding text, labeling values, and reference lines</em></li>
+<li><a href="lessons/wk7-01_intro-to-data-viz-ggp2-part-01.html">Data Visualization with ggplot2 (part 1)</a> <em>counting things, variable distributions, ridgelines, and violin plots</em></li>
 </ul>
 </div>
 <div id="week-8" class="section level3">
 <h3>Week 8</h3>
-<p><code>tidyr</code> has functions for <em>generate sequences of data</em> (<a href="https://tidyr.tidyverse.org/reference/full_seq.html"><code>full_seq()</code></a>), <em>creating an output for each combination of any input</em> (<a href="https://tidyr.tidyverse.org/reference/expand_grid.html"><code>expand_grid()</code></a>), and <em>completing missing combinations of data</em> (<a href="https://tidyr.tidyverse.org/reference/complete.html"><code>complete()</code></a>).</p>
+<p>Data are rarely collected in a way that’s fit for analysis or data visualization. In this lesson we introduce <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>, a package designed to handle “<em>most common data manipulation challenges.</em>”</p>
 <ul>
-<li><a href="lessons/wk8-01_adv-data-manip-joins.html">Advanced Data Transformation and Manipulation</a> <em>dealing with complex data structures</em></li>
+<li><a href="lessons/wk8-01_data-manipulation-intro.html">Introduction to Data Manipulation</a> <em>introduction to wrangling data</em></li>
 </ul>
 </div>
 <div id="week-9" class="section level3">
 <h3>Week 9</h3>
-<p>This lesson builds on our previous knowledge of <code>ggplot2</code> and introduces facets (small multiples) with <a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html"><code>ggplot2::facet_wrap()</code></a>, <a href="https://ggforce.data-imaginist.com/reference/facet_wrap_paginate.html"><code>ggforce::facet_wrap_paginate()</code></a>, and <a href="https://hafen.github.io/geofacet/reference/facet_geo.html"><code>geofacet::facet_geo()</code></a></p>
+<p>This lesson covers intermediate data visualization techniques like plotting trends (<a href="https://ggplot2.tidyverse.org/reference/geom_path.html"><code>geom_line()</code></a>), adding help-text to your graph (<a href="https://ggplot2.tidyverse.org/reference/annotate.html"><code>ggplot2::annotate()</code></a>), labeling values to stand out (<a href="https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html"><code>ggrepel::geom_label_repel()</code></a>), and using reference lines for comparisons (<a href="https://ggplot2.tidyverse.org/reference/geom_abline.html"><code>ggplot2::geom_hline()</code></a>).</p>
 <ul>
-<li><a href="lessons/wk9-01_intro-to-data-viz-ggp2-part-04.html">Data Visualization with ggplot2 (part 4)</a> <em>advanced facetting and small multiples</em></li>
+<li><a href="lessons/wk9-01_intro-to-data-viz-ggp2-part-02.html">Data Visualization with ggplot2 (part 2)</a> <em>trends, adding text, labeling values, and reference lines</em></li>
 </ul>
 </div>
 <div id="week-10" class="section level3">
 <h3>Week 10</h3>
-<p>This week we cover our first case study using data from the executed offenders database on the <a href="https://www.tdcj.texas.gov/death_row/dr_executed_offenders.html">Texas Department of Criminal Justice website</a>.</p>
+<p><code>tidyr</code> has functions for <em>generate sequences of data</em> (<a href="https://tidyr.tidyverse.org/reference/full_seq.html"><code>full_seq()</code></a>), <em>creating an output for each combination of any input</em> (<a href="https://tidyr.tidyverse.org/reference/expand_grid.html"><code>expand_grid()</code></a>), and <em>completing missing combinations of data</em> (<a href="https://tidyr.tidyverse.org/reference/complete.html"><code>complete()</code></a>).</p>
 <ul>
-<li><a href="lessons/wk10-01_case-study-dont-mess-with-texas.html">Case Study (Part 1)</a> don’t mess with texas part 1: scrape html tables</li>
-<li><a href="lessons/wk10-02_case-study-dont-mess-with-texas.html">Case Study (Part 2)</a> don’t mess with texas part 2: iterate and download with <code>purrr</code></li>
-<li><a href="lessons/wk10-03_case-study-dont-mess-with-texas.html">Case Study (Part 3)</a> don’t mess with texas part 3: split and wrangle the data</li>
-<li><a href="lessons/wk10-04_case-study-dont-mess-with-texas.html">Case Study (Part 4)</a> don’t mess with texas part 3: manipulating images with <code>magick</code></li>
+<li><a href="lessons/wk10-01_data-trans-joins.html">Reshaping and Joining Data in R</a> <em>transpose, pivot, split, and combine data</em></li>
 </ul>
 </div>
 <div id="week-11" class="section level3">
 <h3>Week 11</h3>
-<p>Maps are a great way to give context to any data source. In this lesson, we’re going to collect data with the <a href="https://github.com/ropensci/rtweet"><code>rtweet</code> package</a> and use it to build a map with <a href="https://ggplot2.tidyverse.org/reference/geom_map.html"><code>ggplot2</code></a>.</p>
+<p>This lesson builds on our previous knowledge of <code>ggplot2</code> and introduces facets (small multiples) with <a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html"><code>ggplot2::facet_wrap()</code></a>, <a href="https://ggforce.data-imaginist.com/reference/facet_wrap_paginate.html"><code>ggforce::facet_wrap_paginate()</code></a>, and <a href="https://hafen.github.io/geofacet/reference/facet_geo.html"><code>geofacet::facet_geo()</code></a></p>
 <ul>
-<li><a href="lessons/wk11-01_intro-to-maps.html">Intro to building maps in R</a> <em>building maps with ggplot2</em></li>
+<li><a href="lessons/wk11-01_intro-to-data-viz-ggp2-part-03.html">Data Visualization with ggplot2 (part 3)</a> <em>advanced facetting and small multiples</em></li>
 </ul>
 </div>
 <div id="week-12" class="section level3">
 <h3>Week 12</h3>
+<p>Now that we’ve covered how to manipulate and restructure data, we’ll use R’s functions for creating sequences (<code>seq()</code>), along with some of <code>tidyr</code>’s functions for dealing with missing or incomplete data (<a href="https://tidyr.tidyverse.org/reference/full_seq.html"><code>full_seq()</code></a>, <a href="https://tidyr.tidyverse.org/reference/expand_grid.html"><code>expand_grid()</code></a>, and <a href="https://tidyr.tidyverse.org/reference/complete.html"><code>complete()</code></a>).</p>
+<ul>
+<li><a href="lessons/wk12-01_adv-data-manip-joins.html">Advanced Data Transformation and Manipulation</a> <em>dealing with complex data structures</em></li>
+</ul>
 </div>
 <div id="week-13" class="section level3">
 <h3>Week 13</h3>
+<p>Maps are a great way to give context to any data source. In this lesson, we’re going to collect data with the <a href="https://github.com/ropensci/rtweet"><code>rtweet</code> package</a> and use it to build a map with <a href="https://ggplot2.tidyverse.org/reference/geom_map.html"><code>ggplot2</code></a>.</p>
+<ul>
+<li><a href="lessons/wk13-01_intro-to-data-viz-ggp2-part-04.html">Data Visualization with ggplot2 (part 4)</a> <em>building maps with ggplot2</em></li>
+</ul>
 </div>
 <div id="week-14" class="section level3">
 <h3>Week 14</h3>
+<p><strong><em>Under construction</em></strong></p>
+<p>Not every project requires a data visualization, so this week we’ll cover how to display data in tables.</p>
+<ul>
+<li><a href="lessons/wk14-01_displaying-data-in-tables.html">Displaying data in tables</a> <em>an introduction to creating tables in r</em></li>
+</ul>
 </div>
 <div id="week-15" class="section level3">
 <h3>Week 15</h3>
-<ul>
-<li><a href="lessons/wk15-01_flow-control-statements.html">Flow Control Statements</a> <em>change the flow of your code</em></li>
-</ul>
 </div>
 <div id="week-16" class="section level3">
 <h3>Week 16</h3>
 <p>This work is licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+<!--
+
+
+
+
+
+This week we cover our first case study using data from the executed offenders database on the [Texas Department of Criminal Justice website](https://www.tdcj.texas.gov/death_row/dr_executed_offenders.html).
+
+
+
+
+
+
+
+
+
+
+> Now that we've introduced the grammar of `ggplot2`, we can build visualizations that display counts and variable distributions. 
+
+> In previous lessons, we used `dplyr` to manipulate data. In this lesson, we'll be using the `tidyr` package to reshape and restructure data. To demonstrate how these packages work together, we're going to scrape (download) a Wikipedia table of [List of largest biotechnology and pharmaceutical companies](https://en.wikipedia.org/wiki/List_of_largest_biotechnology_and_pharmaceutical_companies). 
+-->
 </div>
 
 <i class="fab fa-creative-commons fa-2x"></i><i class="fab fa-creative-commons-by fa-2x"></i><i class="fab fa-creative-commons-sa fa-2x"></i>

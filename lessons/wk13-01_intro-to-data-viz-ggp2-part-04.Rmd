@@ -1,5 +1,5 @@
 ---
-title: "Intro to building maps in R"
+title: "Data Visualization with ggplot2 (part 4)"
 comment: "*building maps with ggplot2*"
 output: 
   html_document: 
@@ -51,8 +51,6 @@ TweetsRaw <- read_rds("../data/2021-11-07-NFL-TweetsRaw.rds")
 # Materials 
 
 View the slides for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/slides.html).
-
-View the exercises for this section [here](https://mjfrigaard.github.io/csuc-data-journalism/lessons-exercises.html).
 
 # Twitter data 
 
