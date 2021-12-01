@@ -181,14 +181,14 @@ cat_bullet(x, "^lessons/wk14-")
 
 ### Week 15 
 
-```{r wk15-files, results = 'asis', echo = FALSE, eval=TRUE}
-cat_bullet(x, "^lessons/wk15-")
+```{r cs01-files, results = 'asis', echo = FALSE, eval=TRUE}
+cat_bullet(x, "^lessons/cs01-")
 ```
 
 ### Week 16 
 
-```{r wk16-files, results = 'asis', echo = FALSE, eval=TRUE}
-cat_bullet(x, "^lessons/wk16-")
+```{r cs02-files, results = 'asis', echo = FALSE, eval=TRUE}
+cat_bullet(x, "^lessons/cs02-")
 ```
 
 

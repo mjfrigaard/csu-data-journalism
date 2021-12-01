@@ -80,6 +80,7 @@ cat_bullet_pdf <- function(x, pattern) {
 ## Week 1 
 
 
+
 ```{r wk-01-files, results='asis', echo=FALSE, eval=TRUE}
 cat_bullet(x = hrefs_bullets, pattern = "^slides/wk-01")
 ```
