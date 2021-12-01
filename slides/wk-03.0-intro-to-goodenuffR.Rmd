@@ -1,5 +1,5 @@
 ---
-title: "Using the goodenuffR package"
+title: "Using the `goodenuffR` package"
 subtitle: "Everything...in its right place"
 author: "Martin Frigaard"
 institute: "California State University | Journalism & Public Relations: Data Journalism"

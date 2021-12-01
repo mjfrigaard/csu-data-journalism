@@ -1,6 +1,6 @@
 ---
 title: "Data Manipulation with R"
-subtitle: "An introduction to the dplyr package"
+subtitle: "An introduction to the `dplyr` package"
 author: "Martin Frigaard"
 institute: "California State University | Journalism & Public Relations: Data Journalism"
 output:

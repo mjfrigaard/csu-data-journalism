@@ -1,0 +1,1978 @@
+---
+title: "Data Visualization: Graph Gallery"
+subtitle: "Examples and code of common graphs"
+author: "Martin Frigaard"
+institute: "California State University | Journalism & Public Relations: Data Journalism"
+output:
+  xaringan::moon_reader:
+    css:
+      - default
+      - css/lexis.css
+      - css/lexis-fonts.css
+    lib_dir: libs
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+---
+
+```{r meta, echo=FALSE}
+library(metathis)
+meta() %>%
+  meta_general(
+    description = "Data Visualization: Graph Gallery",
+    generator = "xaringan and remark.js"
+  ) %>%
+  meta_name("github-repo" = "mjfrigaard/csuc-data-journalism") %>%
+  meta_social(
+    title = "Data Visualization: Graph Gallery",
+    url = "https://mjfrigaard.github.io/csuc-data-journalism/",
+    og_type = "website",
+    og_author = "Martin Frigaard",
+    twitter_card_type = "summary",
+    twitter_creator = "@mjfrigaard"
+  )
+```
+
+```{r setup, include=FALSE}
+dateWritten <- format(as.Date('2021-09-21'), format = "%B %d %Y")
+today <- format(Sys.Date(), format = "%B %d %Y")
+library(knitr)
+library(tidyverse)
+library(fontawesome)
+library(ggwaffle)
+library(ggpubr)
+library(ggrepel)
+library(ggridges)
+library(ggtern)
+library(ggsunburst)
+library(ggbeeswarm)
+library(ggmosaic)
+library(ggcorrplot)
+library(openintro)
+library(ggwaffle)
+library(statebins)
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = ''
+)
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "img/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = " ",
+    fig.retina = 3 # Better figure resolution
+)
+# Enables the ability to show all slides in a tile overview by pressing "o"
+xaringanExtra::use_tile_view()
+xaringanExtra::use_panelset()
+xaringanExtra::use_clipboard()
+xaringanExtra::use_share_again()
+xaringanExtra::style_share_again(share_buttons = "all")
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,
+  mute_unhighlighted_code = FALSE
+)
+```
+
+```{r funs, include=FALSE, warning=FALSE, message=FALSE}
+# fs::dir_tree("../code")
+source("../code/copy-slide-images.R")
+source("../code/create-movie-data.R")
+source("../code/vcsExtra-datasets-fun.R")
+movies_data <- create_movie_data()
+movies_data <- filter(movies_data, !is.na(budget)) %>%
+  mutate(mpaa = factor(mpaa,
+    levels = c("PG", "PG-13", "R")
+  ))
+```
+
+
+layout: true
+
+<!-- this adds the link footer to all slides, depends on footer-small class in css-->
+
+<div class="footer-small"><span>https://github.com/mjfrigaard/csuc-data-journalism</div>
+
+---
+name: title-slide
+class: title-slide, center, middle, inverse
+
+# `r rmarkdown::metadata$title`
+#.fancy[`r rmarkdown::metadata$subtitle`]
+
+<br>
+
+.large[by Martin Frigaard]
+
+Written: `r dateWritten`
+
+Updated: `r today`
+
+.footer-large[.right[.fira[
+<br><br><br><br><br>[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
+]]]
+
+
+---
+class: inverse, center, top
+background-image: url(img/ggplot2.png)
+background-position: 50% 70%
+background-size: 35%
+
+# Graph Gallery
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+# Outline
+
+## Graph gallery
+
+.leftcol[
+
+### Distributions & Counts
+
+#### + Comparing Distributions & Counts
+
+### Part-to-Whole 
+
+]
+
+.rightcol[
+
+#### X vs. Y 
+
+#### Uncertainty
+
+#### Spatial Data
+
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+# Datasets 
+
+## `palmerpenguins`
+
+## `fivethirtyeight` 
+
+## `ggplot2movies`
+
+Load these datasets below:
+
+```{r package-datasets, message=FALSE, warning=FALSE}
+library(palmerpenguins)
+library(fivethirtyeight)
+library(ggplot2movies)
+```
+
+---
+class: left, top
+background-image: url(https://allisonhorst.github.io/palmerpenguins/reference/figures/logo.png)
+background-position: 95% 8%
+background-size: 6%
+
+## `palmerpenguins` 
+
+#### [Package website](https://allisonhorst.github.io/palmerpenguins/)
+
+.small[
+
+```{r penguins}
+palmerpenguins::penguins -> penguins
+```
+
+```{r paged_table-penguins, echo=FALSE}
+rmarkdown::paged_table(penguins)
+```
+
+]
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## `fivethirtyeight` 
+
+#### [Package website](https://fivethirtyeight-r.netlify.app/)
+
+
+.small[
+
+*All datasets are listed below with descriptions*
+
+```{r fivethirtyeight, eval=FALSE}
+datasets("fivethirtyeight")
+```
+
+```{r paged_table-fivethirtyeight, echo=FALSE}
+rmarkdown::paged_table(datasets("fivethirtyeight"))
+```
+
+]
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## `ggplot2movies` 
+
+#### [Package website](https://github.com/hadley/ggplot2movies)
+
+```{r movies_data, eval=FALSE}
+movies_data
+```
+
+.small[
+
+```{r paged_table-movies_data, echo=FALSE}
+rmarkdown::paged_table(movies_data)
+```
+
+*We're using `movies_data` (derived version of the `ggplot2movies::movies`)*
+
+]
+
+
+---
+class: inverse, center, top
+background-image: url(img/ggplot2.png)
+background-position: 50% 70%
+background-size: 35%
+
+# Distributions & Counts
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Distributions & Counts
+
+.medium[
+
+Histograms compare counts with discrete quantitative ‘bins’ to form ordinal value groupings (`geom_histogram()`)
+
+]
+
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r geom_histogram, fig.show='hide'}
+penguins %>% 
+    ggplot(aes(x = flipper_length_mm)) + 
+    geom_histogram()
+```
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_histogram, ref.label='geom_histogram', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+]
+
+---
+
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Distributions & Counts
+
+.medium[
+
+Frequency polygons (`geom_freqpoly()`) are similar to histograms, but use lines instead of bars to represent the variable distribution.
+
+]
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r geom_freqpoly, fig.show='hide'}
+penguins %>% 
+    ggplot(aes(x = flipper_length_mm)) + 
+    geom_freqpoly()
+```
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_freqpoly, ref.label='geom_freqpoly', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+]
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Distributions & Counts
+
+.medium[
+
+To view an estimate of the *population distribution* (based on the
+sample data), we use the `geom_density()` function.
+
+]
+
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r geom_density, fig.show='hide'}
+penguins %>% 
+    ggplot(aes(x = flipper_length_mm)) + 
+  geom_density()
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_density, ref.label='geom_density', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Distributions & Counts
+
+.medium[
+
+View the relative counts of values within a categorical variable with [`geom_bar()`](https://ggplot2.tidyverse.org/reference/geom_bar.html)
+
+]
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r geom_bar, fig.show='hide'}
+movies_data %>% 
+    ggplot(aes(x = mpaa)) + 
+  geom_bar(aes(fill = mpaa))
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_bar, ref.label='geom_bar', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+]
+
+---
+class: inverse, center, top
+background-image: url(img/ggplot2.png)
+background-position: 50% 70%
+background-size: 35%
+
+# Comparing Distributions & Counts
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Comparing Distributions & Counts
+
+.medium[
+
+If we want to compare the values of a numerical variable across the levels of a categorical variable, we can use the [`geom_col()`](https://ggplot2.tidyverse.org/reference/geom_bar.html) function.
+
+]
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r geom_col, fig.show='hide'}
+movies_data %>% 
+    ggplot(aes(x = mpaa, y = rating)) + 
+  geom_col(aes(fill = mpaa))
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_col, ref.label='geom_col', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Comparing Distributions & Counts
+
+.medium[
+
+Pie-charts ([`ggpubr::ggpie`](https://rpkgs.datanovia.com/ggpubr/reference/ggpie.html)) are ideal for comparing the proportions of categorical variable values.
+
+]
+
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r ggpie, fig.show='hide'}
+movies_data %>% 
+    group_by(mpaa) %>% 
+    summarize(avg = mean(rating)) %>% 
+    ggpubr::ggpie(x = "avg", 
+                  label = "mpaa", 
+                  fill = "mpaa", 
+                  color = "white") + 
+    theme(legend.position = "none")
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-ggpie, ref.label='ggpie', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Comparing Distributions & Counts
+
+.medium[
+
+Comparing multiple distributions using [`ridgeline plots`](https://wilkelab.org/ggridges/) (`geom_density_ridges()`)
+
+]
+
+
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r geom_density_ridges, fig.show='hide'}
+penguins %>% 
+    filter(!is.na(sex)) %>% 
+  ggplot(aes(x = bill_length_mm, 
+             y = sex, 
+             fill = sex)) +
+  ggridges::geom_density_ridges(alpha = 2/3)
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_density_ridges, ref.label='geom_density_ridges', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Comparing Distributions & Counts
+
+.medium[
+
+[`bee-swarm`](https://github.com/eclarke/ggbeeswarm) plots display the distribution of numeric values across the levels of a categorical variable.
+
+]
+
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r geom_beeswarm, fig.show='hide'}
+penguins %>% 
+    ggplot(aes(x = island, 
+               y = body_mass_g, 
+           color = island)) + 
+  ggbeeswarm::geom_beeswarm(alpha = 1/2)
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_beeswarm, ref.label='geom_beeswarm', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Comparing Distributions & Counts
+
+.medium[
+
+Compare distributions box-plots using  [`geom_boxplot()`](https://ggplot2.tidyverse.org/reference/geom_boxplot.html)
+
+]
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r geom_boxplot, fig.show='hide'}
+movies_data %>% 
+    ggplot(aes(x = mpaa, 
+               y = length, 
+               fill = mpaa)) + 
+  geom_boxplot(outlier.size = 0.4) + 
+  theme(legend.position = "none")
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_boxplot, ref.label='geom_boxplot', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Comparing Distributions & Counts
+
+.medium[
+
+Compare distributions with [`geom_violin()`](https://ggplot2.tidyverse.org/reference/geom_violin.html)
+
+]
+
+
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r geom_violin, fig.show='hide'}
+movies_data %>% 
+  ggplot(aes(x = mpaa, 
+             y = length, 
+             fill = mpaa)) + 
+  geom_violin(alpha = 1/3)
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_violin, ref.label='geom_violin', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Comparing Distributions & Counts
+
+.medium[
+
+Dumbbell-plots allow us to compare differences between two values across multiple categories. 
+
+]
+
+
+.panelset[
+
+.panel[.panel-name[Data]
+.code60[
+
+```{r dumbbell_plot_police_deaths}
+dumbbell_plot_police_deaths <- fivethirtyeight::police_deaths %>%
+    group_by(state, year) %>% summarize(deaths = n()) %>% 
+    ungroup() %>% filter(year == 1997 | year == 2007) %>% 
+    arrange(desc(deaths)) 
+
+death_states <- c("TX", "NY", "CA", "FL", "LA", "IN",
+            "IL", "AZ", "NC", "MS", "SC", "AR")
+
+dumbbell_plot_police_deaths <- dumbbell_plot_police_deaths %>% 
+    count(state, sort = TRUE) %>% filter(n == 2) %>% 
+    inner_join(x = ., y = dumbbell_plot_police_deaths, by = "state") %>% 
+    arrange(desc(state)) %>% filter(state %in% death_states) %>% 
+    mutate(paired = rep(1:(n()/2), each = 2), year = factor(year)) %>% 
+    select(`Police Deaths` = deaths, State = state, Year = year, paired)
+```
+
+]
+]
+
+.panel[.panel-name[R Code]
+
+```{r dumbbell-plot, fig.show='hide'}
+dumbbell_plot_police_deaths %>% 
+  ggplot(aes(x = `Police Deaths`, 
+             y = State, group = paired)) +
+  geom_line(size = 0.6) + 
+    geom_point(aes(color = Year), 
+               size = 1.6)
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-dumbbell-plot, ref.label='dumbbell-plot', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+
+
+]
+
+---
+class: inverse, center, top
+background-image: url(img/ggplot2.png)
+background-position: 50% 70%
+background-size: 35%
+
+# Part-to-Whole Relationships
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Part-to-Whole Relationships
+
+.medium[
+Compare levels of categorical variables with stacked bar-charts using `geom_bar()`
+]
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r stacked-bar-chart, fig.show='hide'}
+penguins %>% 
+    filter(!is.na(sex)) %>% 
+    ggplot(aes(x = flipper_length_mm, 
+               fill = sex)) + 
+  geom_bar()
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-stacked-bar-chart, ref.label='stacked-bar-chart', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Part-to-Whole Relationships
+
+.medium[
+
+Create (horizontal) diverging bar-charts using `geom_bar()`
+
+]
+
+
+
+.panelset[
+
+.panel[.panel-name[Data]
+.code60[
+
+```{r diverging_bar_drug_use}
+use <- drug_use %>% select(age, n, ends_with("_use")) %>%
+  pivot_longer(-c(age, n), names_to = "drug", values_to = "use") %>%
+  mutate(drug = str_sub(drug, start = 1, end = -5))
+
+freq <- drug_use %>% select(age, n, ends_with("_freq")) %>%
+  pivot_longer(-c(age, n), names_to = "drug", values_to = "freq") %>%
+  mutate(drug = str_sub(drug, start = 1, end = -6))
+
+diverging_bar_drug_use <- left_join(x = use, y = freq, by = c("age", "n", "drug")) %>%
+  arrange(age) %>% select(age, n, drug, percent_using = use, median_use = freq) %>%
+    filter(!is.na(median_use) & drug %in% c("alcohol", "cocaine", "marijuana",
+                                            "pain_releiver", "meth", "heroin")) %>%
+  mutate(age = as.character(age),
+    perc_using_wt = round((percent_using - mean(percent_using)) / sd(percent_using), 2),
+    perc_using_cat = if_else(perc_using_wt < 0, "below", "above"),
+    perc_using_cat = factor(perc_using_cat, levels = c("above", "below"))) %>%
+  select(`% using (weighted)` = perc_using_wt, `Category` = perc_using_cat, Drug = drug)
+```
+
+]]
+
+.panel[.panel-name[R Code]
+
+```{r diverging_bar_chart, fig.show='hide'}
+diverging_bar_drug_use %>%
+  ggplot(aes(x = Drug, 
+             y = `% using (weighted)`, 
+             label = Drug)) +
+  geom_bar(aes(fill = `Category`),
+           stat = "identity", 
+           width = .5)
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-diverging_bar_chart, ref.label='diverging_bar_chart', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+
+
+
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Part-to-Whole Relationships
+
+.medium[
+
+Create (vertical) diverging bar-charts using `geom_bar()`
+
+]
+
+
+
+.panelset[
+
+.panel[.panel-name[Data]
+.code60[
+
+```{r diverging_bar_candy_rankings}
+candy_names <- c("Kit Kat", "Snickers", "Reese's pieces", "Milky Way", 
+                 "Peanut butter M&M's", "Peanut M&Ms", "3 Musketeers", "Starburst", 
+                 "M&M's", "Nestle Crunch", "Milky Way Simply Caramel", 
+                 "Skittles original")
+diverging_bar_candy <- candy_rankings %>% tidyr::pivot_longer(
+    cols = -c(competitorname, sugarpercent, pricepercent, winpercent),
+     names_to = "characteristics", values_to = "present") %>%
+  mutate(present = as.logical(present)) %>% arrange(competitorname) %>%
+  filter(present == TRUE) %>% distinct() %>%
+  select(-present) %>% mutate(
+            sugar_price_diff = sugarpercent - pricepercent,
+            sugar_price_cat = if_else(sugar_price_diff < 0, "below", "above"),
+            sugar_price_cat = factor(sugar_price_cat, levels = c("above", "below"))) %>%
+  arrange(desc(winpercent)) %>% filter(competitorname %in% candy_names) %>%
+  select(name = competitorname, `sugar % - price %` = sugar_price_diff,
+         Characteristics = characteristics, `Diff Category` = sugar_price_cat)
+```
+
+]]
+
+.panel[.panel-name[R Code]
+
+```{r vertical-diverging-bar-chart, fig.show='hide'}
+diverging_bar_candy %>% ggplot(aes(x = `sugar % - price %`, 
+ y =  reorder(name, `sugar % - price %`), label = Characteristics)) +
+  geom_bar(aes(fill = `Diff Category`), stat = "identity", 
+           width = .5) + labs(y = " ")
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-vertical-diverging-bar-chart, ref.label='vertical-diverging-bar-chart', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+```
+
+]
+
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Part-to-Whole Relationships
+
+.medium[
+
+Use heatmaps to compare numeric variables across two categorical variables.
+
+]
+
+
+
+.panelset[
+
+.panel[.panel-name[Data]
+
+.code80[
+
+```{r heatmap_births_2000_2014}
+heatmap_births_2000_2014 <- fivethirtyeight::US_births_2000_2014 %>% 
+    mutate(year = factor(year), 
+           weekday = as.character(day_of_week),
+           weekday = factor(weekday)) 
+```
+
+]]
+
+.panel[.panel-name[R Code]
+
+```{r heatamp, eval=FALSE}
+heatmap_births_2000_2014 %>% 
+  ggplot(aes(weekday, 
+             year, 
+             fill = births)) + 
+    geom_raster() + 
+    scale_fill_distiller(palette = "RdPu")
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-heatamp, ref.label='heatamp', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+
+
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Part-to-Whole Relationships
+
+.medium[
+
+Create waffle charts with `ggwaffle`
+
+]
+
+
+.panelset[
+
+.panel[.panel-name[Data]
+
+.code80[
+
+```{r penguins_waffle}
+penguins_waffle <- mutate(penguins, 
+                          island = as.character(island))
+penguins_waffle_data <- ggwaffle::waffle_iron(data = penguins_waffle, 
+                                     aes_d(group = island))
+```
+
+]]
+
+.panel[.panel-name[R Code]
+
+```{r geom_waffle, fig.show='hide'}
+penguins_waffle_data %>% 
+    ggplot(aes(x = x, 
+               y = y, 
+               fill = group)) + 
+    ggwaffle::geom_waffle() + 
+    theme_waffle() + 
+    labs(x = " ", y = " ")
+```
+
+]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_waffle, ref.label='geom_waffle', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+
+
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Part-to-Whole Relationships
+
+.medium[
+
+Create mosaic plots with [`ggmosaic::geom_mosaic()`](https://haleyjeppson.github.io/ggmosaic/)
+
+]
+
+
+
+.panelset[
+
+.panel[.panel-name[Data]
+
+.code60[
+
+```{r flying_mosaic}
+flying_mosaic <- fivethirtyeight::flying %>% 
+    select(recline_frequency, recline_rude) %>% 
+    filter(!is.na(recline_frequency) & !is.na(recline_rude)) %>% 
+    mutate(recline_rude = as.character(recline_rude),
+           recline_rude = factor(recline_rude), 
+          recline_often = as.character(recline_frequency), 
+          recline_often = factor(recline_often))
+```
+
+]]
+
+.panel[.panel-name[geom_mosaic]
+
+```{r geom_mosaic, fig.show='hide'}
+flying_mosaic %>% 
+    ggplot() + 
+    geom_mosaic(aes(x = product(recline_rude), 
+                    fill = recline_often), 
+                    show.legend = FALSE) + 
+    theme(rect = element_blank(), 
+          axis.ticks = element_blank())
+```
+
+]
+
+.panel[.panel-name[plot geom]
+
+```{r plot-geom_mosaic, ref.label='theme_mosaic', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+.panel[.panel-name[theme_mosaic]
+
+```{r theme_mosaic, fig.show='hide'}
+flying_mosaic %>% 
+    ggplot() + 
+    geom_mosaic(aes(x = product(recline_rude), 
+                    fill = recline_often), 
+                    show.legend = FALSE) + 
+    theme_mosaic()
+```
+
+]
+
+.panel[.panel-name[plot theme]
+
+```{r plot-theme_mosaic, ref.label='geom_mosaic', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Part-to-Whole Relationships
+
+.medium[
+
+Build dendrograms with [`ggdendro`](https://cran.r-project.org/web/packages/ggdendro/vignettes/ggdendro.html)
+
+]
+
+
+.panelset[
+
+.panel[.panel-name[Data]
+.code70[
+
+```{r hclust_police}
+deaths_year <- fivethirtyeight::police_deaths %>%
+    filter(year == 2015) %>% group_by(state, year) %>% 
+    summarize(deaths = n()) %>% ungroup()
+
+killings_year <- fivethirtyeight::police_killings %>% 
+    group_by(state, year) %>% summarize(killings = n()) %>% ungroup()
+
+police_death_killing_year <- inner_join(x = deaths_year, y = killings_year, 
+                                        by = c("state", "year")) 
+hclust_police <- police_death_killing_year %>%
+    column_to_rownames(var = 'state') %>% select(deaths, killings) 
+
+police_hcmodel <- hclust(dist(hclust_police), method = "average")
+dhc_police <- as.dendrogram(police_hcmodel)
+rect_police_data <- ggdendro::dendro_data(dhc_police, type = "rectangle")
+```
+
+]]
+
+.panel[.panel-name[R Code]
+
+.code70[
+
+```{r ggdendro, fig.show='hide'}
+ggplot(ggdendro::segment(rect_police_data)) + 
+geom_segment(aes(x = x, 
+                 y = y, 
+                 xend = xend, 
+                 yend = yend), 
+             size = 0.2) + 
+geom_text(data = ggdendro::label(rect_police_data), 
+          aes(x = x, 
+              y = y, 
+          label = label, 
+          hjust = -0.1), size = 1.1) + 
+    coord_flip() +
+    scale_y_reverse(expand = c(0.2, 0)) + 
+    labs(x = " ", y = " ")
+```
+
+]]
+
+.panel[.panel-name[Plot]
+
+```{r plot-ggdendro, ref.label='ggdendro', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+
+
+]
+
+---
+class: inverse, center, top
+background-image: url(img/ggplot2.png)
+background-position: 50% 70%
+background-size: 35%
+
+# X vs. Y Relationships
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## X vs. Y Relationships
+
+.medium[
+
+Build scatter-plots with [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html).
+
+]
+
+
+.panelset[
+
+.panel[.panel-name[Data]
+
+.code90[
+
+```{r scatter_movie_data}
+scatter_movie_data <- movies_data %>% 
+    mutate(budget_mil = budget / 1000000,
+           budget_mil = paste0(budget_mil, " mil"),
+           budget_mil = factor(budget_mil)) %>% 
+    select(title, year, rating, length, 
+           budget, budget_mil, mpaa, genres)
+```
+
+]]
+
+.panel[.panel-name[R Code]
+
+.code90[
+
+```{r scatter-plot, fig.show='hide'}
+scatter_movie_data %>% 
+    ggplot(aes(x = length, y = rating)) + 
+    geom_point()
+```
+
+]]
+
+.panel[.panel-name[Plot]
+
+```{r plot-scatter-plot, ref.label='scatter-plot', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## X vs. Y Relationships
+
+.medium[
+
+Add color with `geom_point(aes(color = ))`, reduce over-plotting with `alpha`
+
+]
+
+.panelset[
+
+.panel[.panel-name[Code]
+
+.code90[
+
+```{r scatter-plot-color, fig.show='hide'}
+scatter_movie_data %>% 
+    ggplot(aes(x = length, y = rating)) + 
+    geom_point(aes(color = mpaa), alpha = 1/3)
+```
+
+]]
+
+.panel[.panel-name[Plot]
+
+```{r plot-scatter-plot-color, ref.label='scatter-plot-color', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## X vs. Y Relationships
+
+.medium[
+
+Add a smoothed line through the points in a scatter-plot with `geom_smooth()` (see `method` args [here](https://ggplot2.tidyverse.org/reference/geom_smooth.html))
+
+]
+
+
+.panelset[
+
+.panel[.panel-name[Code]
+.code90[
+
+```{r geom_smooth, fig.show='hide'}
+scatter_movie_data %>% 
+    ggplot(aes(x = length, y = rating)) + 
+    geom_point(aes(color = mpaa), alpha = 1/3) + 
+    geom_smooth()
+```
+
+]]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_smooth, ref.label='geom_smooth', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+]
+
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## X vs. Y Relationships
+
+.medium[
+
+Bubble-charts use size to represent an additional numerical variable in a scatter-plot.
+
+]
+
+
+.panelset[
+
+.panel[.panel-name[Data]
+
+.code80[
+
+```{r bubble_movie_data}
+bubble_movie_data <- movies_data %>% 
+    mutate(`budget (million)` = budget / 1000000,
+           budget_mil_fct = paste0(`budget (million)`, " mil"),
+           budget_mil_fct = factor(budget_mil_fct)) %>% 
+    select(title, year, rating, length, `budget (million)`, 
+           budget, budget_mil_fct, mpaa, genres)
+```
+
+]]
+
+.panel[.panel-name[Code]
+
+.code80[
+
+```{r bubble-chart, fig.show='hide'}
+bubble_movie_data %>% 
+    ggplot(aes(x = length, y = rating)) + 
+    geom_point(aes(color = mpaa, 
+                   size = `budget (million)`), 
+               alpha = 1/3) + 
+    theme(legend.position = "left")
+```
+
+]]
+
+.panel[.panel-name[Plot]
+
+```{r plot-bubble-chart, ref.label='bubble-chart', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+
+
+]
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## X vs. Y Relationships
+
+.medium[
+
+Line graphs (`geom_line()`) are great for representing changes in a numeric variable (`Rep - Dem (Pct Diff)`) on the `y` over time time (`Year`) on the x axis. 
+
+]
+
+.panelset[
+
+.panel[.panel-name[Data].code70[
+
+```{r august_senate_polls_line_data}
+august_senate_polls_line_data <- august_senate_polls %>% 
+  group_by(state, cycle) %>% 
+  summarize(
+       rep_result_mean = mean(rep_result), 
+       dem_result_mean = mean(dem_result), 
+       result_diff = rep_result_mean - dem_result_mean) %>% 
+  ungroup() %>% 
+  filter(state %in% c("NH","IA")) %>% 
+  select(`Rep - Dem (Pct Diff)` = result_diff, 
+         State = state, 
+         Year = cycle)
+```
+
+
+]]
+
+.panel[.panel-name[Code]
+
+.code80[
+
+```{r line-graph, fig.show='hide'}
+august_senate_polls_line_data %>%
+  ggplot(aes(x = Year, y = `Rep - Dem (Pct Diff)`, color = State)) + 
+  geom_line(aes(group = State))
+```
+
+
+]]
+
+.panel[.panel-name[Plot]
+
+```{r ref.label='line-graph', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+
+]
+
+]
+
+
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## X vs. Y Relationships
+
+.medium[
+
+Slope-graphs are great for showing differences in a continuous variable across two categorical variables.  
+
+]
+
+.panelset[
+
+.panel[.panel-name[Data].code70[
+
+```{r august_senate_polls_slopegraph}
+august_senate_polls_slopegraph <- 
+    fivethirtyeight::august_senate_polls %>% 
+    filter(cycle == 2014 | cycle == 2016) %>% 
+    mutate(dem_diff = dem_poll - dem_result) %>% 
+    group_by(state, cycle) %>% 
+    summarize(dem_diff_sum = sum(dem_diff)) %>% 
+    ungroup() %>% 
+    filter(state %in% c("NH","IA")) %>% 
+    mutate(cycle = factor(cycle, levels = c("2014", "2016")),
+        state = factor(state, levels = c("IA", "NH"))) %>% 
+    select(Year = cycle, 
+       State = state, 
+       `Dem Support Diff (Pct)` = dem_diff_sum)
+```
+
+]]
+
+.panel[.panel-name[Code]
+
+.code80[
+
+```{r slopegraph, fig.show='hide'}
+august_senate_polls_slopegraph %>% 
+    ggplot(aes(x = Year, 
+               y = `Dem Support Diff (Pct)`, 
+               group = State)) +
+    geom_line(aes(color = State), size = 2, alpha = 1, 
+              show.legend = FALSE) +
+    geom_point(aes(color = State), size = 4, alpha = 1) 
+```
+
+]]
+
+.panel[.panel-name[Plot]
+
+```{r plot-slopegraph, ref.label='slopegraph', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+]
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## X vs. Y Relationships
+
+.medium[
+
+`geom_density_2d()` works well with scatter-plots by adding contour lines around the points.
+
+]
+
+
+
+.panelset[
+
+.panel[.panel-name[Code]
+
+.code80[
+
+```{r geom_density_2d, fig.show='hide'}
+ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm)) +
+ geom_point() +
+ xlim(170, 240) +
+ ylim(20, 60) +
+ geom_density_2d()
+```
+
+]]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_density_2d, ref.label='geom_density_2d', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+]
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## X vs. Y Relationships
+
+
+
+.medium[
+
+Correlograms use a heatmap-like plot to show the correlations between numeric variables (see the [`ggcorrplot`](https://cran.r-project.org/web/packages/ggcorrplot/readme/README.html))
+
+]
+
+.panelset[
+
+.panel[.panel-name[Data].code70[
+
+```{r corr_mat}
+library(ggcorrplot)
+college_recent_grads <- fivethirtyeight::college_recent_grads
+num <- select(college_recent_grads, employed_fulltime,
+             employed_parttime, unemployment_rate,
+             college_jobs, non_college_jobs, low_wage_jobs)
+corr <- round(cor(num), 1)
+corr_mat <- cor_pmat(corr)
+```
+
+]]
+
+.panel[.panel-name[Code]
+
+.code80[
+
+```{r ggcorrplot, fig.show='hide'}
+ggcorrplot(corr_mat, method = "circle")
+```
+
+]]
+
+.panel[.panel-name[Plot]
+
+```{r plot-ggcorrplot, ref.label='ggcorrplot', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+]
+
+
+---
+class: inverse, center, top
+background-image: url(img/ggplot2.png)
+background-position: 50% 70%
+background-size: 35%
+
+# Uncertainty
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Uncertainty
+
+.medium[
+
+Error bars are useful for displaying uncertainty around a given metric. For line graphs, use the use a [geom_crossbar()](https://ggplot2.tidyverse.org/reference/geom_linerange.html). 
+
+]
+
+.panelset[
+
+.panel[.panel-name[Data].code60[
+
+```{r august_senate_polls_crossbar_data}
+august_senate_polls_crossbar_data <- august_senate_polls %>%
+  group_by(state, cycle) %>%
+  summarize(
+       rep_result_mean = mean(rep_result),
+       error_mean = mean(error),
+       rep_upper = rep_result_mean + error_mean,
+       rep_lower = rep_result_mean - error_mean) %>%
+  ungroup() %>%
+  filter(state == "NH") %>%
+  mutate(election_cycle = as.factor(cycle)) %>%
+  select(`Rep Result (Pct)` = rep_result_mean,
+         State = state,
+         Date = cycle,
+         `Election Cycle` = election_cycle,
+         rep_upper,
+         rep_lower)
+```
+
+]]
+
+.panel[.panel-name[Code]
+
+.code80[
+
+```{r geom_crossbar, fig.show='hide'}
+august_senate_polls_crossbar_data %>%
+  ggplot(aes(x = Date,
+             y = `Rep Result (Pct)`)) +
+  geom_line(aes(group = State)) +
+  geom_crossbar(
+    aes(ymin = rep_lower,
+        color = `Election Cycle`,
+        ymax = rep_upper),
+                width = 0.2)
+```
+
+]]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_crossbar, ref.label='geom_crossbar', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+]
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Uncertainty
+
+.medium[
+
+For a more traditional error bar, use the  [geom_errorbar()](https://ggplot2.tidyverse.org/reference/geom_linerange.html) function.
+
+]
+
+.panelset[
+
+.panel[.panel-name[Data].code60[
+
+```{r august_senate_polls_errorbar_data}
+august_senate_polls_errorbar_data <- august_senate_polls %>%
+  group_by(state, cycle) %>%
+  summarize(
+       rep_result_mean = mean(rep_result),
+       error_mean = mean(error),
+       rep_upper = rep_result_mean + error_mean,
+       rep_lower = rep_result_mean - error_mean) %>%
+  ungroup() %>%
+  filter(state == "IA") %>%
+  mutate(election_cycle = as.factor(cycle)) %>%
+  select(`Rep Result (Pct)` = rep_result_mean,
+         State = state,
+         Date = cycle,
+         `Election Cycle` = election_cycle,
+         rep_upper,
+         rep_lower)
+```
+
+]]
+
+.panel[.panel-name[Code].code80[
+
+```{r geom_errorbar, fig.show='hide'}
+august_senate_polls_errorbar_data %>%
+  ggplot(aes(x = Date,
+             y = `Rep Result (Pct)`)) +
+  geom_point(aes(group = State, 
+                 color = `Election Cycle`)) +
+  geom_errorbar(
+    aes(ymin = rep_lower,
+        ymax = rep_upper,
+        color = `Election Cycle`),
+                width = 0.5)
+```
+
+]]
+
+.panel[.panel-name[Plot]
+
+```{r plot-geom_errorbar, ref.label='geom_errorbar', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]]
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Uncertainty
+
+.medium[
+
+Use the [`position_dodge()`](https://ggplot2.tidyverse.org/reference/position_dodge.html) function when creating error bars with column charts. 
+
+]
+
+.panelset[
+
+.panel[.panel-name[Data].code60[
+
+```{r movies_errorbar_data}
+dodge <- position_dodge(width = 0.75)
+movies_errorbar_data <- movies_data %>%
+  group_by(mpaa, year) %>%
+  summarize(
+    avg_rating = mean(rating, na.rm = TRUE),
+    sd_rating = sd(rating, na.rm = TRUE),
+    upper = avg_rating + sd_rating,
+    lower = avg_rating - sd_rating) %>%
+  ungroup() %>%
+  filter(year > 2002) %>%
+  select(`Avg Rating` = avg_rating,
+         Year = year,
+         mpaa, upper, lower)
+```
+
+
+]]
+
+.panel[.panel-name[Code].code80[
+
+```{r dodge-geom_errorbar, fig.show='hide'}
+movies_errorbar_data %>%
+    ggplot(aes(x = Year, 
+               y = `Avg Rating`, 
+               fill = mpaa)) +
+    geom_col(position = dodge) +
+    geom_errorbar(aes(ymin = lower, 
+                      ymax = upper),
+                  position = dodge, 
+                  width = 0.25)
+```
+
+]]
+
+.panel[.panel-name[Plot]
+
+```{r plot-dodge-geom_errorbar, ref.label='dodge-geom_errorbar', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]]
+
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Uncertainty
+
+
+.medium[
+
+Confidence bands are helpful for showing error 
+
+]
+
+.panelset[
+
+.panel[.panel-name[Data].code60[
+
+```{r police_deaths_conf_bands}
+police_deaths_conf_bands <- police_deaths %>%
+  group_by(year) %>%
+  summarize(deaths = sum(n())) %>%
+  ungroup()
+```
+
+]]
+
+.panel[.panel-name[stderr].code80[
+
+```{r stderr, eval=FALSE}
+stderr <- function(x, na.rm = FALSE) {
+  if (na.rm) x <- na.omit(x)
+  sqrt(var(x)/length(x))
+}
+```
+
+]]
+
+```{r stderr-no-show, echo=FALSE}
+stderr <- function(x, na.rm = FALSE) {
+  if (na.rm) x <- na.omit(x)
+  sqrt(var(x)/length(x))
+}
+```
+
+.panel[.panel-name[se Code].code80[
+
+```{r se-geom_ribbon, fig.show='hide'}
+se <- stderr(police_deaths_conf_bands$deaths)
+police_deaths_conf_bands %>%
+  ggplot(aes(x = year, y = deaths)) +
+  geom_ribbon(aes(ymin = deaths - se,
+                  ymax = deaths + se,
+                  ),
+              fill = "grey70") +
+  geom_line(aes(y = deaths))
+```
+
+]]
+
+.panel[.panel-name[se Plot]
+
+```{r plot-se-geom_ribbon, ref.label='se-geom_ribbon', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+.panel[.panel-name[sd Code].code80[
+
+```{r sd-geom_ribbon, fig.show='hide'}
+sd <- sd(police_deaths_conf_bands$deaths)
+police_deaths_conf_bands %>%
+  ggplot(aes(x = year, y = deaths)) +
+  geom_ribbon(aes(ymin = deaths - sd,
+                  ymax = deaths + sd,
+                  ),
+              fill = "grey70") +
+  geom_line(aes(y = deaths))
+```
+
+]]
+
+.panel[.panel-name[sd Plot]
+
+```{r plot-sd-geom_ribbon, ref.label='sd-geom_ribbon', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+]
+
+
+
+---
+class: inverse, center, top
+background-image: url(img/ggplot2.png)
+background-position: 50% 70%
+background-size: 35%
+
+# Spatial Data
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Spatial Data
+
+
+.medium[
+
+Cartogram Heatmaps ([`statebins`](https://gitlab.com/hrbrmstr/statebins)) are great for viewing numerical variables by state.
+
+]
+
+.panelset[
+
+.panel[.panel-name[Data 1].code60[
+
+```{r police_killings_carto_heat}
+police_killings_carto_heat <- fivethirtyeight::police_killings %>%
+  group_by(state) %>%
+  summarize(killings = sum(n())) %>%
+  ungroup() %>%
+  rename(state_abbr = state) %>%
+  mutate(state = usdata::abbr2state(state_abbr)) %>%
+  filter(!is.na(state))
+```
+
+]]
+
+.panel[.panel-name[Code 1].code80[
+
+```{r statebins-killings, fig.show='hide'}
+statebins::statebins(police_killings_carto_heat,
+                     value_col = "killings",
+                     name = "Police Killings",
+                     round = TRUE,
+          radius = grid::unit(16, "pt"),
+          palette = "Reds", direction = 1) +
+  theme_statebins(legend_position = "right")
+```
+
+]]
+
+.panel[.panel-name[Plot 1]
+
+```{r plot-statebins-killings, ref.label='statebins-killings', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+
+.panel[.panel-name[Data 2].code60[
+
+```{r police_deaths_carto_heat}
+police_deaths_carto_heat <- fivethirtyeight::police_deaths %>%
+    group_by(state) %>%
+    summarize(deaths = sum(n())) %>%
+    ungroup() %>%
+    rename(state_abbr = state) %>%
+    mutate(state = usdata::abbr2state(state_abbr)) %>%
+    filter(!is.na(state))
+
+```
+
+]]
+
+.panel[.panel-name[Code 2].code80[
+
+```{r statebins-deaths, fig.show='hide'}
+statebins::statebins(police_deaths_carto_heat,
+                     value_col = "deaths",
+                     name = "Police Deaths",
+                     round = FALSE,
+          radius = grid::unit(16, "pt"),
+          palette = "Reds", direction = 2) +
+  theme_statebins(legend_position = "right")
+```
+
+]]
+
+.panel[.panel-name[Plot 2]
+
+```{r plot-statebins-deaths, ref.label='statebins-deaths', echo=FALSE, fig.align='center', out.width='55%', out.height='55%'}
+
+```
+
+]
+]
+
+
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Spatial Data
+
+Cartogram 
+
+---
+class: left, top
+background-image: url(img/ggplot2.png)
+background-position: 95% 8%
+background-size: 6%
+
+## Spatial Data
+
+Choropleth 
+
+
+
+
+
+
+```{r tidy_candy_rankings, eval=FALSE, include=FALSE}
+tidy_candy_rankings <- candy_rankings %>%
+  tidyr::pivot_longer(
+    cols = -c(competitorname, sugarpercent, pricepercent, winpercent), 
+     names_to = "characteristics", values_to = "present") %>%
+  mutate(present = as.logical(present)) %>% arrange(competitorname) %>% 
+  filter(present == TRUE) %>% distinct() %>% 
+  select(-present)
+```

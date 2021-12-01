@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Introduction to Web Technologies</title>
+    <title>Introduction to folders, files, and software</title>
     <meta charset="utf-8" />
     <meta name="author" content="Martin Frigaard" />
     <script src="libs/header-attrs/header-attrs.js"></script>
@@ -55,8 +55,8 @@ layout: true
 name: title-slide
 class: title-slide, center, middle, inverse
 
-# Introduction to Web Technologies
-#.fancy[stuff you'll use from the web]
+# Introduction to folders, files, and software
+#.fancy[the stuff you'll use for data projects]
 
 &lt;br&gt;
 
@@ -64,7 +64,7 @@ class: title-slide, center, middle, inverse
 
 Written: September 21 2021
 
-Updated: November 28 2021
+Updated: November 30 2021
 
 .footer-large[.right[.fira[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;[Created using the "λέξις" theme](https://jhelvy.github.io/lexis/index.html#what-does-%CE%BB%CE%AD%CE%BE%CE%B9%CF%82-mean)
@@ -110,6 +110,8 @@ Updated: November 28 2021
 
 ]
 
+--
+
 #### [fivethirtyeight](https://twitter.com/FiveThirtyEight): 
 
 .cols3[
@@ -117,6 +119,8 @@ Updated: November 28 2021
 &gt; Data-driven news and analysis  
 
 ]
+
+--
 
 #### [the upshot (NYT)](https://twitter.com/UpshotNYT):
 
@@ -515,6 +519,8 @@ qplot(data = diamonds,
 
 ]
 
+--
+
 .rightcol65[
 
 &lt;br&gt;
@@ -543,6 +549,8 @@ qplot(data = diamonds,
 
 ]
 
+--
+
 .rightcol65[
 
 &lt;br&gt;
@@ -568,7 +576,7 @@ qplot(data = diamonds,
 
 .panel[.panel-name[Plot]
 
-&lt;img src="img/unnamed-chunk-10-1.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/qplot-show-1.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 ]
 ]
@@ -607,6 +615,8 @@ class: left, top
 ]
 ]
 
+--
+
 .rightcol55[
 
 #### Head over to the [fivethirtyeight landing page](https://fivethirtyeight.com/)
@@ -621,6 +631,8 @@ class: left, top
 ## `HTML`
 
 &gt; We're looking at the HTML code used to build the fivethirtyeight website (note the `&lt;!DOCTYPE html&gt;` at the top of the page)
+
+--
 
 &lt;br&gt;
 
@@ -655,16 +667,23 @@ class: left, top
 
 ## `HTML` - `elements` and `tags`
 
+--
+
 #### Start tag: 
 
 ```html
 &lt;title&gt;
 ```
+
+--
+
 #### Content: 
 
 ```html
 &lt;title&gt;FiveThirtyEight | Nate Silver’s FiveThirtyEight uses statisti...
 ```
+
+--
 
 #### End tag: 
 
@@ -676,6 +695,8 @@ class: left, top
 class: left, top
 
 # `HTML` - attributes
+
+--
 
 #### Attributes appear in the start tag  `&lt;tag&gt;` 
 #### Inside tags are `attribute(s)="attribute value(s)"` 
@@ -697,10 +718,12 @@ class: left, top
 
 # `HTML` - tags to know 
 
-.leftcol70[
+.leftcol55[.code60[
+
+&lt;br&gt;
 
 ```html
-&lt;!-- html comments (not read or displayed by browser) --&gt;
+&lt;!-- html comments (not read/displayed by browser) --&gt;
 &lt;!DOCTYPE html&gt; &lt;!-- document type declaration --&gt;
 &lt;html lang="en-US"&gt; &lt;!-- describes the web page --&gt;
   &lt;head&gt; &lt;!-- header of the HTML document --&gt;
@@ -710,7 +733,7 @@ class: left, top
     &lt;h1&gt; &lt;!-- level 1 header (others include h2-h6) --&gt;
     &lt;!-- href is url, followed by displayed text --&gt;
       &lt;a 
-      href="https://www.website.com"&gt;A link to website
+      href="https://www.website.com"&gt;link
       &lt;/a&gt;
       &lt;!-- src the path to an image file --&gt;
         &lt;img src="example.com/example.jpg"&gt;
@@ -719,18 +742,28 @@ class: left, top
 &lt;/html&gt;
 ```
 
-]
+]]
 
 --
 
-.rightcol30[
+.rightcol45[.small[
 
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&gt; *starts with* .red[`&lt;!DOCTYPE html&gt;`]
 
-&gt; *Most of the code is in the* .red[`&lt;body&gt;`]
+&lt;br&gt;
+
+&gt; *most of the code is in the* .red[`&lt;body&gt;`]
+
+&lt;br&gt;
+
+&gt; *website:* .red[`&lt;a href="url&gt;text&lt;/a&gt;`]
+
+&lt;br&gt;
+
+&gt; *image* .red[`&lt;img src="path/to/file.jpg"&gt;`]
 
 ]
-
+]
 
 
 
@@ -765,6 +798,20 @@ class: left, top
 
 .leftcol55[
 
+```css
+    &lt;style&gt;
+        h1 {
+            color: blue;
+        }
+    &lt;/style&gt;
+```
+
+]
+
+--
+
+.rightcol45[
+
 1. `&lt;style&gt;` .green[start tag]   
 2. .yellow[a selector] (`h1`)     
 3. .yellow[an open bracket] (`{`)   
@@ -773,21 +820,8 @@ class: left, top
 6. .blue[property value] (`blue`)    
 7. .blue[semi-colon] (`;`)     
 8. .yellow[a closed bracket] (`}`)    
-9. `&lt;/style&gt;` .green[end tag]   
+9. `&lt;/style&gt;` .green[end tag] 
 
-]
-
---
-
-.rightcol45[
-
-```css
-    &lt;style&gt;
-        h1 {
-            color: blue;
-        }
-    &lt;/style&gt;
-```
 ]
 
 
@@ -795,6 +829,8 @@ class: left, top
 class: left, top
 
 # `CSS` - use 
+
+--
 
 &lt;br&gt;
 
@@ -823,6 +859,8 @@ class: left, top
 
 # `Data` file types
 
+--
+
 #### Data comes in a variety of formats, but this course will focus on 'plain text formats'
 
 --
@@ -837,6 +875,8 @@ class: left, top
 class: left, top
 
 # `CSV` - 'comma-separated values' files
+
+--
 
 #### The first line is a "header" and contains column (or variable) names in each of the fields (using letters, digits, and underscores)
 
@@ -906,6 +946,10 @@ class: left, top
 
 # `XML` - Extensible Markup Language
 
+&lt;br&gt;
+
+--
+
 #### `XML` consists of of XML elements with a start tag and an end tag (with plain text content or other XML elements in-between)
 
 --
@@ -943,7 +987,7 @@ class: left, top
 
 &lt;br&gt;
 
-.center[
+.right[
 .small[
 .blue[root element] = `&lt;heights&gt;`  
 .blue[start tag] = `&lt;filename&gt;`  
@@ -974,9 +1018,15 @@ class: left, top
 
 # `JSON` - JavaScript Object Notation
 
+&lt;br&gt;
+
+--
+
 ### `JSON` is a lightweight data storage format similar in structure to `XML` but different syntax/format
 
 --
+
+&lt;br&gt;
 
 ### Common format for data from application programming interfaces (APls)
 
