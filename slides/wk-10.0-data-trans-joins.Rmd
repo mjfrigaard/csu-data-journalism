@@ -51,7 +51,7 @@ options(
 knitr::opts_chunk$set(
     warning = FALSE,
     message = FALSE,
-    fig.path = "figs/",
+    fig.path = "img/",
     fig.width = 7.252,
     fig.height = 4,
     comment = " ",
@@ -107,9 +107,15 @@ background-size: 7%
 
 # Objectives 
 
+<br><br>
+
 ## 1) Recap `dplyr`'s data manipulation verbs
 
+--
+
 ## 2) `tidyr`'s pivoting functions 
+
+--
 
 ## 3) Joins with `dplyr`
 
@@ -143,23 +149,25 @@ background-size: 7%
 
 --
 
-### 1) View data with `glimpse()`
+.leftcol[
+
+> #### 1) View data with `glimpse()`
+
+> #### 2) Select columns with `select()`
+
+> #### 3) Filter rows with `filter()`
+
+]
 
 --
 
-### 2) Select columns with `select()`
+.rightcol[
 
---
+> #### 4) Arrange data with `arrange()`
 
-### 3) Filter rows with `filter()`
+> #### 5) Create/change columns with `mutate()`
 
---
-
-### 4) Arrange data with `arrange()`
-
---
-
-### 5) Create/change columns with `mutate()`
+]
 
 
 ---
@@ -246,9 +254,14 @@ NotTidy <- tibble::tribble(
           "C", "223/100", "146/100", "288/100")
 ```
 
+.small[
+
 ```{r NotTidy-paged, echo=FALSE}
 rmarkdown::paged_table(NotTidy)
 ```
+
+]
+
 
 
 ---
@@ -381,7 +394,7 @@ background-size: 7%
 
 #### How it works: 
 
-
+--
 
 .leftcol[
 
@@ -490,11 +503,17 @@ NotTidy %>%
 
 .leftcol[
 
-```{r print-Tidy-console}
+```{r print-Tidy-console, eval=FALSE}
 Tidy
 ```
 
-]
+.small[
+
+```{r paged-Tidy-console, echo=FALSE}
+rmarkdown::paged_table(Tidy)
+```
+
+]]
 
 --
 
@@ -537,19 +556,19 @@ NotTidy %>%
 
 --
 
-.rightcol[
+.rightcol[.small[
 
 ```{r names_transform-output, echo=FALSE}
-NotTidy %>% 
+rmarkdown::paged_table(NotTidy %>% 
   pivot_longer(
        cols = -group, 
        names_to = "year", 
        values_to = "rate", 
        names_transform = list( 
-         year = as.numeric))
+         year = as.numeric)))
 ```
 
-]
+]]
 
 ---
 class: left, top
@@ -559,7 +578,17 @@ background-size: 7%
 
 ## `pivot_longer()` = names_sep
 
+<br><br><br>
+
+.leftcol40[
+
 Create the `SiteRates` data (example of COVID rates as various hospitals)
+
+]
+
+.rightcol60[
+
+.code60[
 
 ```{r SiteRates, eval=FALSE}
 SiteRates <- tibble::tribble(
@@ -569,6 +598,10 @@ SiteRates <- tibble::tribble(
   "Cincinnati",       6.73,       4.87,       5.02,       4.66,
        "Texas",       18.2,       16.6,         17,         19)
 ```
+
+]]
+
+
 
 
 ---
@@ -632,8 +665,6 @@ background-size: 7%
 
 + `year` and `quarter` should also be numeric
 
---
-
 .leftcol[
 
 ```{r names_sep, eval=FALSE}
@@ -658,7 +689,7 @@ SiteRates %>%
 
 .border[
 
-```{r TidySites-View, echo=FALSE, fig.align='center', out.height='45%', out.width='45%'}
+```{r TidySites-View, echo=FALSE, fig.align='center', out.height='47%', out.width='47%'}
 knitr::include_graphics(path = "img/TidySites.png")
 ```
 
@@ -676,6 +707,9 @@ Create the `SpaceDogs` data. These are names of dogs in the [Soviet Space Dogs d
 
 *Some dogs have multiple names, and some share names.*
 
+
+.code70[
+
 ```{r SpaceDogs, eval=FALSE}
 # data.frame prints to the screen better
 SpaceDogs <- data.frame(
@@ -691,6 +725,9 @@ SpaceDogs <- data.frame(
    name_2 = c("Veterok / Bzdunok", NA, NA, 
               "Kometka", "Pchyolka", "Neva"))
 ```
+
+]
+
 
 ```{r create-SpaceDogs, echo=FALSE}
 SpaceDogs <- data.frame(
@@ -730,6 +767,8 @@ knitr::include_graphics(path = "img/SpaceDogs.png")
 
 The `SpaceDogs` data has missing values in `name_2` 
 
+--
+
 *...two of the columns have a similar prefix (`name_`)*
 
 
@@ -743,6 +782,8 @@ background-size: 7%
 ## More `pivot_longer()` options
 
 ### To tidy these data, we can combine what we've learned:
+
+--
 
 #### 1. `dplyr::starts_with()` to select the `name_` columns
 
@@ -762,13 +803,21 @@ background-size: 7%
 
 ## More `pivot_longer()` options
 
+.code70[
+
 ```{r starts_with, eval=FALSE}
 SpaceDogs %>% 
   pivot_longer( # columns with `name_` prefix
    starts_with("name_"), #<< 
 ```
 
+]
+
+
+
 --
+
+.code70[
 
 ```{r special-value, eval=FALSE}
 SpaceDogs %>% 
@@ -779,7 +828,13 @@ SpaceDogs %>%
      c(".value", "dog_id"), #<< 
 ```
 
+]
+
+
+
 --
+
+.code70[
 
 ```{r values_drop_na, eval=FALSE}
 SpaceDogs %>% 
@@ -790,6 +845,10 @@ SpaceDogs %>%
      c(".value", "dog_id"), # remove missing
    values_drop_na = TRUE) #<< 
 ```
+
+]
+
+
 
 
 ---
@@ -836,7 +895,7 @@ SpaceDogs %>%
 
 .border[
 
-```{r TidySpaceDogs-View, echo=FALSE, fig.align='center', out.height='90%', out.width='90%'}
+```{r TidySpaceDogs-View, echo=FALSE, fig.align='center', out.height='95%', out.width='95%'}
 knitr::include_graphics(path = "img/TidySpaceDogs.png")
 ```
 
@@ -921,11 +980,20 @@ background-size: 7%
 
 ## `tidyr::pivot_wider()`
 
-<br>
+<br><br><br>
 
-### Create `CatVsDogWide`
+.leftcol35[
 
-<br>
+
+#### Create `CatVsDogWide`
+
+]
+
+--
+
+.rightcol65[
+
+.code70[
 
 ```{r CatVsDogWide, eval=FALSE}
 CatVsDogWide <- tibble::tribble(
@@ -945,6 +1013,10 @@ CatVsDogWide <- tibble::tribble(
 "no_of_cat_households",  3687, 2544, 2079, 2189, 1748)
 ```
 
+]]
+
+
+
 ---
 class: left, top
 background-image: url(img/tidyr.png)
@@ -957,10 +1029,15 @@ background-size: 7%
 CatVsDogWide %>% View("CvDWide")
 ```
 
+.border[
 
 ```{r CvDWide-png, echo=FALSE, out.height='88%', out.width='88%', fig.align='center'}
 knitr::include_graphics(path = "img/CvDWide.png")
 ```
+
+]
+
+
 
 
 ---
@@ -1024,9 +1101,13 @@ CatVsDogWide %>%
 
 --
 
+.border[
+
 ```{r CvDWide2-png, echo=FALSE, out.height='70%', out.width='70%', fig.align='center'}
 knitr::include_graphics(path = "img/CvDWide2.png")
 ```
+
+]
 
 
 ---
@@ -1259,6 +1340,8 @@ class: left, top
 
 ### Toy data `X`
 
+.code70[
+
 ```{r X}
 # create X table
 X <- tibble::tribble(
@@ -1268,10 +1351,14 @@ X <- tibble::tribble(
     "c", "v", 3L)
 ```
 
+.small[
+
 ```{r paged_table-X, echo=FALSE}
 rmarkdown::paged_table(X)
 ```
 
+]
+]
 ]
 
 --
@@ -1280,6 +1367,7 @@ rmarkdown::paged_table(X)
 
 ### Toy data `Y`
 
+.code70[
 
 ```{r Y}
 # create Y table
@@ -1290,10 +1378,14 @@ Y <- tibble::tribble(
     "d", "W", 1L)
 ```
 
+.small[
+
 ```{r paged_table-Y, echo=FALSE}
 rmarkdown::paged_table(Y)
 ```
 
+]
+]
 ]
 
 ---
@@ -1329,12 +1421,14 @@ left_join(
 
 This creates:
 
+.small[
+
 ```{r LeftJoinXY, echo=FALSE}
 LeftJoinXY <- left_join(x = X, y = Y)
 rmarkdown::paged_table(LeftJoinXY)
 ```
 
-]
+]]
 
 ---
 background-image: url(img/left-join-01.png)
@@ -1397,10 +1491,15 @@ right_join(x = X, y = Y)
 
 This creates:
 
+.small[
+
 ```{r RIghtJoinXY, echo=FALSE}
 RIghtJoinXY <- right_join(x = X, y = Y)
 rmarkdown::paged_table(RIghtJoinXY)
 ```
+
+]
+
 
 ]
 
@@ -1467,12 +1566,14 @@ inner_join(x = X, y = Y)
 
 This creates:
 
+.small[
+
 ```{r InnerJoinXY, echo=FALSE}
 InnerJoinXY <- inner_join(x = X, y = Y)
 rmarkdown::paged_table(InnerJoinXY)
 ```
 
-]
+]]
 
 ---
 background-image: url(img/inner-join-01.png)
@@ -1546,12 +1647,14 @@ full_join(x = X, y = Y)
 
 This creates:
 
+.small[
+
 ```{r FullJoinXY, echo=FALSE}
 FullJoinXY <- full_join(x = X, y = Y)
 rmarkdown::paged_table(FullJoinXY)
 ```
 
-]
+]]
 
 ---
 background-image: url(img/full-join-01.png)
@@ -1608,6 +1711,6 @@ pdf_slides <- str_replace(html_slides,
 pdf_slides <- paste0("pdfs/", pdf_slides)
 print_files <- tibble("pdfs" = pdf_slides,
   "htmls" = html_slides)
-# print_files$htmls[7]
-pagedown::chrome_print(input = print_files$htmls[7], output = print_files$pdfs[7], timeout = 120)
+# print_files$htmls[11]
+pagedown::chrome_print(input = print_files$htmls[11], output = print_files$pdfs[11], timeout = 120)
 ```

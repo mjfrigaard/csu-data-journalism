@@ -83,9 +83,15 @@ background-size: 7%
 
 # Objectives 
 
+&lt;br&gt;&lt;br&gt;
+
 ## 1) Recap `dplyr`'s data manipulation verbs
 
+--
+
 ## 2) `tidyr`'s pivoting functions 
+
+--
 
 ## 3) Joins with `dplyr`
 
@@ -119,23 +125,25 @@ background-size: 7%
 
 --
 
-### 1) View data with `glimpse()`
+.leftcol[
+
+&gt; #### 1) View data with `glimpse()`
+
+&gt; #### 2) Select columns with `select()`
+
+&gt; #### 3) Filter rows with `filter()`
+
+]
 
 --
 
-### 2) Select columns with `select()`
+.rightcol[
 
---
+&gt; #### 4) Arrange data with `arrange()`
 
-### 3) Filter rows with `filter()`
+&gt; #### 5) Create/change columns with `mutate()`
 
---
-
-### 4) Arrange data with `arrange()`
-
---
-
-### 5) Create/change columns with `mutate()`
+]
 
 
 ---
@@ -219,11 +227,16 @@ NotTidy &lt;- tibble::tribble(
           "C", "223/100", "146/100", "288/100")
 ```
 
+.small[
+
 &lt;div data-pagedtable="false"&gt;
   &lt;script data-pagedtable-source type="application/json"&gt;
 {"columns":[{"label":["group"],"name":[1],"type":["chr"],"align":["left"]},{"label":["2019"],"name":[2],"type":["chr"],"align":["left"]},{"label":["2020"],"name":[3],"type":["chr"],"align":["left"]},{"label":["2021"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"A","2":"102/100","3":"123/100","4":"161/100"},{"1":"B","2":"179/100","3":"199/100","4":"221/100"},{"1":"C","2":"223/100","3":"146/100","4":"288/100"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   &lt;/script&gt;
 &lt;/div&gt;
+
+]
+
 
 
 ---
@@ -354,7 +367,7 @@ background-size: 7%
 
 #### How it works: 
 
-
+--
 
 .leftcol[
 
@@ -465,22 +478,15 @@ background-size: 7%
 Tidy
 ```
 
-```
-  # A tibble: 9 × 3
-    group year  rate   
-    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  
-  1 A     2019  102/100
-  2 A     2020  123/100
-  3 A     2021  161/100
-  4 B     2019  179/100
-  5 B     2020  199/100
-  6 B     2021  221/100
-  7 C     2019  223/100
-  8 C     2020  146/100
-  9 C     2021  288/100
-```
+.small[
 
-]
+&lt;div data-pagedtable="false"&gt;
+  &lt;script data-pagedtable-source type="application/json"&gt;
+{"columns":[{"label":["group"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["chr"],"align":["left"]},{"label":["rate"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"A","2":"2019","3":"102/100"},{"1":"A","2":"2020","3":"123/100"},{"1":"A","2":"2021","3":"161/100"},{"1":"B","2":"2019","3":"179/100"},{"1":"B","2":"2020","3":"199/100"},{"1":"B","2":"2021","3":"221/100"},{"1":"C","2":"2019","3":"223/100"},{"1":"C","2":"2020","3":"146/100"},{"1":"C","2":"2021","3":"288/100"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
+
+]]
 
 --
 
@@ -524,25 +530,15 @@ NotTidy %&gt;%
 
 --
 
-.rightcol[
+.rightcol[.small[
 
+&lt;div data-pagedtable="false"&gt;
+  &lt;script data-pagedtable-source type="application/json"&gt;
+{"columns":[{"label":["group"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["rate"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"A","2":"2019","3":"102/100"},{"1":"A","2":"2020","3":"123/100"},{"1":"A","2":"2021","3":"161/100"},{"1":"B","2":"2019","3":"179/100"},{"1":"B","2":"2020","3":"199/100"},{"1":"B","2":"2021","3":"221/100"},{"1":"C","2":"2019","3":"223/100"},{"1":"C","2":"2020","3":"146/100"},{"1":"C","2":"2021","3":"288/100"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
 
-```
-  # A tibble: 9 × 3
-    group  year rate   
-    &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;  
-  1 A      2019 102/100
-  2 A      2020 123/100
-  3 A      2021 161/100
-  4 B      2019 179/100
-  5 B      2020 199/100
-  6 B      2021 221/100
-  7 C      2019 223/100
-  8 C      2020 146/100
-  9 C      2021 288/100
-```
-
-]
+]]
 
 ---
 class: left, top
@@ -552,7 +548,17 @@ background-size: 7%
 
 ## `pivot_longer()` = names_sep
 
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+.leftcol40[
+
 Create the `SiteRates` data (example of COVID rates as various hospitals)
+
+]
+
+.rightcol60[
+
+.code60[
 
 
 ```r
@@ -563,6 +569,10 @@ SiteRates &lt;- tibble::tribble(
   "Cincinnati",       6.73,       4.87,       5.02,       4.66,
        "Texas",       18.2,       16.6,         17,         19)
 ```
+
+]]
+
+
 
 
 ---
@@ -623,8 +633,6 @@ background-size: 7%
 
 + `year` and `quarter` should also be numeric
 
---
-
 .leftcol[
 
 
@@ -650,7 +658,7 @@ SiteRates %&gt;%
 
 .border[
 
-&lt;img src="img/TidySites.png" width="45%" height="45%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/TidySites.png" width="47%" height="47%" style="display: block; margin: auto;" /&gt;
 
 ]]
 
@@ -665,6 +673,9 @@ background-size: 7%
 Create the `SpaceDogs` data. These are names of dogs in the [Soviet Space Dogs database](https://airtable.com/universe/expG3z2CFykG1dZsp/sovet-space-dogs).
 
 *Some dogs have multiple names, and some share names.*
+
+
+.code70[
 
 
 ```r
@@ -682,6 +693,9 @@ SpaceDogs &lt;- data.frame(
    name_2 = c("Veterok / Bzdunok", NA, NA, 
               "Kometka", "Pchyolka", "Neva"))
 ```
+
+]
+
 
 
 
@@ -707,6 +721,8 @@ SpaceDogs %&gt;%
 
 The `SpaceDogs` data has missing values in `name_2` 
 
+--
+
 *...two of the columns have a similar prefix (`name_`)*
 
 
@@ -720,6 +736,8 @@ background-size: 7%
 ## More `pivot_longer()` options
 
 ### To tidy these data, we can combine what we've learned:
+
+--
 
 #### 1. `dplyr::starts_with()` to select the `name_` columns
 
@@ -739,6 +757,8 @@ background-size: 7%
 
 ## More `pivot_longer()` options
 
+.code70[
+
 
 ```r
 SpaceDogs %&gt;% 
@@ -746,7 +766,13 @@ SpaceDogs %&gt;%
 *  starts_with("name_"),
 ```
 
+]
+
+
+
 --
+
+.code70[
 
 
 ```r
@@ -758,7 +784,13 @@ SpaceDogs %&gt;%
 *    c(".value", "dog_id"),
 ```
 
+]
+
+
+
 --
+
+.code70[
 
 
 ```r
@@ -770,6 +802,10 @@ SpaceDogs %&gt;%
      c(".value", "dog_id"), # remove missing
 *  values_drop_na = TRUE)
 ```
+
+]
+
+
 
 
 ---
@@ -809,7 +845,7 @@ SpaceDogs %&gt;%
 
 .border[
 
-&lt;img src="img/TidySpaceDogs.png" width="90%" height="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/TidySpaceDogs.png" width="95%" height="95%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -888,11 +924,20 @@ background-size: 7%
 
 ## `tidyr::pivot_wider()`
 
-&lt;br&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
 
-### Create `CatVsDogWide`
+.leftcol35[
 
-&lt;br&gt;
+
+#### Create `CatVsDogWide`
+
+]
+
+--
+
+.rightcol65[
+
+.code70[
 
 
 ```r
@@ -903,6 +948,10 @@ CatVsDogWide &lt;- tibble::tribble(
 "no_of_dog_households",  4260, 3960, 2718, 2177, 1702,
 "no_of_cat_households",  3687, 2544, 2079, 2189, 1748)
 ```
+
+
+
+]]
 
 
 
@@ -919,8 +968,13 @@ background-size: 7%
 CatVsDogWide %&gt;% View("CvDWide")
 ```
 
+.border[
 
 &lt;img src="img/CvDWide.png" width="88%" height="88%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
 
 
 ---
@@ -984,7 +1038,11 @@ CatVsDogWide %&gt;%
 
 --
 
+.border[
+
 &lt;img src="img/CvDWide2.png" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+]
 
 
 ---
@@ -1185,6 +1243,8 @@ class: left, top
 
 ### Toy data `X`
 
+.code70[
+
 
 ```r
 # create X table
@@ -1195,12 +1255,16 @@ X &lt;- tibble::tribble(
     "c", "v", 3L)
 ```
 
+.small[
+
 &lt;div data-pagedtable="false"&gt;
   &lt;script data-pagedtable-source type="application/json"&gt;
 {"columns":[{"label":["A"],"name":[1],"type":["chr"],"align":["left"]},{"label":["B"],"name":[2],"type":["chr"],"align":["left"]},{"label":["C"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"a","2":"t","3":"1"},{"1":"b","2":"u","3":"2"},{"1":"c","2":"v","3":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   &lt;/script&gt;
 &lt;/div&gt;
 
+]
+]
 ]
 
 --
@@ -1209,6 +1273,7 @@ X &lt;- tibble::tribble(
 
 ### Toy data `Y`
 
+.code70[
 
 
 ```r
@@ -1220,12 +1285,16 @@ Y &lt;- tibble::tribble(
     "d", "W", 1L)
 ```
 
+.small[
+
 &lt;div data-pagedtable="false"&gt;
   &lt;script data-pagedtable-source type="application/json"&gt;
 {"columns":[{"label":["A"],"name":[1],"type":["chr"],"align":["left"]},{"label":["B"],"name":[2],"type":["chr"],"align":["left"]},{"label":["D"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"a","2":"t","3":"3"},{"1":"b","2":"u","3":"2"},{"1":"d","2":"W","3":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   &lt;/script&gt;
 &lt;/div&gt;
 
+]
+]
 ]
 
 ---
@@ -1262,13 +1331,15 @@ left_join(
 
 This creates:
 
+.small[
+
 &lt;div data-pagedtable="false"&gt;
   &lt;script data-pagedtable-source type="application/json"&gt;
 {"columns":[{"label":["A"],"name":[1],"type":["chr"],"align":["left"]},{"label":["B"],"name":[2],"type":["chr"],"align":["left"]},{"label":["C"],"name":[3],"type":["int"],"align":["right"]},{"label":["D"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"a","2":"t","3":"1","4":"3"},{"1":"b","2":"u","3":"2","4":"2"},{"1":"c","2":"v","3":"3","4":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   &lt;/script&gt;
 &lt;/div&gt;
 
-]
+]]
 
 ---
 background-image: url(img/left-join-01.png)
@@ -1332,11 +1403,16 @@ right_join(x = X, y = Y)
 
 This creates:
 
+.small[
+
 &lt;div data-pagedtable="false"&gt;
   &lt;script data-pagedtable-source type="application/json"&gt;
 {"columns":[{"label":["A"],"name":[1],"type":["chr"],"align":["left"]},{"label":["B"],"name":[2],"type":["chr"],"align":["left"]},{"label":["C"],"name":[3],"type":["int"],"align":["right"]},{"label":["D"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"a","2":"t","3":"1","4":"3"},{"1":"b","2":"u","3":"2","4":"2"},{"1":"d","2":"W","3":"NA","4":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   &lt;/script&gt;
 &lt;/div&gt;
+
+]
+
 
 ]
 
@@ -1404,13 +1480,15 @@ inner_join(x = X, y = Y)
 
 This creates:
 
+.small[
+
 &lt;div data-pagedtable="false"&gt;
   &lt;script data-pagedtable-source type="application/json"&gt;
 {"columns":[{"label":["A"],"name":[1],"type":["chr"],"align":["left"]},{"label":["B"],"name":[2],"type":["chr"],"align":["left"]},{"label":["C"],"name":[3],"type":["int"],"align":["right"]},{"label":["D"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"a","2":"t","3":"1","4":"3"},{"1":"b","2":"u","3":"2","4":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   &lt;/script&gt;
 &lt;/div&gt;
 
-]
+]]
 
 ---
 background-image: url(img/inner-join-01.png)
@@ -1485,13 +1563,15 @@ full_join(x = X, y = Y)
 
 This creates:
 
+.small[
+
 &lt;div data-pagedtable="false"&gt;
   &lt;script data-pagedtable-source type="application/json"&gt;
 {"columns":[{"label":["A"],"name":[1],"type":["chr"],"align":["left"]},{"label":["B"],"name":[2],"type":["chr"],"align":["left"]},{"label":["C"],"name":[3],"type":["int"],"align":["right"]},{"label":["D"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"a","2":"t","3":"1","4":"3"},{"1":"b","2":"u","3":"2","4":"2"},{"1":"c","2":"v","3":"3","4":"NA"},{"1":"d","2":"W","3":"NA","4":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   &lt;/script&gt;
 &lt;/div&gt;
 
-]
+]]
 
 ---
 background-image: url(img/full-join-01.png)
