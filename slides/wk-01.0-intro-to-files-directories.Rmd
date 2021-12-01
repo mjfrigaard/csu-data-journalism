@@ -22,12 +22,12 @@ output:
 library(metathis)
 meta() %>%
   meta_general(
-    description = "Introduction to Web Technologies",
+    description = "Introduction to folders, files, and software",
     generator = "xaringan and remark.js"
   ) %>%
   meta_name("github-repo" = "mjfrigaard/csuc-data-journalism") %>%
   meta_social(
-    title = "Introduction to Web Technologies",
+    title = "Introduction to folders, files, and software",
     url = "https://mjfrigaard.github.io/csuc-data-journalism/",
     og_type = "website",
     og_author = "Martin Frigaard",
@@ -499,6 +499,8 @@ qplot(data = diamonds,
 ```
 
 ]
+
+--
 
 .rightcol65[
 
