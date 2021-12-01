@@ -1101,7 +1101,7 @@ pdf_slides <- str_replace(html_slides,
 pdf_slides <- paste0("pdfs/", pdf_slides)
 print_files <- tibble("pdfs" = pdf_slides,
   "htmls" = html_slides)
-
-
-pagedown::chrome_print(input = print_files$htmls[1], output = print_files$pdfs[1], timeout = 120)
+print_files$pdfs[2]
+print_files$htmls[2]
+pagedown::chrome_print(input = print_files$htmls[2], output = print_files$pdfs[2], timeout = 120)
 ```

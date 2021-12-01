@@ -51,7 +51,7 @@ options(
 knitr::opts_chunk$set(
     warning = FALSE,
     message = FALSE,
-    fig.path = "figs/",
+    fig.path = "img/",
     fig.width = 7.252,
     fig.height = 4,
     comment = " ",
@@ -966,8 +966,8 @@ pdf_slides <- str_replace(html_slides,
 pdf_slides <- paste0("pdfs/", pdf_slides)
 print_files <- tibble("pdfs" = pdf_slides,
   "htmls" = html_slides)
-# print_files$pdfs[6]
-# print_files$htmls[6]
-pagedown::chrome_print(input = print_files$htmls[6], output = print_files$pdfs[6], timeout = 120)
+# print_files$pdfs[9]
+# print_files$htmls[9]
+pagedown::chrome_print(input = print_files$htmls[9], output = print_files$pdfs[9], timeout = 120)
 ```
 
